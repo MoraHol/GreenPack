@@ -53,6 +53,16 @@ $conversor = new ConversorDate(); ?>
     .common-textarea {
       border-radius: 0.625rem !important;
     }
+    @media(min-width: 400px){
+      #counters{
+        height:1000px!important;
+      }
+    }
+    @media(min-width: 800px){
+      #counters{
+        height:600px!important;
+      }
+    }
   </style>
   <script src="js/all.min.js"></script>
   <script src="js/spinner.js"></script>
@@ -140,7 +150,7 @@ $conversor = new ConversorDate(); ?>
   <!-- counter Area -->
   <section class="section-gap info-area" style="padding: 0px 0 600px 0;">
     <div id="fh5co-counter" class="fh5co-bg fh5co-counter animated" style="background-image:url(/images/AdobeStock_227727671_Preview.jpeg);   background-position-y: 50%;">
-      <div class="container" style="height: 600px;">
+      <div class="container" id="counters">
         <div class="row align-items-center justify-content-center" style="vertical-align: middle; height: 600px;">
           <div class="col-md-3 col-sm-6 animate-box fadeInUp animated-fast">
             <div class="feature-center">

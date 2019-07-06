@@ -148,14 +148,14 @@ select.country:hover {
 .footer-grid-icon input[type="submit"] {
     font-size: 1em;
     color: #fff;
-    background: linear-gradient(0deg, #1aff2c 0%, #2bde94 100%);
+    background-image: -webkit-linear-gradient(0deg, #199023 0%, #0fb973 100%);
     border: none;
     padding: 0.5em 1em;
     outline: none;
 }
 
 .footer-grid-icon input[type="submit"]:hover {
-    background: linear-gradient(0deg, #09c018 0%, #2bde94 100%);
+    background-image: -webkit-linear-gradient(0deg, #199023 0%, #0fb973 100%);
     transition: 0.5s all;
     -webkit-transition: 0.5s all;
     -moz-transition: 0.5s all;
