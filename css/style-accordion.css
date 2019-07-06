@@ -1,0 +1,22 @@
+.accordion::after {
+    float: right;
+    font-family: 'FontAwesome';
+    content: "\f077";
+}
+
+.accordion.collapsed::after{
+    font-family: 'FontAwesome';
+    content: "\f078";
+}
+
+.accordion:hover {
+    color: #45a016;
+}
+
+a.accordion {
+    width: 100% !important;
+}
+
+.category .child-category {
+    padding-left: 20px;
+}
