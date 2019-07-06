@@ -130,10 +130,10 @@ $conversor = new ConversorDate(); ?>
   </section>
   <!-- End about Area -->
   <!-- counter Area -->
-  <section class="section-gap info-area" style="padding: 0px 0 500px 0;">
-    <div id="fh5co-counter" class="fh5co-bg fh5co-counter animated" style="background-image:url(https://technext.github.io/shop/images/img_bg_5.jpg);">
-      <div class="container" style="height: 500px;">
-        <div class="row align-items-center justify-content-center" style="vertical-align: middle; height: 500px;">
+  <section class="section-gap info-area" style="padding: 0px 0 600px 0;">
+    <div id="fh5co-counter" class="fh5co-bg fh5co-counter animated" style="background-image:url(/images/AdobeStock_227727671_Preview.jpeg);   background-position-y: 50%;">
+      <div class="container" style="height: 600px;">
+        <div class="row align-items-center justify-content-center" style="vertical-align: middle; height: 600px;">
           <div class="col-md-3 col-sm-6 animate-box fadeInUp animated-fast">
             <div class="feature-center">
               <span class="icon">
@@ -141,7 +141,7 @@ $conversor = new ConversorDate(); ?>
               </span>
 
               <span class="counter js-counter" data-from="0" data-to="22070" data-speed="5000" data-refresh-interval="50">22070</span>
-              <span class="counter-label">Innovaciones</span>
+              <span class="counter-label">Innovaciones Realizadas</span>
 
             </div>
           </div>
@@ -151,7 +151,7 @@ $conversor = new ConversorDate(); ?>
                 <i class="icon-shop"></i>
               </span>
               <span class="counter js-counter" data-from="0" data-to="700" data-speed="5000" data-refresh-interval="50">700</span>
-              <span class="counter-label">Productos</span>
+              <span class="counter-label">Productos Ofertados</span>
             </div>
           </div>
           <div class="col-md-3 col-sm-6 animate-box fadeInUp animated-fast">
@@ -161,7 +161,7 @@ $conversor = new ConversorDate(); ?>
               </span>
 
               <span class="counter js-counter" data-from="0" data-to="450" data-speed="5000" data-refresh-interval="50">450</span>
-              <span class="counter-label">Clientes</span>
+              <span class="counter-label">Clientes <br>Atendidos</span>
             </div>
           </div>
 
@@ -211,7 +211,7 @@ $conversor = new ConversorDate(); ?>
 ">
   <!-- clientes -->
   <section id="clients">
-  <br><br>
+    <br><br>
     <h2 class="g-font-size-32--xs g-font-size-36--md text-center">Nuestros Clientes</h2>
     <br><br>
     <div class="flexslider carousel">
