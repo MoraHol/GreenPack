@@ -53,14 +53,16 @@ $conversor = new ConversorDate(); ?>
     .common-textarea {
       border-radius: 0.625rem !important;
     }
-    @media(min-width: 400px){
-      #counters{
-        height:1000px!important;
+
+    @media(min-width: 300px) {
+      #counters {
+        height: 1000px !important;
       }
     }
-    @media(min-width: 800px){
-      #counters{
-        height:600px!important;
+
+    @media(min-width: 800px) {
+      #counters {
+        height: 600px !important;
       }
     }
   </style>
@@ -322,18 +324,36 @@ $conversor = new ConversorDate(); ?>
         return false;
       });
     });
+    // store the slider in a local variable
+    var $window = $(window),
+      flexslider = {
+        vars: {}
+      };
+
+    // tiny helper function to add breakpoints
+    function getGridSize() {
+      return (window.innerWidth <= 400) ? 1 :
+        (window.innerWidth <= 600) ? 2 : 4;
+    }
     $(window).load(() => {
       $('.flexslider').flexslider({
         animation: 'slide',
         itemWidth: 110,
         itemMargin: 10,
-        minItems: 2,
-        maxItems: 4,
+        minItems: getGridSize(),
+        maxItems: getGridSize(),
         animationLoop: true,
         controlNav: false,
         directionNav: false
       })
     })
+    // check grid size on resize event
+    $window.resize(function() {
+      var gridSize = getGridSize();
+
+      flexslider.vars.minItems = gridSize;
+      flexslider.vars.maxItems = gridSize;
+    });
   </script>
 </body>
 

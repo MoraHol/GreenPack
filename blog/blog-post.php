@@ -51,6 +51,18 @@ $conversor = new ConversorDate();
         .search {
             color: #fff;
         }
+
+        @media(min-width: 300px) {
+            #block-title {
+                padding-top: 140px;
+                padding-bottom: 140px;
+            }
+        }
+        @media(min-width: 900px) {
+            #block-title {
+                padding: 140px;
+            }
+        }
     </style>
 
     <script src="/js/spinner.js"></script>
@@ -79,7 +91,7 @@ $conversor = new ConversorDate();
             <div class="bg-image bg-parallax overlay" style="background-image:url(<?php echo $notice->getImage(); ?>); height: 580px;"></div>
             <!-- /Backgound Image -->
             <div class="container">
-                <div class="row" style="padding: 140px;">
+                <div class="row" id="block-title">
                     <div class="col-md-10 col-md-offset-1 text-center">
                         <!-- <ul class="hero-area-tree">
                             <li><a href="/">Inicio</a></li>
