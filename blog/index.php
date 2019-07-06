@@ -150,19 +150,21 @@ if ($_GET["page"] > $pages || $_GET["page"] <= 0) {
               <!-- single blog -->
               <div class="col-md-6">
                 <div class="single-blog">
+                  <div style="margin-bottom: 6px;">
+                    <div style="float:left"><i class="fas fa-fw fa-eye"></i>HITS: <span>0</span></div>
+                    <div class="text-right">
+                      <span class=""><?php echo $notice->getCreatedAt()["day"];
+                            echo " de " .  " " . $conversor->monthToString($notice->getCreatedAt()["month"]) . ", " . $notice->getCreatedAt()["year"];; ?></span>
+                    </div>
+                  </div>
+                  
                   <div class="blog-img">
                     <a href="blog-post.php?id=<?php echo $notice->getId() ?>">
                       <img height="264" src="<?php echo $notice->getImage() ?>" alt="">
                     </a>
                   </div>
                   <h4><a href="blog-post.php?id=<?php echo $notice->getId() ?>"><?php echo $notice->getTitle() ?>.</a></h4>
-                  <div class="blog-meta">
-
-                    <div class="pull-right">
-                      <span><?php echo $notice->getCreatedAt()["day"];
-                            echo " de " .  " " . $conversor->monthToString($notice->getCreatedAt()["month"]) . ", " . $notice->getCreatedAt()["year"];; ?></span>
-                    </div>
-                  </div>
+                  <hr>
                 </div>
               </div>
               <!-- /single blog -->
