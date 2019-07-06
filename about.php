@@ -67,6 +67,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     .f24 {
       font-size: 16px !important;
     }
+
+    .bg-image.overlay:after{
+      background-image: linear-gradient(to bottom, #37405085 0%, #798696d9 100%) !important;
+    }
   </style>
 
   <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
@@ -101,7 +105,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="hero-area section" style="height: 150px;">
 
       <!-- Backgound Image -->
-      <div class="bg-image bg-parallax overlay" style="background-image:url(/images/page-background.jpg)"></div>
+      <div class="bg-image bg-parallax overlay" style="background-image:url(/images/landscape.jpg); background-position-y: -253px;"></div>
       <!-- /Backgound Image -->
 
     </div>
@@ -119,11 +123,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
           <p class="text-center"><img src="/images/greenbags_logo_verde.png" alt="" width="150"><img src="/images/greenpack_logo_verde.png" alt="" width="150"> <img src="/images/empaques_verdes_logo_verde.png" alt="" width="150"></p>
           <br>
         </div>
-        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.7s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.1s;"><img  class="img-responsive" width="581" src="/images/sea.jpg" alt="">
+        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.7s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.1s;"><img class="img-responsive" width="581" src="/images/sea.jpg" alt="">
         </div>
       </div>
       <div class="row align-items-center" id="compromise">
-        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.7s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.1s;"><img  class="img-responsive" width="520" src="/images/AdobeStock_256856590_Preview.jpeg" alt=""></div>
+        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.7s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.1s;"><img class="img-responsive" width="520" src="/images/AdobeStock_256856590_Preview.jpeg" alt=""></div>
         <div class="col-sm 6 wow fadeIn" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.1s;">
           <h2 class="normal f30 fb text-uppercase">Nuestro compromiso</h2>
           <br>

@@ -45,6 +45,14 @@ $conversor = new ConversorDate(); ?>
     .img-responsive {
       width: 350px;
     }
+
+    .common-input {
+      border-radius: 0.625rem !important;
+    }
+
+    .common-textarea {
+      border-radius: 0.625rem !important;
+    }
   </style>
   <script src="js/all.min.js"></script>
   <script src="js/spinner.js"></script>
@@ -239,7 +247,10 @@ $conversor = new ConversorDate(); ?>
         <div class="menu-content pb-60 col-lg-8">
           <div class="title text-center">
             <h1 class="mb-10">Si lo necesitas, solo escríbenos</h1>
-            <p>Haz crecer tu negocio.</p>
+            <p style="
+    font-size: 24px;
+    margin-bottom: -20px;
+">Haz crecer tu negocio.</p>
           </div>
         </div>
       </div>
@@ -251,6 +262,7 @@ $conversor = new ConversorDate(); ?>
             <input name="email" placeholder="Ingresa tu correo" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingresa tu correo'" class="common-input mb-20 form-control" required="" type="email">
 
             <input name="subject" placeholder="Ingresa tu Asunto" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingresa tu Asunto'" class="common-input mb-20 form-control" required="" type="text">
+            <input type="checkbox" name="terms" id="terms" required><label for="terms" style="display:inline"> Conozco y acepto la Política de Protección de Datos y autorizo el manejo de éstos.</span>
           </div>
           <div class="col-lg-6 form-group">
             <textarea class="common-textarea mt-10 form-control" name="message" placeholder="Mensaje" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mensaje'" required=""></textarea>

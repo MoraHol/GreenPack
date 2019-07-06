@@ -26,7 +26,7 @@ if ($_GET["page"] > $pages || $_GET["page"] <= 0) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <?php include('../partials/metaproperties.html') ?>
-
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
   <!-- Google font -->
   <link href="https://fonts.googleapis.com/css?family=Lato:700%7CMontserrat:400,600" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
@@ -60,6 +60,32 @@ if ($_GET["page"] > $pages || $_GET["page"] <= 0) {
     .search {
       color: #fff;
     }
+
+    .carousel-slick .carousel-item-notice {
+      color: #fff;
+      padding-top: 201px;
+      padding-left: 300px;
+    }
+
+    .carousel-slick .carousel-item-notice .notice {
+      border-left: 2px solid #fff;
+      padding-left: 32px;
+      padding-bottom: 25px;
+      font-size: 17px;
+      text-transform: uppercase;
+      line-height: normal;
+      letter-spacing: 0.100em;
+      display: block;
+    }
+
+    .carousel-slick .carousel-item-notice .title {
+      font-size: 22px;
+      letter-spacing: 0.230em;
+      position: relative;
+      left: -190px;
+      top: 25px;
+      text-transform: uppercase;
+    }
   </style>
 
   <script src="/js/spinner.js"></script>
@@ -84,21 +110,23 @@ if ($_GET["page"] > $pages || $_GET["page"] <= 0) {
   ?>
   <section class="default-banner">
 
-    <div class="hero-area section" style="height: 400px;">
+    <div class="hero-area section" style="height: 600px;">
 
       <!-- Backgound Image -->
-      <div class="bg-image bg-parallax overlay" style="background-image:url(/images/page-background.jpg)"></div>
+      <div class="bg-image bg-parallax overlay" style="background-image:url(/images/nature-3294681_1920.jpg)"></div>
       <!-- /Backgound Image -->
 
-      <div class="container align-items-center">
-        <div class="row align-items-center" style="padding: 80px;">
-          <div class="col-md-10 col-md-offset-1 text-center">
-            <ul class="hero-area-tree">
-              <li><a href="/">Inicio</a></li>
-              <li class="active">Blog</li>
-            </ul>
-            <h1 class="white-text">Blog Page</h1>
-          </div>
+      <div class="container align-items-end">
+        <div class="carousel-slick">
+          <?php
+          $noticesLastest = $noticeDao->findlastest(5);
+          // var_dump($noticesLastest);
+          foreach ($noticesLastest as $noticeLastest) { ?>
+            <div class="carousel-item-notice ">
+              <span class="title">NOTICIAS</span>
+              <span class="notice"><?php echo $noticeLastest->getTitle(); ?></span>
+            </div>
+          <?php } ?>
         </div>
       </div>
 
@@ -124,7 +152,7 @@ if ($_GET["page"] > $pages || $_GET["page"] <= 0) {
                 <div class="single-blog">
                   <div class="blog-img">
                     <a href="blog-post.php?id=<?php echo $notice->getId() ?>">
-                      <img src="<?php echo $notice->getImage() ?>" alt="">
+                      <img height="264" src="<?php echo $notice->getImage() ?>" alt="">
                     </a>
                   </div>
                   <h4><a href="blog-post.php?id=<?php echo $notice->getId() ?>"><?php echo $notice->getTitle() ?>.</a></h4>
@@ -225,6 +253,16 @@ if ($_GET["page"] > $pages || $_GET["page"] <= 0) {
   <script src="/js/back-top.js"></script>
   <script src="https://kit.fontawesome.com/58e9d196f8.js"></script>
   <script>
+    $(() => {
+      $('.carousel-slick').slick({
+        slidesToShow: 1,
+        infinite: true,
+        autoplay: true,
+        arrows: false,
+        draggable: true
+      })
+    })
+
     $(document).ready(function() {
       $('#btn-search').click(function() {
         if ($('#in-search').val() == '') {

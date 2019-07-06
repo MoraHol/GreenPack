@@ -76,16 +76,16 @@ $conversor = new ConversorDate();
         <div class="hero-area section">
 
             <!-- Backgound Image -->
-            <div class="bg-image bg-parallax overlay" style="background-image:url(<?php echo $notice->getImage(); ?>); height: 400px;"></div>
+            <div class="bg-image bg-parallax overlay" style="background-image:url(<?php echo $notice->getImage(); ?>); height: 580px;"></div>
             <!-- /Backgound Image -->
             <div class="container">
-                <div class="row" style="padding: 40px;">
+                <div class="row" style="padding: 140px;">
                     <div class="col-md-10 col-md-offset-1 text-center">
-                        <ul class="hero-area-tree">
+                        <!-- <ul class="hero-area-tree">
                             <li><a href="/">Inicio</a></li>
                             <li><a href="/blog">Blog</a></li>
                             <li><?php echo $notice->getTitle(); ?></li>
-                        </ul>
+                        </ul> -->
                         <h1 class="white-text"><?php echo $notice->getTitle(); ?></h1>
                         <ul class="blog-post-meta">
 

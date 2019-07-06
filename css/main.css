@@ -1999,18 +1999,18 @@ h6 {
 .video-area .overlay-bg,
 .single-footer-widget .click-btn,
 .generic-banner {
-  background-image: -webkit-linear-gradient(0deg, #1aff2c 0%, #2bde94 100%);
-  background-image: -webkit-linear-gradient(0deg, #1aff2c 0%, #2bde94 100%);
-  background-image: -ms-linear-gradient(0deg, #1aff2c 0%, #2bde94 100%);
+  background-image: -webkit-linear-gradient(0deg, #199023 0%, #0fb973 100%);
+  background-image: -webkit-linear-gradient(0deg, #199023 0%, #0fb973 100%);
+  background-image: -ms-linear-gradient(0deg, #199023 0%, #0fb973 100%);
 }
 
 .p1-gradient-color,
 .counter-left h2,
 .footer-social a:hover i,
 .single-footer-widget .bb-btn {
-  background: -moz-linear-gradient(0deg, #1aff2c 0%, #2bde94 100%);
-  background: -webkit-linear-gradient(0deg, #1aff2c 0%, #2bde94 100%);
-  background: -ms-linear-gradient(0deg, #1aff2c 0%, #2bde94 100%);
+  background: -moz-linear-gradient(0deg, #199023 0%, #0fb973 100%);
+  background: -webkit-linear-gradient(0deg, #199023 0%, #0fb973 100%);
+  background: -ms-linear-gradient(0deg, #199023 0%, #0fb973 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -2166,7 +2166,7 @@ h6 {
 }
 
 .dropdown-menu {
-  background: #222;
+  background: #00000047;
   border-radius: 0;
   margin-top: 15px;
   border: none;
