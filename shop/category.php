@@ -162,7 +162,7 @@
                     </div>
                     <div class="card-body">
                       <p><?php
-                          echo strtoupper($product->getCategory()["name"]);
+                          echo strtoupper($product->getCategory()->getName());
                           ?></p>
                       <h4 class="card-product__title"><a href="#"><?php echo $product->getName(); ?></a></h4>
                       <p class="card-product__price">$<?php echo $product->getPrice(); ?></p>
