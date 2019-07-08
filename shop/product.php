@@ -138,24 +138,21 @@ $product = $productDao->findById($_GET["id"]);
           <div class="col-md-5 single-top ">
             <div class="flexslider">
               <ul class="slides">
-                <li data-thumb="<?php echo $product->getImages()[0]->getUrl(); ?>">
-                  <div class="thumb-image"> <img src="<?php echo $product->getImages()[0]->getUrl(); ?>" data-imagezoom="true" class="img-responsive"> </div>
-                </li>
-                <li data-thumb="<?php echo $product->getImages()[0]->getUrl(); ?>">
-                  <div class="thumb-image"> <img src="<?php echo $product->getImages()[0]->getUrl(); ?>" data-imagezoom="true" class="img-responsive"> </div>
-                </li>
-                <li data-thumb="<?php echo $product->getImages()[0]->getUrl(); ?>">
-                  <div class="thumb-image"> <img src="<?php echo $product->getImages()[0]->getUrl(); ?>" data-imagezoom="true" class="img-responsive"> </div>
-                </li>
+                <?php foreach ($product->getImages() as $image) { ?>
+                  <li data-thumb="<?php echo $image->getUrl(); ?>">
+                    <div class="thumb-image"> <img src="<?php echo $image->getUrl(); ?>" data-imagezoom="true" class="img-responsive"> </div>
+                  </li>
+                <?php } ?>
               </ul>
             </div>
           </div>
           <div class="col-md-4 ">
             <div class="s_product_text">
               <h3><?php echo $product->getName(); ?></h3>
-              <?php echo $product->getDescription(); ?>
-              <div class="sorting">
-                <select>
+              <p><?php echo strip_tags($product->getDescription()); ?></p>
+              <div class="sorting form-group">
+                <label for="printing">Tipo de impresion:</label>
+                <select id="printing">
                   <option value="generica">generica</option>
                   <option value="impresa">impresa</option>
                 </select>
@@ -333,10 +330,10 @@ $product = $productDao->findById($_GET["id"]);
     $(document).ready(function() {
       $('select').niceSelect()
       if ($('#description1').height() < 100) {
-        if ($('#description1').height() = 0) {
-          $('.single').css("margin-bottom", ($('#description1').height() * 6) + 400)
+        if ($('#description1').height() == 0) {
+          $('.single').css("margin-bottom", (($('#description1').height() + 1) * 6) + 400)
         } else {
-          $('.single').css("margin-bottom", ($('#description1').height() * 6) + 100)
+          $('.single').css("margin-bottom", ($('#description1').height() * 10) + 350)
         }
       } else {
         $('.single').css("margin-bottom", ($('#description1').height() * 2.2) + 110)

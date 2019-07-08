@@ -18,6 +18,8 @@ class MaterialDao
       $material->setId($materialDB["id_materials"]);
       $material->setName($materialDB["name"]);
       $material->setDescription($materialDB["description"]);
+      $material->setGrammage($materialDB["grammage"]);
+      $material->setPricePerKg($materialDB["price_per_kg"]);
       array_push($materials, $material);
     }
     return $materials;
@@ -31,6 +33,8 @@ class MaterialDao
     $material->setId($materialDB["id_materials"]);
     $material->setName($materialDB["name"]);
     $material->setDescription($materialDB["description"]);
+    $material->setGrammage($materialDB["grammage"]);
+    $material->setPricePerKg($materialDB["price_per_kg"]);
     $this->db->close();
     return $material;
   }
@@ -44,6 +48,8 @@ class MaterialDao
       $material->setId($materialDB["id_materials"]);
       $material->setName($materialDB["name"]);
       $material->setDescription($materialDB["description"]);
+      $material->setGrammage($materialDB["grammage"]);
+      $material->setPricePerKg($materialDB["price_per_kg"]);
       array_push($materials, $material);
     }
     $this->db->close();
@@ -60,17 +66,33 @@ class MaterialDao
   function save($material)
   {
     $this->db->connect();
-    $query = "INSERT INTO `materials` (`id_materials`, `name`, `description`) VALUES (NULL, '" . $material->getName() . "', '" . $material->getDescription() . "')";
+    $query = "INSERT INTO `materials` (`id_materials`, `name`, `description`,`grammage`,`price_per_kg`) VALUES (NULL, '" . $material->getName() . "', '" . $material->getDescription() . "','" . $material->getGrammage() . "','" . $material->getPricePerKg() . "')";
+    echo $query;
     $status = $this->db->consult($query);
     $this->db->close();
     return $status;
   }
-  function delete()
-  { }
+  function delete($id)
+  {
+    $this->db->connect();
+    $query = "DELETE FROM `materials` WHERE `materials`.`id_materials` = $id";
+    $status = $this->db->consult($query);
+    $this->db->close();
+    return $status;
+  }
+  function update($material)
+  {
+    $this->db->connect();
+    $query = "UPDATE `materials` SET `name` = '" . $material->getName() . "', `grammage` = '" . $material->getGrammage() . "', `price_per_kg` = '" . $material->getPricePerKg() . "', `description` = '" . $material->getDescription() . "' WHERE `materials`.`id_materials` = " . $material->getId();
+    $status = $this->db->consult($query);
+    $this->db->close();
+    return $status;
+  }
   function deleteByProduct($id, $product)
   {
     $this->db->connect();
-    $query = "DELETE FROM `products_has_materials` WHERE `products_has_materials`.`products_id_products` = $product  AND `products_has_materials`.`materials_id_materials` = $id";    echo $query;
+    $query = "DELETE FROM `products_has_materials` WHERE `products_has_materials`.`products_id_products` = $product  AND `products_has_materials`.`materials_id_materials` = $id";
+    echo $query;
     $status = $this->db->consult($query);
     $this->db->close();
     return $status;

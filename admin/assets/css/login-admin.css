@@ -7,7 +7,9 @@
  body, html {
     height: 100%;
     background-repeat: no-repeat;
-    background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));
+    /* background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33)); */
+    background-image: url("/images/sunflower-1127174.jpg");
+    background-size: cover;
 }
 
 .card-container.card {
@@ -32,7 +34,7 @@
     /* just in case there no content*/
     padding: 20px 25px 30px;
     margin: 0 auto 25px;
-    margin-top: 50px;
+    margin-top: 100px;
     /* shadows and rounded borders */
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;

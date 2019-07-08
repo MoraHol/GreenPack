@@ -6,18 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Login | GreenPack</title>
-  <link rel="stylesheet" href="/css/login-admin.css">
+  <link rel="stylesheet" href="/admin/assets/css/login-admin.css">
   <link rel="stylesheet" href="/css/bootstrap.min.css">
 </head>
 
 <body>
-  <div class="container">
+  <div class="container  align-items-center" style="height: 600px">
     <div class="card card-container">
-      <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+      <!-- <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" /> -->
+      <div class="text-center"> <img class="text-center" src="/images/greenpack_logo_verde.png" /></div>
       <p id="profile-name" class="profile-name-card"></p>
       <form class="form-signin" method="POST" action="login.php">
         <span id="reauth-email" class="reauth-email"></span>
-        <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
+        <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required
+          autofocus>
         <input type="password" id="inputPassword" name="pass" class="form-control" placeholder="Password" required>
         <div id="remember" class="checkbox">
           <label>

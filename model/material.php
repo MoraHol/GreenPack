@@ -4,7 +4,9 @@ class Material implements JsonSerializable
   private $id;
   private $name;
   private $description;
-
+  private $grammage;
+  private $pricePerKg;
+  
   public function getId()
   {
     return $this->id;
@@ -33,6 +35,26 @@ class Material implements JsonSerializable
   public function setDescription($description)
   {
     $this->description = $description;
+  }
+
+  public function getGrammage()
+  {
+    return $this->grammage;
+  }
+
+  public function setGrammage($grammage)
+  {
+    $this->grammage = $grammage;
+  }
+
+  public function getPricePerKg()
+  {
+    return $this->pricePerKg;
+  }
+
+  public function setPricePerKg($pricePerKg)
+  {
+    $this->pricePerKg = $pricePerKg;
   }
 
   public function jsonSerialize()
