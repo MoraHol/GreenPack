@@ -151,13 +151,13 @@ if ($_GET["page"] > $pages || $_GET["page"] <= 0) {
               <div class="col-md-6">
                 <div class="single-blog">
                   <div style="margin-bottom: 6px;">
-                    <div style="float:left"><i class="fas fa-fw fa-eye"></i>HITS: <span>0</span></div>
+                    <div style="float:left"><i class="fas fa-fw fa-eye"></i> VISITAS: <span>0</span></div>
                     <div class="text-right">
                       <span class=""><?php echo $notice->getCreatedAt()["day"];
-                            echo " de " .  " " . $conversor->monthToString($notice->getCreatedAt()["month"]) . ", " . $notice->getCreatedAt()["year"];; ?></span>
+                                      echo " de " .  " " . $conversor->monthToString($notice->getCreatedAt()["month"]) . ", " . $notice->getCreatedAt()["year"];; ?></span>
                     </div>
                   </div>
-                  
+
                   <div class="blog-img">
                     <a href="blog-post.php?id=<?php echo $notice->getId() ?>">
                       <img height="264" src="<?php echo $notice->getImage() ?>" alt="">
@@ -220,9 +220,9 @@ if ($_GET["page"] > $pages || $_GET["page"] <= 0) {
                 <a class="single-post-img" href="blog-post.php?id=<?php echo $notice->getId() ?>">
                   <img src="<?php echo $notice->getImage() ?>" alt="">
                 </a>
-                <a href="blog-post.php?id=<?php echo $notice->getId() ?>"><?php echo $notice->getTitle() ?></a>
-                <p><small><?php echo $notice->getCreatedAt()["day"];
-                          echo " de " .  " " . $conversor->monthToString($notice->getCreatedAt()["month"]) . ", " . $notice->getCreatedAt()["year"]; ?></small></p>
+                <a href="blog-post.php?id=<?php echo $notice->getId() ?>" style="line-height: 0px;"><small><?php echo $notice->getTitle() ?></small></a>
+                <!-- <p><small><?php echo $notice->getCreatedAt()["day"];
+                                echo " de " .  " " . $conversor->monthToString($notice->getCreatedAt()["month"]) . ", " . $notice->getCreatedAt()["year"]; ?></small></p> -->
               </div>
               <!-- /single posts -->
             <?php } ?>

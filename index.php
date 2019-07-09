@@ -24,9 +24,9 @@ $conversor = new ConversorDate(); ?>
   <link rel="stylesheet" href="css/solid.min.css">
   <link rel="stylesheet" href="css/all.min.css">
   <link rel="stylesheet" href="/css/style-counters-index.css">
-  <link rel="stylesheet" href="https://technext.github.io/shop/css/icomoon.css">
   <link rel="stylesheet" href="https://teenus.com.co/css/global/global.css">
   <link rel="stylesheet" href="/css/style-index-notices.css">
+  <link href="https://fonts.googleapis.com/css?family=Concert+One&display=swap" rel="stylesheet">
   <style>
     .search input.serch {
       color: #fff;
@@ -65,6 +65,18 @@ $conversor = new ConversorDate(); ?>
         height: 600px !important;
       }
     }
+
+    .counter.js-counter {
+      font-family: 'Concert One', cursive !important;
+    }
+
+    .icon {
+      background-color: #00000000 !important;
+    }
+
+    #fh5co-counter .icon i {
+      color: rgb(19, 109, 8);
+    }
   </style>
   <script src="js/all.min.js"></script>
   <script src="js/spinner.js"></script>
@@ -86,7 +98,7 @@ $conversor = new ConversorDate(); ?>
   <?php include("partials/header_1.html") ?>
 
   <section class="default-banner active-blog-slider">
-    <div class="item-slider relative" style="background: url(images/AdobeStock_165734333_Preview.jpeg);background-size: cover;">
+    <div class="item-slider relative" style="background: url(images/AdobeStock_114530769_Preview.jpeg);background-size: cover;">
       <div class="overlay" style="background: rgba(0,0,0,.3)"></div>
       <div class="container">
         <div class="row fullscreen justify-content-center align-items-center">
@@ -117,7 +129,7 @@ $conversor = new ConversorDate(); ?>
         </div>
       </div>
     </div>
-    <div class="item-slider relative" style="background: url(images/reciclaje-1.min.jpg);background-size: cover;">
+    <div class="item-slider relative" style="background: url(images/AdobeStock_178732916_Preview.jpeg);background-size: cover;">
       <div class="overlay" style="background: rgba(0,0,0,.3)"></div>
       <div class="container">
         <div class="row fullscreen justify-content-center align-items-center">
@@ -135,9 +147,9 @@ $conversor = new ConversorDate(); ?>
   </section>
 
   <!-- Start about Area -->
-  <section class="section-gap info-area" id="about">
+  <section class="section-gap info-area" id="about" style="padding-bottom: 0;">
     <div class="container info-index">
-      <div class="row d-flex justify-content-center">
+      <div class="row d-flex justify-content-center align-items-center">
         <div class="menu-content pb-40 col-lg-8">
           <div class="title text-center">
             <h1 class="mb-10">Con Materiales Biodegradables y Covertibles en abono</h1>
@@ -150,36 +162,35 @@ $conversor = new ConversorDate(); ?>
   </section>
   <!-- End about Area -->
   <!-- counter Area -->
-  <section class="section-gap info-area" style="padding: 0px 0 600px 0;">
-    <div id="fh5co-counter" class="fh5co-bg fh5co-counter animated" style="background-image:url(/images/AdobeStock_227727671_Preview.jpeg);   background-position-y: 50%;">
+  <section class="section-gap info-area" style="padding: 0px 0 550px 0;">
+    <div id="fh5co-counter" class="fh5co-bg fh5co-counter animated" style="background-image:url(/images/productos.png);   background-position-y: 50%;">
       <div class="container" id="counters">
-        <div class="row align-items-center justify-content-center" style="vertical-align: middle; height: 600px;">
+        <div class="row align-items-center justify-content-center" style="Svertical-align: middle; height: 600px;">
           <div class="col-md-3 col-sm-6 animate-box fadeInUp animated-fast">
             <div class="feature-center">
               <span class="icon">
-                <i class="icon-eye"></i>
+                <i class="far fa-lightbulb" style="    color: rgb(19, 109, 8);height: 70px;font-size: -webkit-xxx-large;"></i>
               </span>
 
-              <span class="counter js-counter" data-from="0" data-to="22070" data-speed="5000" data-refresh-interval="50">22070</span>
-              <span class="counter-label">Innovaciones Realizadas</span>
+              <span class="counter js-counter" data-from="0" data-to="220" data-speed="5000" data-refresh-interval="50">220</span>
+              <span class="counter-label">Innovaciones <br>Realizadas</span>
 
             </div>
           </div>
           <div class="col-md-3 col-sm-6 animate-box fadeInUp animated-fast">
             <div class="feature-center">
               <span class="icon">
-                <i class="icon-shop"></i>
+                <i class="fas fa-box-open" style="color: rgb(19, 109, 8);height: 70px;font-size: -webkit-xxx-large;"></i>
               </span>
               <span class="counter js-counter" data-from="0" data-to="700" data-speed="5000" data-refresh-interval="50">700</span>
-              <span class="counter-label">Productos Ofertados</span>
+              <span class="counter-label">Productos <br>Ofertados</span>
             </div>
           </div>
           <div class="col-md-3 col-sm-6 animate-box fadeInUp animated-fast">
             <div class="feature-center">
               <span class="icon">
-                <i class="icon-shopping-cart"></i>
+                <i class="fas fa-running" style="color: rgb(19, 109, 8);height: 70px;font-size: -webkit-xxx-large;"></i>
               </span>
-
               <span class="counter js-counter" data-from="0" data-to="450" data-speed="5000" data-refresh-interval="50">450</span>
               <span class="counter-label">Clientes <br>Atendidos</span>
             </div>
@@ -209,7 +220,7 @@ $conversor = new ConversorDate(); ?>
             <div class="g-bg-color--white g-box-shadow__dark-lightest-v2 g-text-center--xs g-padding-x-40--xs g-padding-y-40--xs" style="padding-top: 0.5rem;">
 
               <div class="row g-font-size-14--xs g-font-weight--700 g-color--primary">
-                <div class="col text-uppercase"><i class="fas fa-eye"></i> Hits: 0</div>
+                <div class="col text-uppercase"><i class="fas fa-eye"></i> Visitas: 0</div>
                 <div class="col"><?php echo $notice->getCreatedAt()["day"];
                                   echo " de " .  " " . $conversor->monthToString($notice->getCreatedAt()["month"]) . ", " . $notice->getCreatedAt()["year"];; ?></div>
               </div>
@@ -344,7 +355,8 @@ $conversor = new ConversorDate(); ?>
         maxItems: getGridSize(),
         animationLoop: true,
         controlNav: false,
-        directionNav: false
+        directionNav: false,
+        move: 1
       })
     })
     // check grid size on resize event
