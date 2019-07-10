@@ -71,7 +71,15 @@
       password: $('#password').val()
     }, (data, status) => {
       if (status == 'success') {
-        alert('Se ha cambiado tu contraseña')
+        $.notify({
+          message: 'Se ha cambiado tu contraseña',
+          title: 'Exito',
+          // icon: 'fas fa-check-circle'
+        },{
+          type: 'success'
+        })
+        $('#ModalPass').modal('hide')
+        password: $('#password').val('')
       }
     })
   })

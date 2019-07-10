@@ -130,7 +130,7 @@ $conversor = new ConversorDate();
 
                     <!-- blog share -->
                     <div class="blog-share">
-                        <h4>Compartir Esta Notica:</h4>
+                        <h4>¿Te gusto? Comparte esta Noticia:</h4>
                         <a href="#" class="facebook"><i class="fab fa-facebook"></i></a>
                         <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
                         <a href="#" class="google-plus"><i class="fab fa-google-plus"></i></a>
