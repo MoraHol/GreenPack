@@ -168,9 +168,9 @@ $conversor = new ConversorDate();
                                 <a class="single-post-img" href="blog-post.php?id=<?php echo $notice->getId() ?>">
                                     <img src="<?php echo $notice->getImage() ?>" alt="">
                                 </a>
-                                <a href="blog-post.php?id=<?php echo $notice->getId() ?>"><?php echo $notice->getTitle() ?></a>
-                                <p><small><?php echo $notice->getCreatedAt()["day"];
-                                            echo " de " .  " " . $conversor->monthToString($notice->getCreatedAt()["month"]) . ", " . $notice->getCreatedAt()["year"]; ?></small></p>
+                                <p><small><a href="blog-post.php?id=<?php echo $notice->getId() ?>"><?php echo $notice->getTitle() ?></a></small></p>
+                                <!-- <p><small><?php echo $notice->getCreatedAt()["day"];
+                                                echo " de " .  " " . $conversor->monthToString($notice->getCreatedAt()["month"]) . ", " . $notice->getCreatedAt()["year"]; ?></small></p> -->
                             </div>
                             <!-- /single posts -->
                         <?php } ?>
