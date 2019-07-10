@@ -269,7 +269,7 @@ $conversor = new ConversorDate(); ?>
       <div class="row d-flex justify-content-center">
         <div class="menu-content pb-60 col-lg-8">
           <div class="title text-center">
-            <h1 class="mb-10">Si lo necesitas, solo escríbenos</h1>
+            <h1 class="mb-10">Solo escríbenos</h1>
             <p style="
     font-size: 24px;
     margin-bottom: -20px;
