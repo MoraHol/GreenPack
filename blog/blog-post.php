@@ -48,6 +48,12 @@ $conversor = new ConversorDate();
             width: 120px;
         }
 
+        ul,
+        ol {
+            margin: 0;
+            padding-left: 2rem;
+        }
+
         .search {
             color: #fff;
         }
@@ -58,6 +64,7 @@ $conversor = new ConversorDate();
                 padding-bottom: 140px;
             }
         }
+
         @media(min-width: 900px) {
             #block-title {
                 padding: 140px;
