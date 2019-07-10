@@ -36,6 +36,7 @@ $product = $productDao->findById($_GET["id"]);
   <link rel="stylesheet" href="/css/all.min.css">
   <link rel="stylesheet" href="/css/flexslider.css">
   <link rel="stylesheet" href="/css/nice-select/nice-select.css">
+  <link rel="stylesheet" href="/css/style-product.css">
   <!--===================== JS ================-->
   <script src="/js/jquery.flexslider.js"></script>
   <script src="/js/spinner.js"></script>
@@ -57,140 +58,6 @@ $product = $productDao->findById($_GET["id"]);
       });
     });
   </script>
-  <style>
-    @media (min-width: 992px) {
-
-      .col-md-1,
-      .col-md-2,
-      .col-md-3,
-      .col-md-4,
-      .col-md-5,
-      .col-md-6,
-      .col-md-7,
-      .col-md-8,
-      .col-md-9,
-      .col-md-10,
-      .col-md-11,
-      .col-md-12 {
-        float: left;
-      }
-
-
-    }
-
-    .button:hover {
-      color: #000;
-      background-image: -webkit-linear-gradient(0deg, #7dff1abd 0%, #17c53dc9 100%);
-    }
-
-    .card {
-      box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
-      border-radius: 6px;
-      padding-bottom: 10px;
-      padding-left: 20px;
-      padding-top: 20px;
-    }
-
-    .card-product {
-      border: 0;
-      margin-bottom: 30px;
-      box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
-      border-radius: 15px;
-    }
-
-
-    .card-icon {
-      width: 60px;
-      color: #fff;
-      font-size: 30px;
-      border-radius: 3px;
-      background-color: #999999;
-      padding: 15px;
-      margin-top: -20px;
-      margin-right: 15px;
-      float: left;
-      box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(255, 152, 0, 0.4);
-      background: linear-gradient(60deg, #15cc91, #23b32a);
-      position: relative;
-      bottom: 20px;
-    }
-
-    .accordion .card {
-      padding: 0;
-    }
-
-    @media(min-width: 800px) {
-      #container-cotizador {
-        position: relative;
-        right: -131px;
-      }
-
-      .single {
-        margin-bottom: 400px;
-      }
-    }
-  </style>
-  <style>
-    .switch {
-      position: relative;
-      display: inline-block;
-      width: 60px;
-      height: 34px;
-    }
-
-    .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #ccc;
-      -webkit-transition: .4s;
-      transition: .4s;
-    }
-
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 26px;
-      width: 26px;
-      left: 4px;
-      bottom: 4px;
-      background-color: white;
-      -webkit-transition: .4s;
-      transition: .4s;
-    }
-
-    input:checked+.slider {
-      background-color: #2196F3;
-    }
-
-    input:focus+.slider {
-      box-shadow: 0 0 1px #2196F3;
-    }
-
-    input:checked+.slider:before {
-      -webkit-transform: translateX(26px);
-      -ms-transform: translateX(26px);
-      transform: translateX(26px);
-    }
-
-    /* Rounded sliders */
-    .slider.round {
-      border-radius: 34px;
-    }
-
-    .slider.round:before {
-      border-radius: 50%;
-    }
-  </style>
 </head>
 
 <body>
@@ -232,35 +99,26 @@ $product = $productDao->findById($_GET["id"]);
               <div class="accordion" id="accordion-cotizador">
                 <div class="card">
                   <div class="card-header" id="headingOne">
-                    <h2 class="mb-0">
-                      <a class="btn btn-link" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        <i class="more-less fas fa-plus"></i>Impresión
+                    <h2 class="mb-0 panel-title">
+                      <a class="btn btn-link text-left" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <i class="more-less fas fa-minus"></i>Impresión
                       </a>
                     </h2>
                   </div>
-
                   <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion-cotizador">
                     <div class="card-body">
-                      <!-- <div class="form-check form-check-inline">
-                        <input type="radio" name="typePrintingInput" id="typePrintingInput1" class="form-check-input">
-                        <label for="typePrintingInput1" class="form-check-label" selected>Si</label>
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input type="radio" name="typePrintingInput" id="typePrintingInput2" class="form-check-input">
-                        <label for="typePrintingInput2" class="form-check-label">No</label>
-                      </div> -->
                       <label class="switch">
                         <input type="checkbox" id="checkboxPrinting">
                         <span class="slider round"></span>
-                        <p id="questionPrinting">NO</p>
+                        <span id="questionPrinting">NO</span>
                       </label>
                     </div>
                   </div>
                 </div>
                 <div class="card">
                   <div class="card-header" id="headingTwo" role="tab">
-                    <h2 class="mb-0">
-                      <a class="btn btn-link collapsed" role="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <h2 class="mb-0 panel-title">
+                      <a class="btn btn-link collapsed text-left" role="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                         <i class="more-less fas fa-plus"></i>
                         Materiales
                       </a>
@@ -269,10 +127,11 @@ $product = $productDao->findById($_GET["id"]);
                   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion-cotizador">
                     <div class="card-body">
                       <?php foreach ($product->getMaterials() as $material) { ?>
-                        <div class="form-check form-check-inline">
-                          <input type="radio" name="typePrintingInput" id="typePrintingInput2" class="form-check-input">
-                          <label for="typePrintingInput2" class="form-check-label" value="<?php echo $material->getName(); ?>"><?php echo $material->getName(); ?></label>
-                        </div>
+                        <label class="radio-inline"><input type="radio" name="material"><?php echo $material->getName(); ?></label>
+                        <!-- <div class="form-check form-check-inline">
+                              <input type="radio" name="typePrintingInput" id="typePrintingInput2" class="form-check-input">
+                              <label for="typePrintingInput2" class="form-check-label" value="<?php echo $material->getName(); ?>"><?php echo $material->getName(); ?></label>
+                            </div> -->
                       <?php
                       } ?>
                     </div>
@@ -280,9 +139,9 @@ $product = $productDao->findById($_GET["id"]);
                 </div>
                 <div class="card">
                   <div class="card-header" id="headingThree">
-                    <h2 class="mb-0">
-                      <a class="btn btn-link collapsed" role="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        <i class="more-less fas fa-plus"></i>Medidas
+                    <h2 class="mb-0 panel-title">
+                      <a class="btn btn-link collapsed text-left" role="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Medidas<i class="more-less fas fa-plus"></i>
                       </a>
                     </h2>
                   </div>
@@ -312,13 +171,13 @@ $product = $productDao->findById($_GET["id"]);
                   </div>
                 </div>
               </div>
-              <div class="product_count">
-                <label for="qty">Cantidad:</label>
-                <input type="number" name="qty" id="sst" size="2" maxlength="12" value="1000" title="Quantity:" class="input-text qty">
+              <div class="product_count form-group">
+                <label for="sst">Cantidad:</label>
+                <input type="number" name="qty" id="sst" maxlength="12" value="1000" title="Cantidad:" class="input-text qty">
                 <a class="btn button primary-btn" id="btnCotizar" href="#">Añadir al cotizador</a>
               </div>
             </div>
-            <div class="clearfix"> </div>
+            <div class="clearfix"></div>
           </div>
         </div>
       </div>
@@ -479,6 +338,16 @@ $product = $productDao->findById($_GET["id"]);
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="/js/bootstrap.min.js"></script>
   <script>
+    function toggleIcon(e) {
+      $(e.target)
+        .prev(".card-header")
+        .find(".more-less")
+        .toggleClass("fa-plus fa-minus");
+    }
+    $(".collapse").on("hide.bs.collapse", toggleIcon);
+    $(".collapse").on("show.bs.collapse", toggleIcon);
+  </script>
+  <script>
     $('#height').attr("disabled", "false")
     let measurements = `<?php echo json_encode($product->getMeasurements()); ?>`
     measurements = JSON.parse(measurements)
@@ -498,6 +367,7 @@ $product = $productDao->findById($_GET["id"]);
       $('#length').prop("disabled", true)
       renderLengths($(this).val(), $('#width').val())
     })
+
 
     function renderHeigths(width) {
       $('#length').html('')
@@ -541,10 +411,19 @@ $product = $productDao->findById($_GET["id"]);
         $('#questionPrinting').html('NO')
       }
     })
+  </script>
+  <script>
     $('#sst').change(function() {
-      if($(this).val() < 1000){
+      if ($(this).val() < 1000) {
         $('#btnCotizar').addClass("disabled")
-      }else{
+      } else {
+        $('#btnCotizar').removeClass("disabled")
+      }
+    })
+    $('#sst').on('keyup', function() {
+      if ($(this).val() < 1000) {
+        $('#btnCotizar').addClass("disabled")
+      } else {
         $('#btnCotizar').removeClass("disabled")
       }
     })
