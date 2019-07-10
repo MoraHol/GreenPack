@@ -67,7 +67,7 @@
     float: right;
 }
 
-.panel-title>a {
+.panel-title > a {
     display: block;
     /* padding: 15px; */
     text-decoration: none;
@@ -80,7 +80,7 @@
     }
 
     .single {
-        margin-bottom: 400px;
+        margin-bottom: 480px;
     }
 }
 
@@ -142,4 +142,9 @@ input:checked+.slider:before {
 
 .slider.round:before {
     border-radius: 50%;
+}
+
+#btnCotizar.disabled {
+    background-color: #cccccc;
+    background-image: none;
 }

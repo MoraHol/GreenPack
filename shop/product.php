@@ -54,7 +54,6 @@ $product = $productDao->findById($_GET["id"]);
         directionNav: true,
         prevText: "prev",
         nextText: "next"
-        // controlNav: "thumbnails"
       });
     });
   </script>
@@ -127,11 +126,7 @@ $product = $productDao->findById($_GET["id"]);
                   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion-cotizador">
                     <div class="card-body">
                       <?php foreach ($product->getMaterials() as $material) { ?>
-                        <label class="radio-inline"><input type="radio" name="material"><?php echo $material->getName(); ?></label>
-                        <!-- <div class="form-check form-check-inline">
-                              <input type="radio" name="typePrintingInput" id="typePrintingInput2" class="form-check-input">
-                              <label for="typePrintingInput2" class="form-check-label" value="<?php echo $material->getName(); ?>"><?php echo $material->getName(); ?></label>
-                            </div> -->
+                        <label class="radio-inline" style="margin-left: 10px;"><input type="radio" name="material"><?php echo $material->getName(); ?></label>
                       <?php
                       } ?>
                     </div>
@@ -150,30 +145,46 @@ $product = $productDao->findById($_GET["id"]);
                       <div class="sorting">
                         <div class="row">
                           <div class="col">
+                            <label for="width">Ancho:</label>
                             <select id="width" class="form-control">
-                              <option selected disabled>ancho</option>
+                              <option selected disabled>Seleccione</option>
                             </select>
                           </div>
                           <div class="col">
+                            <label for="height">Alto:</label>
                             <select id="height" disabled class="form-control">
-                              <option selected disabled>alto</option>
+                              <option selected disabled>Seleccione</option>
                             </select>
                           </div>
                           <div class="col">
+                            <label for="length">largo:</label>
                             <select id="length" disabled class="form-control">
-                              <option selected disabled>largo</option>
+                              <option selected disabled>Seleccione</option>
                             </select>
                           </div>
                         </div>
-
                       </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header" id="headingFour">
+                    <h2 class="mb-0 panel-title">
+                      <a class="btn btn-link collapsed text-left" role="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        Cantidad<i class="more-less fas fa-plus"></i>
+                      </a>
+                    </h2>
+                  </div>
+                  <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion-cotizador">
+                    <div class="card-body">
+                      <label for="sst">Cantidad:</label>
+                      <input type="number" name="qty" id="sst" maxlength="12" value="1000" title="Cantidad:" class="input-text qty form-control">
                     </div>
                   </div>
                 </div>
               </div>
               <div class="product_count form-group">
-                <label for="sst">Cantidad:</label>
-                <input type="number" name="qty" id="sst" maxlength="12" value="1000" title="Cantidad:" class="input-text qty">
+                <br>
                 <a class="btn button primary-btn" id="btnCotizar" href="#">Añadir al cotizador</a>
               </div>
             </div>
