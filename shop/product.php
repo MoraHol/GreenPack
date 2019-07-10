@@ -21,7 +21,6 @@ $product = $productDao->findById($_GET["id"]);
 
   <link rel="stylesheet" href="/css/styles.css">
   <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
-  <!--<link rel="stylesheet" href="css/main.css">-->
   <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
   <link rel="stylesheet" href="/css/style-shop.css">
 
@@ -47,11 +46,14 @@ $product = $productDao->findById($_GET["id"]);
 
 
   <script>
-    // Can also be used with $(document).ready()
     $(window).load(function() {
       $('.flexslider').flexslider({
         animation: "slide",
-        controlNav: "thumbnails"
+        controlNav: false,
+        directionNav: true,
+        prevText: "prev",
+        nextText: "next"
+        // controlNav: "thumbnails"
       });
     });
   </script>
@@ -112,6 +114,82 @@ $product = $productDao->findById($_GET["id"]);
       position: relative;
       bottom: 20px;
     }
+
+    .accordion .card {
+      padding: 0;
+    }
+
+    @media(min-width: 800px) {
+      #container-cotizador {
+        position: relative;
+        right: -131px;
+      }
+
+      .single {
+        margin-bottom: 400px;
+      }
+    }
+  </style>
+  <style>
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    input:checked+.slider {
+      background-color: #2196F3;
+    }
+
+    input:focus+.slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked+.slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 34px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
   </style>
 </head>
 
@@ -135,7 +213,7 @@ $product = $productDao->findById($_GET["id"]);
     <div class="container">
       <div class="single-main">
         <div class="single-top-main">
-          <div class="col-md-5 single-top ">
+          <div class="col-md-4 single-top ">
             <div class="flexslider">
               <ul class="slides">
                 <?php foreach ($product->getImages() as $image) { ?>
@@ -146,53 +224,101 @@ $product = $productDao->findById($_GET["id"]);
               </ul>
             </div>
           </div>
-          <div class="col-md-4 ">
-            <div class="s_product_text">
+          <div class="col-md-7" id="container-cotizador">
+            <div class="s_product_text" style="margin-left: 0; margin-top: 0;">
               <h3><?php echo $product->getName(); ?></h3>
-              <p><?php echo strip_tags($product->getDescription()); ?></p>
-              <div class="sorting form-group">
-                <label for="printing">Tipo de impresion:</label>
-                <select id="printing">
-                  <option value="generica">generica</option>
-                  <option value="impresa">impresa</option>
-                </select>
-              </div>
-              <div class="sorting">
-                <select>
-                  <?php foreach ($product->getMaterials() as $material) { ?>
-                    <option value="<?php echo $material->getName(); ?>"><?php echo $material->getName(); ?></option>
-                  <?php
-                  } ?>
-                </select>
-              </div>
-              <div class="sorting">
-                <select>
-                  <?php foreach ($product->getMeasurements() as $measurement) { ?>
-                    <option value="<?php echo $measurement->getId(); ?>"><?php echo $measurement->getWidth() . "+" . $measurement->getLength() . "*" . $measurement->getHeight(); ?></option>
-                  <?php
-                  } ?>
-                </select>
+              <!-- <p><?php echo strip_tags($product->getDescription()); ?></p> -->
+              <!-- nueva pesentacion -->
+              <div class="accordion" id="accordion-cotizador">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                      <a class="btn btn-link" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <i class="more-less fas fa-plus"></i>Impresión
+                      </a>
+                    </h2>
+                  </div>
+
+                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion-cotizador">
+                    <div class="card-body">
+                      <!-- <div class="form-check form-check-inline">
+                        <input type="radio" name="typePrintingInput" id="typePrintingInput1" class="form-check-input">
+                        <label for="typePrintingInput1" class="form-check-label" selected>Si</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input type="radio" name="typePrintingInput" id="typePrintingInput2" class="form-check-input">
+                        <label for="typePrintingInput2" class="form-check-label">No</label>
+                      </div> -->
+                      <label class="switch">
+                        <input type="checkbox" id="checkboxPrinting">
+                        <span class="slider round"></span>
+                        <p id="questionPrinting">NO</p>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header" id="headingTwo" role="tab">
+                    <h2 class="mb-0">
+                      <a class="btn btn-link collapsed" role="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <i class="more-less fas fa-plus"></i>
+                        Materiales
+                      </a>
+                    </h2>
+                  </div>
+                  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion-cotizador">
+                    <div class="card-body">
+                      <?php foreach ($product->getMaterials() as $material) { ?>
+                        <div class="form-check form-check-inline">
+                          <input type="radio" name="typePrintingInput" id="typePrintingInput2" class="form-check-input">
+                          <label for="typePrintingInput2" class="form-check-label" value="<?php echo $material->getName(); ?>"><?php echo $material->getName(); ?></label>
+                        </div>
+                      <?php
+                      } ?>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header" id="headingThree">
+                    <h2 class="mb-0">
+                      <a class="btn btn-link collapsed" role="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <i class="more-less fas fa-plus"></i>Medidas
+                      </a>
+                    </h2>
+                  </div>
+                  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion-cotizador">
+                    <div class="card-body">
+                      <div class="sorting">
+                        <div class="row">
+                          <div class="col">
+                            <select id="width" class="form-control">
+                              <option selected disabled>ancho</option>
+                            </select>
+                          </div>
+                          <div class="col">
+                            <select id="height" disabled class="form-control">
+                              <option selected disabled>alto</option>
+                            </select>
+                          </div>
+                          <div class="col">
+                            <select id="length" disabled class="form-control">
+                              <option selected disabled>largo</option>
+                            </select>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="product_count">
                 <label for="qty">Cantidad:</label>
-                <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;" class="increase items-count" type="button"><i class="ti-angle-left"></i></button>
-                <input type="text" name="qty" id="sst" size="2" maxlength="12" value="1" title="Quantity:" class="input-text qty">
-                <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="ti-angle-right"></i></button>
-                <a class="button primary-btn" href="#">Add to Cart</a>
+                <input type="number" name="qty" id="sst" size="2" maxlength="12" value="1000" title="Quantity:" class="input-text qty">
+                <a class="btn button primary-btn" id="btnCotizar" href="#">Añadir al cotizador</a>
               </div>
             </div>
             <div class="clearfix"> </div>
-          </div>
-          <div class="col-md-3">
-            <div class="s_product_text card">
-              <div class="card-icon"><i class="far fa-list-alt"></i></div>
-              <h3>Usos</h3>
-              <ul>
-                <?php foreach ($product->getUses() as $use) { ?>
-                  <li><?php echo $use ?></li>
-                <?php } ?>
-              </ul>
-            </div>
           </div>
         </div>
       </div>
@@ -201,94 +327,108 @@ $product = $productDao->findById($_GET["id"]);
   <!--================Product Description Area =================-->
   <section class="product_description_area">
     <div class="container">
-      <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Descripción</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Especificaciones</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Comments</a>
-        </li>
-      </ul>
-      <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-          <p><?php echo $product->getDescription(); ?></p>
-        </div>
-        <div class="tab-pane fade " id="profile" role="tabpanel" aria-labelledby="profile-tab">
-          <div class="table-responsive">
-            <table class="table">
-              <tbody>
-                <tr>
-                  <td>
-                    <h5>Width</h5>
-                  </td>
-                  <td>
-                    <h5>128mm</h5>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <h5>Height</h5>
-                  </td>
-                  <td>
-                    <h5>508mm</h5>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <h5>Depth</h5>
-                  </td>
-                  <td>
-                    <h5>85mm</h5>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <h5>Weight</h5>
-                  </td>
-                  <td>
-                    <h5>52gm</h5>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <h5>Quality checking</h5>
-                  </td>
-                  <td>
-                    <h5>yes</h5>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <h5>Freshness Duration</h5>
-                  </td>
-                  <td>
-                    <h5>03days</h5>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <h5>When packeting</h5>
-                  </td>
-                  <td>
-                    <h5>Without touch of hand</h5>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <h5>Each Box contains</h5>
-                  </td>
-                  <td>
-                    <h5>60pcs</h5>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+      <div class="row">
+        <div class="col-md-3 uses">
+          <div class=" card">
+            <div class="card-icon"><i class="far fa-list-alt"></i></div>
+            <h3>Usos</h3>
+            <ul>
+              <?php foreach ($product->getUses() as $use) { ?>
+                <li><?php echo $use ?></li>
+              <?php } ?>
+            </ul>
           </div>
         </div>
-
+        <div class="col-md-9">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Descripción</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Especificaciones</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Comments</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+              <p><?php echo $product->getDescription(); ?></p>
+            </div>
+            <div class="tab-pane fade " id="profile" role="tabpanel" aria-labelledby="profile-tab">
+              <div class="table-responsive">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <h5>Width</h5>
+                      </td>
+                      <td>
+                        <h5>128mm</h5>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h5>Height</h5>
+                      </td>
+                      <td>
+                        <h5>508mm</h5>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h5>Depth</h5>
+                      </td>
+                      <td>
+                        <h5>85mm</h5>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h5>Weight</h5>
+                      </td>
+                      <td>
+                        <h5>52gm</h5>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h5>Quality checking</h5>
+                      </td>
+                      <td>
+                        <h5>yes</h5>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h5>Freshness Duration</h5>
+                      </td>
+                      <td>
+                        <h5>03days</h5>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h5>When packeting</h5>
+                      </td>
+                      <td>
+                        <h5>Without touch of hand</h5>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h5>Each Box contains</h5>
+                      </td>
+                      <td>
+                        <h5>60pcs</h5>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -326,20 +466,6 @@ $product = $productDao->findById($_GET["id"]);
       </div>
     </div>
   </section>
-  <script>
-    $(document).ready(function() {
-      $('select').niceSelect()
-      if ($('#description1').height() < 100) {
-        if ($('#description1').height() == 0) {
-          $('.single').css("margin-bottom", (($('#description1').height() + 1) * 6) + 400)
-        } else {
-          $('.single').css("margin-bottom", ($('#description1').height() * 10) + 350)
-        }
-      } else {
-        $('.single').css("margin-bottom", ($('#description1').height() * 2.2) + 110)
-      }
-    })
-  </script>
   <?php include("../partials/footer.html"); ?>
   <!--================End Product Description Area =================-->
   <script src="/js/bootstrap.bundle.min.js"></script>
@@ -352,6 +478,77 @@ $product = $productDao->findById($_GET["id"]);
   <script src="/js/spinner.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="/js/bootstrap.min.js"></script>
+  <script>
+    $('#height').attr("disabled", "false")
+    let measurements = `<?php echo json_encode($product->getMeasurements()); ?>`
+    measurements = JSON.parse(measurements)
+    let widths = []
+    measurements.forEach(measurement => {
+      if (!widths.includes(measurement.width)) {
+        widths.push(measurement.width)
+        $('#width').append(`<option>${measurement.width}</option>`)
+      }
+    })
+    $('#width').change(function() {
+      $('#height').prop("disabled", true)
+      $('#length').prop("disabled", true)
+      renderHeigths($(this).val())
+    })
+    $('#height').change(function() {
+      $('#length').prop("disabled", true)
+      renderLengths($(this).val(), $('#width').val())
+    })
+
+    function renderHeigths(width) {
+      $('#length').html('')
+      $('#height').html('')
+      $('#height').append('<option selected disabled>alto</option>')
+      $('#length').append('<option selected disabled>largo</option>')
+      let measurementsAux = measurements.filter((measurement) => measurement.width == width)
+      let heights = []
+      measurementsAux.forEach(measurement => {
+        if (!heights.includes(measurement.height)) {
+          heights.push(measurement.height)
+          $('#height').append(`<option>${measurement.height}</option>`)
+        }
+      })
+      $('#height').prop("disabled", false)
+    }
+
+    function renderLengths(height, width) {
+      $('#length').html('')
+      $('#length').append('<option selected disabled>largo</option>')
+      console.log(height, width)
+      let measurementsAux = measurements.filter((measurement) => {
+        if (measurement.height == height && measurement.width == width) {
+          return measurement
+        }
+      })
+      console.log(measurementsAux)
+      let lengths = []
+      measurementsAux.forEach(measurement => {
+        if (!lengths.includes(measurement.length)) {
+          lengths.push(measurement.length)
+          $('#length').append(`<option>${measurement.length}</option>`)
+        }
+      })
+      $('#length').prop("disabled", false)
+    }
+    $('#checkboxPrinting').change(function() {
+      if ($(this).prop('checked')) {
+        $('#questionPrinting').html('SI')
+      } else {
+        $('#questionPrinting').html('NO')
+      }
+    })
+    $('#sst').change(function() {
+      if($(this).val() < 1000){
+        $('#btnCotizar').addClass("disabled")
+      }else{
+        $('#btnCotizar').removeClass("disabled")
+      }
+    })
+  </script>
 
 </body>
 

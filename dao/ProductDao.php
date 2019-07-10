@@ -175,7 +175,9 @@ class ProductDao
   {
     $this->db->connect();
     $query = "UPDATE `products` SET `ref` = '" . $product->getRef() . "', `name` = '" . $product->getName() . "', `price` = '" . $product->getPrice() . "', `description` = '" . $product->getDescription() . "', `categories_id_categories` = '" . $product->getCategory()->getId() . "', `uses` = '" . json_encode($product->getUses()) . "' WHERE `products`.`id_products` = " . $product->getId();
+    echo $query;
     $status = $this->db->consult($query);
+    echo $status;
     $this->db->close();
     return $status;
   }

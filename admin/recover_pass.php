@@ -32,7 +32,7 @@ if (isset($_GET["id"]) && isset($_GET["token"])) {
       <p id="profile-name" class="profile-name-card"></p>
       <form class="form-signin" id="form">
         <span id="reauth-email" class="reauth-email"></span>
-        <input type="password" id="inputPassword" name="pa ss" class="form-control" placeholder="Nueva Contraseña" required>
+        <input type="password" id="inputPassword" name="pass" class="form-control" placeholder="Nueva Contraseña" required>
         <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Cambiar Contraseña</button>
       </form>
     </div><!-- /card-container -->
