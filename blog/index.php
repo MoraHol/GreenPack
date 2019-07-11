@@ -92,6 +92,7 @@ if ($_GET["page"] > $pages || $_GET["page"] <= 0) {
 </head>
 
 <body>
+  <?php include("../partials/fixed-quoting.html"); ?>
   <div class="wall-loading">
     <div class="lds-roller">
       <div></div>

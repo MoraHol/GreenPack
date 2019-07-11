@@ -105,7 +105,7 @@ class quotation
   {
     array_push($this->items, $item);
   }
-  
+
   public function removeItem($item)
   {
     $index = array_search($item, $this->items);

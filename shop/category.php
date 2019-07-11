@@ -55,6 +55,7 @@
     header("Location: category.php?id=" . $_GET['id'] . "&page=1");
   }
   ?>
+  <?php include("../partials/fixed-quoting.html"); ?>
   <div class="wall-loading">
     <div class="lds-roller">
       <div></div>

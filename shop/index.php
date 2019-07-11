@@ -35,6 +35,7 @@
 </head>
 
 <body>
+<?php include("../partials/fixed-quoting.html"); ?>
   <div style="background-color: black; height: 81px;"></div>
   <?php include("../partials/header_1.html"); ?>
   <div class="wall-loading">

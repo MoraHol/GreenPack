@@ -60,7 +60,7 @@ $product = $productDao->findById($_GET["id"]);
 </head>
 
 <body>
-
+  <?php include("../partials/fixed-quoting.html"); ?>
   <div style="background-color: black; height: 81px;"></div>
   <?php include("../partials/header_1.html"); ?>
   <div class="wall-loading">
@@ -177,7 +177,6 @@ $product = $productDao->findById($_GET["id"]);
                   </div>
                   <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion-cotizador">
                     <div class="card-body">
-                      <label for="sst">Cantidad:</label>
                       <input type="number" name="qty" id="sst" maxlength="12" value="1000" title="Cantidad:" class="input-text qty form-control">
                     </div>
                   </div>
@@ -383,8 +382,8 @@ $product = $productDao->findById($_GET["id"]);
     function renderHeigths(width) {
       $('#length').html('')
       $('#height').html('')
-      $('#height').append('<option selected disabled>alto</option>')
-      $('#length').append('<option selected disabled>largo</option>')
+      $('#height').append('<option selected disabled>Seleccione</option>')
+      $('#length').append('<option selected disabled>Seleccione</option>')
       let measurementsAux = measurements.filter((measurement) => measurement.width == width)
       let heights = []
       measurementsAux.forEach(measurement => {
@@ -398,7 +397,7 @@ $product = $productDao->findById($_GET["id"]);
 
     function renderLengths(height, width) {
       $('#length').html('')
-      $('#length').append('<option selected disabled>largo</option>')
+      $('#length').append('<option selected disabled>Seleccione</option>')
       console.log(height, width)
       let measurementsAux = measurements.filter((measurement) => {
         if (measurement.height == height && measurement.width == width) {

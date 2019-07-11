@@ -1,0 +1,75 @@
+<div class="fixed-quoting text-center">
+  <img src="/images/icon.png" alt="">
+  <div class="fixed-link">
+    <a href="">
+      <span>Cotizar</span>
+    </a>
+  </div>
+</div>
+<div class="fixed-quoting-2 text-center">
+  <img src="/images/book-open-solid.svg" alt="" width="28" height="28" style="padding-left: 5px;padding-top: 5px;">
+  <div class="fixed-link-2">
+    <a href="">
+      <span>Catalogo</span>
+    </a>
+  </div>
+</div>
+<div class="fixed-quoting-3 text-center">
+  <img src="/images/envelope-regular.svg" alt="" width="28" height="28" style="padding-left: 5px;padding-top: 5px;">
+  <div class="fixed-link-3">
+    <a href="javascript:void(0)" data-target="#modalSuscribe" data-toggle="modal">
+      <span>Suscripción</span>
+    </a>
+  </div>
+</div>
+<!-- Modal  change password-->
+<div class="modal fade" id="modalSuscribe" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Sucribirme</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="name">Correo:</label>
+          <input type="email" id="email" class="form-control">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <a id="btnEditPass" role="button" class="btn btn-primary" href="#">Suscrbirme</a>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .modal .btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  }
+</style>
+<script>
+  $('.fixed-quoting').hover(() => {
+    $('.fixed-link').css('right', '-15px')
+  })
+  $('.fixed-quoting').mouseleave(() => {
+    $('.fixed-link').css('right', '-200px')
+  })
+  $('.fixed-quoting-2').hover(() => {
+    $('.fixed-link-2').css('right', '-15px')
+  })
+  $('.fixed-quoting-2').mouseleave(() => {
+    $('.fixed-link-2').css('right', '-200px')
+  })
+  $('.fixed-quoting-3').hover(() => {
+    $('.fixed-link-3').css('right', '-15px')
+  })
+  $('.fixed-quoting-3').mouseleave(() => {
+    $('.fixed-link-3').css('right', '-200px')
+  })
+</script>

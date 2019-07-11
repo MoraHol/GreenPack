@@ -68,7 +68,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       font-size: 16px !important;
     }
 
-    .bg-image.overlay:after{
+    .bg-image.overlay:after {
       background-image: linear-gradient(to bottom, #37405085 0%, #798696d9 100%) !important;
     }
   </style>
@@ -88,6 +88,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 
 <body>
+<?php include("partials/fixed-quoting.html"); ?>
+
   <div class="wall-loading">
     <div class="lds-roller">
       <div></div>
