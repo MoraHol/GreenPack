@@ -37,6 +37,19 @@ $product = $productDao->findById($_GET["id"]);
   <link rel="stylesheet" href="/css/flexslider.css">
   <link rel="stylesheet" href="/css/nice-select/nice-select.css">
   <link rel="stylesheet" href="/css/style-product.css">
+
+  <!-- basket -->
+  <link rel="stylesheet" type="text/css" href="/css/shopping_car.css">
+  <link rel="stylesheet" type="text/css" href="/css/products-basket.css">
+  <link rel="stylesheet" type="text/css" href="/css/carousel-stores.css">
+  <!--  -->
+  <link rel="stylesheet" type="text/css" href="/css/products.css">
+  <!--  -->
+  <link rel="stylesheet" type="text/css" href="/css/stores.css">
+  <link rel="stylesheet" type="text/css" href="/css/index-page.css">
+
+
+  
   <!--===================== JS ================-->
   <script src="/js/jquery.flexslider.js"></script>
   <script src="/js/spinner.js"></script>
@@ -90,7 +103,7 @@ $product = $productDao->findById($_GET["id"]);
               </ul>
             </div>
           </div>
-          <div class="col-md-7" id="container-cotizador">
+          <div class="col-md-6" id="container-cotizador">
             <div class="s_product_text" style="margin-left: 0; margin-top: 0;">
               <h3><?php echo $product->getName(); ?></h3>
               <!-- <p><?php echo strip_tags($product->getDescription()); ?></p> -->
@@ -335,6 +348,7 @@ $product = $productDao->findById($_GET["id"]);
       </div>
     </div>
   </section>
+  <?php include("../partials/basket.html"); ?>
   <?php include("../partials/footer.html"); ?>
   <!--================End Product Description Area =================-->
   <script src="/js/bootstrap.bundle.min.js"></script>
