@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="/css/all.min.css">
   <link rel="stylesheet" href="/css/style-blog.css">
   <link rel="stylesheet" href="/css/style-accordion.css">
-
+  <link rel="stylesheet" href="/css/basket.css">
 
   <link rel="stylesheet" href="/css/style-shop.css">
   <script src="/js/spinner.js"></script>
@@ -206,6 +206,7 @@
       </div>
     </div>
   </section>
+  <?php include("../partials/basket.html"); ?>
   <!-- ================ category section end ================= -->
 
 

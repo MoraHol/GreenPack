@@ -29,6 +29,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <link rel="stylesheet" type="text/css" href="/css/slick.css" />
   <link rel="stylesheet" type="text/css" href="/css/slick-theme.css" />
   <link rel="stylesheet" href="/css/animate.css">
+  <link rel="stylesheet" href="/css/basket.css">
   <!-- start-smoth-scrolling -->
   <script type="text/javascript" src="/js/move-top.js"></script>
   <script type="text/javascript" src="/js/jquery.easing.1.3.js"></script>
@@ -154,6 +155,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       </div>
     </div>
   </section>
+  <?php include("partials/basket.html"); ?>
   <!-- End faq Area -->
   <?php include("partials/footer.html") ?>
   <script src="js/jquery-2.2.4.min.js"></script>

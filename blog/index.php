@@ -46,6 +46,7 @@ if ($_GET["page"] > $pages || $_GET["page"] <= 0) {
   <link rel="stylesheet" href="/css/spinner.css">
   <!-- Custom stlylesheet -->
   <link type="text/css" rel="stylesheet" href="/css/style-blog.css" />
+  <link rel="stylesheet" href="/css/basket.css">
   <style>
     .search input.serch {
       color: #fff;
@@ -240,7 +241,7 @@ if ($_GET["page"] > $pages || $_GET["page"] <= 0) {
 
   </div>
   <!-- /Blog -->
-
+  <?php include("../partials/basket.html"); ?>
   <?php include("../partials/footer.html") ?>
   <div id="test"></div>
   <a href="#" id="back-to-top" title="Regresar al inicio"><i class="fas fa-arrow-up"></i></a>

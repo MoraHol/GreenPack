@@ -27,6 +27,7 @@ $conversor = new ConversorDate(); ?>
   <link rel="stylesheet" href="https://teenus.com.co/css/global/global.css">
   <link rel="stylesheet" href="/css/style-index-notices.css">
   <link href="https://fonts.googleapis.com/css?family=Concert+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/basket.css">
   <style>
     .search input.serch {
       color: #fff;
@@ -302,7 +303,7 @@ $conversor = new ConversorDate(); ?>
   </section>
   <!-- end contact Area -->
 
-
+  <?php include("partials/basket.html"); ?>
 
   <a href="#" id="back-to-top" title="Regresar al inicio"><i class="fas fa-arrow-up"></i></a>
   <?php include("partials/footer.html") ?>

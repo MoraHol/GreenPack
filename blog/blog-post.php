@@ -37,6 +37,7 @@ $conversor = new ConversorDate();
   <link href="https://cdn.jsdelivr.net/npm/froala-editor@3.0.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type='text/css' />
   <!-- Custom stlylesheet -->
   <link type="text/css" rel="stylesheet" href="/css/style-blog.css" />
+  <link rel="stylesheet" href="/css/basket.css">
   <style>
     .search input.serch {
       color: #fff;
@@ -188,6 +189,7 @@ $conversor = new ConversorDate();
 
   </div>
   <!-- /Blog -->
+  <?php include("../partials/basket.html"); ?>
   <?php include("../partials/footer.html") ?>
   <a href="#" id="back-to-top" title="Regresar al inicio"><i class="fas fa-arrow-up"></i></a>
   <script src="/js/jquery.ajaxchimp.min.js"></script>

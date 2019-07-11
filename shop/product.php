@@ -37,19 +37,9 @@ $product = $productDao->findById($_GET["id"]);
   <link rel="stylesheet" href="/css/flexslider.css">
   <link rel="stylesheet" href="/css/nice-select/nice-select.css">
   <link rel="stylesheet" href="/css/style-product.css">
-
-  <!-- basket -->
-  <link rel="stylesheet" type="text/css" href="/css/shopping_car.css">
-  <link rel="stylesheet" type="text/css" href="/css/products-basket.css">
-  <link rel="stylesheet" type="text/css" href="/css/carousel-stores.css">
-  <!--  -->
-  <link rel="stylesheet" type="text/css" href="/css/products.css">
-  <!--  -->
-  <link rel="stylesheet" type="text/css" href="/css/stores.css">
-  <link rel="stylesheet" type="text/css" href="/css/index-page.css">
+  <link rel="stylesheet" href="/css/basket.css">
 
 
-  
   <!--===================== JS ================-->
   <script src="/js/jquery.flexslider.js"></script>
   <script src="/js/spinner.js"></script>
