@@ -19,8 +19,9 @@
     font-weight: initial;
     font-style: normal
 }
+
 .w-100 {
-    width: 80%!important;
+    width: 80% !important;
     margin: 0 auto;
 }
 
@@ -461,7 +462,6 @@ q,
 ruby,
 s,
 samp,
-section,
 small,
 span,
 strike,
@@ -489,7 +489,7 @@ video {
     vertical-align: baseline
 }
 
-* {
+*:not(section, hr) {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -966,7 +966,7 @@ screen and (orientation:portrait) {
     background: linear-gradient(to right, #ffb57d 0, #fd6250 47%, #fd6250 51%, #fd6250 71%, #fd6250 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffb57d', endColorstr='#fd6250', GradientType=1)
 }
-
+/* 
 .carousel {
     text-align: center;
     margin: 0 auto;
@@ -988,7 +988,7 @@ screen and (orientation:portrait) {
     left: 0;
     vertical-align: top;
     transition: .8s
-}
+} */
 
 .text-info {
     text-align: center;

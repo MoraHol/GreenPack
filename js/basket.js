@@ -6,3 +6,14 @@ document.getElementsByClassName('close-basket').item(0).onclick = () => {
   basketContainer.setAttribute('class', 'basket-container')
   basketContainer.style.zIndex = 100000000
 }
+renderCart()
+
+function renderCart() {
+  $.get('/services/fill-basket.php', (data, status) => {
+    $('.basket-body').html(data)
+  })
+}
+
+function showCart() {
+  basketContainer.setAttribute('class', 'basket-container show')
+}

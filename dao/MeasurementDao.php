@@ -31,12 +31,24 @@ class MeasurementDao
     $this->db->connect();
     $query = "INSERT INTO `measurements` (`id_measurements`, `width`, `height`, `lenght`, `products_id_products`) VALUES (NULL, '" . $measurement->getWidth() . "', '" . $measurement->getHeight() . "', '" . $measurement->getLength() . "', '" . $measurement->getProduct() . "')";
     $status = $this->db->consult($query);
-    echo $query;
     $this->db->close();
     return $status;
   }
-  function delete($id)
-  { }
+  function searchMeasurementByProduct($product, $height, $width, $length)
+  {
+    $this->db->connect();
+    $query = "SELECT * FROM `measurements` WHERE `width` = $width and `height` = $height and `lenght` = $length AND `products_id_products` = " . $product->getId();
+    $measurementDB = $this->db->consult($query, "yes");
+    $measurementDB = $measurementDB[0];
+    $measurement = new Measurement();
+    $measurement->setId($measurementDB["id_measurements"]);
+    $measurement->setLength($measurementDB["lenght"]);
+    $measurement->setWidth($measurementDB["width"]);
+    $measurement->setHeight($measurementDB["height"]);
+    $measurement->setProduct($product->getId());
+    $this->db->close();
+    return $measurement;
+  }
   function deleteByProduct($idMeasurement, $idProduct)
   {
     $this->db->connect();

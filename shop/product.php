@@ -129,7 +129,7 @@ $product = $productDao->findById($_GET["id"]);
                   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion-cotizador">
                     <div class="card-body">
                       <?php foreach ($product->getMaterials() as $material) { ?>
-                        <label class="radio-inline" style="margin-left: 10px;"><input type="radio" name="material"><?php echo $material->getName(); ?></label>
+                        <label class="radio-inline" style="margin-left: 10px;"><input type="radio" name="material" value="<?php echo $material->getId(); ?>"><?php echo $material->getName(); ?></label>
                       <?php
                       } ?>
                     </div>
@@ -439,6 +439,39 @@ $product = $productDao->findById($_GET["id"]);
         $('#btnCotizar').addClass("disabled")
       } else {
         $('#btnCotizar').removeClass("disabled")
+      }
+    })
+    // agregar un producto al carrito
+    $('#btnCotizar').click(() => {
+      let $printing = $('#checkboxPrinting').prop('checked')
+      let $width = $('#width').val()
+      let $height = $('#height').val()
+      let $length = $('#length').val()
+      let $material = $("input[name='material']:checked").val();
+      let $quantity = $('#sst').val()
+      if ($width != null && $height != null && $length != null && $material != undefined && $quantity > 999) {
+        $.post('api/add_item.php', {
+          idProduct: `<?php echo $product->getId(); ?>`,
+          width: $width,
+          height: $height,
+          length: $length,
+          material: $material,
+          quantity: $quantity,
+          printing: $printing
+        }, (data, status) => {
+          if (status == 'success') {
+            alert(data)
+          }
+          renderCart()
+          showCart()
+        })
+      } else {
+        if ($width == null || $height == null || $length == null) {
+          alert('Seleccione medidas')
+        }
+        if ($material == undefined) {
+          alert('Seleccione un material')
+        }
       }
     })
   </script>

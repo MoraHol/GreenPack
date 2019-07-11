@@ -1,5 +1,5 @@
 <?php
-class quotation
+class Quotation
 {
   private $nameClient;
   private $lastNameClient;
@@ -103,7 +103,16 @@ class quotation
 
   public function addItem($item)
   {
-    array_push($this->items, $item);
+    $flag = false;
+    foreach ($this->items as $itemArray) {
+      if ($itemArray->isEqual($item)) {
+        $itemArray->setQuantity($itemArray->getQuantity() + $item->getQuantity());
+        $flag = true;
+      }
+    }
+    if (!$flag) {
+      array_push($this->items, $item);
+    }
   }
 
   public function removeItem($item)

@@ -27,7 +27,7 @@ $conversor = new ConversorDate(); ?>
   <link rel="stylesheet" href="https://teenus.com.co/css/global/global.css">
   <link rel="stylesheet" href="/css/style-index-notices.css">
   <link href="https://fonts.googleapis.com/css?family=Concert+One&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/basket.css">
+  <link rel="stylesheet" href="/css/basket.css"> 
   <style>
     .search input.serch {
       color: #fff;
@@ -272,11 +272,8 @@ $conversor = new ConversorDate(); ?>
       <div class="row d-flex justify-content-center">
         <div class="menu-content pb-60 col-lg-8">
           <div class="title text-center">
-            <h1 class="mb-10">Escríbenos</h1>
-            <p style="
-    font-size: 24px;
-    margin-bottom: -20px;
-">Haz crecer tu negocio.</p>
+            <h1 class="mb-10" style="font-size: 40px;font-family: 'Poppins', sans-serif;margin-bottom: 10px;">Escríbenos</h1>
+            <p style="font-size: 24px;margin-bottom: -20px;color:#666666">Haz crecer tu negocio.</p>
           </div>
         </div>
       </div>

@@ -4,3 +4,10 @@
 @import url('/css/products.css');
 @import url('/css/stores.css');
 @import url('/css/index-page.css');
+
+.cont-products-basket button {
+    border: none;
+}
+.cont-product-basket .description-product .text-primary{
+    color: #000!important;
+}
