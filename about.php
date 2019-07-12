@@ -106,11 +106,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <?php include("partials/header_1.html") ?>
   <section class="default-banner">
     <div class="hero-area section" style="height: 150px;">
-
       <!-- Backgound Image -->
       <div class="bg-image bg-parallax overlay" style="background-image:url(/images/landscape.jpg); background-position-y: -253px;"></div>
       <!-- /Backgound Image -->
-
     </div>
   </section>
 

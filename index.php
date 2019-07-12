@@ -272,8 +272,8 @@ $conversor = new ConversorDate(); ?>
       <div class="row d-flex justify-content-center">
         <div class="menu-content pb-60 col-lg-8">
           <div class="title text-center">
-            <h1 class="mb-10" style="font-size: 40px;font-family: 'Poppins', sans-serif;margin-bottom: 10px;">Escríbenos</h1>
-            <p style="font-size: 24px;margin-bottom: -20px;color:#666666">Haz crecer tu negocio.</p>
+            <h1 class="mb-10" style="font-size: 40px;font-family: 'Poppins', sans-serif;margin-bottom: 10px;font-weight: bold;">Escríbenos</h1>
+            <p style="font-size: 24px;margin-bottom: -20px;color:#666666;font-family: 'Poppins', sans-serif;">Haz crecer tu negocio.</p>
           </div>
         </div>
       </div>

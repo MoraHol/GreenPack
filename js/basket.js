@@ -17,3 +17,18 @@ function renderCart() {
 function showCart() {
   basketContainer.setAttribute('class', 'basket-container show')
 }
+
+function hideCart() {
+  basketContainer.setAttribute('class', 'basket-container')
+}
+
+function deleteItem(idItem) {
+  $.post('/shop/api/remove_item.php', {
+    id_item: idItem
+  }, (data, status) => {
+    if (status == 'success') {
+      alert('borrado')
+      renderCart()
+    }
+  })
+}

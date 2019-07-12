@@ -919,7 +919,7 @@ screen and (orientation:portrait) {
     display: none !important
 }
 
-.modal {
+/* .modal {
     -webkit-transform: scale(1.2);
     transform: scale(1.2);
     opacity: 0;
@@ -946,7 +946,7 @@ screen and (orientation:portrait) {
     opacity: 1;
     visibility: visible;
     z-index: 20
-}
+} */
 
 .relative {
     position: relative

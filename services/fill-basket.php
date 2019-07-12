@@ -42,14 +42,14 @@ if (isset($_SESSION["cart"])) {
                               <span class="text-primary">Ancho:</span><span>&nbsp; <?php echo $item->getMeasurement()->getLength(); ?></span>&nbsp;
                             </p>
                             <span class="topping-product"></span>
-                            <span class="delete" onclick="deleteProduct(<?php echo $item->getProduct()->getId(); ?>)">Eliminar</span>
+                            <span class="delete" onclick="deleteItem('<?php echo $item->getId() ?>')">Eliminar</span>
                           </div>
                           <div class="cont-calculator ng-star-inserted">
                             <app-counter-product>
-                              <div class="calculator"><button class="subtract" onclick="subtractQty(<?php echo $item->getId(); ?>)">
+                              <div class="calculator"><button class="subtract" onclick="subtractQty('<?php echo $item->getId(); ?>')">
                                   <div><span class="ng-star-inserted"><i class="iconf-delete"></i></span></div>
                                 </button>
-                                <div><?php echo $item->getQuantity();?></div><button class="plus" onclick="sumQty(<?php echo $item->getId(); ?>)">
+                                <div><?php echo $item->getQuantity(); ?></div><button class="plus" onclick="sumQty('<?php echo $item->getId(); ?>')">
                                   <div>+</div>
                                 </button>
                               </div>
@@ -68,6 +68,9 @@ if (isset($_SESSION["cart"])) {
         </li>
       </ul>
     </div>
+    <script>
+      $('#submit-order').prop('disabled', false)
+    </script>
   <?php
   } else {
     ?>

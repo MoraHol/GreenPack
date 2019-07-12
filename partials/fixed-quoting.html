@@ -17,7 +17,7 @@
 <div class="fixed-quoting-3 text-center">
   <img src="/images/envelope-regular.svg" alt="" width="28" height="28" style="padding-left: 5px;padding-top: 5px;">
   <div class="fixed-link-3">
-    <a href="javascript:void(0)" data-target="#modalSuscribe" data-toggle="modal">
+    <a href="javascript:void(0)" data-target="#modalSuscribe" data-toggle="modal" id="btnSuscribe">
       <span>Suscripción</span>
     </a>
   </div>
@@ -54,6 +54,10 @@
   }
 </style>
 <script>
+  $('#btnSuscribe').click(()=>
+  {
+    hideCart()
+  })
   $('.fixed-quoting').hover(() => {
     $('.fixed-link').css('right', '-15px')
   })

@@ -5,7 +5,7 @@
 @import url('/css/stores.css');
 @import url('/css/index-page.css');
 
-.cont-products-basket button {
+.cont-products-basket button, .basket-footer  button{
     border: none;
 }
 .cont-product-basket .description-product .text-primary{

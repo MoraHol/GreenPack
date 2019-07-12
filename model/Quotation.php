@@ -115,11 +115,22 @@ class Quotation
     }
   }
 
-  public function removeItem($item)
+  public function searchItem($idItem)
   {
-    $index = array_search($item, $this->items);
+    foreach ($this->items as $key => $item) {
+      if ($item->getId() == $idItem) {
+        return $key;
+      }
+    }
+  }
+  public function removeItem($idItem)
+  {
+    $index = searchItem($idItem);
     if ($index !== false) {
       unset($this->items[$index]);
+      return true;
+    } else {
+      return false;
     }
   }
 }
