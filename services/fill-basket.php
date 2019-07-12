@@ -49,7 +49,7 @@ if (isset($_SESSION["cart"])) {
                               <div class="calculator"><button class="subtract" onclick="subtractQty('<?php echo $item->getId(); ?>')">
                                   <div><span class="ng-star-inserted"><i class="iconf-delete"></i></span></div>
                                 </button>
-                                <div><?php echo $item->getQuantity(); ?></div><button class="plus" onclick="sumQty('<?php echo $item->getId(); ?>')">
+                                <div id="qty<?php echo $item->getId(); ?>"><?php echo $item->getQuantity(); ?></div><button class="plus" onclick="sumQty('<?php echo $item->getId(); ?>')">
                                   <div>+</div>
                                 </button>
                               </div>
@@ -94,4 +94,7 @@ if (isset($_SESSION["cart"])) {
       <p>Te invitamos a cotizar</p>
     </div>
   </div>
+  <script>
+      $('#submit-order').prop('disabled', true)
+    </script>
 <?php } ?>

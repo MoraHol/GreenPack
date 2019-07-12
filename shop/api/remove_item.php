@@ -8,6 +8,7 @@ require_once(dirname(dirname(__DIR__)) . "/dao/MaterialDao.php");
 if (isset($_POST["id_item"])) {
   $cart = unserialize($_SESSION["cart"]);
   if ($cart->removeItem($_POST["id_item"])) {
+    $_SESSION["cart"] = serialize($cart);
     http_response_code(200);
   } else {
     http_response_code(500);

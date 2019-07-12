@@ -5,12 +5,30 @@ class Quotation
   private $lastNameClient;
   private $company;
   private $address;
-  private $country;
+  private $city;
   private $items;
   private $email;
   private $phoneNumber;
   private $cellphoneNumber;
+  private $extraInformation;
+  private $id;
 
+  public function getId()
+  {
+    return $this->id;
+  }
+  public function setId($id)
+  {
+    $this->id = $id;
+  }
+  public function getExtraInformation()
+  {
+    return $this->extraInformation;
+  }
+  public function FunctionName($extraInformation)
+  {
+    $this->extraInformation = $extraInformation;
+  }
   public function getNameClient()
   {
     return $this->nameClient;
@@ -51,14 +69,14 @@ class Quotation
     $this->address = $address;
   }
 
-  public function getCountry()
+  public function getCity()
   {
-    return $this->country;
+    return $this->city;
   }
 
-  public function setCountry($country)
+  public function setCity($city)
   {
-    $this->country = $country;
+    $this->city = $city;
   }
 
   public function getItems()
@@ -125,9 +143,10 @@ class Quotation
   }
   public function removeItem($idItem)
   {
-    $index = searchItem($idItem);
+    $index = $this->searchItem($idItem);
     if ($index !== false) {
       unset($this->items[$index]);
+      var_dump($this->items);
       return true;
     } else {
       return false;
