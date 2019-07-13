@@ -15,7 +15,6 @@ $product = $productDao->findById($_GET["id"]);
   <?php include("../partials/metaproperties.html") ?>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script src="/js/jquery-1.11.0.min.js"></script>
   <title><?php echo $product->getName(); ?> | Greenpack</title>
   <!--============= CSS ======================== -->
 
@@ -318,7 +317,7 @@ $product = $productDao->findById($_GET["id"]);
               <div class="card-body">
                 <p><?php echo $productInstance->getCategory()->getName(); ?></p>
                 <h4 class="card-product__title"><a href="#"><?php echo $productInstance->getName(); ?></a></h4>
-                <p class="card-product__price">$<?php echo $productInstance->getPrice(); ?></p>
+                <!-- <p class="card-product__price">$<?php echo $productInstance->getPrice(); ?></p> -->
               </div>
             </div>
           </div>
@@ -345,10 +344,7 @@ $product = $productDao->findById($_GET["id"]);
     $(window).load(function() {
       $('.flexslider').flexslider({
         animation: "slide",
-        controlNav: false,
-        directionNav: true,
-        prevText: "prev",
-        nextText: "next"
+        controlNav: false
       })
     })
   </script>

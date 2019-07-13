@@ -165,8 +165,11 @@
                       <p><?php
                           echo strtoupper($product->getCategory()->getName());
                           ?></p>
-                      <h4 class="card-product__title"><a href="#"><?php echo $product->getName(); ?></a></h4>
-                      <p class="card-product__price">$<?php echo $product->getPrice(); ?></p>
+                      <script>
+                        console.log(<?php echo json_encode($product) ?>)
+                      </script>
+                      <h4 class="card-product__title"><a href="product.php?id=<?php echo $product->getId() ?>"><?php echo $product->getName(); ?></a></h4>
+                      <!-- <p class="card-product__price">$<?php echo $product->getPrice(); ?></p> -->
                     </div>
                   </div>
                 </div>
