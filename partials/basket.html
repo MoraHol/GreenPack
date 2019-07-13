@@ -144,6 +144,10 @@
       if(status == 'success'){
         alert('se ha creado su cotización')
         cleanCart()
+        renderCart()
+      }else{
+        alert('No tienes productos ')
+        renderCart()
       }
     })
   })

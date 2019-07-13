@@ -12,6 +12,37 @@ class Quotation
   private $cellphoneNumber;
   private $extraInformation;
   private $id;
+  private $file;
+  private $idClient;
+
+  public function __construct()
+  { 
+    $this->company = "NULL";
+    $this->phoneNumber = "NULL";
+    $this->extraInformation = "NULL";
+    $this->file = "NULL";
+  }
+
+
+  public function getIdClient()
+  {
+    return $this->idClient;
+  }
+
+  public function setIdClient($idClient)
+  {
+    $this->idClient = $idClient;
+  }
+
+  public function getFile()
+  {
+    return $this->file;
+  }
+
+  public function setFile($file)
+  {
+    $this->file = $file;
+  }
 
   public function getId()
   {
@@ -25,7 +56,7 @@ class Quotation
   {
     return $this->extraInformation;
   }
-  public function FunctionName($extraInformation)
+  public function setExtraInformation($extraInformation)
   {
     $this->extraInformation = $extraInformation;
   }

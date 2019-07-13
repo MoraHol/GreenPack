@@ -7,10 +7,21 @@ class Item
   private $printing;
   private $measurement;
   private $id;
+  private $price;
 
   public function __construct()
   {
     $this->id = bin2hex(openssl_random_pseudo_bytes(256));
+  }
+
+  public function getPrice()
+  {
+    return $this->price;
+  }
+
+  public function setPrice($price)
+  {
+    $this->price = $price;
   }
 
   public function getId()
@@ -76,6 +87,27 @@ class Item
       return true;
     } else {
       return false;
+    }
+  }
+  public function calculatePrice()
+  {
+    $LongUseful = $this->measurement->getLength() - 3;
+    $AT = (($this->measurement->getWidth() + $this->measurement->getHeight()) * 2) + 2;
+    $V = $this->measurement->getWidth() - 6;
+    $PAPER = ($AT * $this->measurement->getLength() * $this->material->getGrammage()) / 10000000;
+    $PLA = ((($V + 3) * $this->measurement->getLength()) * 30) / 10000000;
+    $LAM = ($AT * $this->measurement->getLength() * 30) / 1000000;
+    $directCost = $PAPER * $this->material->getPricePerKg();
+    if ($this->quantity > 20000 &&  $this->quantity < 60000) {
+      $this->price = $directCost * 3;
+    }
+    if ($this->quantity > 60000 &&  $this->quantity < 100000) {
+      $this->price = $directCost * 2.8;
+    }
+    if ($this->quantity > 100000 &&  $this->quantity < 1000000) {
+      $this->price = $directCost * 2.3;
+    } else {
+      $this->price = $directCost * 2.3;
     }
   }
 }
