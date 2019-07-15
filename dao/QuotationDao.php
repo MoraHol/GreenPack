@@ -57,6 +57,7 @@ class QuotationDao
     $quotation->setCellPhoneNumber($quotationDB["cell_phone"]);
     $quotation->setExtraInformation($quotationDB["description"]);
     $quotation->setSolved(filter_var($quotationDB["solved"], FILTER_VALIDATE_BOOLEAN));
+    $quotation->setId($quotationDB["id_quotations"]);
     $items = [];
     // cargado de cada uno de los items
     $itemsDB = $this->db->consult("SELECT * FROM quotations_details WHERE `quotations_id_quotations` = $id", "yes");

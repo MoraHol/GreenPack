@@ -155,8 +155,8 @@ $conversor = new ConversorDate(); ?>
       <div class="row d-flex justify-content-center align-items-center">
         <div class="menu-content pb-40 col-lg-8">
           <div class="title text-center">
-            <h1 class="mb-10">Con Materiales Biodegradables y Covertibles en abono</h1>
-            <p>Un empaque innovador y totalmente ecológico.</p>
+            <h1 class="mb-10" style="font-size: 2.5rem; font-weight: bold;     font-family: 'Poppins', sans-serif;color: #222222;line-height: 1.2em !important;">Con Materiales Biodegradables y Covertibles en abono</h1>
+            <p style="font-size: 0.9375rem;font-family: 'Poppins', sans-serif;font-weight: 300;color: #656565;line-height: 1.6;margin-top: 0;margin-bottom: 1rem;">Un empaque innovador y totalmente ecológico.</p>
           </div>
         </div>
       </div>
@@ -229,7 +229,12 @@ $conversor = new ConversorDate(); ?>
               </div>
 
               <hr>
-              <h3 class="g-font-size-22--xs g-letter-spacing--1"><a href="/blog/blog-post.php?id=<?php echo $notice->getId(); ?>"><?php echo $notice->getTitle(); ?></a></h3>
+              <h3 class="g-font-size-22--xs g-letter-spacing--1" style="    font-family: 'Poppins', sans-serif;
+    color: #222222;
+    line-height: 1.2em !important;
+    margin-bottom: 0;
+    margin-top: 0;
+    font-weight: 600;"><a  href="/blog/blog-post.php?id=<?php echo $notice->getId(); ?>"><?php echo $notice->getTitle(); ?></a></h3>
               <p></p>
             </div>
           </article>
@@ -362,12 +367,11 @@ $conversor = new ConversorDate(); ?>
     // check grid size on resize event
     $window.resize(function() {
       var gridSize = getGridSize();
-
       flexslider.vars.minItems = gridSize;
       flexslider.vars.maxItems = gridSize;
-    });
+    })
   </script>
-  
+
 </body>
 
 </html>

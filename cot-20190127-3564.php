@@ -1344,7 +1344,7 @@ EXCEL -->
 						</table>
 					</span></td>
 				<td colspan=4 rowspan=2 class=xl902996 width=315 style='border-right:1.0pt solid black;
-  width:237pt'>Cotizacion No.<font class="font52996">2701192258</font>
+  width:237pt'>Cotizacion No.<font class="font52996"><?php echo $quotation->getId() ?></font>
 				</td>
 			</tr>
 			<tr height=20 style='mso-height-source:userset;height:15.0pt'>
@@ -1358,34 +1358,34 @@ EXCEL -->
 			<tr height=20 style='mso-height-source:userset;height:15.0pt'>
 				<td height=20 class=xl702996 style='height:15.0pt;border-top: 1.0pt solid windowtext;'>Nombre:</td>
 				<td colspan=2 class=xl1162996 style='border-top: 1.0pt solid windowtext;border-right:.5pt solid black;
-  border-left:none'>Maria</td>
+  border-left:none'><?php echo $quotation->getNameClient() ?></td>
 				<td class=xl652996 style='border-left:none;border-top: 1.0pt solid windowtext;'>Apellido:</td>
 				<td colspan=3 class=xl1182996 style='border-right:1.0pt solid black;
-  border-left:none'>Diaz</td>
+  border-left:none'><?php echo $quotation->getLastNameClient() ?></td>
 			</tr>
 			<tr height=20 style='mso-height-source:userset;height:15.0pt'>
 				<td height=20 class=xl702996 style='height:15.0pt'>Empresa:</td>
 				<td colspan=2 class=xl1162996 style='border-right:.5pt solid black;
-  border-left:none'>Ninguna</td>
+  border-left:none'><?php echo $quotation->getCompany() ?></td>
 				<td class=xl652996 style='border-left:none'>Email:</td>
 				<td colspan=3 class=xl1162996 style='border-right:1.0pt solid black;
-  border-left:none'>mariadiazlopera@gmail.com</td>
+  border-left:none'><?php echo $quotation->getEmail() ?></td>
 			</tr>
 			<tr height=20 style='mso-height-source:userset;height:15.0pt'>
 				<td height=20 class=xl702996 style='height:15.0pt'>Ciudad:</td>
 				<td colspan=2 class=xl1162996 style='border-right:.5pt solid black;
-  border-left:none'>Cartagena</td>
+  border-left:none'><?php echo $quotation->getCity() ?></td>
 				<td class=xl652996 style='border-left:none'>Direcci&oacute;n:</td>
 				<td colspan=3 class=xl1162996 style='border-right:1.0pt solid black;
-  border-left:none'>Escallon Villa Calle 30G #55-36</td>
+  border-left:none'><?php echo $quotation->getAddress() ?></td>
 			</tr>
 			<tr height=20 style='mso-height-source:userset;height:15.0pt'>
 				<td height=20 class=xl702996 style='height:15.0pt'>Tel&eacute;fono:</td>
 				<td colspan=2 class=xl1162996 style='border-right:.5pt solid black;
-  border-left:none'>000000</td>
+  border-left:none'><?php echo $quotation->getPhoneNumber() ?></td>
 				<td class=xl652996 style='border-left:none'>Celular:</td>
 				<td colspan=3 class=xl1162996 style='border-right:1.0pt solid black;
-  border-left:none'>3152248875</td>
+  border-left:none'><?php echo $quotation->getCellphoneNumber() ?></td>
 			</tr>
 			<tr height=20 style='mso-height-source:userset;height:15.0pt'>
 				<td colspan=7 rowspan=2 height=40 class=xl1002996 style='border-right:1.0pt solid black;
@@ -1397,7 +1397,7 @@ EXCEL -->
 			<tr class="xl662996" height="20" style="mso-height-source:userset;height:15.0pt">
 				<td colspan="2" height="20" class="xl1062996" style="border-right:.5pt solid black; height:15.0pt">
 					Producto</td>
-				<td class="xl672996" style="border-top: .5pt solid windowtext;">Comprar</td>
+				<td class="xl672996" style="border-top: .5pt solid windowtext;">Impresión</td>
 				<td class="xl672996" style="border-top: .5pt solid windowtext;">Material</td>
 				<td class="xl672996" style="border-top: .5pt solid windowtext;">Medidas</td>
 				<td class="xl672996" style="border-top: .5pt solid windowtext;">Cantidad</td>
@@ -1407,11 +1407,11 @@ EXCEL -->
 				<!-- producto inidividual -->
 				<tr style="mso-height-source:userset;">
 					<td align="left" valign="top" style="border-right: .5pt solid windowtext;
-    		border-left: .5pt solid windowtext;border-bottom: .5pt solid windowtext;height:64px;"><span style="mso-ignore:vglayout;
-  		z-index:2;margin-left:6px;margin-top:26px;width:70px;
-  		height:51px"><img width="70" height="51" src="<?php echo $item->getProduct()->getImages()[0]->getUrl() ?>" alt="<?php echo $item->getProduct()->getImages()[0]->getUrl() ?>" v:shapes="Picture_x0020_2"></span></td>
+    			border-left: .5pt solid windowtext;border-bottom: .5pt solid windowtext;height:64px;"><span style="mso-ignore:vglayout;
+  			z-index:2;margin-left:6px;margin-top:26px;width:70px;
+  			height:51px"><img width="70" height="51" src="<?php echo $item->getProduct()->getImages()[0]->getUrl() ?>" alt="<?php echo $item->getProduct()->getImages()[0]->getUrl() ?>" v:shapes="Picture_x0020_2"></span></td>
 					<td class="xl752996" width="108" style="width:81pt"><?php echo $item->getProduct()->getRef() ?></td>
-					<td class="xl682996">Al detal</td>
+					<td class="xl682996"><?php echo $item->isPrinting() ? "SI" : "NO"; ?></td>
 					<td class="xl692996" width="77" style="width:58pt"><?php echo $item->getMaterial()->getName() ?></td>
 					<td class="xl682996"><?php echo $item->getMeasurement()->getWidth(); ?>*<?php echo $item->getMeasurement()->getHeight() ?>*<?php echo $item->getMeasurement()->getLength() ?></td>
 					<td class="xl742996" width="76" style="width:57pt"><?php echo $item->getQuantity() ?></td>
