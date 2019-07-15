@@ -15,6 +15,7 @@ class AdminDao
     $admins = [];
     foreach ($adminsDB as  $adminDB) {
       $admin = new Admin();
+      $admin->setId($adminDB["id_admins"]);
       $admin->setEmail($adminDB["email"]);
       $admin->setName($adminDB["name"]);
       $admin->setLastName($adminDB["last_name"]);
@@ -31,6 +32,7 @@ class AdminDao
     $adminDB = $this->db->consult("SELECT * FROM `admins` WHERE `id_admins` = $id", "yes");
     $adminDB = $adminDB[0];
     $admin = new Admin();
+    $admin->setId($adminDB["id_admins"]);
     $admin->setEmail($adminDB["email"]);
     $admin->setName($adminDB["name"]);
     $admin->setLastName($adminDB["last_name"]);
@@ -45,6 +47,7 @@ class AdminDao
     $adminDB = $this->db->consult("SELECT * FROM `admins` WHERE `email` = $email", "yes");
     $adminDB = $adminDB[0];
     $admin = new Admin();
+    $admin->setId($adminDB["id_admins"]);
     $admin->setEmail($adminDB["email"]);
     $admin->setName($adminDB["name"]);
     $admin->setLastName($adminDB["last_name"]);
@@ -62,7 +65,13 @@ class AdminDao
     return $status;
   }
   function update($admin)
-  { }
+  {
+    $this->db->connect();
+    $query = "UPDATE `admins` SET `name` = '" . $admin->getName() . "', `last_name` = '" . $admin->getLastName() . "', `password` = '" . $admin->getPassword() . "', `token_password` = '" . $admin->getTokenPass() . "' WHERE `admins`.`id_admins` = " . $admin->getId();
+    $status = $this->db->consult($query);
+    $this->db->close();
+    return $status;
+  }
   function delete($id)
   { }
 }

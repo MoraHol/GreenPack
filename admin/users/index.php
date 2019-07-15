@@ -1,14 +1,14 @@
 <?php
-require dirname(dirname(__DIR__)) . "/dao/MaterialDao.php";
-$materialDao = new MaterialDao();
-$materials = $materialDao->findAll();
+require dirname(dirname(__DIR__)) . "/dao/AdminDao.php";
+$adminDao = new AdminDao();
+$admins = $adminDao->findAll();
 ?>
 <!-- author: Alexis Holguin, github: MoraHol -->
 <!doctype html>
 <html lang="es">
 
 <head>
-  <title>Materiales | GreenPack</title>
+  <title>Administadores | GreenPack</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -55,20 +55,20 @@ $materials = $materialDao->findAll();
                     </tr>
                   </thead>
                   <tbody>
-                    <?php foreach ($materials as $material) { ?>
+                    <?php foreach ($admins as $admin) { ?>
                       <tr>
-                        <td><?php echo $material->getName(); ?></td>
-                        <td class="text-center money"><?php echo $material->getPricePerKg(); ?></td>
-                        <td class="text-center"><?php echo $material->getGrammage(); ?> grs</td>
-                        <td class="text-center"><a class="text-center" href="/admin/materials/update-material.php?id=<?php echo $material->getId(); ?>"><i class="fas fa-fw fa-sync"></a></td>
-                        <td class="text-center"><a onclick="modal(<?php echo $material->getId(); ?>)" href="#"><i class="far fa-trash-alt"></i></a></td>
+                        <td><?php echo $admin->getName(); ?></td>
+                        <td class="text-center"><?php echo $admin->getLastName(); ?></td>
+                        <td class="text-center"><?php echo $admin->getEmail(); ?></td>
+                        <td class="text-center"><a class="text-center" href="/admin/users/update-admin.php?id=<?php echo $admin->getId(); ?>"><i class="fas fa-fw fa-sync"></a></td>
+                        <td class="text-center"><a onclick="modal(<?php echo $admin->getId(); ?>)" href="#"><i class="far fa-trash-alt"></i></a></td>
                       </tr>
                     <?php } ?>
                   </tbody>
                 </table>
               </div>
               <div>
-                <a class="btn btn-primary" href="create_material.php"> <i class="fas fa-plus"></i> Crear</a>
+                <a class="btn btn-primary" href="create_admin.php"> <i class="fas fa-plus"></i> Crear</a>
               </div>
             </div>
           </div>
@@ -155,7 +155,9 @@ $materials = $materialDao->findAll();
     </div>
     <script>
       $(() => {
-        $('.money').formatCurrency({region: 'es-CO'})
+        $('.money').formatCurrency({
+          region: 'es-CO'
+        })
         $('.sidebar div.sidebar-wrapper ul.nav li:first').removeClass('active')
         $('#users-item').addClass('active')
       })

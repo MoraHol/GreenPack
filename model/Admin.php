@@ -8,6 +8,10 @@ class Admin
   private $password;
   private $tokenPass;
 
+  public function __construct()
+  {
+    $this->tokenPass = bin2hex(openssl_random_pseudo_bytes(256));
+  }
   public function getId()
   {
     return $this->id;
