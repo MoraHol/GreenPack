@@ -14,15 +14,25 @@ class Quotation
   private $id;
   private $file;
   private $idClient;
+  private $solved;
 
   public function __construct()
-  { 
+  {
     $this->company = "NULL";
     $this->phoneNumber = "NULL";
     $this->extraInformation = "NULL";
     $this->file = "NULL";
   }
 
+  public function setSolved($solved)
+  {
+    $this->solved = $solved;
+  }
+
+  public function  isSolved()
+  {
+    return $this->solved;
+  }
 
   public function getIdClient()
   {

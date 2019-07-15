@@ -25,7 +25,20 @@ class MeasurementDao
     return $measurements;
   }
   function findById($id)
-  { }
+  { 
+    $this->db->connect();
+    $query = "SELECT * FROM `greenpack`.`measurements` WHERE `id_measurements` = $id";
+    $measurementDB = $this->db->consult($query, "yes");
+    $measurementDB = $measurementDB[0];
+    $measurement = new Measurement();
+    $measurement->setId($measurementDB["id_measurements"]);
+    $measurement->setLength($measurementDB["lenght"]);
+    $measurement->setWidth($measurementDB["width"]);
+    $measurement->setHeight($measurementDB["height"]);
+    $measurement->setProduct($measurementDB["products_id_products"]);
+    $this->db->close();
+    return $measurement;
+  }
   function saveByProduct($measurement)
   {
     $this->db->connect();
