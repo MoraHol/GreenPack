@@ -11,7 +11,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
 <html lang="es">
 
 <head>
-  <title>Materiales | GreenPack</title>
+  <title>Cotizacion No <?= $quotation->getId() ?> | GreenPack</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -100,7 +100,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
                 </div>
               </div>
             </div>
-            <div class="card">
+            <div class="card" id="products">
               <?php foreach ($quotation->getItems() as $item) { ?>
                 <div class="row align-items-center">
                   <div class="col-md-2 text-center"><img src="<?= $item->getProduct()->getImages()[0]->getUrl() ?>" alt="" width="150" height="150"></div>
@@ -136,8 +136,8 @@ $quotation = $quotationDao->findById($_GET["id"]);
             </div>
             <div class="row" style="margin-bottom: 20px; margin-top: 20px;">
               <div class="col text-center"><a class="btn btn-danger btn-lg" href="/admin/quotations">Regresar</a></div>
-              <div class="col text-center"><button id="submitEditor" class="btn btn-info btn-lg">Actualizar</button></div>
-              <div class="col text-center"><button id="submitEditor" class="btn btn-primary btn-lg"> Enviar Cotización</button></div>
+              <div class="col text-center"><button onclick="update()" class="btn btn-info btn-lg">Actualizar</button></div>
+              <div class="col text-center"><button onclick="send()" class="btn btn-primary btn-lg"> Enviar Cotización</button></div>
             </div>
           </div>
         </div>
@@ -175,12 +175,12 @@ $quotation = $quotationDao->findById($_GET["id"]);
       $('#load_pdf').append(`<embed  src="/services/view-quotation.php?id=<?= $quotation->getId() ?>#toolbar=0&navpanes=0&scrollbar=0&statusbar=0&zoom=55" type="application/pdf" width="100%" height="600px" />`)
       formatMoney()
       $('.price').keyup(function() {
-          let id = $(this).context.id.substring(5, $(this).context.id.length)
-          calculateTotal(id)
+        let id = $(this).context.id.substring(5, $(this).context.id.length)
+        calculateTotal(id)
       })
       $('.quantity').keyup(function() {
-          let id = $(this).context.id.substring(8, $(this).context.id.length)
-          calculateTotal(id)
+        let id = $(this).context.id.substring(8, $(this).context.id.length)
+        calculateTotal(id)
       })
     })
 
@@ -201,6 +201,34 @@ $quotation = $quotationDao->findById($_GET["id"]);
     function viewPdf(id) {
       $('#load_pdf').html('')
       $('#load_pdf').append(`<embed  src="/services/view-quotation.php?id=${id}#toolbar=0&navpanes=0&scrollbar=0&statusbar=0%zoom=20" type="application/pdf" width="100%" height="600px" />`)
+    }
+
+    function send() {
+
+    }
+
+    function update() {
+      let products = []
+      $.each($('.price'), function() {
+        let id = $(this).context.id.substring(5, $(this).context.id.length)
+        let product = {}
+        product.price = $(this).val()
+        product.quantity = $(`#quantity${id}`).val()
+        products.push(product)
+      })
+      $.post('api/update-quotation.php', {
+        id: `<?= $quotation->getId() ?>`,
+        name: $('#nameClient').val(),
+        lastname: $('#lastName').val(),
+        company: $('#company').val(),
+        city: $('#city').val(),
+        address: $('#address').val(),
+        email: $('#emailClient').val(),
+        extra: $('#extraInformaction').val(),
+        phone: $('#phone').val(),
+        cellphone: $('#cellphone').val(),
+        products: JSON.stringify(products)
+      })
     }
   </script>
 </body>

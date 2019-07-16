@@ -63,6 +63,7 @@ class QuotationDao
     $itemsDB = $this->db->consult("SELECT * FROM quotations_details WHERE `quotations_id_quotations` = $id", "yes");
     foreach ($itemsDB as $itemDB) {
       $item = new Item();
+      $item->setId($itemDB["id_quotations_details"]);
       $item->setProduct($this->productDao->findById($itemDB["products_id_products"]));
       $item->setMaterial($this->materialDao->findById($itemDB["material_id"]));
       $item->setMeasurement($this->measurementDao->findById($itemDB["measurement_id"]));
