@@ -89,6 +89,10 @@ class Item
       return false;
     }
   }
+  public function calculateTotal()
+  {
+    return (int) $this->price * (int) $this->quantity;
+  }
   public function calculatePrice()
   {
     $LongUseful = $this->measurement->getLength() - 3;
@@ -98,6 +102,9 @@ class Item
     $PLA = ((($V + 3) * $this->measurement->getLength()) * 30) / 10000000;
     $LAM = ($AT * $this->measurement->getLength() * 30) / 1000000;
     $directCost = $PAPER * $this->material->getPricePerKg();
+    if ($this->quantity < 2000) {
+      $this->price = $directCost * 3.5;
+    }
     if ($this->quantity > 20000 &&  $this->quantity < 60000) {
       $this->price = $directCost * 3;
     }

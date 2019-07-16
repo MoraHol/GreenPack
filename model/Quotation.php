@@ -193,4 +193,12 @@ class Quotation
       return false;
     }
   }
+  public function calculateTotal()
+  {
+    $total = 0;
+    foreach ($this->items as $item) {
+      $total += $item->calculateTotal();
+    }
+    return $total;
+  }
 }

@@ -66,8 +66,8 @@ class QuotationDao
       $item->setProduct($this->productDao->findById($itemDB["products_id_products"]));
       $item->setMaterial($this->materialDao->findById($itemDB["material_id"]));
       $item->setMeasurement($this->measurementDao->findById($itemDB["measurement_id"]));
-      $item->setQuantity($itemDB["quantity"]);
-      $item->setPrice($itemDB["price"]);
+      $item->setQuantity((int) $itemDB["quantity"]);
+      $item->setPrice((int) $itemDB["price"]);
       $item->setPrinting(filter_var($itemDB["printed"], FILTER_VALIDATE_BOOLEAN));
       array_push($items, $item);
     }
@@ -76,5 +76,36 @@ class QuotationDao
     return $quotation;
   }
   function findAll()
-  { }
+  {
+    $this->db->connect();
+    $quotationsDB = $this->db->consult("SELECT `id_quotations` AS id FROM `quotations` ORDER BY `created_at` DESC", "yes");
+    $quotations = [];
+    foreach ($quotationsDB as $quotationDB) {
+      array_push($quotations, $this->findById($quotationDB["id"]));
+    }
+    // $this->db->close();
+    return $quotations;
+  }
+  function findSolved()
+  { 
+    $this->db->connect();
+    $quotationsDB = $this->db->consult("SELECT `id_quotations` AS id FROM `quotations` WHERE `solved` != 0 ORDER BY `created_at` DESC", "yes");
+    $quotations = [];
+    foreach ($quotationsDB as $quotationDB) {
+      array_push($quotations, $this->findById($quotationDB["id"]));
+    }
+    // $this->db->close();
+    return $quotations;
+  }
+  function findNoSolved()
+  { 
+    $this->db->connect();
+    $quotationsDB = $this->db->consult("SELECT `id_quotations` AS id FROM `quotations` WHERE `solved` = 0 ORDER BY `created_at` ASC", "yes");
+    $quotations = [];
+    foreach ($quotationsDB as $quotationDB) {
+      array_push($quotations, $this->findById($quotationDB["id"]));
+    }
+    // $this->db->close();
+    return $quotations;
+  }
 }

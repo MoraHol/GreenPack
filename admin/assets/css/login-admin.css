@@ -9,7 +9,6 @@
     background-repeat: no-repeat;
     /* background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33)); */
     background-image: url("/images/sunflower-1127174.jpg");
-    background-size: cover;
 }
 
 .card-container.card {
