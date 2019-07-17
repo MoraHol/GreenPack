@@ -1,5 +1,5 @@
 <?php
-class Item
+class Item implements JsonSerializable
 {
   private $product;
   private $quantity;
@@ -28,7 +28,7 @@ class Item
   {
     $this->id = $id;
   }
-  
+
   public function getId()
   {
     return $this->id;
@@ -121,5 +121,9 @@ class Item
     } else {
       $this->price = $directCost * 2.3;
     }
+  }
+  public function jsonSerialize()
+  {
+    return get_object_vars($this);
   }
 }

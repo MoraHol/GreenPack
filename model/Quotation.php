@@ -1,5 +1,5 @@
 <?php
-class Quotation
+class Quotation implements JsonSerializable
 {
   private $nameClient;
   private $lastNameClient;
@@ -15,13 +15,48 @@ class Quotation
   private $file;
   private $idClient;
   private $solved;
+  private $dateSolved;
+  private $idAdminSolved;
+  private $createdAt;
 
   public function __construct()
   {
-    $this->company = "NULL";
-    $this->phoneNumber = "NULL";
-    $this->extraInformation = "NULL";
-    $this->file = "NULL";
+    $this->company = null;
+    $this->phoneNumber = null;
+    $this->extraInformation = null;
+    $this->file = null;
+    $this->dateSolved = '0-0-0';
+    $this->idAdminSolved = 0;
+  }
+
+  public function getIdAdminSolved()
+  {
+    return $this->idAdminSolved;
+  }
+
+  public function setIdAdminSolved($idAdminSolved)
+  {
+    $this->idAdminSolved = $idAdminSolved;
+  }
+
+  public function getDateSolved()
+  {
+    return $this->dateSolved;
+  }
+
+  public function setDateSolved($dateSolved)
+  {
+    $this->dateSolved = $dateSolved;
+  }
+
+  public function getCreatedAt()
+  {
+    return $this->createdAt;
+  }
+
+  public function setCreatedAt($createdAt)
+  {
+    $this->createdAt = $createdAt;
   }
 
   public function setSolved($solved)
@@ -200,5 +235,9 @@ class Quotation
       $total += $item->calculateTotal();
     }
     return $total;
+  }
+  public function jsonSerialize()
+  {
+    return get_object_vars($this);
   }
 }

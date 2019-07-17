@@ -135,9 +135,9 @@ $quotation = $quotationDao->findById($_GET["id"]);
               <?php } ?>
             </div>
             <div class="row" style="margin-bottom: 20px; margin-top: 20px;">
-              <div class="col text-center"><a class="btn btn-danger btn-lg" href="/admin/quotations">Regresar</a></div>
-              <div class="col text-center"><button onclick="update()" class="btn btn-info btn-lg">Actualizar</button></div>
-              <div class="col text-center"><button onclick="send()" class="btn btn-primary btn-lg"> Enviar Cotización</button></div>
+              <div class="col text-center"><a class="btn btn-danger btn-lg" href="/admin/quotations/#no-solved"><i class="material-icons">arrow_back</i> Regresar</a></div>
+              <div class="col text-center"><button onclick="update()" class="btn btn-info btn-lg"><i class="material-icons md-48">update</i> Actualizar</button></div>
+              <div class="col text-center"><button onclick="send()" class="btn btn-primary btn-lg"><i class="material-icons">email</i> Enviar Cotización</button></div>
             </div>
           </div>
         </div>
@@ -204,7 +204,28 @@ $quotation = $quotationDao->findById($_GET["id"]);
     }
 
     function send() {
+      update()
+      $.notify({
+        message: 'Enviando Correo',
+        title: 'Procesando',
+        icon: 'email'
+      }, {
+        type: 'info'
+      })
+      $.post('api/sent_email.php', {
+        id: `<?= $quotation->getId() ?>`
+      }, (data, status, xhr) => {
 
+        if (status == 'success' && xhr.readyState == 4) {
+          $.notify({
+            message: 'La cotizacion ha sido enviada correctamente al Cliente',
+            title: 'Exito',
+            icon: 'email'
+          }, {
+            type: 'success'
+          })
+        }
+      })
     }
 
     function update() {
@@ -224,10 +245,30 @@ $quotation = $quotationDao->findById($_GET["id"]);
         city: $('#city').val(),
         address: $('#address').val(),
         email: $('#emailClient').val(),
-        extra: $('#extraInformaction').val(),
+        extra: $('#extraInformation').val(),
         phone: $('#phone').val(),
         cellphone: $('#cellphone').val(),
         products: JSON.stringify(products)
+      }, (data, status) => {
+        if (status == 'success') {
+          $.notify({
+            message: 'Se ha actulizado la cotizacion',
+            title: 'Exito',
+            icon: 'notification_important'
+          }, {
+            type: 'success'
+          })
+          viewPdf(`<?= $quotation->getId() ?>`)
+        }
+        if (status == 'notmodified') {
+          $.notify({
+            message: 'No se ha cambiado ningun valor',
+            title: 'Actualizacion',
+            icon: 'warning'
+          }, {
+            type: 'warning'
+          })
+        }
       })
     }
   </script>

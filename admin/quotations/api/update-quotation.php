@@ -20,9 +20,16 @@ if (isset($_POST["id"])) {
     $item->setQuantity($items[$key]->quantity);
     $item->setPrice($items[$key]->price);
   }
+  $quotationCompare = $quotationDao->findById($_POST["id"]);
+  if ($quotationCompare == $quotation) {
+    http_response_code(304);
+    exit;
+  }
   if ($quotationDao->update($quotation) > 0) {
     http_response_code(200);
+    exit;
   }
 } else {
   http_response_code(400);
+  exit;
 }

@@ -44,7 +44,8 @@ class AdminDao
   function findByEmail($email)
   {
     $this->db->connect();
-    $adminDB = $this->db->consult("SELECT * FROM `admins` WHERE `email` = $email", "yes");
+    $query = "SELECT * FROM `admins` WHERE `email` = '$email'";
+    $adminDB = $this->db->consult($query, "yes");
     $adminDB = $adminDB[0];
     $admin = new Admin();
     $admin->setId($adminDB["id_admins"]);

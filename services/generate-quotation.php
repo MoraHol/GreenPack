@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <?php
 require_once dirname(__DIR__) . "/dao/QuotationDao.php";
 $quotationDao = new QuotationDao();
@@ -10,6 +10,7 @@ if (isset($_GET["id"])) {
 
 <head>
 	<meta http-equiv="Content-Type content=" text/html; charset=windows-1252">
+	<meta charset="utf-8"> 
 	<style id="base_2996_Styles">
 		{
 			mso-displayed-decimal-separator: "\.";

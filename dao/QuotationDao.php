@@ -39,7 +39,26 @@ class QuotationDao
   function delete($id)
   { }
   function update($quotation)
-  { }
+  {
+    $this->db->connect();
+    $status = 0;
+    //update data client
+    $status = $this->db->consult("INSERT INTO `clients` (`id_clients`, `name`, `surname`, `email`, `name_company`) VALUES (NULL, '" . $quotation->getNameClient() . "', '" . $quotation->getLastNameClient() . "', '" . $quotation->getEmail() . "', '" . $quotation->getCompany() . "') ON DUPLICATE KEY UPDATE `name` = '" . $quotation->getNameClient() . "', `surname` =  '" . $quotation->getLastNameClient() . "', `name_company` = '" . $quotation->getCompany() . "'");
+    $idClient = $this->db->consult("SELECT `id_clients` AS id FROM `clients` WHERE `email` = '" . $quotation->getEmail() . "'", "yes");
+    $idClient = $idClient[0]["id"];
+    $quotation->setIdClient($idClient);
+    // update quotation
+    $query = "UPDATE `quotations` SET `city` = '" . $quotation->getCity() . "', `address` = '" . $quotation->getAddress() . "', `cell_phone` = '" . $quotation->getCellPhoneNumber() . "', `phone` = '" . $quotation->getPhoneNumber() . "', `description` = '" . $quotation->getExtraInformation() . "', `solved` = '" . (int) $quotation->isSolved() . "', `clients_id_clients` = '" . $quotation->getIdClient() . "', `date_solved` = '" . $quotation->getDateSolved() . "', `id_admin_solved` = '" . $quotation->getIdAdminSolved() . "' WHERE `quotations`.`id_quotations` = " . $quotation->getId();
+    echo $query;
+    $status = $this->db->consult($query);
+    // update items
+    foreach ($quotation->getItems() as $item) {
+      $query = "UPDATE `quotations_details` SET `quantity` = '" . $item->getQuantity() . "', `price` = '" . $item->getPrice() . "' WHERE `quotations_details`.`id_quotations_details` = " . $item->getId();
+      $status = $this->db->consult($query);
+    }
+    $this->db->close();
+    return $status;
+  }
   function findById($id)
   {
     // query para buscar la cotizacion con la información del cliente
@@ -56,6 +75,7 @@ class QuotationDao
     $quotation->setPhoneNumber($quotationDB["phone"]);
     $quotation->setCellPhoneNumber($quotationDB["cell_phone"]);
     $quotation->setExtraInformation($quotationDB["description"]);
+    $quotation->setCreatedAt(strtotime($quotationDB["created_at"]));
     $quotation->setSolved(filter_var($quotationDB["solved"], FILTER_VALIDATE_BOOLEAN));
     $quotation->setId($quotationDB["id_quotations"]);
     $items = [];
@@ -88,7 +108,7 @@ class QuotationDao
     return $quotations;
   }
   function findSolved()
-  { 
+  {
     $this->db->connect();
     $quotationsDB = $this->db->consult("SELECT `id_quotations` AS id FROM `quotations` WHERE `solved` != 0 ORDER BY `created_at` DESC", "yes");
     $quotations = [];
@@ -99,7 +119,7 @@ class QuotationDao
     return $quotations;
   }
   function findNoSolved()
-  { 
+  {
     $this->db->connect();
     $quotationsDB = $this->db->consult("SELECT `id_quotations` AS id FROM `quotations` WHERE `solved` = 0 ORDER BY `created_at` ASC", "yes");
     $quotations = [];

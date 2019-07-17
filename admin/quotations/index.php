@@ -77,6 +77,7 @@ $quotationsNoSolved = $quotationDao->findNoSolved();
                           <th class="text-center">Apellido</th>
                           <th class="text-center">Empresa</th>
                           <th class="text-center">Total de la cotización</th>
+                          <th class="text-center">Fecha</th>
                           <th class="text-center">Ver Cotizacion</th>
                           <th class="text-center">Editar</th>
                           <th class="text-center">Descargar</th>
@@ -88,10 +89,11 @@ $quotationsNoSolved = $quotationDao->findNoSolved();
                             <td><?php echo $quotation->getNameClient(); ?></td>
                             <td><?php echo $quotation->getLastNameClient(); ?></td>
                             <td class="text-center"><?php echo $quotation->getCompany() == "" ? "N/A" : $quotation->getCompany(); ?> </td>
-                            <td class="text-center money"><?php echo $quotation->calculateTotal(); ?></td>
-                            <td class="text-center"><a class="text-center" onclick="viewPdf(`<?= $quotation->getId(); ?>`)" href="#load_pdf"><i class="fas fa-fw fa-eye"></td>
+                            <td class="text-center money"><?= $quotation->calculateTotal(); ?></td>
+                            <td class="text-center"><?= date("d-m-Y", $quotation->getCreatedAt()); ?></td>
+                            <td class="text-center"><a class="text-center" href="javascript:viewPdf(`<?= $quotation->getId(); ?>`)" title="Ver Aqui"><i class="material-icons">remove_red_eye</i> <a href="#" onclick="openWindow(`<?= $quotation->getId(); ?>`)" title="Ver en nueva Ventana"><i class="material-icons">featured_video</i></a></td>
                             <td class="text-center"><a href="edit-quotation.php?id=<?= $quotation->getId() ?>"><i class="fas fa-pen"></i></a></td>
-                            <td class="text-center"><a class="text-center" target="_blank" href="/services/download-quotation.php?id=<?php echo $quotation->getId(); ?>"><i class="fas fa-fw fa-download"></a></td>
+                            <td class="text-center"><a class="text-center" target="_blank" href="/services/download-quotation.php?id=<?= $quotation->getId(); ?>"><i class="fas fa-fw fa-download"></a></td>
                           </tr>
                         <?php } ?>
                       </tbody>
@@ -115,6 +117,7 @@ $quotationsNoSolved = $quotationDao->findNoSolved();
                           <th class="text-center">Apellido</th>
                           <th class="text-center">Empresa</th>
                           <th class="text-center">Total de la cotización</th>
+                          <th class="text-center">Fecha</th>
                           <th class="text-center">Ver Cotizacion</th>
                           <th class="text-center">Editar</th>
                           <th class="text-center">Descargar</th>
@@ -123,11 +126,12 @@ $quotationsNoSolved = $quotationDao->findNoSolved();
                       <tbody>
                         <?php foreach ($quotationsSolved as $quotation) { ?>
                           <tr>
-                            <td><?php echo $quotation->getNameClient(); ?></td>
-                            <td><?php echo $quotation->getLastNameClient(); ?></td>
-                            <td class="text-center"><?php echo $quotation->getCompany() == "" ? "N/A" : $quotation->getCompany(); ?> </td>
-                            <td class="text-center money"><?php echo $quotation->calculateTotal(); ?></td>
-                            <td class="text-center"><a class="text-center" onclick="viewPdf(`<?= $quotation->getId(); ?>`)" href="#load_pdf"><i class="fas fa-fw fa-eye"></td>
+                            <td><?= $quotation->getNameClient(); ?></td>
+                            <td><?= $quotation->getLastNameClient(); ?></td>
+                            <td class="text-center"><?= $quotation->getCompany() == "" ? "N/A" : $quotation->getCompany(); ?> </td>
+                            <td class="text-center money"><?= $quotation->calculateTotal(); ?></td>
+                            <td class="text-center"><?= date("d-m-Y", $quotation->getCreatedAt()); ?></td>
+                            <td class="text-center"><a class="text-center" onclick="viewPdf(`<?= $quotation->getId(); ?>`)" href="#load_pdf" title="Ver Aqui"><i class="material-icons">remove_red_eye</i> <a href="#" onclick="openWindow(`<?= $quotation->getId(); ?>`)" title="Ver en nueva Ventana"><i class="material-icons">featured_video</i></a></td>
                             <td class="text-center"><a href="edit-quotation.php?id=<?= $quotation->getId() ?>"><i class="fas fa-pen"></i></a></td>
                             <td class="text-center"><a class="text-center" target="_blank" href="/services/download-quotation.php?id=<?php echo $quotation->getId(); ?>"><i class="fas fa-fw fa-download"></a></td>
                           </tr>
@@ -146,13 +150,14 @@ $quotationsNoSolved = $quotationDao->findNoSolved();
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
-                    <table class="table row-border table-bordered hover dataTable" width="100%" cellspacing="0">
+                    <table class="table row-border table-bordered hover dataTable" width="100%" cellspacing="0" id="table-no-solved">
                       <thead>
                         <tr>
                           <th class="text-center">Nombre</th>
                           <th class="text-center">Apellido</th>
                           <th class="text-center">Empresa</th>
                           <th class="text-center">Total de la cotización</th>
+                          <th class="text-center">Fecha</th>
                           <th class="text-center">Ver Cotizacion</th>
                           <th class="text-center">Editar</th>
                           <th class="text-center">Descargar</th>
@@ -166,15 +171,17 @@ $quotationsNoSolved = $quotationDao->findNoSolved();
                             <td><?php echo $quotation->getLastNameClient(); ?></td>
                             <td class="text-center"><?php echo $quotation->getCompany() == "" ? "N/A" : $quotation->getCompany(); ?> </td>
                             <td class="text-center money"><?php echo $quotation->calculateTotal(); ?></td>
-                            <td class="text-center"><a class="text-center" onclick="viewPdf(`<?= $quotation->getId(); ?>`)" href="#load_pdf"><i class="fas fa-fw fa-eye"></td>
-                            <td class="text-center"><a href="edit-quotation.php?id=<?= $quotation->getId() ?>"><i class="fas fa-pen"></i></a></td>
-                            <td class="text-center"><a class="text-center" target="_blank" href="/services/download-quotation.php?id=<?php echo $quotation->getId(); ?>"><i class="fas fa-fw fa-download"></a></td>
-                            <td class="text-center"><a class="text-center" target="_blank" href="/services/download-quotation.php?id=<?php echo $quotation->getId(); ?>"><i class="fas fa-fw fa-envelope"></a></td>
+                            <td class="text-center"><?= date("d-m-Y", $quotation->getCreatedAt()); ?></td>
+                            <td class="text-center"><a class="text-center" href="javascript:viewPdf(`<?= $quotation->getId(); ?>`)" title="Ver Aqui"><i class="material-icons">remove_red_eye</i> <a href="#" onclick="openWindow(`<?= $quotation->getId(); ?>`)" title="Ver en nueva Ventana"><i class="material-icons">featured_video</i></a></td>
+                            <td class="text-center"><a href="edit-quotation.php?id=<?= $quotation->getId() ?>"><i class="material-icons">create</i></a></td>
+                            <td class="text-center"><a class="text-center" target="_blank" title="descargar" href="/services/download-quotation.php?id=<?php echo $quotation->getId(); ?>"><i class="material-icons">cloud_download</a></td>
+                            <td class="text-center"><a class="text-center" href="javascript:sentEmail(`<?php echo $quotation->getId(); ?>`)"><i class="material-icons">email</a></td>
                           </tr>
                         <?php } ?>
                       </tbody>
                     </table>
                   </div>
+                  <button class="btn btn-primary" onclick="exportTableToExcel('table-no-solved')">Excel</button>
                 </div>
               </div>
             </div>
@@ -241,6 +248,11 @@ $quotationsNoSolved = $quotationDao->findNoSolved();
 
           }
         })
+        table.on('draw', function() {
+          $('.money').formatCurrency({
+            region: 'es-CO'
+          })
+        })
         $('#dataTable tbody')
           .on('mouseenter', 'td', function() {
             var colIdx = table.cell(this).index().column;
@@ -257,35 +269,80 @@ $quotationsNoSolved = $quotationDao->findNoSolved();
         })
         $('.sidebar div.sidebar-wrapper ul.nav li:first').removeClass('active')
         $('#quotations-item').addClass('active')
-
+        var url = document.location.toString();
+        if (url.match('#')) {
+          $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+        }
       })
     </script>
     <script>
-      function modal(id) {
-        $('#ModalDelete').modal()
-        $('#linkDelete').on('click', () => {
-          $.post('api/delete_material.php', {
-            id: id
-          }, (data, status) => {
-            if (status == 'success') {
-              window.location.reload()
-            }
-          })
-        })
-      }
-
       function viewPdf(id) {
         $('#load_pdf').html(`<div class="wall-loading"><div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>`)
         $('.wall-loading').width($('#load_pdf').width())
         $('.wall-loading').height($('#load_pdf').height())
-        $('#load_pdf').append(`<embed  src="/services/view-quotation.php?id=${id}#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" width="100%" height="600px" />`)
-        $('#load_pdf embed')[0].onload = fadeSpinner()
+        $('#load_pdf').append(`<div class="card"></div>`)
+        $('#load_pdf .card').append(`<embed  src="/services/view-quotation.php?id=${id}#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" width="100%" height="600px" />`)
+        $('#load_pdf .card embed')[0].onload = fadeSpinner()
+        location.href = "#load_pdf"
       }
 
       function fadeSpinner() {
         $('.wall-loading').delay(100).fadeOut('slow')
         $('.spinner').delay(100).fadeOut('slow')
         $('.wall-loading').css('z-index', -20)
+      }
+
+      function sentEmail(id) {
+        $.notify({
+          message: 'Enviando Correo',
+          title: 'Procesando',
+          icon: 'email'
+        }, {
+          type: 'info'
+        })
+        $.post('api/sent_email.php', {
+          id: id
+        }, (data, status, xhr) => {
+          if (status == 'success' && xhr.readyState == 4) {
+            location.href = '#no-solved'
+            location.reload()
+          }
+        })
+      }
+
+      function openWindow(id) {
+        window.open(`/services/view-quotation.php?id=${id}`, "Cotizacion No " + id, "width=600, height=800")
+      }
+
+      function exportTableToExcel(tableID, filename = '') {
+        var downloadLink;
+        var dataType = 'application/vnd.ms-excel';
+        var tableSelect = document.getElementById(tableID);
+        var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+        // Specify file name
+        filename = filename ? filename + '.xls' : 'excel_data.xls';
+
+        // Create download link element
+        downloadLink = document.createElement("a");
+
+        document.body.appendChild(downloadLink);
+
+        if (navigator.msSaveOrOpenBlob) {
+          var blob = new Blob(['ufeff', tableHTML], {
+            type: dataType
+          });
+          navigator.msSaveOrOpenBlob(blob, filename);
+        } else {
+          // Create a link to the file
+          downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+          // Setting the file name
+          downloadLink.download = filename;
+
+          //triggering the function
+          downloadLink.click();
+        }
       }
     </script>
 </body>
