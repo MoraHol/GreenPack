@@ -271,6 +271,8 @@ $materials = $materialDao->findAll();
               </ul>
             </div>
             <button class="btn btn-primary" onclick="addMeasurement()" title="Agregar una medida"><i class="fas fa-plus"></i></button>
+            <button id="btnUploadExcel" class="btn btn-primary" title="Cargar Medidas"><i class="fas fa-cloud-upload-alt"></i></button>
+            <div id="uploadExcel"></div>
             <hr>
             <div class="form-gruop">
               <label for="campo1">Materiales:</label>
@@ -541,8 +543,8 @@ $materials = $materialDao->findAll();
 
       function update(uses, materials, measurements) {
         $.post("api/update_product.php", {
-          id: <?php echo $product->getId(); ?> ,
-          title : $('#title').val(),
+          id: <?php echo $product->getId(); ?>,
+          title: $('#title').val(),
           content: editor.html.get(),
           uses: JSON.stringify(uses),
           ref: $('#ref').val(),
@@ -564,8 +566,8 @@ $materials = $materialDao->findAll();
 
       function ajax(responses, uses, materials, measurements) {
         $.post("api/update_product.php", {
-          id: <?php echo $product->getId(); ?> ,
-          title : $('#title').val(),
+          id: <?php echo $product->getId(); ?>,
+          title: $('#title').val(),
           content: editor.html.get(),
           photos: JSON.stringify(responses),
           uses: JSON.stringify(uses),
@@ -587,9 +589,9 @@ $materials = $materialDao->findAll();
       }
     </script>
     <script>
-      indexField = <?php echo--$indexField; ?> ;
-      indexMeasurement = <?php echo--$indexMeasurement; ?> ;
-      indexMaterial = <?php echo--$indexMaterial; ?> ;
+      indexField = <?php echo --$indexField; ?>;
+      indexMeasurement = <?php echo --$indexMeasurement; ?>;
+      indexMaterial = <?php echo --$indexMaterial; ?>;
 
       function addField() {
         indexField++;
@@ -612,7 +614,7 @@ $materials = $materialDao->findAll();
         $('#materials').append(`<li><select class="wide" style="margin-bottom: 10px;" id="material${indexMaterial}"><option disabled selected>Seleccione un material</option>
                       <?php
                       foreach ($materials as  $material) { ?>
-                                            <option value="<?php echo $material->getId(); ?>"><?php echo $material->getName(); ?></option>
+                                                            <option value="<?php echo $material->getId(); ?>"><?php echo $material->getName(); ?></option>
                       <?php }
                       ?>
                     </select></li>`)
@@ -620,6 +622,32 @@ $materials = $materialDao->findAll();
         $('select').niceSelect('update')
 
       }
+    </script>
+    <script>
+      $('#btnUploadExcel').click(() => {
+        $('#uploadExcel').append('<div id="uploadFileExcel" class="dropzone"></div>')
+        DropzoneExcel = new Dropzone("div#uploadFileExcel", {
+          url: "/admin/upload-file.php",
+          method: 'post',
+          paramName: 'file',
+          maxFiles: 1,
+          dictDefaultMessage: 'Sube El Archivo excel con las medidas del producto',
+          dictMaxFilesExceeded: 'Solo se permite subir un archivo',
+          dictInvalidFileType: 'Solo se permite archivos excel'
+        })
+        DropzoneExcel.on('success', function(file) {
+          let response = JSON.parse(file.xhr.responseText)
+          let url = response.link
+          $.post('api/upload_measurements.php', {
+            id: `<?= $_GET["id"] ?>`,
+            file: url
+          },(data,status)=>{
+            if(status == "success"){
+              alert('subido')
+            }
+          })
+        })
+      })
     </script>
     <script src="/vendor/bootstrap-notify.min.js"></script>
     <script src="/vendor/sleep.js"></script>
