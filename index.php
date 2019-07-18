@@ -27,7 +27,7 @@ $conversor = new ConversorDate(); ?>
   <link rel="stylesheet" href="https://teenus.com.co/css/global/global.css">
   <link rel="stylesheet" href="/css/style-index-notices.css">
   <link href="https://fonts.googleapis.com/css?family=Concert+One&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/basket.css"> 
+  <link rel="stylesheet" href="/css/basket.css">
   <style>
     .search input.serch {
       color: #fff;
@@ -230,11 +230,11 @@ $conversor = new ConversorDate(); ?>
 
               <hr>
               <h3 class="g-font-size-22--xs g-letter-spacing--1" style="    font-family: 'Poppins', sans-serif;
-    color: #222222;
-    line-height: 1.2em !important;
-    margin-bottom: 0;
-    margin-top: 0;
-    font-weight: 600;"><a  href="/blog/blog-post.php?id=<?php echo $notice->getId(); ?>"><?php echo $notice->getTitle(); ?></a></h3>
+      color: #222222;
+      line-height: 1.2em !important;
+      margin-bottom: 0;
+      margin-top: 0;
+      font-weight: 600;"><a href="/blog/blog-post.php?id=<?php echo $notice->getId(); ?>"><?php echo $notice->getTitle(); ?></a></h3>
               <p></p>
             </div>
           </article>
@@ -326,6 +326,9 @@ $conversor = new ConversorDate(); ?>
   <script src="https://technext.github.io/shop/js/jquery.flexslider-min.js"></script>
   <script>
     $(document).ready(function() {
+      $.get('/services/notify-admins.php', (data, status) => {
+
+      })
       $('a[href^="#"]').click(function() {
         var destino = $(this.hash);
         if (destino.length == 0) {
