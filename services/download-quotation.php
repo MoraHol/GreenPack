@@ -12,7 +12,7 @@ curl_setopt_array($curl, [
 $content = curl_exec($curl);
 curl_close($curl);
 $dompdf = new Dompdf(array('enable_remote' => true));
-$dompdf->load_html(utf8_decode($content));
+$dompdf->loadHtml($content, "UTF-8");
 $dompdf->setPaper('letter');
 $dompdf->render();
 $pdf = $dompdf->output();
