@@ -17,8 +17,6 @@ foreach ($days as $day) {
   }
   array_push($dailySales, $n);
 }
-
-
 header('Content-Type: application/json');
 echo json_encode($dailySales);
 $db->close();

@@ -256,7 +256,7 @@ $materials = $materialDao->findAll();
 
             </div>
             <div class="form-gruop" id="measurement-container">
-              <label for="campo1">Medidas:</label>
+              <label for="campo1">Medidas:</label> <button class="btn" id="hideMeasurements">Ocultar</button>
               <ul class="list-unstyled" id="measurements">
                 <?php foreach ($product->getMeasurements() as $measurement) { ?>
                   <li>Medida <?php echo $indexMeasurement ?>:<div class="row">
@@ -614,7 +614,7 @@ $materials = $materialDao->findAll();
         $('#materials').append(`<li><select class="wide" style="margin-bottom: 10px;" id="material${indexMaterial}"><option disabled selected>Seleccione un material</option>
                       <?php
                       foreach ($materials as  $material) { ?>
-                                                            <option value="<?php echo $material->getId(); ?>"><?php echo $material->getName(); ?></option>
+                                                              <option value="<?php echo $material->getId(); ?>"><?php echo $material->getName(); ?></option>
                       <?php }
                       ?>
                     </select></li>`)
@@ -641,12 +641,19 @@ $materials = $materialDao->findAll();
           $.post('api/upload_measurements.php', {
             id: `<?= $_GET["id"] ?>`,
             file: url
-          },(data,status)=>{
-            if(status == "success"){
+          }, (data, status) => {
+            if (status == "success") {
               alert('subido')
             }
           })
         })
+      })
+      $('#hideMeasurements').click(function() {
+        $('#measurements').fadeToggle()
+        $(this).text(function(i, text) {
+          return text === "Ocultar" ? "Ver Medidas" : "Ocultar";
+        })
+        $(this).toggleClass('btn-primary')
       })
     </script>
     <script src="/vendor/bootstrap-notify.min.js"></script>
