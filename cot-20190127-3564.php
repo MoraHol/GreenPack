@@ -4,1476 +4,580 @@
 require_once __DIR__ . "/dao/QuotationDao.php";
 $quotationDao = new QuotationDao();
 if (isset($_GET["id"])) {
-	$quotation = $quotationDao->findById($_GET["id"]);
+  $quotation = $quotationDao->findById($_GET["id"]);
 }
 ?>
 
 <head>
-	<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
-	<meta name=ProgId content=Excel.Sheet>
-	<meta name=Generator content="Microsoft Excel 15">
-	<link rel=File-List href="base_archivos/filelist.xml">
-	<style id="base_2996_Styles">
-		{
-			mso-displayed-decimal-separator: "\.";
-			mso-displayed-thousand-separator: "\,";
-		}
-
-		.font52996 {
-			color: black;
-			font-size: 12.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-		}
-
-		.xl152996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: general;
-			vertical-align: bottom;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl652996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: general;
-			vertical-align: bottom;
-			border-top: none;
-			border-right: .5pt solid windowtext;
-			border-bottom: none;
-			border-left: .5pt solid windowtext;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl662996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: general;
-			vertical-align: bottom;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl672996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: .5pt solid windowtext;
-			border-right: .5pt solid windowtext;
-			border-bottom: .5pt solid windowtext;
-			border-left: none;
-			background: #92D050;
-			mso-pattern: black none;
-			white-space: nowrap;
-		}
-
-		.xl682996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: general;
-			vertical-align: middle;
-			border-top: none;
-			border-right: .5pt solid windowtext;
-			border-bottom: .5pt solid windowtext;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl692996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: general;
-			vertical-align: middle;
-			border-top: none;
-			border-right: .5pt solid windowtext;
-			border-bottom: .5pt solid windowtext;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: normal;
-		}
-
-		.xl702996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: general;
-			vertical-align: bottom;
-			border-top: none;
-			border-right: .5pt solid windowtext;
-			border-bottom: none;
-			border-left: 1.0pt solid windowtext;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl712996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: .5pt solid windowtext;
-			border-right: 1.0pt solid windowtext;
-			border-bottom: .5pt solid windowtext;
-			border-left: none;
-			background: #92D050;
-			mso-pattern: black none;
-			white-space: nowrap;
-		}
-
-		.xl722996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: general;
-			vertical-align: middle;
-			border-top: none;
-			border-right: .5pt solid windowtext;
-			border-bottom: .5pt solid windowtext;
-			border-left: 1.0pt solid windowtext;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl732996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: "\0022$\0022\\ \#\,\#\#0\;\[Red\]\\-\0022$\0022\\ \#\,\#\#0";
-			text-align: general;
-			vertical-align: middle;
-			border-top: none;
-			border-right: 1.0pt solid windowtext;
-			border-bottom: .5pt solid windowtext;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl742996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: general;
-			vertical-align: middle;
-			border-top: none;
-			border-right: .5pt solid windowtext;
-			border-bottom: .5pt solid windowtext;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: normal;
-		}
-
-		.xl752996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: left;
-			vertical-align: middle;
-			border-top: none;
-			border-right: .5pt solid windowtext;
-			border-left: .5pt solid windowtext;
-			border-bottom: .5pt solid windowtext;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: normal;
-		}
-
-		.xl762996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 7.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Arial, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: .5pt solid windowtext;
-			border-right: none;
-			border-bottom: .5pt solid windowtext;
-			border-left: 1.0pt solid windowtext;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl772996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 7.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Arial, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: .5pt solid windowtext;
-			border-right: .5pt solid windowtext;
-			border-bottom: .5pt solid windowtext;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl782996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: bottom;
-			border-top: .5pt solid windowtext;
-			border-right: none;
-			border-bottom: .5pt solid windowtext;
-			border-left: .5pt solid windowtext;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl792996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: bottom;
-			border-top: .5pt solid windowtext;
-			border-right: none;
-			border-bottom: .5pt solid windowtext;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl802996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: bottom;
-			border-top: .5pt solid windowtext;
-			border-right: 1.0pt solid windowtext;
-			border-bottom: .5pt solid windowtext;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl812996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 7.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Arial, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: .5pt solid windowtext;
-			border-right: none;
-			border-bottom: .5pt solid windowtext;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl822996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 7.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Arial, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: .5pt solid windowtext;
-			border-right: 1.0pt solid windowtext;
-			border-bottom: .5pt solid windowtext;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl832996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 7.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Arial, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: .5pt solid windowtext;
-			border-right: none;
-			border-bottom: 1.0pt solid windowtext;
-			border-left: 1.0pt solid windowtext;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl842996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 7.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Arial, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: .5pt solid windowtext;
-			border-right: none;
-			border-bottom: 1.0pt solid windowtext;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl852996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 7.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Arial, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: .5pt solid windowtext;
-			border-right: 1.0pt solid windowtext;
-			border-bottom: 1.0pt solid windowtext;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl862996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: 1.0pt solid windowtext;
-			border-right: none;
-			border-bottom: none;
-			border-left: 1.0pt solid windowtext;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl872996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: 1.0pt solid windowtext;
-			border-right: none;
-			border-bottom: none;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl882996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: none;
-			border-right: none;
-			border-bottom: none;
-			border-left: 1.0pt solid windowtext;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl892996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl902996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 12.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: 1.0pt solid windowtext;
-			border-right: none;
-			border-bottom: none;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl912996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 12.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: 1.0pt solid windowtext;
-			border-right: 1.0pt solid windowtext;
-			border-bottom: none;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl922996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 12.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl932996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 12.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: none;
-			border-right: 1.0pt solid windowtext;
-			border-bottom: none;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl942996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 18.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: 1.0pt solid windowtext;
-			border-right: none;
-			border-bottom: none;
-			border-left: 1.0pt solid windowtext;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl952996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 18.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: 1.0pt solid windowtext;
-			border-right: none;
-			border-bottom: none;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl962996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 18.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: 1.0pt solid windowtext;
-			border-right: 1.0pt solid windowtext;
-			border-bottom: none;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl972996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 18.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: none;
-			border-right: none;
-			border-bottom: 1.0pt solid windowtext;
-			border-left: 1.0pt solid windowtext;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl982996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 18.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: none;
-			border-right: none;
-			border-bottom: 1.0pt solid windowtext;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl992996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 18.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: none;
-			border-right: 1.0pt solid windowtext;
-			border-bottom: 1.0pt solid windowtext;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl1002996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: .5pt solid windowtext;
-			border-right: none;
-			border-bottom: none;
-			border-left: 1.0pt solid windowtext;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl1012996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: .5pt solid windowtext;
-			border-right: none;
-			border-bottom: none;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl1022996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: .5pt solid windowtext;
-			border-right: 1.0pt solid windowtext;
-			border-bottom: none;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl1032996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: none;
-			border-right: none;
-			border-bottom: .5pt solid windowtext;
-			border-left: 1.0pt solid windowtext;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl1042996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: none;
-			border-right: none;
-			border-bottom: .5pt solid windowtext;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl1052996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: none;
-			border-right: 1.0pt solid windowtext;
-			border-bottom: .5pt solid windowtext;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl1062996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: .5pt solid windowtext;
-			border-right: none;
-			border-bottom: .5pt solid windowtext;
-			border-left: 1.0pt solid windowtext;
-			background: #92D050;
-			mso-pattern: black none;
-			white-space: nowrap;
-		}
-
-		.xl1072996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 9.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Arial, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: .5pt solid windowtext;
-			border-right: none;
-			border-bottom: none;
-			border-left: 1.0pt solid windowtext;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl1082996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 9.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Arial, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: .5pt solid windowtext;
-			border-right: none;
-			border-bottom: none;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl1092996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 9.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Arial, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: .5pt solid windowtext;
-			border-right: 1.0pt solid windowtext;
-			border-bottom: none;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl1102996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 9.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Arial, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: none;
-			border-right: none;
-			border-bottom: .5pt solid windowtext;
-			border-left: 1.0pt solid windowtext;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl1112996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 9.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Arial, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: none;
-			border-right: none;
-			border-bottom: .5pt solid windowtext;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl1122996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 9.0pt;
-			font-weight: 700;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Arial, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: middle;
-			border-top: none;
-			border-right: 1.0pt solid windowtext;
-			border-bottom: .5pt solid windowtext;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl1132996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: bottom;
-			border-top: .5pt solid windowtext;
-			border-right: none;
-			border-bottom: .5pt solid windowtext;
-			border-left: .5pt solid windowtext;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: normal;
-		}
-
-		.xl1142996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: bottom;
-			border-top: .5pt solid windowtext;
-			border-right: none;
-			border-bottom: .5pt solid windowtext;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: normal;
-		}
-
-		.xl1152996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: bottom;
-			border-top: .5pt solid windowtext;
-			border-right: 1.0pt solid windowtext;
-			border-bottom: .5pt solid windowtext;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: normal;
-		}
-
-		.xl1162996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: bottom;
-			border-top: none;
-			border-right: none;
-			border-bottom: none;
-			border-left: .5pt solid windowtext;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl1172996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: bottom;
-			border-top: none;
-			border-right: .5pt solid black;
-			border-bottom: none;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl1182996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: bottom;
-			border-top: 1.0pt solid windowtext;
-			border-right: none;
-			border-bottom: none;
-			border-left: .5pt solid windowtext;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl1192996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: bottom;
-			border-top: 1.0pt solid windowtext;
-			border-right: none;
-			border-bottom: none;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl1202996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: bottom;
-			border-top: 1.0pt solid windowtext;
-			border-right: 1.0pt solid windowtext;
-			border-bottom: none;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl1212996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: bottom;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-
-		.xl1222996 {
-			padding: 0px;
-			mso-ignore: padding;
-			color: black;
-			font-size: 11.0pt;
-			font-weight: 400;
-			font-style: normal;
-			text-decoration: none;
-			font-family: Calibri, sans-serif;
-			mso-font-charset: 0;
-			mso-number-format: General;
-			text-align: center;
-			vertical-align: bottom;
-			border-top: none;
-			border-right: 1.0pt solid windowtext;
-			border-bottom: none;
-			border-left: none;
-			mso-background-source: auto;
-			mso-pattern: auto;
-			white-space: nowrap;
-		}
-	</style>
+  <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8">
+  <title>Cotizacion</title>
+  <link rel="stylesheet" href="/css/style-template-quotation.css">
 </head>
 
-<body>
-	<!--[if !excel]>&nbsp;&nbsp;<![endif]-->
-	<!--La siguiente informaci&oacute;n se gener&oacute; mediante el Asistente para publicar como
-p&aacute;gina web de Microsoft Excel.-->
-	<!--Si se vuelve a publicar el mismo elemento desde Excel, se reemplazar&aacute; toda
-la informaci&oacute;n comprendida entre las etiquetas DIV.-->
-	<!----------------------------->
-	<!--INICIO DE LOS RESULTADOS DEL ASISTENTE PARA PUBLICAR COMO P&Aacute;GINA WEB DE
-EXCEL -->
-	<!----------------------------->
+<body dir="ltr" style="max-width:215.9mm;/*argin-top:19.05mm; margin-bottom:19.05mm; margin-left:17.78mm; margin-right:17.78mm;*/ margin: 0 auto; ">
+  <table border="0" cellspacing="0" cellpadding="0" class="ta1">
+    <colgroup>
+      <col width="114">
+      <col width="114">
+      <col width="114">
+      <col width="114">
+      <col width="114">
+      <col width="114">
+      <col width="114">
+      <col width="148">
+      <col width="17">
+      <col width="123">
+      <col width="179">
+      <col width="114">
+    </colgroup>
+    <tbody>
+      <tr class="ro1">
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:33.87mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:3.88mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:40.92mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro2">
+        <td style="text-align:left;width:26.02mm; " class="Default">
+          <div style="height:19.11mm;width:26.02mm; padding:0; " id="Imagen_1" class="P1">
+            <p><img style="height:1,911cm;width:8,359999999999999cm;" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAABMCAMAAAC1QZn3AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAh1BMVEX///8PdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMPdUMAAAD3GC22AAAAK3RSTlMAIIDAsEBg4NCQcEqg8BBQMHGfXz9Pr89v799/2L+P65SeTIJ5iD3JxDxYKPPsYgAAAAFiS0dELLrdcasAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAAHdElNRQfhCAcSIjQlz9R0AAAHtUlEQVR42u1ciXriOAz2mWtjx0Pp0MDSvU+///utT8V2QmnT3cJsqvlmPgiOLP3+JcsKDELbEUyotkIZ4be25RZSaV0zYoTWBoWmrfCtLfpo/2uOOoRq4/d3Vd94ELZDBSwaiZAekGYNorRSiBMDQnNruz5MiLaLrXtkVn5gumUIKWHebkZY7f5tENOaVVpo6391a6s+UCi1/xKNOkOB1vyVQmwnARipW4RkV2vJ3VbYocbkgw1JpQmqhGCG9Tb9E95viv+S6VpVmkll0n5vSiFJDSDbkU7oRg7aJH6z/BIL8qXZUv43q617iag2dYDZAziqvmxq/xuEFjbcqQt6rrk0MdDe2qqPE+OtUPaF2fbtSUCb8k9sJ//hJvpvXvfC7YCilbc268PE0F83ibvcyq2N+kAhOvd/a9Jv23/ZfPr/6f92/Vdi2/7Lrftv+S+27r+6tRm3E+v/tto9ufS+5bVZcf5v6Lhfim34bnkDqNyBd/1TP+wOjN/OU8PSVlcA6ZUnXtX6p8fuCXL3LZDI7XdVeWFlv7dqdC79/fOA6KLgcQlw1fNOTPVM7r9z5o2eCL8+AVRCL8m9b6aFlVisrYAqfUHunAPeSAh5F8RshR4ODu8e9iYZPu4gCu47D+QAtGVGeK3IyP+v4C4+xEx4ax9fDwBfzdk+OPuUghIRuLWPrwegdtv3Ci04uJo/LZKjLlLsHUoKAFkdsq1XcywuD/6y0Shb2ivkvmZH+8rHmOx6KnQN7+GultZaUNaBJZ2/2aQWwqb7UUspCZepEaJSLdhop0LY6/kCcKuDtlF7AgDO8+FbRFxI+C4T7pDfbU1uCVulrQ5wjBqXJgACSZLdlCqA166LioWGIIB6m9YfDbjKs5pEdEvqKS8AcPfUa/xXywQwcjoeTzCgUjD5UFQNsfeiilqSgI1tttHao5rXEEr3LAYlK/fikIiHfFYmUwCq9bs2WcoAqXjdZPLu+9JCX3sosWC5h43mhQaLpvP8FmdDM9PukZzVKgZH+NhvZKsIgFjiwwsIobldAqhqOQCbqabwqgt7U13cyYO2ErIB1sOqme6Si7VaIwGAPky3RoIXl9PnZNJ4HpNltMQfwnpRALK2SOLwRuCpxjo/7PfPY6RAQpOBV5AfZMxIxNnDIT/h8Op42u+hTiMRAA44rZCg+fKACMBo8456Oge7/YcyIMA58NJJF0YBAD48QyIRAEDIH3F9O5XzkcfJQtbdefVqTAlEwiKuKYJRjMYUAN8UcaISAHgKGIRbqCL6PhsUiSUiAJGdYVisPaB3HQCreSR1EI8vDePP8bJKqKgJz+d4LwBZtNUqAnDwnw7pgk4uCRFDAWXjgmPH4nKJC0SiqjMtoUgRQQ0u1XsAaAE+trBK95ZfD4sSAKkzqRFEmhNSmpLh1ZVq+uxmiIEAQHJyCWo63FM2KY/Vw5zjFpk2mwPihhzPtTQDiMkc5+NVXpQAcJ0LJhm+gdpoeXxSt9WpcbyYLtyULDUukDLOd6zYJTJfHk5xL/khfBwPbnRAprAUokZVg9TV2iByDy6M+aw8X/MAAJ0kHZxcFq8AIK1cU0jkQBY6VPNzSfF58KEaGyIHbf7Ig2AKXZFZHaB25yUAlue8Jj++GgAaAcBtfUHZzJfi858CJ9HjoWMmbBjG6lkg9XKP6HIl+BYALtgsfn4zAOSy3gsWlhQZB8R+0Yww/StFw4iGl49IwZaFMnIRgMXmYUN+W0Slj4XQKwDwrtLkmEXbQWZwvMAA377w/WB1Pu9+N/kVC/V8OF9vEV48+GcAxI0MmLrIo1k9+TIA/Wy2PwBSnupdMtEUKfAJweMM0VdLwHzeTc8AiC77lCHKscOSiVcBaGYDA8Eg37cpAOkuYEtQYMshIrWqIRKrshl6iwB0C2ysSIcXdGBCroRAoibzdEpINGV4yrv00Dwq6GCtaYlBT7DYMfkiAKo00d/f+xBOM4k9v4srAIC9OMstMDxWZW2JV1oJemaEYFnzVCC2/3T6JeIhbsQqByCe1ydb/OMoUrLUl3bdywDA+KD1z2IpIi/+CiETDczwCieEo1+CNUdCgFP0gw0iVU1b8YgKAELN2oRow+G4IovOWjD97ysA+IYajl2QLncUUuBwzmZV2e5IMsNW/RLg4pMh61ABQAxLYY/sqgW/u+iRcRZXwUJ2JQScZgpNIBp32cYQTCaPa1scWcpIRWL8txkA6FBy819AYKzQDAC5UApQNKWSRKAhMiXnDICi/SVUUQaB1EsWHqaOkJP5AeMNoo5L8+4wgJOonTf/PGVnCNjTvn813exXMqTSPPXZ8JFFSdmxqGCGwCH2BCFjnMvJ3iSnEoLx2a/bvONeNm7jZyT3h+LIy8N0r0NpjLjghAP+d5xZeFMV+GbrDp4beJIxGoHzHtZxJQAIPe6mKY67xyw+Dnly5RMEop34nZ5jmI9727sZ1XSnC+YBiAG9fvgdiwQi+d6/45tf5IevYN5JRsumNlEoUt71e0C8fzydTvt97q46Pc6H8s7+XwSdKi6rwV4mUycGPz1k2uTDE84ig7vx6QinYoi4mnpqmsTa9zCZdzqMu1T76eAeZXwD8q5o/T/IJwCfAHwC8AnAJwBbBsAVUvf9Daz/VmzFex/faf8H75BM9vp9EJEAAAAASUVORK5CYII=">
+            </p>
+          </div>
+        </td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td colspan="3" style="text-align:left;width:26.02mm; position:relative; top:24px;" class="ce21">
+          <p>NIT 800,025,125-8</p>
+        </td>
+        <td style="text-align:left;width:3.88mm; " class="Default">&nbsp;</td>
+        <td colspan="2" style="text-align:left;width:28.22mm; " class="ce30">
+          <p>&nbsp;COTIZACIÓN No</p>
+        </td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro3">
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td colspan="3" style="text-align:left;width:26.02mm; " class="ce21">
+          <p>Cra. 5 este No. 20-69 Bodega # 6</p>
+        </td>
+        <td style="text-align:left;width:3.88mm; " class="Default">&nbsp;</td>
+        <td colspan="2" rowspan="3" style="text-align:right; width:28.22mm; " class="ce31">
+          <p><?= $quotation->getId() ?></p>
+        </td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro3">
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td colspan="3" style="text-align:left;width:26.02mm; " class="ce21">
+          <p>&nbsp;(57+1) 893 26 31 / 35/ 38/ 42</p>
+        </td>
+        <td style="text-align:left;width:3.88mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro4">
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td colspan="3" style="text-align:left;width:26.02mm; " class="ce21">
+          <p>Mosquera - Cundinamarca</p>
+        </td>
+        <td style="text-align:left;width:3.88mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro5">
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="ce25">&nbsp;</td>
+        <td style="text-align:left;width:33.87mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:3.88mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:40.92mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro1">
+        <td style="text-align:left;width:26.02mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:33.87mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:3.88mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:40.92mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro6">
+        <td colspan="2" style="text-align:left;width:26.02mm; " class="ce3">
+          <p>Nombres y Apellidos</p>
+        </td>
+        <td colspan="3" style="text-align:left;width:26.02mm; " class="ce19">
+          <p><?= $quotation->getNameClient() ?> <?= $quotation->getLastNameClient() ?></p>
+        </td>
+        <td style="text-align:left;width:26.02mm; " class="ce23">
+          <p>Email</p>
+        </td>
+        <td colspan="2" style="text-align:left;width:26.02mm; " class="ce27">
+          <p><a href="mailto:<?= $quotation->getEmail() ?>"><?= $quotation->getEmail() ?></a></p>
+        </td>
+        <td style="text-align:left;width:3.88mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="ce3">
+          <p>Fecha </p>
+        </td>
+        <td style="text-align:right; width:40.92mm; " class="ce37">
+          <p><?= date("d/m/Y", $quotation->getCreatedAt()) ?></p>
+        </td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro4">
+        <td colspan="2" style="text-align:left;width:26.02mm; " class="ce3">
+          <p>Empresa</p>
+        </td>
+        <td colspan="3" style="text-align:left;width:26.02mm; " class="ce22">
+          <p><?= $quotation->getCompany() ?></p>
+        </td>
+        <td style="text-align:left;width:26.02mm; " class="ce23">
+          <p>Direccion</p>
+        </td>
+        <td style="text-align:left;width:26.02mm; " class="ce22" colspan="2">
+          <p><?= $quotation->getAddress() ?></p>
+        </td>
 
-	<div id="base_2996" align=center x:publishsource="Excel">
+        <td style="text-align:left;width:3.88mm; " class="ce22">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="ce22">&nbsp;</td>
+        <td style="text-align:left;width:40.92mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro4">
+        <td colspan="2" style="text-align:left;width:26.02mm; " class="ce3">
+          <p>Ciudad</p>
+        </td>
+        <td colspan="3" style="text-align:left;width:26.02mm; " class="ce19">
+          <p><?= $quotation->getCity() ?></p>
+        </td>
+        <td style="text-align:left;width:26.02mm; " class="ce23">
+          <p>Celular</p>
+        </td>
+        <td style="text-align:right; width:26.02mm; " class="ce22">
+          <p><?= $quotation->getCellphoneNumber() ?></p>
+        </td>
+        <td style="text-align:left;width:33.87mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:3.88mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="ce24">&nbsp;</td>
+        <td style="text-align:left;width:40.92mm; " class="ce24">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro4">
+        <td colspan="2" style="text-align:left;width:26.02mm; " class="ce3">
+          <p>Telefono</p>
+        </td>
+        <td colspan="3" style="text-align:right; width:26.02mm; " class="ce19">
+          <p><?= $quotation->getPhoneNumber() ?></p>
+        </td>
+        <td style="text-align:left;width:26.02mm; " class="ce24">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:33.87mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:3.88mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:40.92mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro1">
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:33.87mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:3.88mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:40.92mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro7">
+        <td colspan="2" style="text-align:left;width:26.02mm; " class="ce4">
+          <p>Producto</p>
+        </td>
+        <td colspan="5" style="text-align:left;width:26.02mm; " class="ce4">
+          <p>Descripcion</p>
+        </td>
+        <td colspan="2" style="text-align:left;width:33.87mm; " class="ce4">
+          <p>Cantidad </p>
+        </td>
+        <td style="text-align:left;width:28.22mm; " class="ce34">
+          <p>Precio Unidad</p>
+        </td>
+        <td style="text-align:left;width:40.92mm; " class="ce38">
+          <p>Valor Total</p>
+        </td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <?php foreach ($quotation->getItems() as $item) { ?>
+        <tr class="ro8">
+          <td colspan="2" style="text-align:left;width:26.02mm; " class="ce35">
+            <p><img src="<?= $item->getProduct()->getImages()[0]->getUrl() ?>" width="70" height="71"></p>
+          </td>
+          <td colspan="5" style="text-align: left!important;width:26.02mm; " class="ce5">
+            <p>
+              <span class="T1">Referencia</span><span class="T2"> <?= $item->getProduct()->getRef() ?></span>
+              <br>
+              <span class="T3">Material</span><span class="T4"> <?= $item->getMaterial()->getName() ?> </span>
+              <br>
+              <span class="T5">Medidas</span><span class="T4"> <?= $item->getMeasurement()->getWidth() ?>*<?= $item->getMeasurement()->getHeight() ?>*<?= $item->getMeasurement()->getLength() ?></span>
+            </p>
+          </td>
+          <td colspan="2" style="text-align:right; width:33.87mm; " class="ce28">
+            <p>&nbsp;<?= $item->getQuantity() ?> </p>
+          </td>
+          <td style="text-align:right; width:28.22mm; " class="ce35">
+            <p class="money"><?= $item->getPrice() ?></p>
+          </td>
+          <td style="text-align:right; width:40.92mm; " class="ce39">
+            <p class="money"><?= $item->calculateTotal() ?></p>
+          </td>
+          <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        </tr>
+      <?php } ?>
 
-		<table border=0 cellpadding=0 cellspacing=0 width=586 style='border-collapse:
- collapse;table-layout:fixed;width:441pt'>
-			<col width=78 style='mso-width-source:userset;mso-width-alt:2852;width:59pt'>
-			<col width=108 style='mso-width-source:userset;mso-width-alt:3949;width:81pt'>
-			<col width=85 style='mso-width-source:userset;mso-width-alt:3108;width:64pt'>
-			<col width=77 style='mso-width-source:userset;mso-width-alt:2816;width:58pt'>
-			<col width=86 style='mso-width-source:userset;mso-width-alt:3145;width:65pt'>
-			<col width=76 span=2 style='mso-width-source:userset;mso-width-alt:2779;
- width:57pt'>
-			<tr height=64 style='mso-height-source:userset;height:48.0pt'>
-				<td colspan=3 rowspan=2 height=84 width=271 style='height:63.0pt;width:204pt' align=left valign=top>
-					<span style='mso-ignore:vglayout;
-  position:absolute;z-index:1;margin-left:10px;margin-top:7px;width:247px;
-  height:76px'><img width=247 height=76 src="http://greenpack.com.co/wp-content/themes/greenpack/images/logo-greenpack.png" alt="http://greenpack.com.co/wp-content/themes/greenpack/images/logo-greenpack.png" v:shapes="Picture_x0020_1"></span>
-					<![endif]><span style='mso-ignore:vglayout2'>
-						<table cellpadding=0 cellspacing=0>
-							<tr>
-								<td colspan=3 rowspan=2 height=84 class=xl862996 width=271 style='height:63.0pt;width:204pt'>&nbsp;</td>
-							</tr>
-						</table>
-					</span></td>
-				<td colspan=4 rowspan=2 class=xl902996 width=315 style='border-right:1.0pt solid black;
-  width:237pt'>Cotizacion No.<font class="font52996"><?php echo $quotation->getId() ?></font>
-				</td>
-			</tr>
-			<tr height=20 style='mso-height-source:userset;height:15.0pt'>
-			</tr>
-			<tr height=21 style='mso-height-source:userset;height:15.75pt'>
-				<td colspan=7 rowspan=2 height=41 class=xl942996 style='border-right:1.0pt solid black;
-  border-bottom:1.0pt solid black;height:30.75pt'>Datos Cotizaci&oacute;n</td>
-			</tr>
-			<tr height=20 style='mso-height-source:userset;height:15.0pt'>
-			</tr>
-			<tr height=20 style='mso-height-source:userset;height:15.0pt'>
-				<td height=20 class=xl702996 style='height:15.0pt;border-top: 1.0pt solid windowtext;'>Nombre:</td>
-				<td colspan=2 class=xl1162996 style='border-top: 1.0pt solid windowtext;border-right:.5pt solid black;
-  border-left:none'><?php echo $quotation->getNameClient() ?></td>
-				<td class=xl652996 style='border-left:none;border-top: 1.0pt solid windowtext;'>Apellido:</td>
-				<td colspan=3 class=xl1182996 style='border-right:1.0pt solid black;
-  border-left:none'><?php echo $quotation->getLastNameClient() ?></td>
-			</tr>
-			<tr height=20 style='mso-height-source:userset;height:15.0pt'>
-				<td height=20 class=xl702996 style='height:15.0pt'>Empresa:</td>
-				<td colspan=2 class=xl1162996 style='border-right:.5pt solid black;
-  border-left:none'><?php echo $quotation->getCompany() ?></td>
-				<td class=xl652996 style='border-left:none'>Email:</td>
-				<td colspan=3 class=xl1162996 style='border-right:1.0pt solid black;
-  border-left:none'><?php echo $quotation->getEmail() ?></td>
-			</tr>
-			<tr height=20 style='mso-height-source:userset;height:15.0pt'>
-				<td height=20 class=xl702996 style='height:15.0pt'>Ciudad:</td>
-				<td colspan=2 class=xl1162996 style='border-right:.5pt solid black;
-  border-left:none'><?php echo $quotation->getCity() ?></td>
-				<td class=xl652996 style='border-left:none'>Direcci&oacute;n:</td>
-				<td colspan=3 class=xl1162996 style='border-right:1.0pt solid black;
-  border-left:none'><?php echo $quotation->getAddress() ?></td>
-			</tr>
-			<tr height=20 style='mso-height-source:userset;height:15.0pt'>
-				<td height=20 class=xl702996 style='height:15.0pt'>Tel&eacute;fono:</td>
-				<td colspan=2 class=xl1162996 style='border-right:.5pt solid black;
-  border-left:none'><?php echo $quotation->getPhoneNumber() ?></td>
-				<td class=xl652996 style='border-left:none'>Celular:</td>
-				<td colspan=3 class=xl1162996 style='border-right:1.0pt solid black;
-  border-left:none'><?php echo $quotation->getCellphoneNumber() ?></td>
-			</tr>
-			<tr height=20 style='mso-height-source:userset;height:15.0pt'>
-				<td colspan=7 rowspan=2 height=40 class=xl1002996 style='border-right:1.0pt solid black;
-  border-bottom:.5pt solid black;height:30.0pt'>&iexcl;Cordial Saludo! Con agrado nos
-					permitimos entregarle la siguiente cotizaci&oacute;n</td>
-			</tr>
-			<tr height=20 style='mso-height-source:userset;height:15.0pt'>
-			</tr>
-			<tr class="xl662996" height="20" style="mso-height-source:userset;height:15.0pt">
-				<td colspan="2" height="20" class="xl1062996" style="border-right:.5pt solid black; height:15.0pt">
-					Producto</td>
-				<td class="xl672996" style="border-top: .5pt solid windowtext;">Impresión</td>
-				<td class="xl672996" style="border-top: .5pt solid windowtext;">Material</td>
-				<td class="xl672996" style="border-top: .5pt solid windowtext;">Medidas</td>
-				<td class="xl672996" style="border-top: .5pt solid windowtext;">Cantidad</td>
-				<td class="xl712996" style="border-top: .5pt solid windowtext;">$UNIDAD</td>
-			</tr>
-			<?php foreach ($quotation->getItems() as $item) { ?>
-				<!-- producto inidividual -->
-				<tr style="mso-height-source:userset;">
-					<td align="left" valign="top" style="border-right: .5pt solid windowtext;
-    			border-left: .5pt solid windowtext;border-bottom: .5pt solid windowtext;height:64px;"><span style="mso-ignore:vglayout;
-  			z-index:2;margin-left:6px;margin-top:26px;width:70px;
-  			height:51px"><img width="70" height="51" src="<?php echo $item->getProduct()->getImages()[0]->getUrl() ?>" alt="<?php echo $item->getProduct()->getImages()[0]->getUrl() ?>" v:shapes="Picture_x0020_2"></span></td>
-					<td class="xl752996" width="108" style="width:81pt"><?php echo $item->getProduct()->getRef() ?></td>
-					<td class="xl682996"><?php echo $item->isPrinting() ? "SI" : "NO"; ?></td>
-					<td class="xl692996" width="77" style="width:58pt"><?php echo $item->getMaterial()->getName() ?></td>
-					<td class="xl682996"><?php echo $item->getMeasurement()->getWidth(); ?>*<?php echo $item->getMeasurement()->getHeight() ?>*<?php echo $item->getMeasurement()->getLength() ?></td>
-					<td class="xl742996" width="76" style="width:57pt"><?php echo $item->getQuantity() ?></td>
-					<td class="xl732996" align="right">$ <?php echo $item->getPrice() ?></td>
-				</tr>
-				<!-- producto individual -->
-			<?php } ?>
-
-			<tr height=20 style='mso-height-source:userset;height:15.0pt'>
-				<td colspan=7 rowspan=2 height=40 class=xl1072996 style='border-right:1.0pt solid black;
-  border-bottom:.5pt solid black;height:30.0pt'>CONDICIONES COMERCIALES</td>
-			</tr>
-			<tr height=20 style='mso-height-source:userset;height:15.0pt'>
-			</tr>
-			<tr height=20 style='mso-height-source:userset;height:15.0pt'>
-				<td colspan=2 height=20 class=xl762996 style='border-right:.5pt solid black;
-  height:15.0pt'>FORMA DE PAGO</td>
-				<td colspan=5 class=xl782996 style='border-right:1.0pt solid black;
-  border-left:none'>50% contra pedido - 50% contra facturacion para entrega</td>
-			</tr>
-			<tr height=39 style='mso-height-source:userset;height:29.25pt'>
-				<td colspan=2 height=39 class=xl762996 style='border-right:.5pt solid black;
-  height:29.25pt'>TIEMPOS DE ENTREGA</td>
-				<td colspan=5 class=xl1132996 width=400 style='border-right:1.0pt solid black;
-  border-left:none;width:301pt'>15 DIAS HABILES DESPUES DE APROBACION MUESTRAS
-					PARA IMPRESOS Y 8 DIAS PARA GENERICOS</td>
-			</tr>
-			<tr height=20 style='mso-height-source:userset;height:15.0pt'>
-				<td colspan=2 height=20 class=xl762996 style='border-right:.5pt solid black;
-  height:15.0pt'>VALIDEZ DE LA OFERTA</td>
-				<td colspan=5 class=xl782996 style='border-right:1.0pt solid black;
-  border-left:none'>3 meses</td>
-			</tr>
-			<tr height=20 style='mso-height-source:userset;height:15.0pt'>
-				<td colspan=7 height=20 class=xl762996 style='border-right:1.0pt solid black;
-  height:15.0pt'>PARA PRODUCTO IMPRESO EN EL PRIMER PEDIDO SE COBRARA EL VALOR
-					DE LOS FOTOPOLIMEROS</td>
-			</tr>
-			<tr height=20 style='mso-height-source:userset;height:15.0pt'>
-				<td colspan=7 height=20 class=xl832996 style='border-right:1.0pt solid black;
-  height:15.0pt'>el precio no incluye IVA ni fletes fuera del perimetro Urbano.</td>
-			</tr>
-			<![if supportMisalignedColumns]>
-			<tr height=0 style='display:none'>
-				<td width=78 style='width:59pt'></td>
-				<td width=108 style='width:81pt'></td>
-				<td width=85 style='width:64pt'></td>
-				<td width=77 style='width:58pt'></td>
-				<td width=86 style='width:65pt'></td>
-				<td width=76 style='width:57pt'></td>
-				<td width=76 style='width:57pt'></td>
-			</tr>
-			<![endif]>
-		</table>
-
-	</div>
-
-
-	<!----------------------------->
-	<!--FINAL DE LOS RESULTADOS DEL ASISTENTE PARA PUBLICAR COMO P&Aacute;GINA WEB DE
-EXCEL-->
-	<!----------------------------->
+      <tr class="ro9">
+        <td style="text-align:left;width:26.02mm; " class="ce7">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="ce7">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="ce7">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="ce7">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="ce7">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="ce7">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="ce7">&nbsp;</td>
+        <td style="text-align:left;width:33.87mm; " class="ce7">&nbsp;</td>
+        <td style="text-align:left;width:3.88mm; " class="ce7">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="ce7">&nbsp;</td>
+        <td style="text-align:left;width:40.92mm; " class="ce16">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro1">
+        <td style="text-align:left;width:26.02mm; " class="Default">
+          <p>Observaciones</p>
+        </td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:33.87mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:3.88mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:40.92mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro1">
+        <td colspan="8" rowspan="3" style="text-align:left;width:26.02mm; " class="ce8">&nbsp;<?= $quotation->getExtraInformation() ?></td>
+        <td style="text-align:left;width:3.88mm; " class="ce7">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="Default">
+          <p>Subtotal</p>
+        </td>
+        <td style="text-align:left;width:40.92mm; " class="ce40">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro1">
+        <td style="text-align:left;width:3.88mm; " class="ce7">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="Default">
+          <p>IVA 19%</p>
+        </td>
+        <td style="text-align:left;width:40.92mm; " class="ce40">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro1">
+        <td style="text-align:left;width:3.88mm; " class="ce7">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="Default">
+          <p>Total</p>
+        </td>
+        <td style="text-align:left;width:40.92mm; " class="ce39 money">&nbsp; <?= $quotation->calculateTotal() ?></td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro1">
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:33.87mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:3.88mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:40.92mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro1">
+        <td style="text-align:left;width:26.02mm; " class="ce9" colspan="6">
+          <p>Condiciones de Pago</p>
+        </td>
+        <td style="text-align:left;width:26.02mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:33.87mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:3.88mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:40.92mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro4">
+        <td colspan="8" style="text-align:left;width:26.02mm; " class="ce10">
+          <p>50% al realizar el pedido - 50% a contra entrega de los productos</p>
+        </td>
+        <td style="text-align:left;width:3.88mm; " class="ce16">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:40.92mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro1">
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:33.87mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:3.88mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:40.92mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro1">
+        <td style="text-align:left;width:26.02mm; " class="ce9" colspan="6">
+          <p>Tiempo de Entrega a partir de la aprobación</p>
+        </td>
+        <td style="text-align:left;width:26.02mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:33.87mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:3.88mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:40.92mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro4">
+        <td colspan="6" style="text-align:left;width:26.02mm; " class="ce10">
+          <p>Sin impresión &nbsp;8 dias</p>
+        </td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:33.87mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:3.88mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:40.92mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="ce41">&nbsp;</td>
+      </tr>
+      <tr class="ro4">
+        <td colspan="6" style="text-align:left;width:26.02mm; " class="ce11">
+          <p>Impresos 15 dias</p>
+        </td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:33.87mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:3.88mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:40.92mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro1">
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:33.87mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:3.88mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:40.92mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro1">
+        <td style="text-align:left;width:26.02mm; " class="ce9">
+          <p>Vigencia</p>
+        </td>
+        <td style="text-align:left;width:26.02mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:33.87mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:3.88mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:40.92mm; " class="ce1">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro10">
+        <td colspan="11" style="text-align:left;width:26.02mm; " class="ce12">
+          <p> 30 días contados a partir de la fecha de la entrega de la cotizacion</p>
+          <p>presente propuesta</p>
+        </td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro1">
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:33.87mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:3.88mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:40.92mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro1">
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:33.87mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:3.88mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:40.92mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro1">
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:33.87mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:3.88mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:40.92mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro1">
+        <td style="text-align:left;width:26.02mm; " class="Default">
+          <p>Cordialmente,</p>
+        </td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:33.87mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:3.88mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:40.92mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro1">
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:33.87mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:3.88mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:40.92mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro1">
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td colspan="3" style="text-align:left;width:26.02mm; " class="ce18">
+          <p>Vendedor 1</p>
+        </td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:33.87mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:3.88mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:40.92mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro4">
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">
+          <p>Movil: </p>
+        </td>
+        <td colspan="2" style="text-align:left;width:26.02mm; " class="ce21">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:33.87mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:3.88mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:40.92mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro1">
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:33.87mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:3.88mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:40.92mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+      <tr class="ro1">
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:33.87mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:3.88mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:28.22mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:40.92mm; " class="Default">&nbsp;</td>
+        <td style="text-align:left;width:26.02mm; " class="Default">&nbsp;</td>
+      </tr>
+    </tbody>
+  </table>
+  <script src="/js/jquery-2.2.4.min.js"></script>
+  <script src="/vendor/jquery.formatCurrency-1.4.0.min.js"></script>
+  <script src="/vendor/jquery.formatCurrency.all.js"></script>
+  <script>
+    $('.money').formatCurrency({
+      region: 'es-CO'
+    })
+  </script>
 </body>
 
 </html>

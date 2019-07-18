@@ -6,7 +6,8 @@ require_once __DIR__ . "/db/env.php";
 
 use Dompdf\Dompdf;
 
-$file = "http://" . $_SERVER["HTTP_HOST"] . "/cot-20190127-3564.php?id=" . $_GET["id"];
+// $file = "http://" . $_SERVER["HTTP_HOST"] . "/cot-20190127-3564.php?id=" . $_GET["id"];
+$file = "http://" . $_SERVER["HTTP_HOST"] . "/Plantilla_Cotizacion.html";
 $curl = curl_init();
 curl_setopt_array($curl, [
     CURLOPT_RETURNTRANSFER => true,
