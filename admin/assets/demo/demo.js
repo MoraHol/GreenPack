@@ -1,14 +1,14 @@
 demo = {
-  initDocumentationCharts: function() {
+  initDocumentationCharts: function () {
     if ($('#dailySalesChart').length != 0 && $('#websiteViewsChart').length != 0) {
       /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
 
       dataDailySalesChart = {
-        labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+        labels: ['L', 'M', 'M', 'J', 'V', 'S', 'D'],
         series: [
-          [12, 17, 7, 17, 23, 18, 38]
+          [0, 17, 7, 17, 23, 18, 38]
         ]
-      };
+      }
 
       optionsDailySalesChart = {
         lineSmooth: Chartist.Interpolation.cardinal({
@@ -30,7 +30,7 @@ demo = {
     }
   },
 
-  initGoogleMaps: function() {
+  initGoogleMaps: function () {
     var myLatlng = new google.maps.LatLng(40.748817, -73.985428);
     var mapOptions = {
       zoom: 13,

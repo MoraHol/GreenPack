@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="/css/all.min.css">
   <link rel="stylesheet" href="/css/style-blog.css">
   <link rel="stylesheet" href="/css/style-accordion.css">
-
+  <link rel="stylesheet" href="/css/basket.css">
 
   <link rel="stylesheet" href="/css/style-shop.css">
   <script src="/js/spinner.js"></script>
@@ -165,8 +165,8 @@
                       <p><?php
                           echo strtoupper($product->getCategory()->getName());
                           ?></p>
-                      <h4 class="card-product__title"><a href="#"><?php echo $product->getName(); ?></a></h4>
-                      <p class="card-product__price">$<?php echo $product->getPrice(); ?></p>
+                      <h4 class="card-product__title"><a href="product.php?id=<?php echo $product->getId() ?>"><?php echo $product->getName(); ?></a></h4>
+                      <!-- <p class="card-product__price">$<?php echo $product->getPrice(); ?></p> -->
                     </div>
                   </div>
                 </div>
@@ -206,6 +206,7 @@
       </div>
     </div>
   </section>
+  <?php include("../partials/basket.html"); ?>
   <!-- ================ category section end ================= -->
 
 

@@ -611,7 +611,7 @@ video {
     vertical-align: baseline
 }
 
-* {
+*:not(section,hr) {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -919,7 +919,7 @@ screen and (orientation:portrait) {
     display: none !important
 }
 
-.modal {
+/* .modal {
     -webkit-transform: scale(1.2);
     transform: scale(1.2);
     opacity: 0;
@@ -946,7 +946,7 @@ screen and (orientation:portrait) {
     opacity: 1;
     visibility: visible;
     z-index: 20
-}
+} */
 
 .relative {
     position: relative
@@ -1089,7 +1089,7 @@ screen and (orientation:portrait) {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffb57d', endColorstr='#fd6250', GradientType=1)
 }
 
-.carousel {
+/* .carousel {
     text-align: center;
     margin: 0 auto;
     max-width: 100%;
@@ -1111,7 +1111,7 @@ screen and (orientation:portrait) {
     left: 0;
     vertical-align: top;
     transition: .8s
-}
+} */
 
 .text-info {
     text-align: center;

@@ -18,6 +18,7 @@ if (isset($_FILES["file"])) {
   $tmp_name = $_FILES["file"]["tmp_name"];
   $url = "$uploads_dir/$name";
   if (move_uploaded_file($tmp_name, $url)) {
+    chmod($url, 0777);
     header('Content-type: application/json');
     $url = new stdClass();
     $url->link = "https://$host/upload/file/$name";

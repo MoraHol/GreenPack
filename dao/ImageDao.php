@@ -1,6 +1,6 @@
 <?php
-require dirname(__DIR__) . "/db/DBOperator.php";
-require dirname(__DIR__) . "/model/Image.php";
+require_once dirname(__DIR__) . "/db/DBOperator.php";
+require_once dirname(__DIR__) . "/model/Image.php";
 require_once(dirname(__DIR__) . "/db/env.php");
 class ImageDao
 {

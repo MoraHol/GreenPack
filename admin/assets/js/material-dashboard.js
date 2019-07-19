@@ -15,7 +15,7 @@
 
  */
 
-(function() {
+(function () {
   isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
 
   if (isWindows) {
@@ -49,7 +49,7 @@ var seq2 = 0,
   delays2 = 80,
   durations2 = 500;
 
-$(document).ready(function() {
+$(document).ready(function () {
 
   $('body').bootstrapMaterialDesign();
 
@@ -70,14 +70,14 @@ $(document).ready(function() {
   //  Activate the tooltips
   $('[rel="tooltip"]').tooltip();
 
-  $('.form-control').on("focus", function() {
+  $('.form-control').on("focus", function () {
     $(this).parent('.input-group').addClass("input-group-focus");
-  }).on("blur", function() {
+  }).on("blur", function () {
     $(this).parent(".input-group").removeClass("input-group-focus");
   });
 
   // remove class has-error for checkbox validation
-  $('input[type="checkbox"][required="true"], input[type="radio"][required="true"]').on('click', function() {
+  $('input[type="checkbox"][required="true"], input[type="radio"][required="true"]').on('click', function () {
     if ($(this).hasClass('error')) {
       $(this).closest('div').removeClass('has-error');
     }
@@ -85,20 +85,20 @@ $(document).ready(function() {
 
 });
 
-$(document).on('click', '.navbar-toggler', function() {
+$(document).on('click', '.navbar-toggler', function () {
   $toggle = $(this);
 
   if (mobile_menu_visible == 1) {
     $('html').removeClass('nav-open');
 
     $('.close-layer').remove();
-    setTimeout(function() {
+    setTimeout(function () {
       $toggle.removeClass('toggled');
     }, 400);
 
     mobile_menu_visible = 0;
   } else {
-    setTimeout(function() {
+    setTimeout(function () {
       $toggle.addClass('toggled');
     }, 430);
 
@@ -111,17 +111,17 @@ $(document).on('click', '.navbar-toggler', function() {
       $layer.appendTo(".wrapper-full-page");
     }
 
-    setTimeout(function() {
+    setTimeout(function () {
       $layer.addClass('visible');
     }, 100);
 
-    $layer.click(function() {
+    $layer.click(function () {
       $('html').removeClass('nav-open');
       mobile_menu_visible = 0;
 
       $layer.removeClass('visible');
 
-      setTimeout(function() {
+      setTimeout(function () {
         $layer.remove();
         $toggle.removeClass('toggled');
 
@@ -136,13 +136,13 @@ $(document).on('click', '.navbar-toggler', function() {
 });
 
 // activate collapse right menu when the windows is resized
-$(window).resize(function() {
+$(window).resize(function () {
   md.initSidebarsCheck();
 
   // reset the seq for charts drawing animations
   seq = seq2 = 0;
 
-  setTimeout(function() {
+  setTimeout(function () {
     md.initDashboardPageCharts();
   }, 500);
 });
@@ -156,7 +156,7 @@ md = {
     disabled_collapse_init: 0
   },
 
-  checkSidebarImage: function() {
+  checkSidebarImage: function () {
     $sidebar = $('.sidebar');
     image_src = $sidebar.data('image');
 
@@ -166,7 +166,7 @@ md = {
     }
   },
 
-  initSidebarsCheck: function() {
+  initSidebarsCheck: function () {
     if ($(window).width() <= 991) {
       if ($sidebar.length != 0) {
         md.initRightMenu();
@@ -174,64 +174,96 @@ md = {
     }
   },
 
-  initDashboardPageCharts: function() {
+  initDashboardPageCharts: function () {
 
     if ($('#dailySalesChart').length != 0 || $('#completedTasksChart').length != 0 || $('#websiteViewsChart').length != 0) {
       /* ----------==========     Daily Sales Chart initialization    ==========---------- */
+      let seriesDailySales
 
-      dataDailySalesChart = {
-        labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-        series: [
-          [12, 17, 7, 17, 23, 18, 38]
-        ]
-      };
 
-      optionsDailySalesChart = {
-        lineSmooth: Chartist.Interpolation.cardinal({
-          tension: 0
-        }),
-        low: 0,
-        high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-        chartPadding: {
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0
-        },
-      }
+      $.get('/admin/services/daily_sales.php', (data, status) => {
+        if (status == 'success') {
+          seriesDailySales = data
+          dataDailySalesChart = {
+            labels: ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom'],
+            series: [
+              seriesDailySales
+            ]
+          };
+          let max = Math.max.apply(null, seriesDailySales) + 3
+          optionsDailySalesChart = {
+            low: 0,
+            showArea: true,
+            high: max,
+            chartPadding: {
+              top: 0,
+              right: 0,
+              bottom: 0,
+              left: 0
+            },
+            lineSmooth: Chartist.Interpolation.simple({
+              divisor: 2
+            }),
+            plugins: [
+              Chartist.plugins.ctPointLabels({
+                textAnchor: 'middle',
+                labelInterpolationFnc: function (value) {
+                  if (value == undefined) {
+                    return 0
+                  } else {
+                    return value
+                  }
+                }
+              })
+            ]
+          }
 
-      var dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
+          var dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart)
 
-      md.startAnimationForLineChart(dailySalesChart);
+          md.startAnimationForLineChart(dailySalesChart)
+        }
+      })
+
+
 
 
       /* ----------==========     Completed Tasks Chart initialization    ==========---------- */
+      $.get('/admin/services/quotations_solved.php', (data, status) => {
+        if (status == "success") {
+          let quotations = data
+          dataCompletedTasksChart = {
+            series: [quotations.noSolved, quotations.solved]
+          }
+          let total = quotations.noSolved + quotations.solved
+          $('#totalQuotations').html(total)
+          optionsCompletedTasksChart = {
+            lineSmooth: Chartist.Interpolation.cardinal({
+              tension: 0
+            }),
+            donut: true,
+            donutWidth: 30,
+            donutSolid: true,
+            startAngle: 270,
+            showLabel: true,
+            labelInterpolationFnc: function (value) {
+              if (value == 0) {
+                return 0
+              } else {
+                return Math.round(value / total * 100) + '%'
+              }
 
-      dataCompletedTasksChart = {
-        labels: ['12p', '3p', '6p', '9p', '12p', '3a', '6a', '9a'],
-        series: [
-          [230, 750, 450, 300, 280, 240, 200, 190]
-        ]
-      };
+            }
+          }
+          if (total <= 0) {
+            dataCompletedTasksChart.series = [0]
+          }
+          var completedTasksChart = new Chartist.Pie('#completedTasksChart', dataCompletedTasksChart, optionsCompletedTasksChart);
 
-      optionsCompletedTasksChart = {
-        lineSmooth: Chartist.Interpolation.cardinal({
-          tension: 0
-        }),
-        low: 0,
-        high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-        chartPadding: {
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0
+          // start animation for the Completed Tasks Chart - Line Chart
+          md.startAnimationForLineChart(completedTasksChart);
+
         }
-      }
-
-      var completedTasksChart = new Chartist.Line('#completedTasksChart', dataCompletedTasksChart, optionsCompletedTasksChart);
-
-      // start animation for the Completed Tasks Chart - Line Chart
-      md.startAnimationForLineChart(completedTasksChart);
+      })
 
 
       /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
@@ -260,20 +292,19 @@ md = {
         ['screen and (max-width: 640px)', {
           seriesBarDistance: 5,
           axisX: {
-            labelInterpolationFnc: function(value) {
+            labelInterpolationFnc: function (value) {
               return value[0];
             }
           }
         }]
       ];
       var websiteViewsChart = Chartist.Bar('#websiteViewsChart', dataWebsiteViewsChart, optionsWebsiteViewsChart, responsiveOptions);
-
       //start animation for the Emails Subscription Chart
       md.startAnimationForBarChart(websiteViewsChart);
     }
   },
 
-  showNotification: function(from, align) {
+  showNotification: function (from, align) {
     type = ['', 'info', 'danger', 'success', 'warning', 'primary'];
 
     color = Math.floor((Math.random() * 5) + 1);
@@ -292,7 +323,7 @@ md = {
     });
   },
 
-  checkScrollForTransparentNavbar: debounce(function() {
+  checkScrollForTransparentNavbar: debounce(function () {
     if ($(document).scrollTop() > 260) {
       if (transparent) {
         transparent = false;
@@ -306,7 +337,7 @@ md = {
     }
   }, 17),
 
-  initRightMenu: debounce(function() {
+  initRightMenu: debounce(function () {
 
     $sidebar_wrapper = $('.sidebar-wrapper');
 
@@ -330,7 +361,7 @@ md = {
       $nav_content.insertBefore($sidebar_nav);
       $navbar_form.insertBefore($nav_content);
 
-      $(".sidebar-wrapper .dropdown .dropdown-menu > li > a").click(function(event) {
+      $(".sidebar-wrapper .dropdown .dropdown-menu > li > a").click(function (event) {
         event.stopPropagation();
 
       });
@@ -350,8 +381,8 @@ md = {
     }
   }, 200),
 
-  startAnimationForLineChart: function(chart) {
-    chart.on('draw', function(data) {
+  startAnimationForLineChart: function (chart) {
+    chart.on('draw', function (data) {
       if ((data.type === 'line' || data.type === 'area') && window.matchMedia("(min-width: 900px)").matches) {
         data.element.animate({
           d: {
@@ -380,8 +411,8 @@ md = {
     seq = 0;
 
   },
-  startAnimationForBarChart: function(chart) {
-    chart.on('draw', function(data) {
+  startAnimationForBarChart: function (chart) {
+    chart.on('draw', function (data) {
       if (data.type === 'bar' && window.matchMedia("(min-width: 900px)").matches) {
         seq2++;
         data.element.animate({
@@ -409,11 +440,11 @@ md = {
 
 function debounce(func, wait, immediate) {
   var timeout;
-  return function() {
+  return function () {
     var context = this,
       args = arguments;
     clearTimeout(timeout);
-    timeout = setTimeout(function() {
+    timeout = setTimeout(function () {
       timeout = null;
       if (!immediate) func.apply(context, args);
     }, wait);

@@ -20,7 +20,7 @@
 
   <link rel="stylesheet" href="/css/magnific-popup.css">
   <link rel="stylesheet" href="/css/animate.min.css">
-
+  <link rel="stylesheet" href="/css/basket.css">
   <style>
     .nav-bar-nav a {
       color: #fff !important;
@@ -35,7 +35,7 @@
 </head>
 
 <body>
-<?php include("../partials/fixed-quoting.html"); ?>
+  <?php include("../partials/fixed-quoting.html"); ?>
   <div style="background-color: black; height: 81px;"></div>
   <?php include("../partials/header_1.html"); ?>
   <div class="wall-loading">
@@ -210,6 +210,7 @@
     </div>
   </div>
   <div style="height:60px"></div>
+  <?php include("../partials/basket.html"); ?>
   <?php include("../partials/footer.html"); ?>
 
   <script src="/js/jquery.magnific-popup.min.js"></script>

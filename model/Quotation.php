@@ -1,16 +1,110 @@
 <?php
-class quotation
+class Quotation implements JsonSerializable
 {
   private $nameClient;
   private $lastNameClient;
   private $company;
   private $address;
-  private $country;
+  private $city;
   private $items;
   private $email;
   private $phoneNumber;
   private $cellphoneNumber;
+  private $extraInformation;
+  private $id;
+  private $file;
+  private $idClient;
+  private $solved;
+  private $dateSolved;
+  private $idAdminSolved;
+  private $createdAt;
 
+  public function __construct()
+  {
+    $this->company = null;
+    $this->phoneNumber = null;
+    $this->extraInformation = null;
+    $this->file = null;
+    $this->dateSolved = '0-0-0';
+    $this->idAdminSolved = 0;
+  }
+
+  public function getIdAdminSolved()
+  {
+    return $this->idAdminSolved;
+  }
+
+  public function setIdAdminSolved($idAdminSolved)
+  {
+    $this->idAdminSolved = $idAdminSolved;
+  }
+
+  public function getDateSolved()
+  {
+    return $this->dateSolved;
+  }
+
+  public function setDateSolved($dateSolved)
+  {
+    $this->dateSolved = $dateSolved;
+  }
+
+  public function getCreatedAt()
+  {
+    return $this->createdAt;
+  }
+
+  public function setCreatedAt($createdAt)
+  {
+    $this->createdAt = $createdAt;
+  }
+
+  public function setSolved($solved)
+  {
+    $this->solved = $solved;
+  }
+
+  public function  isSolved()
+  {
+    return $this->solved;
+  }
+
+  public function getIdClient()
+  {
+    return $this->idClient;
+  }
+
+  public function setIdClient($idClient)
+  {
+    $this->idClient = $idClient;
+  }
+
+  public function getFile()
+  {
+    return $this->file;
+  }
+
+  public function setFile($file)
+  {
+    $this->file = $file;
+  }
+
+  public function getId()
+  {
+    return $this->id;
+  }
+  public function setId($id)
+  {
+    $this->id = $id;
+  }
+  public function getExtraInformation()
+  {
+    return $this->extraInformation;
+  }
+  public function setExtraInformation($extraInformation)
+  {
+    $this->extraInformation = $extraInformation;
+  }
   public function getNameClient()
   {
     return $this->nameClient;
@@ -51,14 +145,14 @@ class quotation
     $this->address = $address;
   }
 
-  public function getCountry()
+  public function getCity()
   {
-    return $this->country;
+    return $this->city;
   }
 
-  public function setCountry($country)
+  public function setCity($city)
   {
-    $this->country = $country;
+    $this->city = $city;
   }
 
   public function getItems()
@@ -103,14 +197,47 @@ class quotation
 
   public function addItem($item)
   {
-    array_push($this->items, $item);
+    $flag = false;
+    foreach ($this->items as $itemArray) {
+      if ($itemArray->isEqual($item)) {
+        $itemArray->setQuantity($itemArray->getQuantity() + $item->getQuantity());
+        $flag = true;
+      }
+    }
+    if (!$flag) {
+      array_push($this->items, $item);
+    }
   }
 
-  public function removeItem($item)
+  public function searchItem($idItem)
   {
-    $index = array_search($item, $this->items);
+    foreach ($this->items as $key => $item) {
+      if ($item->getId() == $idItem) {
+        return $key;
+      }
+    }
+  }
+  public function removeItem($idItem)
+  {
+    $index = $this->searchItem($idItem);
     if ($index !== false) {
       unset($this->items[$index]);
+      var_dump($this->items);
+      return true;
+    } else {
+      return false;
     }
+  }
+  public function calculateTotal()
+  {
+    $total = 0;
+    foreach ($this->items as $item) {
+      $total += $item->calculateTotal();
+    }
+    return $total;
+  }
+  public function jsonSerialize()
+  {
+    return get_object_vars($this);
   }
 }

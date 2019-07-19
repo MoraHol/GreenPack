@@ -21,6 +21,11 @@ $materials = $materialDao->findAll();
   <link rel="stylesheet" href="/css/all.min.css">
   <!-- Page level plugin CSS-->
   <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <style>
+    td.highlight {
+      background-color: whitesmoke !important;
+    }
+  </style>
 </head>
 
 <body class="white-edition">
@@ -35,16 +40,16 @@ $materials = $materialDao->findAll();
             <li class="breadcrumb-item">
               <a href="#">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active">Productos</li>
+            <li class="breadcrumb-item active">Materiales</li>
           </ol>
           <!-- DataTables Example -->
           <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-table"></i>
-              Productos Ofertados</div>
+              Materiales Ofertados</div>
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table row-border table-bordered hover" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th class="text-center">Nombre</th>
@@ -104,7 +109,7 @@ $materials = $materialDao->findAll();
     <script>
       // Call the dataTables jQuery plugin
       $(document).ready(function() {
-        $('#dataTable').DataTable({
+        let table = $('#dataTable').DataTable({
           "language": {
             "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ registros",
@@ -131,6 +136,13 @@ $materials = $materialDao->findAll();
 
           }
         })
+        $('#dataTable tbody')
+          .on('mouseenter', 'td', function() {
+            var colIdx = table.cell(this).index().column;
+
+            $(table.cells().nodes()).removeClass('highlight');
+            $(table.column(colIdx).nodes()).addClass('highlight');
+          });
       })
     </script>
     <!-- Modal  delete Material-->
@@ -157,7 +169,9 @@ $materials = $materialDao->findAll();
     </div>
     <script>
       $(() => {
-        $('.money').formatCurrency({region: 'es-CO'})
+        $('.money').formatCurrency({
+          region: 'es-CO'
+        })
         $('.sidebar div.sidebar-wrapper ul.nav li:first').removeClass('active')
         $('#material-item').addClass('active')
       })

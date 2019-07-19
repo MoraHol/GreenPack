@@ -15,7 +15,6 @@ $product = $productDao->findById($_GET["id"]);
   <?php include("../partials/metaproperties.html") ?>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script src="/js/jquery-1.11.0.min.js"></script>
   <title><?php echo $product->getName(); ?> | Greenpack</title>
   <!--============= CSS ======================== -->
 
@@ -37,19 +36,9 @@ $product = $productDao->findById($_GET["id"]);
   <link rel="stylesheet" href="/css/flexslider.css">
   <link rel="stylesheet" href="/css/nice-select/nice-select.css">
   <link rel="stylesheet" href="/css/style-product.css">
-
-  <!-- basket -->
-  <link rel="stylesheet" type="text/css" href="/css/shopping_car.css">
-  <link rel="stylesheet" type="text/css" href="/css/products-basket.css">
-  <link rel="stylesheet" type="text/css" href="/css/carousel-stores.css">
-  <!--  -->
-  <link rel="stylesheet" type="text/css" href="/css/products.css">
-  <!--  -->
-  <link rel="stylesheet" type="text/css" href="/css/stores.css">
-  <link rel="stylesheet" type="text/css" href="/css/index-page.css">
+  <link rel="stylesheet" href="/css/basket.css">
 
 
-  
   <!--===================== JS ================-->
   <script src="/js/jquery.flexslider.js"></script>
   <script src="/js/spinner.js"></script>
@@ -59,17 +48,6 @@ $product = $productDao->findById($_GET["id"]);
   <script src="/js/jquery.easing.1.3.js"></script>
 
 
-  <script>
-    $(window).load(function() {
-      $('.flexslider').flexslider({
-        animation: "slide",
-        controlNav: false,
-        directionNav: true,
-        prevText: "prev",
-        nextText: "next"
-      });
-    });
-  </script>
 </head>
 
 <body>
@@ -139,7 +117,7 @@ $product = $productDao->findById($_GET["id"]);
                   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion-cotizador">
                     <div class="card-body">
                       <?php foreach ($product->getMaterials() as $material) { ?>
-                        <label class="radio-inline" style="margin-left: 10px;"><input type="radio" name="material"><?php echo $material->getName(); ?></label>
+                        <label class="radio-inline" style="margin-left: 10px;"><input type="radio" name="material" value="<?php echo $material->getId(); ?>"><?php echo $material->getName(); ?></label>
                       <?php
                       } ?>
                     </div>
@@ -339,7 +317,7 @@ $product = $productDao->findById($_GET["id"]);
               <div class="card-body">
                 <p><?php echo $productInstance->getCategory()->getName(); ?></p>
                 <h4 class="card-product__title"><a href="#"><?php echo $productInstance->getName(); ?></a></h4>
-                <p class="card-product__price">$<?php echo $productInstance->getPrice(); ?></p>
+                <!-- <p class="card-product__price">$<?php echo $productInstance->getPrice(); ?></p> -->
               </div>
             </div>
           </div>
@@ -361,6 +339,15 @@ $product = $productDao->findById($_GET["id"]);
   <script src="/js/spinner.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="/js/bootstrap.min.js"></script>
+
+  <script>
+    $(window).load(function() {
+      $('.flexslider').flexslider({
+        animation: "slide",
+        controlNav: false
+      })
+    })
+  </script>
   <script>
     function toggleIcon(e) {
       $(e.target)
@@ -449,6 +436,38 @@ $product = $productDao->findById($_GET["id"]);
         $('#btnCotizar').addClass("disabled")
       } else {
         $('#btnCotizar').removeClass("disabled")
+      }
+    })
+    // agregar un producto al carrito
+    $('#btnCotizar').click(() => {
+      let $printing = $('#checkboxPrinting').prop('checked')
+      let $width = $('#width').val()
+      let $height = $('#height').val()
+      let $length = $('#length').val()
+      let $material = $("input[name='material']:checked").val();
+      let $quantity = $('#sst').val()
+      if ($width != null && $height != null && $length != null && $material != undefined && $quantity > 999) {
+        $.post('api/add_item.php', {
+          idProduct: `<?php echo $product->getId(); ?>`,
+          width: $width,
+          height: $height,
+          length: $length,
+          material: $material,
+          quantity: $quantity,
+          printing: $printing
+        }, (data, status) => {
+          if (status == 'success') {
+            renderCart()
+            showCart()
+          }
+        })
+      } else {
+        if ($width == null || $height == null || $length == null) {
+          alert('Seleccione medidas')
+        }
+        if ($material == undefined) {
+          alert('Seleccione un material')
+        }
       }
     })
   </script>
