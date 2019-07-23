@@ -91,17 +91,40 @@ $product = $productDao->findById($_GET["id"]);
                   <div class="card-header" id="headingOne">
                     <h2 class="mb-0 panel-title">
                       <a class="btn btn-link text-left" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        <i class="more-less fas fa-minus"></i>Impresión
+                        <i class="more-less fas fa-minus"></i>Caracteristicas
                       </a>
                     </h2>
                   </div>
                   <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion-cotizador">
                     <div class="card-body">
-                      <label class="switch">
-                        <input type="checkbox" id="checkboxPrinting">
-                        <span class="slider round"></span>
-                        <span id="questionPrinting">NO</span>
-                      </label>
+                      <div class="row">
+                        <div class="col">
+                          <span>impresión:</span>
+                          <br>
+                          <label class="switch">
+                            <input type="checkbox" class="checkboxPrinting" id="impresion">
+                            <span class="slider round"></span>
+                            <span class="questionPrinting">NO</span>
+                          </label></div>
+                        <div class="col">
+                          <span>Ventanilla:</span>
+                          <br>
+                          <label class="switch">
+                            <input type="checkbox" class="checkboxPrinting" id="ventanilla">
+                            <span class="slider round"></span>
+                            <span class="questionPrinting">NO</span>
+                          </label>
+                        </div>
+                        <div class="col">
+                          <span>Laminada:</span>
+                          <br>
+                          <label class="switch">
+                            <input type="checkbox" class="checkboxPrinting" id="laminada">
+                            <span class="slider round"></span>
+                            <span class="questionPrinting">NO</span>
+                          </label>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -317,7 +340,6 @@ $product = $productDao->findById($_GET["id"]);
               <div class="card-body">
                 <p><?php echo $productInstance->getCategory()->getName(); ?></p>
                 <h4 class="card-product__title"><a href="#"><?php echo $productInstance->getName(); ?></a></h4>
-                <!-- <p class="card-product__price">$<?php echo $productInstance->getPrice(); ?></p> -->
               </div>
             </div>
           </div>
@@ -415,11 +437,14 @@ $product = $productDao->findById($_GET["id"]);
       })
       $('#length').prop("disabled", false)
     }
-    $('#checkboxPrinting').change(function() {
+
+
+    $('.checkboxPrinting').change(function() {
       if ($(this).prop('checked')) {
-        $('#questionPrinting').html('SI')
+        $(this).siblings('.questionPrinting').html('SI')
+        console.log($(this).siblings('.questionPrinting'))
       } else {
-        $('#questionPrinting').html('NO')
+        $(this).siblings('.questionPrinting').html('NO')
       }
     })
   </script>
@@ -440,7 +465,9 @@ $product = $productDao->findById($_GET["id"]);
     })
     // agregar un producto al carrito
     $('#btnCotizar').click(() => {
-      let $printing = $('#checkboxPrinting').prop('checked')
+      let $printing = $('#impresion').prop('checked')
+      let $laminada = $('#laminada').prop('checked')
+      let $ventanilla = $('#ventanilla').prop('checked')
       let $width = $('#width').val()
       let $height = $('#height').val()
       let $length = $('#length').val()
@@ -454,7 +481,9 @@ $product = $productDao->findById($_GET["id"]);
           length: $length,
           material: $material,
           quantity: $quantity,
-          printing: $printing
+          printing: $printing,
+          lam: $laminada,
+          window: $ventanilla
         }, (data, status) => {
           if (status == 'success') {
             renderCart()

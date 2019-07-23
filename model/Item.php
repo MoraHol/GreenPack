@@ -1,5 +1,9 @@
 <?php
-class Item implements JsonSerializable
+require_once __DIR__ . "/material.php";
+require_once __DIR__ . "/measurement.php";
+require_once __DIR__ . "/product.php";
+
+abstract class Item implements JsonSerializable
 {
   private $product;
   private $quantity;
@@ -8,10 +12,32 @@ class Item implements JsonSerializable
   private $measurement;
   private $id;
   private $price;
+  private $pla;
+  private $lam;
 
   public function __construct()
   {
     $this->id = bin2hex(openssl_random_pseudo_bytes(256));
+  }
+
+  public function isPla()
+  {
+    return $this->pla;
+  }
+
+  public function setPla($pla)
+  {
+    $this->pla = $pla;
+  }
+
+  public function isLam()
+  {
+    return $this->lam;
+  }
+
+  public function setLam($lam)
+  {
+    $this->lam = $lam;
   }
 
   public function getPrice()
@@ -88,6 +114,7 @@ class Item implements JsonSerializable
     if (
       $this->printing == $item->isPrinting() && $this->measurement == $item->getMeasurement()
       && $this->product == $item->getProduct() && $this->material == $item->getMaterial()
+      && $this->pla == $item->isPla() && $this->lam == $item->isLam()
     ) {
       return true;
     } else {
@@ -98,30 +125,10 @@ class Item implements JsonSerializable
   {
     return (int) $this->price * (int) $this->quantity;
   }
-  public function calculatePrice()
-  {
-    $LongUseful = $this->measurement->getLength() - 3;
-    $AT = (($this->measurement->getWidth() + $this->measurement->getHeight()) * 2) + 2;
-    $V = $this->measurement->getWidth() - 6;
-    $PAPER = ($AT * $this->measurement->getLength() * $this->material->getGrammage()) / 10000000;
-    $PLA = ((($V + 3) * $this->measurement->getLength()) * 30) / 10000000;
-    $LAM = ($AT * $this->measurement->getLength() * 30) / 1000000;
-    $directCost = $PAPER * $this->material->getPricePerKg();
-    if ($this->quantity < 2000) {
-      $this->price = $directCost * 3.5;
-    }
-    if ($this->quantity > 20000 &&  $this->quantity < 60000) {
-      $this->price = $directCost * 3;
-    }
-    if ($this->quantity > 60000 &&  $this->quantity < 100000) {
-      $this->price = $directCost * 2.8;
-    }
-    if ($this->quantity > 100000 &&  $this->quantity < 1000000) {
-      $this->price = $directCost * 2.3;
-    } else {
-      $this->price = $directCost * 2.3;
-    }
-  }
+  abstract public function calculatePrice();
+  // {
+
+  // }
   public function jsonSerialize()
   {
     return get_object_vars($this);

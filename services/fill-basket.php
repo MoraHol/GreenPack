@@ -1,6 +1,8 @@
 <?php
 require_once(dirname(__DIR__) . "/model/Quotation.php");
 require_once(dirname(__DIR__) . "/model/Item.php");
+require_once(dirname(__DIR__) . "/model/ItemBox.php");
+require_once(dirname(__DIR__) . "/model/ItemBag.php");
 require_once(dirname(__DIR__) . "/model/Category.php");
 require_once(dirname(__DIR__) . "/model/product.php");
 require_once(dirname(__DIR__) . "/model/measurement.php");

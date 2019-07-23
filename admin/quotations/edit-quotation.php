@@ -108,6 +108,8 @@ $quotation = $quotationDao->findById($_GET["id"]);
                     <h5><?= $item->getProduct()->getName() ?></h5>
                     <br>
                     <p><span class="text-primary">Impresion:</span> <?= $item->isPrinting() ? "SI" : "NO" ?></p>
+                    <p><span class="text-primary">Con ventanilla:</span> <?= $item->isPla() ? "SI" : "NO" ?></p>
+                    <p><span class="text-primary">Laminada:</span> <?= $item->isLam() ? "SI" : "NO" ?></p>
                     <p><span class="text-primary">Material:</span> <?= $item->getMaterial()->getName() ?></p>
                     <p><span class="text-primary">Medidas:</span></p>
                     <p>
@@ -137,6 +139,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
             <div class="row" style="margin-bottom: 20px; margin-top: 20px;">
               <div class="col text-center"><a class="btn btn-danger btn-lg" href="/admin/quotations/#no-solved"><i class="material-icons">arrow_back</i> Regresar</a></div>
               <div class="col text-center"><button onclick="update()" class="btn btn-info btn-lg"><i class="material-icons md-48">update</i> Actualizar</button></div>
+              <div class="col text-center"><button onclick="recalculate()" class="btn btn-info btn-lg"><i class="material-icons">trending_up</i> Calcular Precios</button></div>
               <div class="col text-center"><button onclick="send()" class="btn btn-primary btn-lg"><i class="material-icons">email</i> Enviar Cotización</button></div>
             </div>
           </div>
@@ -201,6 +204,17 @@ $quotation = $quotationDao->findById($_GET["id"]);
     function viewPdf(id) {
       $('#load_pdf').html('')
       $('#load_pdf').append(`<embed  src="/services/view-quotation.php?id=${id}#toolbar=0&navpanes=0&scrollbar=0&statusbar=0%zoom=20" type="application/pdf" width="100%" height="600px" />`)
+    }
+
+    function recalculate() {
+      $.post('api/recalculate_prices.php', {
+          id: `<?= $_GET["id"]; ?>`
+        },
+        (data, status) => {
+          if (status == 'success') {
+            location.reload()
+          }
+        })
     }
 
     function send() {

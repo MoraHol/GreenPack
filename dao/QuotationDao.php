@@ -1,6 +1,7 @@
 <?php
 require_once dirname(__DIR__) . "/model/Quotation.php";
 require_once dirname(__DIR__) . "/model/Item.php";
+require_once dirname(__DIR__) . "/model/ItemBag.php";
 require_once dirname(__DIR__) . "/db/DBOperator.php";
 require_once dirname(__DIR__) . "/db/env.php";
 require_once dirname(__DIR__) . "/dao/MeasurementDao.php";
@@ -31,10 +32,10 @@ class QuotationDao
     $quotation->setId($idQuotation);
     // Insert Items
     foreach ($quotation->getItems() as $item) {
-      $query = "INSERT INTO `quotations_details` (`id_quotations_details`, `products_id_products`, `quantity`, `printed`, `price`, `material_id`, `measurement_id`, `quotations_id_quotations`) VALUES (NULL, '" . $item->getProduct()->getId() . "', '" . $item->getQuantity() . "', '" . (int) $item->isPrinting() . "', '" . $item->getPrice() . "', '" . $item->getMaterial()->getId() . "', '" . $item->getMeasurement()->getId() . "', '" . $quotation->getId() . "')";
+      $query = "INSERT INTO `quotations_details` (`id_quotations_details`, `products_id_products`, `quantity`, `printed`, `price`, `material_id`, `measurement_id`, `quotations_id_quotations`,`laminated`,`pla`) VALUES (NULL, '" . $item->getProduct()->getId() . "', '" . $item->getQuantity() . "', '" . (int) $item->isPrinting() . "', '" . $item->getPrice() . "', '" . $item->getMaterial()->getId() . "', '" . $item->getMeasurement()->getId() . "', '" . $quotation->getId() . "','" . (int) $item->isLam() . "','" . (int) $item->isPla() . "')";
       $this->db->consult($query);
     }
-    $this->close();
+    $this->db->close();
   }
   function delete($id)
   { }
@@ -82,14 +83,21 @@ class QuotationDao
     // cargado de cada uno de los items
     $itemsDB = $this->db->consult("SELECT * FROM quotations_details WHERE `quotations_id_quotations` = $id", "yes");
     foreach ($itemsDB as $itemDB) {
-      $item = new Item();
+      $product = $this->productDao->findById($itemDB["products_id_products"]);
+      if ($product->getCategory()->getName() == 'bolsas') {
+        $item = new ItemBag();
+      } else {
+        $item = new ItemBox();
+      }
       $item->setId($itemDB["id_quotations_details"]);
-      $item->setProduct($this->productDao->findById($itemDB["products_id_products"]));
+      $item->setProduct($product);
       $item->setMaterial($this->materialDao->findById($itemDB["material_id"]));
       $item->setMeasurement($this->measurementDao->findById($itemDB["measurement_id"]));
       $item->setQuantity((int) $itemDB["quantity"]);
       $item->setPrice((int) $itemDB["price"]);
       $item->setPrinting(filter_var($itemDB["printed"], FILTER_VALIDATE_BOOLEAN));
+      $item->setLam(filter_var($itemDB["laminated"], FILTER_VALIDATE_BOOLEAN));
+      $item->setPla(filter_var($itemDB["pla"], FILTER_VALIDATE_BOOLEAN));
       array_push($items, $item);
     }
     $quotation->setItems($items);

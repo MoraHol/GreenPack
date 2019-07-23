@@ -246,8 +246,8 @@ md = {
             startAngle: 270,
             showLabel: true,
             labelInterpolationFnc: function (value) {
-              if (value == 0) {
-                return 0
+              if (value === 0 || total === 0) {
+                return value
               } else {
                 return Math.round(value / total * 100) + '%'
               }
@@ -255,8 +255,9 @@ md = {
             }
           }
           if (total <= 0) {
-            dataCompletedTasksChart.series = [0]
+            dataCompletedTasksChart.series = [1]
           }
+
           var completedTasksChart = new Chartist.Pie('#completedTasksChart', dataCompletedTasksChart, optionsCompletedTasksChart);
 
           // start animation for the Completed Tasks Chart - Line Chart

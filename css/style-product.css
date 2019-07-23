@@ -15,7 +15,7 @@
         float: left;
     }
 
-    #questionPrinting {
+    .questionPrinting {
         position: relative;
         left: 66px;
         top: 7px;
