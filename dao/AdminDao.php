@@ -71,7 +71,7 @@ class AdminDao
   function update($admin)
   {
     $this->db->connect();
-    $query = "UPDATE `admins` SET `name` = '" . $admin->getName() . "', `last_name` = '" . $admin->getLastName() . "', `password` = '" . $admin->getPassword() . "', `token_password` = '" . $admin->getTokenPass() . "' WHERE `admins`.`id_admins` = " . $admin->getId();
+    $query = "UPDATE `admins` SET `name` = '" . $admin->getName() . "', `last_name` = '" . $admin->getLastName() . "', `password` = '" . $admin->getPassword() . "', `token_password` = '" . $admin->getTokenPass() . "', `id_role` = '" . $admin->getRole() . "' WHERE `admins`.`id_admins` = " . $admin->getId();
     $status = $this->db->consult($query);
     $this->db->close();
     return $status;

@@ -11,6 +11,7 @@ if (isset($_POST["id"])) {
 if (isset($_POST["name"]) && isset($_POST["lastName"])) {
   $admin->setName($_POST["name"]);
   $admin->setLastName($_POST["lastName"]);
+  $admin->setRole($_POST["idAdmin"]);
   if (isset($_POST["password"])) {
     $admin->setPassword(hash("sha256", $_POST["password"]));
   }

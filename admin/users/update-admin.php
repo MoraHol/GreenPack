@@ -1,11 +1,12 @@
 <!-- author: Alexis Holguin, github: MoraHol -->
+
 <?php
-require_once dirname(dirname(__DIR__)) . "/dao/AdminDao.php";
-$adminDao = new AdminDao();
-if (isset($_GET["id"])) {
-  $admin = $adminDao->findById($_GET["id"]);
-}
+require_once dirname(dirname(__DIR__)) . "/db/DBOperator.php";
+require_once dirname(dirname(__DIR__)) . "/db/env.php";
+$db = new DBOperator($_ENV["db_host"], $_ENV["db_user"], $_ENV["db_name"], $_ENV["db_pass"]);
+$roles = $db->consult("SELECT * FROM `roles_admin`", "yes");
 ?>
+
 <!doctype html>
 <html lang="es">
 
@@ -27,6 +28,7 @@ if (isset($_GET["id"])) {
 
 <body class="white-edition">
   <div class="wrapper ">
+
     <?php include("../partials/sidebar.php"); ?>
     <div class="main-panel">
       <?php include("../partials/navbar.php");  ?>
@@ -40,6 +42,13 @@ if (isset($_GET["id"])) {
             <li class="breadcrumb-item"><a href="/admin/materials">Usuarios</a></li>
             <li class="breadcrumb-item active">Actualizar Usuario</li>
           </ol>
+          <?php
+          require_once dirname(dirname(__DIR__)) . "/dao/AdminDao.php";
+          $adminDao = new AdminDao();
+          if (isset($_GET["id"])) {
+            $admin = $adminDao->findById($_GET["id"]);
+          }
+          ?>
           <div class="container">
             <form id="form-creator">
               <div class="row">
@@ -60,7 +69,7 @@ if (isset($_GET["id"])) {
               </div>
               <br>
               <div class="row">
-                <div class="col-sm-7">
+                <div class="col-sm-5">
                   <div class="form-group">
                     <label for="email">Correo :</label>
                     <br>
@@ -74,6 +83,18 @@ if (isset($_GET["id"])) {
                     <br>
                     <input type="password" id="passwordUser" placeholder="Ej: ******" class="form-control" aria-describedby="passwordHelp">
                     <small id="passwordHelp" class="form-text text-muted">Dejarlo en blanco en caso de no querer cambiar la contraseña.</small>
+                  </div>
+                </div>
+                <div class="col-sm-2">
+                  <div class="form-group">
+                    <label for="passwordUser">Rol:</label>
+                    <br>
+                    <select class="form-control" id="role">
+                      <?php foreach ($roles as $role) { ?>
+
+                        <option value="<?= $role["id_role"] ?>" <?= $admin->getRole() == $role["id_role"] ? "selected" : "" ?>><?= $role["name"] ?></option>
+                      <?php } ?>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -123,6 +144,7 @@ if (isset($_GET["id"])) {
     function ajaxWithPass() {
       $.post('api/update_admin.php', {
         id: `<?php echo $_GET["id"]; ?>`,
+        idAdmin: $('#role').val(),
         name: $('#nameUser').val(),
         lastName: $('#lastNameUser').val(),
         password: $('#passwordUser').val()
@@ -150,6 +172,7 @@ if (isset($_GET["id"])) {
     function ajaxWithoutPass() {
       $.post('api/update_admin.php', {
         id: `<?php echo $_GET["id"]; ?>`,
+        idAdmin: $('#role').val(),
         name: $('#nameUser').val(),
         lastName: $('#lastNameUser').val()
       }, (data, status) => {
