@@ -142,7 +142,7 @@ $materials = $materialDao->findAll();
 
 <body class="white-edition" id="body">
   <div class="wrapper ">
-    <?php include("../partials/sidebar.html") ?>
+    <?php include("../partials/sidebar.php") ?>
     <div id="main-panel">
       <div class="main-panel" id="main-panel-child">
         <!-- Navbar -->
@@ -178,8 +178,8 @@ $materials = $materialDao->findAll();
               </div>
               <div class="col">
                 <div class="form-group">
-                  <label for="price">Escriba el precio del producto:</label>
-                  <input type="number" placeholder="Ej. 2000" id="price" class="form-control" value="<?php echo $product->getPrice(); ?>">
+                  <label for="price">Escriba el Gramaje del producto:</label>
+                  <input type="number" placeholder="Ej. 40" id="price" class="form-control" value="<?php echo $product->getPrice(); ?>">
                 </div>
               </div>
             </div>
@@ -263,6 +263,7 @@ $materials = $materialDao->findAll();
                       <div class="col"><label for="width<?php echo $indexMeasurement ?>">Ancho:</label><input type="number" id="width<?php echo $indexMeasurement ?>" class="form-control" value="<?php echo $measurement->getWidth(); ?>" readonly></div>
                       <div class="col"><label for="height<?php echo $indexMeasurement ?>">Alto:</label><input type="number" id="height<?php echo $indexMeasurement ?>" class="form-control" value="<?php echo $measurement->getHeight(); ?>" readonly></div>
                       <div class="col"><label for="lenght<?php echo $indexMeasurement ?>">Largo:</label><input type="number" id="lenght<?php echo $indexMeasurement ?>" class="form-control" value="<?php echo $measurement->getLength(); ?>" readonly></div>
+                      <div class="col"><label for="window<?php echo $indexMeasurement ?>">Ventana:</label><input type="number" id="window<?php echo $indexMeasurement ?>" class="form-control" value="<?php echo $measurement->getWindow(); ?>" readonly></div>
                       <div class="col-sm-2"><button class="btn btn-danger" onclick="deleteMeasurement(<?php echo $product->getId() ?>,<?php echo $measurement->getId() ?>)">Eliminar</button></div>
                     </div>
                   </li>
@@ -517,8 +518,11 @@ $materials = $materialDao->findAll();
               measurement.width = $('#width' + (index + 1)).val()
               measurement.height = $('#height' + (index + 1)).val()
               measurement.lenght = $('#lenght' + (index + 1)).val()
+              measurement.window = $('#window' + (index + 1)).val()
               if (typeof($('#width' + (index + 1)).val()) != 'undefinded' && $('#width' + (index + 1)).val() != '' &&
-                typeof($('#height' + (index + 1)).val()) != 'undefined' && $('#height' + (index + 1)).val() != '' && typeof($('#lenght' + (index + 1)).val()) != 'undefined' && $('#lenght' + (index + 1)).val() != '') {
+                typeof($('#height' + (index + 1)).val()) != 'undefined' && $('#height' + (index + 1)).val() != '' &&
+                typeof($('#lenght' + (index + 1)).val()) != 'undefined' && $('#lenght' + (index + 1)).val() != '' &&
+                $('#window' + (index + 1)).val() != undefined) {
                 measurements.push(measurement)
               }
             }
@@ -605,7 +609,8 @@ $materials = $materialDao->findAll();
         $('#measurements').append(`<li>Medida ${indexMeasurement}:<div class="row">
                       <div class="col"><label for="width${indexMeasurement}">Ancho:</label><input type="number" id="width${indexMeasurement}" class="form-control"></div>
                       <div class="col"><label for="height${indexMeasurement}">Alto:</label><input type="number" id="height${indexMeasurement}" class="form-control"></div>
-                      <div class="col"><label for="lenght${indexMeasurement}">Largo:</label><input type="number" id="lenght${indexMeasurement}" class="form-control"</div>
+                      <div class="col"><label for="lenght${indexMeasurement}">Largo:</label><input type="number" id="lenght${indexMeasurement}" class="form-control"></div>
+                      <div class="col"><label for="window${indexMeasurement}">Ventana:</label><input type="number" id="window${indexMeasurement}" class="form-control"></div>
                     </div></li>`)
       }
 
@@ -614,7 +619,7 @@ $materials = $materialDao->findAll();
         $('#materials').append(`<li><select class="wide" style="margin-bottom: 10px;" id="material${indexMaterial}"><option disabled selected>Seleccione un material</option>
                       <?php
                       foreach ($materials as  $material) { ?>
-                                                              <option value="<?php echo $material->getId(); ?>"><?php echo $material->getName(); ?></option>
+                                                                <option value="<?php echo $material->getId(); ?>"><?php echo $material->getName(); ?></option>
                       <?php }
                       ?>
                     </select></li>`)
@@ -625,7 +630,7 @@ $materials = $materialDao->findAll();
     </script>
     <script>
       $('#btnUploadExcel').click(() => {
-        $('#uploadExcel').append('<div id="uploadFileExcel" class="dropzone"></div>')
+        $('#uploadExcel').html('<div id="uploadFileExcel" class="dropzone"></div>')
         DropzoneExcel = new Dropzone("div#uploadFileExcel", {
           url: "/admin/upload-file.php",
           method: 'post',

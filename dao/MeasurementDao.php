@@ -19,13 +19,14 @@ class MeasurementDao
       $measurement->setLength($measurementDB["lenght"]);
       $measurement->setWidth($measurementDB["width"]);
       $measurement->setHeight($measurementDB["height"]);
+      $measurement->setWindow($measurementDB["window"]);
       $measurement->setProduct($product->getId());
       array_push($measurements, $measurement);
     }
     return $measurements;
   }
   function findById($id)
-  { 
+  {
     $this->db->connect();
     $query = "SELECT * FROM `greenpack`.`measurements` WHERE `id_measurements` = $id";
     $measurementDB = $this->db->consult($query, "yes");
@@ -35,6 +36,7 @@ class MeasurementDao
     $measurement->setLength($measurementDB["lenght"]);
     $measurement->setWidth($measurementDB["width"]);
     $measurement->setHeight($measurementDB["height"]);
+    $measurement->setWindow($measurementDB["window"]);
     $measurement->setProduct($measurementDB["products_id_products"]);
     $this->db->close();
     return $measurement;
@@ -42,7 +44,8 @@ class MeasurementDao
   function saveByProduct($measurement)
   {
     $this->db->connect();
-    $query = "INSERT INTO `measurements` (`id_measurements`, `width`, `height`, `lenght`, `products_id_products`) VALUES (NULL, '" . $measurement->getWidth() . "', '" . $measurement->getHeight() . "', '" . $measurement->getLength() . "', '" . $measurement->getProduct() . "')";
+    $query = "INSERT INTO `measurements` (`id_measurements`, `width`, `height`, `lenght`, `products_id_products`, `window`) VALUES (NULL, '" . $measurement->getWidth() . "', '" . $measurement->getHeight() . "', '" . $measurement->getLength() . "', '" . $measurement->getProduct() . "', '" . $measurement->getWindow() . "')";
+    echo $query;
     $status = $this->db->consult($query);
     $this->db->close();
     return $status;
@@ -58,6 +61,7 @@ class MeasurementDao
     $measurement->setLength($measurementDB["lenght"]);
     $measurement->setWidth($measurementDB["width"]);
     $measurement->setHeight($measurementDB["height"]);
+    $measurement->setWindow($measurementDB["window"]);
     $measurement->setProduct($product->getId());
     $this->db->close();
     return $measurement;

@@ -21,6 +21,7 @@ class AdminDao
       $admin->setLastName($adminDB["last_name"]);
       $admin->setPassword($adminDB["password"]);
       $admin->setTokenPass($adminDB["token_password"]);
+      $admin->setRole($adminDB["id_role"]);
       array_push($admins, $admin);
     }
     $this->db->close();
@@ -38,6 +39,7 @@ class AdminDao
     $admin->setLastName($adminDB["last_name"]);
     $admin->setPassword($adminDB["password"]);
     $admin->setTokenPass($adminDB["token_password"]);
+    $admin->setRole($adminDB["id_role"]);
     $this->db->close();
     return $admin;
   }
@@ -54,13 +56,14 @@ class AdminDao
     $admin->setLastName($adminDB["last_name"]);
     $admin->setPassword($adminDB["password"]);
     $admin->setTokenPass($adminDB["token_password"]);
+    $admin->setRole($adminDB["id_role"]);
     $this->db->close();
     return $admin;
   }
   function save($admin)
   {
     $this->db->connect();
-    $query = "INSERT INTO `admins` (`id_admins`, `name`, `last_name`, `email`, `password`, `token_password`) VALUES (NULL, '" . $admin->getName() . "', '" . $admin->getLastName() . "', '" . $admin->getEmail() . "', '" . $admin->getPassword() . "', '" . $admin->getTokenPass() . "')";
+    $query = "INSERT INTO `admins` (`id_admins`, `name`, `last_name`, `email`, `password`, `token_password`,`id_role`) VALUES (NULL, '" . $admin->getName() . "', '" . $admin->getLastName() . "', '" . $admin->getEmail() . "', '" . $admin->getPassword() . "', '" . $admin->getTokenPass() . "','" . $admin->getRole() . "')";
     $status = $this->db->consult($query);
     $this->db->close();
     return $status;

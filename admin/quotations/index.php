@@ -1,7 +1,9 @@
 <!-- author: Alexis Holguin, github: MoraHol -->
 <?php
 require_once dirname(dirname(__DIR__)) . "/dao/QuotationDao.php";
+require_once dirname(dirname(__DIR__)) . "/dao/AdminDao.php";
 $quotationDao = new QuotationDao();
+$adminDao = new AdminDao();
 $quotations = $quotationDao->findAll();
 $quotationsSolved = $quotationDao->findSolved();
 $quotationsNoSolved = $quotationDao->findNoSolved();
@@ -34,7 +36,7 @@ $quotationsNoSolved = $quotationDao->findNoSolved();
 
 <body class="white-edition">
   <div class="wrapper ">
-    <?php include("../partials/sidebar.html"); ?>
+    <?php include("../partials/sidebar.php"); ?>
     <div class="main-panel">
       <?php include("../partials/navbar.php");  ?>
       <div class="content">
@@ -118,19 +120,22 @@ $quotationsNoSolved = $quotationDao->findNoSolved();
                           <th class="text-center">Empresa</th>
                           <th class="text-center">Total de la cotización</th>
                           <th class="text-center">Fecha</th>
+                          <th class="text-center">Vendedor</th>
                           <th class="text-center">Ver Cotizacion</th>
                           <th class="text-center">Editar</th>
                           <th class="text-center">Descargar</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <?php foreach ($quotationsSolved as $quotation) { ?>
+                        <?php foreach ($quotationsSolved as $quotation) {
+                          $admin = $adminDao->findById($quotation->getIdAdminSolved()); ?>
                           <tr>
                             <td><?= $quotation->getNameClient(); ?></td>
                             <td><?= $quotation->getLastNameClient(); ?></td>
                             <td class="text-center"><?= $quotation->getCompany() == "" ? "N/A" : $quotation->getCompany(); ?> </td>
                             <td class="text-center money"><?= $quotation->calculateTotal(); ?></td>
                             <td class="text-center"><?= date("d-m-Y", $quotation->getCreatedAt()); ?></td>
+                            <td class="text-center "><?= $admin->getName(); ?> <?= $admin->getLastName() ?></td>
                             <td class="text-center"><a class="text-center" onclick="viewPdf(`<?= $quotation->getId(); ?>`)" href="#load_pdf" title="Ver Aqui"><i class="material-icons">remove_red_eye</i> <a href="#" onclick="openWindow(`<?= $quotation->getId(); ?>`)" title="Ver en nueva Ventana"><i class="material-icons">featured_video</i></a></td>
                             <td class="text-center"><a href="edit-quotation.php?id=<?= $quotation->getId() ?>"><i class="fas fa-pen"></i></a></td>
                             <td class="text-center"><a class="text-center" target="_blank" href="/services/download-quotation.php?id=<?php echo $quotation->getId(); ?>"><i class="fas fa-fw fa-download"></a></td>

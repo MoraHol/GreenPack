@@ -58,15 +58,15 @@ foreach (json_decode($_POST["materials"]) as  $materialId) {
 $measurements = [];
 foreach (json_decode($_POST["measurements"]) as  $measurementReq) {
   $measurementsByProduct = $measurementDao->findByProduct($product);
-  // var_dump($measurementsByProduct);
   $measurement = new Measurement();
   $measurement->setWidth($measurementReq->width);
   $measurement->setHeight($measurementReq->height);
   $measurement->setLength($measurementReq->lenght);
+  $measurement->setWindow($measurementReq->window);
   $measurement->setProduct($product->getId());
   if (count($measurementsByProduct) <= 0) {
     array_push($measurements, $measurement);
-    $measurementDao->saveByProduct($measurement, $product);
+    $measurementDao->saveByProduct($measurement);
   } else {
     foreach ($measurementsByProduct as $measurementByProduct) {
       echo "comparacion: <br>";
@@ -85,7 +85,7 @@ foreach (json_decode($_POST["measurements"]) as  $measurementReq) {
       }
     }
     if (!$flag) {
-      $measurementDao->saveByProduct($measurement, $product);
+      $measurementDao->saveByProduct($measurement);
     }
   }
 }

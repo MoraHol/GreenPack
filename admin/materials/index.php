@@ -30,7 +30,7 @@ $materials = $materialDao->findAll();
 
 <body class="white-edition">
   <div class="wrapper ">
-    <?php include("../partials/sidebar.html"); ?>
+    <?php include("../partials/sidebar.php"); ?>
     <div class="main-panel">
       <?php include("../partials/navbar.php");  ?>
       <div class="content">

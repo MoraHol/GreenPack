@@ -38,6 +38,7 @@ if (isset($_POST)) {
     $measurement->setWidth($measurementReq->width);
     $measurement->setHeight($measurementReq->height);
     $measurement->setLength($measurementReq->lenght);
+    $measurement->setWindow($measurementReq->window);
     array_push($measurements, $measurement);
   }
   $product->setImages($images);

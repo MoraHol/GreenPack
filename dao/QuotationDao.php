@@ -79,6 +79,7 @@ class QuotationDao
     $quotation->setCreatedAt(strtotime($quotationDB["created_at"]));
     $quotation->setSolved(filter_var($quotationDB["solved"], FILTER_VALIDATE_BOOLEAN));
     $quotation->setId($quotationDB["id_quotations"]);
+    $quotation->setIdAdminSolved($quotationDB["id_admin_solved"]);
     $items = [];
     // cargado de cada uno de los items
     $itemsDB = $this->db->consult("SELECT * FROM quotations_details WHERE `quotations_id_quotations` = $id", "yes");

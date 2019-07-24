@@ -7,11 +7,23 @@ class Admin
   private $email;
   private $password;
   private $tokenPass;
+  private $role;
 
   public function __construct()
   {
     $this->tokenPass = bin2hex(openssl_random_pseudo_bytes(256));
   }
+
+  public function getRole()
+  {
+    return $this->role;
+  }
+
+  public function setRole($role)
+  {
+    $this->role = $role;
+  }
+
   public function getId()
   {
     return $this->id;

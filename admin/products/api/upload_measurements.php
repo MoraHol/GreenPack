@@ -17,9 +17,10 @@ $highestRow = $sheet->getHighestRow();
 $highestColumn = $sheet->getHighestColumn();
 for ($row = 2; $row <= $highestRow; $row++) {
     $measurement = new Measurement();
-    $measurement->setWidth($sheet->getCell("A" . $row)->getValue());
-    $measurement->setHeight($sheet->getCell("B" . $row)->getValue());
-    $measurement->setLength($sheet->getCell("C" . $row)->getValue());
+    $measurement->setWidth((int) $sheet->getCell("A" . $row)->getValue());
+    $measurement->setHeight((int) $sheet->getCell("B" . $row)->getValue());
+    $measurement->setLength((int) $sheet->getCell("C" . $row)->getValue());
+    $measurement->setWindow((int) $sheet->getCell("D" . $row)->getValue());
     $measurement->setProduct($_POST["id"]);
     $measurementDao->saveByProduct($measurement);
 }

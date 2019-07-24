@@ -9,6 +9,7 @@ class Measurement implements JsonSerializable
   private $width;
   private $height;
   private $length;
+  private $window;
   private $product;
 
   public function getId()
@@ -20,6 +21,17 @@ class Measurement implements JsonSerializable
   {
     $this->id = $id;
   }
+
+  public function getWindow()
+  {
+    return $this->window;
+  }
+
+  public function setWindow($window)
+  {
+    $this->window = $window;
+  }
+
 
   public function getWidth()
   {

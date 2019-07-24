@@ -45,7 +45,7 @@
 
 <body class="white-edition">
   <div class="wrapper ">
-    <?php include("../partials/sidebar.html") ?>
+    <?php include("../partials/sidebar.php") ?>
     <div class="main-panel">
       <!-- Navbar -->
       <?php include("../partials/navbar.php"); ?>
@@ -54,7 +54,7 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="index.html">Dashboard</a>
+              <a href="index.hhtmltml">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">Crear una nueva Noticia</li>
           </ol>
@@ -187,12 +187,13 @@
           $('#measurements').append(`<li>Medida ${indexField}:<div class="row">
                   <div class="col"><label for="width${indexMeasurement}">Ancho:</label><input type="number" id="width${indexMeasurement}" class="form-control"></div>
                   <div class="col"><label for="height${indexMeasurement}">Alto:</label><input type="number" id="height${indexMeasurement}" class="form-control"></div>
-                  <div class="col"><label for="lenght${indexMeasurement}">Largo:</label><input type="number" id="lenght${indexMeasurement}" class="form-control"</div>
+                  <div class="col"><label for="lenght${indexMeasurement}">Largo:</label><input type="number" id="lenght${indexMeasurement}" class="form-control"></div>
+                  <div class="col"><label for="window${indexMeasurement}">Ventana:</label><input type="number" id="window${indexMeasurement}" class="form-control"</div>
                 </div></li>`)
           $('#materials').append(`<li><select class="wide" style="margin-bottom: 10px;"><option disabled selected>Seleccione un material</option>
                   <?php
                   foreach ($materials as  $material) { ?>
-                                                                          <option value="<?php echo $material->getId(); ?>"><?php echo $material->getName(); ?></option>
+                                                                                <option value="<?php echo $material->getId(); ?>"><?php echo $material->getName(); ?></option>
                   <?php }
                   ?>
                 </select></li>`)
@@ -210,7 +211,8 @@
           $('#measurements').append(`<li>Medida ${indexMeasurement}:<div class="row">
                   <div class="col"><label for="width${indexMeasurement}">Ancho:</label><input type="number" id="width${indexMeasurement}" class="form-control"></div>
                   <div class="col"><label for="height${indexMeasurement}">Alto:</label><input type="number" id="height${indexMeasurement}" class="form-control"></div>
-                  <div class="col"><label for="lenght${indexMeasurement}">Largo:</label><input type="number" id="lenght${indexMeasurement}" class="form-control"</div>
+                  <div class="col"><label for="lenght${indexMeasurement}">Largo:</label><input type="number" id="lenght${indexMeasurement}" class="form-control"></div>
+                  <div class="col"><label for="window${indexMeasurement}">Ventana:</label><input type="number" id="window${indexMeasurement}" class="form-control"></div>
                 </div></li>`)
         }
 
@@ -218,7 +220,7 @@
           $('#materials').append(`<li><select class="wide" style="margin-bottom: 10px;" ><option disabled selected>Seleccione un material</option>
                   <?php
                   foreach ($materials as  $material) { ?>
-                                                                          <option value="<?php echo $material->getId(); ?>"><?php echo $material->getName(); ?></option>
+                                                                                <option value="<?php echo $material->getId(); ?>"><?php echo $material->getName(); ?></option>
                   <?php }
                   ?>
                 </select></li>`)
@@ -304,8 +306,11 @@
                 measurement.width = $('#width' + (index + 1)).val()
                 measurement.height = $('#height' + (index + 1)).val()
                 measurement.lenght = $('#lenght' + (index + 1)).val()
+                measurement.window = $('#window' + (index + 1)).val()
                 if (typeof($('#width' + (index + 1)).val()) != 'undefinded' && $('#width' + (index + 1)).val() != '' &&
-                  typeof($('#height' + (index + 1)).val()) != 'undefined' && $('#height' + (index + 1)).val() != '' && typeof($('#lenght' + (index + 1)).val()) != 'undefined' && $('#lenght' + (index + 1)).val() != '') {
+                  typeof($('#height' + (index + 1)).val()) != 'undefined' && $('#height' + (index + 1)).val() != '' &&
+                  typeof($('#lenght' + (index + 1)).val()) != 'undefined' && $('#lenght' + (index + 1)).val() != '' &&
+                  $('#window' + (index + 1)).val() != undefined) {
                   measurements.push(measurement)
                 }
               }

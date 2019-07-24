@@ -7,7 +7,7 @@ class ItemBag extends Item implements JsonSerializable
     $pricePLA = 18000;
     $LongUseful = $this->getMeasurement()->getLength() - 3;
     $AT = (($this->getMeasurement()->getWidth() + $this->getMeasurement()->getHeight()) * 2) + 2;
-    $V = $this->getMeasurement()->getWidth() - 6;
+    $V = $this->getMeasurement()->getWindow();
     $PAPER = ($AT * $this->getMeasurement()->getLength() * $this->getMaterial()->getGrammage()) / 10000000;
     $PLA = ((($V + 3) * $this->getMeasurement()->getLength()) * 30) / 10000000;
     $LAM = ($AT * $this->getMeasurement()->getLength() * 30) / 10000000;
