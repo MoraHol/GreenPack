@@ -1,6 +1,18 @@
 <!-- author: Alexis Holguin, github: MoraHol -->
 <!doctype html>
 <html lang="es">
+<?php if (!isset($_SESSION)) {
+  session_start();
+}
+require_once dirname(__DIR__) . "/model/Admin.php";
+$admin = unserialize($_SESSION["admin"]);
+if($admin->getRole() == 3){
+  header("Location: /admin/blog");
+}
+if($admin->getRole() == 1){
+  header("Location: /admin/quotations/");
+}
+?>
 
 <head>
   <title>Dashboard | GreenPack</title>
@@ -23,8 +35,9 @@
       display: flex;
       font-weight: bold;
     }
-    .card-header-secundary{
-      background-color: #e6e6e6fa!important;
+
+    .card-header-secundary {
+      background-color: #e6e6e6fa !important;
     }
   </style>
 </head>

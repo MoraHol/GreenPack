@@ -7,6 +7,7 @@ if (isset($_POST["name"]) && isset($_POST["lastName"]) && isset($_POST["email"])
   $admin->setLastName($_POST["lastName"]);
   $admin->setEmail($_POST["email"]);
   $admin->setPassword(hash("sha256", $_POST["password"]));
+  $admin->setRole($_POST["idAdmin"]);
   if ($adminDao->save($admin) > 0) {
     http_response_code(201);
     exit;

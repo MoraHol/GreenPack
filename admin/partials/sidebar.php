@@ -12,7 +12,10 @@
   <div class="sidebar-wrapper">
     <ul class="nav">
       <?php
-      session_start();
+      if (!isset($_SESSION)) {
+        session_start();
+      }
+      require_once dirname(dirname(__DIR__)) . "/model/Admin.php";
       $admin = unserialize($_SESSION["admin"]);
       if ($admin->getRole() == 2) { ?>
         <li class="nav-item active  ">
@@ -22,7 +25,7 @@
           </a>
         </li>
       <?php } ?>
-      <?php if ($admin->getRole() == 3 && $admin->getRole() == 2) { ?>
+      <?php if ($admin->getRole() == 3 || $admin->getRole() == 2) { ?>
         <li class="nav-item " id="blog-item">
           <a class="nav-link" href="/admin/blog/">
             <i class="material-icons">book</i>
@@ -51,7 +54,7 @@
           </a>
         </li>
       <?php } ?>
-      <?php if ($admin->getRole() == 2 && $admin->getRole() == 1) { ?>
+      <?php if ($admin->getRole() == 2 || $admin->getRole() == 1) { ?>
         <li class="nav-item" id="quotations-item">
           <a href="/admin/quotations/" class="nav-link">
             <i class="fas fa-cart-plus"></i>

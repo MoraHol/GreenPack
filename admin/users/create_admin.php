@@ -1,6 +1,13 @@
 <!-- author: Alexis Holguin, github: MoraHol -->
 <!doctype html>
 <html lang="es">
+<?php
+require_once dirname(dirname(__DIR__)) . "/db/DBOperator.php";
+require_once dirname(dirname(__DIR__)) . "/db/env.php";
+$db = new DBOperator($_ENV["db_host"], $_ENV["db_user"], $_ENV["db_name"], $_ENV["db_pass"]);
+$roles = $db->consult("SELECT * FROM `roles_admin`", "yes");
+
+?>
 
 <head>
   <title>Materiales | GreenPack</title>
@@ -53,7 +60,7 @@
               </div>
               <br>
               <div class="row">
-                <div class="col-sm-7">
+                <div class="col-sm-5">
                   <div class="form-group">
                     <label for="email">Correo :</label>
                     <br>
@@ -65,6 +72,17 @@
                     <label for="passwordUser">Contraseña:</label>
                     <br>
                     <input type="password" required id="passwordUser" placeholder="Ej: ******" class="form-control">
+                  </div>
+                </div>
+                <div class="col-sm-2">
+                  <div class="form-group">
+                    <label for="passwordUser">Rol:</label>
+                    <br>
+                    <select class="form-control" id="role">
+                      <?php foreach ($roles as $role) { ?>
+                        <option value="<?= $role["id_role"] ?>"><?= $role["name"] ?></option>
+                      <?php } ?>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -104,6 +122,7 @@
       $('#form-creator').submit((event) => {
         event.preventDefault()
         $.post('api/create-admin.php', {
+          idAdmin: $('#role').val(),
           name: $('#nameUser').val(),
           lastName: $('#lastNameUser').val(),
           email: $('#emailUser').val(),
