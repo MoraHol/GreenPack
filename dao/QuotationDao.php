@@ -160,7 +160,6 @@ class QuotationDao
     $idAdmin = $this->adminDao->findSellerLastAssignment();
     var_dump($idAdmin);
     $admins = $this->adminDao->findSellers();
-    // var_dump($admins);
     $adminCurrent = $this->busquedaBinariaRecursiva($admins, $idAdmin, 0, count($admins) - 1);
     $idAssigned = $this->next($admins, $adminCurrent);
     $this->db->connect();
@@ -168,6 +167,14 @@ class QuotationDao
     $this->db->consult($query);
     $quotation->setIdAdminAssigned($idAssigned);
     $quotation->setDateAssigned(strtotime(date("Y-m-d H:i:s")));
+    $file = "https://" . $_SERVER["HTTP_HOST"] . "/admin/services/sent_email_quotation.php?email=" . $admins[$idAssigned]->getEmail();
+    $curl = curl_init();
+    curl_setopt_array($curl, [
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_URL => $file
+    ]);
+    $content = curl_exec($curl);
+    curl_close($curl);
     return $quotation;
   }
   private function next($admins, $adminCurrent)
