@@ -49,6 +49,7 @@ class ProductDao
   }
   function findById($id)
   {
+    $this->db->connect();
     $productDB = $this->db->consult("SELECT id_products,ref,products.name,description,price, categories.name as category_name, categories.id_categories,uses FROM `products` INNER JOIN categories ON categories.id_categories = products.categories_id_categories WHERE `id_products` = $id", "yes");
     $productDB = $productDB[0];
     $product = new Product();
@@ -65,6 +66,7 @@ class ProductDao
     }
     $category = $this->categoryDao->findById($productDB["id_categories"]);
     $product->setCategory($category);
+    $this->db->close();
     return $product;
   }
   function findByCategory($idCategory)
@@ -182,7 +184,7 @@ class ProductDao
     return $status;
   }
   function delete($id)
-  { 
+  {
     $this->db->connect();
     $query = "DELETE FROM `products` WHERE `products`.`id_products` = $id";
     $status = $this->db->consult($query);

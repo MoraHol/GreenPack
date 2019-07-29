@@ -11,6 +11,7 @@ class MeasurementDao
   }
   function findByProduct($product)
   {
+    $this->db->connect();
     $measurements = [];
     $measurementsDB = $this->db->consult("SELECT * FROM `measurements` WHERE `products_id_products` = " . $product->getId(), "yes");
     foreach ($measurementsDB as  $measurementDB) {
@@ -23,6 +24,7 @@ class MeasurementDao
       $measurement->setProduct($product->getId());
       array_push($measurements, $measurement);
     }
+    $this->db->close();
     return $measurements;
   }
   function findById($id)
