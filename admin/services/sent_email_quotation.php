@@ -1,7 +1,7 @@
 <?php
 require_once dirname(dirname(__DIR__)) . "/vendor/PHPMailer/class.phpmailer.php";
 require_once dirname(dirname(__DIR__)) . "/vendor/PHPMailer/class.smtp.php";
-require_once dirname(__DIR__) . "/db/env.php";
+require_once dirname(dirname(__DIR__)) . "/db/env.php";
 if ($_GET["email"]) {
   $email = $_GET["email"];
   // envio de email
@@ -19,7 +19,7 @@ if ($_GET["email"]) {
   $mail->From = $_ENV["smtpEmail"]; // Email desde donde env�o el correo.
   $mail->FromName = 'GreenPack';
   $mail->AddAddress($email);
-  $mail->Subject = "Envio de Cotización"; // Este es el titulo del email.
+  $mail->Subject = "Nueva Cotización"; // Este es el titulo del email.
   $mail->Body = "<!DOCTYPE html>
   <html>
   <head>
