@@ -37,6 +37,7 @@ $product = $productDao->findById($_GET["id"]);
   <link rel="stylesheet" href="/css/nice-select/nice-select.css">
   <link rel="stylesheet" href="/css/style-product.css">
   <link rel="stylesheet" href="/css/basket.css">
+  <link rel="stylesheet" href="/css/notify-style.css">
 
 
   <!--===================== JS ================-->
@@ -492,10 +493,22 @@ $product = $productDao->findById($_GET["id"]);
         })
       } else {
         if ($width == null || $height == null || $length == null) {
-          alert('Seleccione medidas')
+          $.notify({
+            message: 'Seleccione Medidas para el producto',
+            title: 'Acción Necesaria',
+            icon: 'fas fa-exclamation-triangle'
+          }, {
+            type: 'danger'
+          })
         }
         if ($material == undefined) {
-          alert('Seleccione un material')
+          $.notify({
+            message: 'Seleccione un material para cotizar',
+            title: 'Acción Necesaria',
+            icon: 'fas fa-exclamation-triangle'
+          }, {
+            type: 'danger'
+          })
         }
       }
     })

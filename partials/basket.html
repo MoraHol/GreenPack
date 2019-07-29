@@ -135,17 +135,31 @@
     </div>
   </div>
 </form>
+<script src="/vendor/bootstrap-notify.min.js"></script>
 <script>
   $('#form-quotation').submit((event) => {
-    console.log(event)
     event.preventDefault()
     let dataSerialize = $('#form-quotation').serialize()
+    $('#modal-oder').modal('hide')
+    $.notify({
+      message: 'Enviando Correo',
+      title: 'Procesando',
+      icon: 'fas fa-envelope'
+    }, {
+      type: 'info'
+    })
     $.post('/services/create_quotation.php', dataSerialize, (data, status, xhr) => {
-      if(status == 'success'){
-        alert('se ha creado su cotización')
+      if (status == 'success') {
+        $.notify({
+            message: 'La cotizacion ha sido enviada',
+            title: 'Exito',
+            icon: 'fas fa-envelope-open'
+          }, {
+            type: 'success'
+          })
         cleanCart()
         renderCart()
-      }else{
+      } else {
         alert('No tienes productos ')
         renderCart()
       }
