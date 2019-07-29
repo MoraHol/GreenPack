@@ -17,6 +17,7 @@ class QuotationDao
     $this->productDao = new ProductDao();
     $this->materialDao = new MaterialDao();
     $this->adminDao = new AdminDao();
+    date_default_timezone_set("America/Bogota");
   }
   function save($quotation)
   {
@@ -39,6 +40,15 @@ class QuotationDao
       $query = "INSERT INTO `quotations_details` (`id_quotations_details`, `products_id_products`, `quantity`, `printed`, `price`, `material_id`, `measurement_id`, `quotations_id_quotations`,`laminated`,`pla`) VALUES (NULL, '" . $item->getProduct()->getId() . "', '" . $item->getQuantity() . "', '" . (int) $item->isPrinting() . "', '" . $item->getPrice() . "', '" . $item->getMaterial()->getId() . "', '" . $item->getMeasurement()->getId() . "', '" . $quotation->getId() . "','" . (int) $item->isLam() . "','" . (int) $item->isPla() . "')";
       $this->db->consult($query);
     }
+    // envio de correo al usuario
+    $file = "https://" . $_SERVER["HTTP_HOST"] . "/admin/services/sent_email_quotation_client.php?email=" . $quotation->getEmail() . "&name=" . $quotation->getNameClient();
+    $curl = curl_init();
+    curl_setopt_array($curl, [
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_URL => $file
+    ]);
+    $content = curl_exec($curl);
+    curl_close($curl);
     $this->db->close();
   }
   function delete($id)
@@ -53,8 +63,7 @@ class QuotationDao
     $idClient = $idClient[0]["id"];
     $quotation->setIdClient($idClient);
     // update quotation
-    $query = "UPDATE `quotations` SET `city` = '" . $quotation->getCity() . "', `address` = '" . $quotation->getAddress() . "', `cell_phone` = '" . $quotation->getCellPhoneNumber() . "', `phone` = '" . $quotation->getPhoneNumber() . "', `description` = '" . $quotation->getExtraInformation() . "', `solved` = '" . (int) $quotation->isSolved() . "', `clients_id_clients` = '" . $quotation->getIdClient() . "', `date_solved` = '" . $quotation->getDateSolved() . "', `id_admin_solved` = '" . $quotation->getIdAdminSolved() . "' WHERE `quotations`.`id_quotations` = " . $quotation->getId();
-    echo $query;
+    $query = "UPDATE `quotations` SET `city` = '" . $quotation->getCity() . "', `address` = '" . $quotation->getAddress() . "', `cell_phone` = '" . $quotation->getCellPhoneNumber() . "', `phone` = '" . $quotation->getPhoneNumber() . "', `description` = '" . $quotation->getExtraInformation() . "', `solved` = '" . (int) $quotation->isSolved() . "', `clients_id_clients` = '" . $quotation->getIdClient() . "', `date_solved` = '" . $quotation->getDateSolved() . "', `id_admin_solved` = '" . $quotation->getIdAdminSolved() . "',`id_admin_assignment` = '" . $quotation->getIdAdminAssigned() . "', `date_assignment` = '" . date('Y-m-d H:i:s', $quotation->getDateAssigned()) . "' WHERE `quotations`.`id_quotations` = " . $quotation->getId();
     $status = $this->db->consult($query);
     // update items
     foreach ($quotation->getItems() as $item) {
@@ -176,17 +185,9 @@ class QuotationDao
     ]);
     $content = curl_exec($curl);
     curl_close($curl);
-    // envio de correo al usuario
-    $file = "https://" . $_SERVER["HTTP_HOST"] . "/admin/services/sent_email_quotation_client.php?email=" . $quotation->getEmail() . "&name=" . $quotation->getNameClient();
-    $curl = curl_init();
-    curl_setopt_array($curl, [
-      CURLOPT_RETURNTRANSFER => true,
-      CURLOPT_URL => $file
-    ]);
-    $content = curl_exec($curl);
-    curl_close($curl);
     return $quotation;
   }
+
   private function next($admins, $adminCurrent)
   {
     if (count($admins) - 1 == $adminCurrent) {
@@ -195,6 +196,7 @@ class QuotationDao
       return $admins[$adminCurrent + 1]->getId();
     }
   }
+
   private function busquedaBinariaRecursiva($arreglo, $busqueda, $izquierda, $derecha)
   {
 
