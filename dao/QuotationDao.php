@@ -167,7 +167,17 @@ class QuotationDao
     $quotation->setIdAdminAssigned($idAssigned);
     $quotation->setDateAssigned(strtotime(date("Y-m-d H:i:s")));
     $admin = $this->adminDao->findById($idAssigned);
+    // envio de correo al vendedor 
     $file = "https://" . $_SERVER["HTTP_HOST"] . "/admin/services/sent_email_quotation.php?email=" . $admin->getEmail();
+    $curl = curl_init();
+    curl_setopt_array($curl, [
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_URL => $file
+    ]);
+    $content = curl_exec($curl);
+    curl_close($curl);
+    // envio de correo al usuario
+    $file = "https://" . $_SERVER["HTTP_HOST"] . "/admin/services/sent_email_quotation_client.php?email=" . $quotation->getEmail() . "&name=" . $quotation->getNameClient();
     $curl = curl_init();
     curl_setopt_array($curl, [
       CURLOPT_RETURNTRANSFER => true,
