@@ -158,6 +158,7 @@ class QuotationDao
   function assign($quotation)
   {
     $idAdmin = $this->adminDao->findSellerLastAssignment();
+    var_dump($idAdmin);
     $admins = $this->adminDao->findSellers();
     // var_dump($admins);
     $adminCurrent = $this->busquedaBinariaRecursiva($admins, $idAdmin, 0, count($admins) - 1);

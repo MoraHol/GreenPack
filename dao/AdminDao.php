@@ -95,7 +95,7 @@ class AdminDao
     $this->db->connect();
     $query = "SELECT * FROM `assignment_queue` LIMIT 1";
     $id = $this->db->consult($query, "yes");
-    $id = $id[0];
+    $id = $id[0]["id_admin"];
     return $id;
   }
 }

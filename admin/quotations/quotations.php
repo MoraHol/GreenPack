@@ -27,6 +27,7 @@ $quotations = $quotationDao->findAssignedTo($admin->getId());
   <link rel="stylesheet" href="/css/all.min.css">
   <!-- Page level plugin CSS-->
   <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/spinner.css">
 
 </head>
 
@@ -68,7 +69,7 @@ $quotations = $quotationDao->findAssignedTo($admin->getId());
                     </tr>
                   </thead>
                   <tbody>
-                    <<?php foreach ($quotations as $quotation) { ?> <tr>
+                    <?php foreach ($quotations as $quotation) { ?> <tr>
                         <td><?php echo $quotation->getNameClient(); ?></td>
                         <td><?php echo $quotation->getLastNameClient(); ?></td>
                         <td class="text-center"><?php echo $quotation->getCompany() == "" ? "N/A" : $quotation->getCompany(); ?> </td>
@@ -78,13 +79,15 @@ $quotations = $quotationDao->findAssignedTo($admin->getId());
                         <td class="text-center"><a href="edit-quotation.php?id=<?= $quotation->getId() ?>"><i class="material-icons">create</i></a></td>
                         <td class="text-center"><a class="text-center" target="_blank" title="descargar" href="/services/download-quotation.php?id=<?php echo $quotation->getId(); ?>"><i class="material-icons">cloud_download</a></td>
                         <td class="text-center"><a class="text-center" href="javascript:sentEmail(`<?php echo $quotation->getId(); ?>`)"><i class="material-icons">email</a></td>
-                        </tr>
-                      <?php } ?>
+                      </tr>
+                    <?php } ?>
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
+        </div>
+        <div id="load_pdf">
         </div>
         <?php include("../partials/footer.html"); ?>
       </div>
@@ -118,10 +121,13 @@ $quotations = $quotationDao->findAssignedTo($admin->getId());
     <!-- Page level plugin JavaScript-->
     <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="/vendor/jquery.formatCurrency-1.4.0.min.js"></script>
+    <script src="/vendor/jquery.formatCurrency.all.js"></script>
+    <script src="/js/spinner.js"></script>
     <script>
       // Call the dataTables jQuery plugin
       $(document).ready(function() {
-        $('#dataTable').DataTable({
+        let table = $('#dataTable').DataTable({
           "language": {
             "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ registros",
@@ -148,7 +154,71 @@ $quotations = $quotationDao->findAssignedTo($admin->getId());
 
           }
         })
+        table.on('draw', function() {
+          $('.money').formatCurrency({
+            region: 'es-CO'
+          })
+        })
+        $('#dataTable tbody')
+          .on('mouseenter', 'td', function() {
+            var colIdx = table.cell(this).index().column;
+
+            $(table.cells().nodes()).removeClass('highlight');
+            $(table.column(colIdx).nodes()).addClass('highlight');
+          });
       })
+    </script>
+    <script>
+      $(() => {
+        $('.money').formatCurrency({
+          region: 'es-CO'
+        })
+        $('.sidebar div.sidebar-wrapper ul.nav li:first').removeClass('active')
+        $('#quotations-item').addClass('active')
+        var url = document.location.toString();
+        if (url.match('#')) {
+          $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+        }
+      })
+    </script>
+    <script>
+      function viewPdf(id) {
+        $('#load_pdf').html(`<div class="wall-loading"><div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>`)
+        $('.wall-loading').width($('#load_pdf').width())
+        $('.wall-loading').height($('#load_pdf').height())
+        $('#load_pdf').append(`<div class="card"></div>`)
+        $('#load_pdf .card').append(`<embed  src="/services/view-quotation.php?id=${id}#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" width="100%" height="600px" />`)
+        $('#load_pdf .card embed')[0].onload = fadeSpinner()
+        location.href = "#load_pdf"
+      }
+
+      function fadeSpinner() {
+        $('.wall-loading').delay(100).fadeOut('slow')
+        $('.spinner').delay(100).fadeOut('slow')
+        $('.wall-loading').css('z-index', -20)
+      }
+
+      function sentEmail(id) {
+        $.notify({
+          message: 'Enviando Correo',
+          title: 'Procesando',
+          icon: 'email'
+        }, {
+          type: 'info'
+        })
+        $.post('api/sent_email.php', {
+          id: id
+        }, (data, status, xhr) => {
+          if (status == 'success' && xhr.readyState == 4) {
+            location.href = '#no-solved'
+            location.reload()
+          }
+        })
+      }
+
+      function openWindow(id) {
+        window.open(`/services/view-quotation.php?id=${id}`, "Cotizacion No " + id, "width=600, height=800")
+      }
     </script>
 </body>
 
