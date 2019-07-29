@@ -155,13 +155,13 @@
             <p class="desc">Búsqueda más fácil con enlaces de productos</p>
             <p class="benefit">Pegar el enlace del producto o subir una foto</p>
             <div class="images-wrap">
-              <a class="item-image zoom-wrap" data-goldkey="theme" data-ctrdot="expose_cid-3803#senseid-9200_9#pvid-c1a81149-2d9b-4923-a356-32ac29a927ab#id-60773195001#algPos-1#matchType-2#fatherId-null#blockId-52806#" href="category.php?id=2">
+              <a class="item-image zoom-wrap" data-goldkey="theme" data-ctrdot="expose_cid-3803#senseid-9200_9#pvid-c1a81149-2d9b-4923-a356-32ac29a927ab#id-60773195001#algPos-1#matchType-2#fatherId-null#blockId-52806#" href="category.php?id=1">
                 <img class="image zoom-in" src="https://greenpack.com.co/wp-content/uploads/2017/07/b-plegada.png">
               </a>
-              <a class="item-image zoom-wrap" data-goldkey="theme" data-ctrdot="expose_cid-3803#senseid-9200_9#pvid-c1a81149-2d9b-4923-a356-32ac29a927ab#id-60593692790#algPos-1#matchType-2#fatherId-null#blockId-52806#" href="https://www.alibaba.com/picture/search.htm?SearchScene=amazonseller&amp;sourceFrom=imageupload&amp;link=https://www.alibaba.com/product-detail/_60593692790.html" target="_blank" data-goldlog="pos=tab&amp;type=buyerHub&amp;index=1&amp;clickParam=click_cid-3852#click_senseid-9200_9#pvid-c1a81149-2d9b-4923-a356-32ac29a927ab#id-60593692790#pos-1#matchType-2#fatherId-null#blockId-52806">
+              <a class="item-image zoom-wrap" data-goldkey="theme" data-ctrdot="expose_cid-3803#senseid-9200_9#pvid-c1a81149-2d9b-4923-a356-32ac29a927ab#id-60593692790#algPos-1#matchType-2#fatherId-null#blockId-52806#" href="category.php?id=1">
                 <img class="image zoom-in" src="https://greenpack.com.co/wp-content/uploads/2017/07/b-fondo-auto.png">
               </a>
-              <a class="item-image zoom-wrap" data-goldkey="theme" data-ctrdot="expose_cid-3803#senseid-9200_9#pvid-c1a81149-2d9b-4923-a356-32ac29a927ab#id-60734382711#algPos-1#matchType-2#fatherId-null#blockId-52806#" href="https://www.alibaba.com/picture/search.htm?SearchScene=amazonseller&amp;sourceFrom=imageupload&amp;link=https://www.alibaba.com/product-detail/_60734382711.html" target="_blank" data-goldlog="pos=tab&amp;type=buyerHub&amp;index=2&amp;clickParam=click_cid-3852#click_senseid-9200_9#pvid-c1a81149-2d9b-4923-a356-32ac29a927ab#id-60734382711#pos-1#matchType-2#fatherId-null#blockId-52806">
+              <a class="item-image zoom-wrap" data-goldkey="theme" data-ctrdot="expose_cid-3803#senseid-9200_9#pvid-c1a81149-2d9b-4923-a356-32ac29a927ab#id-60734382711#algPos-1#matchType-2#fatherId-null#blockId-52806#" href="category.php?id=1">
                 <img class="image zoom-in" src="https://greenpack.com.co/wp-content/uploads/2017/07/bol.png">
               </a>
             </div>
@@ -186,7 +186,7 @@
           </a>
           <div class="items-wrap">
             <div class="item-wrap">
-              <a class="item" href="//www.alibaba.com/brandzone#specialOffers" target="_blank" data-goldkey="theme" data-goldlog="pos=tab&amp;type=brandzone&amp;index=0">
+              <a class="item" href="category.php?id=6"  data-goldkey="theme" data-goldlog="pos=tab&amp;type=brandzone&amp;index=0">
                 <!-- <i class="icon" style="background-image: url(/images/greenbags_logo_verde.png)"></i> -->
                 <div class="item-image zoom-wrap">
                   <img class="image zoom-in" src="https://greenpack.com.co/wp-content/uploads/2017/07/SEPARADOR.png">
@@ -197,7 +197,7 @@
               </a>
             </div>
             <div class="item-wrap">
-              <a class="item" href="//www.alibaba.com/brandzone#specialOffers" target="_blank" data-goldkey="theme" data-goldlog="pos=tab&amp;type=brandzone&amp;index=1">
+              <a class="item" href="category.php?id=6" data-goldkey="theme" data-goldlog="pos=tab&amp;type=brandzone&amp;index=1">
                 <!-- <i class="icon" style="background-image: url(//i.alicdn.com/sc01/kf/HTB1QlmVacnrK1RkHFrdq6xCoFXaq.jpg)"></i> -->
                 <div class="item-image zoom-wrap">
                   <img class="image zoom-in" src="https://greenpack.com.co/wp-content/uploads/2017/07/INDIVIDUALES.jpg">
