@@ -35,7 +35,7 @@ class MaterialDao
     $material->setDescription($materialDB["description"]);
     $material->setGrammage($materialDB["grammage"]);
     $material->setPricePerKg($materialDB["price_per_kg"]);
-    $this->db->close();
+    // $this->db->close();
     return $material;
   }
   function findByProduct($product)

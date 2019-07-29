@@ -38,7 +38,7 @@ class MeasurementDao
     $measurement->setHeight($measurementDB["height"]);
     $measurement->setWindow($measurementDB["window"]);
     $measurement->setProduct($measurementDB["products_id_products"]);
-    $this->db->close();
+    // $this->db->close();
     return $measurement;
   }
   function saveByProduct($measurement)
