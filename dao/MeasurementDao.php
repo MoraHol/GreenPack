@@ -30,7 +30,7 @@ class MeasurementDao
   function findById($id)
   {
     $this->db->connect();
-    $query = "SELECT * FROM `greenpack`.`measurements` WHERE `id_measurements` = $id";
+    $query = "SELECT * FROM `measurements` WHERE `id_measurements` = $id";
     $measurementDB = $this->db->consult($query, "yes");
     $measurementDB = $measurementDB[0];
     $measurement = new Measurement();
