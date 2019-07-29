@@ -147,7 +147,8 @@ class QuotationDao
   function findAssignedTo($idAdmin)
   {
     $this->db->connect();
-    $query = "SELECT * FROM `quotations` WHERE `id_admin_assignment` = $idAdmin";
+    $quotations = [];
+    $query = "SELECT `id_quotations` AS `id` FROM `quotations` WHERE `id_admin_assignment` = $idAdmin";
     $quotationsDB = $this->db->consult($query, "yes");
     foreach ($quotationsDB as $quotationDB) {
       array_push($quotations, $this->findById($quotationDB["id"]));
@@ -158,7 +159,8 @@ class QuotationDao
   {
     $idAdmin = $this->adminDao->findSellerLastAssignment();
     $admins = $this->adminDao->findSellers();
-    $adminCurrent = busquedaBinariaRecursiva($admins, $idAdmin, 0, count($admins));
+    // var_dump($admins);
+    $adminCurrent = $this->busquedaBinariaRecursiva($admins, $idAdmin, 0, count($admins) - 1);
     $idAssigned = $this->next($admins, $adminCurrent);
     $this->db->connect();
     $query = "UPDATE `assignment_queue` SET `id_admin`= $idAssigned WHERE `id_admin` = $idAdmin";
@@ -175,7 +177,7 @@ class QuotationDao
       return $admins[$adminCurrent + 1]->getId();
     }
   }
-  private function busquedaBinariaRecursiva(&$arreglo, $busqueda, $izquierda, $derecha)
+  private function busquedaBinariaRecursiva($arreglo, $busqueda, $izquierda, $derecha)
   {
 
     /*
@@ -196,11 +198,11 @@ class QuotationDao
       if ($busqueda > $elementoDelMedio->getId()) {
         # Si está a la derecha, lo partimos desde el medio + 1 hasta el elemento dado por derecha
         $izquierda = $indiceDelElementoMedio + 1;
-        return busquedaBinariaRecursiva($arreglo, $busqueda, $izquierda, $derecha);
+        return $this->busquedaBinariaRecursiva($arreglo, $busqueda, $izquierda, $derecha);
       } else {
         # Si está a la izquierda, lo partimos desde el medio - 1 hasta el elemento dado por izquierda
         $derecha = $indiceDelElementoMedio - 1;
-        return busquedaBinariaRecursiva($arreglo, $busqueda, $izquierda, $derecha);
+        return $this->busquedaBinariaRecursiva($arreglo, $busqueda, $izquierda, $derecha);
       }
     }
   }

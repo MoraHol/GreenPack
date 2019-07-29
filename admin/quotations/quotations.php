@@ -9,7 +9,7 @@ require dirname(dirname(__DIR__)) . "/dao/AdminDao.php";
 require dirname(dirname(__DIR__)) . "/dao/QuotationDao.php";
 $quotationDao = new QuotationDao();
 $adminDao = new AdminDao();
-$admin = unseralize($_SESSION["admin"]);
+$admin = unserialize($_SESSION["admin"]);
 $quotations = $quotationDao->findAssignedTo($admin->getId());
 ?>
 
