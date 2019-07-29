@@ -5,6 +5,9 @@
 if (!isset($_SESSION)) {
   session_start();
 }
+if (!isset($_SESSION["admin"])) {
+  header("Location: /admin");
+}
 require dirname(dirname(__DIR__)) . "/dao/AdminDao.php";
 require dirname(dirname(__DIR__)) . "/dao/QuotationDao.php";
 $quotationDao = new QuotationDao();
