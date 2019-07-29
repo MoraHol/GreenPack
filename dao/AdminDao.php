@@ -78,4 +78,24 @@ class AdminDao
   }
   function delete($id)
   { }
+  function findSellers()
+  {
+    $this->db->connect();
+    $admins = [];
+    $query = "SELECT `id_admins` FROM admins WHERE id_role = 1 ORDER BY `id_admins` ASC";
+    $adminsDB = $this->db->consult($query, "yes");
+    foreach ($adminsDB as $adminDB) {
+      array_push($admins, $this->findById($adminDB["id_admins"]));
+    }
+    $this->db->close();
+    return $admins;
+  }
+  function findSellerLastAssignment()
+  {
+    $this->db->connect();
+    $query = "SELECT * FROM `assignment_queue` LIMIT 1";
+    $id = $this->db->consult($query, "yes");
+    $id = $id[0];
+    return $id;
+  }
 }

@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ ."/ItemBag.php";
-require_once __DIR__ ."/ItemBox.php";
+require_once __DIR__ . "/ItemBag.php";
+require_once __DIR__ . "/ItemBox.php";
 class Quotation implements JsonSerializable
 {
   private $nameClient;
@@ -20,6 +20,8 @@ class Quotation implements JsonSerializable
   private $dateSolved;
   private $idAdminSolved;
   private $createdAt;
+  private $idAdminAssigned;
+  private $dateAssigned;
 
   public function __construct()
   {
@@ -29,6 +31,26 @@ class Quotation implements JsonSerializable
     $this->file = null;
     $this->dateSolved = '0-0-0';
     $this->idAdminSolved = 0;
+  }
+
+  public function getIdAdminAssigned()
+  {
+    return $this->idAdminAssigned;
+  }
+
+  public function setIdAdminAssigned($idAdminAssigned)
+  {
+    $this->idAdminAssigned = $idAdminAssigned;
+  }
+
+  public function getDateAssigned()
+  {
+    return $this->dateAssigned;
+  }
+
+  public function setDateAssigned($dateAssigned)
+  {
+    $this->dateAssigned = $dateAssigned;
   }
 
   public function getIdAdminSolved()

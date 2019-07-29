@@ -7,6 +7,7 @@ require_once dirname(__DIR__) . "/db/env.php";
 require_once dirname(__DIR__) . "/dao/MeasurementDao.php";
 require_once dirname(__DIR__) . "/dao/MaterialDao.php";
 require_once dirname(__DIR__) . "/dao/ProductDao.php";
+require_once dirname(__DIR__) . "/dao/AdminDao.php";
 class QuotationDao
 {
   function __construct()
@@ -15,6 +16,7 @@ class QuotationDao
     $this->measurementDao = new MeasurementDao();
     $this->productDao = new ProductDao();
     $this->materialDao = new MaterialDao();
+    $this->adminDao = new AdminDao();
   }
   function save($quotation)
   {
@@ -25,7 +27,9 @@ class QuotationDao
     $idClient = $idClient[0]["id"];
     $quotation->setIdClient($idClient);
     // Insert quotation
-    $query = "INSERT INTO `quotations` (`id_quotations`, `city`, `address`, `cell_phone`, `phone`, `description`, `file`, `clients_id_clients`, `created_at`) VALUES (NULL, '" . $quotation->getCity() . "', '" . $quotation->getAddress() . "', '" . $quotation->getCellPhoneNumber() . "', '" . $quotation->getPhoneNumber() . "', '" . $quotation->getExtraInformation() . "', '" . $quotation->getFile() . "', '$idClient', current_timestamp())";
+    //assing admin
+    $quotation = $this->assign($quotation);
+    $query = "INSERT INTO `quotations` (`id_quotations`, `city`, `address`, `cell_phone`, `phone`, `description`, `file`, `clients_id_clients`, `created_at`,`id_admin_assignment`,`date_assignment`) VALUES (NULL, '" . $quotation->getCity() . "', '" . $quotation->getAddress() . "', '" . $quotation->getCellPhoneNumber() . "', '" . $quotation->getPhoneNumber() . "', '" . $quotation->getExtraInformation() . "', '" . $quotation->getFile() . "', '$idClient', current_timestamp(),'" . $quotation->getIdAdminAssigned() . "','" . date('Y-m-d H:i:s', $quotation->getDateAssigned()) . "')";
     $this->db->consult($query);
     $idQuotation = $this->db->consult("SELECT MAX(`id_quotations`) AS id FROM `quotations`", "yes");
     $idQuotation = $idQuotation[0]["id"];
@@ -80,6 +84,8 @@ class QuotationDao
     $quotation->setSolved(filter_var($quotationDB["solved"], FILTER_VALIDATE_BOOLEAN));
     $quotation->setId($quotationDB["id_quotations"]);
     $quotation->setIdAdminSolved($quotationDB["id_admin_solved"]);
+    $quotation->setIdAdminAssigned($quotationDB["id_admin_assignment"]);
+    $quotation->setDateAssigned(strtotime($quotationDB["date_assignment"]));
     $items = [];
     // cargado de cada uno de los items
     $itemsDB = $this->db->consult("SELECT * FROM quotations_details WHERE `quotations_id_quotations` = $id", "yes");
@@ -137,5 +143,65 @@ class QuotationDao
     }
     // $this->db->close();
     return $quotations;
+  }
+  function findAssignedTo($idAdmin)
+  {
+    $this->db->connect();
+    $query = "SELECT * FROM `quotations` WHERE `id_admin_assignment` = $idAdmin";
+    $quotationsDB = $this->db->consult($query, "yes");
+    foreach ($quotationsDB as $quotationDB) {
+      array_push($quotations, $this->findById($quotationDB["id"]));
+    }
+    return $quotations;
+  }
+  function assign($quotation)
+  {
+    $idAdmin = $this->adminDao->findSellerLastAssignment();
+    $admins = $this->adminDao->findSellers();
+    $adminCurrent = busquedaBinariaRecursiva($admins, $idAdmin, 0, count($admins));
+    $idAssigned = $this->next($admins, $adminCurrent);
+    $this->db->connect();
+    $query = "UPDATE `assignment_queue` SET `id_admin`= $idAssigned WHERE `id_admin` = $idAdmin";
+    $this->db->consult($query);
+    $quotation->setIdAdminAssigned($idAssigned);
+    $quotation->setDateAssigned(strtotime(date("Y-m-d H:i:s")));
+    return $quotation;
+  }
+  private function next($admins, $adminCurrent)
+  {
+    if (count($admins) - 1 == $adminCurrent) {
+      return $admins[0]->getId();
+    } else {
+      return $admins[$adminCurrent + 1]->getId();
+    }
+  }
+  private function busquedaBinariaRecursiva(&$arreglo, $busqueda, $izquierda, $derecha)
+  {
+
+    /*
+    Comprobar si ya no podemos partir el arreglo
+     */
+    if ($izquierda > $derecha) {
+      return -1;
+    }
+    # Obtener el valor y elemento de la mitad del arreglo
+    $indiceDelElementoMedio = floor(($izquierda + $derecha) / 2);
+    $elementoDelMedio = $arreglo[$indiceDelElementoMedio];
+
+    # ¿Lo que buscamos está en la mitad del arreglo? entonces regresa el índice
+    if ($busqueda === $elementoDelMedio->getId()) {
+      return $indiceDelElementoMedio;
+    } else {
+      # Si no, partimos el arreglo dependiendo de la búsqueda
+      if ($busqueda > $elementoDelMedio->getId()) {
+        # Si está a la derecha, lo partimos desde el medio + 1 hasta el elemento dado por derecha
+        $izquierda = $indiceDelElementoMedio + 1;
+        return busquedaBinariaRecursiva($arreglo, $busqueda, $izquierda, $derecha);
+      } else {
+        # Si está a la izquierda, lo partimos desde el medio - 1 hasta el elemento dado por izquierda
+        $derecha = $indiceDelElementoMedio - 1;
+        return busquedaBinariaRecursiva($arreglo, $busqueda, $izquierda, $derecha);
+      }
+    }
   }
 }

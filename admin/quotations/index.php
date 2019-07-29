@@ -2,11 +2,18 @@
 <?php
 require_once dirname(dirname(__DIR__)) . "/dao/QuotationDao.php";
 require_once dirname(dirname(__DIR__)) . "/dao/AdminDao.php";
+if (!isset($_SESSION)) {
+  session_start();
+}
 $quotationDao = new QuotationDao();
 $adminDao = new AdminDao();
 $quotations = $quotationDao->findAll();
 $quotationsSolved = $quotationDao->findSolved();
 $quotationsNoSolved = $quotationDao->findNoSolved();
+$admin = unserialize($_SESSION["admin"]);
+if ($admin->getRole() != 2) {
+  header("Location: quotations.php");
+}
 ?>
 <!doctype html>
 <html lang="es">
