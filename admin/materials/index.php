@@ -1,5 +1,6 @@
 <?php
 require dirname(dirname(__DIR__)) . "/dao/MaterialDao.php";
+include("../partials/verify-session.php");
 $materialDao = new MaterialDao();
 $materials = $materialDao->findAll();
 ?>

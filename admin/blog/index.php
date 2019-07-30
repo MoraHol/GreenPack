@@ -4,6 +4,7 @@
 <?php
 require dirname(dirname(__DIR__)) . "/dao/NoticeDao.php";
 require dirname(dirname(__DIR__)) . "/db/conversor_date.php";
+include("../partials/verify-session.php");
 $noticeDao = new NoticeDao();
 $notices = $noticeDao->findAll();
 $conversorDate = new ConversorDate();

@@ -1,3 +1,6 @@
+<?php
+include("../partials/verify-session.php");
+?>
 <!-- author: Alexis Holguin, github: MoraHol -->
 <!doctype html>
 <html lang="es">
@@ -123,7 +126,7 @@ $products = $productDao->findAll();
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
     <script src="../assets/demo/demo.js"></script>
     <script>
-       $(() => {
+      $(() => {
         $('.sidebar div.sidebar-wrapper ul.nav li:first').removeClass('active')
         $('#product-item').addClass('active')
       })

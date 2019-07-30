@@ -1,7 +1,9 @@
 <?php
 require dirname(dirname(__DIR__)) . "/dao/AdminDao.php";
+include("../partials/verify-session.php");
 $adminDao = new AdminDao();
 $admins = $adminDao->findAll();
+
 ?>
 <!-- author: Alexis Holguin, github: MoraHol -->
 <!doctype html>

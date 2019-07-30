@@ -119,6 +119,7 @@ class ProductDao
   }
   function findRelatedProducts($product)
   {
+    $this->db->connect();
     $products = [];
     $query = "SELECT id_products,ref,products.name,description,price, categories.name as category_name, categories.id_categories FROM `products` INNER JOIN categories ON categories.id_categories = products.categories_id_categories WHERE `id_products` <> " . $product->getId() . " AND categories.id_categories = " . $product->getCategory()->getId() . " LIMIT 3";
     $productsDB = $this->db->consult($query, "yes");
@@ -139,6 +140,7 @@ class ProductDao
       $productInstance->setCategory($category);
       array_push($products, $productInstance);
     }
+    $this->db->close();
     return $products;
   }
   function search($pattern)

@@ -1,5 +1,6 @@
 <?php
 require_once dirname(dirname(__DIR__)) . "/dao/QuotationDao.php";
+include("../partials/verify-session.php");
 $quotationDao = new QuotationDao();
 if (!isset($_GET["id"])) {
   header("Location: /admin/materials");

@@ -1,4 +1,5 @@
-<?php include("../partials/verify-session.php");
+<?php
+include("../partials/verify-session.php");
 require dirname(dirname(__DIR__)) . "/dao/NoticeDao.php";
 $noticeDao = new NoticeDao();
 if (isset($_GET["id"])) {
@@ -147,7 +148,7 @@ if (isset($_GET["id"])) {
           </div>
         </div>
       </div>
-      <?php include("../partials/footer.html");?>
+      <?php include("../partials/footer.html"); ?>
     </div>
   </div>
   <!--   Core JS Files   -->
@@ -221,10 +222,18 @@ if (isset($_GET["id"])) {
                 alert("error")
               }
             })
+          },
+          'keyup': function(keyupEvent) {
+            if (document.domain != 'localhost') {
+              $('.fr-wrapper>div:first-child').css('visibility', 'hidden')
+            }
           }
         }
       }, () => {
         editor.html.set(text)
+        if (document.domain != 'localhost') {
+          $('.fr-wrapper>div:first-child').css('visibility', 'hidden')
+        }
       })
       $('#changeImg').click(() => {
         $.post('/admin/image_delete.php', {
@@ -270,8 +279,8 @@ if (isset($_GET["id"])) {
     function ajax(link) {
       $.post("api/update_notice.php", {
         update: true,
-        id: <?php echo $notice->getId() ?> ,
-        title : $('#title').val(),
+        id: <?php echo $notice->getId() ?>,
+        title: $('#title').val(),
         content: editor.html.get(),
         photo: link,
         category: $('#category').val(),

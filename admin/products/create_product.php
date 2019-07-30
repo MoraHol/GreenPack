@@ -1,3 +1,6 @@
+<?php
+include("../partials/verify-session.php");
+?>
 <!-- author: Alexis Holguin, github: MoraHol -->
 <!doctype html>
 <html lang="es">
@@ -193,7 +196,7 @@
           $('#materials').append(`<li><select class="wide" style="margin-bottom: 10px;"><option disabled selected>Seleccione un material</option>
                   <?php
                   foreach ($materials as  $material) { ?>
-                                                                                <option value="<?php echo $material->getId(); ?>"><?php echo $material->getName(); ?></option>
+                                                                                      <option value="<?php echo $material->getId(); ?>"><?php echo $material->getName(); ?></option>
                   <?php }
                   ?>
                 </select></li>`)
@@ -220,7 +223,7 @@
           $('#materials').append(`<li><select class="wide" style="margin-bottom: 10px;" ><option disabled selected>Seleccione un material</option>
                   <?php
                   foreach ($materials as  $material) { ?>
-                                                                                <option value="<?php echo $material->getId(); ?>"><?php echo $material->getName(); ?></option>
+                                                                                      <option value="<?php echo $material->getId(); ?>"><?php echo $material->getName(); ?></option>
                   <?php }
                   ?>
                 </select></li>`)
@@ -266,7 +269,16 @@
                     alert("error")
                   }
                 })
+              },
+              'keyup': function(keyupEvent) {
+                if (document.domain != 'localhost') {
+                  $('.fr-wrapper>div:first-child').css('visibility', 'hidden')
+                }
               }
+            }
+          }, () => {
+            if (document.domain != 'localhost') {
+              $('.fr-wrapper>div:first-child').css('visibility', 'hidden')
             }
           })
           myDropzone = new Dropzone("div#myId", {

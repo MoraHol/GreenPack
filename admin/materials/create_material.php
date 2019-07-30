@@ -1,3 +1,6 @@
+<?php
+include("../partials/verify-session.php");
+?>
 <!-- author: Alexis Holguin, github: MoraHol -->
 <!doctype html>
 <html lang="es">

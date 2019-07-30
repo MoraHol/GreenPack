@@ -2,12 +2,7 @@
 <?php
 require_once dirname(dirname(__DIR__)) . "/dao/QuotationDao.php";
 require_once dirname(dirname(__DIR__)) . "/dao/AdminDao.php";
-if (!isset($_SESSION)) {
-  session_start();
-}
-if (!isset($_SESSION["admin"])) {
-  header("Location: /admin");
-}
+include("../partials/verify-session.php");
 $quotationDao = new QuotationDao();
 $adminDao = new AdminDao();
 $quotations = $quotationDao->findAll();

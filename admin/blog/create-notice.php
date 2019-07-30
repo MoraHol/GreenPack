@@ -1,3 +1,6 @@
+<?php
+include("../partials/verify-session.php");
+?>
 <!-- author: Alexis Holguin, github: MoraHol -->
 <!doctype html>
 <html lang="es">
@@ -170,7 +173,16 @@
                 alert("error")
               }
             })
+          },
+          'keyup': function(keyupEvent) {
+            if (document.domain != 'localhost') {
+              $('.fr-wrapper>div:first-child').css('visibility', 'hidden')
+            }
           }
+        }
+      }, () => {
+        if (document.domain != 'localhost') {
+          $('.fr-wrapper>div:first-child').css('visibility', 'hidden')
         }
       })
       myDropzone = new Dropzone("div#myId", {
