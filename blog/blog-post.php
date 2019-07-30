@@ -12,12 +12,14 @@ $conversor = new ConversorDate();
 <html lang="es">
 
 <head>
-  <?php include("../partials/metaproperties.html"); ?>
+  <?php //include("../partials/metaproperties.html"); 
+  ?>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title><?php echo $notice->getTitle(); ?></title>
-
+  <script src="/js/jquery-1.11.0.min.js"></script>
+  <link href="/images/icon.png" rel="icon" type="image/png">
   <meta property="og:type" content="article">
   <meta property="og:title" content="<?= $notice->getTitle(); ?>">
   <meta property="og:description" content="<?= strip_tags($notice->getContent()); ?>">
