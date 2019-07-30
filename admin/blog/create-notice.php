@@ -160,7 +160,13 @@ include("../partials/verify-session.php");
               src: $img.attr('src')
             }, (data, status) => {
               if (status != "success") {
-                alert("error")
+                $.notify({
+                  message: 'Error',
+                  title: 'Error',
+                  icon: 'notification_important'
+                }, {
+                  type: 'warning'
+                })
               }
             })
           },
@@ -170,7 +176,13 @@ include("../partials/verify-session.php");
               src: $file.attr('src')
             }, (data, status) => {
               if (status != "success") {
-                alert("error")
+                $.notify({
+                  message: 'Error',
+                  title: 'Error',
+                  icon: 'notification_important'
+                }, {
+                  type: 'warning'
+                })
               }
             })
           },
@@ -204,11 +216,23 @@ include("../partials/verify-session.php");
             photo: response.link,
             active: !$('#activeBtn').prop('checked')
           }, (data, status) => {
-            alert("se ha subido la noticia")
+            $.notify({
+              message: 'Se ha creado la noticia',
+              title: 'Exito',
+              icon: 'notification_important'
+            }, {
+              type: 'success'
+            })
             fieldsClear()
           })
         } else {
-          alert("los campos deben ser completados")
+          $.notify({
+            message: 'Los campos deben ser completados',
+            title: 'Error',
+            icon: 'notification_important'
+          }, {
+            type: 'warning'
+          })
         }
       })
     })

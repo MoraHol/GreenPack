@@ -270,7 +270,13 @@ if (isset($_GET["id"])) {
             link = response.link
             ajax(link)
           } else {
-            alert("los campos deben ser completados")
+            $.notify({
+              message: 'Se ha actulizado la noticia',
+              title: 'Exito',
+              icon: 'notification_important'
+            }, {
+              type: 'warning'
+            })
           }
         }
       })
@@ -286,7 +292,13 @@ if (isset($_GET["id"])) {
         category: $('#category').val(),
         active: !$('#activeBtn').prop('checked')
       }, (data, status) => {
-        alert("se ha actualizado la noticia")
+        $.notify({
+          message: 'Se ha actulizado la noticia',
+          title: 'Exito',
+          icon: 'notification_important'
+        }, {
+          type: 'success'
+        })
       })
     }
 

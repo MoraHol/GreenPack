@@ -196,7 +196,7 @@ include("../partials/verify-session.php");
           $('#materials').append(`<li><select class="wide" style="margin-bottom: 10px;"><option disabled selected>Seleccione un material</option>
                   <?php
                   foreach ($materials as  $material) { ?>
-                                                                                      <option value="<?php echo $material->getId(); ?>"><?php echo $material->getName(); ?></option>
+                                                                                              <option value="<?php echo $material->getId(); ?>"><?php echo $material->getName(); ?></option>
                   <?php }
                   ?>
                 </select></li>`)
@@ -223,7 +223,7 @@ include("../partials/verify-session.php");
           $('#materials').append(`<li><select class="wide" style="margin-bottom: 10px;" ><option disabled selected>Seleccione un material</option>
                   <?php
                   foreach ($materials as  $material) { ?>
-                                                                                      <option value="<?php echo $material->getId(); ?>"><?php echo $material->getName(); ?></option>
+                                                                                              <option value="<?php echo $material->getId(); ?>"><?php echo $material->getName(); ?></option>
                   <?php }
                   ?>
                 </select></li>`)
@@ -337,11 +337,23 @@ include("../partials/verify-session.php");
                 materials: JSON.stringify(materials),
                 measurements: JSON.stringify(measurements)
               }, (data, status) => {
-                alert("se ha subido el producto")
-                //fieldsClear()
+                $.notify({
+                  message: 'Se ha creado el producto',
+                  title: 'Exito',
+                  icon: 'notification_important'
+                }, {
+                  type: 'success'
+                })
+                fieldsClear()
               })
             } else {
-              alert("los campos deben ser completados")
+              $.notify({
+                message: 'Los campos deben ser completados',
+                title: 'Error',
+                icon: 'notification_important'
+              }, {
+                type: 'danger'
+              })
             }
           })
         })

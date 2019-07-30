@@ -135,13 +135,10 @@ $conversor = new ConversorDate();
   </section>
   <!-- Blog -->
   <div id="blog" class="section">
-
     <!-- container -->
     <div class="container">
-
       <!-- row -->
       <div class="row">
-
         <!-- main blog -->
         <div id="main" class="col-md-9">
 
