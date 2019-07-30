@@ -47,7 +47,24 @@ $product = $productDao->findById($_GET["id"]);
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="/js/bootstrap.min.js"></script>
   <script src="/js/jquery.easing.1.3.js"></script>
+  <style>
+    .flex-direction-nav {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      top: -172px;
+    }
 
+    .flex-direction-nav .flex-prev {
+      position: relative;
+      left: -210px;
+    }
+
+    .flex-direction-nav .flex-next {
+      position: relative;
+      right: -210px;
+    }
+  </style>
 
 </head>
 
@@ -199,7 +216,7 @@ $product = $productDao->findById($_GET["id"]);
               </div>
               <div class="product_count form-group">
                 <br>
-                <a class="btn button primary-btn" id="btnCotizar" href="#">Añadir al cotizador</a>
+                <a class="btn button primary-btn disabled" id="btnCotizar" href="#">Añadir al cotizador</a>
               </div>
             </div>
             <div class="clearfix"></div>
@@ -367,7 +384,10 @@ $product = $productDao->findById($_GET["id"]);
     $(window).load(function() {
       $('.flexslider').flexslider({
         animation: "slide",
-        controlNav: false
+        controlNav: false,
+        directionNav: true,
+        nextText: '<i class="fas fa-angle-right fa-3x pl-3"></i>',
+        prevText: '<i class="fas fa-angle-left fa-3x pl-3"></i>'
       })
     })
   </script>
@@ -450,15 +470,30 @@ $product = $productDao->findById($_GET["id"]);
     })
   </script>
   <script>
+    let category = `<?= $product->getCategory()->getName(); ?>`;
+    let minQuantity = 0;
+
+    function verifyMinQunatiry() {
+      if (category == "bolsas") {
+        if ($('#width').val() < 13) {
+          minQuantity = 20000
+        } else {
+          minQuantity = 10000
+        }
+      } else {
+        minQuantity = 1000
+      }
+      return minQuantity
+    }
     $('#sst').change(function() {
-      if ($(this).val() < 1000) {
+      if ($(this).val() < verifyMinQunatiry()) {
         $('#btnCotizar').addClass("disabled")
       } else {
         $('#btnCotizar').removeClass("disabled")
       }
     })
     $('#sst').on('keyup', function() {
-      if ($(this).val() < 1000) {
+      if ($(this).val() < verifyMinQunatiry()) {
         $('#btnCotizar').addClass("disabled")
       } else {
         $('#btnCotizar').removeClass("disabled")
