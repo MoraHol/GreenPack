@@ -17,6 +17,13 @@ $conversor = new ConversorDate();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title><?php echo $notice->getTitle(); ?></title>
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="<?= $notice->getTitle(); ?>">
+  <meta property="og:description" content="<?= strip_tags($notice->getContent()); ?>">
+  <meta property="og:url" content="<?= "https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]; ?>">
+  <meta property="og:site_name" content="GreenPack">
+
   <!-- Google font -->
   <link href="https://fonts.googleapis.com/css?family=Lato:700%7CMontserrat:400,600" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
@@ -77,7 +84,7 @@ $conversor = new ConversorDate();
 </head>
 
 <body>
-<?php include("../partials/fixed-quoting.html"); ?>
+  <?php include("../partials/fixed-quoting.html"); ?>
 
   <div class="wall-loading">
     <div class="lds-roller">
@@ -139,9 +146,9 @@ $conversor = new ConversorDate();
           <!-- blog share -->
           <div class="blog-share">
             <h4>¿Te gusto? Comparte esta Noticia:</h4>
-            <a href="#" class="facebook"><i class="fab fa-facebook"></i></a>
-            <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="google-plus"><i class="fab fa-google-plus"></i></a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode("https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]); ?>" class="facebook"><i class="fab fa-facebook"></i></a>
+            <a href="https://twitter.com/intent/tweet?text=<?= urlencode($notice->getTitle()) ?>&url=<?= urlencode("https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]); ?>" class="twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?= urlencode("https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]); ?>&title=<?= urlencode($notice->getTitle()) ?>&summary=<?= urlencode(strip_tags($notice->getContent())) ?>" class="facebook"><i class="fab fa-linkedin-in"></i></a>
           </div>
           <!-- /blog share -->
         </div>
