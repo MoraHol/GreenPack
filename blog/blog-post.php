@@ -23,6 +23,7 @@ $conversor = new ConversorDate();
   <meta property="og:description" content="<?= strip_tags($notice->getContent()); ?>">
   <meta property="og:url" content="<?= "https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]; ?>">
   <meta property="og:site_name" content="GreenPack">
+  <meta property="og:image" content="<?= $notice->getImage() ?>">
 
   <!-- Google font -->
   <link href="https://fonts.googleapis.com/css?family=Lato:700%7CMontserrat:400,600" rel="stylesheet">
