@@ -1,14 +1,17 @@
 <?php
 require_once(dirname(__DIR__) . "/dao/ProductDao.php");
+require_once(dirname(__DIR__) . "/dao/TabProductDao.php");
 if (!$_GET) {
-  header("Location: index.php");
+  header("Location: /shop");
 }
 $productDao = new ProductDao();
 $product = $productDao->findById($_GET["id"]);
+$tabProductDao = new TabProductDao();
+$tabs = $tabProductDao->findByProduct($product);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
@@ -241,94 +244,24 @@ $product = $productDao->findById($_GET["id"]);
           </div>
         </div>
         <div class="col-md-9">
-          <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Descripción</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Especificaciones</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Comments</a>
-            </li>
-          </ul>
-          <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-              <p><?php echo $product->getDescription(); ?></p>
+          <?php if (count($tabs) > 0) { ?>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <?php foreach ($tabs as $key => $tab) { ?>
+                <li class="nav-item">
+                  <a class="nav-link <?= $key == 0? "active" : "" ?>" id="tab-<?= $tab->getId() ?>" data-toggle="tab" href="#description-tab-<?= $tab->getId() ?>" role="tab" aria-controls="description-tab-<?= $tab->getId() ?>" aria-selected="true"><?= $tab->getTitle() ?></a>
+                </li>
+              <?php } ?>
+            </ul>
+          <?php } ?>
+          <?php if (count($tabs) > 0) { ?>
+            <div class="tab-content" id="myTabContent">
+              <?php foreach ($tabs as $tab) { ?>
+                <div class="tab-pane fade show active" id="description-tab-<?= $tab->getId() ?>" role="tabpanel" aria-labelledby="tab<?= $tab->getId() ?>">
+                  <p><?= $tab->getDescription(); ?></p>
+                </div>
+              <?php } ?>
             </div>
-            <div class="tab-pane fade " id="profile" role="tabpanel" aria-labelledby="profile-tab">
-              <div class="table-responsive">
-                <table class="table">
-                  <tbody>
-                    <tr>
-                      <td>
-                        <h5>Width</h5>
-                      </td>
-                      <td>
-                        <h5>128mm</h5>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <h5>Height</h5>
-                      </td>
-                      <td>
-                        <h5>508mm</h5>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <h5>Depth</h5>
-                      </td>
-                      <td>
-                        <h5>85mm</h5>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <h5>Weight</h5>
-                      </td>
-                      <td>
-                        <h5>52gm</h5>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <h5>Quality checking</h5>
-                      </td>
-                      <td>
-                        <h5>yes</h5>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <h5>Freshness Duration</h5>
-                      </td>
-                      <td>
-                        <h5>03days</h5>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <h5>When packeting</h5>
-                      </td>
-                      <td>
-                        <h5>Without touch of hand</h5>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <h5>Each Box contains</h5>
-                      </td>
-                      <td>
-                        <h5>60pcs</h5>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+          <?php } ?>
         </div>
       </div>
     </div>
