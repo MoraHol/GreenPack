@@ -146,7 +146,7 @@
           <span class="line"></span>
         </div>
         <div class="content">
-          <a class="banner" data-goldkey="theme" data-goldlog="pos=banner&amp;type=buyerHub" style="background-image: url(/images/shop-791582_1920.jpg)" href="category.php?id=1">
+          <a class="banner" data-goldkey="theme" data-goldlog="pos=banner&amp;type=buyerHub" style="background-image: url(/images/shop-791582_1920.jpg)" href="category.php?id=1&page=1">
             <h3>Producto avanzado</h3>
             <p class="description">Herramienta de búsqueda</p>
             <div class="view-more">Ingresar a la zona para compradores</div>
@@ -155,13 +155,13 @@
             <p class="desc">Búsqueda más fácil con enlaces de productos</p>
             <p class="benefit">Pegar el enlace del producto o subir una foto</p>
             <div class="images-wrap">
-              <a class="item-image zoom-wrap" data-goldkey="theme" data-ctrdot="expose_cid-3803#senseid-9200_9#pvid-c1a81149-2d9b-4923-a356-32ac29a927ab#id-60773195001#algPos-1#matchType-2#fatherId-null#blockId-52806#" href="category.php?id=1">
+              <a class="item-image zoom-wrap" data-goldkey="theme" data-ctrdot="expose_cid-3803#senseid-9200_9#pvid-c1a81149-2d9b-4923-a356-32ac29a927ab#id-60773195001#algPos-1#matchType-2#fatherId-null#blockId-52806#" href="category.php?id=1&page=1">
                 <img class="image zoom-in" src="https://greenpack.com.co/wp-content/uploads/2017/07/b-plegada.png">
               </a>
-              <a class="item-image zoom-wrap" data-goldkey="theme" data-ctrdot="expose_cid-3803#senseid-9200_9#pvid-c1a81149-2d9b-4923-a356-32ac29a927ab#id-60593692790#algPos-1#matchType-2#fatherId-null#blockId-52806#" href="category.php?id=1">
+              <a class="item-image zoom-wrap" data-goldkey="theme" data-ctrdot="expose_cid-3803#senseid-9200_9#pvid-c1a81149-2d9b-4923-a356-32ac29a927ab#id-60593692790#algPos-1#matchType-2#fatherId-null#blockId-52806#" href="category.php?id=1&page=1">
                 <img class="image zoom-in" src="https://greenpack.com.co/wp-content/uploads/2017/07/b-fondo-auto.png">
               </a>
-              <a class="item-image zoom-wrap" data-goldkey="theme" data-ctrdot="expose_cid-3803#senseid-9200_9#pvid-c1a81149-2d9b-4923-a356-32ac29a927ab#id-60734382711#algPos-1#matchType-2#fatherId-null#blockId-52806#" href="category.php?id=1">
+              <a class="item-image zoom-wrap" data-goldkey="theme" data-ctrdot="expose_cid-3803#senseid-9200_9#pvid-c1a81149-2d9b-4923-a356-32ac29a927ab#id-60734382711#algPos-1#matchType-2#fatherId-null#blockId-52806#" href="category.php?id=1&page=1">
                 <img class="image zoom-in" src="https://greenpack.com.co/wp-content/uploads/2017/07/bol.png">
               </a>
             </div>

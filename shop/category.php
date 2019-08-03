@@ -37,10 +37,8 @@
 <body>
 
   <?php
-  // require_once(dirname(__DIR__) . "/db/DBOperator.php");
   require_once(dirname(__DIR__) . "/dao/ProductDao.php");
   require_once(dirname(__DIR__) . "/db/env.php");
-  // $db = new DBOperator($_ENV["db_host"], $_ENV["db_user"], $_ENV["db_name"]);
   $productDao = new ProductDao();
   if (!$_GET) {
     header("Location: category.php?id=1&page=1");
