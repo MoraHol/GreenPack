@@ -18,7 +18,7 @@ $tabs = $tabProductDao->findByProduct($product);
   <?php include("../partials/metaproperties.html") ?>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title><?php echo $product->getName(); ?> | Greenpack</title>
+  <title><?= $product->getName(); ?> | Greenpack</title>
   <!--============= CSS ======================== -->
 
   <link rel="stylesheet" href="/css/styles.css">
@@ -41,6 +41,7 @@ $tabs = $tabProductDao->findByProduct($product);
   <link rel="stylesheet" href="/css/style-product.css">
   <link rel="stylesheet" href="/css/basket.css">
   <link rel="stylesheet" href="/css/notify-style.css">
+  <link href="https://cdn.jsdelivr.net/npm/froala-editor@3.0.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type='text/css' />
 
 
   <!--===================== JS ================-->
@@ -50,6 +51,7 @@ $tabs = $tabProductDao->findByProduct($product);
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="/js/bootstrap.min.js"></script>
   <script src="/js/jquery.easing.1.3.js"></script>
+
   <style>
     .flex-direction-nav {
       display: flex;
@@ -87,16 +89,24 @@ $tabs = $tabProductDao->findByProduct($product);
       <div></div>
     </div>
   </div>
+  <div class="container">
+    <h2><?= $product->getName(); ?></h2>
+    <br>
+    <div class="fr-view">
+      <?= $product->getDescription(); ?>
+    </div>
+  </div>
+
   <div class="single">
-    <div class="container">
-      <div class="single-main">
-        <div class="single-top-main">
+    <div class="single-top-main">
+      <div class="container">
+        <div class="single-main">
           <div class="col-md-4 single-top ">
             <div class="flexslider">
               <ul class="slides">
                 <?php foreach ($product->getImages() as $image) { ?>
-                  <li data-thumb="<?php echo $image->getUrl(); ?>">
-                    <div class="thumb-image"> <img src="<?php echo $image->getUrl(); ?>" data-imagezoom="true" class="img-responsive"> </div>
+                  <li data-thumb="<?= $image->getUrl(); ?>">
+                    <div class="thumb-image"> <img src="<?= $image->getUrl(); ?>" data-imagezoom="true" class="img-responsive"> </div>
                   </li>
                 <?php } ?>
               </ul>
@@ -104,8 +114,7 @@ $tabs = $tabProductDao->findByProduct($product);
           </div>
           <div class="col-md-6" id="container-cotizador">
             <div class="s_product_text" style="margin-left: 0; margin-top: 0;">
-              <h3><?php echo $product->getName(); ?></h3>
-              <!-- <p><?php echo strip_tags($product->getDescription()); ?></p> -->
+
               <!-- nueva pesentacion -->
               <div class="accordion" id="accordion-cotizador">
                 <div class="card">
@@ -161,7 +170,7 @@ $tabs = $tabProductDao->findByProduct($product);
                   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion-cotizador">
                     <div class="card-body">
                       <?php foreach ($product->getMaterials() as $material) { ?>
-                        <label class="radio-inline" style="margin-left: 10px;"><input type="radio" name="material" value="<?php echo $material->getId(); ?>"><?php echo $material->getName(); ?></label>
+                        <label class="radio-inline" style="margin-left: 10px;"><input type="radio" name="material" value="<?= $material->getId(); ?>"><?= $material->getName(); ?></label>
                       <?php
                       } ?>
                     </div>
@@ -238,7 +247,7 @@ $tabs = $tabProductDao->findByProduct($product);
             <h3>Usos</h3>
             <ul>
               <?php foreach ($product->getUses() as $use) { ?>
-                <li><?php echo $use ?></li>
+                <li><?= $use ?></li>
               <?php } ?>
             </ul>
           </div>
@@ -248,7 +257,7 @@ $tabs = $tabProductDao->findByProduct($product);
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <?php foreach ($tabs as $key => $tab) { ?>
                 <li class="nav-item">
-                  <a class="nav-link <?= $key == 0? "active" : "" ?>" id="tab-<?= $tab->getId() ?>" data-toggle="tab" href="#description-tab-<?= $tab->getId() ?>" role="tab" aria-controls="description-tab-<?= $tab->getId() ?>" aria-selected="true"><?= $tab->getTitle() ?></a>
+                  <a class="nav-link <?= $key == 0 ? "active" : "" ?>" id="tab-<?= $tab->getId() ?>" data-toggle="tab" href="#description-tab-<?= $tab->getId() ?>" role="tab" aria-controls="description-tab-<?= $tab->getId() ?>" aria-selected="true"><?= $tab->getTitle() ?></a>
                 </li>
               <?php } ?>
             </ul>
@@ -283,14 +292,14 @@ $tabs = $tabProductDao->findByProduct($product);
           <div class="col-md-6 col-lg-4">
             <div class="card text-center card-product zoom-in">
               <div class="card-product__img">
-                <img class="card-img" src="<?php echo $productInstance->getImages()[0]->getUrl(); ?>">
+                <img class="card-img" src="<?= $productInstance->getImages()[0]->getUrl(); ?>">
                 <ul class="card-product__imgOverlay">
-                  <li><a href="product.php?id=<?php echo $productInstance->getId() ?>"><i class="ti-search"></i> Cotizar</a></li>
+                  <li><a href="product.php?id=<?= $productInstance->getId() ?>"><i class="ti-search"></i> Cotizar</a></li>
                 </ul>
               </div>
               <div class="card-body">
-                <p><?php echo $productInstance->getCategory()->getName(); ?></p>
-                <h4 class="card-product__title"><a href="#"><?php echo $productInstance->getName(); ?></a></h4>
+                <p><?= $productInstance->getCategory()->getName(); ?></p>
+                <h4 class="card-product__title"><a href="#"><?= $productInstance->getName(); ?></a></h4>
               </div>
             </div>
           </div>
@@ -336,7 +345,7 @@ $tabs = $tabProductDao->findByProduct($product);
   </script>
   <script>
     $('#height').attr("disabled", "false")
-    let measurements = `<?php echo json_encode($product->getMeasurements()); ?>`
+    let measurements = `<?= json_encode($product->getMeasurements()); ?>`
     measurements = JSON.parse(measurements)
     let widths = []
     measurements.forEach(measurement => {
@@ -444,7 +453,7 @@ $tabs = $tabProductDao->findByProduct($product);
       let $quantity = $('#sst').val()
       if ($width != null && $height != null && $length != null && $material != undefined && $quantity > 999) {
         $.post('api/add_item.php', {
-          idProduct: `<?php echo $product->getId(); ?>`,
+          idProduct: `<?= $product->getId(); ?>`,
           width: $width,
           height: $height,
           length: $length,
