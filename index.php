@@ -123,7 +123,7 @@ $conversor = new ConversorDate(); ?>
         <div class="row fullscreen justify-content-center align-items-center">
           <div class="col-md-10 col-12">
             <div class="banner-content text-center">
-              <h4 class="text-white mb-20 text-uppercase">Descubre la magia de nuestros empaques</h4>
+              <h4 class="text-white mb-20 text-uppercase">¿Qué tipo de empaque quieres tener?</h4>
               <h1 class="text-uppercase text-white">100% Biodegradable</h1>
               <h5 class="text-white">Empaques desarrollados para que ayudemos al planeta.</h5>
               <a href="#about" class="text-uppercase header-btn">Descubrir Ahora</a>
