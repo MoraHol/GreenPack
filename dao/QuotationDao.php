@@ -8,6 +8,12 @@ require_once dirname(__DIR__) . "/dao/MeasurementDao.php";
 require_once dirname(__DIR__) . "/dao/MaterialDao.php";
 require_once dirname(__DIR__) . "/dao/ProductDao.php";
 require_once dirname(__DIR__) . "/dao/AdminDao.php";
+/*****************************************************************************
+/*Esta clase permite Crear, Actualizar, Buscar y Eliminar Cotizaciones
+/*Desarrollada por Alexis Holguin(github: MoraHol)
+/*Para Teenus.com.co
+/*Ultima actualizacion 31/07/2019
+/*****************************************************************************/
 class QuotationDao
 {
   function __construct()

@@ -7,7 +7,12 @@ require_once  dirname(__DIR__) . "/model/product.php";
 require_once dirname(__DIR__) . "/db/DBOperator.php";
 require_once __DIR__ . "/MaterialDao.php";
 require_once  __DIR__ . "/CategoryDao.php";
-
+/*****************************************************************************
+/*Esta clase permite Crear, Actualizar, Buscar y Eliminar Productos
+/*Desarrollada por Alexis Holguin(github: MoraHol)
+/*Para Teenus.com.co
+/*Ultima actualizacion 31/07/2019
+/*****************************************************************************/
 class ProductDao
 {
   private $db;

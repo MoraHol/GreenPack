@@ -2,6 +2,12 @@
 require_once dirname(__DIR__) . "/model/measurement.php";
 require_once(dirname(__DIR__) . "/db/env.php");
 require_once dirname(__DIR__) . "/db/DBOperator.php";
+/*****************************************************************************
+/*Esta clase permite Crear, Actualizar, Buscar y Eliminar Medidas
+/*Desarrollada por Alexis Holguin(github: MoraHol)
+/*Para Teenus.com.co
+/*Ultima actualizacion 31/07/2019
+/*****************************************************************************/
 class MeasurementDao
 {
   private $db;

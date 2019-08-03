@@ -2,6 +2,12 @@
 require_once dirname(__DIR__) . "/db/env.php";
 require_once dirname(__DIR__) . "/db/DBOperator.php";
 require_once dirname(__DIR__) . "/model/Category.php";
+/*****************************************************************************
+/*Esta clase permite Crear, Actualizar, Buscar y Eliminar Categorias
+/*Desarrollada por Alexis Holguin(github: MoraHol)
+/*Para Teenus.com.co
+/*Ultima actualizacion 31/07/2019
+/*****************************************************************************/
 class CategoryDao
 {
   private $db;
