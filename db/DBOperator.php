@@ -83,6 +83,9 @@ class DBOperator
     //Si se desea capturar datos desde la base de datos
     if ($capture == "yes") {
       $rowValues = array();
+      if ($consult === false) {
+        return $rowValues;
+      }
       while ($linea = mysqli_fetch_array($consult, MYSQLI_ASSOC)) {
         $rowValues[] = $linea;
       }

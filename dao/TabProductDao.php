@@ -14,7 +14,7 @@ class TabProductDao
   private $db;
   function __construct()
   {
-    $this->db = new DBOperator($_ENV["host"], $_ENV["user_db"], $_ENV["db_name"], $_ENV["password_db"]);
+    $this->db = new DBOperator($_ENV["db_host"], $_ENV["db_user"], $_ENV["db_name"], $_ENV["db_pass"]);
   }
   function save($tab)
   {
@@ -50,8 +50,10 @@ class TabProductDao
     $query = "SELECT `id_tab` FROM `products_tabs` WHERE `product_id` = " . $product->getId();
     $tabsProductDB = $this->db->consult($query, "yes");
     $tabs = [];
-    foreach ($tabsProductDB as $tab) {
-      array_push($tabs, $this->findById($tab["id_tab"]));
+    if (count($tabsProductDB) > 0) {
+      foreach ($tabsProductDB as $tab) {
+        array_push($tabs, $this->findById($tab["id_tab"]));
+      }
     }
     $this->db->close();
     return $tabs;

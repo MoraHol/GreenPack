@@ -1,19 +1,21 @@
 <?php include("../partials/verify-session.php"); ?>
-<?php include("../partials/navbar.php"); ?>
 <?php
 require_once dirname(dirname(__DIR__)) . "/dao/ProductDao.php";
 require_once dirname(dirname(__DIR__)) . "/dao/MaterialDao.php";
+require_once dirname(dirname(__DIR__)) . "/dao/TabProductDao.php";
 $productDao = new ProductDao();
 if (!isset($_GET["id"])) {
   header("Location: /admin/products");
 }
 $product = $productDao->findById($_GET["id"]);
+$tabProductDao = new TabProductDao();
 $indexField = 1;
 $indexMeasurement = 1;
 $indexMaterial = 1;
 
 $materialDao = new MaterialDao();
 $materials = $materialDao->findAll();
+$tabs = $tabProductDao->findByProduct($product);
 ?>
 <!-- author: Alexis Holguin, github: MoraHol -->
 <!doctype html>
@@ -134,9 +136,6 @@ $materials = $materialDao->findAll();
       font-size: 80%;
     }
   </style>
-  <?php if ($_SERVER["HTTP_HOST"] != "localhost") {
-    echo "<style>.fr-wrapper>div:first-child {display: none !important;}</style>";
-  } ?>
 
 </head>
 
@@ -146,6 +145,7 @@ $materials = $materialDao->findAll();
     <div id="main-panel">
       <div class="main-panel" id="main-panel-child">
         <!-- Navbar -->
+        <?php include("../partials/navbar.php"); ?>
 
         <!-- End Navbar -->
         <div class="content">
@@ -300,6 +300,25 @@ $materials = $materialDao->findAll();
 
             <button class="btn btn-primary" onclick="addMaterial()" title="Agregar un material"><i class="fas fa-plus"></i></button>
             <hr>
+            <div class="container-fluid">
+              <div class="row">Pestañas del producto:</div>
+              <hr>
+              <?php
+              // echo count($tabs); 
+              if (count($tabs) > 0) {
+                foreach ($tabs as $tab) {
+                  ?>
+                  <div class="row align-center">
+                    <div class="col-sm-6 "><?= $tab->getTitle() ?></div>
+                    <div class="col-sm-3 text-center"><a class="text-center" href="update-tab-product.php?id=<?= $tab->getId() ?>">Editar <i class="fas fa-pen"></i></a></div>
+                    <div class="col-sm-3 text-center"><a class="text-center" href="javascript:deleteTab(`<?= $tab->getId() ?>`)">Borrar <i class="fas fa-trash-alt"></i></a></div>
+                  </div>
+                  <hr>
+                <?php }
+              } ?>
+              <a href="new-tab-product.php?id=<?= $product->getId() ?>" class="btn btn-primary"><i class="fas fa-plus"> Crear</i></a>
+            </div>
+            <hr>
             <?php
             require_once dirname(dirname(__DIR__)) . "/dao/CategoryDao.php";
             $categoryDao = new CategoryDao();
@@ -317,7 +336,7 @@ $materials = $materialDao->findAll();
 
 
             <div class="row" style="margin-bottom: 20px; margin-top: 60px;">
-              <div class="col"></div>
+            <div class="col"><a href="/admin/products" class="btn btn-danger btn-lg">Regresar</a></div>
               <div class="col text-center"><button id="submitEditor" class="btn btn-primary btn-lg">Enviar</button></div>
               <div class="col"></div>
             </div>
@@ -480,10 +499,18 @@ $materials = $materialDao->findAll();
                   alert("error")
                 }
               })
+            },
+            'keyup': function(keyupEvent) {
+              if (document.domain != 'localhost') {
+                $('.fr-wrapper>div:first-child').css('visibility', 'hidden')
+              }
             }
           }
         }, () => {
           editor.html.set(text)
+          if (document.domain != 'localhost') {
+            $('.fr-wrapper>div:first-child').css('visibility', 'hidden')
+          }
         })
         myDropzone = new Dropzone("div#myId", {
           url: "/admin/upload.php",
@@ -619,7 +646,7 @@ $materials = $materialDao->findAll();
         $('#materials').append(`<li><select class="wide" style="margin-bottom: 10px;" id="material${indexMaterial}"><option disabled selected>Seleccione un material</option>
                       <?php
                       foreach ($materials as  $material) { ?>
-                                                                <option value="<?php echo $material->getId(); ?>"><?php echo $material->getName(); ?></option>
+                                                                                <option value="<?php echo $material->getId(); ?>"><?php echo $material->getName(); ?></option>
                       <?php }
                       ?>
                     </select></li>`)
@@ -660,6 +687,16 @@ $materials = $materialDao->findAll();
         })
         $(this).toggleClass('btn-primary')
       })
+
+      function deleteTab(id) {
+        $.post('api/delete_tab_product.php', {
+          id: id
+        }, (data, status) => {
+          if (status == 'success') {
+            location.reload()
+          }
+        })
+      }
     </script>
     <script src="/vendor/bootstrap-notify.min.js"></script>
     <script src="/vendor/sleep.js"></script>
