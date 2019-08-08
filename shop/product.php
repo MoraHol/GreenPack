@@ -237,6 +237,9 @@ $tabs = $tabProductDao->findByProduct($product);
       </div>
     </div>
   </div>
+  <hr width="80%" style="
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+">
   <!--================Product Description Area =================-->
   <section class="product_description_area">
     <div class="container">
@@ -275,6 +278,11 @@ $tabs = $tabProductDao->findByProduct($product);
       </div>
     </div>
   </section>
+
+  <hr width="80%" style="
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+">
+
   <section class="related-product-area mt-0">
     <div class="container">
       <div class="section-intro pb-60px">
