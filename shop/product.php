@@ -275,7 +275,7 @@ $tabs = $tabProductDao->findByProduct($product);
       </div>
     </div>
   </section>
-  <section class="related-product-area section-margin--small mt-0">
+  <section class="related-product-area mt-0">
     <div class="container">
       <div class="section-intro pb-60px">
         <p>Articulos relacionados a este producto</p>
@@ -287,9 +287,9 @@ $tabs = $tabProductDao->findByProduct($product);
     <div class="container">
       <div class="row">
         <?php
-        $products = $productDao->findRelatedProducts($product);
+        $products = $productDao->findRelatedProducts($product, 4);
         foreach ($products as $productInstance) { ?>
-          <div class="col-md-6 col-lg-4">
+          <div class="col-sm-3">
             <div class="card text-center card-product zoom-in">
               <div class="card-product__img">
                 <img class="card-img" src="<?= $productInstance->getImages()[0]->getUrl(); ?>">
