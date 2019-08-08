@@ -62,30 +62,60 @@ if ($_GET["page"] > $pages || $_GET["page"] <= 0) {
       color: #fff;
     }
 
-    .carousel-slick .carousel-item-notice {
-      color: #fff;
-      padding-top: 201px;
-      padding-left: 300px;
+    @media(min-width: 1024px) {
+      .carousel-slick .carousel-item-notice {
+        color: #fff;
+        padding-top: 201px;
+        padding-left: 300px;
+      }
+
+      .carousel-slick .carousel-item-notice .notice {
+        border-left: 2px solid #fff;
+        padding-left: 32px;
+        padding-bottom: 25px;
+        font-size: 17px;
+        text-transform: uppercase;
+        line-height: normal;
+        letter-spacing: 0.100em;
+        display: block;
+      }
+
+      .carousel-slick .carousel-item-notice .title {
+        font-size: 22px;
+        letter-spacing: 0.230em;
+        position: relative;
+        left: -190px;
+        top: 25px;
+        text-transform: uppercase;
+      }
     }
 
-    .carousel-slick .carousel-item-notice .notice {
-      border-left: 2px solid #fff;
-      padding-left: 32px;
-      padding-bottom: 25px;
-      font-size: 17px;
-      text-transform: uppercase;
-      line-height: normal;
-      letter-spacing: 0.100em;
-      display: block;
-    }
+    @media(max-width: 400px) {
+      .carousel-slick .carousel-item-notice {
+        color: #fff;
+        padding-top: 201px;
+        padding-left: 180px;
+      }
 
-    .carousel-slick .carousel-item-notice .title {
-      font-size: 22px;
-      letter-spacing: 0.230em;
-      position: relative;
-      left: -190px;
-      top: 25px;
-      text-transform: uppercase;
+      .carousel-slick .carousel-item-notice .notice {
+        border-left: 2px solid #fff;
+        padding-left: 32px;
+        padding-bottom: 25px;
+        font-size: 13px;
+        text-transform: uppercase;
+        line-height: normal;
+        letter-spacing: 0.100em;
+        display: block;
+      }
+
+      .carousel-slick .carousel-item-notice .title {
+        font-size: 18px;
+        letter-spacing: 0.230em;
+        position: relative;
+        left: -190px;
+        top: 25px;
+        text-transform: uppercase;
+      }
     }
   </style>
 

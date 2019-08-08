@@ -4855,12 +4855,12 @@ a.ui2-button.disabled:hover {
     position: relative;
     display: block
 }
-
+/* 
 @media screen and (max-width:1320px) {
 
     .home-category-info-detail .home-category-info-top-words-warpper .home-category-info-top-word.top-word-0,
     .home-category-info-detail .home-category-info-top-words-warpper .home-category-info-top-word.top-word-2 {
-        display: none
+        display: block;
     }
 
     .home-category-info-detail .home-category-info-top-words-warpper .home-category-info-top-word.home-category-info-ranking-list-wrap,
@@ -4873,9 +4873,9 @@ a.ui2-button.disabled:hover {
 
     .home-category-info-detail .home-category-info-top-words-warpper .home-category-info-top-word.home-category-info-ranking-list-wrap,
     .home-category-info-detail .home-category-info-top-words-warpper .home-category-info-top-word.top-word-1 {
-        display: none
+        display: block;
     }
-}
+} */
 
 .home-category-info-detail .home-category-info-top-words-warpper .home-category-info-top-word .hot-topic-star-wrap {
     position: absolute;
@@ -5233,7 +5233,7 @@ a.ui2-button.disabled:hover {
         line-height: 32px
     }
 }
-
+/* 
 @media screen and (max-width:1319px) and (min-width:1110px) {
     .home-theme-buyer-hub .content .banner {
         background-image: none !important;
@@ -5279,7 +5279,7 @@ a.ui2-button.disabled:hover {
         margin-left: -35px;
         margin-top: -35px
     }
-}
+} */
 
 .home-theme-flashdeals {
     margin-top: 30px
@@ -5681,7 +5681,7 @@ a.ui2-button.disabled:hover {
     vertical-align: -2px
 }
 
-@media screen and (max-width:1319px) and (min-width:1110px) {
+/* @media screen and (max-width:1319px) and (min-width:1110px) {
     .home-theme-container .theme-item .content .banner {
         display: none
     }
@@ -5701,7 +5701,7 @@ a.ui2-button.disabled:hover {
         transform: translateX(-50%);
         bottom: 12px
     }
-}
+} */
 
 @media screen and (max-width:1109px) {
     .home-theme-container .theme-item {
@@ -7364,9 +7364,11 @@ only screen and (min-device-pixel-ratio:2) {
     height: 376px;
     background-color: #fff
 }
-.banner::after{
+
+.banner::after {
     background-image: linear-gradient(to bottom, #69a55e 0%, #045d07 100%);
 }
+
 .rfq .rfq-banner-0705 .rfq-banner-slider:hover .rfq-banner-prev {
     opacity: 1;
     left: 0

@@ -966,6 +966,7 @@ screen and (orientation:portrait) {
     background: linear-gradient(to right, #ffb57d 0, #fd6250 47%, #fd6250 51%, #fd6250 71%, #fd6250 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffb57d', endColorstr='#fd6250', GradientType=1)
 }
+
 /* 
 .carousel {
     text-align: center;
@@ -1315,7 +1316,7 @@ section.image-store-type.style-arrow-carousel.not-space .carousel>ul {
 screen and (orientation:portrait) {
     body {
         background-color: #f7f7f7;
-        padding-bottom: 60px
+        /* padding-bottom: 60px */
     }
 
     .checkbox label:hover::after {
@@ -1374,8 +1375,8 @@ screen and (orientation:portrait) {
 
     .container {
         width: 100%;
-        padding-left: 10px;
-        padding-right: 10px
+        padding-left: 0;
+        padding-right: 0;
     }
 
     .scroll-horizontal {

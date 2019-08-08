@@ -16,7 +16,7 @@ $tabs = $tabProductDao->findByProduct($product);
 <head>
   <meta charset="UTF-8">
   <?php include("../partials/metaproperties.html") ?>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title><?= $product->getName(); ?> | Greenpack</title>
   <!--============= CSS ======================== -->

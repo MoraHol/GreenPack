@@ -13,7 +13,8 @@ $conversor = new ConversorDate(); ?>
   <!--CSS ============================================= -->
   <link rel="stylesheet" href="css/linearicons.css">
   <link rel="stylesheet" href="css/font-awesome.min.css">
-  <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+  <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
   <link rel="stylesheet" href="css/magnific-popup.css">
   <link rel="stylesheet" href="css/animate.min.css">
   <link rel="stylesheet" href="css/owl.carousel.css">
@@ -230,11 +231,11 @@ $conversor = new ConversorDate(); ?>
 
               <hr>
               <h3 class="g-font-size-22--xs g-letter-spacing--1" style="    font-family: 'Poppins', sans-serif;
-      color: #222222;
-      line-height: 1.2em !important;
-      margin-bottom: 0;
-      margin-top: 0;
-      font-weight: 600;"><a href="/blog/blog-post.php?id=<?php echo $notice->getId(); ?>"><?php echo $notice->getTitle(); ?></a></h3>
+            color: #222222;
+            line-height: 1.2em !important;
+            margin-bottom: 0;
+            margin-top: 0;
+            font-weight: 600;"><a href="/blog/blog-post.php?id=<?php echo $notice->getId(); ?>"><?php echo $notice->getTitle(); ?></a></h3>
               <p></p>
             </div>
           </article>

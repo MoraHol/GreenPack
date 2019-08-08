@@ -51,11 +51,25 @@
     background-color: #007bff;
     border-color: #007bff;
   }
+
+  @media(max-width: 400px) {
+
+    .fixed-quoting,
+    .fixed-quoting-2,
+    .fixed-quoting-3 {
+      display: none;
+    }
+  }
+  @media(min-width: 1024px){
+    .fixed-quoting,
+    .fixed-quoting-2,
+    .fixed-quoting-3 {
+      display: block;
+    }
   }
 </style>
 <script>
-  $('#btnSuscribe').click(()=>
-  {
+  $('#btnSuscribe').click(() => {
     hideCart()
   })
   $('.fixed-quoting').hover(() => {
