@@ -46,7 +46,7 @@
   if (!isset($_GET["page"])) {
     header("Location: category.php?id=" . $_GET['id'] . "&page=1");
   }
-  $productsperPage = 6;
+  $productsperPage = 8;
   $pages = ceil(count($productDao->findByCategory($_GET["id"])) / $productsperPage);
   $pageInit = ($_GET["page"] - 1) * $productsperPage;
   if ($_GET["page"] > $pages || $_GET["page"] < 0) {
@@ -139,7 +139,7 @@
               <?php
               $products = $productDao->findByCategoryWithLimit($_GET["id"], $pageInit, $productsperPage);
               foreach ($products as $product) { ?>
-                <div class="col-md-6 col-lg-4">
+                <div class="col-lg-3">
                   <div class="card text-center card-product zoom-in">
                     <div class="card-product__img">
                       <img class="card-img" src="<?php echo $product->getImages()[0]->getUrl(); ?>">

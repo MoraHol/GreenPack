@@ -230,11 +230,11 @@ $conversor = new ConversorDate(); ?>
 
               <hr>
               <h3 class="g-font-size-22--xs g-letter-spacing--1" style="    font-family: 'Poppins', sans-serif;
-                color: #222222;
-                line-height: 1.2em !important;
-                margin-bottom: 0;
-                margin-top: 0;
-                font-weight: 600;"><a href="/blog/blog-post.php?id=<?php echo $notice->getId(); ?>"><?php echo $notice->getTitle(); ?></a></h3>
+                    color: #222222;
+                    line-height: 1.2em !important;
+                    margin-bottom: 0;
+                    margin-top: 0;
+                    font-weight: 600;"><a href="/blog/blog-post.php?id=<?php echo $notice->getId(); ?>"><?php echo $notice->getTitle(); ?></a></h3>
               <p></p>
             </div>
           </article>
@@ -249,20 +249,20 @@ $conversor = new ConversorDate(); ?>
     width: 80%;
 ">
   <!-- clientes -->
-  <section id="clients">
+  <section>
     <br><br>
     <h2 class="g-font-size-32--xs g-font-size-36--md text-center">Nuestros Clientes</h2>
     <br><br>
     <div class="flexslider carousel">
-      <ul class="slides">
-        <li><img src="/images/clients/conciencia-eco.png" alt="" width="300"></li>
+      <ul class="slides" id="clients-slides">
+        <!-- <li><img src="/images/clients/conciencia-eco.png" alt="" width="300"></li>
         <li><img src="/images/clients/conciencia-global}.png" alt="" width="300"></li>
         <li><img src="/images/clients/conexion-verde.png" alt="" srcset="" width="300"></li>
         <li><img src="/images/clients/eco-inteligencia.png" alt="" srcset="" width="300"></li>
         <li><img src="/images/clients/min-ambiente.png" alt="" srcset="" width="300"></li>
         <li><img src="/images/clients/sentido-verde.png" alt="" width="300"></li>
         <li><img src="/images/clients/veo_verde.png" alt="" width="300"></li>
-        <li><img src="/images/clients/LOGO-FRISBY.jpg" alt="" width="300"></li>
+        <li><img src="/images/clients/LOGO-FRISBY.jpg" alt="" width="300"></li> -->
       </ul>
     </div>
   </section>
@@ -382,6 +382,12 @@ $conversor = new ConversorDate(); ?>
       $('#innovations').attr("data-to", numbers[1].value)
       $('#products').attr("data-to", numbers[0].value)
       $('#clients').attr("data-to", numbers[2].value)
+    })
+    $.get('/admin/texts/home/api/get_clients.php', (data, status) => {
+      let clients = data
+      clients.forEach(client => {
+        $('#clients-slides').append(`<li><img src="${client.image_url}" alt="" width="300"></li>`)
+      });
     })
   </script>
 
