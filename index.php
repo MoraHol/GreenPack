@@ -114,7 +114,6 @@ $conversor = new ConversorDate(); ?>
               <a href="#about" class="text-uppercase header-btn">Descubrir Ahora</a>
             </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -176,7 +175,7 @@ $conversor = new ConversorDate(); ?>
                 <i class="far fa-lightbulb" style="    color: rgb(19, 109, 8);height: 70px;font-size: -webkit-xxx-large;"></i>
               </span>
 
-              <span class="counter js-counter" data-from="0" data-to="220" data-speed="5000" data-refresh-interval="50">220</span>
+              <span class="counter js-counter" data-from="0" data-to="220" data-speed="5000" data-refresh-interval="50" id="innovations">220</span>
               <span class="counter-label">Innovaciones <br>Realizadas</span>
 
             </div>
@@ -186,7 +185,7 @@ $conversor = new ConversorDate(); ?>
               <span class="icon">
                 <i class="fas fa-box-open" style="color: rgb(19, 109, 8);height: 70px;font-size: -webkit-xxx-large;"></i>
               </span>
-              <span class="counter js-counter" data-from="0" data-to="700" data-speed="5000" data-refresh-interval="50">700</span>
+              <span class="counter js-counter" data-from="0" data-to="700" data-speed="5000" data-refresh-interval="50" id="products">700</span>
               <span class="counter-label">Productos <br>Ofertados</span>
             </div>
           </div>
@@ -195,7 +194,7 @@ $conversor = new ConversorDate(); ?>
               <span class="icon">
                 <i class="fas fa-running" style="color: rgb(19, 109, 8);height: 70px;font-size: -webkit-xxx-large;"></i>
               </span>
-              <span class="counter js-counter" data-from="0" data-to="450" data-speed="5000" data-refresh-interval="50">450</span>
+              <span class="counter js-counter" data-from="0" data-to="450" data-speed="5000" data-refresh-interval="50" id="clients">450</span>
               <span class="counter-label">Clientes <br>Atendidos</span>
             </div>
           </div>
@@ -231,11 +230,11 @@ $conversor = new ConversorDate(); ?>
 
               <hr>
               <h3 class="g-font-size-22--xs g-letter-spacing--1" style="    font-family: 'Poppins', sans-serif;
-            color: #222222;
-            line-height: 1.2em !important;
-            margin-bottom: 0;
-            margin-top: 0;
-            font-weight: 600;"><a href="/blog/blog-post.php?id=<?php echo $notice->getId(); ?>"><?php echo $notice->getTitle(); ?></a></h3>
+                color: #222222;
+                line-height: 1.2em !important;
+                margin-bottom: 0;
+                margin-top: 0;
+                font-weight: 600;"><a href="/blog/blog-post.php?id=<?php echo $notice->getId(); ?>"><?php echo $notice->getTitle(); ?></a></h3>
               <p></p>
             </div>
           </article>
@@ -373,6 +372,16 @@ $conversor = new ConversorDate(); ?>
       var gridSize = getGridSize();
       flexslider.vars.minItems = gridSize;
       flexslider.vars.maxItems = gridSize;
+    })
+    // get numbers for update
+    $.get('/admin/texts/home/api/get_numbers.php', (data, status) => {
+      let numbers = data
+      $('#innovations').html(numbers[1].value)
+      $('#products').html(numbers[0].value)
+      $('#clients').html(numbers[2].value)
+      $('#innovations').attr("data-to", numbers[1].value)
+      $('#products').attr("data-to", numbers[0].value)
+      $('#clients').attr("data-to", numbers[2].value)
     })
   </script>
 

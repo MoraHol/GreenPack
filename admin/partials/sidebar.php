@@ -53,6 +53,12 @@
             <p>Administradores</p>
           </a>
         </li>
+        <li class="nav-item" id="users-item">
+          <a href="/admin/texts" class="nav-link">
+            <i class="fas fa-font"></i>
+            <p>Textos</p>
+          </a>
+        </li>
       <?php } ?>
       <?php if ($admin->getRole() == 2 || $admin->getRole() == 1) { ?>
         <li class="nav-item" id="quotations-item">

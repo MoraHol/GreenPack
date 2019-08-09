@@ -114,7 +114,7 @@ $material = $materialDao->findById($_GET["id"]);
         }, (data, status) => {
           if (status == 'success') {
             $.notify({
-              message: 'Se ha actualizado el Producto',
+              message: 'Se ha actualizado el Material',
               title: '<strong>Exito</strong>',
               icon: 'fas fa-exclamation-triangle'
             }, {
