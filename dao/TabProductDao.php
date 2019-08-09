@@ -28,8 +28,9 @@ class TabProductDao
   function update($tab)
   {
     $this->db->connect();
-    $query = "UPDATE `products_tabs` SET `title` = '" . $tab->getTitle() . "', `description` = '" . $tab->getDescription() . "',
+    $query = "UPDATE `products_tabs` SET `title` = '" . $tab->getTitle() . "', `description` = '" . $tab->getDescription() . "'
     WHERE `products_tabs`.`id_tab` = " . $tab->getId();
+    echo $query;
     $status = $this->db->consult($query);
     $this->db->close();
     return $status;

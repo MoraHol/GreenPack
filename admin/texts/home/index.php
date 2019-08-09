@@ -86,6 +86,10 @@ include("../../partials/verify-session.php");
     <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="/vendor/jquery.formatCurrency-1.4.0.min.js"></script>
     <script src="/vendor/jquery.formatCurrency.all.js"></script>
+    <script>
+    $('.sidebar div.sidebar-wrapper ul.nav li:first').removeClass('active')
+      $('#text-item').addClass('active')
+      </script>
 </body>
 
 </html>

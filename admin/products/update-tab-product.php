@@ -172,7 +172,7 @@ $tab = $tabProductDao->findById($_GET["id"]);
           $.notify({
             message: 'Se ha actualizado la Pestaña',
             title: 'Exito',
-            icon: 'fas fa-check-circle'
+            icon: 'notification_important'
           }, {
             type: 'success'
           })

@@ -1,12 +1,15 @@
 <?php
+// require dirname(dirname(__DIR__)) . "/dao/MaterialDao.php";
 include("../../partials/verify-session.php");
+// $materialDao = new MaterialDao();
+// $materials = $materialDao->findAll();
 ?>
 <!-- author: Alexis Holguin, github: MoraHol -->
 <!doctype html>
 <html lang="es">
 
 <head>
-  <title>Textos - Banner | GreenPack</title>
+  <title>Textos | GreenPack</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -19,14 +22,11 @@ include("../../partials/verify-session.php");
   <link rel="stylesheet" href="/css/all.min.css">
   <!-- Page level plugin CSS-->
   <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/vendor/dropzone/dropzone.css">
+
   <style>
     td.highlight {
       background-color: whitesmoke !important;
-    }
-
-    .title {
-      font-size: 30px;
-      text-align: center;
     }
   </style>
 </head>
@@ -49,23 +49,38 @@ include("../../partials/verify-session.php");
             <li class="breadcrumb-item">
               <a href="/admin/texts/home">Inicio</a>
             </li>
-            <li class="breadcrumb-item active">Banner</li>
+            <li class="breadcrumb-item">
+              <a href="/admin/texts/home/banner.php">Banner</a>
+            </li>
+            <li class="breadcrumb-item active">Crear Slides</li>
           </ol>
           <!-- DataTables Example -->
           <div class="card mb-3">
             <div class="card-header">
-              <i class="fas fa-table"></i>
-              Slides del Banner</div>
+              <i class="fas fa-plus"></i>
+              Nueva Slide</div>
             <div class="card-body">
-              <hr>
-              <div class="container" id="banners">
+              <div class="form-group">
+                <label for="header">Escriba el encabezado del slide</label>
+                <input type="text" class="form-control" id="header">
               </div>
-              <a href="new_slide.php" class="btn btn-primary bnt-lg"><i class="fas fa-plus"></i> Crear</a>
+              <div class="form-group">
+                <label for="title">Escriba el titulo del slide</label>
+                <input type="text" class="form-control" id="title">
+              </div>
+              <div class="form-group">
+                <label for="subtitle">Escriba el subtitulo del slide</label>
+                <input type="text" class="form-control" id="subtitle">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="myId">Suba la imagen del slide:</label>
+              <div id="myId" class="dropzone"></div>
             </div>
           </div>
           <div class="row">
-            <div class="col"><a href="/admin/texts/home" class="btn btn-danger btn-lg">Regresar</a></div>
             <div class="col"></div>
+            <div class="col"><button id="submitEditor" class="btn btn-primary btn-lg">Crear</button></div>
             <div class="col"></div>
           </div>
         </div>
@@ -95,29 +110,47 @@ include("../../partials/verify-session.php");
     <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="/vendor/jquery.formatCurrency-1.4.0.min.js"></script>
     <script src="/vendor/jquery.formatCurrency.all.js"></script>
+    <script src="/vendor/dropzone/dropzone.js"></script>
     <script>
       $('.sidebar div.sidebar-wrapper ul.nav li:first').removeClass('active')
       $('#text-item').addClass('active')
 
-      $.get('api/get_banner.php', (slides, status) => {
-        slides.forEach(slide => {
-          $('#banners').append(`<div class="row align-items-center  justify-content-center ">
-                  <div class="col-sm-3"><img src="${slide.image}" alt="" width="200"></div>
-                  <div class="col-sm-6 mr-auto">
-                    <div class="row  justify-content-center header-title align-items-center">${slide.header}</div>
-                    <div class="row  justify-content-center title text-primary">${slide.title}</div>
-                    <div class="row  text-gray justify-content-center sub-title-v2">${slide.subtitle}</div>
-                  </div>
-                  <div class="col-sm-1"><a href="update_slide.php?id=${slide.id}" title="Editar" class="btn btn-primary"><i class="fas fa-pen"></i></a></div>
-                  <div class="col-sm-1"><a href="javascript:deleteSlide(${slide.id})" title="Borrar" class="btn btn-primary"><i class="fas fa-trash"></i></a></div>
-                </div>
-                <hr>`)
-        });
+      // dropzone
+      let myDropzone
+      Dropzone.autoDiscover = false;
+      myDropzone = new Dropzone("div#myId", {
+        url: "/admin/upload.php",
+        method: 'post',
+        paramName: 'photo',
+        acceptedFiles: "image/*",
+        dictDefaultMessage: 'Sube tus archivos, arrastralos o haz click para buscarlos',
+        dictMaxFilesExceeded: 'Solo se permite subir una imagen',
+        dictInvalidFileType: 'Solo se permite imagenes',
+        maxFiles: 1
       })
-
-      function deleteSlide(id) {
-
-      }
+      $('#submitEditor').click(() => {
+        if (myDropzone.getAcceptedFiles().length > 0 && $('#title').val() != '') {
+          let response = JSON.parse(myDropzone.getAcceptedFiles()[0].xhr.responseText)
+          $.post('api/create_slide.php', {
+            image: response.link,
+            title: $('#title').val(),
+            subtitle: $('#subtitle').val(),
+            header: $('#header').val()
+          }, (data, status) => {
+            if (status == 'success') {
+              location.href = "/admin/texts/home/banner.php"
+            }
+          })
+        } else {
+          $.notify({
+            message: 'Faltan Datos para la creacion del slide',
+            title: '<strong>Error</strong>',
+            icon: 'notification_important'
+          }, {
+            type: 'danger'
+          })
+        }
+      })
     </script>
 </body>
 

@@ -14,7 +14,6 @@ $conversor = new ConversorDate(); ?>
   <link rel="stylesheet" href="css/linearicons.css">
   <link rel="stylesheet" href="css/font-awesome.min.css">
   <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
-  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
   <link rel="stylesheet" href="css/magnific-popup.css">
   <link rel="stylesheet" href="css/animate.min.css">
   <link rel="stylesheet" href="css/owl.carousel.css">
@@ -255,14 +254,6 @@ $conversor = new ConversorDate(); ?>
     <br><br>
     <div class="flexslider carousel">
       <ul class="slides" id="clients-slides">
-        <!-- <li><img src="/images/clients/conciencia-eco.png" alt="" width="300"></li>
-        <li><img src="/images/clients/conciencia-global}.png" alt="" width="300"></li>
-        <li><img src="/images/clients/conexion-verde.png" alt="" srcset="" width="300"></li>
-        <li><img src="/images/clients/eco-inteligencia.png" alt="" srcset="" width="300"></li>
-        <li><img src="/images/clients/min-ambiente.png" alt="" srcset="" width="300"></li>
-        <li><img src="/images/clients/sentido-verde.png" alt="" width="300"></li>
-        <li><img src="/images/clients/veo_verde.png" alt="" width="300"></li>
-        <li><img src="/images/clients/LOGO-FRISBY.jpg" alt="" width="300"></li> -->
       </ul>
     </div>
   </section>

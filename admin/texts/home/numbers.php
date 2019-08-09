@@ -147,6 +147,10 @@ include("../../partials/verify-session.php");
         }
       })
     </script>
+    <script>
+    $('.sidebar div.sidebar-wrapper ul.nav li:first').removeClass('active')
+      $('#text-item').addClass('active')
+      </script>
 </body>
 
 </html>
