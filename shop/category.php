@@ -32,6 +32,19 @@
 
   <link rel="stylesheet" href="/css/style-shop.css">
   <script src="/js/spinner.js"></script>
+  <style>
+    #container-image {
+      background-size: cover;
+      background-position: center;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      height: 100%;
+      width: 100%;
+      text-align: center;
+    }
+  </style>
 </head>
 
 <body>
@@ -52,6 +65,30 @@
   if ($_GET["page"] > $pages || $_GET["page"] < 0) {
     header("Location: category.php?id=" . $_GET['id'] . "&page=1");
   }
+  switch ($_GET["id"]) {
+    case 1:
+      $image = "/images/categories/bolsas_biodegradables.png";
+      break;
+    case 2:
+      $image = "/images/categories/cajas_biodegradables.png";
+      break;
+    case 3:
+      $image = "/images/categories/cajas_biodegradables.png";
+      break;
+    case 4:
+      $image = "/images/categories/cajas_biodegradables.png";
+      break;
+    case 5:
+      $image = "/images/categories/cajas_biodegradables.png";
+      break;
+    case 6:
+      $image = "/images/categories/laminas_biodegradables.png";
+      break;
+    case 7:
+      $image = "/images/categories/Rollo_de_papel.png";
+      break;
+  }
+  if ($_GET["id"] == 1) { }
   ?>
   <?php include("../partials/fixed-quoting.html"); ?>
   <div class="wall-loading">
@@ -71,7 +108,7 @@
 
   <!-- ================ start banner area ================= -->
   <section class="blog-banner-area" id="category">
-    <div class="container h-100">
+    <div class="container h-100" style="background: url(<?= $image ?>) no-repeat fixed center;" id="container-image">
       <div class="blog-banner">
         <div class="text-center">
           <h1>Productos</h1>

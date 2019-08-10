@@ -101,51 +101,6 @@ $conversor = new ConversorDate(); ?>
   <?php include("partials/header_1.html") ?>
 
   <section class="default-banner active-blog-slider" id="banner">
-    <!-- <div class="item-slider relative" style="background: url(images/AdobeStock_114530769_Preview.jpeg);background-size: cover;">
-      <div class="overlay" style="background: rgba(0,0,0,.3)"></div>
-      <div class="container">
-        <div class="row fullscreen justify-content-center align-items-center">
-          <div class="col-md-10 col-12">
-            <div class="banner-content text-center">
-              <h4 class="text-white mb-20 text-uppercase">Descubre la magia de nuestros empaques</h4>
-              <h1 class="text-uppercase text-white">Exportación</h1>
-              <h5 class="text-white">Diseñamos tus empaques especiales para tus productos de exportación.</h5>
-              <a href="#about" class="text-uppercase header-btn">Descubrir Ahora</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="item-slider relative" style="background: url(images/beach.jpg);background-size: cover;">
-      <div class="overlay" style="background: rgba(0,0,0,.3)"></div>
-      <div class="container">
-        <div class="row fullscreen justify-content-center align-items-center">
-          <div class="col-md-10 col-12">
-            <div class="banner-content text-center">
-              <h4 class="text-white mb-20 text-uppercase">¿Qué tipo de empaque quieres tener?</h4>
-              <h1 class="text-uppercase text-white">100% Biodegradable</h1>
-              <h5 class="text-white">Empaques desarrollados para que ayudemos al planeta.</h5>
-              <a href="#about" class="text-uppercase header-btn">Descubrir Ahora</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="item-slider relative" style="background: url(/images/AdobeStock_178732916_Preview.jpeg);background-size: cover;">
-      <div class="overlay" style="background: rgba(0,0,0,.3)"></div>
-      <div class="container">
-        <div class="row fullscreen justify-content-center align-items-center">
-          <div class="col-md-10 col-12">
-            <div class="banner-content text-center">
-              <h4 class="text-white mb-20 text-uppercase">Descubre la magia de nuestros empaques</h4>
-              <h1 class="text-uppercase text-white">Innovación</h1>
-              <h5 class="text-white">El comienzo de una nueva era para llevar, servir y exhibir.</h5>
-              <a href="#about" class="text-uppercase header-btn">Descubrir Ahora</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
   </section>
 
   <!-- Start about Area -->
