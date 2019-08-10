@@ -100,8 +100,8 @@ $conversor = new ConversorDate(); ?>
   </div>
   <?php include("partials/header_1.html") ?>
 
-  <section class="default-banner active-blog-slider">
-    <div class="item-slider relative" style="background: url(images/AdobeStock_114530769_Preview.jpeg);background-size: cover;">
+  <section class="default-banner active-blog-slider" id="banner">
+    <!-- <div class="item-slider relative" style="background: url(images/AdobeStock_114530769_Preview.jpeg);background-size: cover;">
       <div class="overlay" style="background: rgba(0,0,0,.3)"></div>
       <div class="container">
         <div class="row fullscreen justify-content-center align-items-center">
@@ -131,7 +131,7 @@ $conversor = new ConversorDate(); ?>
         </div>
       </div>
     </div>
-    <div class="item-slider relative" style="background: url(images/AdobeStock_178732916_Preview.jpeg);background-size: cover;">
+    <div class="item-slider relative" style="background: url(/images/AdobeStock_178732916_Preview.jpeg);background-size: cover;">
       <div class="overlay" style="background: rgba(0,0,0,.3)"></div>
       <div class="container">
         <div class="row fullscreen justify-content-center align-items-center">
@@ -145,7 +145,7 @@ $conversor = new ConversorDate(); ?>
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </section>
 
   <!-- Start about Area -->
@@ -229,11 +229,11 @@ $conversor = new ConversorDate(); ?>
 
               <hr>
               <h3 class="g-font-size-22--xs g-letter-spacing--1" style="    font-family: 'Poppins', sans-serif;
-                    color: #222222;
-                    line-height: 1.2em !important;
-                    margin-bottom: 0;
-                    margin-top: 0;
-                    font-weight: 600;"><a href="/blog/blog-post.php?id=<?php echo $notice->getId(); ?>"><?php echo $notice->getTitle(); ?></a></h3>
+                                          color: #222222;
+                                          line-height: 1.2em !important;
+                                          margin-bottom: 0;
+                                          margin-top: 0;
+                                          font-weight: 600;"><a href="/blog/blog-post.php?id=<?php echo $notice->getId(); ?>"><?php echo $notice->getTitle(); ?></a></h3>
               <p></p>
             </div>
           </article>
@@ -308,7 +308,6 @@ $conversor = new ConversorDate(); ?>
   <script src="js/slick.js"></script>
   <script src="js/jquery.counterup.min.js"></script>
   <script src="js/waypoints.min.js"></script>
-  <script src="js/main.js"></script>
   <script src="js/back-top.js"></script>
   <script src="js/bootstrap.min.js"></script>
 
@@ -380,8 +379,38 @@ $conversor = new ConversorDate(); ?>
         $('#clients-slides').append(`<li><img src="${client.image_url}" alt="" width="300"></li>`)
       });
     })
+    $.get('/admin/texts/home/api/get_banner.php', (slides, status) => {
+      slides.forEach(slide => {
+        $('#banner').append(`<div class="item-slider relative" style="background: url(${slide.image});background-size: cover;">
+      <div class="overlay" style="background: rgba(0,0,0,.3)"></div>
+      <div class="container">
+        <div class="row fullscreen justify-content-center align-items-center">
+          <div class="col-md-10 col-12">
+            <div class="banner-content text-center">
+              <h4 class="text-white mb-20 text-uppercase">${slide.header}</h4>
+              <h1 class="text-uppercase text-white">${slide.title}</h1>
+              <h5 class="text-white">${slide.subtitle}</h5>
+              <a href="#about" class="text-uppercase header-btn">Descubrir Ahora</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`)
+      })
+      $('.active-blog-slider').owlCarousel({
+        loop: true,
+        dots: true,
+        items: 1,
+        autoplay: true,
+        autoplayTimeout: 5000,
+        smartSpeed: 1000,
+        animateOut: 'fadeOut',
+      })
+      var s = document.createElement("script");
+      s.src = '/js/main.js';
+      document.querySelector("head").appendChild(s);
+    })
   </script>
-
 </body>
 
 </html>

@@ -98,10 +98,13 @@ include("../../partials/verify-session.php");
     <script>
       $('.sidebar div.sidebar-wrapper ul.nav li:first').removeClass('active')
       $('#text-item').addClass('active')
+      loadBanner()
 
-      $.get('api/get_banner.php', (slides, status) => {
-        slides.forEach(slide => {
-          $('#banners').append(`<div class="row align-items-center  justify-content-center ">
+      function loadBanner() {
+        $.get('api/get_banner.php', (slides, status) => {
+          $('#banners').html('')
+          slides.forEach(slide => {
+            $('#banners').append(`<div class="row align-items-center  justify-content-center ">
                   <div class="col-sm-3"><img src="${slide.image}" alt="" width="200"></div>
                   <div class="col-sm-6 mr-auto">
                     <div class="row  justify-content-center header-title align-items-center">${slide.header}</div>
@@ -112,11 +115,26 @@ include("../../partials/verify-session.php");
                   <div class="col-sm-1"><a href="javascript:deleteSlide(${slide.id})" title="Borrar" class="btn btn-primary"><i class="fas fa-trash"></i></a></div>
                 </div>
                 <hr>`)
-        });
-      })
+          });
+        })
+      }
+
 
       function deleteSlide(id) {
-
+        $.post('api/delete_slide.php', {
+          id
+        }, (data, status) => {
+          if (status == 'sucsess') {
+            $.notify({
+              message: 'Se ha borrado el slide',
+              title: '<strong>Error</strong>',
+              icon: 'notification_important'
+            }, {
+              type: 'warning'
+            })
+          }
+          loadBanner()
+        })
       }
     </script>
 </body>
