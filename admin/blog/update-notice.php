@@ -79,9 +79,6 @@ if (isset($_GET["id"])) {
       margin-top: 75px;
     }
   </style>
-  <?php if ($_SERVER["HTTP_HOST"] != "localhost") {
-    echo "<style>.fr-wrapper>div:first-child {display: none !important;}</style>";
-  } ?>
 
 </head>
 
