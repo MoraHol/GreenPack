@@ -77,6 +77,9 @@ $tabs = $tabProductDao->findByProduct($product);
     .tab-pane .fr-view>p[data-f-id="pbf"] {
       display: none;
     }
+    .tab-content .fr-view hr{
+      border-top: 1px solid rgba(0, 0, 0, 0.3);
+    }
   </style>
 
 </head>
