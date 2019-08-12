@@ -28,6 +28,16 @@ $conversor = new ConversorDate(); ?>
   <link rel="stylesheet" href="/css/style-index-notices.css">
   <link href="https://fonts.googleapis.com/css?family=Concert+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/basket.css">
+  <script type="text/javascript">
+    $(document).ready(function($) {
+      $(".scroll").click(function(event) {
+        event.preventDefault();
+        $('html,body').animate({
+          scrollTop: $(this.hash).offset().top
+        }, 1000);
+      });
+    });
+  </script>
   <style>
     .search input.serch {
       color: #fff;
@@ -170,30 +180,30 @@ $conversor = new ConversorDate(); ?>
       $noticeDao = new NoticeDao();
       $notices = $noticeDao->findlastest(3);
       foreach ($notices as $notice) { ?>
-        <div class="col-sm-4 g-margin-b-30--xs g-margin-b-0--md">
-          <!-- Bloque 1 -->
-          <article>
-            <img class="img-responsive" src="<?php echo $notice->getImage(); ?>">
-            <div class="g-bg-color--white g-box-shadow__dark-lightest-v2 g-text-center--xs g-padding-x-40--xs g-padding-y-40--xs" style="padding-top: 0.5rem;">
+      <div class="col-sm-4 g-margin-b-30--xs g-margin-b-0--md">
+        <!-- Bloque 1 -->
+        <article>
+          <img class="img-responsive" src="<?php echo $notice->getImage(); ?>">
+          <div class="g-bg-color--white g-box-shadow__dark-lightest-v2 g-text-center--xs g-padding-x-40--xs g-padding-y-40--xs" style="padding-top: 0.5rem;">
 
-              <div class="row g-font-size-14--xs g-font-weight--700 g-color--primary">
-                <div class="col text-uppercase"><i class="fas fa-eye"></i> Visitas: 0</div>
-                <div class="col"><?php echo $notice->getCreatedAt()["day"];
+            <div class="row g-font-size-14--xs g-font-weight--700 g-color--primary">
+              <div class="col text-uppercase"><i class="fas fa-eye"></i> Visitas: 0</div>
+              <div class="col"><?php echo $notice->getCreatedAt()["day"];
                                   echo " de " .  " " . $conversor->monthToString($notice->getCreatedAt()["month"]) . ", " . $notice->getCreatedAt()["year"];; ?></div>
-              </div>
+            </div>
 
-              <hr>
-              <h3 class="g-font-size-22--xs g-letter-spacing--1" style="    font-family: 'Poppins', sans-serif;
+            <hr>
+            <h3 class="g-font-size-22--xs g-letter-spacing--1" style="    font-family: 'Poppins', sans-serif;
                                           color: #222222;
                                           line-height: 1.2em !important;
                                           margin-bottom: 0;
                                           margin-top: 0;
                                           font-weight: 600;"><a href="/blog/blog-post.php?id=<?php echo $notice->getId(); ?>"><?php echo $notice->getTitle(); ?></a></h3>
-              <p></p>
-            </div>
-          </article>
-          <!-- Final Bloque 1 -->
-        </div>
+            <p></p>
+          </div>
+        </article>
+        <!-- Final Bloque 1 -->
+      </div>
       <?php } ?>
     </div>
   </div>

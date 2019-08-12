@@ -26,6 +26,10 @@ include("../partials/verify-session.php");
     td.highlight {
       background-color: whitesmoke !important;
     }
+
+    .card-body .fas {
+      font-size: 4rem;
+    }
   </style>
 </head>
 
@@ -49,10 +53,24 @@ include("../partials/verify-session.php");
               <i class="fas fa-table"></i>
               Pestañas de la pagina</div>
             <div class="card-body">
-              <ul>
-                <li><a href="home">Inicio</a></li>
-                <li>Acerca de nosotros</li+>
-              </ul>
+              <div class="row">
+                <div class="col-sm-6 align-items-start justify-content-center text-center border-right" id="border-item">
+                  <a href="home">
+                    <i class="fas fa-home"></i>
+                    <br>
+                    <br>
+                    Inicio
+                  </a>
+                </div>
+                <div class="col-sm-6 align-items-start justify-content-center  border-rigth text-center" id="border-item-2">
+                  <a href="about">
+                    <i class="fas fa-building"></i>
+                    <br>
+                    <br>
+                    Acerca de nosotros
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -83,9 +101,28 @@ include("../partials/verify-session.php");
     <script src="/vendor/jquery.formatCurrency-1.4.0.min.js"></script>
     <script src="/vendor/jquery.formatCurrency.all.js"></script>
     <script>
-    $('.sidebar div.sidebar-wrapper ul.nav li:first').removeClass('active')
+      $('.sidebar div.sidebar-wrapper ul.nav li:first').removeClass('active')
       $('#text-item').addClass('active')
-      </script>
+      $(window).resize(() => {
+        borderResize()
+      })
+
+      borderResize()
+
+      function borderResize() {
+        if ($(window).width() < 401) {
+          $('#border-item').removeClass('border-right')
+          $('#border-item').addClass('border-bottom')
+          $('#border-item').css('padding-bottom', '20px')
+          $('#border-item-2').css('padding-top', '20px')
+        } else {
+          $('#border-item').addClass('border-right')
+          $('#border-item').removeClass('border-bottom')
+          $('#border-item').css('padding-bottom', '0')
+          $('#border-item-2').css('padding-top', '0')
+        }
+      }
+    </script>
 </body>
 
 </html>

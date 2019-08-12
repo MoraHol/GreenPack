@@ -48,40 +48,15 @@ include("../../partials/verify-session.php");
             <li class="breadcrumb-item">
               <a href="/admin/texts">Textos</a>
             </li>
-            <li class="breadcrumb-item active">Inicio</li>
+            <li class="breadcrumb-item active">Acerca de Nosotros</li>
           </ol>
           <!-- DataTables Example -->
           <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-table"></i>
-              Pestañas de la pagina</div>
+              Acerca de Nosotros</div>
             <div class="card-body">
-              <div class="row">
-                <div class="col-sm-4 align-items-start justify-content-center text-center border-right" id="border-item">
-                  <a href="banner.php">
-                    <i class="fas fa-chalkboard"></i>
-                    <br>
-                    <br>
-                    Banner
-                  </a>
-                </div>
-                <div class="col-sm-4 align-items-start justify-content-center text-center border-right" id="border-item-2">
-                  <a href="numbers.php">
-                    <i class="fas fa-hashtag"></i>
-                    <br>
-                    <br>
-                    Numeros
-                  </a>
-                </div>
-                <div class="col-sm-4 align-items-start justify-content-center text-center" id="border-item-3">
-                  <a href="clients.php">
-                    <i class="fas fa-users"></i>
-                    <br>
-                    <br>
-                    Clientes
-                  </a>
-                </div>
-              </div>
+
             </div>
           </div>
         </div>
@@ -114,33 +89,6 @@ include("../../partials/verify-session.php");
     <script>
       $('.sidebar div.sidebar-wrapper ul.nav li:first').removeClass('active')
       $('#text-item').addClass('active')
-      $(window).resize(() => {
-        borderResize();
-      })
-      borderResize();
-
-      
-      function borderResize() {
-        if ($(window).width() < 401) {
-          $('#border-item').removeClass('border-right')
-          $('#border-item-2').removeClass('border-right')
-          $('#border-item').addClass('border-bottom')
-          $('#border-item-2').addClass('border-bottom')
-          $('#border-item').css('padding-bottom', '20px')
-          $('#border-item-2').css('padding-top', '20px')
-          $('#border-item-2').css('padding-bottom', '20px')
-          $('#border-item-3').css('padding-top', '20px')
-        } else {
-          $('#border-item').addClass('border-right')
-          $('#border-item-2').addClass('border-right')
-          $('#border-item').removeClass('border-bottom')
-          $('#border-item-2').removeClass('border-bottom')
-          $('#border-item').css('padding-bottom', '0')
-          $('#border-item-2').css('padding-top', '0')
-          $('#border-item-2').css('padding-bottom', '0')
-          $('#border-item-3').css('padding-top', '0')
-        }
-      }
     </script>
 </body>
 
