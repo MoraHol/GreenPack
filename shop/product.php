@@ -77,7 +77,8 @@ $tabs = $tabProductDao->findByProduct($product);
     .tab-pane .fr-view>p[data-f-id="pbf"] {
       display: none;
     }
-    .tab-content .fr-view hr{
+
+    .tab-content .fr-view hr {
       border-top: 1px solid rgba(0, 0, 0, 0.3);
     }
   </style>
@@ -181,7 +182,7 @@ $tabs = $tabProductDao->findByProduct($product);
                   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion-cotizador">
                     <div class="card-body">
                       <?php foreach ($product->getMaterials() as $material) { ?>
-                        <label class="radio-inline" style="margin-left: 10px;"><input type="radio" name="material" value="<?= $material->getId(); ?>"><?= $material->getName(); ?></label>
+                        <label class="radio-inline" style="margin-left: 10px;">&nbsp;&nbsp;<input type="radio" name="material" value="<?= $material->getId(); ?>">&nbsp;&nbsp;&nbsp;<?= $material->getName(); ?></label>
                       <?php
                       } ?>
                     </div>
