@@ -28,7 +28,7 @@ include("../partials/verify-session.php");
     }
 
     .card-body .fas {
-      font-size: 4rem;
+      font-size: 12rem;
     }
   </style>
 </head>

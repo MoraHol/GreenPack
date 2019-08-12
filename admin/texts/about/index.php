@@ -26,10 +26,6 @@ include("../../partials/verify-session.php");
     td.highlight {
       background-color: whitesmoke !important;
     }
-
-    .card-body .fas {
-      font-size: 4rem;
-    }
   </style>
 </head>
 
@@ -56,7 +52,9 @@ include("../../partials/verify-session.php");
               <i class="fas fa-table"></i>
               Acerca de Nosotros</div>
             <div class="card-body">
+              <div class="container" id="about">
 
+              </div>
             </div>
           </div>
         </div>
@@ -89,6 +87,19 @@ include("../../partials/verify-session.php");
     <script>
       $('.sidebar div.sidebar-wrapper ul.nav li:first').removeClass('active')
       $('#text-item').addClass('active')
+      $.get('api/get_about.php', (data, status) => {
+        data.forEach(about => {
+          $('#about').append(`<div class="row align-items-center  justify-content-center ">
+                <div class="col-sm-3"><img src="${about.image}" alt="" width="200"></div>
+                <div class="col-sm-6 mr-auto">
+                  <div class="row  justify-content-center header-title align-items-center">${about.title}</div>
+                </div>
+                <div class="col-sm-1"><a href="update_about.php?id=${about.id_about}" title="Editar" class="btn btn-primary"><i class="fas fa-pen"></i></a></div>
+                <div class="col-sm-1"><a href="javascript:deleteAbout(${about.id_about})" title="Borrar" class="btn btn-primary"><i class="fas fa-trash"></i></a></div>
+              </div>
+              <hr>`)
+        })
+      })
     </script>
 </body>
 
