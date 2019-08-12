@@ -33,16 +33,33 @@
   <link rel="stylesheet" href="/css/style-shop.css">
   <script src="/js/spinner.js"></script>
   <style>
+    @media(max-width: 600) {
+      #container-image {
+        background-attachment: scroll !important;
+      }
+    }
+
+    @media(min-width: 1024px) {
+      #container-image {
+        background-attachment: fixed !important;
+      }
+    }
+
     #container-image {
-      background-size: cover;
+      background-size: contain !important;
       background-position: center;
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
-      background-size: cover;
+      -webkit-background-size: contain !important;
+      -moz-background-size: contain !important;
+      -o-background-size: contain !important;
+      background-size: contain !important;
+      background-attachment: fixed;
       height: 100%;
       width: 100%;
       text-align: center;
+    }
+
+    .blog-banner-area::after {
+      background: #fff !important;
     }
   </style>
 </head>
@@ -108,7 +125,7 @@
 
   <!-- ================ start banner area ================= -->
   <section class="blog-banner-area" id="category">
-    <div class="container h-100" style="background: url(<?= $image ?>) no-repeat fixed center;" id="container-image">
+    <div class="container h-100" style="background: url(<?= $image ?>) no-repeat center;" id="container-image">
       <div class="blog-banner">
         <div class="text-center">
           <h1>Productos</h1>
@@ -186,8 +203,8 @@
                     </div>
                     <div class="card-body">
                       <!-- <p><?php
-                          //echo strtoupper($product->getCategory()->getName());
-                          ?></p> -->
+                              //echo strtoupper($product->getCategory()->getName());
+                              ?></p> -->
                       <h4 class="card-product__title"><a href="product.php?id=<?php echo $product->getId() ?>"><?php echo $product->getName(); ?></a></h4>
                       <!-- <p class="card-product__price">$<?php echo $product->getPrice(); ?></p> -->
                     </div>
