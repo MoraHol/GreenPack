@@ -276,7 +276,7 @@ $tabs = $tabProductDao->findByProduct($product);
           <?php if (count($tabs) > 0) { ?>
             <div class="tab-content" id="myTabContent">
               <?php foreach ($tabs as $key => $tab) { ?>
-                <div class="tab-pane fade show <?= $key == 0 ? "active" : "" ?>" id="description-tab-<?= $tab->getId() ?>" role="tabpanel" aria-labelledby="tab<?= $tab->getId() ?>">
+                <div class="tab-pane fade show <?= $key == 0 ? "active" : "" ?> fr-view" id="description-tab-<?= $tab->getId() ?>" role="tabpanel" aria-labelledby="tab<?= $tab->getId() ?>">
                   <p><?= $tab->getDescription(); ?></p>
                 </div>
               <?php } ?>
