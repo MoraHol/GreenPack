@@ -131,11 +131,11 @@ include("../../partials/verify-session.php");
                 <div id="myId" class="dropzone"></div>
               </div>
             </div>
-            <div class="row">
-              <div class="col"><a href="/admin/texts/about" class="btn btn-danger btn-lg">Regresar</a></div>
-              <div class="col"><button id="submitEditor" class="btn btn-primary btn-lg">Actulizar</button></div>
-              <div class="col"></div>
-            </div>
+          </div>
+          <div class="row">
+            <div class="col"><a href="/admin/texts/about" class="btn btn-danger btn-lg"><i class="fas fa-arrow-left"></i> Regresar</a></div>
+            <div class="col"><button id="submitEditor" class="btn btn-primary btn-lg"><i class="fas fa-sync"></i> Actualizar</button></div>
+            <div class="col"></div>
           </div>
         </div>
         <?php include("../../partials/footer.html"); ?>

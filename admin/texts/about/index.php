@@ -57,6 +57,11 @@ include("../../partials/verify-session.php");
               </div>
             </div>
           </div>
+          <div class="row">
+            <div class="col"><a href="/admin/texts" class="btn btn-danger btn-lg"><i class="fas fa-arrow-left"></i> Regresar</a></div>
+            <div class="col"></div>
+            <div class="col"></div>
+          </div>
         </div>
         <?php include("../../partials/footer.html"); ?>
       </div>
