@@ -161,7 +161,7 @@ class ProductDao
   function save($product)
   {
     $this->db->connect();
-    $query = "INSERT INTO `products` (`id_products`, `ref`, `name`, `price`, `description`, `categories_id_categories`, `uses`) VALUES (NULL, '" . $product->getRef() . "', '" . $product->getName() . "', '" . $product->getPrice() . "', '" . $product->getDescription() . "', '" . $product->getCategory()->getId() . "', '" . json_encode($product->getUses()) . "')";
+    $query = "INSERT INTO `products` (`id_products`, `ref`, `name`, `price`, `description`, `categories_id_categories`, `uses`) VALUES (NULL, '" . $product->getRef() . "', '" . $product->getName() . "', '" . $product->getPrice() . "', '" . $product->getDescription() . "', '" . $product->getCategory()->getId() . "', '" . json_encode($product->getUses(), JSON_UNESCAPED_UNICODE) . "')";
     $status = $this->db->consult($query);
     $id = $this->db->consult("SELECT MAX(`id_products`) AS id FROM products", "yes");
     $id = $id[0]["id"];
@@ -183,8 +183,8 @@ class ProductDao
   function update($product)
   {
     $this->db->connect();
-    $query = "UPDATE `products` SET `ref` = '" . $product->getRef() . "', `name` = '" . $product->getName() . "', `price` = '" . $product->getPrice() . "', `description` = '" . $product->getDescription() . "', `categories_id_categories` = '" . $product->getCategory()->getId() . "', `uses` = '" . json_encode($product->getUses()) . "' WHERE `products`.`id_products` = " . $product->getId();
-    // echo $query;
+    $query = "UPDATE `products` SET `ref` = '" . $product->getRef() . "', `name` = '" . $product->getName() . "', `price` = '" . $product->getPrice() . "', `description` = '" . $product->getDescription() . "', `categories_id_categories` = '" . $product->getCategory()->getId() . "', `uses` = '" . json_encode($product->getUses(), JSON_UNESCAPED_UNICODE) . "' WHERE `products`.`id_products` = " . $product->getId();
+    echo $query;
     $status = $this->db->consult($query);
     // echo $status;
     $this->db->close();
