@@ -185,9 +185,9 @@
                       </ul>
                     </div>
                     <div class="card-body">
-                      <p><?php
-                          echo strtoupper($product->getCategory()->getName());
-                          ?></p>
+                      <!-- <p><?php
+                          //echo strtoupper($product->getCategory()->getName());
+                          ?></p> -->
                       <h4 class="card-product__title"><a href="product.php?id=<?php echo $product->getId() ?>"><?php echo $product->getName(); ?></a></h4>
                       <!-- <p class="card-product__price">$<?php echo $product->getPrice(); ?></p> -->
                     </div>
@@ -283,9 +283,7 @@
                       </ul>
                     </div>
                     <div class="card-body">
-                      <p>${product.category.name}</p>
                       <h4 class="card-product__title"><a href="#">${product.name}</a></h4>
-                      <p class="card-product__price">$${product.price}</p>
                     </div>
                   </div>
                 </div>`)

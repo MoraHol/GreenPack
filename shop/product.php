@@ -70,7 +70,7 @@ $tabs = $tabProductDao->findByProduct($product);
       right: -210px;
     }
 
-    .fr-view>p[data-f-id="pbf"] {
+    .fr-view > p[data-f-id="pbf"] {
       display: none;
     }
   </style>
@@ -252,6 +252,7 @@ $tabs = $tabProductDao->findByProduct($product);
           <div class=" card">
             <div class="card-icon"><i class="far fa-list-alt"></i></div>
             <h3>Usos</h3>
+            <br>
             <ul>
               <?php foreach ($product->getUses() as $use) { ?>
                 <li><?= $use ?></li>
@@ -271,8 +272,8 @@ $tabs = $tabProductDao->findByProduct($product);
           <?php } ?>
           <?php if (count($tabs) > 0) { ?>
             <div class="tab-content" id="myTabContent">
-              <?php foreach ($tabs as $tab) { ?>
-                <div class="tab-pane fade show active" id="description-tab-<?= $tab->getId() ?>" role="tabpanel" aria-labelledby="tab<?= $tab->getId() ?>">
+              <?php foreach ($tabs as $key => $tab) { ?>
+                <div class="tab-pane fade show <?= $key == 0 ? "active" : "" ?>" id="description-tab-<?= $tab->getId() ?>" role="tabpanel" aria-labelledby="tab<?= $tab->getId() ?>">
                   <p><?= $tab->getDescription(); ?></p>
                 </div>
               <?php } ?>
@@ -290,7 +291,7 @@ $tabs = $tabProductDao->findByProduct($product);
   <section class="related-product-area mt-0">
     <div class="container">
       <div class="section-intro pb-60px">
-        <p>Articulos relacionados a este producto</p>
+        <!-- <p>Articulos relacionados a este producto</p> -->
         <h2>Articulos <span class="section-intro__style">Relacionados</span></h2>
       </div>
     </div>
