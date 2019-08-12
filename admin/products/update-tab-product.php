@@ -9,8 +9,11 @@ if (!isset($_GET["id"])) {
   header("Location : /admin/products");
 }
 require_once dirname(dirname(__DIR__)) . "/dao/TabProductDao.php";
+require_once dirname(dirname(__DIR__)) . "/dao/ProductDao.php";
 $tabProductDao = new TabProductDao();
 $tab = $tabProductDao->findById($_GET["id"]);
+$productDao  = new ProductDao();
+$product = $productDao->findById($tab->getIdProduct());
 ?>
 
 <head>
@@ -65,17 +68,17 @@ $tab = $tabProductDao->findById($_GET["id"]);
               <a href="/admin/">Dashboard</a>
             </li>
             <li class="breadcrumb-item "><a href="/admin/products">Productos</a></li>
-            <li class="breadcrumb-item "><a href="/admin/products/update_product.php?id=<?= $_GET["id"] ?>">Productos</a></li>
-            <li class="breadcrumb-item active">Nueva Pestaña</li>
+            <li class="breadcrumb-item "><a href="/admin/products/update_product.php?id=<?= $product->getId() ?>"><?= $product->getName() ?></a></li>
+            <li class="breadcrumb-item active">Actualizar Pestaña</li>
           </ol>
 
           <div class="form-group">
-            <label for="title">Escriba el Titulo de la Pestaña:</label>
+            <label for="title">Titulo de la Pestaña:</label>
             <input type="text" placeholder="Ej. Caracteristicas" id="title" class="form-control" value="<?= $tab->getTitle() ?>">
           </div>
           <br>
           <div class="form-group">
-            <label for="content">Escriba El contenido de la Pestaña:</label>
+            <label for="content">Contenido de la Pestaña:</label>
             <br>
             <textarea name="content" id="content"></textarea>
           </div>

@@ -5,6 +5,9 @@
   session_start();
 }
 include("../partials/verify-session.php");
+require_once dirname(dirname(__DIR__)) . "/dao/ProductDao.php";
+$productDao = new ProductDao();
+$product = $productDao->findById($_GET["id"]);
 ?>
 
 <head>
@@ -59,7 +62,7 @@ include("../partials/verify-session.php");
               <a href="/admin/">Dashboard</a>
             </li>
             <li class="breadcrumb-item "><a href="/admin/products">Productos</a></li>
-            <li class="breadcrumb-item "><a href="/admin/products/update_product.php?id=<?= $_GET["id"] ?>">Productos</a></li>
+            <li class="breadcrumb-item "><a href="/admin/products/update_product.php?id=<?= $_GET["id"] ?>"><?= $product->getName() ?></a></li>
             <li class="breadcrumb-item active">Nueva Pestaña</li>
           </ol>
 

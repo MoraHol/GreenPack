@@ -336,7 +336,7 @@ $tabs = $tabProductDao->findByProduct($product);
 
 
             <div class="row" style="margin-bottom: 20px; margin-top: 60px;">
-            <div class="col"><a href="/admin/products" class="btn btn-danger btn-lg">Regresar</a></div>
+              <div class="col"><a href="/admin/products" class="btn btn-danger btn-lg">Regresar</a></div>
               <div class="col text-center"><button id="submitEditor" class="btn btn-primary btn-lg">Enviar</button></div>
               <div class="col"></div>
             </div>
@@ -567,6 +567,37 @@ $tabs = $tabProductDao->findByProduct($product);
             alert("los campos deben ser completados")
           }
         })
+        $('#btnUploadExcel').click(() => {
+          $('#uploadExcel').html('<div id="uploadFileExcel" class="dropzone"></div>')
+          DropzoneExcel = new Dropzone("div#uploadFileExcel", {
+            url: "/admin/upload-file.php",
+            method: 'post',
+            paramName: 'file',
+            maxFiles: 1,
+            dictDefaultMessage: 'Sube El Archivo excel con las medidas del producto',
+            dictMaxFilesExceeded: 'Solo se permite subir un archivo',
+            dictInvalidFileType: 'Solo se permite archivos excel'
+          })
+          DropzoneExcel.on('success', function(file) {
+            let response = JSON.parse(file.xhr.responseText)
+            let url = response.link
+            $.post('api/upload_measurements.php', {
+              id: `<?= $_GET["id"] ?>`,
+              file: url
+            }, (data, status) => {
+              if (status == "success") {
+                alert('subido')
+              }
+            })
+          })
+        })
+        $('#hideMeasurements').click(function() {
+          $('#measurements').fadeToggle()
+          $(this).text(function(i, text) {
+            return text === "Ocultar" ? "Ver Medidas" : "Ocultar";
+          })
+          $(this).toggleClass('btn-primary')
+        })
       }
       $(() => {
         initialize()
@@ -585,6 +616,7 @@ $tabs = $tabProductDao->findByProduct($product);
           measurements: JSON.stringify(measurements)
         }, (data, status) => {
           reloadPage()
+          text = editor.html.get()
           $.notify({
             message: 'Se ha actualizado el producto',
             title: 'Exito',
@@ -609,6 +641,8 @@ $tabs = $tabProductDao->findByProduct($product);
           measurements: JSON.stringify(measurements)
         }, (data, status) => {
           reloadPage()
+          text = editor.html.get()
+
           $.notify({
             message: 'Se ha actualizado el producto',
             title: 'Exito',
@@ -646,7 +680,7 @@ $tabs = $tabProductDao->findByProduct($product);
         $('#materials').append(`<li><select class="wide" style="margin-bottom: 10px;" id="material${indexMaterial}"><option disabled selected>Seleccione un material</option>
                       <?php
                       foreach ($materials as  $material) { ?>
-                                                                                <option value="<?php echo $material->getId(); ?>"><?php echo $material->getName(); ?></option>
+                                                                                    <option value="<?php echo $material->getId(); ?>"><?php echo $material->getName(); ?></option>
                       <?php }
                       ?>
                     </select></li>`)
@@ -656,38 +690,6 @@ $tabs = $tabProductDao->findByProduct($product);
       }
     </script>
     <script>
-      $('#btnUploadExcel').click(() => {
-        $('#uploadExcel').html('<div id="uploadFileExcel" class="dropzone"></div>')
-        DropzoneExcel = new Dropzone("div#uploadFileExcel", {
-          url: "/admin/upload-file.php",
-          method: 'post',
-          paramName: 'file',
-          maxFiles: 1,
-          dictDefaultMessage: 'Sube El Archivo excel con las medidas del producto',
-          dictMaxFilesExceeded: 'Solo se permite subir un archivo',
-          dictInvalidFileType: 'Solo se permite archivos excel'
-        })
-        DropzoneExcel.on('success', function(file) {
-          let response = JSON.parse(file.xhr.responseText)
-          let url = response.link
-          $.post('api/upload_measurements.php', {
-            id: `<?= $_GET["id"] ?>`,
-            file: url
-          }, (data, status) => {
-            if (status == "success") {
-              alert('subido')
-            }
-          })
-        })
-      })
-      $('#hideMeasurements').click(function() {
-        $('#measurements').fadeToggle()
-        $(this).text(function(i, text) {
-          return text === "Ocultar" ? "Ver Medidas" : "Ocultar";
-        })
-        $(this).toggleClass('btn-primary')
-      })
-
       function deleteTab(id) {
         $.post('api/delete_tab_product.php', {
           id: id
