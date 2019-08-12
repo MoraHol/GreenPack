@@ -61,6 +61,10 @@
     .blog-banner-area::after {
       background: #fff !important;
     }
+
+    .card-product__title {
+      font-size: 16px;
+    }
   </style>
 </head>
 
