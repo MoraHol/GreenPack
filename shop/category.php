@@ -42,6 +42,11 @@
     @media(min-width: 1024px) {
       #container-image {
         background-attachment: fixed !important;
+
+      }
+
+      .sticky-wrapper {
+        height: 0 !important;
       }
     }
 
@@ -64,6 +69,21 @@
 
     .card-product__title {
       font-size: 16px;
+    }
+
+    .blog-banner div.text-center {
+      margin: auto;
+      width: 25%;
+      background: #333333c2;
+      color: #fff !important;
+      height: 113px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .blog-banner div.text-center h1 {
+      color: #fff !important;
     }
   </style>
 </head>
@@ -133,12 +153,7 @@
       <div class="blog-banner">
         <div class="text-center">
           <h1>Productos</h1>
-          <nav aria-label="breadcrumb" class="banner-breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.php">Inicio</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Productos</li>
-            </ol>
-          </nav>
+
         </div>
       </div>
     </div>
