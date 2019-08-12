@@ -70,10 +70,11 @@ $tabs = $tabProductDao->findByProduct($product);
       right: -210px;
     }
 
-    .fr-view > p[data-f-id="pbf"] {
+    .fr-view>p[data-f-id="pbf"] {
       display: none;
     }
-    .tab-pane .fr-view > p[data-f-id="pbf"] {
+
+    .tab-pane .fr-view>p[data-f-id="pbf"] {
       display: none;
     }
   </style>
@@ -276,8 +277,8 @@ $tabs = $tabProductDao->findByProduct($product);
           <?php if (count($tabs) > 0) { ?>
             <div class="tab-content" id="myTabContent">
               <?php foreach ($tabs as $key => $tab) { ?>
-                <div class="tab-pane fade show <?= $key == 0 ? "active" : "" ?> fr-view" id="description-tab-<?= $tab->getId() ?>" role="tabpanel" aria-labelledby="tab<?= $tab->getId() ?>">
-                  <p><?= $tab->getDescription(); ?></p>
+                <div class="tab-pane fade show <?= $key == 0 ? "active" : "" ?> " id="description-tab-<?= $tab->getId() ?>" role="tabpanel" aria-labelledby="tab<?= $tab->getId() ?>">
+                  <div class="fr-view"><?= $tab->getDescription(); ?></div>
                 </div>
               <?php } ?>
             </div>
