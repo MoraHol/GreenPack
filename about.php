@@ -72,6 +72,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     .bg-image.overlay:after {
       background-image: linear-gradient(to bottom, #37405085 0%, #798696d9 100%) !important;
     }
+
+    .fr-view>p[data-f-id="pbf"] {
+      display: none;
+    }
   </style>
 
   <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
@@ -86,10 +90,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <link rel="stylesheet" href="/css/spinner.css">
   <link type="text/css" rel="stylesheet" href="/css/style-blog.css" />
   <script src="/js/spinner.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/froala-editor@3.0.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type='text/css' />
 </head>
 
 <body>
-<?php include("partials/fixed-quoting.html"); ?>
+  <?php include("partials/fixed-quoting.html"); ?>
 
   <div class="wall-loading">
     <div class="lds-roller">
@@ -117,23 +122,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
       <div class="row align-items-center" id="love">
         <div class="col-sm 6 wow fadeIn" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.1s;">
-          <h2 class="normal f30 fb text-uppercase">El amor de GreenPack hacia el medio ambiente</h2>
+          <h2 class="normal f30 fb text-uppercase" id="love-title">El amor de GreenPack hacia el medio ambiente</h2>
           <br>
-          <p class="f24 normal">Nuestro espíritu protector del medio ambiente nos permitió destacarnos en el mercado por ser los primeros en traer al país materias primas totalmente biodegradables para transformarlos en grandiosos empaques. Materias primas como papeles vírgenes de fibras largas (sustituto de los reciclados en empaques primarios), papeles antigrasa (sustituto de los parafinados) y Biopolímeros (sustituto de los plásticos a base de petróleo) para laminación y ventanillas. Todas las materias primas tienen certificaciones no solo ambientales sino aptas para entrar en contacto directo con alimentos (Empaque primario).</p>
+          <div class="fr-view" id="love-content"></div>
+          <!-- <p class="f24 normal">Nuestro espíritu protector del medio ambiente nos permitió destacarnos en el mercado por ser los primeros en traer al país materias primas totalmente biodegradables para transformarlos en grandiosos empaques. Materias primas como papeles vírgenes de fibras largas (sustituto de los reciclados en empaques primarios), papeles antigrasa (sustituto de los parafinados) y Biopolímeros (sustituto de los plásticos a base de petróleo) para laminación y ventanillas. Todas las materias primas tienen certificaciones no solo ambientales sino aptas para entrar en contacto directo con alimentos (Empaque primario).</p>
           <p class="f24 normal">Hemos registrado como marcas EMPAQUES VERDES (la traducción de nuestro nombre) y GREENBAGS, una nueva línea de productos con materiales laminados a base de maíz; totalmente biodegradables, especiales para empaques de café y productos orgánicos, creando la oportunidad para que estos productos tengan los mejores empaques.</p>
-          <p class="text-center"><img src="/images/greenbags_logo_verde.png" alt="" width="150"><img src="/images/greenpack_logo_verde.png" alt="" width="150"> <img src="/images/empaques_verdes_logo_verde.png" alt="" width="150"></p>
+          <p class="text-center"><img src="/images/greenbags_logo_verde.png" alt="" width="150"><img src="/images/greenpack_logo_verde.png" alt="" width="150"> <img src="/images/empaques_verdes_logo_verde.png" alt="" width="150"></p> -->
           <br>
         </div>
-        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.7s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.1s;"><img class="img-responsive" width="581" src="/images/sea.jpg" alt="">
+        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.7s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.1s;"><img class="img-responsive" width="581" src="/images/sea.jpg" alt="" id="love-image">
         </div>
       </div>
       <div class="row align-items-center" id="compromise">
-        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.7s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.1s;"><img class="img-responsive" width="520" src="/images/AdobeStock_256856590_Preview.jpeg" alt=""></div>
+        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.7s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.1s;"><img class="img-responsive" width="520" src="/images/AdobeStock_256856590_Preview.jpeg" alt="" id="compromise-image"></div>
         <div class="col-sm 6 wow fadeIn" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.1s;">
-          <h2 class="normal f30 fb text-uppercase">Nuestro compromiso</h2>
+          <h2 class="normal f30 fb text-uppercase" id="compromise-title">Nuestro compromiso</h2>
           <br>
-          <p class="f24 normal">Nuestros empaques desentonan naturalmente, se han actualizado en todas las áreas requeridas para manejar un beneficio fenomenal.</p>
-          <p class="f24 normal">Con el fin de ayudar a nuestro planeta tierra y a nuestra salud, hemos implementado el mejoramiento continuo, capacitado a nuestro más valioso talento humano, disminuido la reducción de desperdicios, he implementado políticas de responsabilidad social y ambiental. Somos un medio de concientización y difusión de las prácticas a seguir.</p>
+          <div class="fr-view" id="compromise-content"></div>
+          <!-- <p class="f24 normal">Nuestros empaques desentonan naturalmente, se han actualizado en todas las áreas requeridas para manejar un beneficio fenomenal.</p>
+          <p class="f24 normal">Con el fin de ayudar a nuestro planeta tierra y a nuestra salud, hemos implementado el mejoramiento continuo, capacitado a nuestro más valioso talento humano, disminuido la reducción de desperdicios, he implementado políticas de responsabilidad social y ambiental. Somos un medio de concientización y difusión de las prácticas a seguir.</p> -->
           <br>
           <br>
           <br>
@@ -141,14 +148,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       </div>
       <div class="row align-items-center" id="about-us">
         <div class="col-sm 6 wow fadeIn" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.1s;">
-          <h2 class="normal f30 fb text-uppercase">Quienes Somos</h2>
+          <h2 class="normal f30 fb text-uppercase" id="about-us-title">Quienes Somos</h2>
           <br>
-          <p class="f24 normal">GREENPACK es una empresa innovadora que nació para actuar y guiar a un mercado que necesita un cambio. Hoy en día, gracias a la normativa que protege al medioambiente, nuestra conciencia de seguir por un camino verde que no se detiene y la conciencia de cambio que se ha generado alrededor del mundo, Green pack ha logrado posicionarse y obtener un completo reconocimiento del mercado como transformador e innovador en soluciones de empaques biodegradables.</p>
+          <div class="fr-view" id="about-us-content"></div>
+          <!-- <p class="f24 normal">GREENPACK es una empresa innovadora que nació para actuar y guiar a un mercado que necesita un cambio. Hoy en día, gracias a la normativa que protege al medioambiente, nuestra conciencia de seguir por un camino verde que no se detiene y la conciencia de cambio que se ha generado alrededor del mundo, Green pack ha logrado posicionarse y obtener un completo reconocimiento del mercado como transformador e innovador en soluciones de empaques biodegradables.</p>
           <p class="f24 normal">Dentro de nuestro catálogo de productos; ofrecemos una amplia variedad de Bolsas, Cajas y Soportes, Sacos Industriales y empaques agroindustriales, láminas y etiquetas, todos ellos con la más alta calidad.</p>
           <p class="f24 normal">En el año 2015 cumplimos 10 años ejecutando y renovando nuestra visión generada en el 2006: Ser reconocida en Colombia como la primera elección del mercado de empaques biodegradables.</p>
-          <p class="f24 normal">Contamos con los mejores clientes de Colombia y exportamos a varios países de América y Europa.</p>
+          <p class="f24 normal">Contamos con los mejores clientes de Colombia y exportamos a varios países de América y Europa.</p> -->
         </div>
-        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.7s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.1s;"><img class="img-responsive" width="581" src="https://greenpack.com.co/wp-content/uploads/2017/07/bg-nuestra-empresa.jpg" alt="">
+        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.7s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.1s;"><img class="img-responsive" width="581" src="https://greenpack.com.co/wp-content/uploads/2017/07/bg-nuestra-empresa.jpg" alt="" id="about-us-image">
         </div>
       </div>
     </div>
@@ -169,7 +177,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <script src="js/main.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script>
-    new WOW().init();
+    $.get('/admin/texts/about/api/get_about.php', (data, status) => {
+      let love = data[0]
+      let compromise = data[1]
+      let aboutUs = data[2]
+      // love
+      $('#love-title').text(love.title)
+      $('#love-content').html(love.content)
+      $('#love-image').attr('src', love.image)
+      // compromise
+      $('#compromise-title').text(compromise.title)
+      $('#compromise-content').html(compromise.content)
+      $('#compromise-image').attr('src', compromise.image)
+      // about-us
+      $('#about-us-title').text(aboutUs.title)
+      $('#about-us-content').html(aboutUs.content)
+      $('#about-us-image').attr('src', aboutUs.image)
+      $('.fr-view p').addClass('f24 normal')
+      new WOW().init()
+    })
   </script>
 </body>
 
