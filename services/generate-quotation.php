@@ -2,9 +2,12 @@
 <html>
 <?php
 require_once dirname(__DIR__) . "/dao/QuotationDao.php";
+require_once dirname(__DIR__) . "/dao/AdminDao.php";
 $quotationDao = new QuotationDao();
+$adminDao = new AdminDao();
 if (isset($_GET["id"])) {
   $quotation = $quotationDao->findById($_GET["id"]);
+  $admin = $adminDao->findById($quotation->getIdAdminAssigned());
 }
 ?>
 
@@ -967,35 +970,35 @@ if (isset($_GET["id"])) {
 
         <?php setlocale(LC_MONETARY, "es_CO");
         foreach ($quotation->getItems() as $item) { ?>
-          <!-- individual product -->
-          <tr height="48" style="mso-height-source:userset;height:36.0pt">
-            <td colspan="2" height="48" class="xl8810772" width="150" style="height:36.0pt;
+        <!-- individual product -->
+        <tr height="48" style="mso-height-source:userset;height:36.0pt">
+          <td colspan="2" height="48" class="xl8810772" width="150" style="height:36.0pt;
                           width:112pt"><img src="<?= $item->getProduct()->getImages()[0]->getUrl() ?>" width="70" height="70" style="margin: 2px;"></td>
-            <td colspan="4" class="xl7710772" width="375" style="width:280pt;vertical-align: middle!important;">
-              <font class="font510772">Referencia</font>
-              <font class="font010772"> <?= $item->getProduct()->getRef() ?> </font>
-              <br>
-              <font class="font510772">Material</font>
-              <font class="font010772"> <?= $item->getMaterial()->getName() ?></font>
-              <br>
-              <font class="font510772">Medidas</font>
-              <font class="font010772"> <?= $item->getMeasurement()->getWidth() ?>*<?= $item->getMeasurement()->getHeight() ?>*<?= $item->getMeasurement()->getLength() ?></font>
-              <br>
-              <font class="font510772">Impresión</font>
-              <font class="font010772"> <?= $item->isPrinting() ? "SI" : "NO" ?></font>
-              <br>
-              <font class="font510772">Con Ventanilla</font>
-              <font class="font010772"> <?= $item->isPla() ? "SI" : "NO" ?></font>
-              <br>
-              <font class="font510772">Laminada</font>
-              <font class="font010772"> <?= $item->isLam() ? "SI" : "NO" ?> </font>
-            </td>
-            <td colspan="2" class="xl8610772" style="border-right:.5pt solid black"><span style="mso-spacerun:yes">&nbsp;</span><?= number_format($item->getQuantity(), 0, ",", ".") ?></td>
-            <td class="xl7210772" style="border-left:none"><span style="mso-spacerun:yes">&nbsp;</span>$<span style="mso-spacerun:yes">&nbsp;</span><?= money_format("%!i", $item->getPrice()) ?></td>
-            <td colspan="2" class="xl7310772" style="border-left:none"><span style="mso-spacerun:yes">&nbsp;</span>$<span style="mso-spacerun:yes">&nbsp;</span><?= money_format("%!i", $item->calculateTotal()) ?> </td>
+          <td colspan="4" class="xl7710772" width="375" style="width:280pt;vertical-align: middle!important;">
+            <font class="font510772">Referencia</font>
+            <font class="font010772"> <?= $item->getProduct()->getRef() ?> </font>
+            <br>
+            <font class="font510772">Material</font>
+            <font class="font010772"> <?= $item->getMaterial()->getName() ?></font>
+            <br>
+            <font class="font510772">Medidas</font>
+            <font class="font010772"> <?= $item->getMeasurement()->getWidth() ?>*<?= $item->getMeasurement()->getHeight() ?>*<?= $item->getMeasurement()->getLength() ?></font>
+            <br>
+            <font class="font510772">Impresión</font>
+            <font class="font010772"> <?= $item->isPrinting() ? "SI" : "NO" ?></font>
+            <br>
+            <font class="font510772">Con Ventanilla</font>
+            <font class="font010772"> <?= $item->isPla() ? "SI" : "NO" ?></font>
+            <br>
+            <font class="font510772">Laminada</font>
+            <font class="font010772"> <?= $item->isLam() ? "SI" : "NO" ?> </font>
+          </td>
+          <td colspan="2" class="xl8610772" style="border-right:.5pt solid black"><span style="mso-spacerun:yes">&nbsp;</span><?= number_format($item->getQuantity(), 0, ",", ".") ?></td>
+          <td class="xl7210772" style="border-left:none"><span style="mso-spacerun:yes">&nbsp;</span>$<span style="mso-spacerun:yes">&nbsp;</span><?= money_format("%!i", $item->getPrice()) ?></td>
+          <td colspan="2" class="xl7310772" style="border-left:none"><span style="mso-spacerun:yes">&nbsp;</span>$<span style="mso-spacerun:yes">&nbsp;</span><?= money_format("%!i", $item->calculateTotal()) ?> </td>
 
-          </tr>
-          <!-- individual product -->
+        </tr>
+        <!-- individual product -->
         <?php } ?>
 
 
@@ -1031,18 +1034,18 @@ if (isset($_GET["id"])) {
   border-bottom:.5pt solid black;height:47.25pt; vertical-align: top!important"><?= $quotation->getExtraInformation() ?></td>
           <td class="xl6510772"></td>
           <td class="xl1510772">Subtotal</td>
-          <td colspan="2" class="xl7510772">&nbsp;</td>
+          <td colspan="2" class="xl7310772"><span style="mso-spacerun:yes">&nbsp;</span>$<span style="mso-spacerun:yes">&nbsp;</span><?= money_format("%!i", $quotation->calculateTotal()) ?></td>
         </tr>
         <tr height="21" style="mso-height-source:userset;height:15.75pt">
           <td height="21" class="xl6510772" style="height:15.75pt"></td>
           <td class="xl1510772">IVA 19%</td>
-          <td colspan="2" class="xl7510772" style="border-top:none">&nbsp;</td>
+          <td colspan="2" class="xl7310772" style="border-top:none">&nbsp; $ <?= money_format("%!i", $quotation->calculateTotal() * 0.19) ?></td>
 
         </tr>
         <tr height="21" style="mso-height-source:userset;height:15.75pt">
           <td height="21" class="xl6510772" style="height:15.75pt"></td>
           <td class="xl1510772">Total</td>
-          <td colspan="2" class="xl7310772" style="border-top:none"><span style="mso-spacerun:yes">&nbsp;</span>$<span style="mso-spacerun:yes">&nbsp;</span><?= money_format("%!i", $quotation->calculateTotal()) ?></td>
+          <td colspan="2" class="xl7310772" style="border-top:none">&nbsp; $ <?= money_format("%!i", $quotation->calculateTotal() + $quotation->calculateTotal() * 0.19) ?></td>
 
         </tr>
         <tr height="21" style="mso-height-source:userset;height:15.75pt">
@@ -1187,7 +1190,7 @@ if (isset($_GET["id"])) {
         </tr>
         <tr height="21" style="mso-height-source:userset;height:15.75pt">
           <td height="21" class="xl1510772" style="height:15.75pt"></td>
-          <td colspan="3" class="xl9110772">Vendedor 1</td>
+          <td colspan="3" class="xl9110772" style="text-transform:capitalize;"><?= $admin->getName() ?></td>
           <td class="xl1510772"></td>
           <td class="xl1510772"></td>
           <td class="xl1510772"></td>
@@ -1199,8 +1202,8 @@ if (isset($_GET["id"])) {
         </tr>
         <tr height="21" style="mso-height-source:userset;height:15.75pt">
           <td height="21" class="xl1510772" style="height:15.75pt"></td>
-          <td class="xl1510772">Movil:<span style="mso-spacerun:yes">&nbsp;</span></td>
-          <td colspan="2" class="xl1510772"></td>
+          <td colspan="2" class="xl1510772">Correo: <a href="mailto:<?= $admin->getEmail() ?>"><?= $admin->getEmail() ?></a></td>
+          <td class="xl1510772"></td>
           <td class="xl1510772"></td>
           <td class="xl1510772"></td>
           <td class="xl1510772"></td>
