@@ -42,6 +42,7 @@ $tabs = $tabProductDao->findByProduct($product);
   <link rel="stylesheet" href="/css/basket.css">
   <link rel="stylesheet" href="/css/notify-style.css">
   <link href="https://cdn.jsdelivr.net/npm/froala-editor@3.0.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type='text/css' />
+  <link rel="stylesheet" href="/css/translate.css">
 
 
   <!--===================== JS ================-->

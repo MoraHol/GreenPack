@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="/css/magnific-popup.css">
   <link rel="stylesheet" href="/css/animate.min.css">
   <link rel="stylesheet" href="/css/basket.css">
+  <link rel="stylesheet" href="/css/translate.css">
   <style>
     .nav-bar-nav a {
       color: #fff !important;

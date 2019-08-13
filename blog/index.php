@@ -47,6 +47,7 @@ if ($_GET["page"] > $pages || $_GET["page"] <= 0) {
   <!-- Custom stlylesheet -->
   <link type="text/css" rel="stylesheet" href="/css/style-blog.css" />
   <link rel="stylesheet" href="/css/basket.css">
+  <link rel="stylesheet" href="/css/translate.css">
   <style>
     .search input.serch {
       color: #fff;

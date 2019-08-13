@@ -28,6 +28,7 @@ $conversor = new ConversorDate(); ?>
   <link rel="stylesheet" href="/css/style-index-notices.css">
   <link href="https://fonts.googleapis.com/css?family=Concert+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/basket.css">
+  <link rel="stylesheet" href="/css/translate.css">
   <script type="text/javascript">
     $(document).ready(function($) {
       $(".scroll").click(function(event) {
@@ -376,6 +377,8 @@ $conversor = new ConversorDate(); ?>
       document.querySelector("head").appendChild(s);
     })
   </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script src="/js/translate.js"></script>
 </body>
 
 </html>

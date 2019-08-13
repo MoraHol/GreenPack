@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="/css/style-blog.css">
   <link rel="stylesheet" href="/css/style-accordion.css">
   <link rel="stylesheet" href="/css/basket.css">
-
+  <link rel="stylesheet" href="/css/translate.css">
   <link rel="stylesheet" href="/css/style-shop.css">
   <script src="/js/spinner.js"></script>
   <style>

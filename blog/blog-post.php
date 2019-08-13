@@ -50,6 +50,7 @@ $conversor = new ConversorDate();
   <link rel="stylesheet" href="/css/footer.css">
   <link rel="stylesheet" href="/css/spinner.css">
   <link href="https://cdn.jsdelivr.net/npm/froala-editor@3.0.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type='text/css' />
+  <link rel="stylesheet" href="/css/translate.css">
   <!-- Custom stlylesheet -->
   <link type="text/css" rel="stylesheet" href="/css/style-blog.css" />
   <link rel="stylesheet" href="/css/basket.css">

@@ -91,9 +91,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <link type="text/css" rel="stylesheet" href="/css/style-blog.css" />
   <script src="/js/spinner.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/froala-editor@3.0.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type='text/css' />
+  <link rel="stylesheet" href="/css/translate.css">
 </head>
 
 <body>
+
   <?php include("partials/fixed-quoting.html"); ?>
 
   <div class="wall-loading">
@@ -164,6 +166,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <?php include("partials/basket.html"); ?>
   <!-- End faq Area -->
   <?php include("partials/footer.html") ?>
+  
   <script src="js/jquery-2.2.4.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
   <script src="js/bootstrap.min.js"></script>
@@ -176,6 +179,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <script src="js/waypoints.min.js"></script>
   <script src="js/main.js"></script>
   <script src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script src="/js/translate.js"></script>
   <script>
     $.get('/admin/texts/about/api/get_about.php', (data, status) => {
       let love = data[0]
