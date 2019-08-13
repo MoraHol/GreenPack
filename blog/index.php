@@ -155,10 +155,10 @@ if ($_GET["page"] > $pages || $_GET["page"] <= 0) {
           $noticesLastest = $noticeDao->findlastest(5);
           // var_dump($noticesLastest);
           foreach ($noticesLastest as $noticeLastest) { ?>
-            <div class="carousel-item-notice ">
-              <span class="title">NOTICIAS</span>
-              <span class="notice"><?php echo $noticeLastest->getTitle(); ?></span>
-            </div>
+          <div class="carousel-item-notice ">
+            <span class="title">NOTICIAS</span>
+            <span class="notice"><?php echo $noticeLastest->getTitle(); ?></span>
+          </div>
           <?php } ?>
         </div>
       </div>
@@ -180,27 +180,27 @@ if ($_GET["page"] > $pages || $_GET["page"] <= 0) {
           <!-- row -->
           <div class="row" id="notices">
             <?php foreach ($noticesToShow as $notice) { ?>
-              <!-- single blog -->
-              <div class="col-md-6">
-                <div class="single-blog">
-                  <div style="margin-bottom: 6px;">
-                    <div style="float:left"><i class="fas fa-fw fa-eye"></i> VISITAS: <span>0</span></div>
-                    <div class="text-right">
-                      <span class=""><?php echo $notice->getCreatedAt()["day"];
+            <!-- single blog -->
+            <div class="col-md-6">
+              <div class="single-blog">
+                <div style="margin-bottom: 6px;">
+                  <div style="float:left"><i class="fas fa-fw fa-eye"></i> VISITAS: <span><?= $notice->getHits() ?></span></div>
+                  <div class="text-right">
+                    <span class=""><?php echo $notice->getCreatedAt()["day"];
                                       echo " de " .  " " . $conversor->monthToString($notice->getCreatedAt()["month"]) . ", " . $notice->getCreatedAt()["year"];; ?></span>
-                    </div>
                   </div>
-
-                  <div class="blog-img">
-                    <a href="blog-post.php?id=<?php echo $notice->getId() ?>">
-                      <img height="264" src="<?php echo $notice->getImage() ?>" alt="">
-                    </a>
-                  </div>
-                  <h4><a href="blog-post.php?id=<?php echo $notice->getId() ?>"><?php echo $notice->getTitle() ?>.</a></h4>
-                  <hr>
                 </div>
+
+                <div class="blog-img">
+                  <a href="blog-post.php?id=<?php echo $notice->getId() ?>">
+                    <img height="264" src="<?php echo $notice->getImage() ?>" alt="">
+                  </a>
+                </div>
+                <h4><a href="blog-post.php?id=<?php echo $notice->getId() ?>"><?php echo $notice->getTitle() ?>.</a></h4>
+                <hr>
               </div>
-              <!-- /single blog -->
+            </div>
+            <!-- /single blog -->
             <?php } ?>
           </div>
           <!-- /row -->
@@ -248,16 +248,16 @@ if ($_GET["page"] > $pages || $_GET["page"] <= 0) {
             <h3>Noticias Recientes</h3>
             <?php $RecentsNotices = $noticeDao->findlastest(3);
             foreach ($RecentsNotices as $notice) { ?>
-              <!-- single posts -->
-              <div class="single-post">
-                <a class="single-post-img" href="blog-post.php?id=<?php echo $notice->getId() ?>">
-                  <img src="<?php echo $notice->getImage() ?>" alt="">
-                </a>
-                <a href="blog-post.php?id=<?php echo $notice->getId() ?>" style="line-height: 0px;"><small><?php echo $notice->getTitle() ?></small></a>
-                <!-- <p><small><?php echo $notice->getCreatedAt()["day"];
+            <!-- single posts -->
+            <div class="single-post">
+              <a class="single-post-img" href="blog-post.php?id=<?php echo $notice->getId() ?>">
+                <img src="<?php echo $notice->getImage() ?>" alt="">
+              </a>
+              <a href="blog-post.php?id=<?php echo $notice->getId() ?>" style="line-height: 0px;"><small><?php echo $notice->getTitle() ?></small></a>
+              <!-- <p><small><?php echo $notice->getCreatedAt()["day"];
                                 echo " de " .  " " . $conversor->monthToString($notice->getCreatedAt()["month"]) . ", " . $notice->getCreatedAt()["year"]; ?></small></p> -->
-              </div>
-              <!-- /single posts -->
+            </div>
+            <!-- /single posts -->
             <?php } ?>
           </div>
           <!-- /posts widget -->

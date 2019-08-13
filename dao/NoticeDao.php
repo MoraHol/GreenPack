@@ -27,7 +27,7 @@ class NoticeDao
   public function update($notice)
   {
     $this->db->connect();
-    $query = "UPDATE `notices` SET `title` = '" . $notice->getTitle() . "', `content` = '" . $notice->getContent() . "', `photo` = '" . $notice->getImage() . "',`active` = " . (int) $notice->getActive() . " WHERE `notices`.`id_notice` = " . $notice->getId();
+    $query = "UPDATE `notices` SET `title` = '" . $notice->getTitle() . "', `content` = '" . $notice->getContent() . "', `photo` = '" . $notice->getImage() . "',`active` = " . (int) $notice->getActive() . ", `hits` = '" . $notice->getHits() . "' WHERE `notices`.`id_notice` = " . $notice->getId();
     $status = $this->db->consult($query);
     $this->db->close();
     return $status;
@@ -48,7 +48,7 @@ class NoticeDao
     $notice->setId($noticeDB["id_notice"]);
     $notice->setTitle($noticeDB["title"]);
     $notice->setImage($noticeDB["photo"]);
-    $notice->setHits($noticeDB["hits"]);
+    $notice->setHits((int) $noticeDB["hits"]);
     $notice->setContent($noticeDB["content"]);
     $notice->setActive(filter_var($noticeDB["active"], FILTER_VALIDATE_BOOLEAN));
     $notice->setCreatedAt(date_parse($noticeDB["created_at"]));
@@ -67,7 +67,7 @@ class NoticeDao
       $notice->setTitle($noticeDB["title"]);
       $notice->setImage($noticeDB["photo"]);
       $notice->setContent($noticeDB["content"]);
-      $notice->setHits($noticeDB["hits"]);
+      $notice->setHits((int) $noticeDB["hits"]);
       $notice->setActive(filter_var($noticeDB["active"], FILTER_VALIDATE_BOOLEAN));
       $notice->setCreatedAt(date_parse($noticeDB["created_at"]));
       $notice->setUpdatedAt(date_parse($noticeDB["updated_at"]));
@@ -86,7 +86,7 @@ class NoticeDao
       $notice->setId($noticeDB["id_notice"]);
       $notice->setTitle($noticeDB["title"]);
       $notice->setImage($noticeDB["photo"]);
-      $notice->setHits($noticeDB["hits"]);
+      $notice->setHits((int) $noticeDB["hits"]);
       $notice->setContent($noticeDB["content"]);
       $notice->setActive(filter_var($noticeDB["active"], FILTER_VALIDATE_BOOLEAN));
       $notice->setCreatedAt(date_parse($noticeDB["created_at"]));
@@ -108,7 +108,7 @@ class NoticeDao
       $notice->setId($noticeDB["id_notice"]);
       $notice->setTitle($noticeDB["title"]);
       $notice->setImage($noticeDB["photo"]);
-      $notice->setHits($noticeDB["hits"]);
+      $notice->setHits((int) $noticeDB["hits"]);
       $notice->setContent($noticeDB["content"]);
       $notice->setActive(filter_var($noticeDB["active"], FILTER_VALIDATE_BOOLEAN));
       $notice->setCreatedAt(date_parse($noticeDB["created_at"]));
@@ -131,7 +131,7 @@ class NoticeDao
       $notice->setTitle($noticeDB["title"]);
       $notice->setImage($noticeDB["photo"]);
       $notice->setContent($noticeDB["content"]);
-      $notice->setHits($noticeDB["hits"]);
+      $notice->setHits((int) $noticeDB["hits"]);
       $notice->setActive(filter_var($noticeDB["active"], FILTER_VALIDATE_BOOLEAN));
       $notice->setCreatedAt(date_parse($noticeDB["created_at"]));
       $notice->setUpdatedAt(date_parse($noticeDB["updated_at"]));
@@ -150,7 +150,7 @@ class NoticeDao
       $notice->setId($noticeDB["id_notice"]);
       $notice->setTitle($noticeDB["title"]);
       $notice->setImage($noticeDB["photo"]);
-      $notice->setHits($noticeDB["hits"]);
+      $notice->setHits((int) $noticeDB["hits"]);
       $notice->setContent($noticeDB["content"]);
       $notice->setActive(filter_var($noticeDB["active"], FILTER_VALIDATE_BOOLEAN));
       $notice->setCreatedAt(date_parse($noticeDB["created_at"]));

@@ -59,6 +59,7 @@ $conversorDate = new ConversorDate();
                       <th>Titulo</th>
                       <th>Imagen</th>
                       <th>Activa</th>
+                      <th>Visitas</th>
                       <th>Visualizar</th>
                       <th>Actualizar</th>
                       <th>Borrar</th>
@@ -66,14 +67,15 @@ $conversorDate = new ConversorDate();
                   </thead>
                   <tbody>
                     <?php foreach ($notices as $notice) { ?>
-                      <tr>
-                        <td><?php echo $notice->getTitle(); ?></td>
-                        <td><img src="<?php echo $notice->getImage(); ?>" height="50" width="50"></td>
-                        <td><?php echo $notice->getActive() ? "<span>Si</span>" : "<span style='color:red;'>No</span>"; ?></td>
-                        <td class="text-center"><a href="/blog/blog-post.php?id=<?php echo $notice->getId(); ?>" target="_blank" rel="noopener noreferrer"><i class="fas fa-eye"></i></a></td>
-                        <td class="text-center"><a class="text-center" href="/admin/blog/update-notice.php?id=<?php echo $notice->getId(); ?>"><i class="fas fa-fw fa-sync"></a></td>
-                        <td class="text-center"><a onclick="modal(<?php echo $notice->getId(); ?>)" href="#"><i class="far fa-trash-alt"></i></a></td>
-                      </tr>
+                    <tr>
+                      <td><?php echo $notice->getTitle(); ?></td>
+                      <td><img src="<?php echo $notice->getImage(); ?>" height="50" width="50"></td>
+                      <td><?php echo $notice->getActive() ? "<span>Si</span>" : "<span style='color:red;'>No</span>"; ?></td>
+                      <td class="text-center"><?= $notice->getHits() ?></td>
+                      <td class="text-center"><a href="/blog/blog-post.php?id=<?php echo $notice->getId(); ?>&admin=true" target="_blank" rel="noopener noreferrer"><i class="fas fa-eye"></i></a></td>
+                      <td class="text-center"><a class="text-center" href="/admin/blog/update-notice.php?id=<?php echo $notice->getId(); ?>"><i class="fas fa-fw fa-sync"></a></td>
+                      <td class="text-center"><a onclick="modal(<?php echo $notice->getId(); ?>)" href="#"><i class="far fa-trash-alt"></i></a></td>
+                    </tr>
                     <?php } ?>
                   </tbody>
                 </table>

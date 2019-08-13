@@ -82,6 +82,10 @@ $tabs = $tabProductDao->findByProduct($product);
     .tab-content .fr-view hr {
       border-top: 1px solid rgba(0, 0, 0, 0.3);
     }
+
+    .fr-view.fr-description p {
+      font-size: 1.1rem;
+    }
   </style>
 
 </head>
@@ -105,7 +109,7 @@ $tabs = $tabProductDao->findByProduct($product);
   <div class="container">
     <h2><?= $product->getName(); ?></h2>
     <br>
-    <div class="fr-view">
+    <div class="fr-view fr-description">
       <?= $product->getDescription(); ?>
     </div>
   </div>
@@ -118,9 +122,9 @@ $tabs = $tabProductDao->findByProduct($product);
             <div class="flexslider">
               <ul class="slides">
                 <?php foreach ($product->getImages() as $image) { ?>
-                  <li data-thumb="<?= $image->getUrl(); ?>">
-                    <div class="thumb-image"> <img src="<?= $image->getUrl(); ?>" data-imagezoom="true" class="img-responsive"> </div>
-                  </li>
+                <li data-thumb="<?= $image->getUrl(); ?>">
+                  <div class="thumb-image"> <img src="<?= $image->getUrl(); ?>" data-imagezoom="true" class="img-responsive"> </div>
+                </li>
                 <?php } ?>
               </ul>
             </div>
@@ -183,7 +187,7 @@ $tabs = $tabProductDao->findByProduct($product);
                   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion-cotizador">
                     <div class="card-body">
                       <?php foreach ($product->getMaterials() as $material) { ?>
-                        <label class="radio-inline" style="margin-left: 10px;">&nbsp;&nbsp;<input type="radio" name="material" value="<?= $material->getId(); ?>">&nbsp;&nbsp;&nbsp;<?= $material->getName(); ?></label>
+                      <label class="radio-inline" style="margin-left: 10px;">&nbsp;&nbsp;<input type="radio" name="material" value="<?= $material->getId(); ?>">&nbsp;&nbsp;&nbsp;<?= $material->getName(); ?></label>
                       <?php
                       } ?>
                     </div>
@@ -264,29 +268,29 @@ $tabs = $tabProductDao->findByProduct($product);
             <br>
             <ul>
               <?php foreach ($product->getUses() as $use) { ?>
-                <li><?= $use ?></li>
+              <li><?= $use ?></li>
               <?php } ?>
             </ul>
           </div>
         </div>
         <div class="col-md-9">
           <?php if (count($tabs) > 0) { ?>
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-              <?php foreach ($tabs as $key => $tab) { ?>
-                <li class="nav-item">
-                  <a class="nav-link <?= $key == 0 ? "active" : "" ?>" id="tab-<?= $tab->getId() ?>" data-toggle="tab" href="#description-tab-<?= $tab->getId() ?>" role="tab" aria-controls="description-tab-<?= $tab->getId() ?>" aria-selected="true"><?= $tab->getTitle() ?></a>
-                </li>
-              <?php } ?>
-            </ul>
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <?php foreach ($tabs as $key => $tab) { ?>
+            <li class="nav-item">
+              <a class="nav-link <?= $key == 0 ? "active" : "" ?>" id="tab-<?= $tab->getId() ?>" data-toggle="tab" href="#description-tab-<?= $tab->getId() ?>" role="tab" aria-controls="description-tab-<?= $tab->getId() ?>" aria-selected="true"><?= $tab->getTitle() ?></a>
+            </li>
+            <?php } ?>
+          </ul>
           <?php } ?>
           <?php if (count($tabs) > 0) { ?>
-            <div class="tab-content" id="myTabContent">
-              <?php foreach ($tabs as $key => $tab) { ?>
-                <div class="tab-pane fade show <?= $key == 0 ? "active" : "" ?> " id="description-tab-<?= $tab->getId() ?>" role="tabpanel" aria-labelledby="tab<?= $tab->getId() ?>">
-                  <div class="fr-view"><?= $tab->getDescription(); ?></div>
-                </div>
-              <?php } ?>
+          <div class="tab-content" id="myTabContent">
+            <?php foreach ($tabs as $key => $tab) { ?>
+            <div class="tab-pane fade show <?= $key == 0 ? "active" : "" ?> " id="description-tab-<?= $tab->getId() ?>" role="tabpanel" aria-labelledby="tab<?= $tab->getId() ?>">
+              <div class="fr-view"><?= $tab->getDescription(); ?></div>
             </div>
+            <?php } ?>
+          </div>
           <?php } ?>
         </div>
       </div>
@@ -311,20 +315,20 @@ $tabs = $tabProductDao->findByProduct($product);
         <?php
         $products = $productDao->findRelatedProducts($product, 4);
         foreach ($products as $productInstance) { ?>
-          <div class="col-sm-3">
-            <div class="card text-center card-product zoom-in">
-              <div class="card-product__img">
-                <img class="card-img" src="<?= $productInstance->getImages()[0]->getUrl(); ?>">
-                <ul class="card-product__imgOverlay">
-                  <li><a href="product.php?id=<?= $productInstance->getId() ?>"><i class="ti-search"></i> Cotizar</a></li>
-                </ul>
-              </div>
-              <div class="card-body">
-                <p><?= $productInstance->getCategory()->getName(); ?></p>
-                <h4 class="card-product__title"><a href="#"><?= $productInstance->getName(); ?></a></h4>
-              </div>
+        <div class="col-sm-3">
+          <div class="card text-center card-product zoom-in">
+            <div class="card-product__img">
+              <img class="card-img" src="<?= $productInstance->getImages()[0]->getUrl(); ?>">
+              <ul class="card-product__imgOverlay">
+                <li><a href="product.php?id=<?= $productInstance->getId() ?>"><i class="ti-search"></i> Cotizar</a></li>
+              </ul>
+            </div>
+            <div class="card-body">
+              <p><?= $productInstance->getCategory()->getName(); ?></p>
+              <h4 class="card-product__title"><a href="#"><?= $productInstance->getName(); ?></a></h4>
             </div>
           </div>
+        </div>
         <?php
         } ?>
       </div>

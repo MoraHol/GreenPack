@@ -7,6 +7,12 @@ $idNotice = $_GET["id"];
 $noticeDao = new NoticeDao();
 $notice = $noticeDao->findById($idNotice);
 $conversor = new ConversorDate();
+if (!isset($_GET["admin"])) {
+  $notice->setHits($notice->getHits() + 1);
+  $noticeDao->update($notice);
+  $notice = $noticeDao->findById((int) $_GET["id"]);
+  echo "<script>alert(" . $notice->getHits() . ")</script>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -17,7 +23,7 @@ $conversor = new ConversorDate();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title><?php echo $notice->getTitle(); ?></title>
+  <title><?= $notice->getTitle(); ?></title>
   <script src="/js/jquery-1.11.0.min.js"></script>
   <link href="/images/icon.png" rel="icon" type="image/png">
   <meta property="og:type" content="article">
@@ -112,7 +118,7 @@ $conversor = new ConversorDate();
     <div class="hero-area section">
 
       <!-- Backgound Image -->
-      <div class="bg-image bg-parallax overlay" style="background-image:url(<?php echo $notice->getImage(); ?>); height: 580px;"></div>
+      <div class="bg-image bg-parallax overlay" style="background-image:url(<?= $notice->getImage(); ?>); height: 580px;"></div>
       <!-- /Backgound Image -->
       <div class="container">
         <div class="row" id="block-title">
@@ -120,12 +126,12 @@ $conversor = new ConversorDate();
             <!-- <ul class="hero-area-tree">
                             <li><a href="/">Inicio</a></li>
                             <li><a href="/blog">Blog</a></li>
-                            <li><?php echo $notice->getTitle(); ?></li>
+                            <li><?= $notice->getTitle(); ?></li>
                         </ul> -->
-            <h1 class="white-text"><?php echo $notice->getTitle(); ?></h1>
+            <h1 class="white-text"><?= $notice->getTitle(); ?></h1>
             <ul class="blog-post-meta">
 
-              <li><?php echo $notice->getCreatedAt()["day"];
+              <li><?= $notice->getCreatedAt()["day"];
                   echo " de " .  " " . $conversor->monthToString($notice->getCreatedAt()["month"]) . ", " . $notice->getCreatedAt()["year"];; ?></li>
             </ul>
           </div>
@@ -145,7 +151,10 @@ $conversor = new ConversorDate();
 
           <!-- blog post -->
           <div class="blog-post">
-            <?php echo $notice->getContent(); ?>
+            <div class="fr-view">
+              <?= $notice->getContent(); ?>
+            </div>
+
           </div>
           <!-- /blog post -->
 
@@ -177,20 +186,22 @@ $conversor = new ConversorDate();
             <h3>Noticias Recientes</h3>
             <?php $RecentsNotices = $noticeDao->findlastest(4);
             foreach ($RecentsNotices as $notice) { ?>
-              <!-- single posts -->
-              <div class="single-post">
-                <a class="single-post-img" href="blog-post.php?id=<?php echo $notice->getId() ?>">
-                  <img src="<?php echo $notice->getImage() ?>" alt="">
-                </a>
-                <p><small><a href="blog-post.php?id=<?php echo $notice->getId() ?>"><?php echo $notice->getTitle() ?></a></small></p>
-                <!-- <p><small><?php echo $notice->getCreatedAt()["day"];
+            <!-- single posts -->
+            <div class="single-post">
+              <a class="single-post-img" href="blog-post.php?id=<?= $notice->getId() ?>">
+                <img src="<?= $notice->getImage() ?>" alt="">
+              </a>
+              <p><small><a href="blog-post.php?id=<?= $notice->getId() ?>"><?= $notice->getTitle() ?></a></small></p>
+              <!-- <p><small><?= $notice->getCreatedAt()["day"];
                                 echo " de " .  " " . $conversor->monthToString($notice->getCreatedAt()["month"]) . ", " . $notice->getCreatedAt()["year"]; ?></small></p> -->
-              </div>
-              <!-- /single posts -->
+            </div>
+            <!-- /single posts -->
             <?php } ?>
           </div>
           <!-- /posts widget -->
-
+          <?php
+          $notice = $noticeDao->findById((int) $_GET["id"]);
+          echo "<script>alert(" . $notice->getHits() . ")</script>"; ?>
         </div>
         <!-- /aside blog -->
 
@@ -214,7 +225,7 @@ $conversor = new ConversorDate();
   <script src="/js/waypoints.min.js"></script>
   <script src="/js/main.js"></script>
   <script src="/js/back-top.js"></script>
-  <script src="https://kit.fontawesome.com/58e9d196f8.js"></script>
+  <!-- <script src="https://kit.fontawesome.com/58e9d196f8.js"></script> -->
   <script src="/js/bootstrap.min.js"></script>
 </body>
 
