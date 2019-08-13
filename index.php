@@ -140,7 +140,7 @@ $conversor = new ConversorDate(); ?>
                 <i class="far fa-lightbulb" style="    color: rgb(19, 109, 8);height: 70px;font-size: -webkit-xxx-large;"></i>
               </span>
 
-              <span class="counter js-counter" data-from="0" data-to="220" data-speed="5000" data-refresh-interval="50" id="innovations">220</span>
+              <span class="counter js-counter notranslate" data-from="0" data-to="220" data-speed="5000" data-refresh-interval="50" id="innovations">220</span>
               <span class="counter-label">Innovaciones <br>Realizadas</span>
 
             </div>
@@ -150,7 +150,7 @@ $conversor = new ConversorDate(); ?>
               <span class="icon">
                 <i class="fas fa-box-open" style="color: rgb(19, 109, 8);height: 70px;font-size: -webkit-xxx-large;"></i>
               </span>
-              <span class="counter js-counter" data-from="0" data-to="700" data-speed="5000" data-refresh-interval="50" id="products">700</span>
+              <span class="counter js-counter notranslate" data-from="0" data-to="700" data-speed="5000" data-refresh-interval="50" id="products">700</span>
               <span class="counter-label">Productos <br>Ofertados</span>
             </div>
           </div>
@@ -159,7 +159,7 @@ $conversor = new ConversorDate(); ?>
               <span class="icon">
                 <i class="fas fa-running" style="color: rgb(19, 109, 8);height: 70px;font-size: -webkit-xxx-large;"></i>
               </span>
-              <span class="counter js-counter" data-from="0" data-to="450" data-speed="5000" data-refresh-interval="50" id="clients">450</span>
+              <span class="counter js-counter notranslate" data-from="0" data-to="450" data-speed="5000" data-refresh-interval="50" id="clients">450</span>
               <span class="counter-label">Clientes <br>Atendidos</span>
             </div>
           </div>

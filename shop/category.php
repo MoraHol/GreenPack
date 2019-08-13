@@ -172,16 +172,16 @@
               <li class="common-filter">
                 <form action="#">
                   <ul>
-                    <li class="filter-list"><a href="category.php?id=1">Bolsas<span> (<?php echo count($productDao->findByCategory(1)); ?>)</span></a></li>
+                    <li class="filter-list"><a href="category.php?id=1&page=1">Bolsas<span> (<?php echo count($productDao->findByCategory(1)); ?>)</span></a></li>
                     <li class="filter-list"><a href="#cajas" class="accordion" data-toggle="collapse">cajas <span> (<?php echo count($productDao->findByCategory(2)); ?>)</span></a>
                       <ul id="cajas" class="category collapse">
-                        <li class="child-category"><a href="category.php?id=3">Cajas de exhibir <span> (<?php echo count($productDao->findByCategory(3)); ?>)</span></a></li>
-                        <li class="child-category"><a href="category.php?id=4">Cajas de llevar <span> (<?php echo count($productDao->findByCategory(4)); ?>)</span></a></li>
-                        <li class="child-category"><a href="category.php?id=5">Cajas de servir<span> (<?php echo count($productDao->findByCategory(5)); ?>)</span></a></li>
+                        <li class="child-category"><a href="category.php?id=3&page=1">Cajas de exhibir <span> (<?php echo count($productDao->findByCategory(3)); ?>)</span></a></li>
+                        <li class="child-category"><a href="category.php?id=4&page=1">Cajas de llevar <span> (<?php echo count($productDao->findByCategory(4)); ?>)</span></a></li>
+                        <li class="child-category"><a href="category.php?id=5&page=1">Cajas de servir<span> (<?php echo count($productDao->findByCategory(5)); ?>)</span></a></li>
                       </ul>
                     </li>
-                    <li class="filter-list"><a href="category.php?id=6">Laminas<span> (<?php echo count($productDao->findByCategory(6)); ?>)</span></a></li>
-                    <li class="filter-list"><a href="category.php?id=7">Productos especiales<span> (<?php echo count($productDao->findByCategory(7)); ?>)</span></a></li>
+                    <li class="filter-list"><a href="category.php?id=6&page=1">Laminas<span> (<?php echo count($productDao->findByCategory(6)); ?>)</span></a></li>
+                    <li class="filter-list"><a href="category.php?id=7&page=1">Productos especiales<span> (<?php echo count($productDao->findByCategory(7)); ?>)</span></a></li>
                   </ul>
                 </form>
               </li>

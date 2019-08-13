@@ -31,6 +31,41 @@
     html a:visited {
       color: #fff;
     }
+
+    #banner-box {
+      /* background-color: rgba(0, 0, 0, 0.8); */
+      background-size: cover;
+      /* filter: brightness(0.4); */
+      position: relative;
+      box-shadow: 5px 10px;
+    }
+
+    #banner-box::after {
+      
+    }
+
+    #banner-box:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(97, 85, 85, 0.6);
+      -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+      box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    }
+
+    #banner-box p {
+      color: #fff;
+      position: relative;
+    }
+
+    .view-more {
+      z-index: 100;
+      filter: none;
+    }
   </style>
 
 </head>
@@ -61,32 +96,26 @@
             <span class="line"></span>
           </div>
           <div class="content">
-            <a class="banner" data-goldlog="pos=banner&amp;type=weeklydeals" data-goldkey="theme" style="background-image: url(/images/brown-paper-bag-970976_1920.jpg)" href="category.php?id=2">
-              <p class="discount-wrap"><span>MAS DE</span> <span class="discount">1000 productos</span></p>
+            <a class="banner" id="banner-box" data-goldlog="pos=banner&amp;type=weeklydeals" data-goldkey="theme" style="background-image: url(/images/shop/cajas.jpg); " href="category.php?id=2&page=1">
+              <p class="discount-wrap text-white" style="font-weight:600; font-size: 1.4rem"><span>Diseños que enamoran a tus clientes</span> </p>
 
-              <div class="cutdown-wrap">
+              <!-- <div class="cutdown-wrap">
                 <div class="cutdown-desc">Que se adaptan a tus necesidades</div>
-                <!--<div id="weekly-deals-cutdown">
-                  <div id="cutdown-days" data-role="day" class="cutnums">04</div>
-                  <div id="cutdown-hours" data-role="hour" class="cutnums">14</div>
-                  <div id="cutdown-minutes" data-role="minute" class="cutnums dot">10</div>
-                  <div id="cutdown-secons" data-role="second" class="cutnums dot">08</div>
-                </div>-->
-              </div>
+              </div> -->
 
               <div class="view-more">Más información<i class="fas fa-arrow-right"></i></div>
             </a>
             <div class="items-wrap">
 
 
-              <div class="item-wrap item-0" data-ctrdot="expose_cid-3803#senseid-9200_9#pvid-c1a81149-2d9b-4923-a356-32ac29a927ab#id-62000421921#algPos-0#matchType-2#fatherId-null#blockId-157059#">
-                <a class="item" href="category.php?id=2" data-goldkey="theme" data-goldlog="pos=tab&amp;type=weeklydeals&amp;index=0&amp;clickParam=click_cid-3852#click_senseid-9200_9#pvid-c1a81149-2d9b-4923-a356-32ac29a927ab#id-62000421921#pos-0#matchType-2#fatherId-null#blockId-157059">
+              <div class="item-wrap item-0" >
+                <a class="item" href="category.php?id=2&page=1" data-goldkey="theme">
                   <div class="item-image zoom-wrap">
                     <img class="image zoom-in" src="https://greenpack.com.co/wp-content/uploads/2017/07/cem-ch.jpg">
                   </div>
                 </a>
 
-                <a class="view-more" data-goldkey="theme" data-goldlog="pos=banner&amp;type=weeklydeals" href="category.php?id=2">
+                <a class="view-more" data-goldkey="theme" data-goldlog="pos=banner&amp;type=weeklydeals" href="category.php?id=2&page=1">
                   Más información <i class="fas fa-arrow-right"></i>
                 </a>
 
@@ -94,7 +123,7 @@
 
 
               <div class="item-wrap item-1" data-ctrdot="expose_cid-3803#senseid-9200_9#pvid-c1a81149-2d9b-4923-a356-32ac29a927ab#id-62029879904#algPos-0#matchType-2#fatherId-null#blockId-157059#">
-                <a class="item" href="category.php?id=2">
+                <a class="item" href="category.php?id=2&page=1">
                   <div class="item-image zoom-wrap">
                     <img class="image zoom-in" src="https://greenpack.com.co/wp-content/uploads/2017/07/clm-vs.jpg">
                   </div>
@@ -104,7 +133,7 @@
 
 
               <div class="item-wrap item-2" data-ctrdot="expose_cid-3803#senseid-9200_9#pvid-c1a81149-2d9b-4923-a356-32ac29a927ab#id-60813909028#algPos-0#matchType-2#fatherId-null#blockId-157059#">
-                <a class="item" href="category.php?id=2">
+                <a class="item" href="category.php?id=2&page=1">
                   <div class="item-image zoom-wrap">
                     <img class="image zoom-in" src="https://greenpack.com.co/wp-content/uploads/2017/07/cls-pa.jpg">
                   </div>
@@ -115,7 +144,7 @@
 
 
               <div class="item-wrap item-3" data-ctrdot="expose_cid-3803#senseid-9200_9#pvid-c1a81149-2d9b-4923-a356-32ac29a927ab#id-62061058364#algPos-0#matchType-2#fatherId-null#blockId-157059#">
-                <a class="item" href="category.php?id=2">
+                <a class="item" href="category.php?id=2&page=1">
                   <div class="item-image zoom-wrap">
                     <img class="image zoom-in" src="https://greenpack.com.co/wp-content/uploads/2017/07/cla-rp.jpg">
                   </div>
@@ -126,7 +155,7 @@
 
 
               <div class="item-wrap item-4" data-ctrdot="expose_cid-3803#senseid-9200_9#pvid-c1a81149-2d9b-4923-a356-32ac29a927ab#id-62017300930#algPos-0#matchType-2#fatherId-null#blockId-157059#">
-                <a class="item" href="category.php?id=2">
+                <a class="item" href="category.php?id=2&page=1">
                   <div class="item-image zoom-wrap">
                     <img class="image zoom-in" src="https://greenpack.com.co/wp-content/uploads/2017/07/cem-cu.jpg">
                   </div>
@@ -147,10 +176,10 @@
             <span class="line"></span>
           </div>
           <div class="content">
-            <a class="banner" data-goldkey="theme" data-goldlog="pos=banner&amp;type=buyerHub" style="background-image: url(/images/shop-791582_1920.jpg)" href="category.php?id=1&page=1">
-              <h3>Producto avanzado</h3>
-              <p class="description">Herramienta de búsqueda</p>
-              <div class="view-more">Ingresar a la zona para compradores</div>
+            <a class="banner" data-goldkey="theme" data-goldlog="pos=banner&amp;type=buyerHub" style="background-image: url(/images/shop/bolsa.jpg)" href="category.php?id=1&page=1">
+              <!-- <h3>Producto avanzado</h3> -->
+              <p class="description">Sorprende a tus clientes</p>
+              <!-- <div class="view-more">Ingresar a la zona para compradores</div> -->
             </a>
             <div class="items-wrap no-flex">
               <p class="desc">Búsqueda más fácil con enlaces de productos</p>
@@ -179,26 +208,26 @@
             <span class="line"></span>
           </div>
           <div class="content">
-            <a class="banner" data-goldkey="theme" data-goldlog="pos=banner&amp;type=brandzone" style="background-image: url(//i.alicdn.com/img/tfs/TB1YTEooH3nBKNjSZFMXXaUSFXa-720-400.png_350x350.jpg)" href="https://www.alibaba.com/brandzone?tracelog=20190612_ICBU_PC_THEME_BRAND_ZONE_ICBU_PC_THEME_BRAND_ZONE_BANNER_T" target="_blank">
-              <h3>Nuevas marcas</h3>
-              <p class="description">Populares en Alibaba.com</p>
-              <p class="tip">Envío de 48 horas</p>
+            <a class="banner" data-goldkey="theme" data-goldlog="pos=banner&amp;type=brandzone" style="background-image: url(/images/shop/laminas1.jpg);" href="/shop/category.php?id=6&page=1">
+              <h3 class="text-white">El producto que necesitas</h3>
+              <!-- <p class="description">Populares en Alibaba.com</p> -->
+              <!-- <p class="tip">Envío de 48 horas</p> -->
               <div class="view-more">Entrar marca zona</div>
             </a>
             <div class="items-wrap">
               <div class="item-wrap">
-                <a class="item" href="category.php?id=6" data-goldkey="theme" data-goldlog="pos=tab&amp;type=brandzone&amp;index=0">
+                <a class="item" href="/shop/category.php?id=6&page=1" data-goldkey="theme" data-goldlog="pos=tab&amp;type=brandzone&amp;index=0">
                   <!-- <i class="icon" style="background-image: url(/images/greenbags_logo_verde.png)"></i> -->
                   <div class="item-image zoom-wrap">
                     <img class="image zoom-in" src="https://greenpack.com.co/wp-content/uploads/2017/07/SEPARADOR.png">
                   </div>
                 </a>
-                <a class="view-more" href="https://www.alibaba.com/brandzone?tracelog=20190612_ICBU_PC_THEME_BRAND_ZONE_ICBU_PC_THEME_BRAND_ZONE_BANNER_T" target="_blank" data-goldkey="theme" data-goldlog="pos=banner&amp;type=brandzone">
+                <a class="view-more" href="/shop/category.php?id=6&page=1" data-goldkey="theme" data-goldlog="pos=banner&amp;type=brandzone">
                   Entrar marca zona
                 </a>
               </div>
               <div class="item-wrap">
-                <a class="item" href="category.php?id=6" data-goldkey="theme" data-goldlog="pos=tab&amp;type=brandzone&amp;index=1">
+                <a class="item" href="/shop/category.php?id=6&page=1" data-goldkey="theme" data-goldlog="pos=tab&amp;type=brandzone&amp;index=1">
                   <!-- <i class="icon" style="background-image: url(//i.alicdn.com/sc01/kf/HTB1QlmVacnrK1RkHFrdq6xCoFXaq.jpg)"></i> -->
                   <div class="item-image zoom-wrap">
                     <img class="image zoom-in" src="https://greenpack.com.co/wp-content/uploads/2017/07/INDIVIDUALES.jpg">
