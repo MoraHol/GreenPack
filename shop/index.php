@@ -40,9 +40,7 @@
       box-shadow: 5px 10px;
     }
 
-    #banner-box::after {
-      
-    }
+    #banner-box::after {}
 
     #banner-box:before {
       content: '';
@@ -98,27 +96,14 @@
           <div class="content">
             <a class="banner" id="banner-box" data-goldlog="pos=banner&amp;type=weeklydeals" data-goldkey="theme" style="background-image: url(/images/shop/cajas.jpg); " href="category.php?id=2&page=1">
               <p class="discount-wrap text-white" style="font-weight:600; font-size: 1.4rem"><span>Diseños que enamoran a tus clientes</span> </p>
-
-              <!-- <div class="cutdown-wrap">
-                <div class="cutdown-desc">Que se adaptan a tus necesidades</div>
-              </div> -->
-
-              <div class="view-more">Más información<i class="fas fa-arrow-right"></i></div>
             </a>
             <div class="items-wrap">
-
-
-              <div class="item-wrap item-0" >
+              <div class="item-wrap item-0">
                 <a class="item" href="category.php?id=2&page=1" data-goldkey="theme">
                   <div class="item-image zoom-wrap">
                     <img class="image zoom-in" src="https://greenpack.com.co/wp-content/uploads/2017/07/cem-ch.jpg">
                   </div>
                 </a>
-
-                <a class="view-more" data-goldkey="theme" data-goldlog="pos=banner&amp;type=weeklydeals" href="category.php?id=2&page=1">
-                  Más información <i class="fas fa-arrow-right"></i>
-                </a>
-
               </div>
 
 
@@ -128,7 +113,6 @@
                     <img class="image zoom-in" src="https://greenpack.com.co/wp-content/uploads/2017/07/clm-vs.jpg">
                   </div>
                 </a>
-
               </div>
 
 
@@ -182,8 +166,9 @@
               <!-- <div class="view-more">Ingresar a la zona para compradores</div> -->
             </a>
             <div class="items-wrap no-flex">
-              <p class="desc">Búsqueda más fácil con enlaces de productos</p>
-              <p class="benefit">Pegar el enlace del producto o subir una foto</p>
+              <p class="desc">Elaboradas en papeles especiales </p>
+              <p class="benefit" style="overflow:visible">Se adaptan perfectamente para contener y proteger tu producto</p>
+
               <div class="images-wrap">
                 <a class="item-image zoom-wrap" data-goldkey="theme" data-ctrdot="expose_cid-3803#senseid-9200_9#pvid-c1a81149-2d9b-4923-a356-32ac29a927ab#id-60773195001#algPos-1#matchType-2#fatherId-null#blockId-52806#" href="category.php?id=1&page=1">
                   <img class="image zoom-in" src="https://greenpack.com.co/wp-content/uploads/2017/07/b-plegada.png">
@@ -201,8 +186,8 @@
       </div>
       <!-- tangram:3651 end-->
       <!-- tangram:3649 begin-->
-      <div class="theme-item home-theme-brand-zone-container">
-        <div class="home-theme-brand-zone" data-spm="brandzone">
+      <div class="theme-item home-theme-buyer-hub-container">
+        <div class="home-theme-buyer-hub" data-spm="brandzone">
           <div class="header clearfix">
             <h2>Laminas</h2>
             <span class="line"></span>
@@ -210,28 +195,16 @@
           <div class="content">
             <a class="banner" data-goldkey="theme" data-goldlog="pos=banner&amp;type=brandzone" style="background-image: url(/images/shop/laminas1.jpg);" href="/shop/category.php?id=6&page=1">
               <h3 class="text-white">El producto que necesitas</h3>
-              <!-- <p class="description">Populares en Alibaba.com</p> -->
-              <!-- <p class="tip">Envío de 48 horas</p> -->
-              <div class="view-more">Entrar marca zona</div>
             </a>
-            <div class="items-wrap">
-              <div class="item-wrap">
-                <a class="item" href="/shop/category.php?id=6&page=1" data-goldkey="theme" data-goldlog="pos=tab&amp;type=brandzone&amp;index=0">
-                  <!-- <i class="icon" style="background-image: url(/images/greenbags_logo_verde.png)"></i> -->
-                  <div class="item-image zoom-wrap">
-                    <img class="image zoom-in" src="https://greenpack.com.co/wp-content/uploads/2017/07/SEPARADOR.png">
-                  </div>
+            <div class="items-wrap no-flex">
+              <p class="desc">Protegen tu producto </p>
+              <p class="benefit" style="overflow:visible">Desde la preparación hasta el consumo</p>
+              <div class="images-wrap ">
+                <a class="item-image zoom-wrap" data-goldkey="theme" data-ctrdot="expose_cid-3803#senseid-9200_9#pvid-c1a81149-2d9b-4923-a356-32ac29a927ab#id-60773195001#algPos-1#matchType-2#fatherId-null#blockId-52806#" href="category.php?id=1&page=1">
+                  <img class="image zoom-in" src="https://greenpack.com.co/wp-content/uploads/2017/07/SEPARADOR.png">
                 </a>
-                <a class="view-more" href="/shop/category.php?id=6&page=1" data-goldkey="theme" data-goldlog="pos=banner&amp;type=brandzone">
-                  Entrar marca zona
-                </a>
-              </div>
-              <div class="item-wrap">
-                <a class="item" href="/shop/category.php?id=6&page=1" data-goldkey="theme" data-goldlog="pos=tab&amp;type=brandzone&amp;index=1">
-                  <!-- <i class="icon" style="background-image: url(//i.alicdn.com/sc01/kf/HTB1QlmVacnrK1RkHFrdq6xCoFXaq.jpg)"></i> -->
-                  <div class="item-image zoom-wrap">
-                    <img class="image zoom-in" src="https://greenpack.com.co/wp-content/uploads/2017/07/INDIVIDUALES.jpg">
-                  </div>
+                <a class="item-image zoom-wrap" data-goldkey="theme" data-ctrdot="expose_cid-3803#senseid-9200_9#pvid-c1a81149-2d9b-4923-a356-32ac29a927ab#id-60773195001#algPos-1#matchType-2#fatherId-null#blockId-52806#" href="category.php?id=1&page=1">
+                  <img class="image zoom-in" src="https://greenpack.com.co/wp-content/uploads/2017/07/INDIVIDUALES.jpg">
                 </a>
               </div>
             </div>
