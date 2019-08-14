@@ -36,13 +36,13 @@
     @media(max-width: 600) {
       #container-image {
         background-attachment: scroll !important;
+        background-size: contain !important;
       }
     }
 
     @media(min-width: 1024px) {
       #container-image {
         background-attachment: fixed !important;
-
       }
 
       .sticky-wrapper {
@@ -51,12 +51,12 @@
     }
 
     #container-image {
-      background-size: contain !important;
+      background-size: cover !important;
       background-position: center;
-      -webkit-background-size: contain !important;
-      -moz-background-size: contain !important;
-      -o-background-size: contain !important;
-      background-size: contain !important;
+      -webkit-background-size: cover !important;
+      -moz-background-size: cover !important;
+      -o-background-size: cover !important;
+      background-size: cover !important;
       background-attachment: fixed;
       height: 100%;
       width: 100%;
@@ -212,23 +212,23 @@
               <?php
               $products = $productDao->findByCategoryWithLimit($_GET["id"], $pageInit, $productsperPage);
               foreach ($products as $product) { ?>
-                <div class="col-lg-3">
-                  <div class="card text-center card-product zoom-in">
-                    <div class="card-product__img">
-                      <img class="card-img" src="<?php echo $product->getImages()[0]->getUrl(); ?>">
-                      <ul class="card-product__imgOverlay">
-                        <li><a href="product.php?id=<?php echo $product->getId() ?>"><i class="ti-search"></i> Cotizar</a></li>
-                      </ul>
-                    </div>
-                    <div class="card-body">
-                      <!-- <p><?php
+              <div class="col-lg-3">
+                <div class="card text-center card-product zoom-in">
+                  <div class="card-product__img">
+                    <img class="card-img" src="<?php echo $product->getImages()[0]->getUrl(); ?>">
+                    <ul class="card-product__imgOverlay">
+                      <li><a href="product.php?id=<?php echo $product->getId() ?>"><i class="ti-search"></i> Cotizar</a></li>
+                    </ul>
+                  </div>
+                  <div class="card-body">
+                    <!-- <p><?php
                               //echo strtoupper($product->getCategory()->getName());
                               ?></p> -->
-                      <h4 class="card-product__title"><a href="product.php?id=<?php echo $product->getId() ?>"><?php echo $product->getName(); ?></a></h4>
-                      <!-- <p class="card-product__price">$<?php echo $product->getPrice(); ?></p> -->
-                    </div>
+                    <h4 class="card-product__title"><a href="product.php?id=<?php echo $product->getId() ?>"><?php echo $product->getName(); ?></a></h4>
+                    <!-- <p class="card-product__price">$<?php echo $product->getPrice(); ?></p> -->
                   </div>
                 </div>
+              </div>
               <?php
               } ?>
             </div>
