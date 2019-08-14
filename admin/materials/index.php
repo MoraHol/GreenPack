@@ -63,14 +63,14 @@ $materials = $materialDao->findAll();
                   </thead>
                   <tbody>
                     <?php foreach ($materials as $material) { ?>
-                      <tr>
-                        <td><?php echo $material->getName(); ?></td>
-                        <td class="text-center money"><?php echo $material->getPricePerKg(); ?></td>
-                        <td class="text-center"><?php echo $material->getGrammage(); ?> grs</td>
-                        <td><?php echo $material->getDescription(); ?></td>
-                        <td class="text-center"><a class="text-center" href="/admin/materials/update-material.php?id=<?php echo $material->getId(); ?>"><i class="fas fa-fw fa-sync"></a></td>
-                        <td class="text-center"><a onclick="modal(<?php echo $material->getId(); ?>)" href="#"><i class="far fa-trash-alt"></i></a></td>
-                      </tr>
+                    <tr>
+                      <td><?php echo $material->getName(); ?></td>
+                      <td class="text-center money"><?php echo $material->getPricePerKg(); ?></td>
+                      <td class="text-center"><?php echo $material->getGrammage(); ?> grs</td>
+                      <td><?= substr($material->getDescription(), 0, 100) . "..."; ?></td>
+                      <td class="text-center"><a class="text-center" href="/admin/materials/update-material.php?id=<?php echo $material->getId(); ?>"><i class="fas fa-fw fa-sync"></a></td>
+                      <td class="text-center"><a onclick="modal(<?php echo $material->getId(); ?>)" href="#"><i class="far fa-trash-alt"></i></a></td>
+                    </tr>
                     <?php } ?>
                   </tbody>
                 </table>

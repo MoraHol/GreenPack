@@ -50,7 +50,22 @@
           </button>
         </div>
         <div class="modal-body">
-
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email: *</label>
+                <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder=""
+                  required>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Ciudad: *</label>
+                <input type="text" class="form-control" name="city" aria-describedby="emailHelp" placeholder=""
+                  required>
+              </div>
+            </div>
+          </div>
           <div class="row">
             <div class="col">
               <div class="form-group">
@@ -97,22 +112,7 @@
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col">
-              <div class="form-group">
-                <label for="exampleInputEmail1">Email: *</label>
-                <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder=""
-                  required>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-group">
-                <label for="exampleInputEmail1">Ciudad: *</label>
-                <input type="text" class="form-control" name="city" aria-describedby="emailHelp" placeholder=""
-                  required>
-              </div>
-            </div>
-          </div>
+
           <div class="row">
             <div class="col">
               <div class="row">
@@ -151,12 +151,12 @@
     $.post('/services/create_quotation.php', dataSerialize, (data, status, xhr) => {
       if (status == 'success') {
         $.notify({
-            message: 'La cotizacion ha sido enviada',
-            title: 'Exito',
-            icon: 'fas fa-envelope-open'
-          }, {
-            type: 'success'
-          })
+          message: 'La cotizacion ha sido enviada',
+          title: 'Exito',
+          icon: 'fas fa-envelope-open'
+        }, {
+          type: 'success'
+        })
         cleanCart()
         renderCart()
       } else {
