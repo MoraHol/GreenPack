@@ -80,7 +80,7 @@ if (isset($_SESSION["cart"])) {
 <div class="content-basket-empty ng-star-inserted">
   <div><i class="iconf-car-2-icon"></i>
     <p><strong>No tienes productos cotizados</strong></p>
-    <p>Te invitamos a cotizar</p>
+    <p><a href="/shop">Te invitamos a cotizar</a></p>
   </div>
 </div>
 
@@ -93,7 +93,7 @@ if (isset($_SESSION["cart"])) {
 <div class="content-basket-empty ng-star-inserted">
   <div><i class="iconf-car-2-icon"></i>
     <p><strong>No tienes productos cotizados</strong></p>
-    <p>Te invitamos a cotizar</p>
+    <p><a href="/shop">Te invitamos a cotizar</a></p>
   </div>
 </div>
 <script>
