@@ -239,6 +239,9 @@ $tabs = $tabProductDao->findByProduct($product);
                   <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion-cotizador">
                     <div class="card-body">
                       <input type="number" name="qty" id="sst" maxlength="12" value="1000" title="Cantidad:" class="input-text qty form-control">
+                      <div id="help-quantity">
+                        <br> asas as assa asf 
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -246,6 +249,8 @@ $tabs = $tabProductDao->findByProduct($product);
               <div class="product_count form-group">
                 <br>
                 <a class="btn button primary-btn disabled" id="btnCotizar" href="#">Añadir al cotizador</a>
+                <br>
+                <br>
               </div>
             </div>
             <div class="clearfix"></div>
@@ -440,8 +445,9 @@ $tabs = $tabProductDao->findByProduct($product);
   <script>
     let category = `<?= $product->getCategory()->getName(); ?>`;
     let minQuantity = 0;
+    $('#help-quantity').html(`<br><span class="text-danger">La cantidad minima para cotizar es: ${verifyMinQuantity()} si quieres cotizar cantidades menores visita</span> <a href="//greenpointonline.com.co" target="_blank"> Greenpoint</a>`)
 
-    function verifyMinQunatiry() {
+    function verifyMinQuantity() {
       if (category == "bolsas") {
         if ($('#width').val() < 13) {
           minQuantity = 20000
@@ -454,17 +460,21 @@ $tabs = $tabProductDao->findByProduct($product);
       return minQuantity
     }
     $('#sst').change(function() {
-      if ($(this).val() < verifyMinQunatiry()) {
+      if ($(this).val() < verifyMinQuantity()) {
         $('#btnCotizar').addClass("disabled")
+        $('#help-quantity').html(`<br><span class="text-danger">La cantidad minima para cotizar es: ${verifyMinQuantity()} si quieres cotizar cantidades menores visita</span> <a href="//greenpointonline.com.co" target="_blank"> Greenpoint</a>`)
       } else {
         $('#btnCotizar').removeClass("disabled")
+        $('#help-quantity').html('')
       }
     })
     $('#sst').on('keyup', function() {
-      if ($(this).val() < verifyMinQunatiry()) {
+      if ($(this).val() < verifyMinQuantity()) {
         $('#btnCotizar').addClass("disabled")
+        $('#help-quantity').html(`<br><span class="text-danger">La cantidad minima para cotizar es: ${verifyMinQuantity()} si quieres cotizar cantidades menores visita</span> <a href="//greenpointonline.com.co" target="_blank"> Greenpoint</a>`)
       } else {
         $('#btnCotizar').removeClass("disabled")
+        $('#help-quantity').html('')
       }
     })
     // agregar un producto al carrito
