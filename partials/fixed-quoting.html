@@ -35,7 +35,7 @@
       <div class="modal-body">
         <div class="form-group">
           <label for="name">Correo:</label>
-          <input type="email" id="email" class="form-control">
+          <input type="email" id="email-suscribe-modal" class="form-control">
         </div>
       </div>
       <div class="modal-footer">
@@ -45,6 +45,24 @@
     </div>
   </div>
 </div>
+<script>
+  $('#btnEditPass').click(() => {
+
+    $.post('/services/suscribe.php', {
+      email: $('#email-suscribe-modal').val()
+    }, (data, status) => {
+      if (status == 'success') {
+        $('#modalSuscribe').modal('hide')
+        $.notify({
+          message: 'Gracias por preferirnos <br> Su suscripcion ha sido exitosa'
+        }, {
+          type: 'success'
+        })
+      }
+    })
+  })
+</script>
+
 <style>
   .modal .btn-primary {
     color: #fff;
@@ -60,7 +78,9 @@
       display: none;
     }
   }
-  @media(min-width: 1024px){
+
+  @media(min-width: 1024px) {
+
     .fixed-quoting,
     .fixed-quoting-2,
     .fixed-quoting-3 {

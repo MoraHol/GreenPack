@@ -41,9 +41,9 @@
             <li><a href="https://twitter.com/Greenpacksas"><span class="twitter"> </span></a></li>
             <li><a href="https://www.facebook.com/greenpacksas/"><span class="fb"> </span></a></li>
           </ul>
-          <form>
-            <input class="email-ftr" type="text" value="Suscripciones" onfocus="this.value = '';"
-              onblur="if (this.value == '') {this.value = 'Suscripciones';}">
+          <form id="form-suscribe-footer">
+            <input class="email-ftr" type="text" id="email-suscribe-form" value="Suscripciones"
+              onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Suscripciones';}">
             <input type="submit" value="Enviar">
           </form>
         </div>
@@ -244,3 +244,20 @@
 </div>
 <div id="google_translate_element">
 </div>
+<script src="/vendor/bootstrap-notify.min.js"></script>
+<script>
+  $('#form-suscribe-footer').submit((e) => {
+    e.preventDefault()
+    $.post('/services/suscribe.php', {
+      email: $('#email-suscribe-form').val()
+    }, (data, status) => {
+      if (status == 'success') {
+        $.notify({
+          message: 'Gracias por preferirnos <br> Su suscripcion ha sido exitosa'
+        }, {
+          type: 'success'
+        })
+      }
+    })
+  })
+</script>
