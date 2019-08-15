@@ -3,6 +3,11 @@ function googleTranslateElementInit() {
     pageLanguage: 'es',
     autoDisplay: false
   }, 'google_translate_element');
+  if (GTranslateGetCurrentLang() == 'en') {
+    $('#home-text').text('HOME')
+  } else {
+    $('#home-text').text('INICIO')
+  }
 }
 
 function GTranslateGetCurrentLang() {
