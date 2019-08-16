@@ -11,7 +11,7 @@
     opacity: 0.5,
     cursor: 'crosshair',
     zindex: 2147483647,
-    zoomviewsize: [480, 395],
+    zoomviewsize: [450, 395],
     zoomviewposition: 'inner',
     zoomviewmargin: 10,
     zoomviewborder: 'none',
@@ -45,7 +45,7 @@
           if (settings.zoomviewposition == 'right') {
             zoomViewPositionX = (offset.left + imageWidth + settings.zoomviewmargin);
           } else {
-            zoomViewPositionX = (offset.left );
+            zoomViewPositionX = (offset.left);
             // zoomViewPositionX = (offset.left - imageWidth - settings.zoomviewmargin);
           }
 
@@ -55,7 +55,7 @@
             'top': offset.top,
             'width': cursorSize[0] * settings.magnification,
             'height': cursorSize[1] * settings.magnification,
-            'background': '#000',
+            'background': '#fff',
             'z-index': 2147483647,
             'overflow': 'hidden',
             'border': settings.zoomviewborder
