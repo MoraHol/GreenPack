@@ -348,7 +348,7 @@ $tabs = $tabProductDao->findByProduct($product);
               </ul>
             </div>
             <div class="card-body">
-              <p><?= $productInstance->getCategory()->getName(); ?></p>
+              <!-- <p><?= $productInstance->getCategory()->getName(); ?></p> -->
               <h4 class="card-product__title"><a href="#"><?= $productInstance->getName(); ?></a></h4>
             </div>
           </div>
