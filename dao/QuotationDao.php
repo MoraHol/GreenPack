@@ -30,7 +30,8 @@ class QuotationDao
     $this->db->connect();
     // Insert client
     $this->db->consult("INSERT INTO `clients` (`id_clients`, `name`, `surname`, `email`, `name_company`) VALUES (NULL, '" . $quotation->getNameClient() . "', '" . $quotation->getLastNameClient() . "', '" . $quotation->getEmail() . "', '" . $quotation->getCompany() . "') ON DUPLICATE KEY UPDATE `name` = '" . $quotation->getNameClient() . "', `surname` =  '" . $quotation->getLastNameClient() . "', `name_company` = '" . $quotation->getCompany() . "'");
-    $idClient = $this->db->consult("SELECT MAX(`id_clients`) AS id FROM `clients`", "yes");
+    // $idClient = $this->db->consult("SELECT MAX(`id_clients`) AS id FROM `clients`", "yes");
+    $idClient = $this->db->consult("SELECT `id_clients` AS id FROM `clients` WHERE `email` = '" . $quotation->getEmail() . "'", "yes");
     $idClient = $idClient[0]["id"];
     $quotation->setIdClient($idClient);
     // Insert quotation
