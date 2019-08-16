@@ -11,7 +11,6 @@ if (!isset($_GET["admin"])) {
   $notice->setHits($notice->getHits() + 1);
   $noticeDao->update($notice);
   $notice = $noticeDao->findById((int) $_GET["id"]);
-  echo "<script>alert(" . $notice->getHits() . ")</script>";
 }
 ?>
 <!DOCTYPE html>
@@ -60,6 +59,7 @@ if (!isset($_GET["admin"])) {
   <!-- Custom stlylesheet -->
   <link type="text/css" rel="stylesheet" href="/css/style-blog.css" />
   <link rel="stylesheet" href="/css/basket.css">
+  <link rel="stylesheet" href="/css/all.min.css">
   <style>
     .search input.serch {
       color: #fff;
@@ -200,8 +200,7 @@ if (!isset($_GET["admin"])) {
           </div>
           <!-- /posts widget -->
           <?php
-          $notice = $noticeDao->findById((int) $_GET["id"]);
-          echo "<script>alert(" . $notice->getHits() . ")</script>"; ?>
+          $notice = $noticeDao->findById((int) $_GET["id"]);?>
         </div>
         <!-- /aside blog -->
 
@@ -225,7 +224,6 @@ if (!isset($_GET["admin"])) {
   <script src="/js/waypoints.min.js"></script>
   <script src="/js/main.js"></script>
   <script src="/js/back-top.js"></script>
-  <!-- <script src="https://kit.fontawesome.com/58e9d196f8.js"></script> -->
   <script src="/js/bootstrap.min.js"></script>
 </body>
 

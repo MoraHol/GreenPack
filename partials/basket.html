@@ -53,62 +53,64 @@
           <div class="row">
             <div class="col">
               <div class="form-group">
-                <label for="exampleInputEmail1">Email: *</label>
+                <label for="email-quotation">Email: *</label>
                 <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder=""
-                  required>
+                  required id="email-quotation">
               </div>
             </div>
             <div class="col">
               <div class="form-group">
                 <label for="exampleInputEmail1">Ciudad: *</label>
-                <input type="text" class="form-control" name="city" aria-describedby="emailHelp" placeholder=""
-                  required>
+                <input type="text" class="form-control" name="city" aria-describedby="emailHelp" placeholder="" required
+                  id="city-quotation">
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col">
               <div class="form-group">
-                <label for="exampleInputEmail1">Nombres: *</label>
-                <input type="text" class="form-control" name="name" aria-describedby="emailHelp" placeholder=""
-                  required>
+                <label for="name-quotation">Nombres: *</label>
+                <input type="text" class="form-control" name="name" aria-describedby="emailHelp" placeholder="" required
+                  id="name-quotation">
               </div>
             </div>
             <div class="col">
               <div class="form-group">
-                <label for="exampleInputEmail1">Apellidos: *</label>
+                <label for="surname-quotation">Apellidos: *</label>
                 <input type="text" class="form-control" name="lastname" aria-describedby="emailHelp" placeholder=""
-                  required>
+                  required id="surname-quotation">
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col">
               <div class="form-group">
-                <label for="exampleInputEmail1">Telefono: </label>
-                <input type="text" class="form-control" name="phone" aria-describedby="emailHelp" placeholder="">
+                <label for="phone-quotation">Telefono: </label>
+                <input type="text" class="form-control" name="phone" aria-describedby="emailHelp" placeholder=""
+                  id="phone-quotation">
               </div>
             </div>
             <div class="col">
               <div class="form-group">
-                <label for="exampleInputEmail1">Empresa: </label>
-                <input type="text" class="form-control" name="company" aria-describedby="emailHelp" placeholder="">
+                <label for="company-quotation">Empresa: </label>
+                <input type="text" class="form-control" name="company" aria-describedby="emailHelp" placeholder=""
+                  id="company-quotation">
               </div>
             </div>
             <div class="col">
               <div class="form-group">
-                <label for="exampleInputEmail1">Celular: *</label>
+                <label for="cell-phone-quotation">Celular: *</label>
                 <input type="text" class="form-control" name="cellphone" aria-describedby="emailHelp" placeholder=""
-                  required>
+                  required id="cell-phone-quotation">
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col">
               <div class="form-group">
-                <label for="exampleInputEmail1">Direccion: *</label>
+                <label for="address-quotation">Direccion: *</label>
                 <input type="text" class="form-control" name="address" aria-describedby="emailHelp" placeholder=""
-                  required>
+                  required id="address-quotation">
               </div>
             </div>
           </div>
@@ -162,6 +164,21 @@
       } else {
         alert('No tienes productos ')
         renderCart()
+      }
+    })
+  })
+  $('#email-quotation').change(() => {
+    $.get('/services/get_client.php', {
+      email: $('#email-quotation').val()
+    }, (client, status) => {
+      if (client.id) {
+        $('#company-quotation').val(client.company)
+        $('#name-quotation').val(client.name)
+        $('#surname-quotation').val(client.surname)
+        $('#city-quotation').val(client.city)
+        $('#address-quotation').val(client.address)
+        $('#cell-phone-quotation').val(client.cellPhone)
+        $('#phone-quotation').val(client.phone)
       }
     })
   })

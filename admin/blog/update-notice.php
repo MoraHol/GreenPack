@@ -268,7 +268,7 @@ if (isset($_GET["id"])) {
             ajax(link)
           } else {
             $.notify({
-              message: 'Se ha actulizado la noticia',
+              message: 'Se ha actualizado la noticia',
               title: 'Exito',
               icon: 'notification_important'
             }, {
@@ -290,7 +290,7 @@ if (isset($_GET["id"])) {
         active: !$('#activeBtn').prop('checked')
       }, (data, status) => {
         $.notify({
-          message: 'Se ha actulizado la noticia',
+          message: 'Se ha actualizado la noticia',
           title: 'Exito',
           icon: 'notification_important'
         }, {

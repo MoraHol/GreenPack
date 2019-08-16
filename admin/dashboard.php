@@ -6,10 +6,10 @@
 }
 require_once dirname(__DIR__) . "/model/Admin.php";
 $admin = unserialize($_SESSION["admin"]);
-if($admin->getRole() == 3){
+if ($admin->getRole() == 3) {
   header("Location: /admin/blog");
 }
-if($admin->getRole() == 1){
+if ($admin->getRole() == 1) {
   header("Location: /admin/quotations/");
 }
 ?>
@@ -73,12 +73,16 @@ if($admin->getRole() == 1){
                 </div>
                 <div class="card-body">
                   <h4 class="card-title">Cotizaciones</h4>
-                  <div style="float: right"><span>Total: </span> <span id="totalQuotations"></span></div>
+                  <!-- <div style="float: right"><span>Total: </span> <span id="totalQuotations"></span></div> -->
                   <p class="card-category"><i class="fas fa-square" style="color: #00bcd4 "></i> Cotizaciones contestadas
                     <br>
                     <i class="fas fa-square" style="color: #f44336"></i> Cotizaciones no contestadas</p>
                 </div>
-
+                <div class="card-footer">
+                  <div class="stats">
+                    <span>Total de Cotizaciones en el dia: &nbsp;</span> <span id="totalQuotations"></span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
