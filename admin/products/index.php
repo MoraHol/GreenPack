@@ -53,7 +53,7 @@ $products = $productDao->findAll();
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th class="text-center">Nombre</th>
+                      <th class="text-center">Producto</th>
                       <th class="text-center">Referencia</th>
                       <th class="text-center">Imagen / N°</th>
                       <th class="text-center">Categoría</th>
