@@ -24,10 +24,6 @@ $conversorDate = new ConversorDate();
   <link rel="stylesheet" href="/css/all.min.css">
   <!-- Page level plugin CSS-->
   <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
-  <?php if ($_SERVER["HTTP_HOST"] != "localhost") {
-    echo "<style>.fr-wrapper>div:first-child {display: none !important;}</style>";
-  } ?>
 </head>
 
 <body class="white-edition">
@@ -183,6 +179,21 @@ $conversorDate = new ConversorDate();
             }
           })
         })
+      }
+      const urlParams = new URLSearchParams(window.location.search);
+      const updated = urlParams.get('updated');
+
+      if (updated == 'true') {
+        $.notify({
+          message: 'Se ha actualizado la noticia',
+          title: 'Exito',
+          icon: 'notification_important'
+        }, {
+          type: 'success'
+        })
+        if (typeof window.history.pushState == 'function') {
+          window.history.pushState({}, "Hide", location.pathname);
+        }
       }
     </script>
 </body>

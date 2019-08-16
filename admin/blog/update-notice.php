@@ -267,13 +267,14 @@ if (isset($_GET["id"])) {
             link = response.link
             ajax(link)
           } else {
-            $.notify({
-              message: 'Se ha actualizado la noticia',
-              title: 'Exito',
-              icon: 'notification_important'
-            }, {
-              type: 'warning'
-            })
+            // $.notify({
+            //   message: 'Se ha actualizado la noticia',
+            //   title: 'Exito',
+            //   icon: 'notification_important'
+            // }, {
+            //   type: 'warning'
+            // })
+            location.href = "/admin/blog/?updated=true"
           }
         }
       })
@@ -289,13 +290,14 @@ if (isset($_GET["id"])) {
         category: $('#category').val(),
         active: !$('#activeBtn').prop('checked')
       }, (data, status) => {
-        $.notify({
-          message: 'Se ha actualizado la noticia',
-          title: 'Exito',
-          icon: 'notification_important'
-        }, {
-          type: 'success'
-        })
+        // $.notify({
+        //   message: 'Se ha actualizado la noticia',
+        //   title: 'Exito',
+        //   icon: 'notification_important'
+        // }, {
+        //   type: 'success'
+        // })
+        location.href = "/admin/blog/?updated=true"
       })
     }
 
