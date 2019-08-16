@@ -53,7 +53,7 @@ $materials = $materialDao->findAll();
                 <table class="table row-border table-bordered hover" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th class="text-center">Nombre</th>
+                      <th class="text-center">Material</th>
                       <th class="text-center">Precio / Kg</th>
                       <th class="text-center">Gramaje</th>
                       <th class="text-center">Descripción</th>

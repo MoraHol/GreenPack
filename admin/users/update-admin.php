@@ -92,7 +92,7 @@ include("../partials/verify-session.php");
                     <br>
                     <select class="form-control" id="role">
                       <?php foreach ($roles as $role) { ?>
-                        <option value="<?= $role["id_role"] ?>" <?= $admin->getRole() == $role["id_role"] ? "selected" : "" ?>><?= $role["name"] ?></option>
+                      <option value="<?= $role["id_role"] ?>" <?= $admin->getRole() == $role["id_role"] ? "selected" : "" ?>><?= $role["name"] ?></option>
                       <?php } ?>
                     </select>
                   </div>
