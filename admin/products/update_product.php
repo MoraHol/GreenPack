@@ -338,7 +338,7 @@ $tabs = $tabProductDao->findByProduct($product);
 
             <div class="row" style="margin-bottom: 20px; margin-top: 60px;">
               <div class="col"><a href="/admin/products" class="btn btn-danger btn-lg"><i class="fas fa-arrow-left"></i> Regresar</a></div>
-              <div class="col text-center"><button id="submitEditor" class="btn btn-primary btn-lg"><i class="fas fa-sync"></i> Actualizar</button></div>
+              <div class="col text-center"><button id="submitEditor" class="btn btn-primary btn-lg"><i class="fas fa-sync"></i> Guardar</button></div>
               <div class="col"></div>
             </div>
           </div>
@@ -570,7 +570,7 @@ $tabs = $tabProductDao->findByProduct($product);
           }
         })
         $('#btnUploadExcel').click(() => {
-          $('#uploadExcel').html('<div id="uploadFileExcel" class="dropzone"></div>')
+          $('#uploadExcel').html('<div>Descargue aqui el formato para cargar medidas <a href="/Catalogos/FormatMeasurements.xlsx" download="FormatoMedidas.xlsx" class="btn btn-info"><i class="fas fa-file-download"></i></a></div><div id="uploadFileExcel" class="dropzone"></div>')
           DropzoneExcel = new Dropzone("div#uploadFileExcel", {
             url: "/admin/upload-file.php",
             method: 'post',
