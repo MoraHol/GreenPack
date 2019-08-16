@@ -172,13 +172,7 @@ $product = $productDao->findById($tab->getIdProduct());
         content: editor.html.get()
       }, (data, status) => {
         if (status == 'success') {
-          $.notify({
-            message: 'Se ha actualizado la Pestaña',
-            title: 'Exito',
-            icon: 'notification_important'
-          }, {
-            type: 'success'
-          })
+          location.href = `/admin/products/update_product.php?id=<?= $tab->getIdProduct() ?>&updated=true`
         }
       })
     })

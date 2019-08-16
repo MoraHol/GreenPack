@@ -701,6 +701,21 @@ $tabs = $tabProductDao->findByProduct($product);
           }
         })
       }
+      const urlParams = new URLSearchParams(window.location.search);
+      const updated = urlParams.get('updated');
+
+      if (updated == 'true') {
+        $.notify({
+          message: 'Se ha actualizado la Pestaña',
+          title: 'Exito',
+          icon: 'notification_important'
+        }, {
+          type: 'success'
+        })
+        if (typeof window.history.pushState == 'function') {
+          window.history.pushState({}, "Hide", location.pathname + '?id=' + urlParams.get('id'));
+        }
+      }
     </script>
     <script src="/vendor/bootstrap-notify.min.js"></script>
     <script src="/vendor/sleep.js"></script>
