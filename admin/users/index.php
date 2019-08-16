@@ -4,6 +4,8 @@ include("../partials/verify-session.php");
 $adminDao = new AdminDao();
 $admins = $adminDao->findAll();
 
+$db = new DBOperator($_ENV["db_host"], $_ENV["db_user"], $_ENV["db_name"], $_ENV["db_pass"]);
+$roles = $db->consult("SELECT * FROM `roles_admin`", "yes");
 ?>
 <!-- author: Alexis Holguin, github: MoraHol -->
 <!doctype html>
@@ -49,8 +51,9 @@ $admins = $adminDao->findAll();
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th class="text-center">Nombre</th>
-                      <th class="text-center">Apellido</th>
+                      <th class="text-center">Nombres</th>
+                      <th class="text-center">Apellidos</th>
+                      <th class="text-center">Rol</th>
                       <th class="text-center">Correo</th>
                       <th class="text-center">Actualizar</th>
                       <th class="text-center">Borrar</th>
@@ -58,13 +61,20 @@ $admins = $adminDao->findAll();
                   </thead>
                   <tbody>
                     <?php foreach ($admins as $admin) { ?>
-                      <tr>
-                        <td><?php echo $admin->getName(); ?></td>
-                        <td class="text-center"><?php echo $admin->getLastName(); ?></td>
-                        <td class="text-center"><?php echo $admin->getEmail(); ?></td>
-                        <td class="text-center"><a class="text-center" href="/admin/users/update-admin.php?id=<?php echo $admin->getId(); ?>"><i class="fas fa-fw fa-sync"></a></td>
-                        <td class="text-center"><a onclick="modal(<?php echo $admin->getId(); ?>)" href="#"><i class="far fa-trash-alt"></i></a></td>
-                      </tr>
+                    <tr>
+                      <td class="text-center text-capitalize"><?php echo $admin->getName(); ?></td>
+                      <td class="text-center text-capitalize"><?php echo $admin->getLastName(); ?></td>
+                      <td class="text-center">
+                        <?php
+                          foreach ($roles as  $role) {
+                            if ($role["id_role"] == $admin->getRole()) {
+                              echo "<span class='text-capitalize'>" . $role["name"] . "</span>";
+                            }
+                          } ?></td>
+                      <td class="text-center"><?php echo $admin->getEmail(); ?></td>
+                      <td class="text-center"><a class="text-center" href="/admin/users/update-admin.php?id=<?php echo $admin->getId(); ?>"><i class="fas fa-fw fa-sync"></a></td>
+                      <td class="text-center"><a onclick="modal(<?php echo $admin->getId(); ?>)" href="#"><i class="far fa-trash-alt"></i></a></td>
+                    </tr>
                     <?php } ?>
                   </tbody>
                 </table>
