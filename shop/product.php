@@ -231,13 +231,13 @@ $tabs = $tabProductDao->findByProduct($product);
                             </select>
                           </div>
                           <div class="col">
-                            <label for="height">Alto:</label>
+                            <label for="height"><?= $product->getCategory()->getName() == "bolsas" ? "Fuelle" : "Alto" ?>:</label>
                             <select id="height" disabled class="form-control">
                               <option selected disabled>Seleccione</option>
                             </select>
                           </div>
                           <div class="col">
-                            <label for="length">largo:</label>
+                            <label for="length">Largo:</label>
                             <select id="length" disabled class="form-control">
                               <option selected disabled>Seleccione</option>
                             </select>
@@ -257,9 +257,9 @@ $tabs = $tabProductDao->findByProduct($product);
                   </div>
                   <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion-cotizador">
                     <div class="card-body">
-                      <input type="number" name="qty" id="sst" maxlength="12" value="1000" title="Cantidad:" class="input-text qty form-control">
+                      <input type="number" name="qty" id="sst" maxlength="12" title="Cantidad:" class="input-text qty form-control">
                       <div id="help-quantity">
-                        <br> asas as assa asf
+                        <br>
                       </div>
                     </div>
                   </div>
@@ -464,7 +464,9 @@ $tabs = $tabProductDao->findByProduct($product);
   <script>
     let category = `<?= $product->getCategory()->getName(); ?>`;
     let minQuantity = 0;
-    $('#help-quantity').html(`<br><span class="text-danger">La cantidad minima para cotizar es: ${verifyMinQuantity()} si quieres cotizar cantidades menores visita</span> <a href="//greenpointonline.com.co" target="_blank"> Greenpoint</a>`)
+    // $('#help-quantity').html(`<br><span class="text-danger">La cantidad minima para cotizar es: ${verifyMinQuantity()} si quieres cotizar cantidades menores visita</span> <a href="//greenpointonline.com.co" target="_blank"> Greenpoint</a>`)
+    $('#sst').val(verifyMinQuantity())
+    $('#btnCotizar').removeClass("disabled")
 
     function verifyMinQuantity() {
       if (category == "bolsas") {
@@ -478,24 +480,19 @@ $tabs = $tabProductDao->findByProduct($product);
       }
       return minQuantity
     }
-    $('#sst').change(function() {
-      if ($(this).val() < verifyMinQuantity()) {
+
+    function verifyMinQuantityValue() {
+      if ($('#sst').val() < verifyMinQuantity()) {
         $('#btnCotizar').addClass("disabled")
         $('#help-quantity').html(`<br><span class="text-danger">La cantidad minima para cotizar es: ${verifyMinQuantity()} si quieres cotizar cantidades menores visita</span> <a href="//greenpointonline.com.co" target="_blank"> Greenpoint</a>`)
       } else {
         $('#btnCotizar').removeClass("disabled")
         $('#help-quantity').html('')
       }
-    })
-    $('#sst').on('keyup', function() {
-      if ($(this).val() < verifyMinQuantity()) {
-        $('#btnCotizar').addClass("disabled")
-        $('#help-quantity').html(`<br><span class="text-danger">La cantidad minima para cotizar es: ${verifyMinQuantity()} si quieres cotizar cantidades menores visita</span> <a href="//greenpointonline.com.co" target="_blank"> Greenpoint</a>`)
-      } else {
-        $('#btnCotizar').removeClass("disabled")
-        $('#help-quantity').html('')
-      }
-    })
+    }
+    $('#sst').change(verifyMinQuantityValue)
+    $('#sst').on('keyup', verifyMinQuantityValue)
+    $('#width').change(verifyMinQuantityValue)
     // agregar un producto al carrito
     $('#btnCotizar').click(() => {
       let $printing = $('#impresion').prop('checked')
