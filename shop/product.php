@@ -86,6 +86,16 @@ $tabs = $tabProductDao->findByProduct($product);
     .fr-view.fr-description p {
       font-size: 1.1rem;
     }
+
+    .card ul,
+    .fr-view ul {
+      list-style: disc inside;
+    }
+
+    /* 
+    .breadcrumb-item+.breadcrumb-item::before {
+      content: ">";
+    } */
   </style>
 
 </head>
@@ -111,9 +121,18 @@ $tabs = $tabProductDao->findByProduct($product);
     <br>
     <div class="fr-view fr-description">
       <?= $product->getDescription(); ?>
+      <br>
     </div>
-  </div>
 
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i></a></li>
+        <li class="breadcrumb-item"><a href="/shop">Productos</a></li>
+        <li class="breadcrumb-item"><a class="text-capitalize" href="/shop/category.php?id=<?= $product->getCategory()->getId() ?>&page=1"><?= $product->getCategory()->getName() ?></a></li>
+        <li class="breadcrumb-item active" aria-current="page"><span class="text-capitalize"><?= $product->getName() ?></span></li>
+      </ol>
+    </nav>
+  </div>
   <div class="single">
     <div class="single-top-main">
       <div class="container">
@@ -129,7 +148,7 @@ $tabs = $tabProductDao->findByProduct($product);
               </ul>
             </div>
           </div>
-          <div class="col-md-6" id="container-cotizador">
+          <div class="col-md-5" id="container-cotizador">
             <div class="s_product_text" style="margin-left: 0; margin-top: 0;">
 
               <!-- nueva pesentacion -->
@@ -240,7 +259,7 @@ $tabs = $tabProductDao->findByProduct($product);
                     <div class="card-body">
                       <input type="number" name="qty" id="sst" maxlength="12" value="1000" title="Cantidad:" class="input-text qty form-control">
                       <div id="help-quantity">
-                        <br> asas as assa asf 
+                        <br> asas as assa asf
                       </div>
                     </div>
                   </div>
