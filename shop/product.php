@@ -464,7 +464,6 @@ $tabs = $tabProductDao->findByProduct($product);
   <script>
     let category = `<?= $product->getCategory()->getName(); ?>`;
     let minQuantity = 0;
-    // $('#help-quantity').html(`<br><span class="text-danger">La cantidad minima para cotizar es: ${verifyMinQuantity()} si quieres cotizar cantidades menores visita</span> <a href="//greenpointonline.com.co" target="_blank"> Greenpoint</a>`)
     $('#sst').val(verifyMinQuantity())
     $('#btnCotizar').removeClass("disabled")
 
@@ -484,8 +483,9 @@ $tabs = $tabProductDao->findByProduct($product);
     function verifyMinQuantityValue() {
       if ($('#sst').val() < verifyMinQuantity()) {
         $('#btnCotizar').addClass("disabled")
-        $('#help-quantity').html(`<br><span class="text-danger">La cantidad minima para cotizar es: ${verifyMinQuantity()} si quieres cotizar cantidades menores visita</span> <a href="//greenpointonline.com.co" target="_blank"> Greenpoint</a>`)
+        $('#help-quantity').html(`<br><span class="text-danger">Cantidad minima ${verifyMinQuantity()} unidades. ¿Te gustaría cotizar cantidades menores? te invitamos a visitar a nuestro aliado Greenpoint (<a href="//www.greenpointonline.com.co" target="_blank">www.greenpointonline.com.co</a>)`)
       } else {
+
         $('#btnCotizar').removeClass("disabled")
         $('#help-quantity').html('')
       }
