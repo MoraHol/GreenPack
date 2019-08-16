@@ -211,16 +211,16 @@ $tabs = $tabProductDao->findByProduct($product);
                       echo "</div>";
                       echo "<div class='carousel-item'>";
                     } ?>
-                    <div class="col-md-3 mb-3">
-                      <div class="card">
-                        <div class="imagen" style="background-image: url(<?php echo $image->getUrl(); ?>);">
-                          <div class="info">
-                            <p class="descripcion"><button class="btn btn-danger" onclick="deleteImage(<?php echo $image->getId(); ?>,'<?php echo $image->getUrl(); ?>')">Eliminar</button></p>
-                          </div>
+                  <div class="col-md-3 mb-3">
+                    <div class="card">
+                      <div class="imagen" style="background-image: url(<?php echo $image->getUrl(); ?>);">
+                        <div class="info">
+                          <p class="descripcion"><button class="btn btn-danger" onclick="deleteImage(<?php echo $image->getId(); ?>,'<?php echo $image->getUrl(); ?>')">Eliminar</button></p>
                         </div>
                       </div>
                     </div>
-                    <?php
+                  </div>
+                  <?php
                     $counter++;
                   }
                   if ($counter % 4 != 0) {
@@ -243,10 +243,10 @@ $tabs = $tabProductDao->findByProduct($product);
                   <?php
                   if (is_array($product->getUses()) || is_object($product->getUses())) {
                     foreach ($product->getUses() as $use) { ?>
-                      <div class="col-sm-4">
-                        Uso <?php echo $indexField; ?>:<input type="text" id="field<?php echo $indexField; ?>" class="form-control" value="<?php echo $use; ?>">
-                      </div>
-                      <?php $indexField++;
+                  <div class="col-sm-4">
+                    Uso <?php echo $indexField; ?>:<input type="text" id="field<?php echo $indexField; ?>" class="form-control" value="<?php echo $use; ?>">
+                  </div>
+                  <?php $indexField++;
                     }
                   } ?>
                 </div>
@@ -256,18 +256,19 @@ $tabs = $tabProductDao->findByProduct($product);
 
             </div>
             <div class="form-gruop" id="measurement-container">
-              <label for="campo1">Medidas:</label> <button class="btn" id="hideMeasurements">Ocultar</button>
+              <label for="campo1">Medidas:</label>
+              <button class="btn btn-primary" id="hideMeasurements">Ver Medidas</button>
               <ul class="list-unstyled" id="measurements">
                 <?php foreach ($product->getMeasurements() as $measurement) { ?>
-                  <li>Medida <?php echo $indexMeasurement ?>:<div class="row">
-                      <div class="col"><label for="width<?php echo $indexMeasurement ?>">Ancho:</label><input type="number" id="width<?php echo $indexMeasurement ?>" class="form-control" value="<?php echo $measurement->getWidth(); ?>" readonly></div>
-                      <div class="col"><label for="height<?php echo $indexMeasurement ?>">Alto:</label><input type="number" id="height<?php echo $indexMeasurement ?>" class="form-control" value="<?php echo $measurement->getHeight(); ?>" readonly></div>
-                      <div class="col"><label for="lenght<?php echo $indexMeasurement ?>">Largo:</label><input type="number" id="lenght<?php echo $indexMeasurement ?>" class="form-control" value="<?php echo $measurement->getLength(); ?>" readonly></div>
-                      <div class="col"><label for="window<?php echo $indexMeasurement ?>">Ventana:</label><input type="number" id="window<?php echo $indexMeasurement ?>" class="form-control" value="<?php echo $measurement->getWindow(); ?>" readonly></div>
-                      <div class="col-sm-2"><button class="btn btn-danger" onclick="deleteMeasurement(<?php echo $product->getId() ?>,<?php echo $measurement->getId() ?>)">Eliminar</button></div>
-                    </div>
-                  </li>
-                  <?php $indexMeasurement++;
+                <li>Medida <?php echo $indexMeasurement ?>:<div class="row">
+                    <div class="col"><label for="width<?php echo $indexMeasurement ?>">Ancho:</label><input type="number" id="width<?php echo $indexMeasurement ?>" class="form-control" value="<?php echo $measurement->getWidth(); ?>" readonly></div>
+                    <div class="col"><label for="height<?php echo $indexMeasurement ?>">Alto:</label><input type="number" id="height<?php echo $indexMeasurement ?>" class="form-control" value="<?php echo $measurement->getHeight(); ?>" readonly></div>
+                    <div class="col"><label for="lenght<?php echo $indexMeasurement ?>">Largo:</label><input type="number" id="lenght<?php echo $indexMeasurement ?>" class="form-control" value="<?php echo $measurement->getLength(); ?>" readonly></div>
+                    <div class="col"><label for="window<?php echo $indexMeasurement ?>">Ventana:</label><input type="number" id="window<?php echo $indexMeasurement ?>" class="form-control" value="<?php echo $measurement->getWindow(); ?>" readonly></div>
+                    <div class="col-sm-2"><button class="btn btn-danger" onclick="deleteMeasurement(<?php echo $product->getId() ?>,<?php echo $measurement->getId() ?>)">Eliminar</button></div>
+                  </div>
+                </li>
+                <?php $indexMeasurement++;
                 } ?>
               </ul>
             </div>
@@ -279,21 +280,21 @@ $tabs = $tabProductDao->findByProduct($product);
               <label for="campo1">Materiales:</label>
               <ul class="list-unstyled" id="materials">
                 <?php foreach ($product->getMaterials() as $materialProduct) { ?>
-                  <li>
-                    <div class="row">
-                      <div class="col-sm-10"><select class="wide disabled" style="margin-bottom: 10px;" id="material<?php echo $indexMaterial; ?>">
-                          <option disabled>Seleccione un material</option>
-                          <?php
+                <li>
+                  <div class="row">
+                    <div class="col-sm-10"><select class="wide disabled" style="margin-bottom: 10px;" id="material<?php echo $indexMaterial; ?>">
+                        <option disabled>Seleccione un material</option>
+                        <?php
                           foreach ($materials as  $material) {
                             $materialSelected = $materialProduct->getId() == $material->getId() ? $material : $materialSelected ?>
-                            <option value="<?php echo $material->getId(); ?>" <?php echo $materialProduct->getId() == $material->getId() ? "selected" : "" ?> disabled><?php echo $material->getName(); ?></option>
-                          <?php }
+                        <option value="<?php echo $material->getId(); ?>" <?php echo $materialProduct->getId() == $material->getId() ? "selected" : "" ?> disabled><?php echo $material->getName(); ?></option>
+                        <?php }
                           ?>
-                        </select></div>
-                      <div class="col"><button class="btn btn-danger" onclick="deleteMaterial(<?php echo $product->getId() ?>,<?php echo $materialSelected->getId() ?>)">Eliminar</button></div>
-                    </div>
-                  </li>
-                  <?php $indexMaterial++;
+                      </select></div>
+                    <div class="col"><button class="btn btn-danger" onclick="deleteMaterial(<?php echo $product->getId() ?>,<?php echo $materialSelected->getId() ?>)">Eliminar</button></div>
+                  </div>
+                </li>
+                <?php $indexMaterial++;
                 } ?>
               </ul>
             </div>
@@ -308,13 +309,13 @@ $tabs = $tabProductDao->findByProduct($product);
               if (count($tabs) > 0) {
                 foreach ($tabs as $tab) {
                   ?>
-                  <div class="row align-center">
-                    <div class="col-sm-6 "><?= $tab->getTitle() ?></div>
-                    <div class="col-sm-3 text-center"><a class="text-center" href="update-tab-product.php?id=<?= $tab->getId() ?>">Editar <i class="fas fa-pen"></i></a></div>
-                    <div class="col-sm-3 text-center"><a class="text-center" href="javascript:deleteTab(`<?= $tab->getId() ?>`)">Borrar <i class="fas fa-trash-alt"></i></a></div>
-                  </div>
-                  <hr>
-                <?php }
+              <div class="row align-center">
+                <div class="col-sm-6 "><?= $tab->getTitle() ?></div>
+                <div class="col-sm-3 text-center"><a class="text-center" href="update-tab-product.php?id=<?= $tab->getId() ?>">Editar <i class="fas fa-pen"></i></a></div>
+                <div class="col-sm-3 text-center"><a class="text-center" href="javascript:deleteTab(`<?= $tab->getId() ?>`)">Borrar <i class="fas fa-trash-alt"></i></a></div>
+              </div>
+              <hr>
+              <?php }
               } ?>
               <a href="new-tab-product.php?id=<?= $product->getId() ?>" class="btn btn-primary"><i class="fas fa-plus"> Crear</i></a>
             </div>
@@ -329,15 +330,15 @@ $tabs = $tabProductDao->findByProduct($product);
               <select id="category" class="wide">
                 <option disabled>Seleccione una categoría</option>
                 <?php foreach ($categories as $category) { ?>
-                  <option value="<?php echo $category->getId(); ?>" <?php echo $product->getCategory()->getId() == $category->getId() ? "selected" : ""; ?>><?php echo $category->getName(); ?></option>
+                <option value="<?php echo $category->getId(); ?>" <?php echo $product->getCategory()->getId() == $category->getId() ? "selected" : ""; ?>><?php echo $category->getName(); ?></option>
                 <?php } ?>
               </select>
             </div>
 
 
             <div class="row" style="margin-bottom: 20px; margin-top: 60px;">
-              <div class="col"><a href="/admin/products" class="btn btn-danger btn-lg">Regresar</a></div>
-              <div class="col text-center"><button id="submitEditor" class="btn btn-primary btn-lg">Enviar</button></div>
+              <div class="col"><a href="/admin/products" class="btn btn-danger btn-lg"><i class="fas fa-arrow-left"></i> Regresar</a></div>
+              <div class="col text-center"><button id="submitEditor" class="btn btn-primary btn-lg"><i class="fas fa-sync"></i> Actualizar</button></div>
               <div class="col"></div>
             </div>
           </div>
@@ -456,6 +457,7 @@ $tabs = $tabProductDao->findByProduct($product);
       let myDropzone
       let flagImage = false
       let text = `<?php echo $product->getDescription(); ?>`
+      $('#measurements').fadeOut()
 
       function initialize() {
         $('.sidebar div.sidebar-wrapper ul.nav li:first').removeClass('active')
