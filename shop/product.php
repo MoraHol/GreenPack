@@ -92,6 +92,10 @@ $tabs = $tabProductDao->findByProduct($product);
       list-style: disc inside;
     }
 
+    #collapseTwo a {
+      color: #000;
+    }
+
     /* 
     .breadcrumb-item+.breadcrumb-item::before {
       content: ">";
@@ -206,7 +210,7 @@ $tabs = $tabProductDao->findByProduct($product);
                   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion-cotizador">
                     <div class="card-body">
                       <?php foreach ($product->getMaterials() as $material) { ?>
-                      <label class="radio-inline" style="margin-left: 10px;">&nbsp;&nbsp;<input type="radio" name="material" value="<?= $material->getId(); ?>">&nbsp;&nbsp;&nbsp;<?= $material->getName(); ?></label>
+                      <label class="radio-inline" style="margin-left: 10px;">&nbsp;&nbsp;<input type="radio" name="material" value="<?= $material->getId(); ?>">&nbsp;&nbsp;&nbsp;<a href="#" title="Descripción" data-toggle="popover" data-trigger="hover" data-content="<?= $material->getDescription() ?>" data-placement="bottom"><?= $material->getName(); ?></a></label>
                       <?php
                       } ?>
                     </div>
@@ -541,6 +545,7 @@ $tabs = $tabProductDao->findByProduct($product);
         }
       }
     })
+    $('[data-toggle="popover"]').popover();
   </script>
 
 </body>
