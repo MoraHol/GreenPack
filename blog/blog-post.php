@@ -60,6 +60,7 @@ if (!isset($_GET["admin"])) {
   <link type="text/css" rel="stylesheet" href="/css/style-blog.css" />
   <link rel="stylesheet" href="/css/basket.css">
   <link rel="stylesheet" href="/css/all.min.css">
+  <link rel="stylesheet" href="/css/notify-style.css">
   <style>
     .search input.serch {
       color: #fff;
@@ -200,7 +201,7 @@ if (!isset($_GET["admin"])) {
           </div>
           <!-- /posts widget -->
           <?php
-          $notice = $noticeDao->findById((int) $_GET["id"]);?>
+          $notice = $noticeDao->findById((int) $_GET["id"]); ?>
         </div>
         <!-- /aside blog -->
 
@@ -210,6 +211,50 @@ if (!isset($_GET["admin"])) {
     </div>
     <!-- container -->
 
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="suscription-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">Suscribete</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+
+        <form class="form-horizontal" role="form" id="form-suscription">
+          <div class="modal-body">
+
+            <p>Suscríbete y seras el <strong>primero</strong> en recibir información interesante y relevante en tu buzón de correo.
+            </p>
+            <br>
+            <!--End mc_embed_signup-->
+
+            <!-- Begin MailChimp Signup Form -->
+
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+              <div class="col-sm-10">
+                <input type="email" value="" name="EMAIL" class="required email form-control" id="mce-EMAIL" />
+              </div>
+            </div>
+            <div id="mce-responses" class="clear">
+              <div class="response" id="mce-error-response" style="display:none"></div>
+              <div class="response" id="mce-success-response" style="display:none"></div>
+            </div> <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+            <div style="position: absolute; left: -5000px;">
+              <input type="email" value="" id="email-suscription-modal" />
+            </div>
+
+
+            <!--End mc_embed_signup-->
+          </div>
+          <div class="modal-footer remove-top">
+            <button type="submit" class="btn btn-danger btn-block">Subscribete</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
   <!-- /Blog -->
   <?php include("../partials/basket.html"); ?>
@@ -225,6 +270,30 @@ if (!isset($_GET["admin"])) {
   <script src="/js/main.js"></script>
   <script src="/js/back-top.js"></script>
   <script src="/js/bootstrap.min.js"></script>
+  <script>
+    let minutes = `<?= str_word_count(strip_tags($notice->getContent())) / 130; ?>`;
+    let time = (minutes / 0.1) * 1000
+    setTimeout(() => {
+      $('#suscription-modal').modal()
+    }, time)
+    $('#form-suscription').submit((e) => {
+      e.preventDefault()
+      $.post('/services/suscribe.php', {
+        email: $('#email-suscription-modal').val()
+      }, (data, status) => {
+        if (status == 'success') {
+          $('#suscription-modal').modal('hide')
+          $.notify({
+            message: '<br>Te has suscrito <br> Revisa tu correo ',
+            title: '<strong>Suscripcion Exitosa</strong>',
+            icon: 'fas fa-exclamation-triangle'
+          }, {
+            type: 'success'
+          })
+        }
+      })
+    })
+  </script>
 </body>
 
 </html>
