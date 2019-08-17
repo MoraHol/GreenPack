@@ -5,6 +5,17 @@ class Category implements JsonSerializable
   private $name;
   private $parentCategory;
   private $description;
+  private $image;
+
+  public function setImage($image)
+  {
+    $this->image = $image;
+  }
+
+  public function getImage()
+  {
+    return $this->image;
+  }
 
   public function getDescription()
   {

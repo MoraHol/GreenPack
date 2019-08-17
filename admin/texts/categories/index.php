@@ -22,6 +22,8 @@ include("../../partials/verify-session.php");
   <link rel="stylesheet" href="/css/all.min.css">
   <!-- Page level plugin CSS-->
   <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/vendor/dropzone/dropzone.css">
+  <script src="/vendor/dropzone/dropzone.js"></script>
   <style>
     td.highlight {
       background-color: whitesmoke !important;
@@ -31,6 +33,10 @@ include("../../partials/verify-session.php");
       border-left: 1px solid #d2d2d2;
       border-right: 1px solid #d2d2d2;
       border-top: 1px solid #d2d2d2;
+    }
+
+    #imgUpload {
+      display: none;
     }
   </style>
 </head>
@@ -60,6 +66,7 @@ include("../../partials/verify-session.php");
                   <thead>
                     <tr>
                       <th>Nombre</th>
+                      <th>Imagen</th>
                       <th>Descripcion</th>
                       <th>Editar</th>
                     </tr>
@@ -77,7 +84,7 @@ include("../../partials/verify-session.php");
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Editar Descripcion</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Editar Categoría</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -87,11 +94,24 @@ include("../../partials/verify-session.php");
               <div class="col-sm-4">Categoría:</div>
               <div class="col-sm-8 text-capitalize" id="nameCategoryLoad"></div>
             </div>
+            <br>
             <div class="row">
               <div class="col-sm-4">Descripcion:</div>
               <div class="col-sm-8 ">
                 <textarea class="form-control text-area-control" id="descriptionCategoryInput" cols="30" rows="10"></textarea>
               </div>
+            </div>
+            <br>
+            <div class="row" id="containerImageCategory">
+              <div class="col-sm-4">Imagen:</div>
+              <div class="col-sm-8 ">
+                <img src="" id="imageCategory" class="img-responsive" width="300">
+              </div>
+              <div class="col"><button class="btn btn-danger" onclick="changeImage()">Cambiar</button></div>
+            </div>
+            <div id="imgUpload">
+              <span>Suba la imagen de la categoría:</span>
+              <div id="myId"></div>
             </div>
           </div>
           <div class="modal-footer">
@@ -163,12 +183,25 @@ include("../../partials/verify-session.php");
             "targets": -1,
             render: function(data, type, row) {
               $('tr td:last-child').addClass('text-center')
-              return `<a class="text-center" href="javascript:modalEdit('${row.name}',${row.id},'${row.description}')"><i class='fas fa-pen'></i></a>`
+              $('td img').parent().addClass('text-center')
+              $('td.sorting_1').addClass('text-capitalize')
+              return `<a class="text-center" href="javascript:modalEdit('${row.name}',${row.id},'${row.description}','${row.image}')"><i class='fas fa-pen'></i></a>`
+            }
+          }, {
+            "targets": 1,
+            render: function(data, type, row) {
+              $('td img').parent().addClass('text-center')
+              $('td.sorting_1').addClass('text-capitalize')
+              return `<img width="120" class="text-center" src="${row.image}">`
             }
           }],
           "columns": [{
               "data": "name"
             },
+            {
+              "data": 'image'
+            },
+
             {
               "data": "description"
             },
@@ -180,38 +213,82 @@ include("../../partials/verify-session.php");
       })
 
 
+      $('td img').parent().addClass('text-center')
 
-      function modalEdit(nameCategory, idCategory, description) {
+      function modalEdit(nameCategory, idCategory, description, image) {
         $('#modalEdit').modal()
         $('#nameCategoryLoad').text(nameCategory)
         $('#descriptionCategoryInput').val(description)
+        $('#imageCategory').attr('src', image)
         $('#buttonSubmitUpdate').click(() => {
-          $.post('api/update_category.php', {
-            id: idCategory,
-            description: $('#descriptionCategoryInput').val()
-          }, (data, status) => {
-            if (status == 'success') {
-              $('#modalEdit').modal('hide')
-              $.notify({
-                message: 'Se ha actualizado la categoría',
-                title: 'Exito',
-                icon: 'notification_important'
-              }, {
-                type: 'success'
-              })
-              console.log($table)
-              $table.ajax.reload()
+          if (flagImage) {
+            if (myDropzone.getAcceptedFiles().length > 0) {
+              response = JSON.parse(myDropzone.getAcceptedFiles()[0].xhr.responseText)
+              link = response.link
+              ajax(link, idCategory)
             } else {
-              $('#modalEdit').modal('hide')
               $.notify({
-                message: 'No se ha actualizado la categoría',
-                title: 'Error',
+                message: 'Por favor Suba una Imagen',
+                title: 'Exito',
                 icon: 'notification_important'
               }, {
                 type: 'warning'
               })
             }
-          })
+          } else {
+            ajax(image, idCategory)
+          }
+        })
+      }
+    </script>
+    <script>
+      let flagImage = false
+      let myDropzone
+
+      function changeImage() {
+        flagImage = true
+        $('#containerImageCategory').fadeOut()
+        $('#myId').addClass('dropzone')
+        $('#imgUpload').fadeIn()
+        myDropzone = new Dropzone("div#myId", {
+          url: "/admin/upload.php",
+          method: 'post',
+          paramName: 'photo',
+          maxFiles: 1,
+          acceptedFiles: "image/*",
+          dictDefaultMessage: 'Sube tus archivos, arrastralos o haz click para buscarlos',
+          dictMaxFilesExceeded: 'Solo se permite subir una imagen',
+          dictInvalidFileType: 'Solo se permite imagenes'
+        })
+      }
+
+      function ajax(link, idCategory) {
+        $.post('api/update_category.php', {
+          id: idCategory,
+          description: $('#descriptionCategoryInput').val(),
+          image: link
+        }, (data, status) => {
+          if (status == 'success') {
+            $('#modalEdit').modal('hide')
+            $.notify({
+              message: 'Se ha actualizado la categoría',
+              title: 'Exito',
+              icon: 'notification_important'
+            }, {
+              type: 'success'
+            })
+            console.log($table)
+            $table.ajax.reload()
+          } else {
+            $('#modalEdit').modal('hide')
+            $.notify({
+              message: 'No se ha actualizado la categoría',
+              title: 'Error',
+              icon: 'notification_important'
+            }, {
+              type: 'warning'
+            })
+          }
         })
       }
     </script>

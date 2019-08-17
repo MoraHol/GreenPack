@@ -22,7 +22,7 @@ class CategoryDao
   public function update($category)
   {
     $this->db->connect();
-    $query = "UPDATE `categories` SET `description` = '" . $category->getDescription() . "' WHERE `categories`.`id_categories` = " . $category->getId();
+    $query = "UPDATE `categories` SET `description` = '" . $category->getDescription() . "', `image` = '" . $category->getImage() . "' WHERE `categories`.`id_categories` = " . $category->getId();
     $status = $this->db->consult($query);
     $this->db->close();
     return $status;
@@ -40,6 +40,7 @@ class CategoryDao
       $category->setName($categoryDB["name"]);
       $category->setParentcategory($categoryDB["parent_category"]);
       $category->setDescription($categoryDB["description"]);
+      $category->setImage($categoryDB["image"]);
       array_push($categories, $category);
     }
     $this->db->close();
@@ -55,6 +56,7 @@ class CategoryDao
     $category->setName($categoryDB["name"]);
     $category->setParentcategory($categoryDB["parent_category"]);
     $category->setDescription($categoryDB["description"]);
+    $category->setImage($categoryDB["image"]);
     $this->db->close();
     return $category;
   }
