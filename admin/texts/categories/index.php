@@ -26,6 +26,12 @@ include("../../partials/verify-session.php");
     td.highlight {
       background-color: whitesmoke !important;
     }
+
+    .text-area-control {
+      border-left: 1px solid #d2d2d2;
+      border-right: 1px solid #d2d2d2;
+      border-top: 1px solid #d2d2d2;
+    }
   </style>
 </head>
 
@@ -84,7 +90,7 @@ include("../../partials/verify-session.php");
             <div class="row">
               <div class="col-sm-4">Descripcion:</div>
               <div class="col-sm-8 ">
-                <textarea id="descriptionCategoryInput" cols="30" rows="10"></textarea>
+                <textarea class="form-control text-area-control" id="descriptionCategoryInput" cols="30" rows="10"></textarea>
               </div>
             </div>
           </div>
@@ -173,7 +179,7 @@ include("../../partials/verify-session.php");
         })
       })
 
-      
+
 
       function modalEdit(nameCategory, idCategory, description) {
         $('#modalEdit').modal()
