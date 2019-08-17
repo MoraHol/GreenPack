@@ -215,31 +215,34 @@ include("../../partials/verify-session.php");
 
       $('td img').parent().addClass('text-center')
 
+      let categoryId
+
       function modalEdit(nameCategory, idCategory, description, image) {
         $('#modalEdit').modal()
         $('#nameCategoryLoad').text(nameCategory)
         $('#descriptionCategoryInput').val(description)
         $('#imageCategory').attr('src', image)
-        $('#buttonSubmitUpdate').click(() => {
-          if (flagImage) {
-            if (myDropzone.getAcceptedFiles().length > 0) {
-              response = JSON.parse(myDropzone.getAcceptedFiles()[0].xhr.responseText)
-              link = response.link
-              ajax(link, idCategory)
-            } else {
-              $.notify({
-                message: 'Por favor Suba una Imagen',
-                title: 'Exito',
-                icon: 'notification_important'
-              }, {
-                type: 'warning'
-              })
-            }
-          } else {
-            ajax(image, idCategory)
-          }
-        })
+        categoryId = idCategory
       }
+      $('#buttonSubmitUpdate').click(() => {
+        if (flagImage) {
+          if (myDropzone.getAcceptedFiles().length > 0) {
+            response = JSON.parse(myDropzone.getAcceptedFiles()[0].xhr.responseText)
+            link = response.link
+            ajax(link, categoryId)
+          } else {
+            $.notify({
+              message: 'Por favor Suba una Imagen',
+              title: 'Exito',
+              icon: 'notification_important'
+            }, {
+              type: 'warning'
+            })
+          }
+        } else {
+          ajax($('#imageCategory').attr('src'), categoryId)
+        }
+      })
     </script>
     <script>
       let flagImage = false
