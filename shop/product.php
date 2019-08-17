@@ -470,6 +470,7 @@ $tabs = $tabProductDao->findByProduct($product);
     let minQuantity = 0;
     $('#sst').val(verifyMinQuantity())
     $('#btnCotizar').removeClass("disabled")
+    $('#help-quantity').fadeOut()
 
     function verifyMinQuantity() {
       if (category == "bolsas") {
@@ -487,11 +488,17 @@ $tabs = $tabProductDao->findByProduct($product);
     function verifyMinQuantityValue() {
       if ($('#sst').val() < verifyMinQuantity()) {
         $('#btnCotizar').addClass("disabled")
-        $('#help-quantity').html(`<br><span class="text-danger">Cantidad minima ${verifyMinQuantity()} unidades. ¿Te gustaría cotizar cantidades menores? te invitamos a visitar a nuestro aliado Greenpoint (<a href="//www.greenpointonline.com.co" target="_blank">www.greenpointonline.com.co</a>)`)
+        $('#help-quantity').html(`<div class="alert alert-danger" role="alert"><br><span>Cantidad minima ${verifyMinQuantity()} unidades. ¿Te gustaría cotizar cantidades menores? te invitamos a visitar a nuestro aliado Greenpoint (<a href="//www.greenpointonline.com.co" target="_blank">www.greenpointonline.com.co</a>)</div>`)
+        $('#help-quantity').fadeIn()
+        $('.single').css('margin-bottom', '550px')
       } else {
 
         $('#btnCotizar').removeClass("disabled")
-        $('#help-quantity').html('')
+        $('#help-quantity').fadeOut(400, () => {
+          $('#help-quantity').html('')
+          $('.single').css('margin-bottom', '440px')
+        })
+
       }
     }
     $('#sst').change(verifyMinQuantityValue)
