@@ -71,12 +71,23 @@
       font-size: 16px;
     }
 
-    .blog-banner div.text-center {
+    .blog-banner div.text-center:first {
       margin: auto;
       width: 25%;
       background: #333333c2;
       color: #fff !important;
       height: 113px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .blog-banner div.text-center {
+      margin: auto;
+      width: 25%;
+      background: #333333c2;
+      color: #fff !important;
+      height: 50px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -92,8 +103,10 @@
 
   <?php
   require_once(dirname(__DIR__) . "/dao/ProductDao.php");
+  require_once(dirname(__DIR__) . "/dao/CategoryDao.php");
   require_once(dirname(__DIR__) . "/db/env.php");
   $productDao = new ProductDao();
+  $categoryDao = new CategoryDao();
   if (!$_GET) {
     header("Location: category.php?id=1&page=1");
   }
@@ -103,9 +116,10 @@
   $productsperPage = 8;
   $pages = ceil(count($productDao->findByCategory($_GET["id"])) / $productsperPage);
   $pageInit = ($_GET["page"] - 1) * $productsperPage;
-  if ($_GET["page"] > $pages || $_GET["page"] < 0) {
-    header("Location: category.php?id=" . $_GET['id'] . "&page=1");
-  }
+  $category = $categoryDao->findById($_GET["id"]);
+  // if ($_GET["page"] >= $pages || $_GET["page"] <= 0) {
+  //   header("Location: category.php?id=" . $_GET['id'] . "&page=1");
+  // }
   switch ($_GET["id"]) {
     case 1:
       $image = "/images/categories/bolsas_biodegradables.png";
@@ -153,7 +167,9 @@
       <div class="blog-banner">
         <div class="text-center">
           <h1>Productos</h1>
-
+        </div>
+        <div class="text-center">
+          <?= $category->getDescription() ?>
         </div>
       </div>
     </div>

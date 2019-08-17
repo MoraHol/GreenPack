@@ -54,7 +54,7 @@ include("../partials/verify-session.php");
               Pestañas de la pagina</div>
             <div class="card-body">
               <div class="row">
-                <div class="col-sm-6 align-items-start justify-content-center text-center border-right" id="border-item">
+                <div class="col-sm-4 align-items-start justify-content-center text-center border-right" id="border-item">
                   <a href="home">
                     <i class="fas fa-home"></i>
                     <br>
@@ -62,12 +62,20 @@ include("../partials/verify-session.php");
                     Inicio
                   </a>
                 </div>
-                <div class="col-sm-6 align-items-start justify-content-center  border-rigth text-center" id="border-item-2">
+                <div class="col-sm-4 align-items-start justify-content-center  border-rigth text-center" id="border-item-2">
                   <a href="about">
                     <i class="fas fa-building"></i>
                     <br>
                     <br>
                     Acerca de nosotros
+                  </a>
+                </div>
+                <div class="col-sm-4 align-items-start justify-content-center  border-rigth text-center" id="border-item-2">
+                  <a href="categories">
+                  <i class="fas fa-network-wired"></i>
+                    <br>
+                    <br>
+                    Categorías
                   </a>
                 </div>
               </div>

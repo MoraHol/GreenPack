@@ -101,7 +101,8 @@ class ProductDao
   function findByCategoryWithLimit($idCategory, $initialLimit, $quantity = 6)
   {
     $products = [];
-    $productsDB = $this->db->consult("SELECT id_products,ref,products.name,description,price, products.categories_id_categories as id_categories  FROM `products` INNER JOIN categories ON `categories_id_categories` = categories.id_categories WHERE categories.id_categories = $idCategory OR categories.parent_category = $idCategory LIMIT $initialLimit,$quantity", "yes");
+    $query = "SELECT id_products,ref,products.name,products.description,price, products.categories_id_categories as id_categories  FROM `products` INNER JOIN categories ON `categories_id_categories` = categories.id_categories WHERE categories.id_categories = $idCategory OR categories.parent_category = $idCategory LIMIT $initialLimit,$quantity";
+    $productsDB = $this->db->consult($query, "yes");
 
     foreach ($productsDB as $productDB) {
       $product = new Product();
