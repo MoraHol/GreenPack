@@ -94,6 +94,15 @@ if (!isset($_GET["admin"])) {
         padding: 140px;
       }
     }
+
+    @media only screen and (max-width: 767px),
+    screen and (orientation: portrait) {
+      .blog-post {
+        width: 100%;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+    }
   </style>
 
   <script src="/js/spinner.js"></script>
@@ -149,13 +158,11 @@ if (!isset($_GET["admin"])) {
       <div class="row">
         <!-- main blog -->
         <div id="main" class="col-md-9">
-
           <!-- blog post -->
           <div class="blog-post">
             <div class="fr-view">
               <?= $notice->getContent(); ?>
             </div>
-
           </div>
           <!-- /blog post -->
 
