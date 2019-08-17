@@ -77,7 +77,7 @@ class ProductDao
   function findByCategory($idCategory)
   {
     $products = [];
-    $productsDB = $this->db->consult("SELECT id_products,ref,products.name,description,price, categories.name as category_name FROM `products` INNER JOIN categories ON `categories_id_categories` = categories.id_categories WHERE categories.id_categories = $idCategory OR categories.parent_category = $idCategory", "yes");
+    $productsDB = $this->db->consult("SELECT id_products,ref,products.name,products.description,price, categories.name as category_name FROM `products` INNER JOIN categories ON `categories_id_categories` = categories.id_categories WHERE categories.id_categories = $idCategory OR categories.parent_category = $idCategory", "yes");
 
     foreach ($productsDB as $productDB) {
       $product = new Product();
