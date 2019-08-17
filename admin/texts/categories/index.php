@@ -126,6 +126,7 @@ include("../../partials/verify-session.php");
       let $table
       // Call the dataTables jQuery plugin
       $(document).ready(function() {
+        $('tr td:last-child').addClass('text-center')
         $table = $('#dataTable').DataTable({
           "language": {
             "sProcessing": "Procesando...",
@@ -155,6 +156,7 @@ include("../../partials/verify-session.php");
           "columnDefs": [{
             "targets": -1,
             render: function(data, type, row) {
+              $('tr td:last-child').addClass('text-center')
               return `<a class="text-center" href="javascript:modalEdit('${row.name}',${row.id},'${row.description}')"><i class='fas fa-pen'></i></a>`
             }
           }],
@@ -171,6 +173,7 @@ include("../../partials/verify-session.php");
         })
       })
 
+      
 
       function modalEdit(nameCategory, idCategory, description) {
         $('#modalEdit').modal()
