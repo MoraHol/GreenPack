@@ -38,7 +38,7 @@ $conversorDate = new ConversorDate();
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="#">Dashboard</a>
+              <a href="/admin">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">Noticias</li>
           </ol>

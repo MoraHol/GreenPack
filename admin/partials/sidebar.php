@@ -5,7 +5,7 @@
     Tip 2: you can also add an image using data-image tag
 -->
   <div class="logo">
-    <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+    <a href="javascript:;" class="simple-text logo-normal">
       <img src="/images/greenpack_logo.png" alt="Greenpack">
     </a>
   </div>
