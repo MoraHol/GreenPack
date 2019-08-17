@@ -5,7 +5,7 @@
     <div class="navbar-wrapper">
       <a class="navbar-brand" href="javascript:void(0)">Administrador GreenPack</a>
     </div>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" id="toggler-sidebar">
       <span class="sr-only">Toggle navigation</span>
       <span class="navbar-toggler-icon icon-bar"></span>
       <span class="navbar-toggler-icon icon-bar"></span>
@@ -21,9 +21,9 @@
             </p>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="javascript:void(0)" data-target="#ModalPass" data-toggle="modal">Cambiar
+            <a class="dropdown-item" href="javascript:hideSidebar()" onclick="hideSidebar()" data-target="#ModalPass" data-toggle="modal">Cambiar
               Contraseña</a>
-            <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#logoutModal">Cerrar Sesion</a>
+            <a class="dropdown-item" href="javascript:hideSidebar()" onclick="hideSidebar()" data-toggle="modal" data-target="#logoutModal">Cerrar Sesion</a>
           </div>
         </li>
         <!-- your navbar here -->
@@ -74,6 +74,10 @@
       }
     })
   })
+
+  function hideSidebar() {
+    $('#toggler-sidebar').click()
+  }
 </script>
 <!-- author: Alexis Holguin github: MoraHol -->
 <!-- Logout Modal-->

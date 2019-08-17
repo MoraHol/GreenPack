@@ -14735,7 +14735,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 }
 
 .sidebar[data-background-color="black"] .nav li .dropdown-menu .dropdown-item {
-  color: #fff;
+  color: #000000;
 }
 
 .sidebar[data-color="purple"] li.active>a {
