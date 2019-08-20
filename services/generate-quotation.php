@@ -987,7 +987,7 @@ if (isset($_GET["id"])) {
             <font class="font510772">Impresión</font>
             <font class="font010772"> <?= $item->isPrinting() ? "SI" : "NO" ?></font>
             <br>
-            <font class="font510772">Con Ventanilla</font>
+            <font class="font510772">Ventanilla</font>
             <font class="font010772"> <?= $item->isPla() ? "SI" : "NO" ?></font>
             <br>
             <font class="font510772">Laminada</font>
