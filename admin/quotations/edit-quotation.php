@@ -103,38 +103,38 @@ $quotation = $quotationDao->findById($_GET["id"]);
             </div>
             <div class="card" id="products">
               <?php foreach ($quotation->getItems() as $item) { ?>
-                <div class="row align-items-center">
-                  <div class="col-md-2 text-center"><img src="<?= $item->getProduct()->getImages()[0]->getUrl() ?>" alt="" width="150" height="150"></div>
-                  <div class="col-md-3 align-self-center">
-                    <h5><?= $item->getProduct()->getName() ?></h5>
-                    <br>
-                    <p><span class="text-primary">Impresion:</span> <?= $item->isPrinting() ? "SI" : "NO" ?></p>
-                    <p><span class="text-primary">Con ventanilla:</span> <?= $item->isPla() ? "SI" : "NO" ?></p>
-                    <p><span class="text-primary">Laminada:</span> <?= $item->isLam() ? "SI" : "NO" ?></p>
-                    <p><span class="text-primary">Material:</span> <?= $item->getMaterial()->getName() ?></p>
-                    <p><span class="text-primary">Medidas:</span></p>
-                    <p>
-                      <ul class="measurements list-inline">
-                        <li class="list-inline-item"><span class="text-primary">Ancho:</span> <?= $item->getMeasurement()->getWidth() ?></li>
-                        <li class="list-inline-item"><span class="text-primary">Alto:</span> <?= $item->getMeasurement()->getHeight() ?></li>
-                        <li class="list-inline-item"><span class="text-primary">Largo:</span> <?= $item->getMeasurement()->getLength() ?></li>
-                      </ul>
-                    </p>
-                  </div>
-                  <div class="col-md-2">
-                    <p><span class="text-primary">Cantidad:</span></p>
-                    <p><input type="number" id="quantity<?= $item->getId() ?>" value="<?= $item->getQuantity() ?>" class="form-control quantity"></p>
-                  </div>
-                  <div class="col-md-2">
-                    <p><span class="text-primary">Precio:</span></p>
-                    <p><input type="number" id="price<?= $item->getId() ?>" value="<?= $item->getPrice() ?>" class="form-control price"></p>
-                  </div>
-                  <div class="col">
-                    <p><span class="text-primary">Total:</span></p>
-                    <p class="money" id="total<?= $item->getId() ?>"><?= $item->calculateTotal() ?></p>
-                  </div>
+              <div class="row align-items-center">
+                <div class="col-md-2 text-center"><img src="<?= $item->getProduct()->getImages()[0]->getUrl() ?>" alt="" width="150" height="150"></div>
+                <div class="col-md-3 align-self-center">
+                  <h5><?= $item->getProduct()->getName() ?></h5>
+                  <br>
+                  <p><span class="text-primary">Impresion:</span> <?= $item->isPrinting() ? "SI" : "NO" ?></p>
+                  <p><span class="text-primary">Con ventanilla:</span> <?= $item->isPla() ? "SI" : "NO" ?></p>
+                  <p><span class="text-primary">Laminada:</span> <?= $item->isLam() ? "SI" : "NO" ?></p>
+                  <p><span class="text-primary">Material:</span> <?= $item->getMaterial()->getName() ?></p>
+                  <p><span class="text-primary">Medidas:</span></p>
+                  <p>
+                    <ul class="measurements list-inline">
+                      <li class="list-inline-item"><span class="text-primary">Ancho:</span> <?= $item->getMeasurement()->getWidth() ?></li>
+                      <li class="list-inline-item"><span class="text-primary">Alto:</span> <?= $item->getMeasurement()->getHeight() ?></li>
+                      <li class="list-inline-item"><span class="text-primary">Largo:</span> <?= $item->getMeasurement()->getLength() ?></li>
+                    </ul>
+                  </p>
                 </div>
-                <hr>
+                <div class="col-md-2">
+                  <p><span class="text-primary">Cantidad:</span></p>
+                  <p><input type="number" id="quantity<?= $item->getId() ?>" value="<?= $item->getQuantity() ?>" class="form-control quantity"></p>
+                </div>
+                <div class="col-md-2">
+                  <p><span class="text-primary">Precio:</span></p>
+                  <p><input type="number" id="price<?= $item->getId() ?>" value="<?= $item->getPrice() ?>" class="form-control price"></p>
+                </div>
+                <div class="col">
+                  <p><span class="text-primary">Total:</span></p>
+                  <p class="money" id="total<?= $item->getId() ?>"><?= $item->calculateTotal() ?></p>
+                </div>
+              </div>
+              <hr>
               <?php } ?>
             </div>
             <div class="row" style="margin-bottom: 20px; margin-top: 20px;">
@@ -230,7 +230,6 @@ $quotation = $quotationDao->findById($_GET["id"]);
       $.post('api/sent_email.php', {
         id: `<?= $quotation->getId() ?>`
       }, (data, status, xhr) => {
-
         if (status == 'success' && xhr.readyState == 4) {
           $.notify({
             message: 'La cotizacion ha sido enviada correctamente al Cliente',
@@ -267,7 +266,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
       }, (data, status) => {
         if (status == 'success') {
           $.notify({
-            message: 'Se ha actulizado la cotizacion',
+            message: 'Se ha actualizado la cotizacion',
             title: 'Exito',
             icon: 'notification_important'
           }, {

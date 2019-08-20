@@ -159,7 +159,7 @@ include("../partials/verify-session.php");
           })
         } else {
           $.notify({
-            message: 'No se ha podido actulizar el usuario',
+            message: 'No se ha podido actualizar el usuario',
             title: '<strong>Error</strong>',
             icon: 'fas fa-exclamation-triangle'
           }, {
@@ -186,7 +186,7 @@ include("../partials/verify-session.php");
           })
         } else {
           $.notify({
-            message: 'No se ha podido actulizar el usuario',
+            message: 'No se ha podido actualizar el usuario',
             title: '<strong>Error</strong>',
             icon: 'fas fa-exclamation-triangle'
           }, {

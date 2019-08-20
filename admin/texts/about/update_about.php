@@ -277,7 +277,7 @@ include("../../partials/verify-session.php");
             ajax(link)
           } else {
             $.notify({
-              message: 'Faltan Datos para actulizar el About',
+              message: 'Faltan Datos para actualizar el About',
               title: '<strong>Error</strong>',
               icon: 'notification_important'
             }, {
@@ -296,7 +296,7 @@ include("../../partials/verify-session.php");
         }, (data, status) => {
           if (status == 'success') {
             $.notify({
-              message: 'Se ha actulizado correctamente',
+              message: 'Se ha actualizado correctamente',
               title: '<strong>Exito</strong>',
               icon: 'notification_important'
             }, {
