@@ -109,7 +109,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
                   <h5><?= $item->getProduct()->getName() ?></h5>
                   <br>
                   <p><span class="text-primary">Impresion:</span> <?= $item->isPrinting() ? "SI" : "NO" ?></p>
-                  <p><span class="text-primary">Con ventanilla:</span> <?= $item->isPla() ? "SI" : "NO" ?></p>
+                  <p><span class="text-primary">Ventanilla:</span> <?= $item->isPla() ? "SI" : "NO" ?></p>
                   <p><span class="text-primary">Laminada:</span> <?= $item->isLam() ? "SI" : "NO" ?></p>
                   <p><span class="text-primary">Material:</span> <?= $item->getMaterial()->getName() ?></p>
                   <p><span class="text-primary">Medidas:</span></p>
