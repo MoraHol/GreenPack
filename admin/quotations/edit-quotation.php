@@ -85,7 +85,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
             </div>
             <div class="row">
               <div class="col-sm-6">
-                <label for="extraInformation">Información extra</label>
+                <label for="extraInformation">Observaciones:</label>
                 <textarea class="form-control" id="extraInformation" rows="3"></textarea>
               </div>
               <div class="col-sm-3">

@@ -1186,7 +1186,7 @@ if (isset($_GET["id"])) {
         </tr>
         <tr height="21" style="mso-height-source:userset;height:15.75pt">
           <td height="21" class="xl1510772" style="height:15.75pt"></td>
-          <td colspan="3" class="xl9110772" style="text-transform:capitalize;"><?= $admin->getName() ?></td>
+          <td colspan="3" class="xl1510772" style="text-transform:capitalize;"><?= $admin->getName() ?> <?= $admin->getLastName() ?></td>
           <td class="xl1510772"></td>
           <td class="xl1510772"></td>
           <td class="xl1510772"></td>
@@ -1198,8 +1198,7 @@ if (isset($_GET["id"])) {
         </tr>
         <tr height="21" style="mso-height-source:userset;height:15.75pt">
           <td height="21" class="xl1510772" style="height:15.75pt"></td>
-          <td colspan="2" class="xl1510772">Correo: <a href="mailto:<?= $admin->getEmail() ?>"><?= $admin->getEmail() ?></a></td>
-          <td class="xl1510772"></td>
+          <td colspan="2" class="xl1510772">Correo: <?= $admin->getEmail() ?></td>
           <td class="xl1510772"></td>
           <td class="xl1510772"></td>
           <td class="xl1510772"></td>
@@ -1211,7 +1210,7 @@ if (isset($_GET["id"])) {
         </tr>
         <tr height="21" style="mso-height-source:userset;height:15.75pt">
           <td height="21" class="xl1510772" style="height:15.75pt"></td>
-          <td class="xl1510772"></td>
+          <td class="xl1510772">Telefono: <?= $admin->getPhone() ?></td>
           <td class="xl1510772"></td>
           <td class="xl1510772"></td>
           <td class="xl1510772"></td>

@@ -55,7 +55,8 @@ if (isset($_POST["id"])) {
     )
   );
   if (!$mail->send()) {
-    http_response_code(500);
+    http_response_code(501);
+    echo $mail->ErrorInfo;
     exit;
   } else {
     $admin = unserialize($_SESSION["admin"]);
