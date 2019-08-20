@@ -975,6 +975,7 @@ if (isset($_GET["id"])) {
           <td colspan="2" height="48" class="xl8810772" width="150" style="height:36.0pt;
                           width:112pt"><img src="<?= $item->getProduct()->getImages()[0]->getUrl() ?>" width="70" height="70" style="margin: 2px;"></td>
           <td colspan="4" class="xl7710772" width="375" style="width:280pt;vertical-align: middle!important;">
+            <br>
             <font class="font510772">Referencia</font>
             <font class="font010772"> <?= $item->getProduct()->getRef() ?> </font>
             <br>
@@ -992,6 +993,8 @@ if (isset($_GET["id"])) {
             <br>
             <font class="font510772">Laminada</font>
             <font class="font010772"> <?= $item->isLam() ? "SI" : "NO" ?> </font>
+            <br>
+            <br>
           </td>
           <td colspan="2" class="xl8610772" style="border-right:.5pt solid black"><span style="mso-spacerun:yes">&nbsp;</span><?= number_format($item->getQuantity(), 0, ",", ".") ?></td>
           <td class="xl7210772" style="border-left:none"><span style="mso-spacerun:yes">&nbsp;</span>$<span style="mso-spacerun:yes">&nbsp;</span><?= money_format("%!i", $item->getPrice()) ?></td>
