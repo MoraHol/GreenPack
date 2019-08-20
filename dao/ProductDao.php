@@ -127,7 +127,7 @@ class ProductDao
   {
     $this->db->connect();
     $products = [];
-    $query = "SELECT id_products,ref,products.name,description,price, categories.name as category_name, categories.id_categories FROM `products` INNER JOIN categories ON categories.id_categories = products.categories_id_categories WHERE `id_products` <> " . $product->getId() . " AND categories.id_categories = " . $product->getCategory()->getId() . " LIMIT $limit";
+    $query = "SELECT id_products,ref,products.name,products.description,price, categories.name as category_name, categories.id_categories FROM `products` INNER JOIN categories ON categories.id_categories = products.categories_id_categories WHERE `id_products` <> " . $product->getId() . " AND categories.id_categories = " . $product->getCategory()->getId() . " LIMIT $limit";
     $productsDB = $this->db->consult($query, "yes");
     foreach ($productsDB as $productDB) {
       $productInstance = new Product();
