@@ -107,7 +107,11 @@ include("../../partials/verify-session.php");
               <div class="col-sm-8 ">
                 <img src="" id="imageCategory" class="img-responsive" width="300">
               </div>
-              <div class="col"><button class="btn btn-danger" onclick="changeImage()">Cambiar</button></div>
+
+            </div>
+            <div class="row">
+              <div class="col-sm-7"></div>
+              <div class="col-sm-4"><button class="btn btn-danger" onclick="changeImage()">Cambiar Imagen</button></div>
             </div>
             <div id="imgUpload">
               <span>Suba la imagen de la categoría:</span>

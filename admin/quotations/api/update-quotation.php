@@ -12,6 +12,9 @@ if (isset($_POST["id"])) {
   $quotation->setEmail($_POST["email"]);
   $quotation->setPhoneNumber($_POST["phone"]);
   $quotation->setCellPhoneNumber($_POST["cellphone"]);
+  $quotation->setPaymentConditions($_POST["paymentConditions"]);
+  $quotation->setDeliveryTime($_POST["deliveryTime"]);
+  $quotation->setValidity($_POST["validity"]);
   if (isset($_POST["extra"])) {
     $quotation->setExtraInformation($_POST["extra"]);
   }

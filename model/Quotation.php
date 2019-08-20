@@ -22,6 +22,9 @@ class Quotation implements JsonSerializable
   private $createdAt;
   private $idAdminAssigned;
   private $dateAssigned;
+  private $paymentConditions;
+  private $validity;
+  private $deliveryTime;
 
   public function __construct()
   {
@@ -30,7 +33,37 @@ class Quotation implements JsonSerializable
     $this->extraInformation = null;
     $this->file = null;
     $this->dateSolved = '0-0-0';
-    $this->idAdminSolved = 0;
+    $this->idAdminSolved = null;
+  }
+
+  public function getPaymentConditions()
+  {
+    return $this->paymentConditions;
+  }
+
+  public function setPaymentConditions($paymentConditions)
+  {
+    $this->paymentConditions = $paymentConditions;
+  }
+
+  public function getValidity()
+  {
+    return $this->validity;
+  }
+
+  public function setValidity($validity)
+  {
+    $this->validity = $validity;
+  }
+
+  public function getDeliveryTime()
+  {
+    return $this->deliveryTime;
+  }
+
+  public function setDeliveryTime($deliveryTime)
+  {
+    $this->deliveryTime = $deliveryTime;
   }
 
   public function getIdAdminAssigned()

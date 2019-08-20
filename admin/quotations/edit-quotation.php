@@ -137,6 +137,31 @@ $quotation = $quotationDao->findById($_GET["id"]);
               <hr>
               <?php } ?>
             </div>
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label for="payment-conditions">Condiciones de pago</label>
+                      <textarea id="payment-conditions" class="form-control" cols="30" rows="10"></textarea>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label for="delivery-time">Tiempos de envio</label>
+                      <textarea id="delivery-time" class="form-control" cols="30" rows="10"></textarea>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label for="validity">Vigencia</label>
+                      <textarea id="validity" class="form-control" cols="30" rows="10"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div class="row" style="margin-bottom: 20px; margin-top: 20px;">
               <div class="col text-center"><a class="btn btn-danger btn-lg" href="/admin/quotations/#no-solved"><i class="material-icons">arrow_back</i> Regresar</a></div>
               <div class="col text-center"><button onclick="update()" class="btn btn-info btn-lg"><i class="material-icons md-48">update</i> Actualizar</button></div>
@@ -174,7 +199,10 @@ $quotation = $quotationDao->findById($_GET["id"]);
     $(() => {
       $('.sidebar div.sidebar-wrapper ul.nav li:first').removeClass('active')
       $('#quotations-item').addClass('active')
-      $('extraInformation').val(`<?= $quotation->getExtraInformation() ?>`)
+      $('#extraInformation').val(`<?= $quotation->getExtraInformation() ?>`)
+      $('#payment-conditions').val(`<?= $quotation->getPaymentConditions() ?>`)
+      $('#delivery-time').val(`<?= $quotation->getDeliveryTime() ?>`)
+      $('#validity').val(`<?= $quotation->getValidity() ?>`)
       $('#load_pdf').html('')
       $('#load_pdf').append(`<embed  src="/services/view-quotation.php?id=<?= $quotation->getId() ?>#toolbar=0&navpanes=0&scrollbar=0&statusbar=0&zoom=55" type="application/pdf" width="100%" height="600px" />`)
       formatMoney()
@@ -186,6 +214,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
         let id = $(this).context.id.substring(8, $(this).context.id.length)
         calculateTotal(id)
       })
+
     })
 
     function calculateTotal(id) {
@@ -262,7 +291,10 @@ $quotation = $quotationDao->findById($_GET["id"]);
         extra: $('#extraInformation').val(),
         phone: $('#phone').val(),
         cellphone: $('#cellphone').val(),
-        products: JSON.stringify(products)
+        products: JSON.stringify(products),
+        paymentConditions: $('#payment-conditions').val(),
+        deliveryTime: $('#delivery-time').val(),
+        validity: $('#validity').val()
       }, (data, status) => {
         if (status == 'success') {
           $.notify({
@@ -277,7 +309,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
         if (status == 'notmodified') {
           $.notify({
             message: 'No se ha cambiado ningun valor',
-            title: 'Actualizacion',
+            title: 'Actualización',
             icon: 'warning'
           }, {
             type: 'warning'

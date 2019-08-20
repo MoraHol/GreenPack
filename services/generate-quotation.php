@@ -1067,8 +1067,7 @@ if (isset($_GET["id"])) {
             de Pago</td>
         </tr>
         <tr height="21" style="mso-height-source:userset;height:15.75pt">
-          <td colspan="11" height="21" class="xl6810772" style="height:15.75pt">50% al
-            realizar el pedido - 50% a contra entrega de los productos</td>
+          <td colspan="11" height="21" class="xl6810772" style="height:15.75pt"><?= $quotation->getPaymentConditions() ?></td>
         </tr>
         <tr height="21" style="mso-height-source:userset;height:15.75pt">
           <td height="21" class="xl1510772" style="height:15.75pt"></td>
@@ -1088,13 +1087,12 @@ if (isset($_GET["id"])) {
             Entrega a partir de la aprobación</td>
         </tr>
         <tr height="21" style="mso-height-source:userset;height:15.75pt">
-          <td colspan="11" height="21" class="xl6810772" style="height:15.75pt">Sin
-            impresión<span style="mso-spacerun:yes">&nbsp; </span>8 dias</td>
+          <td colspan="11" height="21" class="xl6810772" style="height:15.75pt"><?= $quotation->getDeliveryTime() ?></td>
         </tr>
-        <tr height="21" style="mso-height-source:userset;height:15.75pt">
+        <!-- <tr height="21" style="mso-height-source:userset;height:15.75pt">
           <td colspan="11" height="21" class="xl6810772" style="height:15.75pt">Impresos 15
             dias</td>
-        </tr>
+        </tr> -->
         <tr height="21" style="mso-height-source:userset;height:15.75pt">
           <td height="21" class="xl1510772" style="height:15.75pt"></td>
           <td class="xl1510772"></td>
@@ -1114,9 +1112,7 @@ if (isset($_GET["id"])) {
         </tr>
         <tr height="21" style="mso-height-source:userset;height:15.75pt">
           <td colspan="11" height="21" class="xl8910772" width="828" style="height:15.75pt;
-  width:619pt"><span style="mso-spacerun:yes">&nbsp;&nbsp;</span>30 dias contados a partir
-            de la fecha de la entrega de la cotizacion<br>
-            presente propuesta</td>
+  width:619pt"><span style="mso-spacerun:yes">&nbsp;&nbsp;</span><?= $quotation->getValidity() ?></td>
 
         </tr>
         <tr height="21" style="mso-height-source:userset;height:15.75pt">

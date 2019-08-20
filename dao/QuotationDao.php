@@ -69,8 +69,18 @@ class QuotationDao
     $idClient = $this->db->consult("SELECT `id_clients` AS id FROM `clients` WHERE `email` = '" . $quotation->getEmail() . "'", "yes");
     $idClient = $idClient[0]["id"];
     $quotation->setIdClient($idClient);
+    $idAdminSolved =  $quotation->getIdAdminSolved() == null ? 'NULL' : $quotation->getIdAdminSolved();
     // update quotation
-    $query = "UPDATE `quotations` SET `city` = '" . $quotation->getCity() . "', `address` = '" . $quotation->getAddress() . "', `cell_phone` = '" . $quotation->getCellPhoneNumber() . "', `phone` = '" . $quotation->getPhoneNumber() . "', `description` = '" . $quotation->getExtraInformation() . "', `solved` = '" . (int) $quotation->isSolved() . "', `clients_id_clients` = '" . $quotation->getIdClient() . "', `date_solved` = '" . $quotation->getDateSolved() . "', `id_admin_solved` = '" . $quotation->getIdAdminSolved() . "',`id_admin_assignment` = '" . $quotation->getIdAdminAssigned() . "', `date_assignment` = '" . date('Y-m-d H:i:s', $quotation->getDateAssigned()) . "' WHERE `quotations`.`id_quotations` = " . $quotation->getId();
+    $query = "UPDATE `quotations` SET `city` = '" . $quotation->getCity() . "',
+     `address` = '" . $quotation->getAddress() . "', `cell_phone` = '" . $quotation->getCellPhoneNumber() . "',
+      `phone` = '" . $quotation->getPhoneNumber() . "', `description` = '" . $quotation->getExtraInformation() . "',
+      `solved` = '" . (int) $quotation->isSolved() . "', `clients_id_clients` = '" . $quotation->getIdClient() . "',
+      `date_solved` = '" . $quotation->getDateSolved() . "', `id_admin_solved` = " . $idAdminSolved . ",
+      `id_admin_assignment` = '" . $quotation->getIdAdminAssigned() . "', `date_assignment` = '" . date('Y-m-d H:i:s', $quotation->getDateAssigned()) . "',
+      `payment_conditions` = '" . $quotation->getPaymentConditions() . "', `delivery_time` = '" . $quotation->getDeliveryTime() . "',
+      `validity` = '" . $quotation->getValidity() . "' WHERE `quotations`.`id_quotations` = " . $quotation->getId();
+    // echo $query;
+
     $status = $this->db->consult($query);
     // update items
     foreach ($quotation->getItems() as $item) {
@@ -102,6 +112,9 @@ class QuotationDao
     $quotation->setIdAdminSolved($quotationDB["id_admin_solved"]);
     $quotation->setIdAdminAssigned($quotationDB["id_admin_assignment"]);
     $quotation->setDateAssigned(strtotime($quotationDB["date_assignment"]));
+    $quotation->setPaymentConditions($quotationDB["payment_conditions"]);
+    $quotation->setDeliveryTime($quotationDB["delivery_time"]);
+    $quotation->setValidity($quotationDB["validity"]);
     $items = [];
     // cargado de cada uno de los items
     $itemsDB = $this->db->consult("SELECT * FROM quotations_details WHERE `quotations_id_quotations` = $id", "yes");
