@@ -5,6 +5,7 @@ if (isset($_POST["name"]) && isset($_POST["lastName"]) && isset($_POST["email"])
   $admin = new Admin();
   $admin->setName($_POST["name"]);
   $admin->setLastName($_POST["lastName"]);
+  $admin->setPhone($_POST["phone"]);
   $admin->setEmail($_POST["email"]);
   $admin->setPassword(hash("sha256", $_POST["password"]));
   $admin->setRole($_POST["idAdmin"]);

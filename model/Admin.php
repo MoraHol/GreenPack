@@ -8,10 +8,21 @@ class Admin
   private $password;
   private $tokenPass;
   private $role;
+  private $phone;
 
   public function __construct()
   {
     $this->tokenPass = bin2hex(openssl_random_pseudo_bytes(256));
+  }
+
+  public function getPhone()
+  {
+    return $this->phone;
+  }
+
+  public function setPhone($phone)
+  {
+    $this->phone = $phone;
   }
 
   public function getRole()

@@ -43,18 +43,25 @@ $roles = $db->consult("SELECT * FROM `roles_admin`", "yes");
           <div class="container">
             <form id="form-creator">
               <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                   <div class="form-group">
                     <label for="nameUser">Nombre del Usuario/Administrador:</label>
                     <br>
                     <input type="text" required placeholder="Ej: Alejandra" id="nameUser" class="form-control">
                   </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                   <div class="form-group">
                     <label for="lastNameUser">Apellido del Usuario/Administrador:</label>
                     <br>
                     <input type="text" required id="lastNameUser" placeholder="Ej: Martinez" class="form-control">
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label for="">Numero de Telefono del Usuario/Administrador:</label>
+                    <br>
+                    <input type="number" required id="phoneUser" placeholder="Ej: 3223764531" class="form-control">
                   </div>
                 </div>
               </div>
@@ -80,7 +87,7 @@ $roles = $db->consult("SELECT * FROM `roles_admin`", "yes");
                     <br>
                     <select class="form-control" id="role">
                       <?php foreach ($roles as $role) { ?>
-                        <option value="<?= $role["id_role"] ?>"><?= $role["name"] ?></option>
+                      <option value="<?= $role["id_role"] ?>"><?= $role["name"] ?></option>
                       <?php } ?>
                     </select>
                   </div>
@@ -126,7 +133,8 @@ $roles = $db->consult("SELECT * FROM `roles_admin`", "yes");
           name: $('#nameUser').val(),
           lastName: $('#lastNameUser').val(),
           email: $('#emailUser').val(),
-          password: $('#passwordUser').val()
+          password: $('#passwordUser').val(),
+          phone: $('#phoneUser').val()
         }, (data, status) => {
           if (status == 'success') {
             $.notify({

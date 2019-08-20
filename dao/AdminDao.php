@@ -28,6 +28,7 @@ class AdminDao
       $admin->setPassword($adminDB["password"]);
       $admin->setTokenPass($adminDB["token_password"]);
       $admin->setRole($adminDB["id_role"]);
+      $admin->setPhone($adminDB["phone"]);
       array_push($admins, $admin);
     }
     $this->db->close();
@@ -46,6 +47,7 @@ class AdminDao
     $admin->setPassword($adminDB["password"]);
     $admin->setTokenPass($adminDB["token_password"]);
     $admin->setRole($adminDB["id_role"]);
+    $admin->setPhone($adminDB["phone"]);
     $this->db->close();
     return $admin;
   }
@@ -63,13 +65,14 @@ class AdminDao
     $admin->setPassword($adminDB["password"]);
     $admin->setTokenPass($adminDB["token_password"]);
     $admin->setRole($adminDB["id_role"]);
+    $admin->setPhone($adminDB["phone"]);
     $this->db->close();
     return $admin;
   }
   function save($admin)
   {
     $this->db->connect();
-    $query = "INSERT INTO `admins` (`id_admins`, `name`, `last_name`, `email`, `password`, `token_password`,`id_role`) VALUES (NULL, '" . $admin->getName() . "', '" . $admin->getLastName() . "', '" . $admin->getEmail() . "', '" . $admin->getPassword() . "', '" . $admin->getTokenPass() . "','" . $admin->getRole() . "')";
+    $query = "INSERT INTO `admins` (`id_admins`, `name`, `last_name`, `email`, `password`, `token_password`,`id_role`,`phone`) VALUES (NULL, '" . $admin->getName() . "', '" . $admin->getLastName() . "', '" . $admin->getEmail() . "', '" . $admin->getPassword() . "', '" . $admin->getTokenPass() . "','" . $admin->getRole() . "','" . $admin->getPhone() . "')";
     $status = $this->db->consult($query);
     $this->db->close();
     return $status;
@@ -77,7 +80,7 @@ class AdminDao
   function update($admin)
   {
     $this->db->connect();
-    $query = "UPDATE `admins` SET `name` = '" . $admin->getName() . "', `last_name` = '" . $admin->getLastName() . "', `password` = '" . $admin->getPassword() . "', `token_password` = '" . $admin->getTokenPass() . "', `id_role` = '" . $admin->getRole() . "' WHERE `admins`.`id_admins` = " . $admin->getId();
+    $query = "UPDATE `admins` SET `name` = '" . $admin->getName() . "', `last_name` = '" . $admin->getLastName() . "', `password` = '" . $admin->getPassword() . "', `token_password` = '" . $admin->getTokenPass() . "', `id_role` = '" . $admin->getRole() . "',`phone` = '" . $admin->getPhone() . "' WHERE `admins`.`id_admins` = " . $admin->getId();
     $status = $this->db->consult($query);
     $this->db->close();
     return $status;

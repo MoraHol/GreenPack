@@ -53,18 +53,25 @@ include("../partials/verify-session.php");
           <div class="container">
             <form id="form-creator">
               <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                   <div class="form-group">
                     <label for="nameUser">Nombre del Usuario/Administrador:</label>
                     <br>
-                    <input type="text" required placeholder="Ej: Alejandra" id="nameUser" class="form-control" value="<?php echo $admin->getName() ?>">
+                    <input type="text" required placeholder="Ej: Alejandra" id="nameUser" class="form-control" value="<?= $admin->getName() ?>">
                   </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                   <div class="form-group">
                     <label for="lastNameUser">Apellido del Usuario/Administrador:</label>
                     <br>
-                    <input type="text" required id="lastNameUser" placeholder="Ej: Martinez" class="form-control" value="<?php echo $admin->getLastName() ?>">
+                    <input type="text" required id="lastNameUser" placeholder="Ej: Martinez" class="form-control" value="<?= $admin->getLastName() ?>">
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label for="">Numero de Telefono del Usuario/Administrador:</label>
+                    <br>
+                    <input type="number" required id="phoneUser" placeholder="Ej: 3223764531" class="form-control" value="<?= $admin->getPhone() ?>">
                   </div>
                 </div>
               </div>
@@ -74,7 +81,7 @@ include("../partials/verify-session.php");
                   <div class="form-group">
                     <label for="email">Correo :</label>
                     <br>
-                    <input type="email" id="emailUser" placeholder="Ej: admin1@admin.com" class="form-control" value="<?php echo $admin->getEmail() ?>" readonly aria-describedby="emailHelp">
+                    <input type="email" id="emailUser" placeholder="Ej: admin1@admin.com" class="form-control" value="<?= $admin->getEmail() ?>" readonly aria-describedby="emailHelp">
                     <small id="emailHelp" class="form-text text-muted">El correo no podra ser modificado.</small>
                   </div>
                 </div>
@@ -143,11 +150,12 @@ include("../partials/verify-session.php");
 
     function ajaxWithPass() {
       $.post('api/update_admin.php', {
-        id: `<?php echo $_GET["id"]; ?>`,
+        id: `<?= $_GET["id"]; ?>`,
         idAdmin: $('#role').val(),
         name: $('#nameUser').val(),
         lastName: $('#lastNameUser').val(),
-        password: $('#passwordUser').val()
+        password: $('#passwordUser').val(),
+        phone: $('#phoneUser').val()
       }, (data, status) => {
         if (status == 'success') {
           $.notify({
@@ -171,7 +179,7 @@ include("../partials/verify-session.php");
 
     function ajaxWithoutPass() {
       $.post('api/update_admin.php', {
-        id: `<?php echo $_GET["id"]; ?>`,
+        id: `<?= $_GET["id"]; ?>`,
         idAdmin: $('#role').val(),
         name: $('#nameUser').val(),
         lastName: $('#lastNameUser').val()
