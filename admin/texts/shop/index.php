@@ -1,5 +1,8 @@
 <?php
-include("../../partials/verify-session.php");
+// require dirname(dirname(__DIR__)) . "/dao/MaterialDao.php";
+include("../partials/verify-session.php");
+// $materialDao = new MaterialDao();
+// $materials = $materialDao->findAll();
 ?>
 <!-- author: Alexis Holguin, github: MoraHol -->
 <!doctype html>
@@ -15,7 +18,7 @@ include("../../partials/verify-session.php");
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- Material Kit CSS -->
-  <link href="../../assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+  <link href="../assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
   <link rel="stylesheet" href="/css/all.min.css">
   <!-- Page level plugin CSS-->
   <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -32,9 +35,9 @@ include("../../partials/verify-session.php");
 
 <body class="white-edition">
   <div class="wrapper ">
-    <?php include("../../partials/sidebar.php"); ?>
+    <?php include("../partials/sidebar.php"); ?>
     <div class="main-panel">
-      <?php include("../../partials/navbar.php");  ?>
+      <?php include("../partials/navbar.php");  ?>
       <div class="content">
         <div class="container-fluid">
           <!-- Breadcrumbs-->
@@ -50,63 +53,30 @@ include("../../partials/verify-session.php");
               <i class="fas fa-table"></i>
               Pestañas de la pagina</div>
             <div class="card-body">
-              <div class="row">
-                <div class="col-sm-3 align-items-start justify-content-center text-center border-right" id="border-item">
-                  <a href="home">
-                    <i class="fas fa-home"></i>
-                    <br>
-                    <br>
-                    Inicio
-                  </a>
-                </div>
-                <div class="col-sm-3 align-items-start justify-content-center  border-rigth text-center" id="border-item-2">
-                  <a href="about">
-                    <i class="fas fa-building"></i>
-                    <br>
-                    <br>
-                    Acerca de nosotros
-                  </a>
-                </div>
-                <div class="col-sm-3 align-items-start justify-content-center  border-rigth text-center" id="border-item-2">
-                  <a href="categories">
-                  <i class="fas fa-network-wired"></i>
-                    <br>
-                    <br>
-                    Categorías
-                  </a>
-                </div>
-                <div class="col-sm-3 align-items-start justify-content-center  border-rigth text-center" id="border-item-2">
-                  <a href="shop">
-                  <i class="fas fa-shopping-bag"></i>
-                    <br>
-                    <br>
-                    Banner Tienda
-                  </a>
-                </div>
-              </div>
+                    
             </div>
           </div>
         </div>
-        <?php include("../../partials/footer.html"); ?>
+        <?php include("../partials/footer.html"); ?>
       </div>
     </div>
     <!--   Core JS Files   -->
     <script src="/js/jquery-2.2.4.min.js"></script>
-    <script src="../../assets/js/core/popper.min.js"></script>
-    <script src="../../assets/js/core/bootstrap-material-design.min.js"></script>
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
     <script src="https://unpkg.com/default-passive-events"></script>
     <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Chartist JS -->
-    <script src="../../assets/js/plugins/chartist.min.js"></script>
+    <script src="../assets/js/plugins/chartist.min.js"></script>
     <!--  Notifications Plugin    -->
-    <script src="../../assets/js/plugins/bootstrap-notify.js"></script>
+    <script src="../assets/js/plugins/bootstrap-notify.js"></script>
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="../../assets/js/material-dashboard.js?v=2.1.0"></script>
+    <script src="../assets/js/material-dashboard.js?v=2.1.0"></script>
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-    <script src="../../assets/demo/demo.js"></script>
-    <script src="../../assets/js/script.js"></script>
+    <script src="../assets/demo/demo.js"></script>
+    <script src="../assets/js/script.js"></script>
 
     <!-- Page level plugin JavaScript-->
     <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
@@ -116,25 +86,6 @@ include("../../partials/verify-session.php");
     <script>
       $('.sidebar div.sidebar-wrapper ul.nav li:first').removeClass('active')
       $('#text-item').addClass('active')
-      $(window).resize(() => {
-        borderResize()
-      })
-
-      borderResize()
-
-      function borderResize() {
-        if ($(window).width() < 401) {
-          $('#border-item').removeClass('border-right')
-          $('#border-item').addClass('border-bottom')
-          $('#border-item').css('padding-bottom', '20px')
-          $('#border-item-2').css('padding-top', '20px')
-        } else {
-          $('#border-item').addClass('border-right')
-          $('#border-item').removeClass('border-bottom')
-          $('#border-item').css('padding-bottom', '0')
-          $('#border-item-2').css('padding-top', '0')
-        }
-      }
     </script>
 </body>
 

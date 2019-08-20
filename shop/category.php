@@ -139,11 +139,11 @@
     <div class="container h-100" style="background: url(<?= $category->getImage() ?>) no-repeat center;" id="container-image">
       <div class="blog-banner">
         <div class="text-center">
-          <h1>Productos</h1>
+          <h1><?= $category->getDescription() ?></h1>
         </div>
-        <div class="text-center">
-          <?= $category->getDescription() ?>
-        </div>
+        <!-- <div class="text-center">
+          
+        </div> -->
       </div>
     </div>
   </section>
