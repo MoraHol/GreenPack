@@ -267,10 +267,17 @@ md = {
       })
 
       $.get('/admin/services/monthly_sales.php', (seriesMonthlySales, status) => {
+
         let data = {
           labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
           series: [seriesMonthlySales]
         }
+        if ($(window).width() <= 400) {
+          for (let index = 0; index < data.labels.length; index++) {
+            data.labels[index] = data.labels[index].substring(0, 1)
+          }
+        }
+
         let max = Math.max.apply(null, seriesMonthlySales) + 3
         let options = {
           high: max,
