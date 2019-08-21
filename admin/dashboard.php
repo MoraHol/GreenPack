@@ -85,6 +85,16 @@ if ($admin->getRole() == 1) {
                 </div>
               </div>
             </div>
+            <div class="col-xl-4 col-lg-12">
+              <div class="card card-chart">
+                <div class="card-header card-header-secundary">
+                  <div class="ct-chart" id="salesMonthly"></div>
+                </div>
+                <div class="card-body">
+                  <h4 class="card-title">Cotizaciones Mensuales</h4>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
