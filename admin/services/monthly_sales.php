@@ -8,15 +8,20 @@ $db = new DBOperator($_ENV["db_host"], $_ENV["db_user"], $_ENV["db_name"], $_ENV
 $monthlySalesDB = $db->consult($query, "yes");
 $months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 $monthlySales = [];
-foreach ($months as  $month) {
-  $n = 0;
-  foreach ($monthlySalesDB as $monthlySaleDB) {
-    if ($monthlySaleDB["month"] == $month) {
-      $n = (int) $monthlySaleDB["n_quotations"];
-      break;
+if ($monthlySalesDB !== false) {
+
+  foreach ($months as  $month) {
+    $n = 0;
+    foreach ($monthlySalesDB as $monthlySaleDB) {
+      if ($monthlySaleDB["month"] == $month) {
+        $n = (int) $monthlySaleDB["n_quotations"];
+        break;
+      }
     }
+    array_push($monthlySales, $n);
   }
-  array_push($monthlySales, $n);
+} else { 
+  $monthlySales = [0,0,0,0,0,0,0,0,0,0,0,0];
 }
 $db->close();
 header('Content-Type: application/json');
