@@ -266,6 +266,21 @@ md = {
         }
       })
 
+      $.get('/admin/services/monthly_sales.php', (seriesMonthlySales, status) => {
+        let data = {
+          labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+          series: [seriesMonthlySales]
+        }
+        let max = Math.max.apply(null, seriesMonthlySales) + 3
+        let options = {
+          high: max,
+          low: 0
+        }
+        var monthlySalesChart = new Chartist.Bar('#salesMonthlyChart', data, options)
+
+        md.startAnimationForBarChart(monthlySalesChart)
+      })
+
 
       /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
 

@@ -51,7 +51,7 @@ if ($admin->getRole() == 1) {
         <div class="container-fluid">
           <!-- your content here -->
           <div class="row">
-            <div class="col-xl-4 col-lg-12">
+            <div class="col-xl-6 col-lg-12 col-sm-4">
               <div class="card card-chart">
                 <div class="card-header card-header-success">
                   <div class="ct-chart" id="dailySalesChart"></div>
@@ -66,7 +66,7 @@ if ($admin->getRole() == 1) {
                 </div>
               </div>
             </div>
-            <div class="col-xl-4 col-lg-12">
+            <div class="col-xl-6 col-lg-12 col-sm-4">
               <div class="card card-chart">
                 <div class="card-header card-header-secundary">
                   <div class="ct-chart" id="completedTasksChart"></div>
@@ -85,10 +85,13 @@ if ($admin->getRole() == 1) {
                 </div>
               </div>
             </div>
-            <div class="col-xl-4 col-lg-12">
+            
+          </div>
+          <div class="row">
+          <div class="col-xl-6 col-lg-12 col-sm-4">
               <div class="card card-chart">
-                <div class="card-header card-header-secundary">
-                  <div class="ct-chart" id="salesMonthly"></div>
+                <div class="card-header card-header-primary">
+                  <div class="ct-chart" id="salesMonthlyChart"></div>
                 </div>
                 <div class="card-body">
                   <h4 class="card-title">Cotizaciones Mensuales</h4>
