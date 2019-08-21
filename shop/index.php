@@ -90,39 +90,41 @@
       <div></div>
     </div>
   </div>
-
-  <div class="hl-module-full hl-module-full-wide hl-atf-module-js" id="rtm_list1">
-    <div class="hl-banner hl-color-block-banner" style="background-color:#c5e5fb;">
-      <div class="hl-color-block-banner__content">
-        <div class="hl-banner__text hl-color-block-banner__text">
-          <h2><a style="color:#82187c;" href="#" _sp="p2481888.m4518.l8658.c1" data-click="{&quot;eventFamily&quot;:&quot;HOMEPAGE&quot;,&quot;eventAction&quot;:&quot;ACTN&quot;,&quot;actionKind&quot;:&quot;NAVSRC&quot;,&quot;operationId&quot;:&quot;2481888&quot;,&quot;flushImmediately&quot;:false,&quot;eventProperty&quot;:{&quot;moduledtl&quot;:&quot;mi:4518|iid:0|li:8658|luid:1|c:1&quot;,&quot;ammiid&quot;:&quot;5340024321058908927&quot;,&quot;amdata&quot;:&quot;guid=1c1ad45a16c0aad6fb45a2b2fffd490f|ul=es-CO|bw=LARGE|tdt=iid:5340024321058908927,clkid:5340024321058908926|plmt=(cid:13082 gbh:com.ebay.marketing.rtm.components.segment.gethu.models.Segment@b75 iid:5340024321058908927 mid:18247 pid:100001 sid:-1 tid:a17058f8-ed20-4d3d-94d6-26803a87be2a ttype:HOME_PAGE_BANNER_VELOCITY vid:b7eb62ec90df1d30c3c7113ae7b81bc51413bb0d13f343866b799d2e9b96a150)|uc=46|m=18247|bs=46|12=0&quot;,&quot;parentrq&quot;:&quot;a1b93ceb16c0a4b7fcbc92eafff08bd7&quot;,&quot;pageci&quot;:&quot;67658e43-c13f-11e9-873c-74dbd180d397&quot;,&quot;ampid&quot;:&quot;MADRONA&quot;}}" aria-label="Compra ya">
-              <div style="color:#82187c;" class="ebayui-ellipsis-3"><span style="color:#82187c;">Conéctate a la última tecnología</span></div>
-            </a></h2>
-          <div class="hl-banner__text-subheading">
-            <div style="color:#82187c;" class="ebayui-ellipsis-2"><span style="color:#82187c;">Smartphones, audífonos, drones, cámaras, encuéntralos aquí.</span></div>
+  <div id="banner">
+    <div class="hl-module-full hl-module-full-wide hl-atf-module-js" id="rtm_list1">
+      <div class="hl-banner hl-color-block-banner" style="background-color:#c5e5fb;">
+        <div class="hl-color-block-banner__content">
+          <div class="hl-banner__text hl-color-block-banner__text">
+            <h2><a style="color:#82187c;" href="#" _sp="p2481888.m4518.l8658.c1" data-click="{&quot;eventFamily&quot;:&quot;HOMEPAGE&quot;,&quot;eventAction&quot;:&quot;ACTN&quot;,&quot;actionKind&quot;:&quot;NAVSRC&quot;,&quot;operationId&quot;:&quot;2481888&quot;,&quot;flushImmediately&quot;:false,&quot;eventProperty&quot;:{&quot;moduledtl&quot;:&quot;mi:4518|iid:0|li:8658|luid:1|c:1&quot;,&quot;ammiid&quot;:&quot;5340024321058908927&quot;,&quot;amdata&quot;:&quot;guid=1c1ad45a16c0aad6fb45a2b2fffd490f|ul=es-CO|bw=LARGE|tdt=iid:5340024321058908927,clkid:5340024321058908926|plmt=(cid:13082 gbh:com.ebay.marketing.rtm.components.segment.gethu.models.Segment@b75 iid:5340024321058908927 mid:18247 pid:100001 sid:-1 tid:a17058f8-ed20-4d3d-94d6-26803a87be2a ttype:HOME_PAGE_BANNER_VELOCITY vid:b7eb62ec90df1d30c3c7113ae7b81bc51413bb0d13f343866b799d2e9b96a150)|uc=46|m=18247|bs=46|12=0&quot;,&quot;parentrq&quot;:&quot;a1b93ceb16c0a4b7fcbc92eafff08bd7&quot;,&quot;pageci&quot;:&quot;67658e43-c13f-11e9-873c-74dbd180d397&quot;,&quot;ampid&quot;:&quot;MADRONA&quot;}}" aria-label="Compra ya">
+                <div style="color:#82187c;" class="ebayui-ellipsis-3"><span style="color:#82187c;">Conéctate a la última tecnología</span></div>
+              </a></h2>
+            <div class="hl-banner__text-subheading">
+              <div style="color:#82187c;" class="ebayui-ellipsis-2"><span style="color:#82187c;">Smartphones, audífonos, drones, cámaras, encuéntralos aquí.</span></div>
+            </div>
+            <div class="hl-cta hl-banner__cta ebayui-ellipsis" onfocusin="this.querySelector('.hl-cta__default-js').onmouseover()" onfocusout="this.querySelector('.hl-cta__default-js').onmouseout()"><a href="#" _sp="p2481888.m4518.l8658.c1" data-click="{&quot;eventFamily&quot;:&quot;HOMEPAGE&quot;,&quot;eventAction&quot;:&quot;ACTN&quot;,&quot;actionKind&quot;:&quot;NAVSRC&quot;,&quot;operationId&quot;:&quot;2481888&quot;,&quot;flushImmediately&quot;:false,&quot;eventProperty&quot;:{&quot;moduledtl&quot;:&quot;mi:4518|iid:0|li:8658|luid:1|c:1&quot;,&quot;ammiid&quot;:&quot;5340024321058908927&quot;,&quot;amdata&quot;:&quot;guid=1c1ad45a16c0aad6fb45a2b2fffd490f|ul=es-CO|bw=LARGE|tdt=iid:5340024321058908927,clkid:5340024321058908926|plmt=(cid:13082 gbh:com.ebay.marketing.rtm.components.segment.gethu.models.Segment@b75 iid:5340024321058908927 mid:18247 pid:100001 sid:-1 tid:a17058f8-ed20-4d3d-94d6-26803a87be2a ttype:HOME_PAGE_BANNER_VELOCITY vid:b7eb62ec90df1d30c3c7113ae7b81bc51413bb0d13f343866b799d2e9b96a150)|uc=46|m=18247|bs=46|12=0&quot;,&quot;parentrq&quot;:&quot;a1b93ceb16c0a4b7fcbc92eafff08bd7&quot;,&quot;pageci&quot;:&quot;67658e43-c13f-11e9-873c-74dbd180d397&quot;,&quot;ampid&quot;:&quot;MADRONA&quot;}}">
+                <div class="hl-cta__text-only" style="color:#82187c;">Compra ya
+                  <svg class="icon icon--arrow-right-bold hl-cta__arrow" style="fill:currentColor;" focusable="false" data-ebayui="" aria-hidden="true">
+                    <use xlink:href="#icon-arrow-right-bold"></use>
+                  </svg>
+                </div>
+                <div class="hl-cta__default hl-cta__default-js hl-banner__cta ebayui-ellipsis" style="color: rgb(130, 24, 124); border-color: rgb(130, 24, 124); box-shadow: rgb(130, 24, 124) 0px 0px 0px 0px inset;" onmouseover="this.style.color='#c5e5fb'; this.style['border-color']='#82187c'; this.style['box-shadow']='#82187c 0 0px 0px 70px inset'; this.querySelectorAll('.hl-cta__arrow').item(0).style['stroke']='#c5e5fb'" onmouseout="this.style.color='#82187c'; this.style['border-color']='#82187c'; this.style['box-shadow']='#82187c 0 0px 0px 0px inset'; this.querySelectorAll('.hl-cta__arrow').item(0).style['stroke']='#82187c'">Compra ya <svg class="icon icon--arrow-right-bold hl-cta__arrow" style="fill: currentcolor; stroke: rgb(130, 24, 124);" focusable="false" data-ebayui="" aria-hidden="true">
+                    <use xlink:href="#icon-arrow-right-bold"></use>
+                  </svg>
+                </div>
+              </a>
+            </div>
           </div>
-          <div class="hl-cta hl-banner__cta ebayui-ellipsis" onfocusin="this.querySelector('.hl-cta__default-js').onmouseover()" onfocusout="this.querySelector('.hl-cta__default-js').onmouseout()"><a href="#" _sp="p2481888.m4518.l8658.c1" data-click="{&quot;eventFamily&quot;:&quot;HOMEPAGE&quot;,&quot;eventAction&quot;:&quot;ACTN&quot;,&quot;actionKind&quot;:&quot;NAVSRC&quot;,&quot;operationId&quot;:&quot;2481888&quot;,&quot;flushImmediately&quot;:false,&quot;eventProperty&quot;:{&quot;moduledtl&quot;:&quot;mi:4518|iid:0|li:8658|luid:1|c:1&quot;,&quot;ammiid&quot;:&quot;5340024321058908927&quot;,&quot;amdata&quot;:&quot;guid=1c1ad45a16c0aad6fb45a2b2fffd490f|ul=es-CO|bw=LARGE|tdt=iid:5340024321058908927,clkid:5340024321058908926|plmt=(cid:13082 gbh:com.ebay.marketing.rtm.components.segment.gethu.models.Segment@b75 iid:5340024321058908927 mid:18247 pid:100001 sid:-1 tid:a17058f8-ed20-4d3d-94d6-26803a87be2a ttype:HOME_PAGE_BANNER_VELOCITY vid:b7eb62ec90df1d30c3c7113ae7b81bc51413bb0d13f343866b799d2e9b96a150)|uc=46|m=18247|bs=46|12=0&quot;,&quot;parentrq&quot;:&quot;a1b93ceb16c0a4b7fcbc92eafff08bd7&quot;,&quot;pageci&quot;:&quot;67658e43-c13f-11e9-873c-74dbd180d397&quot;,&quot;ampid&quot;:&quot;MADRONA&quot;}}">
-              <div class="hl-cta__text-only" style="color:#82187c;">Compra ya
-                <svg class="icon icon--arrow-right-bold hl-cta__arrow" style="fill:currentColor;" focusable="false" data-ebayui="" aria-hidden="true">
-                  <use xlink:href="#icon-arrow-right-bold"></use>
-                </svg>
-              </div>
-              <div class="hl-cta__default hl-cta__default-js hl-banner__cta ebayui-ellipsis" style="color: rgb(130, 24, 124); border-color: rgb(130, 24, 124); box-shadow: rgb(130, 24, 124) 0px 0px 0px 0px inset;" onmouseover="this.style.color='#c5e5fb'; this.style['border-color']='#82187c'; this.style['box-shadow']='#82187c 0 0px 0px 70px inset'; this.querySelectorAll('.hl-cta__arrow').item(0).style['stroke']='#c5e5fb'" onmouseout="this.style.color='#82187c'; this.style['border-color']='#82187c'; this.style['box-shadow']='#82187c 0 0px 0px 0px inset'; this.querySelectorAll('.hl-cta__arrow').item(0).style['stroke']='#82187c'">Compra ya <svg class="icon icon--arrow-right-bold hl-cta__arrow" style="fill: currentcolor; stroke: rgb(130, 24, 124);" focusable="false" data-ebayui="" aria-hidden="true">
-                  <use xlink:href="#icon-arrow-right-bold"></use>
-                </svg>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div><a class="hl-color-block-banner__image-link focus-inset" href="#" _sp="p2481888.m4518.l8658.c1" data-click="{&quot;eventFamily&quot;:&quot;HOMEPAGE&quot;,&quot;eventAction&quot;:&quot;ACTN&quot;,&quot;actionKind&quot;:&quot;NAVSRC&quot;,&quot;operationId&quot;:&quot;2481888&quot;,&quot;flushImmediately&quot;:false,&quot;eventProperty&quot;:{&quot;moduledtl&quot;:&quot;mi:4518|iid:0|li:8658|luid:1|c:1&quot;,&quot;ammiid&quot;:&quot;5340024321058908927&quot;,&quot;amdata&quot;:&quot;guid=1c1ad45a16c0aad6fb45a2b2fffd490f|ul=es-CO|bw=LARGE|tdt=iid:5340024321058908927,clkid:5340024321058908926|plmt=(cid:13082 gbh:com.ebay.marketing.rtm.components.segment.gethu.models.Segment@b75 iid:5340024321058908927 mid:18247 pid:100001 sid:-1 tid:a17058f8-ed20-4d3d-94d6-26803a87be2a ttype:HOME_PAGE_BANNER_VELOCITY vid:b7eb62ec90df1d30c3c7113ae7b81bc51413bb0d13f343866b799d2e9b96a150)|uc=46|m=18247|bs=46|12=0&quot;,&quot;parentrq&quot;:&quot;a1b93ceb16c0a4b7fcbc92eafff08bd7&quot;,&quot;pageci&quot;:&quot;67658e43-c13f-11e9-873c-74dbd180d397&quot;,&quot;ampid&quot;:&quot;MADRONA&quot;}}">
-        <div class="hl-image hl-image-js js-only hl-color-block-banner__image hl-image__fill" data-size="920" style="background-image: url(&quot;https://i.ebayimg.com/images/g/ER0AAOSwTLpdUXH6/s-l960.webp&quot;);">
-          <div class="hl-image__background" style="background-color: rgb(197, 229, 251); opacity: 0;"></div><img src="https://i.ebayimg.com/images/g/ER0AAOSwTLpdUXH6/s-l960.webp" data-load-immediately="" alt="Compra ya - Conéctate a la última tecnología" data-load-time="1566081368253">
-        </div><noscript>
-          <div class="hl-image hl-color-block-banner__image" style="background-image: url('https://i.ebayimg.com/images/g/ER0AAOSwTLpdUXH6/s-l960.webp')"><img src="https://i.ebayimg.com/images/g/ER0AAOSwTLpdUXH6/s-l960.webp" alt="Compra ya - Conéctate a la última tecnología"></div>
-        </noscript>
-      </a>
+        </div><a class="hl-color-block-banner__image-link focus-inset" href="#" _sp="p2481888.m4518.l8658.c1" data-click="{&quot;eventFamily&quot;:&quot;HOMEPAGE&quot;,&quot;eventAction&quot;:&quot;ACTN&quot;,&quot;actionKind&quot;:&quot;NAVSRC&quot;,&quot;operationId&quot;:&quot;2481888&quot;,&quot;flushImmediately&quot;:false,&quot;eventProperty&quot;:{&quot;moduledtl&quot;:&quot;mi:4518|iid:0|li:8658|luid:1|c:1&quot;,&quot;ammiid&quot;:&quot;5340024321058908927&quot;,&quot;amdata&quot;:&quot;guid=1c1ad45a16c0aad6fb45a2b2fffd490f|ul=es-CO|bw=LARGE|tdt=iid:5340024321058908927,clkid:5340024321058908926|plmt=(cid:13082 gbh:com.ebay.marketing.rtm.components.segment.gethu.models.Segment@b75 iid:5340024321058908927 mid:18247 pid:100001 sid:-1 tid:a17058f8-ed20-4d3d-94d6-26803a87be2a ttype:HOME_PAGE_BANNER_VELOCITY vid:b7eb62ec90df1d30c3c7113ae7b81bc51413bb0d13f343866b799d2e9b96a150)|uc=46|m=18247|bs=46|12=0&quot;,&quot;parentrq&quot;:&quot;a1b93ceb16c0a4b7fcbc92eafff08bd7&quot;,&quot;pageci&quot;:&quot;67658e43-c13f-11e9-873c-74dbd180d397&quot;,&quot;ampid&quot;:&quot;MADRONA&quot;}}">
+          <div class="hl-image hl-image-js js-only hl-color-block-banner__image hl-image__fill" data-size="920" style="background-image: url(&quot;https://i.ebayimg.com/images/g/ER0AAOSwTLpdUXH6/s-l960.webp&quot;);">
+            <div class="hl-image__background" style="background-color: rgb(197, 229, 251); opacity: 0;"></div><img src="https://i.ebayimg.com/images/g/ER0AAOSwTLpdUXH6/s-l960.webp" data-load-immediately="" alt="Compra ya - Conéctate a la última tecnología" data-load-time="1566081368253">
+          </div><noscript>
+            <div class="hl-image hl-color-block-banner__image" style="background-image: url('https://i.ebayimg.com/images/g/ER0AAOSwTLpdUXH6/s-l960.webp')"><img src="https://i.ebayimg.com/images/g/ER0AAOSwTLpdUXH6/s-l960.webp" alt="Compra ya - Conéctate a la última tecnología"></div>
+          </noscript>
+        </a>
+      </div>
     </div>
   </div>
+
 
   <div class="container">
     <div class="home-theme-container home-theme-promotion">
@@ -268,6 +270,42 @@
   <script src="/js/spinner.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="/js/bootstrap.min.js"></script>
+  <script>
+    $.get('/admin/texts/shop/api/get_banner.php', (banner, status) => {
+      $('#banner').html(`<div class="hl-module-full hl-module-full-wide hl-atf-module-js" id="rtm_list1">
+      <div class="hl-banner hl-color-block-banner" style="background-color:${banner.backgroundColor};">
+        <div class="hl-color-block-banner__content">
+          <div class="hl-banner__text hl-color-block-banner__text">
+            <h2><a style="color:${banner.color};" href="#" _sp="p2481888.m4518.l8658.c1" data-click="{&quot;eventFamily&quot;:&quot;HOMEPAGE&quot;,&quot;eventAction&quot;:&quot;ACTN&quot;,&quot;actionKind&quot;:&quot;NAVSRC&quot;,&quot;operationId&quot;:&quot;2481888&quot;,&quot;flushImmediately&quot;:false,&quot;eventProperty&quot;:{&quot;moduledtl&quot;:&quot;mi:4518|iid:0|li:8658|luid:1|c:1&quot;,&quot;ammiid&quot;:&quot;5340024321058908927&quot;,&quot;amdata&quot;:&quot;guid=1c1ad45a16c0aad6fb45a2b2fffd490f|ul=es-CO|bw=LARGE|tdt=iid:5340024321058908927,clkid:5340024321058908926|plmt=(cid:13082 gbh:com.ebay.marketing.rtm.components.segment.gethu.models.Segment@b75 iid:5340024321058908927 mid:18247 pid:100001 sid:-1 tid:a17058f8-ed20-4d3d-94d6-26803a87be2a ttype:HOME_PAGE_BANNER_VELOCITY vid:b7eb62ec90df1d30c3c7113ae7b81bc51413bb0d13f343866b799d2e9b96a150)|uc=46|m=18247|bs=46|12=0&quot;,&quot;parentrq&quot;:&quot;a1b93ceb16c0a4b7fcbc92eafff08bd7&quot;,&quot;pageci&quot;:&quot;67658e43-c13f-11e9-873c-74dbd180d397&quot;,&quot;ampid&quot;:&quot;MADRONA&quot;}}" aria-label="Compra ya">
+                <div style="color:${banner.color};" class="ebayui-ellipsis-3"><span style="color:${banner.color};">${banner.title}</span></div>
+              </a></h2>
+            <div class="hl-banner__text-subheading">
+              <div style="color:${banner.color};" class="ebayui-ellipsis-2"><span style="color:${banner.color};">${banner.subtitle}</span></div>
+            </div>
+            <div class="hl-cta hl-banner__cta ebayui-ellipsis" onfocusin="this.querySelector('.hl-cta__default-js').onmouseover()" onfocusout="this.querySelector('.hl-cta__default-js').onmouseout()"><a href="#" _sp="p2481888.m4518.l8658.c1" data-click="{&quot;eventFamily&quot;:&quot;HOMEPAGE&quot;,&quot;eventAction&quot;:&quot;ACTN&quot;,&quot;actionKind&quot;:&quot;NAVSRC&quot;,&quot;operationId&quot;:&quot;2481888&quot;,&quot;flushImmediately&quot;:false,&quot;eventProperty&quot;:{&quot;moduledtl&quot;:&quot;mi:4518|iid:0|li:8658|luid:1|c:1&quot;,&quot;ammiid&quot;:&quot;5340024321058908927&quot;,&quot;amdata&quot;:&quot;guid=1c1ad45a16c0aad6fb45a2b2fffd490f|ul=es-CO|bw=LARGE|tdt=iid:5340024321058908927,clkid:5340024321058908926|plmt=(cid:13082 gbh:com.ebay.marketing.rtm.components.segment.gethu.models.Segment@b75 iid:5340024321058908927 mid:18247 pid:100001 sid:-1 tid:a17058f8-ed20-4d3d-94d6-26803a87be2a ttype:HOME_PAGE_BANNER_VELOCITY vid:b7eb62ec90df1d30c3c7113ae7b81bc51413bb0d13f343866b799d2e9b96a150)|uc=46|m=18247|bs=46|12=0&quot;,&quot;parentrq&quot;:&quot;a1b93ceb16c0a4b7fcbc92eafff08bd7&quot;,&quot;pageci&quot;:&quot;67658e43-c13f-11e9-873c-74dbd180d397&quot;,&quot;ampid&quot;:&quot;MADRONA&quot;}}">
+                <div class="hl-cta__text-only" style="color:${banner.color};">Compra ya
+                  <svg class="icon icon--arrow-right-bold hl-cta__arrow" style="fill:currentColor;" focusable="false" data-ebayui="" aria-hidden="true">
+                    <use xlink:href="#icon-arrow-right-bold"></use>
+                  </svg>
+                </div>
+                <div class="hl-cta__default hl-cta__default-js hl-banner__cta ebayui-ellipsis" style="color: rgb(130, 24, 124); border-color: rgb(130, 24, 124); box-shadow: rgb(130, 24, 124) 0px 0px 0px 0px inset;" onmouseover="this.style.color='#c5e5fb'; this.style['border-color']='#82187c'; this.style['box-shadow']='#82187c 0 0px 0px 70px inset'; this.querySelectorAll('.hl-cta__arrow').item(0).style['stroke']='#c5e5fb'" onmouseout="this.style.color='#82187c'; this.style['border-color']='#82187c'; this.style['box-shadow']='#82187c 0 0px 0px 0px inset'; this.querySelectorAll('.hl-cta__arrow').item(0).style['stroke']='#82187c'">Compra ya <svg class="icon icon--arrow-right-bold hl-cta__arrow" style="fill: currentcolor; stroke: rgb(130, 24, 124);" focusable="false" data-ebayui="" aria-hidden="true">
+                    <use xlink:href="#icon-arrow-right-bold"></use>
+                  </svg>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div><a class="hl-color-block-banner__image-link focus-inset" href="#" _sp="p2481888.m4518.l8658.c1" data-click="{&quot;eventFamily&quot;:&quot;HOMEPAGE&quot;,&quot;eventAction&quot;:&quot;ACTN&quot;,&quot;actionKind&quot;:&quot;NAVSRC&quot;,&quot;operationId&quot;:&quot;2481888&quot;,&quot;flushImmediately&quot;:false,&quot;eventProperty&quot;:{&quot;moduledtl&quot;:&quot;mi:4518|iid:0|li:8658|luid:1|c:1&quot;,&quot;ammiid&quot;:&quot;5340024321058908927&quot;,&quot;amdata&quot;:&quot;guid=1c1ad45a16c0aad6fb45a2b2fffd490f|ul=es-CO|bw=LARGE|tdt=iid:5340024321058908927,clkid:5340024321058908926|plmt=(cid:13082 gbh:com.ebay.marketing.rtm.components.segment.gethu.models.Segment@b75 iid:5340024321058908927 mid:18247 pid:100001 sid:-1 tid:a17058f8-ed20-4d3d-94d6-26803a87be2a ttype:HOME_PAGE_BANNER_VELOCITY vid:b7eb62ec90df1d30c3c7113ae7b81bc51413bb0d13f343866b799d2e9b96a150)|uc=46|m=18247|bs=46|12=0&quot;,&quot;parentrq&quot;:&quot;a1b93ceb16c0a4b7fcbc92eafff08bd7&quot;,&quot;pageci&quot;:&quot;67658e43-c13f-11e9-873c-74dbd180d397&quot;,&quot;ampid&quot;:&quot;MADRONA&quot;}}">
+          <div class="hl-image hl-image-js js-only hl-color-block-banner__image hl-image__fill" data-size="920" style="background-image: url(&quot;${banner.image}&quot;);">
+            <div class="hl-image__background" style="background-color: rgb(197, 229, 251); opacity: 0;"></div><img src="${banner.image}" data-load-immediately="" alt="Compra ya - Conéctate a la última tecnología" data-load-time="1566081368253">
+          </div><noscript>
+            <div class="hl-image hl-color-block-banner__image" style="background-image: url('${banner.image}')"><img src="${banner.image}" alt="Compra ya - Conéctate a la última tecnología"></div>
+          </noscript>
+        </a>
+      </div>
+    </div>`)
+    })
+  </script>
 </body>
 
 </html>
