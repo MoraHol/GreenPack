@@ -26,7 +26,7 @@ $quotations = $quotationDao->findAssignedTo($admin->getId());
   <!-- Page level plugin CSS-->
   <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/css/spinner.css">
-
+  <link href="https://cdn.jsdelivr.net/npm/froala-editor@3.0.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type='text/css' />
 </head>
 
 <body class="white-edition">
@@ -68,16 +68,16 @@ $quotations = $quotationDao->findAssignedTo($admin->getId());
                   </thead>
                   <tbody>
                     <?php foreach ($quotations as $quotation) { ?> <tr>
-                        <td><?php echo $quotation->getNameClient(); ?></td>
-                        <td><?php echo $quotation->getLastNameClient(); ?></td>
-                        <td class="text-center"><?php echo $quotation->getCompany() == "" ? "N/A" : $quotation->getCompany(); ?> </td>
-                        <td class="text-center money"><?php echo $quotation->calculateTotal(); ?></td>
-                        <td class="text-center"><?= date("d-m-Y", $quotation->getCreatedAt()); ?></td>
-                        <td class="text-center"><a class="text-center" href="javascript:viewPdf(`<?= $quotation->getId(); ?>`)" title="Ver Aqui"><i class="material-icons">remove_red_eye</i> <a href="#" onclick="openWindow(`<?= $quotation->getId(); ?>`)" title="Ver en nueva Ventana"><i class="material-icons">featured_video</i></a></td>
-                        <td class="text-center"><a href="edit-quotation.php?id=<?= $quotation->getId() ?>"><i class="material-icons">create</i></a></td>
-                        <td class="text-center"><a class="text-center" target="_blank" title="descargar" href="/services/download-quotation.php?id=<?php echo $quotation->getId(); ?>"><i class="material-icons">cloud_download</a></td>
-                        <td class="text-center"><a class="text-center" href="javascript:sentEmail(`<?php echo $quotation->getId(); ?>`)"><i class="material-icons">email</a></td>
-                      </tr>
+                      <td><?php echo $quotation->getNameClient(); ?></td>
+                      <td><?php echo $quotation->getLastNameClient(); ?></td>
+                      <td class="text-center"><?php echo $quotation->getCompany() == "" ? "N/A" : $quotation->getCompany(); ?> </td>
+                      <td class="text-center money"><?php echo $quotation->calculateTotal(); ?></td>
+                      <td class="text-center"><?= date("d-m-Y", $quotation->getCreatedAt()); ?></td>
+                      <td class="text-center"><a class="text-center" href="javascript:viewPdf(`<?= $quotation->getId(); ?>`)" title="Ver Aqui"><i class="material-icons">remove_red_eye</i> <a href="#" onclick="openWindow(`<?= $quotation->getId(); ?>`)" title="Ver en nueva Ventana"><i class="material-icons">featured_video</i></a></td>
+                      <td class="text-center"><a href="edit-quotation.php?id=<?= $quotation->getId() ?>"><i class="material-icons">create</i></a></td>
+                      <td class="text-center"><a class="text-center" target="_blank" title="descargar" href="/services/download-quotation.php?id=<?php echo $quotation->getId(); ?>"><i class="material-icons">cloud_download</a></td>
+                      <td class="text-center"><a class="text-center" href="javascript:sentEmail(`<?php echo $quotation->getId(); ?>`)"><i class="material-icons">email</a></td>
+                    </tr>
                     <?php } ?>
                   </tbody>
                 </table>
@@ -91,6 +91,27 @@ $quotations = $quotationDao->findAssignedTo($admin->getId());
       </div>
     </div>
 
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalContentEmail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Cuerpo del Mensaje</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div id="content"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" onclick="send()" id="btn-send-email" class="btn btn-primary">Enviar</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
     <!--   Core JS Files   -->
@@ -122,6 +143,8 @@ $quotations = $quotationDao->findAssignedTo($admin->getId());
     <script src="/vendor/jquery.formatCurrency-1.4.0.min.js"></script>
     <script src="/vendor/jquery.formatCurrency.all.js"></script>
     <script src="/js/spinner.js"></script>
+    <script src="/vendor/froala_editor.pkgd.min.js"></script>
+    <script src="/js/es.js"></script>
     <script>
       // Call the dataTables jQuery plugin
       $(document).ready(function() {
@@ -178,6 +201,52 @@ $quotations = $quotationDao->findAssignedTo($admin->getId());
           $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
         }
       })
+
+      var editor = new FroalaEditor('#content', {
+        language: 'es',
+        height: 300,
+        imageUploadParam: 'photo',
+        imageUploadURL: '/admin/upload.php',
+        imageUploadMethod: 'POST',
+        videoUploadParam: 'video',
+        videoUploadURL: 'upload-video.php',
+        imageUploadMethod: 'POST',
+        fileUploadParam: 'file',
+        fileUploadURL: '/admin/upload-file.php',
+        fileUploadMethod: 'POST',
+        events: {
+          'image.removed': function($img) {
+            img = $img[0]
+            $.post('/admin/image_delete.php', {
+              src: $img.attr('src')
+            }, (data, status) => {
+              if (status != "success") {
+                alert("error")
+              }
+            })
+          },
+          'file.removed': function($file) {
+            file = $file[0]
+            $.post('/admin/file_delete.php', {
+              src: $file.attr('src')
+            }, (data, status) => {
+              if (status != "success") {
+                alert("error")
+              }
+            })
+          },
+          'keyup': function(keyupEvent) {
+            if (document.domain != 'localhost') {
+              $('.fr-wrapper>div:first-child').css('visibility', 'hidden')
+            }
+          }
+        }
+      }, () => {
+        editor.html.set(`<html><body><p>Nos permitimos enviarle su cotizacion</p><p>cotizacion generada</p></body></html>`)
+        if (document.domain != 'localhost') {
+          $('.fr-wrapper>div:first-child').css('visibility', 'hidden')
+        }
+      })
     </script>
     <script>
       function viewPdf(id) {
@@ -197,6 +266,11 @@ $quotations = $quotationDao->findAssignedTo($admin->getId());
       }
 
       function sentEmail(id) {
+        $('#btn-send-email').attr('data-id-quotation', id)
+        $('#modalContentEmail').modal()
+      }
+
+      function send() {
         $.notify({
           message: 'Enviando Correo',
           title: 'Procesando',
@@ -204,8 +278,10 @@ $quotations = $quotationDao->findAssignedTo($admin->getId());
         }, {
           type: 'info'
         })
+        $('#modalContentEmail').modal('hide')
         $.post('api/sent_email.php', {
-          id: id
+          id: $('#btn-send-email').attr('data-id-quotation'),
+          content: editor.html.get()
         }, (data, status, xhr) => {
           if (status == 'success' && xhr.readyState == 4) {
             location.href = '#no-solved'

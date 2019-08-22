@@ -73,7 +73,7 @@
 
     .blog-banner div.text-center:first {
       margin: auto;
-      width: 45%;
+      width: 50%;
       background: #333333c2;
       color: #fff !important;
       height: auto;
@@ -84,7 +84,7 @@
 
     .blog-banner div.text-center {
       margin: auto;
-      width: 45%;
+      width: 50%;
       background: #333333c2;
       color: #fff !important;
       height: auto;
