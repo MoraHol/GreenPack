@@ -27,7 +27,7 @@ $pdf = $dompdf->output();
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Cotizacion No. <?= $_GET["id"] ?></title>
 </head>
-<?php header("Content-type:application/pdf");
+<?php header("Content-Type: application/pdf");
 echo $pdf; ?>
 
 <body>
