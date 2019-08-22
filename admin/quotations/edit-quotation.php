@@ -25,6 +25,9 @@ $quotation = $quotationDao->findById($_GET["id"]);
   <link rel="stylesheet" href="/css/all.min.css">
   <!-- Page level plugin CSS-->
   <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/modal-confirm.css">
+  <!-- Include Editor style. -->
+  <link href="https://cdn.jsdelivr.net/npm/froala-editor@3.0.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type='text/css' />
 </head>
 
 <body class="white-edition">
@@ -166,7 +169,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
               <div class="col text-center"><a class="btn btn-danger btn-lg" href="/admin/quotations/#no-solved"><i class="material-icons">arrow_back</i> Regresar</a></div>
               <div class="col text-center"><button onclick="update()" class="btn btn-info btn-lg"><i class="material-icons md-48">update</i> Actualizar</button></div>
               <div class="col text-center"><button onclick="recalculate()" class="btn btn-info btn-lg"><i class="material-icons">trending_up</i> Calcular Precios</button></div>
-              <div class="col text-center"><button onclick="send()" class="btn btn-primary btn-lg"><i class="material-icons">email</i> Enviar Cotización</button></div>
+              <div class="col text-center"><button onclick="$('#modalContentEmail').modal()" class="btn btn-primary btn-lg"><i class="material-icons">email</i> Enviar Cotización</button></div>
             </div>
           </div>
         </div>
@@ -176,6 +179,29 @@ $quotation = $quotationDao->findById($_GET["id"]);
       </div>
     </div>
   </div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalContentEmail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Cuerpo del Mensaje</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="content"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" onclick="send()" class="btn btn-primary">Enviar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!--   Core JS Files   -->
   <script src="/js/jquery-2.2.4.min.js"></script>
   <script src="../assets/js/core/popper.min.js"></script>
@@ -184,6 +210,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
   <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
+
   <!-- Chartist JS -->
   <script src="../assets/js/plugins/chartist.min.js"></script>
   <!--  Notifications Plugin    -->
@@ -195,6 +222,8 @@ $quotation = $quotationDao->findById($_GET["id"]);
   <script src="../assets/js/script.js"></script>
   <script src="/vendor/jquery.formatCurrency-1.4.0.min.js"></script>
   <script src="/vendor/jquery.formatCurrency.all.js"></script>
+  <script src="/js/es.js"></script>
+  <script src="/vendor/froala_editor.pkgd.min.js"></script>
   <script>
     $(() => {
       $('.sidebar div.sidebar-wrapper ul.nav li:first').removeClass('active')
@@ -249,6 +278,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
 
     function send() {
       update()
+      $('#modalContentEmail').modal('hide')
       $.notify({
         message: 'Enviando Correo',
         title: 'Procesando',
@@ -257,7 +287,8 @@ $quotation = $quotationDao->findById($_GET["id"]);
         type: 'info'
       })
       $.post('api/sent_email.php', {
-        id: `<?= $quotation->getId() ?>`
+        id: `<?= $quotation->getId() ?>`,
+        content: editor.html.get()
       }, (data, status, xhr) => {
         if (status == 'success' && xhr.readyState == 4) {
           $.notify({
@@ -317,6 +348,51 @@ $quotation = $quotationDao->findById($_GET["id"]);
         }
       })
     }
+    editor = new FroalaEditor('#content', {
+      language: 'es',
+      height: 300,
+      imageUploadParam: 'photo',
+      imageUploadURL: '/admin/upload.php',
+      imageUploadMethod: 'POST',
+      videoUploadParam: 'video',
+      videoUploadURL: 'upload-video.php',
+      imageUploadMethod: 'POST',
+      fileUploadParam: 'file',
+      fileUploadURL: '/admin/upload-file.php',
+      fileUploadMethod: 'POST',
+      events: {
+        'image.removed': function($img) {
+          img = $img[0]
+          $.post('/admin/image_delete.php', {
+            src: $img.attr('src')
+          }, (data, status) => {
+            if (status != "success") {
+              alert("error")
+            }
+          })
+        },
+        'file.removed': function($file) {
+          file = $file[0]
+          $.post('/admin/file_delete.php', {
+            src: $file.attr('src')
+          }, (data, status) => {
+            if (status != "success") {
+              alert("error")
+            }
+          })
+        },
+        'keyup': function(keyupEvent) {
+          if (document.domain != 'localhost') {
+            $('.fr-wrapper>div:first-child').css('visibility', 'hidden')
+          }
+        }
+      }
+    }, () => {
+      editor.html.set(`<html><body><p>Nos permitimos enviarle su cotizacion</p><p>cotizacion generada</p></body></html>`)
+      if (document.domain != 'localhost') {
+        $('.fr-wrapper>div:first-child').css('visibility', 'hidden')
+      }
+    })
   </script>
 </body>
 

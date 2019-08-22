@@ -10,7 +10,7 @@ session_start();
 
 use Dompdf\Dompdf;
 
-if (isset($_POST["id"])) {
+if (isset($_POST["id"]) && isset($_POST["content"])) {
   $quotationDao = new QuotationDao();
   $quotation = $quotationDao->findById($_POST["id"]);
   $file = "http://" . $_SERVER["HTTP_HOST"] . "/services/generate-quotation.php?id=" . $_POST["id"];
@@ -40,12 +40,12 @@ if (isset($_POST["id"])) {
   $mail->Username = $_ENV["smtpEmail"];
   $mail->Password = $_ENV["smtpPass"];
 
-  $mail->From = $_ENV["smtpEmail"]; // Email desde donde env�o el correo.
+  $mail->From = $_ENV["smtpEmail"]; // Email desde donde envio el correo.
   $mail->FromName = 'greenpack';
   $mail->AddAddress($email);
   $mail->addStringAttachment($pdf, "cotizacion.pdf");
   $mail->Subject = "Envio de Cotización"; // Este es el titulo del email.
-  $mail->Body = "<html><body><p>Nos permitimos enviarle su cotizacion</p><p>cotizacion generada</p></body></html>";
+  $mail->Body = $_POST["content"];
   $mail->SMTPSecure = 'tls';
   $mail->SMTPOptions = array(
     'ssl' => array(
