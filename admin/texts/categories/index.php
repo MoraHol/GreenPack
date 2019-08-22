@@ -109,7 +109,7 @@ include("../../partials/verify-session.php");
               </div>
             </div>
             <div class="row" id="containerImageBtn">
-              <div class="col-sm-7"></div>
+              <div class="col-sm-7 "></div>
               <div class="col-sm-4"><button class="btn btn-danger" onclick="changeImage()">Cambiar Imagen</button></div>
             </div>
             <div id="imgUpload">
@@ -183,21 +183,28 @@ include("../../partials/verify-session.php");
           },
           "ajax": 'api/get_categories.php',
           "columnDefs": [{
-            "targets": -1,
-            render: function(data, type, row) {
-              $('tr td:last-child').addClass('text-center')
-              $('td img').parent().addClass('text-center')
-              $('td.sorting_1').addClass('text-capitalize')
-              return `<a class="text-center" href="javascript:modalEdit('${row.name}',${row.id},'${row.description}','${row.image}')"><i class='fas fa-pen'></i></a>`
+              "targets": -1,
+              render: function(data, type, row) {
+                $('tr td:last-child').addClass('text-center')
+                $('td img').parent().addClass('text-center')
+                $('td.sorting_1').addClass('text-capitalize')
+                return `<a class="text-center" href="javascript:modalEdit('${row.name}',${row.id},'${row.description}','${row.image}')"><i class='fas fa-pen'></i></a>`
+              }
+            }, {
+              "targets": 1,
+              render: function(data, type, row) {
+                $('td img').parent().addClass('text-center')
+                $('td.sorting_1').addClass('text-capitalize')
+                return `<img width="120" class="text-center" src="${row.image}">`
+              }
+            },
+            {
+              'targets': 2,
+              render: function(data, type, row) {
+                return `<span class="text-uppercase">${row.description}</span>`
+              }
             }
-          }, {
-            "targets": 1,
-            render: function(data, type, row) {
-              $('td img').parent().addClass('text-center')
-              $('td.sorting_1').addClass('text-capitalize')
-              return `<img width="120" class="text-center" src="${row.image}">`
-            }
-          }],
+          ],
           "columns": [{
               "data": "name"
             },
