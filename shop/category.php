@@ -73,10 +73,10 @@
 
     .blog-banner div.text-center:first {
       margin: auto;
-      width: 25%;
+      width: 45%;
       background: #333333c2;
       color: #fff !important;
-      height: 113px;
+      height: auto;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -84,10 +84,10 @@
 
     .blog-banner div.text-center {
       margin: auto;
-      width: 25%;
+      width: 45%;
       background: #333333c2;
       color: #fff !important;
-      height: 50px;
+      height: auto;
       display: flex;
       justify-content: center;
       align-items: center;
