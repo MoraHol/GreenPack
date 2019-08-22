@@ -222,8 +222,8 @@ $quotation = $quotationDao->findById($_GET["id"]);
   <script src="../assets/js/script.js"></script>
   <script src="/vendor/jquery.formatCurrency-1.4.0.min.js"></script>
   <script src="/vendor/jquery.formatCurrency.all.js"></script>
-  <script src="/js/es.js"></script>
   <script src="/vendor/froala_editor.pkgd.min.js"></script>
+  <script src="/js/es.js"></script>
   <script>
     $(() => {
       $('.sidebar div.sidebar-wrapper ul.nav li:first').removeClass('active')
@@ -348,7 +348,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
         }
       })
     }
-    editor = new FroalaEditor('#content', {
+    var editor = new FroalaEditor('#content', {
       language: 'es',
       height: 300,
       imageUploadParam: 'photo',
