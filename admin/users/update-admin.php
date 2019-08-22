@@ -55,21 +55,21 @@ include("../partials/verify-session.php");
               <div class="row">
                 <div class="col-sm-4">
                   <div class="form-group">
-                    <label for="nameUser">Nombre del Usuario/Administrador:</label>
+                    <label for="nameUser">Nombre del Administrador:</label>
                     <br>
                     <input type="text" required placeholder="Ej: Alejandra" id="nameUser" class="form-control" value="<?= $admin->getName() ?>">
                   </div>
                 </div>
                 <div class="col-sm-4">
                   <div class="form-group">
-                    <label for="lastNameUser">Apellido del Usuario/Administrador:</label>
+                    <label for="lastNameUser">Apellido del Administrador:</label>
                     <br>
                     <input type="text" required id="lastNameUser" placeholder="Ej: Martinez" class="form-control" value="<?= $admin->getLastName() ?>">
                   </div>
                 </div>
                 <div class="col-sm-4">
                   <div class="form-group">
-                    <label for="">Numero de Telefono del Usuario/Administrador:</label>
+                    <label for="">Numero de Telefono del Administrador:</label>
                     <br>
                     <input type="number" required id="phoneUser" placeholder="Ej: 3223764531" class="form-control" value="<?= $admin->getPhone() ?>">
                   </div>
