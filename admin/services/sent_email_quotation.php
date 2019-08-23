@@ -38,7 +38,7 @@ if ($_GET["email"]) {
   <br>
   <p><strong>Equipo Greenpack</strong></p>
   <p style='color: #61bd4f'>Comprometidos para que nuestro medio ambiente siga siendo verde</p>
-  <img src='https://$host/images/logo_biodegrdable_1.png'>
+  <img width='100' src='https://$host/images/logo_biodegrdable_1.png'>
   <img src='https://$host/images/empaques_verdes_logo_verde.png'>
   <img src='https://$host/images/greenbags_logo_verde.png'>
   </body>
