@@ -70,8 +70,10 @@ if (isset($_SESSION["cart"])) {
     </li>
   </ul>
 </div>
+<script src="/vendor/jquery.number.min.js"></script>
 <script>
   $('#submit-order').prop('disabled', false)
+  $('.number').number(true, 0, ',', '.')
 </script>
 <?php
   } else {

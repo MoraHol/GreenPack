@@ -39,9 +39,11 @@ function deleteItem(idItem) {
 }
 
 function subtractQty(id) {
+  let num = $.number($(`#qty${id}`).html(), 0, '', '')
+  console.log(num)
   $.post('/shop/api/change_quantity.php', {
     id_item: id,
-    quantity: parseInt($(`#qty${id}`).html()) - 1
+    quantity: parseInt(num) - 1
   }, (data, status) => {
     if (status == 'success') {
       renderCart()
@@ -50,9 +52,10 @@ function subtractQty(id) {
 }
 
 function sumQty(id) {
+  let num = $.number($(`#qty${id}`).html(), 0, '', '')
   $.post('/shop/api/change_quantity.php', {
     id_item: id,
-    quantity: parseInt($(`#qty${id}`).html()) + 1
+    quantity: parseInt(num) + 1
   }, (data, status) => {
     if (status == 'success') {
       renderCart()
