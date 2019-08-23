@@ -488,7 +488,7 @@ $tabs = $tabProductDao->findByProduct($product);
     function verifyMinQuantityValue() {
       if ($('#sst').val() < verifyMinQuantity()) {
         $('#btnCotizar').addClass("disabled")
-        $('#help-quantity').html(`<div class="alert alert-danger" role="alert"><br><span>Cantidad minima ${verifyMinQuantity()} unidades. ¿Te gustaría cotizar cantidades menores? te invitamos a visitar a nuestro aliado Greenpoint (<a href="//www.greenpointonline.com.co" target="_blank">www.greenpointonline.com.co</a>)</div>`)
+        $('#help-quantity').html(`<br><div class="alert alert-danger alert-min-quantity" role="alert"><span>Cantidad minima ${verifyMinQuantity()} unidades. ¿Te gustaría cotizar cantidades menores? te invitamos a visitar a nuestro aliado Greenpoint (<a style="color:white" href="//www.greenpointonline.com.co" target="_blank">www.greenpointonline.com.co</a>)</div>`)
         $('#help-quantity').fadeIn()
         $('.single').css('margin-bottom', '550px')
       } else {
