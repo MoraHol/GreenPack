@@ -51,7 +51,7 @@ if (isset($_SESSION["cart"])) {
                         <div class="calculator"><button class="subtract" onclick="subtractQty('<?php echo $item->getId(); ?>')">
                             <div><span class="ng-star-inserted"><i class="iconf-delete"></i></span></div>
                           </button>
-                          <div class="number" id="qty<?php echo $item->getId(); ?>"><?php echo $item->getQuantity(); ?></div><button class="plus" onclick="sumQty('<?php echo $item->getId(); ?>')">
+                          <div class="number" contenteditable="true" id="qty<?php echo $item->getId(); ?>"><?php echo $item->getQuantity(); ?></div><button class="plus" onclick="sumQty('<?php echo $item->getId(); ?>')">
                             <div>+</div>
                           </button>
                         </div>
@@ -74,6 +74,29 @@ if (isset($_SESSION["cart"])) {
 <script>
   $('#submit-order').prop('disabled', false)
   $('.number').number(true, 0, ',', '.')
+  calculateWidthNumber()
+  var editables = document.getElementsByClassName('number');
+  for (let index = 0; index < editables.length; index++) {
+    // editables[index].addEventListener('input', function() {
+    //   console.log('Hey, somebody changed something in my text!');
+    //   console.log(this)
+    // });
+    editables[index].addEventListener('focus', function() {
+      $('.number').number(true, 0, '', '')
+    });
+    editables[index].addEventListener('focusout', function() {
+      $('.number').number(true, 0, ',', '.')
+      calculateWidthNumber()
+      console.log(this.id)
+      changeQuantity(this.id)
+    });
+  }
+
+  function calculateWidthNumber() {
+    if ($('.number').text().length > 5) {
+      $('.number').css('width', '108px')
+    }
+  }
 </script>
 <?php
   } else {

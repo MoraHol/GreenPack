@@ -63,6 +63,18 @@ function sumQty(id) {
   })
 }
 
+function changeQuantity(id) {
+  let num = $.number($(`#${id}`).html(), 0, '', '')
+  $.post('/shop/api/change_quantity.php', {
+    id_item: id.replace('qty', ''),
+    quantity: parseInt(num)
+  }, (data, status) => {
+    if (status == 'success') {
+      renderCart()
+    }
+  })
+}
+
 function cleanCart() {
   $.get('/services/clean_basket.php', (data, status) => {
     console.log('cleaned');
