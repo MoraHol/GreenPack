@@ -50,29 +50,15 @@ if ($admin->getRole() == 1) {
       <div class="content">
         <div class="container-fluid">
           <!-- your content here -->
+
           <div class="row">
-            <div class="col-xl-6 col-lg-12 col-sm-4">
-              <div class="card card-chart">
-                <div class="card-header card-header-success">
-                  <div class="ct-chart" id="dailySalesChart"></div>
-                </div>
-                <div class="card-body">
-                  <h4 class="card-title">Cotizaciones semanales</h4>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                    <i class="material-icons">access_time</i> Actualizado hace 4 minutos
-                  </div>
-                </div>
-              </div>
-            </div>
             <div class="col-xl-6 col-lg-12 col-sm-4">
               <div class="card card-chart">
                 <div class="card-header card-header-secundary">
                   <div class="ct-chart" id="completedTasksChart"></div>
                 </div>
                 <div class="card-body">
-                  <h4 class="card-title">Cotizaciones</h4>
+                  <h4 class="card-title">Cotizaciones Diarias</h4>
                   <!-- <div style="float: right"><span>Total: </span> <span id="totalQuotations"></span></div> -->
                   <p class="card-category"><i class="fas fa-square" style="color: #00bcd4 "></i> Cotizaciones contestadas
                     <br>
@@ -85,10 +71,28 @@ if ($admin->getRole() == 1) {
                 </div>
               </div>
             </div>
-            
+
+            <div class="col-xl-6 col-lg-12 col-sm-4">
+              <div class="card card-chart">
+                <div class="card-header card-header-success">
+                  <div class="ct-chart" id="dailySalesChart"></div>
+                </div>
+                <div class="card-body">
+                  <h4 class="card-title">Cotizaciones semanales</h4>
+                  <br>
+                  <br>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <i class="material-icons">access_time</i> Actualizado hace 4 minutos
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+
           <div class="row">
-          <div class="col-xl-6 col-lg-12 col-sm-4">
+            <div class="col-xl-12 col-lg-12 col-sm-4">
               <div class="card card-chart">
                 <div class="card-header card-header-primary">
                   <div class="ct-chart" id="salesMonthlyChart"></div>
