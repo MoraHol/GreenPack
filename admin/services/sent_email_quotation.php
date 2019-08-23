@@ -3,6 +3,7 @@ require_once dirname(dirname(__DIR__)) . "/vendor/PHPMailer/class.phpmailer.php"
 require_once dirname(dirname(__DIR__)) . "/vendor/PHPMailer/class.smtp.php";
 require_once dirname(dirname(__DIR__)) . "/db/env.php";
 $host = "en.teenus.com.co";
+$greeting = date("a") == "am" ? "Dias" : "Tardes";
 if ($_GET["email"]) {
   $email = $_GET["email"];
   // envio de email
@@ -25,11 +26,11 @@ if ($_GET["email"]) {
   <html>
   <head>
   <meta charset=utf-8 />
-  <title>Notificación de nueva cotizacion</title>
+  <title>Notificación de Nueva cotizacion</title>
   </head>
   <body>
   <img src='https://$host/images/greenpack_logo_verde.png'>
-    <p>Muy Buenos Dias</p>
+    <p>Muy Buenos $greeting</p>
     <p>Es un gusto saludarte y decirte que se te ha sido asignado una nueva cotización para tu gestion.
     Por el compromiso de atencion rápida para nuestros clientes, recuerda que tienes 3 horas para darle respuesta o sera asiganda a otro vendedor</p>
 
