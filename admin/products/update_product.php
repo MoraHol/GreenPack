@@ -259,12 +259,38 @@ $tabs = $tabProductDao->findByProduct($product);
               <label for="campo1">Medidas:</label>
               <button class="btn btn-primary" id="hideMeasurements">Ver Medidas</button>
               <ul class="list-unstyled" id="measurements">
-                <?php foreach ($product->getMeasurements() as $measurement) { ?>
+                <?php foreach ($product->getMeasurements() as $measurement) {
+                  $nameAdditional = "";
+                  $routeDownloadFileExample = "";
+                  switch ($product->getCategory()->getId()) {
+                    case 1:
+                      $nameAdditional = "Ventana";
+                      $routeDownloadFileExample = "/Catalogos/FormatMeasurements.xlsx";
+                      break;
+                    case 2:
+                      $nameAdditional = "Piezas por Pliego";
+                      $routeDownloadFileExample = "/Catalogos/FormatMeasurementsBoxes.xlsx";
+                      break;
+                    case 3:
+                      $nameAdditional = "Piezas por Pliego";
+                      $routeDownloadFileExample = "/Catalogos/FormatMeasurementsBoxes.xlsx";
+                      break;
+                    case 4:
+                      $nameAdditional = "Piezas por Pliego";
+                      $routeDownloadFileExample = "/Catalogos/FormatMeasurementsBoxes.xlsx";
+                      break;
+                    case 5:
+                      $nameAdditional = "Piezas por Pliego";
+                      $routeDownloadFileExample = "/Catalogos/FormatMeasurementsBoxes.xlsx";
+                      break;
+                  }
+
+                  ?>
                 <li>Medida <?php echo $indexMeasurement ?>:<div class="row">
                     <div class="col"><label for="width<?php echo $indexMeasurement ?>">Ancho:</label><input type="number" id="width<?php echo $indexMeasurement ?>" class="form-control" value="<?php echo $measurement->getWidth(); ?>" readonly></div>
                     <div class="col"><label for="height<?php echo $indexMeasurement ?>">Alto:</label><input type="number" id="height<?php echo $indexMeasurement ?>" class="form-control" value="<?php echo $measurement->getHeight(); ?>" readonly></div>
                     <div class="col"><label for="lenght<?php echo $indexMeasurement ?>">Largo:</label><input type="number" id="lenght<?php echo $indexMeasurement ?>" class="form-control" value="<?php echo $measurement->getLength(); ?>" readonly></div>
-                    <div class="col"><label for="window<?php echo $indexMeasurement ?>">Ventana:</label><input type="number" id="window<?php echo $indexMeasurement ?>" class="form-control" value="<?php echo $measurement->getWindow(); ?>" readonly></div>
+                    <div class="col"><label for="window<?php echo $indexMeasurement ?>"> <?= $nameAdditional ?></label><input type="number" id="window<?php echo $indexMeasurement ?>" class="form-control" value="<?php echo $measurement->getWindow(); ?>" readonly></div>
                     <div class="col-sm-2"><button class="btn btn-danger" onclick="deleteMeasurement(<?php echo $product->getId() ?>,<?php echo $measurement->getId() ?>)">Eliminar</button></div>
                   </div>
                 </li>
@@ -570,7 +596,7 @@ $tabs = $tabProductDao->findByProduct($product);
           }
         })
         $('#btnUploadExcel').click(() => {
-          $('#uploadExcel').html('<div>Descargue aqui el formato para cargar medidas <a href="/Catalogos/FormatMeasurements.xlsx" download="FormatoMedidas.xlsx" class="btn btn-info"><i class="fas fa-file-download"></i></a></div><div id="uploadFileExcel" class="dropzone"></div>')
+          $('#uploadExcel').html('<div>Descargue aqui el formato para cargar medidas <a id="uploadExcelFile" href="<?= $routeDownloadFileExample ?>" download="FormatoMedidas.xlsx" class="btn btn-info"><i class="fas fa-file-download"></i></a></div><div id="uploadFileExcel" class="dropzone"></div>')
           DropzoneExcel = new Dropzone("div#uploadFileExcel", {
             url: "/admin/upload-file.php",
             method: 'post',

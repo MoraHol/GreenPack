@@ -59,7 +59,7 @@ include("../partials/verify-session.php");
             <li class="breadcrumb-item">
               <a href="index.hhtmltml">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active">Crear una nueva Noticia</li>
+            <li class="breadcrumb-item active">Crear un Nuevo Producto</li>
           </ol>
           <br>
           <div class="form-group">
