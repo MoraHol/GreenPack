@@ -16,6 +16,32 @@ $indexMaterial = 1;
 $materialDao = new MaterialDao();
 $materials = $materialDao->findAll();
 $tabs = $tabProductDao->findByProduct($product);
+
+$nameAdditional = "";
+$routeDownloadFileExample = "";
+switch ($product->getCategory()->getId()) {
+  case 1:
+    $nameAdditional = "Ventana";
+    $routeDownloadFileExample = "/Catalogos/FormatMeasurements.xlsx";
+    break;
+  case 2:
+    $nameAdditional = "Piezas por Pliego";
+    $routeDownloadFileExample = "/Catalogos/FormatMeasurementsBoxes.xlsx";
+    break;
+  case 3:
+    $nameAdditional = "Piezas por Pliego";
+    $routeDownloadFileExample = "/Catalogos/FormatMeasurementsBoxes.xlsx";
+    break;
+  case 4:
+    $nameAdditional = "Piezas por Pliego";
+    $routeDownloadFileExample = "/Catalogos/FormatMeasurementsBoxes.xlsx";
+    break;
+  case 5:
+    $nameAdditional = "Piezas por Pliego";
+    $routeDownloadFileExample = "/Catalogos/FormatMeasurementsBoxes.xlsx";
+    break;
+}
+
 ?>
 <!-- author: Alexis Holguin, github: MoraHol -->
 <!doctype html>
@@ -260,31 +286,6 @@ $tabs = $tabProductDao->findByProduct($product);
               <button class="btn btn-primary" id="hideMeasurements">Ver Medidas</button>
               <ul class="list-unstyled" id="measurements">
                 <?php foreach ($product->getMeasurements() as $measurement) {
-                  $nameAdditional = "";
-                  $routeDownloadFileExample = "";
-                  switch ($product->getCategory()->getId()) {
-                    case 1:
-                      $nameAdditional = "Ventana";
-                      $routeDownloadFileExample = "/Catalogos/FormatMeasurements.xlsx";
-                      break;
-                    case 2:
-                      $nameAdditional = "Piezas por Pliego";
-                      $routeDownloadFileExample = "/Catalogos/FormatMeasurementsBoxes.xlsx";
-                      break;
-                    case 3:
-                      $nameAdditional = "Piezas por Pliego";
-                      $routeDownloadFileExample = "/Catalogos/FormatMeasurementsBoxes.xlsx";
-                      break;
-                    case 4:
-                      $nameAdditional = "Piezas por Pliego";
-                      $routeDownloadFileExample = "/Catalogos/FormatMeasurementsBoxes.xlsx";
-                      break;
-                    case 5:
-                      $nameAdditional = "Piezas por Pliego";
-                      $routeDownloadFileExample = "/Catalogos/FormatMeasurementsBoxes.xlsx";
-                      break;
-                  }
-
                   ?>
                 <li>Medida <?php echo $indexMeasurement ?>:<div class="row">
                     <div class="col"><label for="width<?php echo $indexMeasurement ?>">Ancho:</label><input type="number" id="width<?php echo $indexMeasurement ?>" class="form-control" value="<?php echo $measurement->getWidth(); ?>" readonly></div>
@@ -699,7 +700,7 @@ $tabs = $tabProductDao->findByProduct($product);
                       <div class="col"><label for="width${indexMeasurement}">Ancho:</label><input type="number" id="width${indexMeasurement}" class="form-control"></div>
                       <div class="col"><label for="height${indexMeasurement}">Alto:</label><input type="number" id="height${indexMeasurement}" class="form-control"></div>
                       <div class="col"><label for="lenght${indexMeasurement}">Largo:</label><input type="number" id="lenght${indexMeasurement}" class="form-control"></div>
-                      <div class="col"><label for="window${indexMeasurement}">Ventana:</label><input type="number" id="window${indexMeasurement}" class="form-control"></div>
+                      <div class="col"><label for="window${indexMeasurement}"><?= $nameAdditional ?>:</label><input type="number" id="window${indexMeasurement}" class="form-control"></div>
                     </div></li>`)
       }
 

@@ -4,11 +4,11 @@ class ItemBox extends Item implements JsonSerializable
 {
   public function calculatePrice()
   {
-    $directCost =  $this->getMaterial()->getPrice() / $this->getMeasurement()->getWindow();
+    $directCost =  $this->getMaterial()->getPricePerKg() / $this->getMeasurement()->getWindow();
     if ($this->getQuantity() < 11000) {
-      return $directCost * 2;
+      $this->setPrice($directCost * 2);
     } else {
-      return $directCost * 2.5;
+      return $this->setPrice($directCost * 2.5);
     }
   }
 }

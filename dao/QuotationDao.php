@@ -16,6 +16,7 @@ require_once dirname(__DIR__) . "/dao/AdminDao.php";
 /*****************************************************************************/
 class QuotationDao
 {
+
   function __construct()
   {
     $this->db = new DBOperator($_ENV["db_host"], $_ENV["db_user"], $_ENV["db_name"], $_ENV["db_pass"]);
@@ -25,6 +26,7 @@ class QuotationDao
     $this->adminDao = new AdminDao();
     date_default_timezone_set("America/Bogota");
   }
+
   function save($quotation)
   {
     $this->db->connect();
@@ -45,6 +47,7 @@ class QuotationDao
     // Insert Items
     foreach ($quotation->getItems() as $item) {
       $query = "INSERT INTO `quotations_details` (`id_quotations_details`, `products_id_products`, `quantity`, `printed`, `price`, `material_id`, `measurement_id`, `quotations_id_quotations`,`laminated`,`pla`) VALUES (NULL, '" . $item->getProduct()->getId() . "', '" . $item->getQuantity() . "', '" . (int) $item->isPrinting() . "', '" . $item->getPrice() . "', '" . $item->getMaterial()->getId() . "', '" . $item->getMeasurement()->getId() . "', '" . $quotation->getId() . "','" . (int) $item->isLam() . "','" . (int) $item->isPla() . "')";
+      echo $query;
       $this->db->consult($query);
     }
     // envio de correo al usuario
@@ -58,8 +61,10 @@ class QuotationDao
     curl_close($curl);
     $this->db->close();
   }
+
   function delete($id)
   { }
+
   function update($quotation)
   {
     $this->db->connect();
@@ -90,6 +95,7 @@ class QuotationDao
     $this->db->close();
     return $status;
   }
+
   function findById($id)
   {
     // query para buscar la cotizacion con la información del cliente
@@ -140,6 +146,7 @@ class QuotationDao
     $this->db->close();
     return $quotation;
   }
+
   function findAll()
   {
     $this->db->connect();
@@ -151,6 +158,7 @@ class QuotationDao
     // $this->db->close();
     return $quotations;
   }
+
   function findSolved()
   {
     $this->db->connect();
@@ -162,6 +170,7 @@ class QuotationDao
     // $this->db->close();
     return $quotations;
   }
+
   function findNoSolved()
   {
     $this->db->connect();
@@ -173,6 +182,7 @@ class QuotationDao
     // $this->db->close();
     return $quotations;
   }
+
   function findAssignedTo($idAdmin)
   {
     $this->db->connect();
@@ -184,6 +194,7 @@ class QuotationDao
     }
     return $quotations;
   }
+  
   function assign($quotation)
   {
     $idAdmin = $this->adminDao->findSellerLastAssignment();

@@ -133,7 +133,7 @@ include("../partials/verify-session.php");
                 <select id="category" class="wide">
                   <option disabled selected>Seleccione una categoría</option>
                   <?php foreach ($categories as $category) { ?>
-                    <option value="<?php echo $category->getId(); ?>"><?php echo $category->getName(); ?></option>
+                  <option value="<?php echo $category->getId(); ?>"><?php echo $category->getName(); ?></option>
                   <?php } ?>
                 </select>
               </div>
@@ -181,18 +181,18 @@ include("../partials/verify-session.php");
       <script src="/vendor/dropzone/dropzone.js"></script>
       <script>
         let indexField = 1
-        let indexMeasurement = 1
+        let indexMeasurement = 0
         $(document).ready(function() {
           $('[data-toggle="popover"]').popover();
           $('#fields').append(`<div class="col-sm-4">
                   Uso ${indexField}:<input type="text" id="field${indexField}" class="form-control">
                 </div>`)
-          $('#measurements').append(`<li>Medida ${indexField}:<div class="row">
-                  <div class="col"><label for="width${indexMeasurement}">Ancho:</label><input type="number" id="width${indexMeasurement}" class="form-control"></div>
-                  <div class="col"><label for="height${indexMeasurement}">Alto:</label><input type="number" id="height${indexMeasurement}" class="form-control"></div>
-                  <div class="col"><label for="lenght${indexMeasurement}">Largo:</label><input type="number" id="lenght${indexMeasurement}" class="form-control"></div>
-                  <div class="col"><label for="window${indexMeasurement}">Ventana:</label><input type="number" id="window${indexMeasurement}" class="form-control"</div>
-                </div></li>`)
+          // $('#measurements').append(`<li>Medida ${indexField}:<div class="row">
+          //         <div class="col"><label for="width${indexMeasurement}">Ancho:</label><input type="number" id="width${indexMeasurement}" class="form-control"></div>
+          //         <div class="col"><label for="height${indexMeasurement}">Alto:</label><input type="number" id="height${indexMeasurement}" class="form-control"></div>
+          //         <div class="col"><label for="lenght${indexMeasurement}">Largo:</label><input type="number" id="lenght${indexMeasurement}" class="form-control"></div>
+          //         <div class="col"><label for="window${indexMeasurement}">Ventana:</label><input type="number" id="window${indexMeasurement}" class="form-control"</div>
+          //       </div></li>`)
           $('#materials').append(`<li><select class="wide" style="margin-bottom: 10px;"><option disabled selected>Seleccione un material</option>
                   <?php
                   foreach ($materials as  $material) { ?>
@@ -210,14 +210,43 @@ include("../partials/verify-session.php");
         }
 
         function addMeasurement() {
-          indexMeasurement++;
-          $('#measurements').append(`<li>Medida ${indexMeasurement}:<div class="row">
+          if ($('#category').val() == null) {
+            $.notify({
+              message: 'Por favor seleccione una categoria antes de agregar medidas',
+              title: 'Advertencia',
+              icon: 'notification_important'
+            }, {
+              type: 'warning'
+            })
+          } else {
+            let nameAdditional = ''
+            switch (parseInt($('#category').val())) {
+              case 1:
+                nameAdditional = 'Ventana'
+                break;
+              case 2:
+                nameAdditional = 'Piezas Por Pliego'
+                break;
+              case 3:
+                nameAdditional = 'Piezas Por Pliego'
+                break;
+              case 4:
+                nameAdditional = 'Piezas Por Pliego'
+                break;
+              case 5:
+                nameAdditional = 'Piezas Por Pliego'
+                break;
+            }
+            indexMeasurement++;
+            $('#measurements').append(`<li>Medida ${indexMeasurement}:<div class="row">
                   <div class="col"><label for="width${indexMeasurement}">Ancho:</label><input type="number" id="width${indexMeasurement}" class="form-control"></div>
                   <div class="col"><label for="height${indexMeasurement}">Alto:</label><input type="number" id="height${indexMeasurement}" class="form-control"></div>
                   <div class="col"><label for="lenght${indexMeasurement}">Largo:</label><input type="number" id="lenght${indexMeasurement}" class="form-control"></div>
-                  <div class="col"><label for="window${indexMeasurement}">Ventana:</label><input type="number" id="window${indexMeasurement}" class="form-control"></div>
+                  <div class="col"><label for="window${indexMeasurement}">${nameAdditional}:</label><input type="number" id="window${indexMeasurement}" class="form-control"></div>
                 </div></li>`)
+          }
         }
+
 
         function addMaterial() {
           $('#materials').append(`<li><select class="wide" style="margin-bottom: 10px;" ><option disabled selected>Seleccione un material</option>
