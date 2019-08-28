@@ -95,7 +95,6 @@ $tabs = $tabProductDao->findByProduct($product);
     #collapseTwo a {
       color: #000;
     }
-
   </style>
 
 </head>
@@ -171,8 +170,9 @@ $tabs = $tabProductDao->findByProduct($product);
                             <input type="checkbox" class="checkboxPrinting" id="impresion">
                             <span class="slider round"></span>
                             <span class="questionPrinting">NO</span>
-                          </label></div>
-                        <div class="col">
+                          </label>
+                        </div>
+                        <!-- <div class="col">
                           <span>Ventanilla:</span>
                           <br>
                           <label class="switch">
@@ -189,7 +189,7 @@ $tabs = $tabProductDao->findByProduct($product);
                             <span class="slider round"></span>
                             <span class="questionPrinting">NO</span>
                           </label>
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                   </div>
@@ -199,7 +199,7 @@ $tabs = $tabProductDao->findByProduct($product);
                     <h2 class="mb-0 panel-title">
                       <a class="btn btn-link collapsed text-left" role="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                         <i class="more-less fas fa-plus"></i>
-                        Materiales
+                        Tipo de Producto
                       </a>
                     </h2>
                   </div>
@@ -398,21 +398,35 @@ $tabs = $tabProductDao->findByProduct($product);
     let measurements = `<?= json_encode($product->getMeasurements()); ?>`
     measurements = JSON.parse(measurements)
     let widths = []
-    measurements.forEach(measurement => {
-      if (!widths.includes(measurement.width)) {
-        widths.push(measurement.width)
-        $('#width').append(`<option>${measurement.width}</option>`)
-      }
-    })
-    $('#width').change(function() {
+    if (measurements.length == 1) {
       $('#height').prop("disabled", true)
       $('#length').prop("disabled", true)
-      renderHeigths($(this).val())
-    })
-    $('#height').change(function() {
-      $('#length').prop("disabled", true)
-      renderLengths($(this).val(), $('#width').val())
-    })
+      $('#width').prop("disabled", true)
+      $('#width').append(`<option>${measurements[0].width}</option>`)
+      $('#width').val(measurements[0].width)
+      $('#height').append(`<option>${measurements[0].height}</option>`)
+      $('#height').val(measurements[0].height)
+      $('#length').append(`<option>${measurements[0].length}</option>`)
+      $('#length').val(measurements[0].length)
+    } else {
+      measurements.forEach(measurement => {
+        if (!widths.includes(measurement.width)) {
+          widths.push(measurement.width)
+          $('#width').append(`<option>${measurement.width}</option>`)
+
+        }
+      })
+      $('#width').change(function() {
+        $('#height').prop("disabled", true)
+        $('#length').prop("disabled", true)
+        renderHeigths($(this).val())
+      })
+      $('#height').change(function() {
+        $('#length').prop("disabled", true)
+        renderLengths($(this).val(), $('#width').val())
+      })
+    }
+
 
 
     function renderHeigths(width) {
