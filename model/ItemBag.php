@@ -4,7 +4,28 @@ class ItemBag extends Item implements JsonSerializable
 {
   public function calculatePrice()
   {
-    $pricePLA = 18000;
+    $directCost = $this->calculateDirectCost();
+    if ($this->getQuantity() > 20000 &&  $this->getQuantity() < 60000) {
+      $this->setPrice($directCost * 3);
+    } elseif ($this->getQuantity() > 60000 &&  $this->getQuantity() < 100000) {
+      $this->setPrice($directCost * 2.8);
+    } elseif ($this->getQuantity() > 100000 &&  $this->getQuantity() < 1000000) {
+      $this->setPrice($directCost * 2.3);
+    } else {
+      $this->setPrice($directCost * 2.3);
+    }
+  }
+  public function calculateDirectCost()
+  {
+    $file = "http://" . $_SERVER["HTTP_HOST"] . "/services/get_price_pla.php";
+    $curl = curl_init();
+    curl_setopt_array($curl, [
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_URL => $file
+    ]);
+    $content = curl_exec($curl);
+    curl_close($curl);
+    $pricePLA = (int) $content;
     $LongUseful = $this->getMeasurement()->getLength() - 3;
     $AT = (($this->getMeasurement()->getWidth() + $this->getMeasurement()->getHeight()) * 2) + 2;
     $V = $this->getMeasurement()->getWindow();
@@ -28,14 +49,6 @@ class ItemBag extends Item implements JsonSerializable
         }
       }
     }
-    if ($this->getQuantity() > 20000 &&  $this->getQuantity() < 60000) {
-      $this->setPrice($directCost * 3);
-    } elseif ($this->getQuantity() > 60000 &&  $this->getQuantity() < 100000) {
-      $this->setPrice($directCost * 2.8);
-    } elseif ($this->getQuantity() > 100000 &&  $this->getQuantity() < 1000000) {
-      $this->setPrice($directCost * 2.3);
-    } else {
-      $this->setPrice($directCost * 2.3);
-    }
+    return $directCost;
   }
 }

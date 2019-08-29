@@ -8,6 +8,7 @@ if (isset($_POST)) {
   }
   if ($quotationDao->update($quotation) > 0) {
     http_response_code(200);
+    echo $item->calculateDirectCost();
   } else {
     http_response_code(500);
   }
