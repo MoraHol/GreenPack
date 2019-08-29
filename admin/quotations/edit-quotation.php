@@ -106,38 +106,47 @@ $quotation = $quotationDao->findById($_GET["id"]);
             </div>
             <div class="card" id="products">
               <?php foreach ($quotation->getItems() as $item) { ?>
-              <div class="row align-items-center">
-                <div class="col-md-2 text-center"><img src="<?= $item->getProduct()->getImages()[0]->getUrl() ?>" alt="" width="150" height="150"></div>
-                <div class="col-md-3 align-self-center">
-                  <h5><?= $item->getProduct()->getName() ?></h5>
-                  <br>
-                  <p><span class="text-primary">Impresion:</span> <?= $item->isPrinting() ? "SI" : "NO" ?></p>
-                  <p><span class="text-primary">Ventanilla:</span> <?= $item->isPla() ? "SI" : "NO" ?></p>
-                  <p><span class="text-primary">Laminada:</span> <?= $item->isLam() ? "SI" : "NO" ?></p>
-                  <p><span class="text-primary">Material:</span> <?= $item->getMaterial()->getName() ?></p>
-                  <p><span class="text-primary">Medidas:</span></p>
-                  <p>
-                    <ul class="measurements list-inline">
-                      <li class="list-inline-item"><span class="text-primary">Ancho:</span> <?= $item->getMeasurement()->getWidth() ?></li>
-                      <li class="list-inline-item"><span class="text-primary">Alto:</span> <?= $item->getMeasurement()->getHeight() ?></li>
-                      <li class="list-inline-item"><span class="text-primary">Largo:</span> <?= $item->getMeasurement()->getLength() ?></li>
-                    </ul>
-                  </p>
+                <div class="row align-items-center">
+                  <div class="col-md-2 text-center"><img src="<?= $item->getProduct()->getImages()[0]->getUrl() ?>" alt="" width="150" height="150"></div>
+                  <div class="col-md-3 align-self-center">
+                    <h5><?= $item->getProduct()->getName() ?></h5>
+                    <br>
+                    <p><span class="text-primary">Impresion:</span> <?= $item->isPrinting() ? "SI" : "NO" ?></p>
+                    <?php if ($item->getProduct()->getCategory()->getId() == 1) { ?>
+                      <p><span class="text-primary">Ventanilla:</span> <?= $item->isPla() ? "SI" : "NO" ?></p>
+                      <p><span class="text-primary">Laminada:</span> <?= $item->isLam() ? "SI" : "NO" ?></p>
+                      <?php } else {
+                          if ($item->isPrinting()) { ?>
+                        <p><span class="text-primary">Número de tintas:</span> <?= $item->getNumberInks() ?></p>
+                    <?php }
+                      } ?>
+                    <p><span class="text-primary">Material:</span> <?= $item->getMaterial()->getName() ?></p>
+                    <p><span class="text-primary">Medidas:</span></p>
+                    <p>
+                      <ul class="measurements list-inline">
+                        <li class="list-inline-item"><span class="text-primary">Ancho:</span> <?= $item->getMeasurement()->getWidth() ?></li>
+                        <li class="list-inline-item"><span class="text-primary"><?= $item->getProduct()->getCategory()->getId() == 1 ? "Fuelle" : "Alto" ?>:</span> <?= $item->getMeasurement()->getHeight() ?></li>
+                        <li class="list-inline-item"><span class="text-primary">Largo:</span> <?= $item->getMeasurement()->getLength() ?></li>
+                      </ul>
+                    </p>
+                    <?php if ($item->getProduct()->getCategory()->getId() != 1) { ?>
+                      <p><span class="text-primary">Observaciones:</span> <?= $item->getObservations() ?></p>
+                    <?php } ?>
+                  </div>
+                  <div class="col-md-2">
+                    <p><span class="text-primary">Cantidad:</span></p>
+                    <p><input type="number" id="quantity<?= $item->getId() ?>" value="<?= $item->getQuantity() ?>" class="form-control quantity"></p>
+                  </div>
+                  <div class="col-md-2">
+                    <p><span class="text-primary">Precio:</span></p>
+                    <p><input type="number" id="price<?= $item->getId() ?>" value="<?= $item->getPrice() ?>" class="form-control price"></p>
+                  </div>
+                  <div class="col">
+                    <p><span class="text-primary">Total:</span></p>
+                    <p class="money" id="total<?= $item->getId() ?>"><?= $item->calculateTotal() ?></p>
+                  </div>
                 </div>
-                <div class="col-md-2">
-                  <p><span class="text-primary">Cantidad:</span></p>
-                  <p><input type="number" id="quantity<?= $item->getId() ?>" value="<?= $item->getQuantity() ?>" class="form-control quantity"></p>
-                </div>
-                <div class="col-md-2">
-                  <p><span class="text-primary">Precio:</span></p>
-                  <p><input type="number" id="price<?= $item->getId() ?>" value="<?= $item->getPrice() ?>" class="form-control price"></p>
-                </div>
-                <div class="col">
-                  <p><span class="text-primary">Total:</span></p>
-                  <p class="money" id="total<?= $item->getId() ?>"><?= $item->calculateTotal() ?></p>
-                </div>
-              </div>
-              <hr>
+                <hr>
               <?php } ?>
             </div>
             <div class="card">

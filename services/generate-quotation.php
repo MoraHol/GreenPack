@@ -970,38 +970,50 @@ if (isset($_GET["id"])) {
 
         <?php setlocale(LC_MONETARY, "es_CO");
         foreach ($quotation->getItems() as $item) { ?>
-        <!-- individual product -->
-        <tr height="48" style="mso-height-source:userset;height:36.0pt">
-          <td colspan="2" height="48" class="xl8810772" width="150" style="height:36.0pt;
+          <!-- individual product -->
+          <tr height="48" style="mso-height-source:userset;height:36.0pt">
+            <td colspan="2" height="48" class="xl8810772" width="150" style="height:36.0pt;
                           width:112pt"><img src="<?= $item->getProduct()->getImages()[0]->getUrl() ?>" width="70" height="70" style="margin: 2px;"></td>
-          <td colspan="4" class="xl7710772" width="375" style="width:280pt;vertical-align: middle!important;">
-            <br>
-            <font class="font510772">Referencia</font>
-            <font class="font010772"> <?= $item->getProduct()->getRef() ?> </font>
-            <br>
-            <font class="font510772">Material</font>
-            <font class="font010772"> <?= $item->getMaterial()->getName() ?></font>
-            <br>
-            <font class="font510772">Medidas</font>
-            <font class="font010772"> <?= $item->getMeasurement()->getWidth() ?>*<?= $item->getMeasurement()->getHeight() ?>*<?= $item->getMeasurement()->getLength() ?></font>
-            <br>
-            <font class="font510772">Impresión</font>
-            <font class="font010772"> <?= $item->isPrinting() ? "SI" : "NO" ?></font>
-            <br>
-            <font class="font510772">Ventanilla</font>
-            <font class="font010772"> <?= $item->isPla() ? "SI" : "NO" ?></font>
-            <br>
-            <font class="font510772">Laminada</font>
-            <font class="font010772"> <?= $item->isLam() ? "SI" : "NO" ?> </font>
-            <br>
-            <br>
-          </td>
-          <td colspan="2" class="xl8610772" style="border-right:.5pt solid black"><span style="mso-spacerun:yes">&nbsp;</span><?= number_format($item->getQuantity(), 0, ",", ".") ?></td>
-          <td class="xl7210772" style="border-left:none"><span style="mso-spacerun:yes">&nbsp;</span>$<span style="mso-spacerun:yes">&nbsp;</span><?= money_format("%!i", $item->getPrice()) ?></td>
-          <td colspan="2" class="xl7310772" style="border-left:none"><span style="mso-spacerun:yes">&nbsp;</span>$<span style="mso-spacerun:yes">&nbsp;</span><?= money_format("%!i", $item->calculateTotal()) ?> </td>
+            <td colspan="4" class="xl7710772" width="375" style="width:280pt;vertical-align: middle!important;">
+              <br>
+              <font class="font510772">Referencia</font>
+              <font class="font010772"> <?= $item->getProduct()->getRef() ?> </font>
+              <br>
+              <font class="font510772">Material</font>
+              <font class="font010772"> <?= $item->getMaterial()->getName() ?></font>
+              <br>
+              <font class="font510772">Medidas</font>
+              <font class="font010772"> <?= $item->getMeasurement()->getWidth() ?>*<?= $item->getMeasurement()->getHeight() ?>*<?= $item->getMeasurement()->getLength() ?></font>
+              <br>
+              <font class="font510772">Impresión</font>
+              <font class="font010772"> <?= $item->isPrinting() ? "SI" : "NO" ?></font>
+              <br>
+              <?php if ($item->getProduct()->getCategory()->getId() == 1) { ?>
+                <font class="font510772">Ventanilla</font>
+                <font class="font010772"> <?= $item->isPla() ? "SI" : "NO" ?></font>
+                <br>
+                <font class="font510772">Laminada</font>
+                <font class="font010772"> <?= $item->isLam() ? "SI" : "NO" ?> </font>
+                <br>
+                <?php } else {
+                    if ($item->isPrinting()) { ?>
+                  <font class="font510772">Número de Tintas</font>
+                  <font class="font010772"> <?= $item->getNumberInks() ?> </font>
+                  <br>
+                <?php } ?>
+                <font class="font510772">Observaciones</font>
+                <font class="font010772"> <?= $item->getObservations() ?> </font>
+                <br>
+              <?php } ?>
 
-        </tr>
-        <!-- individual product -->
+              <br>
+            </td>
+            <td colspan="2" class="xl8610772" style="border-right:.5pt solid black"><span style="mso-spacerun:yes">&nbsp;</span><?= number_format($item->getQuantity(), 0, ",", ".") ?></td>
+            <td class="xl7210772" style="border-left:none"><span style="mso-spacerun:yes">&nbsp;</span>$<span style="mso-spacerun:yes">&nbsp;</span><?= money_format("%!i", $item->getPrice()) ?></td>
+            <td colspan="2" class="xl7310772" style="border-left:none"><span style="mso-spacerun:yes">&nbsp;</span>$<span style="mso-spacerun:yes">&nbsp;</span><?= money_format("%!i", $item->calculateTotal()) ?> </td>
+
+          </tr>
+          <!-- individual product -->
         <?php } ?>
 
 

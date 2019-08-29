@@ -137,6 +137,7 @@ class QuotationDao
       } else {
         $item = new ItemBox();
         $item->setObservations($itemDB["observations"]);
+        $item->setNumberInks((int) $itemDB["number_inks"]);
       }
       $item->setId($itemDB["id_quotations_details"]);
       $item->setProduct($product);

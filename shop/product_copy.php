@@ -531,13 +531,13 @@ $tabs = $tabProductDao->findByProduct($product);
         $('#btnCotizar').addClass("disabled")
         $('#help-quantity').html(`<br><div class="alert alert-danger alert-min-quantity" role="alert"><span>Cantidad minima ${verifyMinQuantity()} unidades. ¿Te gustaría cotizar cantidades menores? te invitamos a visitar a nuestro aliado Greenpoint (<a style="color:white" href="//www.greenpointonline.com.co" target="_blank">www.greenpointonline.com.co</a>)</div>`)
         $('#help-quantity').fadeIn()
-        $('.single').css('margin-bottom', '550px')
+        $('.single').css('margin-bottom', '600px')
       } else {
 
         $('#btnCotizar').removeClass("disabled")
         $('#help-quantity').fadeOut(400, () => {
           $('#help-quantity').html('')
-          $('.single').css('margin-bottom', '440px')
+          $('.single').css('margin-bottom', '500px')
         })
 
       }
