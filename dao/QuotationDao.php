@@ -2,6 +2,7 @@
 require_once dirname(__DIR__) . "/model/Quotation.php";
 require_once dirname(__DIR__) . "/model/Item.php";
 require_once dirname(__DIR__) . "/model/ItemBag.php";
+require_once dirname(__DIR__) . "/model/ItemBox.php";
 require_once dirname(__DIR__) . "/db/DBOperator.php";
 require_once dirname(__DIR__) . "/db/env.php";
 require_once dirname(__DIR__) . "/dao/MeasurementDao.php";
@@ -46,8 +47,13 @@ class QuotationDao
     $quotation->setId($idQuotation);
     // Insert Items
     foreach ($quotation->getItems() as $item) {
-      $query = "INSERT INTO `quotations_details` (`id_quotations_details`, `products_id_products`, `quantity`, `printed`, `price`, `material_id`, `measurement_id`, `quotations_id_quotations`,`laminated`,`pla`) VALUES (NULL, '" . $item->getProduct()->getId() . "', '" . $item->getQuantity() . "', '" . (int) $item->isPrinting() . "', '" . $item->getPrice() . "', '" . $item->getMaterial()->getId() . "', '" . $item->getMeasurement()->getId() . "', '" . $quotation->getId() . "','" . (int) $item->isLam() . "','" . (int) $item->isPla() . "')";
-      echo $query;
+      if (is_a($item, "ItemBag")) {
+        $query = "INSERT INTO `quotations_details` (`id_quotations_details`, `products_id_products`, `quantity`, `printed`, `price`, `material_id`, `measurement_id`, `quotations_id_quotations`,`laminated`,`pla`) VALUES (NULL, '" . $item->getProduct()->getId() . "', '" . $item->getQuantity() . "', '" . (int) $item->isPrinting() . "', '" . $item->getPrice() . "', '" . $item->getMaterial()->getId() . "', '" . $item->getMeasurement()->getId() . "', '" . $quotation->getId() . "','" . (int) $item->isLam() . "','" . (int) $item->isPla() . "')";
+        echo $query;
+      } else if (is_a($item, "ItemBox")) {
+        $query = "INSERT INTO `quotations_details` (`id_quotations_details`, `products_id_products`, `quantity`, `printed`, `price`, `material_id`, `measurement_id`, `quotations_id_quotations`,`laminated`,`pla`,`observations`,`number_inks`) VALUES (NULL, '" . $item->getProduct()->getId() . "', '" . $item->getQuantity() . "', '" . (int) $item->isPrinting() . "', '" . $item->getPrice() . "', '" . $item->getMaterial()->getId() . "', '" . $item->getMeasurement()->getId() . "', '" . $quotation->getId() . "','" . (int) $item->isLam() . "','" . (int) $item->isPla() . "','" . $item->getObservations() . "'," . $item->getNumberInks() . ")";
+        echo $query;
+      }
       $this->db->consult($query);
     }
     // envio de correo al usuario
@@ -130,6 +136,7 @@ class QuotationDao
         $item = new ItemBag();
       } else {
         $item = new ItemBox();
+        $item->setObservations($itemDB["observations"]);
       }
       $item->setId($itemDB["id_quotations_details"]);
       $item->setProduct($product);
@@ -194,7 +201,7 @@ class QuotationDao
     }
     return $quotations;
   }
-  
+
   function assign($quotation)
   {
     $idAdmin = $this->adminDao->findSellerLastAssignment();

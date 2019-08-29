@@ -95,6 +95,16 @@ $tabs = $tabProductDao->findByProduct($product);
     #collapseTwo a {
       color: #000;
     }
+
+    @media (min-width: 800px) {
+      .single {
+        margin-bottom: 500px;
+      }
+    }
+
+    #container-num-inks {
+      display: none;
+    }
   </style>
 
 </head>
@@ -140,9 +150,9 @@ $tabs = $tabProductDao->findByProduct($product);
             <div class="flexslider">
               <ul class="slides">
                 <?php foreach ($product->getImages() as $image) { ?>
-                <li data-thumb="<?= $image->getUrl(); ?>">
-                  <div class="thumb-image"> <img src="<?= $image->getUrl(); ?>" data-imagezoom="true" class="img-responsive"> </div>
-                </li>
+                  <li data-thumb="<?= $image->getUrl(); ?>">
+                    <div class="thumb-image"> <img src="<?= $image->getUrl(); ?>" data-imagezoom="true" class="img-responsive"> </div>
+                  </li>
                 <?php } ?>
               </ul>
             </div>
@@ -172,24 +182,17 @@ $tabs = $tabProductDao->findByProduct($product);
                             <span class="questionPrinting">NO</span>
                           </label>
                         </div>
-                        <!-- <div class="col">
-                          <span>Ventanilla:</span>
-                          <br>
-                          <label class="switch">
-                            <input type="checkbox" class="checkboxPrinting" id="ventanilla">
-                            <span class="slider round"></span>
-                            <span class="questionPrinting">NO</span>
-                          </label>
+                        <div class="col" id="container-num-inks">
+                          <div class="form-group">
+                            <label for="num-inks">A cuantas tintas lo quieres:</label>
+                            <select id="num-inks" class="form-control">
+                              <option value="1">1 tinta</option>
+                              <option value="2">2 tintas</option>
+                              <option value="3">3 tintas</option>
+                              <option value="4">4 tintas</option>
+                            </select>
+                          </div>
                         </div>
-                        <div class="col">
-                          <span>Laminada:</span>
-                          <br>
-                          <label class="switch">
-                            <input type="checkbox" class="checkboxPrinting" id="laminada">
-                            <span class="slider round"></span>
-                            <span class="questionPrinting">NO</span>
-                          </label>
-                        </div> -->
                       </div>
                     </div>
                   </div>
@@ -206,7 +209,7 @@ $tabs = $tabProductDao->findByProduct($product);
                   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion-cotizador">
                     <div class="card-body">
                       <?php foreach ($product->getMaterials() as $material) { ?>
-                      <label class="radio-inline" style="margin-left: 10px;">&nbsp;&nbsp;<input type="radio" name="material" value="<?= $material->getId(); ?>">&nbsp;&nbsp;&nbsp;<a href="javascript:;" title="Descripción" data-toggle="popover" data-trigger="hover" data-content="<?= $material->getDescription() ?>" data-placement="bottom"><?= $material->getName(); ?></a></label>
+                        <label class="radio-inline" style="margin-left: 10px;">&nbsp;&nbsp;<input type="radio" name="material" value="<?= $material->getId(); ?>">&nbsp;&nbsp;&nbsp;<a href="javascript:;" title="Descripción" data-toggle="popover" data-trigger="hover" data-content="<?= $material->getDescription() ?>" data-placement="bottom"><?= $material->getName(); ?></a></label>
                       <?php
                       } ?>
                     </div>
@@ -264,6 +267,23 @@ $tabs = $tabProductDao->findByProduct($product);
                     </div>
                   </div>
                 </div>
+                <div class="card">
+                  <div class="card-header" id="headingFive">
+                    <h2 class="mb-0 panel-title">
+                      <a class="btn btn-link collapsed text-left" role="button" data-toggle="collapse" data-target="#collapseFive" aria-controls="collapseFive" aria-expanded="false">
+                        Observaciones <i class="more-less fas fa-plus"></i>
+                      </a>
+                    </h2>
+                  </div>
+                  <div class="collapse" id="collapseFive" aria-labelledby="headingFive" data-parent="#accordion-cotizador">
+                    <div class="card-body">
+                      <div class="form-group">
+                        <label for="observations">Agrege las observaciones o especificaciones para el producto:</label>
+                        <textarea id="observations" class="form-control" cols="30" rows="4"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="product_count form-group">
                 <br>
@@ -292,29 +312,29 @@ $tabs = $tabProductDao->findByProduct($product);
             <br>
             <ul>
               <?php foreach ($product->getUses() as $use) { ?>
-              <li><?= $use ?></li>
+                <li><?= $use ?></li>
               <?php } ?>
             </ul>
           </div>
         </div>
         <div class="col-md-9">
           <?php if (count($tabs) > 0) { ?>
-          <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <?php foreach ($tabs as $key => $tab) { ?>
-            <li class="nav-item">
-              <a class="nav-link <?= $key == 0 ? "active" : "" ?>" id="tab-<?= $tab->getId() ?>" data-toggle="tab" href="#description-tab-<?= $tab->getId() ?>" role="tab" aria-controls="description-tab-<?= $tab->getId() ?>" aria-selected="true"><?= $tab->getTitle() ?></a>
-            </li>
-            <?php } ?>
-          </ul>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <?php foreach ($tabs as $key => $tab) { ?>
+                <li class="nav-item">
+                  <a class="nav-link <?= $key == 0 ? "active" : "" ?>" id="tab-<?= $tab->getId() ?>" data-toggle="tab" href="#description-tab-<?= $tab->getId() ?>" role="tab" aria-controls="description-tab-<?= $tab->getId() ?>" aria-selected="true"><?= $tab->getTitle() ?></a>
+                </li>
+              <?php } ?>
+            </ul>
           <?php } ?>
           <?php if (count($tabs) > 0) { ?>
-          <div class="tab-content" id="myTabContent">
-            <?php foreach ($tabs as $key => $tab) { ?>
-            <div class="tab-pane fade show <?= $key == 0 ? "active" : "" ?> " id="description-tab-<?= $tab->getId() ?>" role="tabpanel" aria-labelledby="tab<?= $tab->getId() ?>">
-              <div class="fr-view"><?= $tab->getDescription(); ?></div>
+            <div class="tab-content" id="myTabContent">
+              <?php foreach ($tabs as $key => $tab) { ?>
+                <div class="tab-pane fade show <?= $key == 0 ? "active" : "" ?> " id="description-tab-<?= $tab->getId() ?>" role="tabpanel" aria-labelledby="tab<?= $tab->getId() ?>">
+                  <div class="fr-view"><?= $tab->getDescription(); ?></div>
+                </div>
+              <?php } ?>
             </div>
-            <?php } ?>
-          </div>
           <?php } ?>
         </div>
       </div>
@@ -339,20 +359,19 @@ $tabs = $tabProductDao->findByProduct($product);
         <?php
         $products = $productDao->findRelatedProducts($product, 4);
         foreach ($products as $productInstance) { ?>
-        <div class="col-sm-3">
-          <div class="card text-center card-product zoom-in">
-            <div class="card-product__img">
-              <img class="card-img" src="<?= $productInstance->getImages()[0]->getUrl(); ?>">
-              <ul class="card-product__imgOverlay">
-                <li><a href="product.php?id=<?= $productInstance->getId() ?>"><i class="ti-search"></i> Cotizar</a></li>
-              </ul>
-            </div>
-            <div class="card-body">
-              <!-- <p><?= $productInstance->getCategory()->getName(); ?></p> -->
-              <h4 class="card-product__title"><a href="#"><?= $productInstance->getName(); ?></a></h4>
+          <div class="col-sm-3">
+            <div class="card text-center card-product zoom-in">
+              <div class="card-product__img">
+                <img class="card-img" src="<?= $productInstance->getImages()[0]->getUrl(); ?>">
+                <ul class="card-product__imgOverlay">
+                  <li><a href="product.php?id=<?= $productInstance->getId() ?>"><i class="ti-search"></i> Cotizar</a></li>
+                </ul>
+              </div>
+              <div class="card-body">
+                <h4 class="card-product__title"><a href="#"><?= $productInstance->getName(); ?></a></h4>
+              </div>
             </div>
           </div>
-        </div>
         <?php
         } ?>
       </div>
@@ -381,6 +400,7 @@ $tabs = $tabProductDao->findByProduct($product);
         nextText: '<i class="fas fa-angle-right fa-3x pl-3"></i>',
         prevText: '<i class="fas fa-angle-left fa-3x pl-3"></i>'
       })
+
     })
   </script>
   <script>
@@ -389,9 +409,22 @@ $tabs = $tabProductDao->findByProduct($product);
         .prev(".card-header")
         .find(".more-less")
         .toggleClass("fa-plus fa-minus");
+      console.log($(this).attr('id'))
+      if ($(this).height() > 100) {
+        $('.single').css('margin-bottom', '550px')
+      } else {
+        $('.single').css('margin-bottom', '500px')
+      }
     }
-    $(".collapse").on("hide.bs.collapse", toggleIcon);
+
+    function toggleIconClose(e) {
+      $(e.target)
+        .prev(".card-header")
+        .find(".more-less")
+        .toggleClass("fa-plus fa-minus");
+    }
     $(".collapse").on("show.bs.collapse", toggleIcon);
+    $(".collapse").on("hide.bs.collapse", toggleIconClose);
   </script>
   <script>
     $('#height').attr("disabled", "false")
@@ -427,8 +460,6 @@ $tabs = $tabProductDao->findByProduct($product);
       })
     }
 
-
-
     function renderHeigths(width) {
       $('#length').html('')
       $('#height').html('')
@@ -454,7 +485,6 @@ $tabs = $tabProductDao->findByProduct($product);
           return measurement
         }
       })
-      console.log(measurementsAux)
       let lengths = []
       measurementsAux.forEach(measurement => {
         if (!lengths.includes(measurement.length)) {
@@ -469,9 +499,10 @@ $tabs = $tabProductDao->findByProduct($product);
     $('.checkboxPrinting').change(function() {
       if ($(this).prop('checked')) {
         $(this).siblings('.questionPrinting').html('SI')
-        console.log($(this).siblings('.questionPrinting'))
+        $('#container-num-inks').fadeIn()
       } else {
         $(this).siblings('.questionPrinting').html('NO')
+        $('#container-num-inks').fadeOut()
       }
     })
   </script>
@@ -517,25 +548,28 @@ $tabs = $tabProductDao->findByProduct($product);
     // agregar un producto al carrito
     $('#btnCotizar').click(() => {
       let $printing = $('#impresion').prop('checked')
-      let $laminada = $('#laminada').prop('checked')
-      let $ventanilla = $('#ventanilla').prop('checked')
+      let $observations = $('#observations').val()
       let $width = $('#width').val()
       let $height = $('#height').val()
       let $length = $('#length').val()
       let $material = $("input[name='material']:checked").val();
       let $quantity = $('#sst').val()
+      let $numInks = $('#num-inks').val()
+      let request = {
+        idProduct: `<?= $product->getId(); ?>`,
+        width: $width,
+        height: $height,
+        length: $length,
+        material: $material,
+        quantity: $quantity,
+        printing: $printing,
+        observations: $observations
+      }
+      if ($printing) {
+        request.numInks = $numInks
+      }
       if ($width != null && $height != null && $length != null && $material != undefined && $quantity > 999) {
-        $.post('api/add_item.php', {
-          idProduct: `<?= $product->getId(); ?>`,
-          width: $width,
-          height: $height,
-          length: $length,
-          material: $material,
-          quantity: $quantity,
-          printing: $printing,
-          lam: $laminada,
-          window: $ventanilla
-        }, (data, status) => {
+        $.post('api/add_item.php', request, (data, status) => {
           if (status == 'success') {
             renderCart()
             showCart()
