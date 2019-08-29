@@ -51,4 +51,8 @@ class ItemBag extends Item implements JsonSerializable
     }
     return $directCost;
   }
+  public function jsonSerialize()
+  {
+    return get_object_vars($this);
+  }
 }

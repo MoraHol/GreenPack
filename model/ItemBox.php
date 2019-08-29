@@ -4,6 +4,7 @@ class ItemBox extends Item implements JsonSerializable
 {
   private $observations;
   private $numberInks;
+  private $typeProduct;
 
   public function __construct()
   {
@@ -19,6 +20,16 @@ class ItemBox extends Item implements JsonSerializable
     } else {
       return $this->setPrice($directCost * 2.5);
     }
+  }
+
+  public function setTypeProduct($typeProduct)
+  {
+    $this->typeProduct = $typeProduct;
+  }
+
+  public function getTypeProduct()
+  {
+    return $this->typeProduct;
   }
 
   public function setObservations($observations)
@@ -39,5 +50,9 @@ class ItemBox extends Item implements JsonSerializable
   public function getNumberInks()
   {
     return $this->numberInks;
+  }
+  public function jsonSerialize()
+  {
+    return get_object_vars($this);
   }
 }

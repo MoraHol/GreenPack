@@ -979,6 +979,11 @@ if (isset($_GET["id"])) {
               <font class="font510772">Referencia</font>
               <font class="font010772"> <?= $item->getProduct()->getRef() ?> </font>
               <br>
+              <?php if ($item->getProduct()->getCategory()->getId() != 1) { ?>
+                <font class="font510772">Tipo De Producto</font>
+                <font class="font010772"> <?= $item->getTypeProduct() ?></font>
+                <br>
+              <?php } ?>
               <font class="font510772">Material</font>
               <font class="font010772"> <?= $item->getMaterial()->getName() ?></font>
               <br>

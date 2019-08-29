@@ -190,7 +190,7 @@ switch ($product->getCategory()->getId()) {
 
             <br>
             <div class="form-group">
-              <label for="title">Escriba el Nombre del producto:</label>
+              <label for="title">Nombre del producto:</label>
               <input type="text" placeholder="Ej. bolsa de manija" id="title" class="form-control" value="<?php echo $product->getName(); ?>">
             </div>
             <br>
@@ -198,13 +198,13 @@ switch ($product->getCategory()->getId()) {
             <div class="row">
               <div class="col">
                 <div class="form-group">
-                  <label for="ref">Escriba la Referencia del producto:</label>
+                  <label for="ref">Referencia del producto:</label>
                   <input type="text" placeholder="Ej. LV-12" id="ref" class="form-control" value="<?php echo $product->getRef(); ?>">
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">
-                  <label for="price">Escriba el Gramaje del producto:</label>
+                  <label for="price">Gramaje del producto:</label>
                   <input type="number" placeholder="Ej. 40" id="price" class="form-control" value="<?php echo $product->getPrice(); ?>">
                 </div>
               </div>
@@ -212,7 +212,7 @@ switch ($product->getCategory()->getId()) {
 
             <br>
             <div class="form-group">
-              <label for="content">Escriba la descripción del producto:</label>
+              <label for="content">descripción del producto:</label>
               <br>
               <textarea name="content" id="content"></textarea>
             </div>

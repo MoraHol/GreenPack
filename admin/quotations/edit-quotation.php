@@ -115,12 +115,17 @@ $quotation = $quotationDao->findById($_GET["id"]);
                     <?php if ($item->getProduct()->getCategory()->getId() == 1) { ?>
                       <p><span class="text-primary">Ventanilla:</span> <?= $item->isPla() ? "SI" : "NO" ?></p>
                       <p><span class="text-primary">Laminada:</span> <?= $item->isLam() ? "SI" : "NO" ?></p>
+                      <p><span class="text-primary">Material:</span> <?= $item->getMaterial()->getName() ?></p>
                       <?php } else {
                           if ($item->isPrinting()) { ?>
                         <p><span class="text-primary">Número de tintas:</span> <?= $item->getNumberInks() ?></p>
-                    <?php }
-                      } ?>
-                    <p><span class="text-primary">Material:</span> <?= $item->getMaterial()->getName() ?></p>
+                      <?php } ?>
+                      <p><span class="text-primary">Tipo de Producto:</span> <?= $item->getTypeProduct() ?></p>
+                      <p><span class="text-primary">Material: <select class="form-control"><?php foreach ($item->getProduct()->getMaterials() as  $material) { ?>
+                              <option <?= $item->getMaterial() == $material ? "selected" : "" ?> value="<?= $material->getId() ?>"><?= $material->getName() ?></option>
+                            <?php } ?></select></p>
+                    <?php } ?>
+
                     <p><span class="text-primary">Medidas:</span></p>
                     <p>
                       <ul class="measurements list-inline">
@@ -176,8 +181,8 @@ $quotation = $quotationDao->findById($_GET["id"]);
 
             <div class="row" style="margin-bottom: 20px; margin-top: 20px;">
               <div class="col text-center"><a class="btn btn-danger btn-lg" href="/admin/quotations/#no-solved"><i class="material-icons">arrow_back</i> Regresar</a></div>
-              <div class="col text-center"><button onclick="update()" class="btn btn-info btn-lg"><i class="material-icons md-48">update</i> Actualizar</button></div>
               <div class="col text-center"><button onclick="recalculate()" class="btn btn-info btn-lg"><i class="material-icons">trending_up</i> Calcular Precios</button></div>
+              <div class="col text-center"><button onclick="update()" class="btn btn-info btn-lg"><i class="material-icons md-48">update</i> Actualizar</button></div>
               <div class="col text-center"><button onclick="$('#modalContentEmail').modal()" class="btn btn-primary btn-lg"><i class="material-icons">email</i> Enviar Cotización</button></div>
             </div>
           </div>

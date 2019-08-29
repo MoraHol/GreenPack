@@ -23,10 +23,12 @@ if (
     $cart->setItems([]);
   }
   $product = $productDao->findById($_POST["idProduct"]);
+
   if ($product->getCategory()->getName() == 'bolsas') {
     $item = new ItemBag();
     $item->setLam(filter_var($_POST["lam"], FILTER_VALIDATE_BOOLEAN));
     $item->setPla(filter_var($_POST["window"], FILTER_VALIDATE_BOOLEAN));
+    $item->setMaterial($materialDao->findById($_POST["material"]));
   } else {
     $item = new ItemBox();
     $item->setLam(false);
@@ -35,8 +37,9 @@ if (
     if (isset($_POST["numInks"])) {
       $item->setNumberInks($_POST["numInks"]);
     }
+    $item->setMaterial($product->getMaterials()[0]);
+    $item->setTypeProduct($_POST["material"]);
   }
-  $item->setMaterial($materialDao->findById($_POST["material"]));
   $item->setProduct($product);
   $item->setMeasurement($measurementDao->searchMeasurementByProduct($item->getProduct(), $_POST["height"], $_POST["width"], $_POST["length"]));
   $item->setPrinting(filter_var($_POST["printing"], FILTER_VALIDATE_BOOLEAN));

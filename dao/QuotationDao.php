@@ -51,7 +51,7 @@ class QuotationDao
         $query = "INSERT INTO `quotations_details` (`id_quotations_details`, `products_id_products`, `quantity`, `printed`, `price`, `material_id`, `measurement_id`, `quotations_id_quotations`,`laminated`,`pla`) VALUES (NULL, '" . $item->getProduct()->getId() . "', '" . $item->getQuantity() . "', '" . (int) $item->isPrinting() . "', '" . $item->getPrice() . "', '" . $item->getMaterial()->getId() . "', '" . $item->getMeasurement()->getId() . "', '" . $quotation->getId() . "','" . (int) $item->isLam() . "','" . (int) $item->isPla() . "')";
         echo $query;
       } else if (is_a($item, "ItemBox")) {
-        $query = "INSERT INTO `quotations_details` (`id_quotations_details`, `products_id_products`, `quantity`, `printed`, `price`, `material_id`, `measurement_id`, `quotations_id_quotations`,`laminated`,`pla`,`observations`,`number_inks`) VALUES (NULL, '" . $item->getProduct()->getId() . "', '" . $item->getQuantity() . "', '" . (int) $item->isPrinting() . "', '" . $item->getPrice() . "', '" . $item->getMaterial()->getId() . "', '" . $item->getMeasurement()->getId() . "', '" . $quotation->getId() . "','" . (int) $item->isLam() . "','" . (int) $item->isPla() . "','" . $item->getObservations() . "'," . $item->getNumberInks() . ")";
+        $query = "INSERT INTO `quotations_details` (`id_quotations_details`, `products_id_products`, `quantity`, `printed`, `price`, `material_id`, `measurement_id`, `quotations_id_quotations`,`laminated`,`pla`,`observations`,`number_inks`,`type_product`) VALUES (NULL, '" . $item->getProduct()->getId() . "', '" . $item->getQuantity() . "', '" . (int) $item->isPrinting() . "', '" . $item->getPrice() . "', '" . $item->getMaterial()->getId() . "', '" . $item->getMeasurement()->getId() . "', '" . $quotation->getId() . "','" . (int) $item->isLam() . "','" . (int) $item->isPla() . "','" . $item->getObservations() . "'," . $item->getNumberInks() . ",'" . $item->getTypeProduct() . "')";
         echo $query;
       }
       $this->db->consult($query);
@@ -138,6 +138,7 @@ class QuotationDao
         $item = new ItemBox();
         $item->setObservations($itemDB["observations"]);
         $item->setNumberInks((int) $itemDB["number_inks"]);
+        $item->setTypeProduct($itemDB["type_product"]);
       }
       $item->setId($itemDB["id_quotations_details"]);
       $item->setProduct($product);

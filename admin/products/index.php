@@ -56,7 +56,7 @@ $products = $productDao->findAll();
                       <th class="text-center">Producto</th>
                       <th class="text-center">Referencia</th>
                       <th class="text-center">Imagen / N°</th>
-                      <th class="text-center">Categoría</th>
+                      <th class="text-center text-capitalize">Categoría</th>
                       <th class="text-center">Visualizar</th>
                       <th class="text-center">Actualizar</th>
                       <th class="text-center">Borrar</th>
@@ -68,7 +68,7 @@ $products = $productDao->findAll();
                         <td><?php echo $product->getName(); ?></td>
                         <td><?php echo $product->getRef(); ?></td>
                         <td class="text-center"><img src="<?php echo $product->getImages()[0]->getUrl(); ?>" height="50" width="50"> <span> / <?php echo count($product->getImages()) ?></span></td>
-                        <td><?php echo $product->getCategory()->getName(); ?></td>
+                        <td class="text-center text-capitalize"><?php echo $product->getCategory()->getName(); ?></td>
                         <td class="text-center"><a href="/shop/product.php?id=<?php echo $product->getId(); ?>" target="_blank" rel="noopener noreferrer"><i class="fas fa-eye"></i></a></td>
                         <td class="text-center"><a class="text-center" href="/admin/products/update_product.php?id=<?php echo $product->getId(); ?>"><i class="fas fa-fw fa-sync"></a></td>
                         <td class="text-center"><a onclick="modal(<?php echo $product->getId(); ?>)" href="#"><i class="far fa-trash-alt"></i></a></td>
