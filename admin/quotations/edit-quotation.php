@@ -28,6 +28,11 @@ $quotation = $quotationDao->findById($_GET["id"]);
   <link rel="stylesheet" href="/css/modal-confirm.css">
   <!-- Include Editor style. -->
   <link href="https://cdn.jsdelivr.net/npm/froala-editor@3.0.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type='text/css' />
+  <style>
+    .alert-price {
+      display: none;
+    }
+  </style>
 </head>
 
 <body class="white-edition">
@@ -121,7 +126,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
                         <p><span class="text-primary">Número de tintas:</span> <?= $item->getNumberInks() ?></p>
                       <?php } ?>
                       <p><span class="text-primary">Tipo de Producto:</span> <?= $item->getTypeProduct() ?></p>
-                      <p><span class="text-primary">Material: <select class="form-control"><?php foreach ($item->getProduct()->getMaterials() as  $material) { ?>
+                      <p><span class="text-primary">Material: <select class="form-control select-option-material" id="<?= $item->getId() ?>"><?php foreach ($item->getProduct()->getMaterials() as  $material) { ?>
                               <option <?= $item->getMaterial() == $material ? "selected" : "" ?> value="<?= $material->getId() ?>"><?= $material->getName() ?></option>
                             <?php } ?></select></p>
                     <?php } ?>
@@ -151,7 +156,11 @@ $quotation = $quotationDao->findById($_GET["id"]);
                     <p class="money" id="total<?= $item->getId() ?>"><?= $item->calculateTotal() ?></p>
                   </div>
                 </div>
+                <div id="priceHelp<?= $item->getId() ?>" class="alert-price">
+
+                </div>
                 <hr>
+
               <?php } ?>
             </div>
             <div class="card">
@@ -251,14 +260,44 @@ $quotation = $quotationDao->findById($_GET["id"]);
       formatMoney()
       $('.price').keyup(function() {
         let id = $(this).context.id.substring(5, $(this).context.id.length)
-        calculateTotal(id)
+
       })
       $('.quantity').keyup(function() {
         let id = $(this).context.id.substring(8, $(this).context.id.length)
-        calculateTotal(id)
+        eventChangeValuesItem(id)
+      })
+      $('.price').change(function() {
+        let id = $(this).context.id.substring(5, $(this).context.id.length)
+        eventChangeValuesItem(id)
+      })
+      $('.quantity').change(function() {
+        let id = $(this).context.id.substring(8, $(this).context.id.length)
+        eventChangeValuesItem(id)
       })
 
     })
+
+    function eventChangeValuesItem(id) {
+      calculateTotal(id)
+      verifyDirectCost(id)
+    }
+
+    function verifyDirectCost(id) {
+      $.get('api/calculate_cost_item.php', {
+        id
+      }, (data, status) => {
+        let cost = parseInt(data)
+        if (parseInt($(`#price${id}`).val()) < cost) {
+          console.log($(`#priceHelp${id}`))
+          $(`#priceHelp${id}`).html(`<div class="alert alert-danger fade show mb-0">Estas por debajo del costo del producto, el cual equivale a $${cost} <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button></div>`)
+          $(`#priceHelp${id}`).fadeIn()
+        } else {
+          $(`#priceHelp${id}`).fadeOut()
+        }
+      })
+    }
 
     function calculateTotal(id) {
       let quantity = parseInt($(`#quantity${id}`).val())
@@ -323,6 +362,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
         let product = {}
         product.price = $(this).val()
         product.quantity = $(`#quantity${id}`).val()
+        product.material = $('#' + id).val()
         products.push(product)
       })
       $.post('api/update-quotation.php', {
@@ -406,6 +446,16 @@ $quotation = $quotationDao->findById($_GET["id"]);
       if (document.domain != 'localhost') {
         $('.fr-wrapper>div:first-child').css('visibility', 'hidden')
       }
+    })
+
+    $('.select-option-material').change(function() {
+      $.post('api/calculate_price_item.php', {
+        id: $(this).attr("id"),
+        material: $(this).val()
+      }, (data, status) => {
+        $(`#price${$(this).attr('id')}`).val(data)
+        calculateTotal($(this).attr("id"))
+      })
     })
   </script>
 </body>

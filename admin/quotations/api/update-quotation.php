@@ -1,7 +1,8 @@
 <?php
 require_once dirname(dirname(dirname(__DIR__))) . "/dao/QuotationDao.php";
+require_once dirname(dirname(dirname(__DIR__))) . "/dao/MaterialDao.php";
 $quotationDao = new QuotationDao();
-
+$materialDao = new MaterialDao();
 if (isset($_POST["id"])) {
   $quotation = $quotationDao->findById($_POST["id"]);
   $quotation->setNameClient($_POST["name"]);
@@ -22,6 +23,9 @@ if (isset($_POST["id"])) {
   foreach ($quotation->getItems() as $key => $item) {
     $item->setQuantity($items[$key]->quantity);
     $item->setPrice($items[$key]->price);
+    if (is_a($item, "ItemBox")) {
+      $item->setMaterial($materialDao->findById($items[$key]->material));
+    }
   }
   $quotationCompare = $quotationDao->findById($_POST["id"]);
   if ($quotationCompare == $quotation) {

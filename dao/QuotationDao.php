@@ -90,12 +90,11 @@ class QuotationDao
       `id_admin_assignment` = '" . $quotation->getIdAdminAssigned() . "', `date_assignment` = '" . date('Y-m-d H:i:s', $quotation->getDateAssigned()) . "',
       `payment_conditions` = '" . $quotation->getPaymentConditions() . "', `delivery_time` = '" . $quotation->getDeliveryTime() . "',
       `validity` = '" . $quotation->getValidity() . "' WHERE `quotations`.`id_quotations` = " . $quotation->getId();
-    // echo $query;
 
     $status = $this->db->consult($query);
     // update items
     foreach ($quotation->getItems() as $item) {
-      $query = "UPDATE `quotations_details` SET `quantity` = '" . $item->getQuantity() . "', `price` = '" . $item->getPrice() . "' WHERE `quotations_details`.`id_quotations_details` = " . $item->getId();
+      $query = "UPDATE `quotations_details` SET `quantity` = '" . $item->getQuantity() . "', `price` = '" . $item->getPrice() . "', `material_id` = '" . $item->getMaterial()->getId() . "' WHERE `quotations_details`.`id_quotations_details` = " . $item->getId();
       $status = $this->db->consult($query);
     }
     $this->db->close();
@@ -265,5 +264,32 @@ class QuotationDao
         return $this->busquedaBinariaRecursiva($arreglo, $busqueda, $izquierda, $derecha);
       }
     }
+  }
+
+  function findItemById($id)
+  {
+    $this->db->connect();
+    $query = "SELECT * FROM `quotations_details` WHERE `id_quotations_details` = $id";
+    $itemDB = $this->db->consult($query, "yes");
+    $itemDB = $itemDB[0];
+    $product = $this->productDao->findById($itemDB["products_id_products"]);
+    if ($product->getCategory()->getName() == 'bolsas') {
+      $item = new ItemBag();
+    } else {
+      $item = new ItemBox();
+      $item->setObservations($itemDB["observations"]);
+      $item->setNumberInks((int) $itemDB["number_inks"]);
+      $item->setTypeProduct($itemDB["type_product"]);
+    }
+    $item->setId($itemDB["id_quotations_details"]);
+    $item->setProduct($product);
+    $item->setMaterial($this->materialDao->findById($itemDB["material_id"]));
+    $item->setMeasurement($this->measurementDao->findById($itemDB["measurement_id"]));
+    $item->setQuantity((int) $itemDB["quantity"]);
+    $item->setPrice((int) $itemDB["price"]);
+    $item->setPrinting(filter_var($itemDB["printed"], FILTER_VALIDATE_BOOLEAN));
+    $item->setLam(filter_var($itemDB["laminated"], FILTER_VALIDATE_BOOLEAN));
+    $item->setPla(filter_var($itemDB["pla"], FILTER_VALIDATE_BOOLEAN));
+    return $item;
   }
 }

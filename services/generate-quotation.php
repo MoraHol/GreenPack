@@ -851,27 +851,26 @@ if (isset($_GET["id"])) {
           <td class="xl1510772" width="80" style="width:60pt"></td>
           <td class="xl1510772" width="116" style="width:87pt"></td>
         </tr>
-        <tr height="28" style="height:21.0pt">
-          <td colspan="3" height="28" class="xl6510772" style="height:21.0pt">NIT
+        <tr height="20" style="mso-height-source:userset;height:15.0pt">
+          <td colspan="3" height="20" class="xl7610772" style="height:15.0pt">NIT
             800,025,125-8</td>
           <td class="xl1510772"></td>
           <td colspan="2" class="xl8010772">COTIZACIÓN No</td>
-
         </tr>
-        <tr height="20" style="mso-height-source:userset;height:15.0pt">
-          <td colspan="3" height="20" class="xl6510772" style="height:15.0pt">Cra. 5 este No.
+        <tr height="28" style="mso-height-source:userset;height:15.0pt">
+          <td colspan="3" height="26" class="xl7610772" style="height:26px">Cra. 5 este No.
             20-69 Bodega # 6</td>
           <td class="xl1510772"></td>
           <td colspan="2" rowspan="3" class="xl8110772"><?= $quotation->getId() ?></td>
         </tr>
-        <tr height="20" style="mso-height-source:userset;height:15.0pt">
-          <td colspan="3" height="20" class="xl7610772" style="height:15.0pt">&nbsp;(57+1)
+        <tr height="28" style="mso-height-source:userset;height:15.0pt">
+          <td colspan="3" height="20" class="xl7610772" style="height:26px">&nbsp;(57+1)
             893 26 31 / 35/ 38/ 42</td>
           <td class="xl1510772"></td>
 
         </tr>
         <tr height="20" style="height:15.0pt">
-          <td colspan="3" height="20" class="xl6510772" style="height:15.0pt">Mosquera -
+          <td colspan="3" height="20" class="xl7610772" style="height:26px">Mosquera -
             Cundinamarca</td>
           <td class="xl1510772"></td>
 

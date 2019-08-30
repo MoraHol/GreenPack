@@ -2,6 +2,10 @@
 require_once __DIR__ . "/Item.php";
 class ItemBag extends Item implements JsonSerializable
 {
+  public function __construct()
+  {
+    parent::__construct();
+  }
   public function calculatePrice()
   {
     $directCost = $this->calculateDirectCost();

@@ -74,6 +74,7 @@ class MeasurementDao
     $this->db->close();
     return $measurement;
   }
+  
   function deleteByProduct($idMeasurement, $idProduct)
   {
     $this->db->connect();
@@ -83,6 +84,7 @@ class MeasurementDao
     $this->db->close();
     return $status;
   }
+
   function update($measurement)
   {
     $this->db->connect();
