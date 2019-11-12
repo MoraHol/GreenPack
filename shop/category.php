@@ -100,6 +100,10 @@
       .blog-banner div.text-center:first h1 {
       font-size: 14px;
     }
+    #title-category{
+      font-size: 20px!important;
+
+    }
     }
   </style>
 </head>
