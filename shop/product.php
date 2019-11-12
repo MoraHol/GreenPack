@@ -57,6 +57,7 @@ if ($product->getCategory()->getId() != 1) {
   <script src="/js/jquery.easing.1.3.js"></script>
 
   <style>
+    
     .flex-direction-nav {
       display: flex;
       justify-content: center;
