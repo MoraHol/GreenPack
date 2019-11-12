@@ -96,6 +96,11 @@
     .blog-banner div.text-center h1 {
       color: #fff !important;
     }
+    @media (max-width: 400px){
+      .blog-banner div.text-center:first h1 {
+      font-size: 14px;
+    }
+    }
   </style>
 </head>
 
@@ -139,11 +144,11 @@
     <div class="container h-100" style="background: url(<?= $category->getImage() ?>) no-repeat center;" id="container-image">
       <div class="blog-banner">
         <div class="text-center">
-          <h1><?= $category->getDescription() ?></h1>
+          <h1 id="title-category"><?= $category->getDescription() ?></h1>
         </div>
-        <!-- <div class="text-center">
-          
-        </div> -->
+        <div class="text-center" >
+          <a href="#categories-section" class="btn btn-success">Tú cotización en minutos</a>
+        </div>
       </div>
     </div>
   </section>
@@ -151,7 +156,7 @@
 
 
   <!-- ================ category section start ================= -->
-  <section class="section-margin--small mb-5">
+  <section class="section-margin--small mb-5" id="categories-section">
     <div class="container">
       <div class="row">
         <div class="col-xl-3 col-lg-4 col-md-5">
