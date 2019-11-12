@@ -51,7 +51,7 @@ if (isset($_SESSION["cart"])) {
                           <div class="cont-calculator ng-star-inserted">
                             <app-counter-product>
                               <div class="calculator"><button class="subtract" onclick="subtractQty('<?php echo $item->getId(); ?>')">
-                                  <div><span class="ng-star-inserted"><i class="iconf-delete"></i></span></div>
+                                  <div><span class="ng-star-inserted">-</span></div>
                                 </button>
                                 <div class="number" contenteditable="true" id="qty<?php echo $item->getId(); ?>"><?php echo $item->getQuantity(); ?></div><button class="plus" onclick="sumQty('<?php echo $item->getId(); ?>')">
                                   <div>+</div>
