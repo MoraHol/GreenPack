@@ -61,6 +61,15 @@ if ($product->getCategory()->getId() != 1) {
       .flex-direction-nav {
         display: none;
       }
+      .flex-direction-nav .flex-prev {
+        display: none;
+      
+    }
+
+    .flex-direction-nav .flex-next {
+      display: none;
+    }
+    
     }
     .flex-direction-nav {
       display: flex;
