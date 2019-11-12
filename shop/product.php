@@ -57,7 +57,11 @@ if ($product->getCategory()->getId() != 1) {
   <script src="/js/jquery.easing.1.3.js"></script>
 
   <style>
-    
+    @media screen and (max-width: 400px){
+      .flex-direction-nav {
+        display: none;
+      }
+    }
     .flex-direction-nav {
       display: flex;
       justify-content: center;
