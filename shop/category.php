@@ -326,19 +326,13 @@
 
   <script src="/js/jquery-3.2.1.min.js"></script>
   <script src="/js/bootstrap.bundle.min.js"></script>
-  <script src="/js/owl.carousel.min.js"></script>
   <script src="/js/jquery.nice-select.min.js"></script>
-  <script src="/js/nouislider.min.js"></script>
   <script src="/js/main-shop.js"></script>
 
-
-  <script src="/js/jquery.ajaxchimp.min.js"></script>
   <script src="/js/jquery.magnific-popup.min.js"></script>
   <script src="/js/owl.carousel.min.js"></script>
   <script src="/js/jquery.sticky.js"></script>
-  <script src="/js/slick.js"></script>
   <script src="/js/jquery.counterup.min.js"></script>
-  <script src="/js/waypoints.min.js"></script>
   <script src="/js/main.js"></script>
   <script src="/js/back-top.js"></script>
   <script src="/js/bootstrap.min.js"></script>

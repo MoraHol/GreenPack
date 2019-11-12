@@ -6,7 +6,6 @@
   <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="js/jquery-1.11.0.min.js"></script>
-  <script src="https://kit.fontawesome.com/58e9d196f8.js"></script>
   <link href="/images/icon.png" rel="icon" type="image/png">
   <!-- Custom Theme files -->
   <link href="css/styles.css" rel="stylesheet" type="text/css" media="all" />
@@ -31,8 +30,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <link rel="stylesheet" href="/css/animate.css">
   <link rel="stylesheet" href="/css/basket.css">
   <!-- start-smoth-scrolling -->
-  <script type="text/javascript" src="/js/move-top.js"></script>
-  <script type="text/javascript" src="/js/jquery.easing.1.3.js"></script>
+  <!-- <script type="text/javascript" src="/js/move-top.js"></script> -->
+  <!-- <script type="text/javascript" src="/js/jquery.easing.1.3.js"></script> -->
   <script type="text/javascript">
     $(document).ready(function($) {
       $(".scroll").click(function(event) {
@@ -123,7 +122,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <section class="faq-area section-gap" id="faq">
     <div class="container">
       <div class="row align-items-center" id="love">
-        <div class="col-sm 6 wow fadeIn" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.1s;">
+        <div class="col-sm-6 order-md-1 order-2 wow fadeIn" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.1s;">
           <h2 class="normal f30 fb text-uppercase" id="love-title">El amor de GreenPack hacia el medio ambiente</h2>
           <br>
           <div class="fr-view" id="love-content"></div>
@@ -132,12 +131,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
           <p class="text-center"><img src="/images/greenbags_logo_verde.png" alt="" width="150"><img src="/images/greenpack_logo_verde.png" alt="" width="150"> <img src="/images/empaques_verdes_logo_verde.png" alt="" width="150"></p> -->
           <br>
         </div>
-        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.7s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.1s;"><img class="img-responsive" width="581" src="/images/sea.jpg" alt="" id="love-image">
+        <div class="col-sm-6 wow fadeIn order-md-2 order-1" data-wow-delay="0.7s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.1s;"><img class="img-responsive" width="581" src="/images/sea.jpg" alt="" id="love-image">
         </div>
       </div>
       <div class="row align-items-center" id="compromise">
         <div class="col-sm-6 wow fadeIn" data-wow-delay="0.7s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.1s;"><img class="img-responsive" width="520" src="/images/AdobeStock_256856590_Preview.jpeg" alt="" id="compromise-image"></div>
-        <div class="col-sm 6 wow fadeIn" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.1s;">
+        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.1s;">
           <h2 class="normal f30 fb text-uppercase" id="compromise-title">Nuestro compromiso</h2>
           <br>
           <div class="fr-view" id="compromise-content"></div>
@@ -149,7 +148,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
       </div>
       <div class="row align-items-center" id="about-us">
-        <div class="col-sm 6 wow fadeIn" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.1s;">
+        <div class="col-sm-6 wow fadeIn order-2 order-md-1" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.1s;">
           <h2 class="normal f30 fb text-uppercase" id="about-us-title">Quienes Somos</h2>
           <br>
           <div class="fr-view" id="about-us-content"></div>
@@ -158,7 +157,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
           <p class="f24 normal">En el año 2015 cumplimos 10 años ejecutando y renovando nuestra visión generada en el 2006: Ser reconocida en Colombia como la primera elección del mercado de empaques biodegradables.</p>
           <p class="f24 normal">Contamos con los mejores clientes de Colombia y exportamos a varios países de América y Europa.</p> -->
         </div>
-        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.7s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.1s;"><img class="img-responsive" width="581" src="https://greenpack.com.co/wp-content/uploads/2017/07/bg-nuestra-empresa.jpg" alt="" id="about-us-image">
+        <div class="col-sm-6 wow fadeIn order-1 order-md-2" data-wow-delay="0.7s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.1s;"><img class="img-responsive" width="581" src="https://greenpack.com.co/wp-content/uploads/2017/07/bg-nuestra-empresa.jpg" alt="" id="about-us-image">
         </div>
       </div>
     </div>
@@ -167,10 +166,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <!-- End faq Area -->
   <?php include("partials/footer.html") ?>
   
-  <script src="js/jquery-2.2.4.min.js"></script>
+  <!-- <script src="js/jquery-2.2.4.min.js"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
   <script src="js/bootstrap.min.js"></script>
-  <script src="js/jquery.ajaxchimp.min.js"></script>
   <script src="js/jquery.magnific-popup.min.js"></script>
   <script src="js/owl.carousel.min.js"></script>
   <script src="js/jquery.sticky.js"></script>
@@ -178,7 +176,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <script src="js/jquery.counterup.min.js"></script>
   <script src="js/waypoints.min.js"></script>
   <script src="js/main.js"></script>
-  <script src="js/bootstrap.min.js"></script>
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   <script src="/js/translate.js"></script>
   <script>

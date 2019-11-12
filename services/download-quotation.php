@@ -3,7 +3,9 @@ require_once dirname(__DIR__) . "/vendor/dompdf/autoload.inc.php";
 
 use Dompdf\Dompdf;
 
-$file = "http://" . $_SERVER["HTTP_HOST"] . "/services/generate-quotation.php?id=" . $_GET["id"];
+$protocol = isset($_SERVER["HTTPS"]) ? "https" : "http";
+
+$file = "$protocol://" . $_SERVER["HTTP_HOST"] . "/services/generate-quotation.php?id=" . $_GET["id"];
 $curl = curl_init();
 curl_setopt_array($curl, [
     CURLOPT_RETURNTRANSFER => true,

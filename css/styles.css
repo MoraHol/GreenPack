@@ -3000,7 +3000,7 @@ span.glyphicon.glyphicon-envelope {
     }
 
     .navbar-brand {
-        height: 0px;
+        
     }
 }
 
@@ -3008,7 +3008,6 @@ span.glyphicon.glyphicon-envelope {
     .logo {
         width: 15%;
         float: left;
-        height: 0px;
     }
 
     .navbar {

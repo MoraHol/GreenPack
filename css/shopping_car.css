@@ -74,12 +74,12 @@ button.btn-loading>i {
     z-index: 13;
     visibility: hidden;
     opacity: 0;
-    transition: .2s
+    transition: .2s;
 }
 
 .basket-container.show {
     opacity: 1;
-    visibility: visible
+    visibility: visible;
 }
 
 .basket-container.show .basket-box {

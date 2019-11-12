@@ -808,12 +808,23 @@ if (isset($_GET["id"])) {
       mso-pattern: auto;
       white-space: nowrap;
     }
+
+    .break-word {
+      -ms-word-break: break-all;
+      word-break: break-all;
+      word-break: break-word;
+
+      -webkit-hyphens: auto;
+      -moz-hyphens: auto;
+      -ms-hyphens: auto;
+      hyphens: auto;
+    }
   </style>
 </head>
 
 <body>
 
-  <div id="Plantilla_Cotizacion (3)_10772" align="center" x:publishsource="Excel" style="wdith:600px">
+  <div id="Plantilla_Cotizacion (3)_10772" align="center" x:publishsource="Excel">
 
     <table border="0" cellpadding="0" cellspacing="0" width="600" style="
  border-collapse:
@@ -1049,8 +1060,8 @@ if (isset($_GET["id"])) {
 
         </tr>
         <tr height="21" style="mso-height-source:userset;height:15.75pt">
-          <td colspan="7" rowspan="3" height="63" class="xl9210772" style="border-right:.5pt solid black;
-  border-bottom:.5pt solid black;height:47.25pt; vertical-align: top!important"><?= $quotation->getExtraInformation() ?></td>
+          <td colspan="7" rowspan="3" height="63" class="xl9210772 break-word" style="border-right:.5pt solid black;
+  border-bottom:.5pt solid black;height:47.25pt; vertical-align: top!important; overflow-wrap: break-word;"><?= $quotation->getExtraInformation() ?></td>
           <td class="xl6510772"></td>
           <td class="xl1510772">Subtotal</td>
           <td colspan="2" class="xl7310772"><span style="mso-spacerun:yes">&nbsp;</span>$<span style="mso-spacerun:yes">&nbsp;</span><?= money_format("%!i", $quotation->calculateTotal()) ?></td>

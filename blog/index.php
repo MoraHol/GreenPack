@@ -92,6 +92,9 @@ if ($_GET["page"] > $pages || $_GET["page"] <= 0) {
     }
 
     @media(max-width: 400px) {
+      .row{
+        margin-right: 0;
+      }
       .carousel-slick .carousel-item-notice {
         color: #fff;
         padding-top: 201px;
@@ -277,7 +280,6 @@ if ($_GET["page"] > $pages || $_GET["page"] <= 0) {
   <div id="test"></div>
   <a href="#" id="back-to-top" title="Regresar al inicio"><i class="fas fa-arrow-up"></i></a>
   <script src="/js/bootstrap.min.js"></script>
-  <script src="/js/jquery.ajaxchimp.min.js"></script>
   <script src="/js/jquery.magnific-popup.min.js"></script>
   <script src="/js/owl.carousel.min.js"></script>
   <script src="/js/jquery.sticky.js"></script>

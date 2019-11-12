@@ -19,9 +19,9 @@ if ($product->getCategory()->getId() != 1) {
 <head>
   <meta charset="UTF-8">
   <?php include("../partials/metaproperties.html") ?>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title><?= $product->getName(); ?> | Greenpack</title>
+  <title> <?= $product->getName(); ?> | Greenpack</title>
   <!--============= CSS ======================== -->
 
   <link rel="stylesheet" href="/css/styles.css">
@@ -486,7 +486,7 @@ if ($product->getCategory()->getId() != 1) {
     function verifyMinQuantityValue() {
       if ($('#sst').val() < verifyMinQuantity()) {
         $('#btnCotizar').addClass("disabled")
-        $('#help-quantity').html(`<br><div class="alert alert-danger alert-min-quantity" role="alert"><span>Cantidad minima ${verifyMinQuantity()} unidades. ¿Te gustaría cotizar cantidades menores? te invitamos a visitar a nuestro aliado Greenpoint (<a style="color:white" href="//www.greenpointonline.com.co" target="_blank">www.greenpointonline.com.co</a>)</div>`)
+        $('#help-quantity').html(`<br><div class="alert alert-danger alert-min-quantity" role="alert"><span>Cantidad minima ${verifyMinQuantity()} unidades. ¿Te gustaría cotizar cantidades menores? te invitamos a visitar a nuestro aliado Greenpoint (<a style="color:green" href="//www.greenpointonline.com.co" target="_blank">www.greenpointonline.com.co</a>)</div>`)
         $('#help-quantity').fadeIn()
         $('.single').css('margin-bottom', '550px')
       } else {

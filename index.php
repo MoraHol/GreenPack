@@ -29,6 +29,8 @@ $conversor = new ConversorDate(); ?>
   <link href="https://fonts.googleapis.com/css?family=Concert+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/basket.css">
   <link rel="stylesheet" href="/css/translate.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <script type="text/javascript">
     $(document).ready(function($) {
       $(".scroll").click(function(event) {
@@ -77,6 +79,11 @@ $conversor = new ConversorDate(); ?>
         height: 600px !important;
       }
     }
+    @media(max-width: 400px) {
+      .row{
+        margin-right: 0;
+      }
+    }
 
     .counter.js-counter {
       font-family: 'Concert One', cursive !important;
@@ -120,7 +127,7 @@ $conversor = new ConversorDate(); ?>
       <div class="row d-flex justify-content-center align-items-center">
         <div class="menu-content pb-40 col-lg-8">
           <div class="title text-center">
-            <h1 class="mb-10" style="font-size: 2.5rem; font-weight: bold;     font-family: 'Poppins', sans-serif;color: #222222;line-height: 1.2em !important;">Con Materiales Biodegradables y Covertibles en abono</h1>
+            <h1 class="mb-10" style="font-size: 2.5rem; font-weight: bold;     font-family: 'Poppins', sans-serif;color: #222222;line-height: 1.2em !important;">Con Materiales Biodegradables y Convertibles en abono</h1>
             <p style="font-size: 0.9375rem;font-family: 'Poppins', sans-serif;font-weight: 300;color: #656565;line-height: 1.6;margin-top: 0;margin-bottom: 1rem;">Un empaque innovador y totalmente ecológico.</p>
           </div>
         </div>
