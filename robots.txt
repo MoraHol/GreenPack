@@ -2,4 +2,4 @@
 User-agent: *
 Disallow: 
 Disallow: /cgi-bin/
-Sitemap: en.teenus.com.co/sitemap.xml
+Sitemap: https://en.teenus.com.co/sitemap.xml
