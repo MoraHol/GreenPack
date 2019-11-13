@@ -170,16 +170,16 @@
               <li class="common-filter">
                 <form action="#">
                   <ul>
-                    <li class="filter-list text-capitalize"><a href="category.php?id=1&page=1">Bolsas<span> (<?php echo count($productDao->findByCategory(1)); ?>)</span></a></li>
-                    <li class="filter-list text-capitalize"><a href="#cajas" class="accordion" data-toggle="collapse">cajas <span> (<?php echo count($productDao->findByCategory(2)); ?>)</span></a>
+                    <li class="filter-list text-capitalize"><a href="category.php?id=1&page=1">Bolsas<span> (<?= count($productDao->findByCategory(1)); ?>)</span></a></li>
+                    <li class="filter-list text-capitalize"><a href="#cajas" class="accordion" data-toggle="collapse">cajas <span> (<?= count($productDao->findByCategory(2)); ?>)</span></a>
                       <ul id="cajas" class="category collapse">
-                        <li class="child-category text-capitalize"><a href="category.php?id=3&page=1">Cajas de exhibir <span> (<?php echo count($productDao->findByCategory(3)); ?>)</span></a></li>
-                        <li class="child-category text-capitalize"><a href="category.php?id=4&page=1">Cajas de llevar <span> (<?php echo count($productDao->findByCategory(4)); ?>)</span></a></li>
-                        <li class="child-category text-capitalize"><a href="category.php?id=5&page=1">Cajas de servir<span> (<?php echo count($productDao->findByCategory(5)); ?>)</span></a></li>
+                        <li class="child-category text-capitalize"><a href="category.php?id=3&page=1">Cajas de exhibir <span> (<?= count($productDao->findByCategory(3)); ?>)</span></a></li>
+                        <li class="child-category text-capitalize"><a href="category.php?id=4&page=1">Cajas de llevar <span> (<?= count($productDao->findByCategory(4)); ?>)</span></a></li>
+                        <li class="child-category text-capitalize"><a href="category.php?id=5&page=1">Cajas de servir<span> (<?= count($productDao->findByCategory(5)); ?>)</span></a></li>
                       </ul>
                     </li>
-                    <li class="filter-list text-capitalize"><a href="category.php?id=6&page=1">Laminas<span> (<?php echo count($productDao->findByCategory(6)); ?>)</span></a></li>
-                    <li class="filter-list text-capitalize"><a href="category.php?id=7&page=1">Productos especiales<span> (<?php echo count($productDao->findByCategory(7)); ?>)</span></a></li>
+                    <li class="filter-list text-capitalize"><a href="category.php?id=6&page=1">Laminas<span> (<?= count($productDao->findByCategory(6)); ?>)</span></a></li>
+                    <li class="filter-list text-capitalize"><a href="category.php?id=7&page=1">Productos especiales<span> (<?= count($productDao->findByCategory(7)); ?>)</span></a></li>
                   </ul>
                 </form>
               </li>
@@ -213,17 +213,17 @@
               <div class="col-lg-3">
                 <div class="card text-center card-product zoom-in">
                   <div class="card-product__img">
-                    <img class="card-img" src="<?php echo $product->getImages()[0]->getUrl(); ?>">
+                    <img class="card-img" src="<?= $product->getImages()[0]->getUrl(); ?>">
                     <ul class="card-product__imgOverlay">
-                      <li><a href="product.php?id=<?php echo $product->getId() ?>"><i class="ti-search"></i> Cotizar</a></li>
+                      <li><a href="product.php?id=<?= $product->getId() ?>"><i class="ti-search"></i> Cotizar</a></li>
                     </ul>
                   </div>
                   <div class="card-body">
                     <!-- <p><?php
                               //echo strtoupper($product->getCategory()->getName());
                               ?></p> -->
-                    <h4 class="card-product__title"><a href="product.php?id=<?php echo $product->getId() ?>"><?php echo $product->getName(); ?></a></h4>
-                    <!-- <p class="card-product__price">$<?php echo $product->getPrice(); ?></p> -->
+                    <h4 class="card-product__title"><a href="product.php?id=<?= $product->getId() ?>"><?= $product->getName(); ?></a></h4>
+                    <!-- <p class="card-product__price">$<?= $product->getPrice(); ?></p> -->
                   </div>
                 </div>
               </div>
@@ -237,7 +237,7 @@
               <!-- pagination -->
               <div class="col-md-12">
                 <div class="post-pagination">
-                  <a href="category.php?id=<?php echo $_GET["id"]; ?>&page=<?php echo $_GET["page"] - 1; ?>#products" class="pagination-back pull-left btn <?php echo $_GET["page"] <= 1 ? "disabled" : ""; ?>">Anterior</a>
+                  <a href="category.php?id=<?= $_GET["id"]; ?>&page=<?= $_GET["page"] - 1 < 1 ? 1 : $_GET["page"] - 1 ?>#products" class="pagination-back pull-left btn <?= $_GET["page"] <= 1 ? "disabled" : ""; ?>">Anterior</a>
                   <ul class="pages">
                     <?php
                     for ($i = 0; $i < $pages; $i++) {
@@ -249,7 +249,7 @@
                     }
                     ?>
                   </ul>
-                  <a href="category.php?id=<?php echo $_GET["id"]; ?>&page=<?php echo $_GET["page"] + 1; ?>#products" class="pagination-next pull-right btn <?php echo $_GET["page"] >= $pages ? "disabled" : ""; ?>">Siguiente</a>
+                  <a href="category.php?id=<?= $_GET["id"]; ?>&page=<?= $_GET["page"] + 1 >= $pages ? $pages : $_GET["page"] + 1?>#products" class="pagination-next pull-right btn <?= $_GET["page"] >= $pages ? "disabled" : ""; ?>">Siguiente</a>
                 </div>
               </div>
               <!-- pagination -->
