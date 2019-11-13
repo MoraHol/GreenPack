@@ -160,7 +160,7 @@ if ($_GET["page"] > $pages || $_GET["page"] <= 0) {
           foreach ($noticesLastest as $noticeLastest) { ?>
           <div class="carousel-item-notice ">
             <span class="title">NOTICIAS</span>
-            <span class="notice"><?php echo $noticeLastest->getTitle(); ?></span>
+            <span class="notice"><?= $noticeLastest->getTitle(); ?></span>
           </div>
           <?php } ?>
         </div>
@@ -189,17 +189,17 @@ if ($_GET["page"] > $pages || $_GET["page"] <= 0) {
                 <div style="margin-bottom: 6px;">
                   <div style="float:left"><i class="fas fa-fw fa-eye"></i> VISITAS: <span><?= $notice->getHits() ?></span></div>
                   <div class="text-right">
-                    <span class=""><?php echo $notice->getCreatedAt()["day"];
+                    <span class=""><?= $notice->getCreatedAt()["day"];
                                       echo " de " .  " " . $conversor->monthToString($notice->getCreatedAt()["month"]) . ", " . $notice->getCreatedAt()["year"];; ?></span>
                   </div>
                 </div>
 
                 <div class="blog-img">
-                  <a href="blog-post.php?id=<?php echo $notice->getId() ?>">
-                    <img height="264" src="<?php echo $notice->getImage() ?>" alt="">
+                  <a href="blog-post.php?id=<?= $notice->getId() ?>">
+                    <img height="264" src="<?= $notice->getImage() ?>" alt="">
                   </a>
                 </div>
-                <h4><a href="blog-post.php?id=<?php echo $notice->getId() ?>"><?php echo $notice->getTitle() ?>.</a></h4>
+                <h4><a href="blog-post.php?id=<?= $notice->getId() ?>"><?= $notice->getTitle() ?>.</a></h4>
                 <hr>
               </div>
             </div>
@@ -214,7 +214,7 @@ if ($_GET["page"] > $pages || $_GET["page"] <= 0) {
             <!-- pagination -->
             <div class="col-md-12">
               <div class="post-pagination">
-                <a href="/blog/?page=<?php echo $_GET["page"] - 1 ?>" class="pagination-back pull-left btn <?php echo $_GET["page"] <= 1 ? "disabled" : ""; ?>">Anterior</a>
+                <a href="/blog/?page=<?= $_GET["page"] - 1 < 1 ? 1 : $_GET["page"] - 1  ?>" class="pagination-back pull-left btn <?= $_GET["page"] <= 1 ? "disabled" : ""; ?>">Anterior</a>
                 <ul class="pages">
                   <?php for ($i = 0; $i < $pages; $i++) {
                     if ($_GET["page"] == $i + 1) {
@@ -224,7 +224,7 @@ if ($_GET["page"] > $pages || $_GET["page"] <= 0) {
                     }
                   } ?>
                 </ul>
-                <a href="/blog/?page=<?php echo $_GET["page"] + 1 ?>" class="pagination-next pull-right btn <?php echo $_GET["page"] >= $pages ? "disabled" : ""; ?>">Siguiente</a>
+                <a href="/blog/?page=<?= $_GET["page"] + 1 >= $pages ? $pages : $_GET["page"] + 1?>" class="pagination-next pull-right btn <?= $_GET["page"] >= $pages ? "disabled" : ""; ?>">Siguiente</a>
               </div>
             </div>
             <!-- pagination -->
@@ -253,11 +253,11 @@ if ($_GET["page"] > $pages || $_GET["page"] <= 0) {
             foreach ($RecentsNotices as $notice) { ?>
             <!-- single posts -->
             <div class="single-post">
-              <a class="single-post-img" href="blog-post.php?id=<?php echo $notice->getId() ?>">
-                <img src="<?php echo $notice->getImage() ?>" alt="">
+              <a class="single-post-img" href="blog-post.php?id=<?= $notice->getId() ?>">
+                <img src="<?= $notice->getImage() ?>" alt="">
               </a>
-              <a href="blog-post.php?id=<?php echo $notice->getId() ?>" style="line-height: 0px;"><small><?php echo $notice->getTitle() ?></small></a>
-              <!-- <p><small><?php echo $notice->getCreatedAt()["day"];
+              <a href="blog-post.php?id=<?= $notice->getId() ?>" style="line-height: 0px;"><small><?= $notice->getTitle() ?></small></a>
+              <!-- <p><small><?= $notice->getCreatedAt()["day"];
                                 echo " de " .  " " . $conversor->monthToString($notice->getCreatedAt()["month"]) . ", " . $notice->getCreatedAt()["year"]; ?></small></p> -->
             </div>
             <!-- /single posts -->
