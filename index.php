@@ -191,7 +191,7 @@ $conversor = new ConversorDate(); ?>
       <div class="col-sm-4 g-margin-b-30--xs g-margin-b-0--md">
         <!-- Bloque 1 -->
         <article>
-          <img class="img-responsive" src="<?php echo $notice->getImage(); ?>">
+          <img class="img-responsive lazyload"   src="<?php echo $notice->getImage();  ?>">
           <div class="g-bg-color--white g-box-shadow__dark-lightest-v2 g-text-center--xs g-padding-x-40--xs g-padding-y-40--xs" style="padding-top: 0.5rem;">
 
             <div class="row g-font-size-14--xs g-font-weight--700 g-color--primary">
@@ -282,7 +282,8 @@ $conversor = new ConversorDate(); ?>
   <script src="js/jquery.counterup.min.js"></script>
   <script src="js/waypoints.min.js"></script>
   <script src="js/back-top.js"></script>
-  <script src="js/bootstrap.min.js"></script>
+  <script src="js/bootstrap.min.js" async></script>
+  <script src="/js/lazysizes.min.js" async></script>
 
   <script src="https://technext.github.io/shop/js/main.js"></script>
   <script src="https://technext.github.io/shop/js/jquery.countTo.js"></script>
@@ -349,7 +350,7 @@ $conversor = new ConversorDate(); ?>
     $.get('/admin/texts/home/api/get_clients.php', (data, status) => {
       let clients = data
       clients.forEach(client => {
-        $('#clients-slides').append(`<li><img src="${client.image_url}" alt="" width="300"></li>`)
+        $('#clients-slides').append(`<li><img src="${client.image_url}" alt="" width="300" class="lazyload"></li>`)
       });
     })
     $.get('/admin/texts/home/api/get_banner.php', (slides, status) => {
