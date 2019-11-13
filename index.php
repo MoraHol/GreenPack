@@ -17,7 +17,7 @@ $conversor = new ConversorDate(); ?>
   <link rel="stylesheet" href="css/magnific-popup.css">
   <link rel="stylesheet" href="css/animate.min.css">
   <link rel="stylesheet" href="css/owl.carousel.css">
-  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/main.min.css">
   <link rel="stylesheet" href="css/back-top.css">
   <link rel="stylesheet" href="css/footer.css">
   <link rel="stylesheet" href="css/spinner.css">
@@ -25,7 +25,7 @@ $conversor = new ConversorDate(); ?>
   <link rel="stylesheet" href="css/all.min.css">
   <link rel="stylesheet" href="/css/style-counters-index.css">
   <link rel="stylesheet" href="https://teenus.com.co/css/global/global.css">
-  <link rel="stylesheet" href="/css/style-index-notices.css">
+  <link rel="stylesheet" href="/css/style-index-notices.min.css">
   <link href="https://fonts.googleapis.com/css?family=Concert+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/basket.css">
   <link rel="stylesheet" href="/css/translate.css">
@@ -278,7 +278,7 @@ $conversor = new ConversorDate(); ?>
   <script src="js/jquery.magnific-popup.min.js"></script>
   <script src="js/owl.carousel.min.js"></script>
   <script src="js/jquery.sticky.js"></script>
-  <script src="js/slick.js"></script>
+  <script src="js/slick.min.js"></script>
   <script src="js/jquery.counterup.min.js"></script>
   <script src="js/waypoints.min.js"></script>
   <script src="js/back-top.js"></script>

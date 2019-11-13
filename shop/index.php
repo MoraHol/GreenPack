@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="/css/font-awesome.min.css">
   <link rel="stylesheet" href="/css/style-shop-alibaba.css">
   <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
-  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/main.min.css">
   <link rel="stylesheet" href="/css/back-top.css">
   <link rel="stylesheet" href="/css/footer.css">
   <link rel="stylesheet" href="/css/spinner.css">

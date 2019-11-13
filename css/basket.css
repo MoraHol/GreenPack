@@ -1,9 +1,9 @@
-@import url('/css/shopping_car.css');
-@import url('/css/products-basket.css');
-@import url('/css/carousel-stores.css');
-@import url('/css/products.css');
-@import url('/css/stores.css');
-@import url('/css/index-page.css');
+@import url('/css/shopping_car.min.css');
+@import url('/css/products-basket.min.css');
+@import url('/css/carousel-stores.min.css');
+@import url('/css/products.min.css');
+@import url('/css/stores.min.css');
+@import url('/css/index-page.min.css');
 
 .cont-products-basket button, .basket-footer  button{
     border: none;

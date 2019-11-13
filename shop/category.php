@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="/css/magnific-popup.css">
   <link rel="stylesheet" href="/css/animate.min.css">
   <link rel="stylesheet" href="/css/owl.carousel.css">
-  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/main.min.css">
   <link rel="stylesheet" href="/css/back-top.css">
   <link rel="stylesheet" href="/css/footer.css">
   <link rel="stylesheet" href="/css/spinner.css">
