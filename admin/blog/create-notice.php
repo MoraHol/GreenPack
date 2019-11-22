@@ -26,10 +26,6 @@ include("../partials/verify-session.php");
 
   <!-- Include JS file. -->
   <script type="text/javascript" src="/vendor/froala_editor.pkgd.min.js"></script>
-
-  <?php if ($_SERVER["HTTP_HOST"] != "localhost") {
-    echo "<style>.fr-wrapper>div:first-child {display: none !important;}</style>";
-  } ?>
 </head>
 
 <body class="white-edition">

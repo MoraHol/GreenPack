@@ -38,6 +38,12 @@
           <p>Personalizar</p>
         </a>
       </li>
+      <li class="nav-item" id="email-item">
+        <a href="/admin/email_marketing.php" class="nav-link">
+          <i class="fas fa-mail-bulk"></i>
+          <p>Email Marketing</p>
+        </a>
+      </li>
       <?php } ?>
       <?php if ($admin->getRole() == 2) { ?>
       <li class="nav-item" id="product-item">
