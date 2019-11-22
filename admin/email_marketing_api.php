@@ -5,7 +5,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/vendor/PHPMailer/class.phpmailer.php"
 require_once $_SERVER["DOCUMENT_ROOT"] . "/vendor/PHPMailer/class.smtp.php";
 
 $response = new stdClass();
-header('Content-Type', 'json/application');
+header('Content-Type: application/json');
 
 if (
   isset($_POST["text"]) && isset($_POST["checkboxClient"]) && isset($_POST["checkboxSubs"])
@@ -24,14 +24,13 @@ if (
       array_push($destinataries, $client->email);
     }
   }
-  if ($checkboxClient) {
+  if ($checkboxSubs) {
     $suscribers = $clientDao->findAllSuscribers();
     foreach ($suscribers as $suscriber) {
       array_push($destinataries, $suscriber->email);
     }
   }
-
-
+  
 
   // envio de email
   $mail = new PHPMailer();
