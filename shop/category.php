@@ -193,9 +193,9 @@
             </div>
             <div>
               <div class="input-group filter-bar-search mr-auto">
-                <input type="text" placeholder="Buscar" id="in-search">
+                <input class="form-control" type="text" placeholder="Buscar" id="in-search">
                 <div class="input-group-append">
-                  <button type="button" id="btn-search"><i class="fas fa-search"></i></button>
+                  <button class="btn" style="" type="button" id="btn-search"><i class="fas fa-search"></i></button>
                 </div>
               </div>
             </div>
