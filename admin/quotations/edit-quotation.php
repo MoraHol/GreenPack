@@ -117,14 +117,16 @@ $quotation = $quotationDao->findById($_GET["id"]);
                     <h5><?= $item->getProduct()->getName() ?></h5>
                     <br>
                     <p><span class="text-primary">Impresion:</span> <?= $item->isPrinting() ? "SI" : "NO" ?></p>
-                    <?php if ($item->getProduct()->getCategory()->getId() == 1) { ?>
+                    <?php if ($item->getProduct()->getCategory()->getId() == 1  && $item->getProduct()->getId() != $_ENV["id_sacos"]) { ?>
                       <p><span class="text-primary">Ventanilla:</span> <?= $item->isPla() ? "SI" : "NO" ?></p>
                       <p><span class="text-primary">Laminada:</span> <?= $item->isLam() ? "SI" : "NO" ?></p>
                       <p><span class="text-primary">Material:</span> <?= $item->getMaterial()->getName() ?></p>
                       <?php } else {
-                          if ($item->isPrinting()) { ?>
-                        <p><span class="text-primary">Número de tintas:</span> <?= $item->getNumberInks() ?></p>
-                      <?php } ?>
+                          if ($item->getProduct()->getCategory()->getId() == 2 || $item->getProduct()->getCategory()->getParentcategory() == 2) {
+                            if ($item->isPrinting()) { ?>
+                          <p><span class="text-primary">Número de tintas:</span> <?= $item->getNumberInks() ?></p>
+                      <?php }
+                          } ?>
                       <p><span class="text-primary">Tipo de Producto:</span> <?= $item->getTypeProduct() ?></p>
                       <p><span class="text-primary">Material: <select class="form-control select-option-material" id="<?= $item->getId() ?>"><?php foreach ($item->getProduct()->getMaterials() as  $material) { ?>
                               <option <?= $item->getMaterial() == $material ? "selected" : "" ?> value="<?= $material->getId() ?>"><?= $material->getName() ?></option>
@@ -135,8 +137,10 @@ $quotation = $quotationDao->findById($_GET["id"]);
                     <p>
                       <ul class="measurements list-inline">
                         <li class="list-inline-item"><span class="text-primary">Ancho:</span> <?= $item->getMeasurement()->getWidth() ?></li>
-                        <li class="list-inline-item"><span class="text-primary"><?= $item->getProduct()->getCategory()->getId() == 1 ? "Fuelle" : "Alto" ?>:</span> <?= $item->getMeasurement()->getHeight() ?></li>
-                        <li class="list-inline-item"><span class="text-primary">Largo:</span> <?= $item->getMeasurement()->getLength() ?></li>
+                        <li class="list-inline-item"><span class="text-primary"><?= $item->getProduct()->getCategory()->getId() == 1 ? "Fuelle" : $item->getProduct()->getCategory()->getId() == 6 ? 'Largo' : 'Alto' ?>:</span> <?= $item->getMeasurement()->getHeight() ?></li>
+                        <?php if( $item->getProduct()->getCategory()->getId() != 6){?>
+                          <li class="list-inline-item"><span class="text-primary">Largo:</span> <?= $item->getMeasurement()->getLength() ?></li>
+                        <?php } ?>
                       </ul>
                     </p>
                     <?php if ($item->getProduct()->getCategory()->getId() != 1) { ?>
@@ -160,7 +164,6 @@ $quotation = $quotationDao->findById($_GET["id"]);
 
                 </div>
                 <hr>
-
               <?php } ?>
             </div>
             <div class="card">

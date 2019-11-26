@@ -23,6 +23,7 @@ if ($_GET["email"]) {
   $mail->FromName = 'GreenPack';
   $mail->AddAddress($email);
   $mail->Subject = "Nueva Cotización"; // Este es el titulo del email.
+  $protocol = isset($_SERVER["HTTPS"]) ? 'https' : 'http';
   $mail->Body = "<!DOCTYPE html>
   <html>
   <head>

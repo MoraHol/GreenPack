@@ -20,7 +20,8 @@ if (isset($_FILES["photo"])) {
 	if (move_uploaded_file($tmp_name, $url)) {
 		header('Content-type: application/json');
 		$url = new stdClass();
-		$url->link ="https://$host/upload/img/$name";
+		$protocol = isset($_SERVER["HTTPS"]) ? 'https' : 'http';
+		$url->link ="$protocol://$host/upload/img/$name";
 		echo json_encode($url);
 	} else {
 		http_response_code(400);

@@ -8,6 +8,9 @@ $productDao = new ProductDao();
 $product = $productDao->findById($_GET["id"]);
 $tabProductDao = new TabProductDao();
 $tabs = $tabProductDao->findByProduct($product);
+// if ($product->getCategory()->getId() != 1) {
+//   header("Location: product_copy.php?id=" . $product->getId());
+// }
 ?>
 
 <!DOCTYPE html>
@@ -16,9 +19,9 @@ $tabs = $tabProductDao->findByProduct($product);
 <head>
   <meta charset="UTF-8">
   <?php include("../partials/metaproperties.html") ?>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title><?= $product->getName(); ?> | Greenpack</title>
+  <title> <?= $product->getName(); ?> | Greenpack</title>
   <!--============= CSS ======================== -->
 
   <link rel="stylesheet" href="/css/styles.css">
@@ -54,6 +57,20 @@ $tabs = $tabProductDao->findByProduct($product);
   <script src="/js/jquery.easing.1.3.js"></script>
 
   <style>
+    @media screen and (max-width: 400px){
+      .flex-direction-nav {
+        display: none;
+      }
+      .flex-direction-nav .flex-prev {
+        display: none;
+      
+    }
+
+    .flex-direction-nav .flex-next {
+      display: none;
+    }
+    
+    }
     .flex-direction-nav {
       display: flex;
       justify-content: center;
@@ -94,16 +111,6 @@ $tabs = $tabProductDao->findByProduct($product);
 
     #collapseTwo a {
       color: #000;
-    }
-
-    @media (min-width: 800px) {
-      .single {
-        margin-bottom: 500px;
-      }
-    }
-
-    #container-num-inks {
-      display: none;
     }
   </style>
 
@@ -180,18 +187,24 @@ $tabs = $tabProductDao->findByProduct($product);
                             <input type="checkbox" class="checkboxPrinting" id="impresion">
                             <span class="slider round"></span>
                             <span class="questionPrinting">NO</span>
+                          </label></div>
+                        <div class="col">
+                          <span>Ventanilla:</span>
+                          <br>
+                          <label class="switch">
+                            <input type="checkbox" class="checkboxPrinting" id="ventanilla">
+                            <span class="slider round"></span>
+                            <span class="questionPrinting">NO</span>
                           </label>
                         </div>
-                        <div class="col" id="container-num-inks">
-                          <div class="form-group">
-                            <label for="num-inks">A cuantas tintas lo quieres:</label>
-                            <select id="num-inks" class="form-control">
-                              <option value="1">1 tinta</option>
-                              <option value="2">2 tintas</option>
-                              <option value="3">3 tintas</option>
-                              <option value="4">4 tintas</option>
-                            </select>
-                          </div>
+                        <div class="col">
+                          <span>Laminada:</span>
+                          <br>
+                          <label class="switch">
+                            <input type="checkbox" class="checkboxPrinting" id="laminada">
+                            <span class="slider round"></span>
+                            <span class="questionPrinting">NO</span>
+                          </label>
                         </div>
                       </div>
                     </div>
@@ -202,15 +215,16 @@ $tabs = $tabProductDao->findByProduct($product);
                     <h2 class="mb-0 panel-title">
                       <a class="btn btn-link collapsed text-left" role="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                         <i class="more-less fas fa-plus"></i>
-                        Tipo de Producto
+                        Materiales
                       </a>
                     </h2>
                   </div>
                   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion-cotizador">
                     <div class="card-body">
-                        <label class="radio-inline" style="margin-left: 10px;">&nbsp;&nbsp;<input type="radio" name="material" value="Productos Secos">&nbsp;&nbsp;&nbsp;Productos Secos</label>
-                        <label class="radio-inline" style="margin-left: 10px;">&nbsp;&nbsp;<input type="radio" name="material" value="Productos Humedos">&nbsp;&nbsp;&nbsp;Productos Humedos</label>
-                        <label class="radio-inline" style="margin-left: 10px;">&nbsp;&nbsp;<input type="radio" name="material" value="Productos Grasos">&nbsp;&nbsp;&nbsp;Productos Grasos</label>
+                      <?php foreach ($product->getMaterials() as $material) { ?>
+                        <label class="radio-inline" style="margin-left: 10px;">&nbsp;&nbsp;<input type="radio" name="material" value="<?= $material->getId(); ?>">&nbsp;&nbsp;&nbsp;<a href="javascript:;" title="Descripción" data-toggle="popover" data-trigger="hover" data-content="<?= $material->getDescription() ?>" data-placement="bottom"><?= $material->getName(); ?></a></label>
+                      <?php
+                      } ?>
                     </div>
                   </div>
                 </div>
@@ -262,23 +276,6 @@ $tabs = $tabProductDao->findByProduct($product);
                       <input type="number" name="qty" id="sst" maxlength="12" title="Cantidad:" class="input-text qty form-control">
                       <div id="help-quantity">
                         <br>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="card-header" id="headingFive">
-                    <h2 class="mb-0 panel-title">
-                      <a class="btn btn-link collapsed text-left" role="button" data-toggle="collapse" data-target="#collapseFive" aria-controls="collapseFive" aria-expanded="false">
-                        Observaciones <i class="more-less fas fa-plus"></i>
-                      </a>
-                    </h2>
-                  </div>
-                  <div class="collapse" id="collapseFive" aria-labelledby="headingFive" data-parent="#accordion-cotizador">
-                    <div class="card-body">
-                      <div class="form-group">
-                        <label for="observations">Agrege las observaciones o especificaciones para el producto:</label>
-                        <textarea id="observations" class="form-control" cols="30" rows="4"></textarea>
                       </div>
                     </div>
                   </div>
@@ -367,6 +364,7 @@ $tabs = $tabProductDao->findByProduct($product);
                 </ul>
               </div>
               <div class="card-body">
+                <!-- <p><?= $productInstance->getCategory()->getName(); ?></p> -->
                 <h4 class="card-product__title"><a href="#"><?= $productInstance->getName(); ?></a></h4>
               </div>
             </div>
@@ -399,7 +397,6 @@ $tabs = $tabProductDao->findByProduct($product);
         nextText: '<i class="fas fa-angle-right fa-3x pl-3"></i>',
         prevText: '<i class="fas fa-angle-left fa-3x pl-3"></i>'
       })
-
     })
   </script>
   <script>
@@ -408,56 +405,31 @@ $tabs = $tabProductDao->findByProduct($product);
         .prev(".card-header")
         .find(".more-less")
         .toggleClass("fa-plus fa-minus");
-      console.log($(this).attr('id'))
-      if ($(this).height() > 100) {
-        $('.single').css('margin-bottom', '550px')
-      } else {
-        $('.single').css('margin-bottom', '500px')
-      }
     }
-
-    function toggleIconClose(e) {
-      $(e.target)
-        .prev(".card-header")
-        .find(".more-less")
-        .toggleClass("fa-plus fa-minus");
-    }
+    $(".collapse").on("hide.bs.collapse", toggleIcon);
     $(".collapse").on("show.bs.collapse", toggleIcon);
-    $(".collapse").on("hide.bs.collapse", toggleIconClose);
   </script>
   <script>
     $('#height').attr("disabled", "false")
     let measurements = `<?= json_encode($product->getMeasurements()); ?>`
     measurements = JSON.parse(measurements)
     let widths = []
-    if (measurements.length == 1) {
+    measurements.forEach(measurement => {
+      if (!widths.includes(measurement.width)) {
+        widths.push(measurement.width)
+        $('#width').append(`<option>${measurement.width}</option>`)
+      }
+    })
+    $('#width').change(function() {
       $('#height').prop("disabled", true)
       $('#length').prop("disabled", true)
-      $('#width').prop("disabled", true)
-      $('#width').append(`<option>${measurements[0].width}</option>`)
-      $('#width').val(measurements[0].width)
-      $('#height').append(`<option>${measurements[0].height}</option>`)
-      $('#height').val(measurements[0].height)
-      $('#length').append(`<option>${measurements[0].length}</option>`)
-      $('#length').val(measurements[0].length)
-    } else {
-      measurements.forEach(measurement => {
-        if (!widths.includes(measurement.width)) {
-          widths.push(measurement.width)
-          $('#width').append(`<option>${measurement.width}</option>`)
+      renderHeigths($(this).val())
+    })
+    $('#height').change(function() {
+      $('#length').prop("disabled", true)
+      renderLengths($(this).val(), $('#width').val())
+    })
 
-        }
-      })
-      $('#width').change(function() {
-        $('#height').prop("disabled", true)
-        $('#length').prop("disabled", true)
-        renderHeigths($(this).val())
-      })
-      $('#height').change(function() {
-        $('#length').prop("disabled", true)
-        renderLengths($(this).val(), $('#width').val())
-      })
-    }
 
     function renderHeigths(width) {
       $('#length').html('')
@@ -484,6 +456,7 @@ $tabs = $tabProductDao->findByProduct($product);
           return measurement
         }
       })
+      console.log(measurementsAux)
       let lengths = []
       measurementsAux.forEach(measurement => {
         if (!lengths.includes(measurement.length)) {
@@ -498,10 +471,9 @@ $tabs = $tabProductDao->findByProduct($product);
     $('.checkboxPrinting').change(function() {
       if ($(this).prop('checked')) {
         $(this).siblings('.questionPrinting').html('SI')
-        $('#container-num-inks').fadeIn()
+        console.log($(this).siblings('.questionPrinting'))
       } else {
         $(this).siblings('.questionPrinting').html('NO')
-        $('#container-num-inks').fadeOut()
       }
     })
   </script>
@@ -530,13 +502,13 @@ $tabs = $tabProductDao->findByProduct($product);
         $('#btnCotizar').addClass("disabled")
         $('#help-quantity').html(`<br><div class="alert alert-danger alert-min-quantity" role="alert"><span>Cantidad minima ${verifyMinQuantity()} unidades. ¿Te gustaría cotizar cantidades menores? te invitamos a visitar a nuestro aliado Greenpoint (<a style="color:green" href="//www.greenpointonline.com.co" target="_blank">www.greenpointonline.com.co</a>)</div>`)
         $('#help-quantity').fadeIn()
-        $('.single').css('margin-bottom', '600px')
+        $('.single').css('margin-bottom', '550px')
       } else {
 
         $('#btnCotizar').removeClass("disabled")
         $('#help-quantity').fadeOut(400, () => {
           $('#help-quantity').html('')
-          $('.single').css('margin-bottom', '500px')
+          $('.single').css('margin-bottom', '440px')
         })
 
       }
@@ -547,28 +519,25 @@ $tabs = $tabProductDao->findByProduct($product);
     // agregar un producto al carrito
     $('#btnCotizar').click(() => {
       let $printing = $('#impresion').prop('checked')
-      let $observations = $('#observations').val()
+      let $laminada = $('#laminada').prop('checked')
+      let $ventanilla = $('#ventanilla').prop('checked')
       let $width = $('#width').val()
       let $height = $('#height').val()
       let $length = $('#length').val()
       let $material = $("input[name='material']:checked").val();
       let $quantity = $('#sst').val()
-      let $numInks = $('#num-inks').val()
-      let request = {
-        idProduct: `<?= $product->getId(); ?>`,
-        width: $width,
-        height: $height,
-        length: $length,
-        material: $material,
-        quantity: $quantity,
-        printing: $printing,
-        observations: $observations
-      }
-      if ($printing) {
-        request.numInks = $numInks
-      }
       if ($width != null && $height != null && $length != null && $material != undefined && $quantity > 999) {
-        $.post('api/add_item.php', request, (data, status) => {
+        $.post('api/add_item.php', {
+          idProduct: `<?= $product->getId(); ?>`,
+          width: $width,
+          height: $height,
+          length: $length,
+          material: $material,
+          quantity: $quantity,
+          printing: $printing,
+          lam: $laminada,
+          window: $ventanilla
+        }, (data, status) => {
           if (status == 'success') {
             renderCart()
             showCart()

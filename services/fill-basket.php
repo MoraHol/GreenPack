@@ -1,8 +1,10 @@
 <?php
 require_once(dirname(__DIR__) . "/model/Quotation.php");
+require_once(dirname(__DIR__) . "/dao/QuotationDao.php");
 require_once(dirname(__DIR__) . "/model/Item.php");
 require_once(dirname(__DIR__) . "/model/ItemBox.php");
 require_once(dirname(__DIR__) . "/model/ItemBag.php");
+require_once(dirname(__DIR__) . "/model/ItemIndividual.php");
 require_once(dirname(__DIR__) . "/model/Category.php");
 require_once(dirname(__DIR__) . "/model/product.php");
 require_once(dirname(__DIR__) . "/model/measurement.php");
@@ -27,33 +29,23 @@ if (isset($_SESSION["cart"])) {
                   <app-product-basket>
                     <div class="item-basket hover-calculator">
                       <div class="cont-img">
-                        <div class="width-img"><img src="<?php echo $item->getProduct()->getImages()[0]->getUrl(); ?>">
+                        <div class="width-img"><img src="<?= $item->getProduct()->getImages()[0]->getUrl(); ?>">
                         </div>
                       </div>
                       <div class="product-basket-stores">
                         <div class="align-content">
-                          <div class="cont-info-item ng-star-inserted"><strong><?php echo $item->getProduct()->getName(); ?></strong>
-                            <p class="description-product">
-                              <span class="text-primary">Impresion: </span><span>&nbsp;<?php echo $item->isPrinting() ? "SI" : "NO"; ?></span>
-                              <br>
-                              <span class="text-primary">Material:</span><span>&nbsp;<?php echo $item->getMaterial()->getName(); ?></span>
-                              <br>
-                              <span class="text-primary">Medidas:</span>
-                              <br>
-                              &nbsp;&nbsp;
-                              <span class="text-primary">Alto:</span><span>&nbsp; <?php echo $item->getMeasurement()->getWidth(); ?></span>&nbsp;
-                              <span class="text-primary">Largo:</span><span>&nbsp; <?php echo $item->getMeasurement()->getHeight(); ?></span>&nbsp;
-                              <span class="text-primary">Ancho:</span><span>&nbsp; <?php echo $item->getMeasurement()->getLength(); ?></span>&nbsp;
-                            </p>
-                            <span class="topping-product"></span>
-                            <span class="delete" onclick="deleteItem('<?php echo $item->getId() ?>')">Eliminar</span>
-                          </div>
+                          <?php
+                                if ($item->getProduct()->getCategory()->getId() == 6) {
+                                  include('fill_basket_item_lamina.php');
+                                } else {
+                                  include('fill_basket_item_bolsas.php');
+                                } ?>
                           <div class="cont-calculator ng-star-inserted">
                             <app-counter-product>
-                              <div class="calculator"><button class="subtract" onclick="subtractQty('<?php echo $item->getId(); ?>')">
+                              <div class="calculator"><button class="subtract" onclick="subtractQty('<?= $item->getId(); ?>')">
                                   <div><span class="ng-star-inserted">-</span></div>
                                 </button>
-                                <div class="number" contenteditable="true" id="qty<?php echo $item->getId(); ?>"><?php echo $item->getQuantity(); ?></div><button class="plus" onclick="sumQty('<?php echo $item->getId(); ?>')">
+                                <div class="number" contenteditable="true" id="qty<?= $item->getId(); ?>"><?= $item->getQuantity(); ?></div><button class="plus" onclick="sumQty('<?= $item->getId(); ?>')">
                                   <div>+</div>
                                 </button>
                               </div>

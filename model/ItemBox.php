@@ -15,9 +15,11 @@ class ItemBox extends Item implements JsonSerializable
   public function calculatePrice()
   {
     $directCost =  $this->calculateDirectCost();
-    if ($this->getQuantity() < 11000) {
-      $this->setPrice($directCost * 2);
-    } else {
+    if ($this->getQuantity() < 6000) {
+      $this->setPrice($directCost * 4);
+    } else if($this->getQuantity() > 6000 && $this->getQuantity() < 10000) {
+      return $this->setPrice($directCost * 3);
+    }else{
       return $this->setPrice($directCost * 2.5);
     }
   }

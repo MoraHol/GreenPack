@@ -3,6 +3,9 @@ require_once dirname(__DIR__) . "/model/Quotation.php";
 require_once dirname(__DIR__) . "/model/Item.php";
 require_once dirname(__DIR__) . "/model/ItemBag.php";
 require_once dirname(__DIR__) . "/model/ItemBox.php";
+require_once dirname(__DIR__) . "/model/ItemIndividual.php";
+require_once dirname(__DIR__) . "/model/ItemSheet.php";
+require_once dirname(__DIR__) . "/model/ItemSaco.php";
 require_once dirname(__DIR__) . "/db/DBOperator.php";
 require_once dirname(__DIR__) . "/db/env.php";
 require_once dirname(__DIR__) . "/dao/MeasurementDao.php";
@@ -48,16 +51,36 @@ class QuotationDao
     // Insert Items
     foreach ($quotation->getItems() as $item) {
       if (is_a($item, "ItemBag")) {
-        $query = "INSERT INTO `quotations_details` (`id_quotations_details`, `products_id_products`, `quantity`, `printed`, `price`, `material_id`, `measurement_id`, `quotations_id_quotations`,`laminated`,`pla`) VALUES (NULL, '" . $item->getProduct()->getId() . "', '" . $item->getQuantity() . "', '" . (int) $item->isPrinting() . "', '" . $item->getPrice() . "', '" . $item->getMaterial()->getId() . "', '" . $item->getMeasurement()->getId() . "', '" . $quotation->getId() . "','" . (int) $item->isLam() . "','" . (int) $item->isPla() . "')";
-        echo $query;
+        $query = "INSERT INTO `quotations_details` (`id_quotations_details`, `products_id_products`, 
+        `quantity`, `printed`, `price`, `material_id`, `measurement_id`, `quotations_id_quotations`,`laminated`,`pla`) 
+        VALUES (NULL, '" . $item->getProduct()->getId() . "', '" . $item->getQuantity() . "', 
+        '" . (int) $item->isPrinting() . "', '" . $item->getPrice() . "',
+         '" . $item->getMaterial()->getId() . "', '" . $item->getMeasurement()->getId() . "',
+        '" . $quotation->getId() . "','" . (int) $item->isLam() . "','" . (int) $item->isPla() . "')";
       } else if (is_a($item, "ItemBox")) {
-        $query = "INSERT INTO `quotations_details` (`id_quotations_details`, `products_id_products`, `quantity`, `printed`, `price`, `material_id`, `measurement_id`, `quotations_id_quotations`,`laminated`,`pla`,`observations`,`number_inks`,`type_product`) VALUES (NULL, '" . $item->getProduct()->getId() . "', '" . $item->getQuantity() . "', '" . (int) $item->isPrinting() . "', '" . $item->getPrice() . "', '" . $item->getMaterial()->getId() . "', '" . $item->getMeasurement()->getId() . "', '" . $quotation->getId() . "','" . (int) $item->isLam() . "','" . (int) $item->isPla() . "','" . $item->getObservations() . "'," . $item->getNumberInks() . ",'" . $item->getTypeProduct() . "')";
-        echo $query;
+
+        $query = "INSERT INTO `quotations_details` (`id_quotations_details`, `products_id_products`, 
+        `quantity`, `printed`, `price`, `material_id`, `measurement_id`, `quotations_id_quotations`,
+        `laminated`,`pla`,`observations`,`number_inks`,`type_product`) 
+        VALUES (NULL, '" . $item->getProduct()->getId() . "', '" . $item->getQuantity() . "', 
+        '" . (int) $item->isPrinting() . "', '" . $item->getPrice() . "', 
+        '" . $item->getMaterial()->getId() . "', '" . $item->getMeasurement()->getId() . "', 
+        '" . $quotation->getId() . "','" . (int) $item->isLam() . "','" . (int) $item->isPla() . "',
+        '" . $item->getObservations() . "'," . $item->getNumberInks() . ",'" . $item->getTypeProduct() . "')";
+      } else if (is_a($item, "ItemIndividual") || is_a($item, "ItemSheet") || is_a($item, "ItemSaco")) {
+        $query = "INSERT INTO `quotations_details` (`id_quotations_details`, `products_id_products`, 
+        `quantity`, `printed`, `price`, `material_id`, `measurement_id`, `quotations_id_quotations`,
+        `laminated`,`pla`,`observations`,`type_product`) 
+        VALUES (NULL, '" . $item->getProduct()->getId() . "', '" . $item->getQuantity() . "', 
+        '" . (int) $item->isPrinting() . "', '" . $item->getPrice() . "', '" . $item->getMaterial()->getId() . "', 
+        '" . $item->getMeasurement()->getId() . "', '" . $quotation->getId() . "','" . (int) $item->isLam() . "',
+        '" . (int) $item->isPla() . "','" . $item->getObservations() . "', '" . $item->getTypeProduct() . "')";
       }
       $this->db->consult($query);
     }
     // envio de correo al usuario
-    $file = "https://" . $_SERVER["HTTP_HOST"] . "/admin/services/sent_email_quotation_client.php?email=" . $quotation->getEmail() . "&name=" . $quotation->getNameClient();
+    $protocol = isset($_SERVER["HTTPS"]) ? 'https' : 'http';
+    $file = "$protocol://" . $_SERVER["HTTP_HOST"] . "/admin/services/sent_email_quotation_client.php?email=" . $quotation->getEmail() . "&name=" . $quotation->getNameClient();
     $curl = curl_init();
     curl_setopt_array($curl, [
       CURLOPT_RETURNTRANSFER => true,
@@ -65,7 +88,7 @@ class QuotationDao
     ]);
     $content = curl_exec($curl);
     curl_close($curl);
-    $this->db->close();
+    // $this->db->close();
   }
 
   function delete($id)
@@ -132,7 +155,21 @@ class QuotationDao
     foreach ($itemsDB as $itemDB) {
       $product = $this->productDao->findById($itemDB["products_id_products"]);
       if ($product->getCategory()->getName() == 'bolsas') {
-        $item = new ItemBag();
+        if ($product->getId() == $_ENV["id_sacos"]) {
+          $item = new ItemSaco();
+          $item->setObservations($itemDB["observations"]);
+          $item->setTypeProduct($itemDB["type_product"]);
+        } else {
+          $item = new ItemBag();
+        }
+      } else if ($product->getCategory()->getId() == 6) {
+        if ($product->getId() == $_ENV["id_individuales"]) {
+          $item = new ItemIndividual();
+        } else {
+          $item = new ItemSheet();
+        }
+        $item->setObservations($itemDB["observations"]);
+        $item->setTypeProduct($itemDB["type_product"]);
       } else {
         $item = new ItemBox();
         $item->setObservations($itemDB["observations"]);
@@ -274,7 +311,21 @@ class QuotationDao
     $itemDB = $itemDB[0];
     $product = $this->productDao->findById($itemDB["products_id_products"]);
     if ($product->getCategory()->getName() == 'bolsas') {
-      $item = new ItemBag();
+      if ($product->getId() == $_ENV["id_sacos"]) {
+        $item = new ItemSaco();
+        $item->setObservations($itemDB["observations"]);
+        $item->setTypeProduct($itemDB["type_product"]);
+      } else {
+        $item = new ItemBag();
+      }
+    } else if ($product->getCategory()->getId() == 6) {
+      if ($product->getId() == $_ENV["id_individuales"]) {
+        $item = new ItemIndividual();
+      } else {
+        $item = new ItemSheet();
+      }
+      $item->setObservations($itemDB["observations"]);
+      $item->setTypeProduct($itemDB["type_product"]);
     } else {
       $item = new ItemBox();
       $item->setObservations($itemDB["observations"]);

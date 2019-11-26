@@ -182,17 +182,6 @@ $tabs = $tabProductDao->findByProduct($product);
                             <span class="questionPrinting">NO</span>
                           </label>
                         </div>
-                        <div class="col" id="container-num-inks">
-                          <div class="form-group">
-                            <label for="num-inks">A cuantas tintas lo quieres:</label>
-                            <select id="num-inks" class="form-control">
-                              <option value="1">1 tinta</option>
-                              <option value="2">2 tintas</option>
-                              <option value="3">3 tintas</option>
-                              <option value="4">4 tintas</option>
-                            </select>
-                          </div>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -208,9 +197,9 @@ $tabs = $tabProductDao->findByProduct($product);
                   </div>
                   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion-cotizador">
                     <div class="card-body">
-                        <label class="radio-inline" style="margin-left: 10px;">&nbsp;&nbsp;<input type="radio" name="material" value="Productos Secos">&nbsp;&nbsp;&nbsp;Productos Secos</label>
-                        <label class="radio-inline" style="margin-left: 10px;">&nbsp;&nbsp;<input type="radio" name="material" value="Productos Humedos">&nbsp;&nbsp;&nbsp;Productos Humedos</label>
-                        <label class="radio-inline" style="margin-left: 10px;">&nbsp;&nbsp;<input type="radio" name="material" value="Productos Grasos">&nbsp;&nbsp;&nbsp;Productos Grasos</label>
+                      <label class="radio-inline" style="margin-left: 10px;">&nbsp;&nbsp;<input type="radio" name="material" value="Productos Secos">&nbsp;&nbsp;&nbsp;Productos Secos</label>
+                      <label class="radio-inline" style="margin-left: 10px;">&nbsp;&nbsp;<input type="radio" name="material" value="Productos Humedos">&nbsp;&nbsp;&nbsp;Productos Humedos</label>
+                      <label class="radio-inline" style="margin-left: 10px;">&nbsp;&nbsp;<input type="radio" name="material" value="Productos Grasos">&nbsp;&nbsp;&nbsp;Productos Grasos</label>
                     </div>
                   </div>
                 </div>
@@ -498,10 +487,8 @@ $tabs = $tabProductDao->findByProduct($product);
     $('.checkboxPrinting').change(function() {
       if ($(this).prop('checked')) {
         $(this).siblings('.questionPrinting').html('SI')
-        $('#container-num-inks').fadeIn()
       } else {
         $(this).siblings('.questionPrinting').html('NO')
-        $('#container-num-inks').fadeOut()
       }
     })
   </script>
@@ -513,15 +500,7 @@ $tabs = $tabProductDao->findByProduct($product);
     $('#help-quantity').fadeOut()
 
     function verifyMinQuantity() {
-      if (category == "bolsas") {
-        if ($('#width').val() < 13) {
-          minQuantity = 20000
-        } else {
-          minQuantity = 10000
-        }
-      } else {
-        minQuantity = 1000
-      }
+      minQuantity = 3000
       return minQuantity
     }
 
@@ -553,7 +532,6 @@ $tabs = $tabProductDao->findByProduct($product);
       let $length = $('#length').val()
       let $material = $("input[name='material']:checked").val();
       let $quantity = $('#sst').val()
-      let $numInks = $('#num-inks').val()
       let request = {
         idProduct: `<?= $product->getId(); ?>`,
         width: $width,
@@ -564,10 +542,7 @@ $tabs = $tabProductDao->findByProduct($product);
         printing: $printing,
         observations: $observations
       }
-      if ($printing) {
-        request.numInks = $numInks
-      }
-      if ($width != null && $height != null && $length != null && $material != undefined && $quantity > 999) {
+      if ($width != null && $height != null && $length != null && $material != undefined && $quantity > 2999) {
         $.post('api/add_item.php', request, (data, status) => {
           if (status == 'success') {
             renderCart()

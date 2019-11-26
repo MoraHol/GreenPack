@@ -182,17 +182,7 @@ $tabs = $tabProductDao->findByProduct($product);
                             <span class="questionPrinting">NO</span>
                           </label>
                         </div>
-                        <div class="col" id="container-num-inks">
-                          <div class="form-group">
-                            <label for="num-inks">A cuantas tintas lo quieres:</label>
-                            <select id="num-inks" class="form-control">
-                              <option value="1">1 tinta</option>
-                              <option value="2">2 tintas</option>
-                              <option value="3">3 tintas</option>
-                              <option value="4">4 tintas</option>
-                            </select>
-                          </div>
-                        </div>
+
                       </div>
                     </div>
                   </div>
@@ -208,9 +198,9 @@ $tabs = $tabProductDao->findByProduct($product);
                   </div>
                   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion-cotizador">
                     <div class="card-body">
-                        <label class="radio-inline" style="margin-left: 10px;">&nbsp;&nbsp;<input type="radio" name="material" value="Productos Secos">&nbsp;&nbsp;&nbsp;Productos Secos</label>
-                        <label class="radio-inline" style="margin-left: 10px;">&nbsp;&nbsp;<input type="radio" name="material" value="Productos Humedos">&nbsp;&nbsp;&nbsp;Productos Humedos</label>
-                        <label class="radio-inline" style="margin-left: 10px;">&nbsp;&nbsp;<input type="radio" name="material" value="Productos Grasos">&nbsp;&nbsp;&nbsp;Productos Grasos</label>
+                      <label class="radio-inline" style="margin-left: 10px;">&nbsp;&nbsp;<input type="radio" name="material" value="Productos Secos">&nbsp;&nbsp;&nbsp;Productos Secos</label>
+                      <label class="radio-inline" style="margin-left: 10px;">&nbsp;&nbsp;<input type="radio" name="material" value="Productos Humedos">&nbsp;&nbsp;&nbsp;Productos Humedos</label>
+                      <label class="radio-inline" style="margin-left: 10px;">&nbsp;&nbsp;<input type="radio" name="material" value="Productos Grasos">&nbsp;&nbsp;&nbsp;Productos Grasos</label>
                     </div>
                   </div>
                 </div>
@@ -347,7 +337,6 @@ $tabs = $tabProductDao->findByProduct($product);
   <section class="related-product-area mt-0">
     <div class="container">
       <div class="section-intro pb-60px">
-        <!-- <p>Articulos relacionados a este producto</p> -->
         <h2>Articulos <span class="section-intro__style">Relacionados</span></h2>
       </div>
     </div>
@@ -391,6 +380,7 @@ $tabs = $tabProductDao->findByProduct($product);
   <script src="/js/bootstrap.min.js"></script>
 
   <script>
+    // cargado de carousel de imagenes del producto
     $(window).load(function() {
       $('.flexslider').flexslider({
         animation: "slide",
@@ -403,6 +393,7 @@ $tabs = $tabProductDao->findByProduct($product);
     })
   </script>
   <script>
+    // cuando de abren las pestañas de caracteristicas
     function toggleIcon(e) {
       $(e.target)
         .prev(".card-header")
@@ -426,7 +417,12 @@ $tabs = $tabProductDao->findByProduct($product);
     $(".collapse").on("hide.bs.collapse", toggleIconClose);
   </script>
   <script>
+    /**
+     * Aqui se relaiza toda la logica de las medidas del producto
+     */
     $('#height').attr("disabled", "false")
+    $('#length').parent().css('display','none')
+    $('#height').siblings('label').text('Largo:')
     let measurements = `<?= json_encode($product->getMeasurements()); ?>`
     measurements = JSON.parse(measurements)
     let widths = []
@@ -475,6 +471,12 @@ $tabs = $tabProductDao->findByProduct($product);
       $('#height').prop("disabled", false)
     }
 
+    /**
+     * se cargan las medidas que tienen ese largo 
+     * Pidiendo el alto y el ancho
+     * Lo que se hace es filtrar las medidas que tienen esos
+     * altos y anchos
+     */
     function renderLengths(height, width) {
       $('#length').html('')
       $('#length').append('<option selected disabled>Seleccione</option>')
@@ -492,47 +494,37 @@ $tabs = $tabProductDao->findByProduct($product);
         }
       })
       $('#length').prop("disabled", false)
+      $('#length').val(0)
     }
 
-
+    // swicth de impresion
     $('.checkboxPrinting').change(function() {
       if ($(this).prop('checked')) {
         $(this).siblings('.questionPrinting').html('SI')
-        $('#container-num-inks').fadeIn()
       } else {
         $(this).siblings('.questionPrinting').html('NO')
-        $('#container-num-inks').fadeOut()
       }
     })
   </script>
   <script>
-    let category = `<?= $product->getCategory()->getName(); ?>`;
+    let category = `<?= $product->getCategory()->getId(); ?>`;
     let minQuantity = 0;
     $('#sst').val(verifyMinQuantity())
     $('#btnCotizar').removeClass("disabled")
     $('#help-quantity').fadeOut()
 
     function verifyMinQuantity() {
-      if (category == "bolsas") {
-        if ($('#width').val() < 13) {
-          minQuantity = 20000
-        } else {
-          minQuantity = 10000
-        }
-      } else {
-        minQuantity = 1000
-      }
-      return minQuantity
+        minQuantity = 5000
+        return minQuantity
     }
 
     function verifyMinQuantityValue() {
       if ($('#sst').val() < verifyMinQuantity()) {
         $('#btnCotizar').addClass("disabled")
-        $('#help-quantity').html(`<br><div class="alert alert-danger alert-min-quantity" role="alert"><span>Cantidad minima ${verifyMinQuantity()} unidades. ¿Te gustaría cotizar cantidades menores? te invitamos a visitar a nuestro aliado Greenpoint (<a style="color:green" href="//www.greenpointonline.com.co" target="_blank">www.greenpointonline.com.co</a>)</div>`)
+        $('#help-quantity').html(`<br><div class="alert alert-danger alert-min-quantity" role="alert"><span>Cantidad minima ${verifyMinQuantity()} unidades. ¿Te gustaría cotizar cantidades menores? te invitamos a visitar a nuestro aliado Greenpoint (<a style="color:green;" href="//www.greenpointonline.com.co" target="_blank">www.greenpointonline.com.co</a>)</div>`)
         $('#help-quantity').fadeIn()
         $('.single').css('margin-bottom', '600px')
       } else {
-
         $('#btnCotizar').removeClass("disabled")
         $('#help-quantity').fadeOut(400, () => {
           $('#help-quantity').html('')
@@ -553,7 +545,6 @@ $tabs = $tabProductDao->findByProduct($product);
       let $length = $('#length').val()
       let $material = $("input[name='material']:checked").val();
       let $quantity = $('#sst').val()
-      let $numInks = $('#num-inks').val()
       let request = {
         idProduct: `<?= $product->getId(); ?>`,
         width: $width,
@@ -564,10 +555,8 @@ $tabs = $tabProductDao->findByProduct($product);
         printing: $printing,
         observations: $observations
       }
-      if ($printing) {
-        request.numInks = $numInks
-      }
-      if ($width != null && $height != null && $length != null && $material != undefined && $quantity > 999) {
+      // revisar que se cumplan con los parametros pedidos
+      if ($width != null && $height != null && $length != null && $material != undefined && $quantity > 4999) {
         $.post('api/add_item.php', request, (data, status) => {
           if (status == 'success') {
             renderCart()

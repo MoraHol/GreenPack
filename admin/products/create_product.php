@@ -31,10 +31,7 @@ include("../partials/verify-session.php");
   <?php
   require_once dirname(dirname(__DIR__)) . "/dao/MaterialDao.php";
   $materialDao = new MaterialDao();
-  $materials = $materialDao->findAll();
-  if ($_SERVER["HTTP_HOST"] != "localhost") {
-    echo "<style>.fr-wrapper>div:first-child {display: none !important;}</style>";
-  } ?>
+  $materials = $materialDao->findAll(); ?>
   <style>
     select .wide {
       width: 90%;
@@ -133,7 +130,7 @@ include("../partials/verify-session.php");
                 <select id="category" class="wide">
                   <option disabled selected>Seleccione una categoría</option>
                   <?php foreach ($categories as $category) { ?>
-                  <option value="<?php echo $category->getId(); ?>"><?php echo $category->getName(); ?></option>
+                    <option value="<?= $category->getId(); ?>"><?= $category->getName(); ?></option>
                   <?php } ?>
                 </select>
               </div>
@@ -196,7 +193,7 @@ include("../partials/verify-session.php");
           $('#materials').append(`<li><select class="wide" style="margin-bottom: 10px;"><option disabled selected>Seleccione un material</option>
                   <?php
                   foreach ($materials as  $material) { ?>
-                                                                                              <option value="<?php echo $material->getId(); ?>"><?php echo $material->getName(); ?></option>
+                                                                                              <option value="<?= $material->getId(); ?>"><?= $material->getName(); ?></option>
                   <?php }
                   ?>
                 </select></li>`)
@@ -219,42 +216,55 @@ include("../partials/verify-session.php");
               type: 'warning'
             })
           } else {
+            indexMeasurement++;
             let nameAdditional = ''
             switch (parseInt($('#category').val())) {
               case 1:
                 nameAdditional = 'Ventana'
+                addMeasurementHtml(indexMeasurement, nameAdditional)
                 break;
               case 2:
                 nameAdditional = 'Piezas Por Pliego'
+                addMeasurementHtml(indexMeasurement, nameAdditional)
                 break;
               case 3:
                 nameAdditional = 'Piezas Por Pliego'
+                addMeasurementHtml(indexMeasurement, nameAdditional)
                 break;
               case 4:
                 nameAdditional = 'Piezas Por Pliego'
+                addMeasurementHtml(indexMeasurement, nameAdditional)
                 break;
               case 5:
                 nameAdditional = 'Piezas Por Pliego'
+                addMeasurementHtml(indexMeasurement, nameAdditional)
+                break;
+              case 6:
+                addMeasurementHtml(indexMeasurement)
+                $('.lenght').css('display', 'none')
+                $('.window').css('display', 'none')
+                $(`#lenght${indexMeasurement}`).val(0)
+                $(`#window${indexMeasurement}`).val(0)
                 break;
             }
-            indexMeasurement++;
-            $('#measurements').append(`<li>Medida ${indexMeasurement}:<div class="row">
+            
+          }
+        }
+        function addMeasurementHtml(indexMeasurement, nameAdditional = ''){
+          $('#measurements').append(`<li>Medida ${indexMeasurement}:<div class="row">
                   <div class="col"><label for="width${indexMeasurement}">Ancho:</label><input type="number" id="width${indexMeasurement}" class="form-control"></div>
                   <div class="col"><label for="height${indexMeasurement}">Alto:</label><input type="number" id="height${indexMeasurement}" class="form-control"></div>
-                  <div class="col"><label for="lenght${indexMeasurement}">Largo:</label><input type="number" id="lenght${indexMeasurement}" class="form-control"></div>
-                  <div class="col"><label for="window${indexMeasurement}">${nameAdditional}:</label><input type="number" id="window${indexMeasurement}" class="form-control"></div>
+                  <div class="col lenght"><label for="lenght${indexMeasurement}">Largo:</label><input type="number" id="lenght${indexMeasurement}" class="form-control"></div>
+                  <div class="col window"><label for="window${indexMeasurement}">${nameAdditional}:</label><input type="number" id="window${indexMeasurement}" class="form-control"></div>
                 </div></li>`)
-          }
         }
 
 
         function addMaterial() {
           $('#materials').append(`<li><select class="wide" style="margin-bottom: 10px;" ><option disabled selected>Seleccione un material</option>
-                  <?php
-                  foreach ($materials as  $material) { ?>
-                                                                                              <option value="<?php echo $material->getId(); ?>"><?php echo $material->getName(); ?></option>
-                  <?php }
-                  ?>
+                  <?php foreach ($materials as  $material) { ?>
+                    <option value="<?= $material->getId(); ?>"><?= $material->getName(); ?></option>
+                  <?php } ?>
                 </select></li>`)
           $('select').niceSelect()
 

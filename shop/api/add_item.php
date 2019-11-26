@@ -1,11 +1,15 @@
 <?php
-require_once(dirname(dirname(__DIR__)) . "/model/Quotation.php");
-require_once(dirname(dirname(__DIR__)) . "/model/Item.php");
-require_once(dirname(dirname(__DIR__)) . "/model/ItemBag.php");
-require_once(dirname(dirname(__DIR__)) . "/model/ItemBox.php");
-require_once(dirname(dirname(__DIR__)) . "/dao/ProductDao.php");
-require_once(dirname(dirname(__DIR__)) . "/dao/MeasurementDao.php");
-require_once(dirname(dirname(__DIR__)) . "/dao/MaterialDao.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . "/model/Quotation.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . "/dao/QuotationDao.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . "/model/Item.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemBag.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemBox.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemIndividual.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemSheet.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . "/dao/ProductDao.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . "/dao/MeasurementDao.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . "/dao/MaterialDao.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . "/db/env.php");
 session_start();
 if (
   isset($_POST["idProduct"]) && isset($_POST["width"])
@@ -25,10 +29,30 @@ if (
   $product = $productDao->findById($_POST["idProduct"]);
 
   if ($product->getCategory()->getName() == 'bolsas') {
-    $item = new ItemBag();
-    $item->setLam(filter_var($_POST["lam"], FILTER_VALIDATE_BOOLEAN));
-    $item->setPla(filter_var($_POST["window"], FILTER_VALIDATE_BOOLEAN));
-    $item->setMaterial($materialDao->findById($_POST["material"]));
+    if ($product->getId() == $_ENV["id_sacos"]) {
+      $item = new ItemSaco();
+      $item->setLam(false);
+      $item->setPla(false);
+      $item->setObservations($_POST["observations"]);
+      $item->setTypeProduct($_POST["material"]);
+      $item->setMaterial($product->getMaterials()[0]);
+    } else {
+      $item = new ItemBag();
+      $item->setLam(filter_var($_POST["lam"], FILTER_VALIDATE_BOOLEAN));
+      $item->setPla(filter_var($_POST["window"], FILTER_VALIDATE_BOOLEAN));
+      $item->setMaterial($materialDao->findById($_POST["material"]));
+    }
+  } else if ($product->getCategory()->getId() == 6) {
+    if ($product->getId() == $_ENV["id_individuales"]) {
+      $item = new ItemIndividual();
+    } else {
+      $item = new ItemSheet();
+    }
+    $item->setLam(false);
+    $item->setPla(false);
+    $item->setMaterial($product->getMaterials()[0]);
+    $item->setObservations($_POST["observations"]);
+    $item->setTypeProduct($_POST["material"]);
   } else {
     $item = new ItemBox();
     $item->setLam(false);

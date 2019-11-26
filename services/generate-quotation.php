@@ -989,7 +989,7 @@ if (isset($_GET["id"])) {
               <font class="font510772">Referencia</font>
               <font class="font010772"> <?= $item->getProduct()->getRef() ?> </font>
               <br>
-              <?php if ($item->getProduct()->getCategory()->getId() != 1) { ?>
+              <?php if ($item->getProduct()->getCategory()->getId() != 1 || $item->getProduct()->getId() == $_ENV["id_sacos"]) { ?>
                 <font class="font510772">Tipo De Producto</font>
                 <font class="font010772"> <?= $item->getTypeProduct() ?></font>
                 <br>
@@ -1003,7 +1003,7 @@ if (isset($_GET["id"])) {
               <font class="font510772">Impresión</font>
               <font class="font010772"> <?= $item->isPrinting() ? "SI" : "NO" ?></font>
               <br>
-              <?php if ($item->getProduct()->getCategory()->getId() == 1) { ?>
+              <?php if ($item->getProduct()->getCategory()->getId() == 1 && $item->getProduct()->getId() != $_ENV["id_sacos"]) { ?>
                 <font class="font510772">Ventanilla</font>
                 <font class="font010772"> <?= $item->isPla() ? "SI" : "NO" ?></font>
                 <br>
@@ -1011,11 +1011,13 @@ if (isset($_GET["id"])) {
                 <font class="font010772"> <?= $item->isLam() ? "SI" : "NO" ?> </font>
                 <br>
                 <?php } else {
-                    if ($item->isPrinting()) { ?>
-                  <font class="font510772">Número de Tintas</font>
-                  <font class="font010772"> <?= $item->getNumberInks() ?> </font>
-                  <br>
-                <?php } ?>
+                    if ($item->getProduct()->getCategory()->getId() == 2 || $item->getProduct()->getCategory()->getParentcategory() == 2) {
+                      if ($item->isPrinting()) { ?>
+                    <font class="font510772">Número de Tintas</font>
+                    <font class="font010772"> <?= $item->getNumberInks() ?> </font>
+                    <br>
+                <?php }
+                    } ?>
                 <font class="font510772">Observaciones</font>
                 <font class="font010772"> <?= $item->getObservations() ?> </font>
                 <br>
