@@ -54,6 +54,22 @@ $tabs = $tabProductDao->findByProduct($product);
   <script src="/js/jquery.easing.1.3.js"></script>
 
   <style>
+    @media screen and (max-width: 500px) {
+      .flex-direction-nav {
+        display: none;
+      }
+
+      .flex-direction-nav .flex-prev {
+        display: none;
+
+      }
+
+      .flex-direction-nav .flex-next {
+        display: none;
+      }
+
+    }
+
     .flex-direction-nav {
       display: flex;
       justify-content: center;
@@ -146,7 +162,7 @@ $tabs = $tabProductDao->findByProduct($product);
     <div class="single-top-main">
       <div class="container">
         <div class="single-main">
-          <div class="col-md-4 single-top ">
+          <div class="col-md-4 col-12 single-top ">
             <div class="flexslider">
               <ul class="slides">
                 <?php foreach ($product->getImages() as $image) { ?>
@@ -157,7 +173,7 @@ $tabs = $tabProductDao->findByProduct($product);
               </ul>
             </div>
           </div>
-          <div class="col-md-5" id="container-cotizador">
+          <div class="col-md-5 col-sm-12 col-12" id="container-cotizador">
             <div class="s_product_text" style="margin-left: 0; margin-top: 0;">
 
               <!-- nueva pesentacion -->
@@ -421,7 +437,7 @@ $tabs = $tabProductDao->findByProduct($product);
      * Aqui se relaiza toda la logica de las medidas del producto
      */
     $('#height').attr("disabled", "false")
-    $('#length').parent().css('display','none')
+    $('#length').parent().css('display', 'none')
     $('#height').siblings('label').text('Largo:')
     let measurements = `<?= json_encode($product->getMeasurements()); ?>`
     measurements = JSON.parse(measurements)
@@ -514,8 +530,8 @@ $tabs = $tabProductDao->findByProduct($product);
     $('#help-quantity').fadeOut()
 
     function verifyMinQuantity() {
-        minQuantity = 5000
-        return minQuantity
+      minQuantity = 5000
+      return minQuantity
     }
 
     function verifyMinQuantityValue() {

@@ -54,6 +54,22 @@ $tabs = $tabProductDao->findByProduct($product);
   <script src="/js/jquery.easing.1.3.js"></script>
 
   <style>
+    @media screen and (max-width: 500px) {
+      .flex-direction-nav {
+        display: none;
+      }
+
+      .flex-direction-nav .flex-prev {
+        display: none;
+
+      }
+
+      .flex-direction-nav .flex-next {
+        display: none;
+      }
+
+    }
+
     .flex-direction-nav {
       display: flex;
       justify-content: center;
@@ -157,7 +173,7 @@ $tabs = $tabProductDao->findByProduct($product);
               </ul>
             </div>
           </div>
-          <div class="col-md-5" id="container-cotizador">
+          <div class="col-md-5 col-12" id="container-cotizador">
             <div class="s_product_text" style="margin-left: 0; margin-top: 0;">
 
               <!-- nueva pesentacion -->

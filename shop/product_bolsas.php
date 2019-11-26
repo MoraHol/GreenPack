@@ -57,7 +57,7 @@ $tabs = $tabProductDao->findByProduct($product);
   <script src="/js/jquery.easing.1.3.js"></script>
 
   <style>
-    @media screen and (max-width: 400px){
+    @media screen and (max-width: 500px){
       .flex-direction-nav {
         display: none;
       }
