@@ -1063,7 +1063,18 @@ if (isset($_GET["id"])) {
         </tr>
         <tr height="21" style="mso-height-source:userset;height:15.75pt">
           <td colspan="7" rowspan="3" height="63" class="xl9210772 break-word" style="border-right:.5pt solid black;
-  border-bottom:.5pt solid black;height:47.25pt; vertical-align: top!important; overflow-wrap: break-word;"><?= $quotation->getExtraInformation() ?></td>
+  border-bottom:.5pt solid black;height:47.25pt; vertical-align: top!important; overflow-wrap: break-word;white-space: pre-line;overflow: auto;text-overflow: ellipsis;">
+            <p>
+              <?php
+              $parts = ceil(strlen($quotation->getExtraInformation()) / 60);
+              $parts = $parts == 1 ? 2 : $parts;
+              for ($i = 0; $i < $parts - 1; $i++) {
+                echo substr($quotation->getExtraInformation(), $i * 60, ($i + 1) * 60);
+                echo '<br>';
+              }
+              ?>
+            </p>
+          </td>
           <td class="xl6510772"></td>
           <td class="xl1510772">Subtotal</td>
           <td colspan="2" class="xl7310772"><span style="mso-spacerun:yes">&nbsp;</span>$<span style="mso-spacerun:yes">&nbsp;</span><?= money_format("%!i", $quotation->calculateTotal()) ?></td>
