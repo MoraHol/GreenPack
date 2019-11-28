@@ -74,12 +74,11 @@ class MeasurementDao
     $this->db->close();
     return $measurement;
   }
-  
+
   function deleteByProduct($idMeasurement, $idProduct)
   {
     $this->db->connect();
     $query = "DELETE FROM `measurements` WHERE `measurements`.`id_measurements` = $idMeasurement AND `measurements`.`products_id_products` = $idProduct";
-    echo $query;
     $status = $this->db->consult($query);
     $this->db->close();
     return $status;
@@ -91,5 +90,38 @@ class MeasurementDao
     $query = "UPDATE `measurements` SET `width` = '" . $measurement->getWidth() . "', `height` = '" . $measurement->getHeight() . "', `lenght` = '" . $measurement->getLength() . "' WHERE `measurements`.`id_measurements` = " . $measurement->getId();
     $this->db->consult($query);
     $this->db->close();
+  }
+
+  public function findByMaterial($idMaterial, $product)
+  {
+    $this->db->connect();
+    $measurements = [];
+    $query = "SELECT * FROM `measurements` WHERE `id_material` = '$idMaterial' AND `products_id_products` = " . $product->getId();
+    $measurementsDB = $this->db->consult($query, "yes");
+    foreach ($measurementsDB as  $measurementDB) {
+      $measurement = new Measurement();
+      $measurement->setId($measurementDB["id_measurements"]);
+      $measurement->setLength($measurementDB["lenght"]);
+      $measurement->setWidth($measurementDB["width"]);
+      $measurement->setHeight($measurementDB["height"]);
+      $measurement->setWindow($measurementDB["window"]);
+      $measurement->setProduct($product->getId());
+      array_push($measurements, $measurement);
+    }
+    $this->db->close();
+    return $measurements;
+  }
+
+  public function saveByMaterial($measurement)
+  {
+    $this->db->connect();
+    $query = "INSERT INTO `measurements` (`id_measurements`, `width`, `height`, 
+    `lenght`, `products_id_products`, `window`, `id_material`) 
+    VALUES (NULL, '" . $measurement->getWidth() . "', 
+    '" . $measurement->getHeight() . "', '" . $measurement->getLength() . "',
+     '" . $measurement->getProduct() . "', '" . $measurement->getWindow() . "', '" . $measurement->getIdMaterial() . "')";
+    $status = $this->db->consult($query);
+    $this->db->close();
+    return $status;
   }
 }

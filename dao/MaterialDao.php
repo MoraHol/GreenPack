@@ -56,15 +56,21 @@ class MaterialDao
       $material->setDescription($materialDB["description"]);
       $material->setGrammage($materialDB["grammage"]);
       $material->setPricePerKg($materialDB["price_per_kg"]);
+      $material->setMinimunScale($materialDB["minimun_scale"]);
+      $material->setMediumScale($materialDB["medium_scale"]);
+      $material->setMaximunScale($materialDB["maximun_scale"]);
       array_push($materials, $material);
     }
     $this->db->close();
     return $materials;
   }
-  function saveByProduct($material, $product)
+  function saveByProduct($material, $product, $minimunScale = "NULL", $mediumScale = "NULL", $maximunScale = "NULL")
   {
     $this->db->connect();
-    $query = "INSERT INTO `products_has_materials` (`products_id_products`, `materials_id_materials`) VALUES ('" . $product->getId() . "', '" . $material->getId() . "')";
+    $query = "INSERT INTO `products_has_materials` (`products_id_products`,
+    `materials_id_materials`,`minimun_scale`,`medium_scale`,`maximun_scale`) 
+    VALUES ('" . $product->getId() . "', '" . $material->getId() . "',$minimunScale, $mediumScale, $maximunScale)
+    ON DUPLICATE KEY UPDATE `minimun_scale` = $minimunScale,`medium_scale` = $mediumScale,`maximun_scale` = $maximunScale";
     $status = $this->db->consult($query);
     $this->db->close();
     return $status;
@@ -73,7 +79,6 @@ class MaterialDao
   {
     $this->db->connect();
     $query = "INSERT INTO `materials` (`id_materials`, `name`, `description`,`grammage`,`price_per_kg`) VALUES (NULL, '" . $material->getName() . "', '" . $material->getDescription() . "','" . $material->getGrammage() . "','" . $material->getPricePerKg() . "')";
-    echo $query;
     $status = $this->db->consult($query);
     $this->db->close();
     return $status;
@@ -98,7 +103,6 @@ class MaterialDao
   {
     $this->db->connect();
     $query = "DELETE FROM `products_has_materials` WHERE `products_has_materials`.`products_id_products` = $product  AND `products_has_materials`.`materials_id_materials` = $id";
-    echo $query;
     $status = $this->db->consult($query);
     $this->db->close();
     return $status;

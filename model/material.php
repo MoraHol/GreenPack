@@ -61,4 +61,28 @@ class Material implements JsonSerializable
   {
     return get_object_vars($this);
   }
+
+  public function getMinimunScale(){
+		return $this->minimunScale;
+	}
+
+	public function setMinimunScale($minimunScale){
+		$this->minimunScale = $minimunScale;
+	}
+
+	public function getMediumScale(){
+		return $this->mediumScale;
+	}
+
+	public function setMediumScale($mediumScale){
+		$this->mediumScale = $mediumScale;
+	}
+
+	public function getMaximunScale(){
+		return $this->maximunScale;
+	}
+
+	public function setMaximunScale($maximunScale){
+		$this->maximunScale = $maximunScale;
+	}
 }

@@ -11,6 +11,7 @@ class Product implements JsonSerializable
   private $category;
   private $uses;
   private $ref;
+
   function __construct()
   { }
 
@@ -99,6 +100,7 @@ class Product implements JsonSerializable
   {
     return get_object_vars($this);
   }
+  
   public function getUses()
   {
     return $this->uses;
@@ -117,4 +119,6 @@ class Product implements JsonSerializable
   {
     $this->ref = $ref;
   }
+
+  
 }

@@ -11,6 +11,7 @@ class Measurement implements JsonSerializable
   private $length;
   private $window;
   private $product;
+  private $idMaterial;
 
   public function getId()
   {
@@ -83,5 +84,14 @@ class Measurement implements JsonSerializable
     } else {
       return false;
     }
+  }
+  public function getIdMaterial()
+  {
+    return $this->idMaterial;
+  }
+
+  public function setIdMaterial($idMaterial)
+  {
+    $this->idMaterial = $idMaterial;
   }
 }

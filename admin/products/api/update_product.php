@@ -40,21 +40,39 @@ if (isset($_POST["photos"])) {
 }
 $materials = [];
 $materialsByProduct = $materialDao->findByProduct($product);
-
-foreach (json_decode($_POST["materials"]) as  $materialId) {
-  $material = $materialDao->findById((int) $materialId);
-  if (count($materialsByProduct) <= 0) {
-    array_push($materials, $material);
-    $materialDao->saveByProduct($material, $product);
-  } else {
-    foreach ($materialsByProduct as $materialProduct) {
-      if ($materialProduct->getId() != $material->getId()) {
-        array_push($materials, $material);
-        $materialDao->saveByProduct($material, $product);
+if ($product->getId() == $_ENV["id_fondo_auto"]) {
+  //si el la bolsa de fondo automatico
+  foreach (json_decode($_POST["materials"]) as  $materialReq) {
+    $material = $materialDao->findById((int) $materialReq->id);
+    if (count($materialsByProduct) <= 0) {
+      array_push($materials, $material);
+      $materialDao->saveByProduct($material, $product, $materialReq->minimunScale, $materialReq->mediumScale, $materialReq->maximunScale);
+    } else {
+      foreach ($materialsByProduct as $materialProduct) {
+        if ($materialProduct->getId() != $material->getId()) {
+          array_push($materials, $material);
+          $materialDao->saveByProduct($material, $product, $materialReq->minimunScale, $materialReq->mediumScale, $materialReq->maximunScale);
+        }
+      }
+    }
+  }
+} else {
+  foreach (json_decode($_POST["materials"]) as  $materialId) {
+    $material = $materialDao->findById((int) $materialId);
+    if (count($materialsByProduct) <= 0) {
+      array_push($materials, $material);
+      $materialDao->saveByProduct($material, $product);
+    } else {
+      foreach ($materialsByProduct as $materialProduct) {
+        if ($materialProduct->getId() != $material->getId()) {
+          array_push($materials, $material);
+          $materialDao->saveByProduct($material, $product);
+        }
       }
     }
   }
 }
+
 $measurements = [];
 foreach (json_decode($_POST["measurements"]) as  $measurementReq) {
   $measurementsByProduct = $measurementDao->findByProduct($product);
