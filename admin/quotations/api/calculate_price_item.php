@@ -5,8 +5,8 @@ if (isset($_POST["id"]) && isset($_POST["material"])) {
   $quotationDao = new QuotationDao();
   $materialDao = new MaterialDao();
   $item = $quotationDao->findItemById($_POST["id"]);
-  $item->setMaterial($materialDao->findById($_POST["material"]));
-  $item->calculatePrice();
+  $item->setMaterial($materialDao->findByIdByProduct($_POST["material"],$item->getProduct()));
+  echo $item->calculatePrice();
   header("Content-Type: text/plain");
   echo $item->getPrice();
 } else {

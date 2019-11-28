@@ -288,7 +288,7 @@ switch ($product->getCategory()->getId()) {
                     <li>
                       <div class="row">
                         <div class="col-sm-4">
-                          <select class="wide disabled" style="margin-bottom: 10px;" id="material<?= $indexMaterial; ?>">
+                          <select class="wide disabled material-select" style="margin-bottom: 10px;" id="material<?= $indexMaterial; ?>">
                             <option disabled>Seleccione un material</option>
                             <?php
                               foreach ($materials as  $material) {
@@ -395,6 +395,7 @@ switch ($product->getCategory()->getId()) {
       </script>
       <script src="/js/es.js"></script>
       <script src="/vendor/dropzone/dropzone.js"></script>
+      <script src="/vendor/sleep.js"></script>
       <script>
         if (parseInt($('#category').val()) == 6) {
           $('.lenght').css('display', 'none')
@@ -570,6 +571,7 @@ switch ($product->getCategory()->getId()) {
                 }
               }
               $('select').niceSelect('update')
+
               for (let index = 0; index < $('#materials').children().length; index++) {
                 let value = $('#material' + (index + 1)).val()
                 let material = {}
@@ -581,6 +583,7 @@ switch ($product->getCategory()->getId()) {
                   materials.push(material)
                 }
               }
+              
               for (let index = 0; index < $('#measurements').children().length; index++) {
                 let measurement = {}
                 measurement.width = $('#width' + (index + 1)).val()
@@ -661,7 +664,7 @@ switch ($product->getCategory()->getId()) {
             $.notify({
               message: 'Se ha actualizado el producto',
               title: 'Exito',
-              icon: 'fas fa-check-circle'
+              icon: 'notification_important'
             }, {
               type: 'success'
             })
@@ -687,7 +690,7 @@ switch ($product->getCategory()->getId()) {
             $.notify({
               message: 'Se ha actualizado el producto',
               title: 'Exito',
-              icon: 'fas fa-check-circle'
+              icon: 'notification_important'
             }, {
               type: 'success'
             })
@@ -744,7 +747,7 @@ switch ($product->getCategory()->getId()) {
 
         function addMaterial() {
           indexMaterial++;
-          $('#materials').append(`<li><select class="wide" style="margin-bottom: 10px;" id="material${indexMaterial}"><option disabled selected>Seleccione un material</option>
+          $('#materials').append(`<li><select class="wide material-select" style="margin-bottom: 10px;" id="material${indexMaterial}"><option disabled selected>Seleccione un material</option>
                       <?php
                       foreach ($materials as  $material) { ?>
                                                                                     <option value="<?= $material->getId(); ?>"><?= $material->getName(); ?></option>
@@ -782,8 +785,7 @@ switch ($product->getCategory()->getId()) {
           }
         }
       </script>
-      <script src="/vendor/bootstrap-notify.min.js"></script>
-      <script src="/vendor/sleep.js"></script>
+      
   </body>
 
   </html>

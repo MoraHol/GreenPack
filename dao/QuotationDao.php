@@ -6,6 +6,7 @@ require_once dirname(__DIR__) . "/model/ItemBox.php";
 require_once dirname(__DIR__) . "/model/ItemIndividual.php";
 require_once dirname(__DIR__) . "/model/ItemSheet.php";
 require_once dirname(__DIR__) . "/model/ItemSaco.php";
+require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemFondoAutomatico.php");
 require_once dirname(__DIR__) . "/db/DBOperator.php";
 require_once dirname(__DIR__) . "/db/env.php";
 require_once dirname(__DIR__) . "/dao/MeasurementDao.php";
@@ -50,7 +51,7 @@ class QuotationDao
     $quotation->setId($idQuotation);
     // Insert Items
     foreach ($quotation->getItems() as $item) {
-      if (is_a($item, "ItemBag")) {
+      if (is_a($item, "ItemBag") || is_a($item, "ItemFondoAutomatico")) {
         $query = "INSERT INTO `quotations_details` (`id_quotations_details`, `products_id_products`, 
         `quantity`, `printed`, `price`, `material_id`, `measurement_id`, `quotations_id_quotations`,`laminated`,`pla`) 
         VALUES (NULL, '" . $item->getProduct()->getId() . "', '" . $item->getQuantity() . "', 
@@ -159,6 +160,8 @@ class QuotationDao
           $item = new ItemSaco();
           $item->setObservations($itemDB["observations"]);
           $item->setTypeProduct($itemDB["type_product"]);
+        } else if ($product->getId() == $_ENV["id_fondo_auto"]) {
+          $item = new ItemFondoAutomatico();
         } else {
           $item = new ItemBag();
         }
@@ -178,7 +181,7 @@ class QuotationDao
       }
       $item->setId($itemDB["id_quotations_details"]);
       $item->setProduct($product);
-      $item->setMaterial($this->materialDao->findById($itemDB["material_id"]));
+      $item->setMaterial($this->materialDao->findByIdByProduct($itemDB["material_id"], $product));
       $item->setMeasurement($this->measurementDao->findById($itemDB["measurement_id"]));
       $item->setQuantity((int) $itemDB["quantity"]);
       $item->setPrice((int) $itemDB["price"]);
@@ -315,6 +318,8 @@ class QuotationDao
         $item = new ItemSaco();
         $item->setObservations($itemDB["observations"]);
         $item->setTypeProduct($itemDB["type_product"]);
+      } else if ($product->getId() == $_ENV["id_fondo_auto"]) {
+        $item = new ItemFondoAutomatico();
       } else {
         $item = new ItemBag();
       }
@@ -334,7 +339,7 @@ class QuotationDao
     }
     $item->setId($itemDB["id_quotations_details"]);
     $item->setProduct($product);
-    $item->setMaterial($this->materialDao->findById($itemDB["material_id"]));
+    $item->setMaterial($this->materialDao->findByIdByProduct($itemDB["material_id"], $product));
     $item->setMeasurement($this->measurementDao->findById($itemDB["measurement_id"]));
     $item->setQuantity((int) $itemDB["quantity"]);
     $item->setPrice((int) $itemDB["price"]);

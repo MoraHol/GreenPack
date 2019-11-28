@@ -6,6 +6,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemBag.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemBox.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemIndividual.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemSheet.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemFondoAutomatico.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . "/dao/ProductDao.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . "/dao/MeasurementDao.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . "/dao/MaterialDao.php");
@@ -36,7 +37,12 @@ if (
       $item->setObservations($_POST["observations"]);
       $item->setTypeProduct($_POST["material"]);
       $item->setMaterial($product->getMaterials()[0]);
-    } else {
+    } else if($product->getId() == $_ENV["id_fondo_auto"]){
+      $item = new ItemFondoAutomatico();
+      $item->setLam(filter_var($_POST["lam"], FILTER_VALIDATE_BOOLEAN));
+      $item->setPla(filter_var($_POST["window"], FILTER_VALIDATE_BOOLEAN));
+      $item->setMaterial($materialDao->findById($_POST["material"]));
+    }else {
       $item = new ItemBag();
       $item->setLam(filter_var($_POST["lam"], FILTER_VALIDATE_BOOLEAN));
       $item->setPla(filter_var($_POST["window"], FILTER_VALIDATE_BOOLEAN));

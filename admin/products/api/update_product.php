@@ -44,6 +44,9 @@ if ($product->getId() == $_ENV["id_fondo_auto"]) {
   //si el la bolsa de fondo automatico
   foreach (json_decode($_POST["materials"]) as  $materialReq) {
     $material = $materialDao->findById((int) $materialReq->id);
+    $materialReq->minimunScale =$materialReq->minimunScale == null ? "NULL" :$materialReq->minimunScale;
+    $materialReq->mediumScale =$materialReq->mediumScale == null ? "NULL" :$materialReq->mediumScale;
+    $materialReq->maximunScale =$materialReq->maximunScale == null ? "NULL" :$materialReq->maximunScale; 
     if (count($materialsByProduct) <= 0) {
       array_push($materials, $material);
       $materialDao->saveByProduct($material, $product, $materialReq->minimunScale, $materialReq->mediumScale, $materialReq->maximunScale);

@@ -6,6 +6,9 @@ class Material implements JsonSerializable
   private $description;
   private $grammage;
   private $pricePerKg;
+  private $minimunScale;
+  private $mediumScale;
+  private $maximunScale;
   
   public function getId()
   {

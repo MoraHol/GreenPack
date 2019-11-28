@@ -1,6 +1,8 @@
 <?php
 
-class ItemFondoAutomatico
+require_once __DIR__ . "/Item.php";
+
+class ItemFondoAutomatico extends Item implements JsonSerializable
 {
   public function __construct()
   {
@@ -9,23 +11,25 @@ class ItemFondoAutomatico
   public function calculatePrice()
   {
     $directCost = $this->calculateDirectCost();
-    if ($this->getQuantity() < 20000) {
-      return $this->setPrice($directCost * 4);
-    } else if ($this->getQuantity() > 20000 && $this->getQuantity() < 95000) {
-      return $this->setPrice($directCost * 3.5);
+    if ($this->getQuantity() <= 20000) {
+      return $this->setPrice($directCost * $this->getMaterial()->getMinimunScale());
+    } else if ($this->getQuantity() > 20000 && $this->getQuantity() <= 100000) {
+      return $this->setPrice($directCost * $this->getMaterial()->getMediumScale());
     } else {
-      return $this->setPrice($directCost * 3);
+      return $this->setPrice($directCost * $this->getMaterial()->getMaximunScale());
     }
   }
   public function calculateDirectCost()
   {
     // calculo de costos 
-    // (Ancho * alto * GR_Material * Precio_Material ) / 10.000.000
-    return ($this->getMeasurement()->getWidth() *
-      $this->getMeasurement()->getHeight() *
-      $this->getMaterial()->getGrammage() *
-      $this->getMaterial()->getPricePerKg())
-      / 10000000;
+		// (Ancho total * largo * GR_Material * Precio_Material ) / 10.000.000
+		// ancho total = mod5((ancho + fuelle) * 2)
+		$anchoTotal = $this->mod5(($this->getMeasurement()->getWidth() + $this->getMeasurement()->getHeight()) * 2);
+		return ($anchoTotal *
+			$this->getMeasurement()->getLength() *
+			$this->getMaterial()->getGrammage() *
+			$this->getMaterial()->getPricePerKg())
+			/ 10000000;
   }
 
   public function setTypeProduct($typeProduct)
@@ -47,4 +51,14 @@ class ItemFondoAutomatico
   {
     return $this->observations;
   }
+
+  private function mod5($number)
+	{
+		$sobra = $number % 5;
+		if ($sobra < 5) {
+			return ($number - $sobra) + 5;
+		} else {
+			return ($number - $sobra) + 10;
+		}
+	}
 }

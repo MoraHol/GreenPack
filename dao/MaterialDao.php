@@ -44,6 +44,26 @@ class MaterialDao
     // $this->db->close();
     return $material;
   }
+
+  function findByIdByProduct($id, $product)
+  {
+    $this->db->connect();
+    $query = "SELECT * FROM `products_has_materials` INNER JOIN materials ON `materials_id_materials` = materials.id_materials WHERE materials_id_materials = $id  AND products_id_products = " . $product->getId();
+    $materialDB = $this->db->consult($query,"yes");
+    $materialDB = $materialDB[0];
+    $material = new Material();
+    $material->setId($materialDB["id_materials"]);
+    $material->setName($materialDB["name"]);
+    $material->setDescription($materialDB["description"]);
+    $material->setGrammage($materialDB["grammage"]);
+    $material->setPricePerKg($materialDB["price_per_kg"]);
+    $material->setMinimunScale($materialDB["minimun_scale"]);
+    $material->setMediumScale($materialDB["medium_scale"]);
+    $material->setMaximunScale($materialDB["maximun_scale"]);
+    $this->db->close();
+    return $material;
+  }
+
   function findByProduct($product)
   {
     $this->db->connect();
