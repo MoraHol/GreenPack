@@ -126,9 +126,7 @@ abstract class Item implements JsonSerializable
     return (int) $this->price * (int) $this->quantity;
   }
   abstract public function calculatePrice();
-  // {
-
-  // }
+  
   public function jsonSerialize()
   {
     return get_object_vars($this);

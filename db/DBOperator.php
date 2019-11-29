@@ -1,5 +1,4 @@
 <?php
-
 /****************************************************************************************************************
 /*Esta clase permite consultar, guardar, actualizar y eliminar campos en tablas de una base de datos usando MySQL
 /*Desarrollada por frimost(Armandux)
@@ -33,6 +32,7 @@ class DBOperator
     $this->mysqliObj = new mysqli($this->host, $this->userName, $this->password, $this->dbName);
     $this->charset = $charset;
     $this->mysqliObj->query("SET NAMES '" . $this->charset . "'");
+    $this->flagConn = true;
   }
   //fin Constructor
   //gets y sets-----------------------
@@ -90,24 +90,59 @@ class DBOperator
         $rowValues[] = $linea;
       }
       //Reiniciar el objeto mySqli para garantizar su uso en varias consultas simultáneas :D----
-      $this->mysqliObj = new mysqli($this->host, $this->userName, $this->password, $this->dbName);
-      $this->mysqliObj->query("SET NAMES '" . $this->charset . "'");
+      /* $this->mysqliObj = new mysqli($this->host, $this->userName, $this->password, $this->dbName);
+      $this->mysqliObj->query("SET NAMES '" . $this->charset . "'"); */
       //----------------------------------------------------------------------------------------
       return $rowValues;
     } else {
-      $this->mysqliObj = new mysqli($this->host, $this->userName, $this->password, $this->dbName);
-      $this->mysqliObj->query("SET NAMES '" . $this->charset . "'");
+      /* $this->mysqliObj = new mysqli($this->host, $this->userName, $this->password, $this->dbName);
+      $this->mysqliObj->query("SET NAMES '" . $this->charset . "'"); */
       return $consult;
     }
   }
   function close()
   {
-
-    $this->mysqliObj->close();
+    if ($this->flagConn) {
+      $this->mysqliObj->close();
+      $this->flagConn = false;
+    }
   }
   function connect()
   {
-    $this->mysqliObj = new mysqli($this->host, $this->userName, $this->password, $this->dbName);
-    $this->mysqliObj->query("SET NAMES '" . $this->charset . "'");
+    if (!$this->flagConn) {
+      $this->mysqliObj = new mysqli($this->host, $this->userName, $this->password, $this->dbName);
+      $this->mysqliObj->query("SET NAMES '" . $this->charset . "'");
+      $this->flagConn = true;
+    }
+  }
+  function lastError()
+  {
+    return $this->mysqliObj->error;
+  }
+  function errorList(){
+    return $this->mysqliObj->error_list;
+  }
+  function begin_transaction()
+  {
+    return $this->mysqliObj->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
+  }
+  function autocommit($flag)
+  {
+    return $this->mysqliObj->autocommit($flag);
+  }
+  function commit()
+  {
+    return $this->mysqliObj->commit();
+  }
+  function rollback()
+  {
+    return $this->mysqliObj->rollback();
+  }
+  function lastInsertId()
+  {
+    return $this->mysqliObj->insert_id;
+  }
+  function errorno(){
+    return $this->mysqliObj->errno;
   }
 }

@@ -21,6 +21,7 @@ if (isset($_SESSION["cart"])) {
   foreach ($cart->getItems() as $item) {
     $item->calculatePrice();
   }
+  echo json_encode($cart);
   $quotationDao->save($cart);
   session_destroy();
 } else {

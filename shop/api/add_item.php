@@ -37,17 +37,15 @@ if (
       $item->setObservations($_POST["observations"]);
       $item->setTypeProduct($_POST["material"]);
       $item->setMaterial($product->getMaterials()[0]);
-    } else if($product->getId() == $_ENV["id_fondo_auto"]){
+    } else if ($product->getId() == $_ENV["id_fondo_auto"]) {
       $item = new ItemFondoAutomatico();
-      $item->setLam(filter_var($_POST["lam"], FILTER_VALIDATE_BOOLEAN));
-      $item->setPla(filter_var($_POST["window"], FILTER_VALIDATE_BOOLEAN));
-      $item->setMaterial($materialDao->findById($_POST["material"]));
-    }else {
+      $item->setMaterial($materialDao->findByIdByProduct($_POST["material"], $product));
+    } else {
       $item = new ItemBag();
-      $item->setLam(filter_var($_POST["lam"], FILTER_VALIDATE_BOOLEAN));
-      $item->setPla(filter_var($_POST["window"], FILTER_VALIDATE_BOOLEAN));
-      $item->setMaterial($materialDao->findById($_POST["material"]));
+      $item->setMaterial($materialDao->findByIdBy($_POST["material"]));
     }
+    $item->setLam(filter_var($_POST["lam"], FILTER_VALIDATE_BOOLEAN));
+    $item->setPla(filter_var($_POST["window"], FILTER_VALIDATE_BOOLEAN));
   } else if ($product->getCategory()->getId() == 6) {
     if ($product->getId() == $_ENV["id_individuales"]) {
       $item = new ItemIndividual();
@@ -77,6 +75,7 @@ if (
   $items = $cart->addItem($item);
   $_SESSION["cart"] = serialize($cart);
   http_response_code(200);
+  echo get_class($item);
 } else {
   http_response_code(400);
 }

@@ -44,6 +44,7 @@ class QuotationDao
     // Insert quotation
     //assing admin
     $quotation = $this->assign($quotation);
+    // creacion de cotizacion
     $query = "INSERT INTO `quotations` (`id_quotations`, `city`, `address`, `cell_phone`, `phone`, `description`, `file`, `clients_id_clients`, `created_at`,`id_admin_assignment`,`date_assignment`) VALUES (NULL, '" . $quotation->getCity() . "', '" . $quotation->getAddress() . "', '" . $quotation->getCellPhoneNumber() . "', '" . $quotation->getPhoneNumber() . "', '" . $quotation->getExtraInformation() . "', '" . $quotation->getFile() . "', '$idClient', current_timestamp(),'" . $quotation->getIdAdminAssigned() . "','" . date('Y-m-d H:i:s', $quotation->getDateAssigned()) . "')";
     $this->db->consult($query);
     $idQuotation = $this->db->consult("SELECT MAX(`id_quotations`) AS id FROM `quotations`", "yes");
@@ -68,6 +69,7 @@ class QuotationDao
         '" . $item->getMaterial()->getId() . "', '" . $item->getMeasurement()->getId() . "', 
         '" . $quotation->getId() . "','" . (int) $item->isLam() . "','" . (int) $item->isPla() . "',
         '" . $item->getObservations() . "'," . $item->getNumberInks() . ",'" . $item->getTypeProduct() . "')";
+
       } else if (is_a($item, "ItemIndividual") || is_a($item, "ItemSheet") || is_a($item, "ItemSaco")) {
         $query = "INSERT INTO `quotations_details` (`id_quotations_details`, `products_id_products`, 
         `quantity`, `printed`, `price`, `material_id`, `measurement_id`, `quotations_id_quotations`,
