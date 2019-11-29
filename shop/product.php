@@ -12,7 +12,10 @@ $product = $productDao->findById($_GET["id"]);
 if ($product->getCategory()->getId() == 1) { // bolsas
   if ($product->getId() == $_ENV["id_sacos"]) {
     include_once('product_saco.php');
-  } else {
+  } 
+  else if($product->getId() == $_ENV["id_fondo_auto"]){
+    include_once('product_fondo_automatico.php');
+  }else {
     include_once('product_bolsas.php');
   }
 } elseif ($product->getCategory()->getId() == 6) { //laminas
