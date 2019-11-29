@@ -288,15 +288,18 @@ switch ($product->getCategory()->getId()) {
                     <li>
                       <div class="row">
                         <div class="col-sm-4">
-                          <select class="wide disabled material-select" style="margin-bottom: 10px;" id="material<?= $indexMaterial; ?>">
-                            <option disabled>Seleccione un material</option>
-                            <?php
-                              foreach ($materials as  $material) {
-                                $materialSelected = $materialProduct->getId() == $material->getId() ? $material : $materialSelected ?>
-                              <option value="<?= $material->getId(); ?>" <?= $materialProduct->getId() == $material->getId() ? "selected" : "" ?> title="<?= $material->getName(); ?>"><?= $material->getName(); ?></option>
-                            <?php }
-                              ?>
-                          </select>
+                          <div class="form-group">
+
+                            <select class="wide disabled material-select" style="margin-bottom: 10px;" id="material<?= $indexMaterial; ?>">
+                              <option disabled>Seleccione un material</option>
+                              <?php
+                                foreach ($materials as  $material) {
+                                  $materialSelected = $materialProduct->getId() == $material->getId() ? $material : $materialSelected ?>
+                                <option value="<?= $material->getId(); ?>" <?= $materialProduct->getId() == $material->getId() ? "selected" : "" ?> title="<?= $material->getName(); ?>"><?= $material->getName(); ?></option>
+                              <?php }
+                                ?>
+                            </select>
+                          </div>
                         </div>
                         <div class="col">
                           <div class="form-group">
@@ -577,13 +580,13 @@ switch ($product->getCategory()->getId()) {
                 let material = {}
                 if (value != '' && typeof(value) != 'undefined' && value != null) {
                   material.id = value
-                  material.minimunScale = parseFloat($('#material' + (index + 1)).parent().siblings('.col').children('.form-group').children('.minimun-scale').val())
-                  material.mediumScale = parseFloat($('#material' + (index + 1)).parent().siblings('.col').children('.form-group').children('.medium-scale').val())
-                  material.maximunScale = parseFloat($('#material' + (index + 1)).parent().siblings('.col').children('.form-group').children('.maximun-scale').val())
+                  material.minimunScale = parseFloat($('#material' + (index + 1)).parent().parent().siblings('.col').children('.form-group').children('.minimun-scale').val())
+                  material.mediumScale = parseFloat($('#material' + (index + 1)).parent().parent().siblings('.col').children('.form-group').children('.medium-scale').val())
+                  material.maximunScale = parseFloat($('#material' + (index + 1)).parent().parent().siblings('.col').children('.form-group').children('.maximun-scale').val())
                   materials.push(material)
                 }
               }
-              
+
               for (let index = 0; index < $('#measurements').children().length; index++) {
                 let measurement = {}
                 measurement.width = $('#width' + (index + 1)).val()
@@ -785,7 +788,7 @@ switch ($product->getCategory()->getId()) {
           }
         }
       </script>
-      
+
   </body>
 
   </html>
