@@ -40,6 +40,10 @@ switch ($product->getCategory()->getId()) {
     $nameAdditional = "Piezas por Pliego";
     $routeDownloadFileExample = "/Catalogos/FormatMeasurementsBoxes.xlsx";
     break;
+  case 8:
+    $nameAdditional = "Piezas por Pliego";
+    $routeDownloadFileExample = "/Catalogos/FormatMeasurementsBoxes.xlsx";
+    break;
 }
 
 ?>
@@ -284,7 +288,8 @@ switch ($product->getCategory()->getId()) {
               <div>
                 <label for="campo1">Materiales:</label>
                 <ul class="list-unstyled" id="materials">
-                  <?php foreach ($product->getMaterials() as $materialProduct) { ?>
+                  <?php foreach ($product->getMaterials() as $materialProduct) {
+                    $materialSelected = null ?>
                     <li>
                       <div class="row">
                         <div class="col-sm-4">

@@ -2,6 +2,11 @@
 require_once(dirname(__DIR__) . "/db/DBOperator.php");
 require_once(dirname(__DIR__) . "/model/material.php");
 require_once(dirname(__DIR__) . "/db/env.php");
+require_once $_SERVER["DOCUMENT_ROOT"] . "/vendor/composer/vendor/autoload.php";
+
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
 /*****************************************************************************
 /*Esta clase permite Crear, Actualizar, Buscar y Eliminar Materiales
 /*Desarrollada por Alexis Holguin(github: MoraHol)
@@ -11,9 +16,13 @@ require_once(dirname(__DIR__) . "/db/env.php");
 class MaterialDao
 {
   private $db;
+  static $logger;
+  
   function __construct()
   {
     $this->db = new DBOperator($_ENV["db_host"], $_ENV["db_user"], $_ENV["db_name"], $_ENV["db_pass"]);
+    self::$logger = new Logger('channel-name');
+    self::$logger->pushHandler(new StreamHandler($_SERVER["DOCUMENT_ROOT"] . '/logs/app.log', Logger::DEBUG));
   }
   function findAll()
   {
@@ -49,7 +58,7 @@ class MaterialDao
   {
     $this->db->connect();
     $query = "SELECT * FROM `products_has_materials` INNER JOIN materials ON `materials_id_materials` = materials.id_materials WHERE materials_id_materials = $id  AND products_id_products = " . $product->getId();
-    $materialDB = $this->db->consult($query,"yes");
+    $materialDB = $this->db->consult($query, "yes");
     $materialDB = $materialDB[0];
     $material = new Material();
     $material->setId($materialDB["id_materials"]);
@@ -61,6 +70,7 @@ class MaterialDao
     $material->setMediumScale($materialDB["medium_scale"]);
     $material->setMaximunScale($materialDB["maximun_scale"]);
     $this->db->close();
+    self::$logger->info($query);
     return $material;
   }
 
@@ -92,6 +102,7 @@ class MaterialDao
     VALUES ('" . $product->getId() . "', '" . $material->getId() . "',$minimunScale, $mediumScale, $maximunScale)
     ON DUPLICATE KEY UPDATE `minimun_scale` = $minimunScale,`medium_scale` = $mediumScale,`maximun_scale` = $maximunScale";
     $status = $this->db->consult($query);
+    self::$logger->info($query);
     $this->db->close();
     return $status;
   }
@@ -101,6 +112,7 @@ class MaterialDao
     $query = "INSERT INTO `materials` (`id_materials`, `name`, `description`,`grammage`,`price_per_kg`) VALUES (NULL, '" . $material->getName() . "', '" . $material->getDescription() . "','" . $material->getGrammage() . "','" . $material->getPricePerKg() . "')";
     $status = $this->db->consult($query);
     $this->db->close();
+    self::$logger->info($query);
     return $status;
   }
   function delete($id)
@@ -109,6 +121,7 @@ class MaterialDao
     $query = "DELETE FROM `materials` WHERE `materials`.`id_materials` = $id";
     $status = $this->db->consult($query);
     $this->db->close();
+    self::$logger->info($query);
     return $status;
   }
   function update($material)
@@ -117,6 +130,7 @@ class MaterialDao
     $query = "UPDATE `materials` SET `name` = '" . $material->getName() . "', `grammage` = '" . $material->getGrammage() . "', `price_per_kg` = '" . $material->getPricePerKg() . "', `description` = '" . $material->getDescription() . "' WHERE `materials`.`id_materials` = " . $material->getId();
     $status = $this->db->consult($query);
     $this->db->close();
+    self::$logger->info($query);
     return $status;
   }
   function deleteByProduct($id, $product)
@@ -125,6 +139,7 @@ class MaterialDao
     $query = "DELETE FROM `products_has_materials` WHERE `products_has_materials`.`products_id_products` = $product  AND `products_has_materials`.`materials_id_materials` = $id";
     $status = $this->db->consult($query);
     $this->db->close();
+    self::$logger->info($query);
     return $status;
   }
 }

@@ -40,7 +40,6 @@ switch ($product->getCategory()->getId()) {
     $routeDownloadFileExample = "/Catalogos/FormatMeasurementsBoxes.xlsx";
     break;
 }
-
 ?>
   <!-- author: Alexis Holguin, github: MoraHol -->
   <!doctype html>
@@ -161,7 +160,13 @@ switch ($product->getCategory()->getId()) {
         font-size: 80%;
       }
     </style>
-
+    <?php if($product->getCategory()->getId() == 6){
+      echo "<style>
+      .lenght,.window{
+        display: none;
+      }
+      </style>";
+    } ?>
   </head>
 
   <body class="white-edition" id="body">

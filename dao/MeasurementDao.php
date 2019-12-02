@@ -2,6 +2,11 @@
 require_once dirname(__DIR__) . "/model/measurement.php";
 require_once(dirname(__DIR__) . "/db/env.php");
 require_once dirname(__DIR__) . "/db/DBOperator.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/vendor/composer/vendor/autoload.php";
+
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
 /*****************************************************************************
 /*Esta clase permite Crear, Actualizar, Buscar y Eliminar Medidas
 /*Desarrollada por Alexis Holguin(github: MoraHol)
@@ -11,9 +16,12 @@ require_once dirname(__DIR__) . "/db/DBOperator.php";
 class MeasurementDao
 {
   private $db;
+  static $logger;
   function __construct()
   {
     $this->db = new DBOperator($_ENV["db_host"], $_ENV["db_user"], $_ENV["db_name"], $_ENV["db_pass"]);
+    self::$logger = new Logger('channel-name');
+    self::$logger->pushHandler(new StreamHandler($_SERVER["DOCUMENT_ROOT"] . '/logs/measurement.log', Logger::DEBUG));
   }
   function findByProduct($product)
   {
@@ -28,6 +36,7 @@ class MeasurementDao
       $measurement->setHeight($measurementDB["height"]);
       $measurement->setWindow($measurementDB["window"]);
       $measurement->setProduct($product->getId());
+      $measurement->setPliego($measurementDB["pliego"]);
       array_push($measurements, $measurement);
     }
     $this->db->close();
@@ -46,16 +55,28 @@ class MeasurementDao
     $measurement->setHeight($measurementDB["height"]);
     $measurement->setWindow($measurementDB["window"]);
     $measurement->setProduct($measurementDB["products_id_products"]);
+    $measurement->setPliego($measurementDB["pliego"]);
     // $this->db->close();
     return $measurement;
   }
   function saveByProduct($measurement)
   {
     $this->db->connect();
-    $query = "INSERT INTO `measurements` (`id_measurements`, `width`, `height`, `lenght`, `products_id_products`, `window`) VALUES (NULL, '" . $measurement->getWidth() . "', '" . $measurement->getHeight() . "', '" . $measurement->getLength() . "', '" . $measurement->getProduct() . "', '" . $measurement->getWindow() . "')";
-    echo $query;
+    self::$logger->warning('pliego:'. $measurement->getPliego() );
+    if ($measurement->getPliego() != null) {
+      $query = "INSERT INTO `measurements` (`id_measurements`, `width`, `height`,
+      `lenght`, `products_id_products`, `window` ,`pliego`) VALUES (NULL, '" . $measurement->getWidth() . "', '"
+        . $measurement->getHeight() . "', '" . $measurement->getLength() . "', 
+      '" . $measurement->getProduct() . "', '" . $measurement->getWindow() . "' ," . $measurement->getPliego() . ")";
+    } else {
+      $query = "INSERT INTO `measurements` (`id_measurements`, `width`, `height`,
+      `lenght`, `products_id_products`, `window`) VALUES (NULL, '" . $measurement->getWidth() . "', '"
+        . $measurement->getHeight() . "', '" . $measurement->getLength() . "', 
+      '" . $measurement->getProduct() . "', '" . $measurement->getWindow() . "')";
+    }
     $status = $this->db->consult($query);
     $this->db->close();
+    self::$logger->info($query);
     return $status;
   }
   function searchMeasurementByProduct($product, $height, $width, $length)
@@ -71,6 +92,7 @@ class MeasurementDao
     $measurement->setHeight($measurementDB["height"]);
     $measurement->setWindow($measurementDB["window"]);
     $measurement->setProduct($product->getId());
+    self::$logger->info($query);
     $this->db->close();
     return $measurement;
   }
@@ -90,6 +112,7 @@ class MeasurementDao
     $query = "UPDATE `measurements` SET `width` = '" . $measurement->getWidth() . "', `height` = '" . $measurement->getHeight() . "', `lenght` = '" . $measurement->getLength() . "' WHERE `measurements`.`id_measurements` = " . $measurement->getId();
     $this->db->consult($query);
     $this->db->close();
+    self::$logger->info($query);
   }
 
   public function findByMaterial($idMaterial, $product)
@@ -105,7 +128,9 @@ class MeasurementDao
       $measurement->setWidth($measurementDB["width"]);
       $measurement->setHeight($measurementDB["height"]);
       $measurement->setWindow($measurementDB["window"]);
+      $measurement->setIdMaterial($idMaterial);
       $measurement->setProduct($product->getId());
+      self::$logger->info($query);
       array_push($measurements, $measurement);
     }
     $this->db->close();
@@ -122,6 +147,7 @@ class MeasurementDao
      '" . $measurement->getProduct() . "', '" . $measurement->getWindow() . "', '" . $measurement->getIdMaterial() . "')";
     $status = $this->db->consult($query);
     $this->db->close();
+    self::$logger->info($query);
     return $status;
   }
 }

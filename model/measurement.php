@@ -12,6 +12,7 @@ class Measurement implements JsonSerializable
   private $window;
   private $product;
   private $idMaterial;
+  private $pliego;
 
   public function getId()
   {
@@ -94,4 +95,11 @@ class Measurement implements JsonSerializable
   {
     $this->idMaterial = $idMaterial;
   }
+  public function getPliego(){
+		return $this->pliego;
+	}
+
+	public function setPliego($pliego){
+		$this->pliego = $pliego;
+	}
 }

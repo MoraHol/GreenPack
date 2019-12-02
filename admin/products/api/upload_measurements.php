@@ -5,7 +5,8 @@
 require_once dirname(dirname(dirname(__DIR__))) . '/vendor/PHPExcel/PHPExcel.php';
 require_once dirname(dirname(dirname(__DIR__))) . '/dao/MeasurementDao.php';
 $host = $_SERVER["HTTP_HOST"];
-$src = explode("https://$host", $_POST["file"]);
+$protocol = isset($_SERVER["HTTPS"]) ? "https" : "http";
+$src = explode("$protocol://$host", $_POST["file"]);
 $src = $src[1];
 $measurementDao = new MeasurementDao();
 $archivo = dirname(dirname(dirname(__DIR__))) . $src;

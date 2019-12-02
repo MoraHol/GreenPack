@@ -21,7 +21,8 @@ if (isset($_FILES["file"])) {
     chmod($url, 0777);
     header('Content-type: application/json');
     $url = new stdClass();
-    $url->link = "https://$host/upload/file/$name";
+    $protocol = isset($_SERVER["HTTPS"]) ? "https":"http";
+    $url->link = "$protocol://$host/upload/file/$name";
     echo json_encode($url);
   } else {
     http_response_code(400);

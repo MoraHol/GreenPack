@@ -40,24 +40,15 @@ if (isset($_POST["photos"])) {
 }
 $materials = [];
 $materialsByProduct = $materialDao->findByProduct($product);
-if ($product->getId() == $_ENV["id_fondo_auto"]) {
+if ($product->getId() == $_ENV["id_fondo_auto"] || $product->getCategory()->getid() == 8) {
   //si el la bolsa de fondo automatico
   foreach (json_decode($_POST["materials"]) as  $materialReq) {
     $material = $materialDao->findById((int) $materialReq->id);
-    $materialReq->minimunScale =$materialReq->minimunScale == null ? "NULL" :$materialReq->minimunScale;
-    $materialReq->mediumScale =$materialReq->mediumScale == null ? "NULL" :$materialReq->mediumScale;
-    $materialReq->maximunScale =$materialReq->maximunScale == null ? "NULL" :$materialReq->maximunScale; 
-    if (count($materialsByProduct) <= 0) {
-      array_push($materials, $material);
-      $materialDao->saveByProduct($material, $product, $materialReq->minimunScale, $materialReq->mediumScale, $materialReq->maximunScale);
-    } else {
-      foreach ($materialsByProduct as $materialProduct) {
-        if ($materialProduct->getId() != $material->getId()) {
-          array_push($materials, $material);
-          $materialDao->saveByProduct($material, $product, $materialReq->minimunScale, $materialReq->mediumScale, $materialReq->maximunScale);
-        }
-      }
-    }
+    $materialReq->minimunScale = $materialReq->minimunScale == null ? "NULL" : $materialReq->minimunScale;
+    $materialReq->mediumScale = $materialReq->mediumScale == null ? "NULL" : $materialReq->mediumScale;
+    $materialReq->maximunScale = $materialReq->maximunScale == null ? "NULL" : $materialReq->maximunScale;
+
+    $materialDao->saveByProduct($material, $product, $materialReq->minimunScale, $materialReq->mediumScale, $materialReq->maximunScale);
   }
 } else {
   foreach (json_decode($_POST["materials"]) as  $materialId) {
@@ -85,20 +76,15 @@ foreach (json_decode($_POST["measurements"]) as  $measurementReq) {
   $measurement->setLength($measurementReq->lenght);
   $measurement->setWindow($measurementReq->window);
   $measurement->setProduct($product->getId());
+  if ($product->getCategory()->getId() == 8) {
+    $measurement->setPliego($measurementReq->pliego);
+  }
   if (count($measurementsByProduct) <= 0) {
     array_push($measurements, $measurement);
     $measurementDao->saveByProduct($measurement);
   } else {
     foreach ($measurementsByProduct as $measurementByProduct) {
-      echo "comparacion: <br>";
-      echo "medida: ";
-      var_dump($measurement);
-      echo "<br> medida del producto: ";
-      var_dump($measurementByProduct);
-      echo "<br>";
-      $flag = false;
       if ($measurement->isEqual($measurementByProduct)) {
-        echo "<span style='color:red'>iguales</span>";
         $flag = true;
         break;
       } else {
