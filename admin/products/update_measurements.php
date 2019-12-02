@@ -66,7 +66,7 @@ include("../partials/verify-session.php");
           <div class="form-gruop">
             <label for="campo1">Medidas:</label>
             <ul class="list-unstyled" id="measurements">
-              <?php foreach ($product->getMeasurements() as $measurement) {
+              <?php foreach ($measurements as $measurement) {
                 ?>
                 <li>Medida <?= $indexMeasurement ?>:<div class="row">
                     <div class="col">
