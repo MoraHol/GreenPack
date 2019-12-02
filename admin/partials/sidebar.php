@@ -12,9 +12,6 @@
   <div class="sidebar-wrapper">
     <ul class="nav">
       <?php
-      if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-      }
       require_once dirname(dirname(__DIR__)) . "/model/Admin.php";
       $admin = unserialize($_SESSION["admin"]);
       if ($admin->getRole() == 2) { ?>
