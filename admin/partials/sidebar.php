@@ -12,7 +12,7 @@
   <div class="sidebar-wrapper">
     <ul class="nav">
       <?php
-      if (!isset($_SESSION)) {
+      if (session_status() == PHP_SESSION_NONE) {
         session_start();
       }
       require_once dirname(dirname(__DIR__)) . "/model/Admin.php";
