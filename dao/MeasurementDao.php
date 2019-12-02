@@ -92,6 +92,7 @@ class MeasurementDao
     $measurement->setHeight($measurementDB["height"]);
     $measurement->setWindow($measurementDB["window"]);
     $measurement->setProduct($product->getId());
+    $measurement->setPliego($measurementDB["pliego"]);
     self::$logger->info($query);
     $this->db->close();
     return $measurement;
@@ -130,6 +131,7 @@ class MeasurementDao
       $measurement->setWindow($measurementDB["window"]);
       $measurement->setIdMaterial($idMaterial);
       $measurement->setProduct($product->getId());
+      
       self::$logger->info($query);
       array_push($measurements, $measurement);
     }

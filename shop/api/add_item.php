@@ -7,6 +7,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemBox.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemIndividual.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemSheet.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemFondoAutomatico.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemBolsasLaminadas.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . "/dao/ProductDao.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . "/dao/MeasurementDao.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . "/dao/MaterialDao.php");
@@ -57,7 +58,15 @@ if (
     $item->setMaterial($product->getMaterials()[0]);
     $item->setObservations($_POST["observations"]);
     $item->setTypeProduct($_POST["material"]);
-  } else {
+  } else if ($product->getCategory()->getId() == 8) {
+    $item = new ItemBolsasLaminadas();
+    $item->setObservations($itemDB["observations"]);
+    $item->setTypeProduct($itemDB["type_product"]);
+    $item->setLam(false);
+    $item->setPla(false);
+    $item->setMaterial($materialDao->findByIdByProduct($product->getMaterials()[0]->getId(),$product));
+
+  }else {
     $item = new ItemBox();
     $item->setLam(false);
     $item->setPla(false);

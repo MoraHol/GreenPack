@@ -6,6 +6,7 @@ require_once dirname(__DIR__) . "/model/ItemBox.php";
 require_once dirname(__DIR__) . "/model/ItemIndividual.php";
 require_once dirname(__DIR__) . "/model/ItemSheet.php";
 require_once dirname(__DIR__) . "/model/ItemSaco.php";
+require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemBolsasLaminadas.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemFondoAutomatico.php");
 require_once dirname(__DIR__) . "/db/DBOperator.php";
 require_once dirname(__DIR__) . "/db/env.php";
@@ -69,8 +70,7 @@ class QuotationDao
         '" . $item->getMaterial()->getId() . "', '" . $item->getMeasurement()->getId() . "', 
         '" . $quotation->getId() . "','" . (int) $item->isLam() . "','" . (int) $item->isPla() . "',
         '" . $item->getObservations() . "'," . $item->getNumberInks() . ",'" . $item->getTypeProduct() . "')";
-
-      } else if (is_a($item, "ItemIndividual") || is_a($item, "ItemSheet") || is_a($item, "ItemSaco")) {
+      } else if (is_a($item, "ItemIndividual") || is_a($item, "ItemSheet") || is_a($item, "ItemSaco")|| is_a($item, "ItemBolsasLaminadas")) {
         $query = "INSERT INTO `quotations_details` (`id_quotations_details`, `products_id_products`, 
         `quantity`, `printed`, `price`, `material_id`, `measurement_id`, `quotations_id_quotations`,
         `laminated`,`pla`,`observations`,`type_product`) 
@@ -173,6 +173,10 @@ class QuotationDao
         } else {
           $item = new ItemSheet();
         }
+        $item->setObservations($itemDB["observations"]);
+        $item->setTypeProduct($itemDB["type_product"]);
+      } else if ($product->getCategory()->getId() == 8) {
+        $item = new ItemBolsasLaminadas();
         $item->setObservations($itemDB["observations"]);
         $item->setTypeProduct($itemDB["type_product"]);
       } else {
@@ -331,6 +335,10 @@ class QuotationDao
       } else {
         $item = new ItemSheet();
       }
+      $item->setObservations($itemDB["observations"]);
+      $item->setTypeProduct($itemDB["type_product"]);
+    }else if ($product->getCategory()->getId() == 8) {
+      $item = new ItemBolsasLaminadas();
       $item->setObservations($itemDB["observations"]);
       $item->setTypeProduct($itemDB["type_product"]);
     } else {

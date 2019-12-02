@@ -394,7 +394,7 @@ switch ($product->getCategory()->getId()) {
               <div class="form-group">
                 <label for="category">Seleccione la categoría del producto:</label>
                 <br>
-                <select id="category" class="wide">
+                <select id="category" class="wide disabled">
                   <option disabled>Seleccione una categoría</option>
                   <?php foreach ($categories as $category) { ?>
                     <option value="<?= $category->getId(); ?>" <?= $product->getCategory()->getId() == $category->getId() ? "selected" : ""; ?>><?= $category->getName(); ?></option>

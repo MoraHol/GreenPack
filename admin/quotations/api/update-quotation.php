@@ -23,7 +23,7 @@ if (isset($_POST["id"])) {
   foreach ($quotation->getItems() as $key => $item) {
     $item->setQuantity($items[$key]->quantity);
     $item->setPrice($items[$key]->price);
-    if (is_a($item, "ItemBox") || is_a($item, "ItemIndividual") || is_a($item, "ItemSheet")) {
+    if (is_a($item, "ItemBox") || is_a($item, "ItemIndividual") || is_a($item, "ItemSheet") || is_a($item, "ItemBolsasLaminadas")) {
       $item->setMaterial($materialDao->findById($items[$key]->material));
     }
   }

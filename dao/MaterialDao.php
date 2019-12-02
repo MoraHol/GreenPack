@@ -70,7 +70,6 @@ class MaterialDao
     $material->setMediumScale($materialDB["medium_scale"]);
     $material->setMaximunScale($materialDB["maximun_scale"]);
     $this->db->close();
-    self::$logger->info($query);
     return $material;
   }
 

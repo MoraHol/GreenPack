@@ -20,6 +20,9 @@ if ($product->getCategory()->getId() == 1) { // bolsas
   }
 } elseif ($product->getCategory()->getId() == 6) { //laminas
   include_once('product_laminas.php');
-} else {
+}elseif ($product->getCategory()->getId() == 8) { // bolsas laminadas
+  include_once('product_saco.php');
+} 
+else {
   include_once('product_copy.php');
 }
