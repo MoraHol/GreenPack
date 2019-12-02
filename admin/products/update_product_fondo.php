@@ -324,8 +324,8 @@ switch ($product->getCategory()->getId()) {
                             <input type="number" class="form-control maximun-scale" value="<?= $materialProduct->getMaximunScale() ?>">
                           </div>
                         </div>
-                        <div class="col-md-1 col-sm-2"><button title="Eliminar" class="btn btn-danger" onclick="deleteMaterial(<?= $product->getId() ?>,<?= $materialSelected->getId() ?>)"><i class="fas fa-trash"></i></button></div>
-                        <div class="col-md-1 col-sm-2"><a title="Ver Medidas" class="btn btn-primary" href="update_measurements.php?id=<?= $product->getId() ?>&id_material=<?= $materialSelected->getId() ?>"><i class="fas fa-ruler-combined"></i></a></div>
+                        <div class="col-md-1 col-sm-2"><button title="Eliminar" class="btn btn-danger" onclick="deleteMaterial(<?= $product->getId() ?>,<?= $materialProduct->getId() ?>)"><i class="fas fa-trash"></i></button></div>
+                        <div class="col-md-1 col-sm-2"><a title="Ver Medidas" class="btn btn-primary" href="update_measurements.php?id=<?= $product->getId() ?>&id_material=<?= $materialProduct->getId() ?>"><i class="fas fa-ruler-combined"></i></a></div>
                       </div>
                     </li>
                   <?php $indexMaterial++;
