@@ -1,8 +1,8 @@
 <!-- author: Alexis Holguin, github: MoraHol -->
 <?php
+include("../partials/verify-session.php");
 require_once dirname(dirname(__DIR__)) . "/dao/QuotationDao.php";
 require_once dirname(dirname(__DIR__)) . "/dao/AdminDao.php";
-include("../partials/verify-session.php");
 $quotationDao = new QuotationDao();
 $adminDao = new AdminDao();
 $quotations = $quotationDao->findAll();
