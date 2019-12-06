@@ -62,6 +62,22 @@ include("../partials/verify-session.php");
                 </div>
               </div>
               <br>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="">Precio pliego 60*90</label>
+                    <input type="text" name="" id="p5400" class="form-control" placeholder="" aria-describedby="helpId">
+                    <small id="helpId">Solo para  materiales de bolsas laminadas</small>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="">Precio pliego 70*100:</label>
+                    <input type="text" name="" id="p7000" class="form-control" placeholder="" aria-describedby="helpId">
+                    <small id="helpId">Solo para  materiales de bolsas laminadas</small>
+                  </div>
+                </div>
+              </div>
               <div class="form-group">
                 <label for="description">Descripcion:</label>
                 <br>
@@ -106,7 +122,9 @@ include("../partials/verify-session.php");
           name: $('#nameMaterial').val(),
           price: $('#pricePerKg').val(),
           grammage: $('#grammage').val(),
-          description: $('#description').val()
+          description: $('#description').val(),
+          p5400: $('p5400').val(),
+          p7000: $('#p7000').val()
         }, (data, status) => {
           if (status == 'success') {
             $.notify({

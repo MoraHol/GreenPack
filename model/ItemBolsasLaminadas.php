@@ -21,12 +21,11 @@ class ItemBolsasLaminadas extends Item implements JsonSerializable
   }
   public function calculateDirectCost()
   {
-    // calculo de costos 
-    // (precio del material / numero de pliegos)
-    $costoReal = $this->getMaterial()->getPricePerKg() / 5400;
-    
-    $cost = $costoReal * $this->getMeasurement()->getPliego();
-		return $cost / $this->getMeasurement()->getWindow();
+    if($this->getMeasurement()->getPliego() == 5400){
+      return $this->getMaterial()->p5400 / $this->getMeasurement()->getWindow();
+    }else{
+      return $this->getMaterial()->p7000 / $this->getMeasurement()->getWindow();
+    }
   }
 
   public function setTypeProduct($typeProduct)

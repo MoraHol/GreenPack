@@ -9,6 +9,8 @@ class Material implements JsonSerializable
   private $minimunScale;
   private $mediumScale;
   private $maximunScale;
+  public $p5400;
+  public $p7000;
   
   public function getId()
   {

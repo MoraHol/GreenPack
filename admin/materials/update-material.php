@@ -48,25 +48,41 @@ $material = $materialDao->findById($_GET["id"]);
                 <div class="form-group">
                   <label for="nameMaterial">Nombre del producto:</label>
                   <br>
-                  <input type="text" placeholder="Ej: Bond" id="nameMaterial" class="form-control" value="<?php echo $material->getName(); ?>">
+                  <input type="text" placeholder="Ej: Bond" id="nameMaterial" class="form-control" value="<?= $material->getName(); ?>">
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="form-group">
                   <label for="pricePerKg">Precio por Kilogramo:</label>
                   <br>
-                  <input type="number" id="pricePerKg" placeholder="Ej: 2000" class="form-control" value="<?php echo $material->getPricePerKg(); ?>">
+                  <input type="number" id="pricePerKg" placeholder="Ej: 2000" class="form-control" value="<?= $material->getPricePerKg(); ?>">
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="form-group">
                   <label for="grammage">Gramaje:</label>
                   <br>
-                  <input type="number" id="grammage" placeholder="Ej: 60" class="form-control" value="<?php echo $material->getGrammage(); ?>">
+                  <input type="number" id="grammage" placeholder="Ej: 60" class="form-control" value="<?= $material->getGrammage(); ?>">
                 </div>
               </div>
             </div>
             <br>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="">Precio pliego 60*90</label>
+                  <input type="text" name="" id="p5400" class="form-control" placeholder="" aria-describedby="helpId" value="<?= $material->p5400?>">
+                  <small id="helpId">Solo para materiales de bolsas laminadas</small>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="">Precio pliego 70*100:</label>
+                  <input type="text" name="" id="p7000" class="form-control" placeholder="" aria-describedby="helpId" value="<?= $material->p7000?>">
+                  <small id="helpId">Solo para materiales de bolsas laminadas</small>
+                </div>
+              </div>
+            </div>
             <div class="form-group">
               <label for="description">Descripcion:</label>
               <br>
@@ -103,10 +119,10 @@ $material = $materialDao->findById($_GET["id"]);
   <script src="../assets/js/script.js"></script>
   <script>
     $(() => {
-      $('#description').val(`<?php echo $material->getDescription(); ?>`)
+      $('#description').val(`<?= $material->getDescription(); ?>`)
       $('button#submitEditor').click(() => {
         $.post('api/update_material.php', {
-          id: `<?php echo $material->getId(); ?>`,
+          id: `<?= $material->getId(); ?>`,
           name: $('#nameMaterial').val(),
           price: $('#pricePerKg').val(),
           grammage: $('#grammage').val(),

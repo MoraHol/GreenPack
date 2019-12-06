@@ -17,7 +17,7 @@ class MaterialDao
 {
   private $db;
   static $logger;
-  
+
   function __construct()
   {
     $this->db = new DBOperator($_ENV["db_host"], $_ENV["db_user"], $_ENV["db_name"], $_ENV["db_pass"]);
@@ -35,6 +35,8 @@ class MaterialDao
       $material->setDescription($materialDB["description"]);
       $material->setGrammage($materialDB["grammage"]);
       $material->setPricePerKg($materialDB["price_per_kg"]);
+      $material->p5400 = $materialDB["price_5400"];
+      $material->p7000 = $materialDB["price_7000"];
       array_push($materials, $material);
     }
     return $materials;
@@ -50,6 +52,8 @@ class MaterialDao
     $material->setDescription($materialDB["description"]);
     $material->setGrammage($materialDB["grammage"]);
     $material->setPricePerKg($materialDB["price_per_kg"]);
+    $material->p5400 = $materialDB["price_5400"];
+    $material->p7000 = $materialDB["price_7000"];
     // $this->db->close();
     return $material;
   }
@@ -69,6 +73,8 @@ class MaterialDao
     $material->setMinimunScale($materialDB["minimun_scale"]);
     $material->setMediumScale($materialDB["medium_scale"]);
     $material->setMaximunScale($materialDB["maximun_scale"]);
+    $material->p5400 = $materialDB["price_5400"];
+    $material->p7000 = $materialDB["price_7000"];
     $this->db->close();
     return $material;
   }
@@ -88,6 +94,8 @@ class MaterialDao
       $material->setMinimunScale($materialDB["minimun_scale"]);
       $material->setMediumScale($materialDB["medium_scale"]);
       $material->setMaximunScale($materialDB["maximun_scale"]);
+      $material->p5400 = $materialDB["price_5400"];
+      $material->p7000 = $materialDB["price_7000"];
       array_push($materials, $material);
     }
     $this->db->close();
@@ -108,7 +116,12 @@ class MaterialDao
   function save($material)
   {
     $this->db->connect();
-    $query = "INSERT INTO `materials` (`id_materials`, `name`, `description`,`grammage`,`price_per_kg`) VALUES (NULL, '" . $material->getName() . "', '" . $material->getDescription() . "','" . $material->getGrammage() . "','" . $material->getPricePerKg() . "')";
+    $query = "INSERT INTO `materials` (`id_materials`, `name`, `description`,
+    `grammage`,`price_per_kg`,`price_5400`, `price_7000`) 
+    VALUES (NULL, '" . $material->getName() . "', 
+    '" . $material->getDescription() . "','" . $material->getGrammage() . "',
+    '" . $material->getPricePerKg() . "', '" . $material->p5400 . "',
+    '" . $material->p7000 . "')";
     $status = $this->db->consult($query);
     $this->db->close();
     self::$logger->info($query);
@@ -126,7 +139,13 @@ class MaterialDao
   function update($material)
   {
     $this->db->connect();
-    $query = "UPDATE `materials` SET `name` = '" . $material->getName() . "', `grammage` = '" . $material->getGrammage() . "', `price_per_kg` = '" . $material->getPricePerKg() . "', `description` = '" . $material->getDescription() . "' WHERE `materials`.`id_materials` = " . $material->getId();
+    $query = "UPDATE `materials` SET `name` = '" . $material->getName() . "',
+    `grammage` = '" . $material->getGrammage() . "',
+    `price_per_kg` = '" . $material->getPricePerKg() . "',
+    `description` = '" . $material->getDescription() . "',
+    `price_5400` = '" . $material->p5400 . "' ,
+    `price_7000` = '" . $material->p7000 . "'
+    WHERE `materials`.`id_materials` = " . $material->getId();
     $status = $this->db->consult($query);
     $this->db->close();
     self::$logger->info($query);

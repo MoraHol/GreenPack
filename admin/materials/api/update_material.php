@@ -7,6 +7,8 @@ if (isset($_POST["id"]) && isset($_POST["name"]) && isset($_POST["price"]) && is
   $material->setPricePerKg($_POST["price"]);
   $material->setGrammage($_POST["grammage"]);
   $material->setDescription($_POST["description"]);
+  $material->p5400 = $_POST["p5400"];
+  $material->p7000 = $_POST["p7000"];
   if ($materialDao->update($material) > 0) {
     http_response_code(200);
     echo "true";
