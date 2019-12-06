@@ -18,6 +18,7 @@ $dompdf->loadHtml($content, "UTF-8");
 $dompdf->setPaper('letter');
 $dompdf->render();
 $pdf = $dompdf->output();
+header("Content-Type: application/pdf");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,8 +29,7 @@ $pdf = $dompdf->output();
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Cotizacion No. <?= $_GET["id"] ?></title>
 </head>
-<?php header("Content-Type: application/pdf");
-echo $pdf; ?>
+<?php echo $pdf; ?>
 
 <body>
 
