@@ -43,7 +43,7 @@ if (
       $item->setMaterial($materialDao->findByIdByProduct($_POST["material"], $product));
     } else {
       $item = new ItemBag();
-      $item->setMaterial($materialDao->findByIdBy($_POST["material"]));
+      $item->setMaterial($materialDao->findById($_POST["material"]));
     }
     $item->setLam(filter_var($_POST["lam"], FILTER_VALIDATE_BOOLEAN));
     $item->setPla(filter_var($_POST["window"], FILTER_VALIDATE_BOOLEAN));
