@@ -120,8 +120,8 @@ class MaterialDao
     `grammage`,`price_per_kg`,`price_5400`, `price_7000`) 
     VALUES (NULL, '" . $material->getName() . "', 
     '" . $material->getDescription() . "','" . $material->getGrammage() . "',
-    '" . $material->getPricePerKg() . "', '" . $material->p5400 . "',
-    '" . $material->p7000 . "')";
+    '" . $material->getPricePerKg() . "', " . $material->p5400 . ",
+    " . $material->p7000 . ")";
     $status = $this->db->consult($query);
     $this->db->close();
     self::$logger->info($query);
@@ -143,8 +143,8 @@ class MaterialDao
     `grammage` = '" . $material->getGrammage() . "',
     `price_per_kg` = '" . $material->getPricePerKg() . "',
     `description` = '" . $material->getDescription() . "',
-    `price_5400` = '" . $material->p5400 . "' ,
-    `price_7000` = '" . $material->p7000 . "'
+    `price_5400` = " . $material->p5400 . " ,
+    `price_7000` = " . $material->p7000 . "
     WHERE `materials`.`id_materials` = " . $material->getId();
     $status = $this->db->consult($query);
     $this->db->close();
