@@ -2,10 +2,10 @@
 require_once(dirname(__DIR__) . "/db/DBOperator.php");
 require_once(dirname(__DIR__) . "/model/material.php");
 require_once(dirname(__DIR__) . "/db/env.php");
-require_once $_SERVER["DOCUMENT_ROOT"] . "/vendor/composer/vendor/autoload.php";
+// require_once $_SERVER["DOCUMENT_ROOT"] . "/vendor/composer/vendor/autoload.php";
 
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
+// use Monolog\Logger;
+// use Monolog\Handler\StreamHandler;
 
 /*****************************************************************************
 /*Esta clase permite Crear, Actualizar, Buscar y Eliminar Materiales
@@ -21,8 +21,8 @@ class MaterialDao
   function __construct()
   {
     $this->db = new DBOperator($_ENV["db_host"], $_ENV["db_user"], $_ENV["db_name"], $_ENV["db_pass"]);
-    self::$logger = new Logger('channel-name');
-    self::$logger->pushHandler(new StreamHandler($_SERVER["DOCUMENT_ROOT"] . '/logs/app.log', Logger::DEBUG));
+    // self::$logger = new Logger('channel-name');
+    // self::$logger->pushHandler(new StreamHandler($_SERVER["DOCUMENT_ROOT"] . '/logs/app.log', Logger::DEBUG));
   }
   function findAll()
   {
@@ -109,7 +109,7 @@ class MaterialDao
     VALUES ('" . $product->getId() . "', '" . $material->getId() . "',$minimunScale, $mediumScale, $maximunScale)
     ON DUPLICATE KEY UPDATE `minimun_scale` = $minimunScale,`medium_scale` = $mediumScale,`maximun_scale` = $maximunScale";
     $status = $this->db->consult($query);
-    self::$logger->info($query);
+    // self::$logger->info($query);
     $this->db->close();
     return $status;
   }
@@ -124,7 +124,7 @@ class MaterialDao
     " . $material->p7000 . ")";
     $status = $this->db->consult($query);
     $this->db->close();
-    self::$logger->info($query);
+    // self::$logger->info($query);
     return $status;
   }
   function delete($id)
@@ -148,7 +148,7 @@ class MaterialDao
     WHERE `materials`.`id_materials` = " . $material->getId();
     $status = $this->db->consult($query);
     $this->db->close();
-    self::$logger->info($query);
+    // self::$logger->info($query);
     return $status;
   }
   function deleteByProduct($id, $product)
@@ -157,7 +157,7 @@ class MaterialDao
     $query = "DELETE FROM `products_has_materials` WHERE `products_has_materials`.`products_id_products` = $product  AND `products_has_materials`.`materials_id_materials` = $id";
     $status = $this->db->consult($query);
     $this->db->close();
-    self::$logger->info($query);
+    // self::$logger->info($query);
     return $status;
   }
 }
