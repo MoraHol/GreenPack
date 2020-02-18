@@ -101,16 +101,16 @@ include("../partials/verify-session.php");
               <div>
               </div>
               <button class="btn btn-primary" onclick="addField()" title="Agregar un uso"><i class="fas fa-plus"></i></button>
-              <hr>
-              <div class="form-gruop">
+              <!-- <hr> -->
+              <div class="form-gruop" style="display: none">
                 <label for="campo1">Medidas:</label>
                 <ul class="list-unstyled" id="measurements">
 
                 </ul>
               </div>
-              <button class="btn btn-primary" onclick="addMeasurement()" title="Agregar una medida"><i class="fas fa-plus"></i></button>
+              <button style="display: none" class="btn btn-primary" onclick="addMeasurement()" title="Agregar una medida"><i class="fas fa-plus"></i></button>
               <hr>
-              <div class="form-gruop">
+              <div class="form-gruop" style="display: none">
                 <label for="campo1">Materiales:</label>
                 <ul class="list-unstyled" id="materials">
 
@@ -118,8 +118,8 @@ include("../partials/verify-session.php");
                 </ul>
               </div>
 
-              <button class="btn btn-primary" onclick="addMaterial()" title="Agregar un material"><i class="fas fa-plus"></i></button>
-              <hr>
+              <button style="display: none" class="btn btn-primary" onclick="addMaterial()" title="Agregar un material"><i class="fas fa-plus"></i></button>
+              <!-- <hr> -->
               <?php
               require dirname(dirname(__DIR__)) . "/dao/CategoryDao.php";
               $categoryDao = new CategoryDao();

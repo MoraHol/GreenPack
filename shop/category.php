@@ -96,14 +96,16 @@
     .blog-banner div.text-center h1 {
       color: #fff !important;
     }
-    @media (max-width: 400px){
-      .blog-banner div.text-center:first h1 {
-      font-size: 14px;
-    }
-    #title-category{
-      font-size: 20px!important;
 
-    }
+    @media (max-width: 400px) {
+      .blog-banner div.text-center:first h1 {
+        font-size: 14px;
+      }
+
+      #title-category {
+        font-size: 20px !important;
+
+      }
     }
   </style>
 </head>
@@ -126,6 +128,8 @@
   $pages = ceil(count($productDao->findByCategory($_GET["id"])) / $productsperPage);
   $pageInit = ($_GET["page"] - 1) * $productsperPage;
   $category = $categoryDao->findById($_GET["id"]);
+  $categories = $categoryDao->findAll();
+  echo "<script>let ii='" . json_encode($categories) . "'</script>";
   ?>
   <?php include("../partials/fixed-quoting.html"); ?>
   <div class="wall-loading">
@@ -150,7 +154,7 @@
         <div class="text-center">
           <h1 id="title-category"><?= $category->getDescription() ?></h1>
         </div>
-        <div class="text-center" >
+        <div class="text-center">
           <a href="#categories-section" class="btn btn-success">Tú cotización en minutos</a>
         </div>
       </div>
@@ -170,7 +174,26 @@
               <li class="common-filter">
                 <form action="#">
                   <ul>
-                    <li class="filter-list text-capitalize"><a href="category.php?id=1&page=1">Bolsas<span> (<?= count($productDao->findByCategory(1)); ?>)</span></a></li>
+                    <?php foreach ($categories as $catego) {
+                      $categoriesChildren = $categoryDao->findChildren($catego->getId()); ?>
+                      <?php if (count($categoriesChildren) > 0 && $catego->getId() != 1) { ?>
+                        <li class="filter-list text-capitalize"><a href="#<?= $catego->getName() ?>" class="accordion" data-toggle="collapse"><?= $catego->getName() ?> <span> (<?= count($productDao->findByCategory(2)); ?>)</span></a>
+                          <ul id="<?= $catego->getName() ?>" class="category collapse">
+                            <?php foreach ($categoriesChildren as  $cat) { ?>
+                              <li class="child-category text-capitalize"><a href="category.php?id=<?= $cat->getId() ?>&page=1"><?= $cat->getName() ?> <span> (<?= count($productDao->findByCategory($cat->getId())); ?>)</span></a></li>
+                            <?php }
+                            ?>
+                          </ul>
+                        </li>
+                        <?php } else {
+                        if ($catego->getParentCategory() == null || $catego->getId() == 1) { ?>
+                          <li class="filter-list text-capitalize"><a href="category.php?id=<?= $catego->getId() ?>&page=1"><?= $catego->getName() ?> <span> (<?= count($productDao->findByCategory($catego->getId())); ?>)</span></a>
+                          </li>
+                        <?php } ?>
+
+                      <?php } ?>
+                    <?php } ?>
+                    <!-- 
                     <li class="filter-list text-capitalize"><a href="#cajas" class="accordion" data-toggle="collapse">cajas <span> (<?= count($productDao->findByCategory(2)); ?>)</span></a>
                       <ul id="cajas" class="category collapse">
                         <li class="child-category text-capitalize"><a href="category.php?id=3&page=1">Cajas de exhibir <span> (<?= count($productDao->findByCategory(3)); ?>)</span></a></li>
@@ -179,7 +202,7 @@
                       </ul>
                     </li>
                     <li class="filter-list text-capitalize"><a href="category.php?id=6&page=1">Laminas<span> (<?= count($productDao->findByCategory(6)); ?>)</span></a></li>
-                    <li class="filter-list text-capitalize"><a href="category.php?id=7&page=1">Productos especiales<span> (<?= count($productDao->findByCategory(7)); ?>)</span></a></li>
+                    <li class="filter-list text-capitalize"><a href="category.php?id=7&page=1">Productos especiales<span> (<?= count($productDao->findByCategory(7)); ?>)</span></a></li> -->
                   </ul>
                 </form>
               </li>
@@ -210,23 +233,23 @@
               <?php
               $products = $productDao->findByCategoryWithLimit($_GET["id"], $pageInit, $productsperPage);
               foreach ($products as $product) { ?>
-              <div class="col-lg-3">
-                <div class="card text-center card-product zoom-in">
-                  <div class="card-product__img">
-                    <img class="card-img" src="<?= $product->getImages()[0]->getUrl(); ?>">
-                    <ul class="card-product__imgOverlay">
-                      <li><a href="product.php?id=<?= $product->getId() ?>"><i class="ti-search"></i> Cotizar</a></li>
-                    </ul>
-                  </div>
-                  <div class="card-body">
-                    <!-- <p><?php
+                <div class="col-lg-3">
+                  <div class="card text-center card-product zoom-in">
+                    <div class="card-product__img">
+                      <img class="card-img" src="<?= $product->getImages()[0]->getUrl(); ?>">
+                      <ul class="card-product__imgOverlay">
+                        <li><a href="product.php?id=<?= $product->getId() ?>"><i class="ti-search"></i> Cotizar</a></li>
+                      </ul>
+                    </div>
+                    <div class="card-body">
+                      <!-- <p><?php
                               //echo strtoupper($product->getCategory()->getName());
                               ?></p> -->
-                    <h4 class="card-product__title"><a href="product.php?id=<?= $product->getId() ?>"><?= $product->getName(); ?></a></h4>
-                    <!-- <p class="card-product__price">$<?= $product->getPrice(); ?></p> -->
+                      <h4 class="card-product__title"><a href="product.php?id=<?= $product->getId() ?>"><?= $product->getName(); ?></a></h4>
+                      <!-- <p class="card-product__price">$<?= $product->getPrice(); ?></p> -->
+                    </div>
                   </div>
                 </div>
-              </div>
               <?php
               } ?>
             </div>
@@ -249,7 +272,7 @@
                     }
                     ?>
                   </ul>
-                  <a href="category.php?id=<?= $_GET["id"]; ?>&page=<?= $_GET["page"] + 1 >= $pages ? $pages : $_GET["page"] + 1?>#products" class="pagination-next pull-right btn <?= $_GET["page"] >= $pages ? "disabled" : ""; ?>">Siguiente</a>
+                  <a href="category.php?id=<?= $_GET["id"]; ?>&page=<?= $_GET["page"] + 1 >= $pages ? $pages : $_GET["page"] + 1 ?>#products" class="pagination-next pull-right btn <?= $_GET["page"] >= $pages ? "disabled" : ""; ?>">Siguiente</a>
                 </div>
               </div>
               <!-- pagination -->

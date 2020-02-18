@@ -29,6 +29,23 @@ class CategoryDao
   }
   public function delete()
   { }
+
+  public function findChildren($idCategory){
+    $this->db->connect();
+    $categories = [];
+    $categoriesDB = $this->db->consult("SELECT * FROM `categories` WHERE parent_category = $idCategory", "yes");
+    foreach ($categoriesDB as $categoryDB) {
+      $category = new Category();
+      $category->setId($categoryDB["id_categories"]);
+      $category->setName($categoryDB["name"]);
+      $category->setParentcategory($categoryDB["parent_category"]);
+      $category->setDescription($categoryDB["description"]);
+      $category->setImage($categoryDB["image"]);
+      array_push($categories, $category);
+    }
+    $this->db->close();
+    return $categories;
+  }
   public function findAll()
   {
     $this->db->connect();
