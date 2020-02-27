@@ -249,12 +249,12 @@ $conversor = new ConversorDate(); ?>
       <form class="form-area " id="myForm" action="mail.php" method="post" class="contact-form text-right">
         <div class="row">
           <div class="col-lg-6 form-group">
-            <input name="name" placeholder="Ingresa tu nombre" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingresa tu nombre'" class="common-input mb-20 form-control" required="" type="text">
+            <input name="name" placeholder="Nombres" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingresa tu nombre'" class="common-input mb-20 form-control" required="" type="text">
 
-            <input name="email" placeholder="Ingresa tu correo" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingresa tu correo'" class="common-input mb-20 form-control" required="" type="email">
+            <input name="email" placeholder="Email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingresa tu correo'" class="common-input mb-20 form-control" required="" type="email">
 
-            <input name="subject" placeholder="Ingresa tu Asunto" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingresa tu Asunto'" class="common-input mb-20 form-control" required="" type="text">
-            <input type="checkbox" name="terms" id="terms" required><label for="terms" style="display:inline"> Conozco y acepto la Política de Protección de Datos y autorizo el manejo de éstos.</span>
+            <input name="subject" placeholder="De que quieres hablar" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingresa tu Asunto'" class="common-input mb-20 form-control" required="" type="text">
+            <input type="checkbox" name="terms" id="terms" required><label for="terms" style="display:inline"> Conozco y acepto la política de protección de datos y autorizo su manejo.</span>
           </div>
           <div class="col-lg-6 form-group">
             <textarea class="common-textarea mt-10 form-control" name="message" placeholder="Mensaje" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mensaje'" required=""></textarea>
