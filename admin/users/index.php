@@ -12,7 +12,7 @@ $roles = $db->consult("SELECT * FROM `roles_admin`", "yes");
 <html lang="es">
 
 <head>
-  <title>Administadores | GreenPack</title>
+  <title>Administadores | Greenpack</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -148,19 +148,17 @@ $roles = $db->consult("SELECT * FROM `roles_admin`", "yes");
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Borrar</h5>
+            <h5 class="modal-title" id="exampleModalLongTitle">Eliminar Usuarios</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            ¿Estas seguro que quieres borrar este material?
-            <br>
-            Si lo haces se borrara en todos los productos en los que se utilice
+            ¿Seguro que quieres eliminar este usuario?
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <a id="linkDelete" role="button" class="btn btn-danger" style="color:white" href="#">Eliminar</a>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            <a id="linkDelete" role="button" class="btn btn-danger" style="color:white" href="#">Si</a>
           </div>
         </div>
       </div>

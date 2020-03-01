@@ -40,7 +40,7 @@ include("../partials/verify-session.php");
             <li class="breadcrumb-item">
               <a href="/admin">Dashboard</a>
             </li>
-            <li class="breadcrumb-item"><a href="/admin/materials">Usuarios</a></li>
+            <li class="breadcrumb-item"><a href="/admin/users">Usuarios</a></li>
             <li class="breadcrumb-item active">Actualizar Usuario</li>
           </ol>
           <?php
@@ -55,23 +55,23 @@ include("../partials/verify-session.php");
               <div class="row">
                 <div class="col-sm-4">
                   <div class="form-group">
-                    <label for="nameUser">Nombre del Administrador:</label>
+                    <label for="nameUser">Nombres:</label>
                     <br>
-                    <input type="text" required placeholder="Ej: Alejandra" id="nameUser" class="form-control" value="<?= $admin->getName() ?>">
+                    <input type="text" required placeholder="Nombres Completos" id="nameUser" class="form-control" value="<?= $admin->getName() ?>">
                   </div>
                 </div>
                 <div class="col-sm-4">
                   <div class="form-group">
-                    <label for="lastNameUser">Apellido del Administrador:</label>
+                    <label for="lastNameUser">Apellidos :</label>
                     <br>
-                    <input type="text" required id="lastNameUser" placeholder="Ej: Martinez" class="form-control" value="<?= $admin->getLastName() ?>">
+                    <input type="text" required id="lastNameUser" placeholder="Apellidos Completos" class="form-control" value="<?= $admin->getLastName() ?>">
                   </div>
                 </div>
                 <div class="col-sm-4">
                   <div class="form-group">
-                    <label for="">Numero de Telefono del Administrador:</label>
+                    <label for="">Número de Telefono:</label>
                     <br>
-                    <input type="number" required id="phoneUser" placeholder="Ej: 3223764531" class="form-control" value="<?= $admin->getPhone() ?>">
+                    <input type="number" required id="phoneUser" placeholder="Numero celular o fijo" class="form-control" value="<?= $admin->getPhone() ?>">
                   </div>
                 </div>
               </div>
@@ -81,7 +81,7 @@ include("../partials/verify-session.php");
                   <div class="form-group">
                     <label for="email">Correo :</label>
                     <br>
-                    <input type="email" id="emailUser" placeholder="Ej: admin1@admin.com" class="form-control" value="<?= $admin->getEmail() ?>" readonly aria-describedby="emailHelp">
+                    <input type="email" id="emailUser" placeholder="Correo electronico" class="form-control" value="<?= $admin->getEmail() ?>" readonly aria-describedby="emailHelp">
                     <small id="emailHelp" class="form-text text-muted">El correo no podra ser modificado.</small>
                   </div>
                 </div>
@@ -90,7 +90,7 @@ include("../partials/verify-session.php");
                     <label for="passwordUser">Contraseña:</label>
                     <br>
                     <input type="password" id="passwordUser" placeholder="Ej: ******" class="form-control" aria-describedby="passwordHelp">
-                    <small id="passwordHelp" class="form-text text-muted">Dejarlo en blanco en caso de no querer cambiar la contraseña.</small>
+                    <small id="passwordHelp" class="form-text text-muted">Dejarlo en blanco en caso de no cambiar la contraseña.</small>
                   </div>
                 </div>
                 <div class="col-sm-2">
@@ -159,15 +159,15 @@ include("../partials/verify-session.php");
       }, (data, status) => {
         if (status == 'success') {
           $.notify({
-            message: 'Se ha actualizado el Usuario',
-            title: '<strong>Exito</strong>',
+            message: 'Usuario Actualizado',
+            title: '<strong>Proceso Exitoso</strong>',
             icon: 'fas fa-exclamation-triangle'
           }, {
             type: 'success'
           })
         } else {
           $.notify({
-            message: 'No se ha podido actualizar el usuario',
+            message: 'Usuario no Actualizado',
             title: '<strong>Error</strong>',
             icon: 'fas fa-exclamation-triangle'
           }, {
@@ -186,7 +186,7 @@ include("../partials/verify-session.php");
       }, (data, status) => {
         if (status == 'success') {
           $.notify({
-            message: 'Se ha actualizado el Usuario',
+            message: 'Datos de usuario actualizados',
             title: '<strong>Exito</strong>',
             icon: 'fas fa-exclamation-triangle'
           }, {
@@ -194,7 +194,7 @@ include("../partials/verify-session.php");
           })
         } else {
           $.notify({
-            message: 'No se ha podido actualizar el usuario',
+            message: 'Usuario no actualizado',
             title: '<strong>Error</strong>',
             icon: 'fas fa-exclamation-triangle'
           }, {
