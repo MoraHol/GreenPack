@@ -12,7 +12,7 @@ $roles = $db->consult("SELECT * FROM `roles_admin`", "yes");
 <html lang="es">
 
 <head>
-  <title>Administadores | Greenpack</title>
+  <title>Administradores | Greenpack</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />

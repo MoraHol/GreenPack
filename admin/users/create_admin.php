@@ -138,7 +138,7 @@ $roles = $db->consult("SELECT * FROM `roles_admin`", "yes");
         }, (data, status) => {
           if (status == 'success') {
             $.notify({
-              message: 'Se ha creado el Usuario',
+              message: 'Usuario creado',
               //title: '<strong>Exito</strong>',
               icon: 'fas fa-exclamation-triangle'
             }, {
@@ -147,7 +147,7 @@ $roles = $db->consult("SELECT * FROM `roles_admin`", "yes");
             clearFields()
           } else {
             $.notify({
-              message: 'No se ha podido crear el usuario',
+              message: 'Error al crear Usuario',
               //title: '<strong>Error</strong>',
               icon: 'fas fa-exclamation-triangle'
             }, {
