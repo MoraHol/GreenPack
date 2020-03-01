@@ -37,7 +37,7 @@ $roles = $db->consult("SELECT * FROM `roles_admin`", "yes");
             <li class="breadcrumb-item">
               <a href="/admin">Dashboard</a>
             </li>
-            <li class="breadcrumb-item"><a href="/admin/materials">Usuarios</a></li>
+            <li class="breadcrumb-item"><a href="/admin/users">Usuarios</a></li>
             <li class="breadcrumb-item active">Crear Usuario</li>
           </ol>
           <div class="container">
