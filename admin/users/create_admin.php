@@ -10,7 +10,7 @@ $roles = $db->consult("SELECT * FROM `roles_admin`", "yes");
 ?>
 
 <head>
-  <title>Materiales | GreenPack</title>
+  <title>Usuarios | GreenPack</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -45,23 +45,23 @@ $roles = $db->consult("SELECT * FROM `roles_admin`", "yes");
               <div class="row">
                 <div class="col-sm-4">
                   <div class="form-group">
-                    <label for="nameUser">Nombre del Administrador:</label>
+                    <label for="nameUser">Nombres:</label>
                     <br>
-                    <input type="text" required placeholder="Ej: Alejandra" id="nameUser" class="form-control">
+                    <input type="text" required placeholder="Nombres Completos" id="nameUser" class="form-control">
                   </div>
                 </div>
                 <div class="col-sm-4">
                   <div class="form-group">
-                    <label for="lastNameUser">Apellido del Administrador:</label>
+                    <label for="lastNameUser">Apellidos:</label>
                     <br>
-                    <input type="text" required id="lastNameUser" placeholder="Ej: Martinez" class="form-control">
+                    <input type="text" required id="lastNameUser" placeholder="Apellidos Comppletos" class="form-control">
                   </div>
                 </div>
                 <div class="col-sm-4">
                   <div class="form-group">
-                    <label for="">Numero de Telefono del Administrador:</label>
+                    <label for="">Numero de Telefono:</label>
                     <br>
-                    <input type="number" required id="phoneUser" placeholder="Ej: 3223764531" class="form-control">
+                    <input type="number" required id="phoneUser" placeholder="Numero Celular o Telefono Fijo" class="form-control">
                   </div>
                 </div>
               </div>
@@ -71,14 +71,14 @@ $roles = $db->consult("SELECT * FROM `roles_admin`", "yes");
                   <div class="form-group">
                     <label for="email">Correo :</label>
                     <br>
-                    <input type="email" required id="emailUser" placeholder="Ej: admin1@admin.com" class="form-control">
+                    <input type="email" required id="emailUser" placeholder="Direccion Correo Electronico" class="form-control">
                   </div>
                 </div>
                 <div class="col-sm-5">
                   <div class="form-group">
                     <label for="passwordUser">Contraseña:</label>
                     <br>
-                    <input type="password" required id="passwordUser" placeholder="Ej: ******" class="form-control">
+                    <input type="password" required id="passwordUser" placeholder="******" class="form-control">
                   </div>
                 </div>
                 <div class="col-sm-2">
@@ -139,7 +139,7 @@ $roles = $db->consult("SELECT * FROM `roles_admin`", "yes");
           if (status == 'success') {
             $.notify({
               message: 'Se ha creado el Usuario',
-              title: '<strong>Exito</strong>',
+              //title: '<strong>Exito</strong>',
               icon: 'fas fa-exclamation-triangle'
             }, {
               type: 'success'
@@ -148,7 +148,7 @@ $roles = $db->consult("SELECT * FROM `roles_admin`", "yes");
           } else {
             $.notify({
               message: 'No se ha podido crear el usuario',
-              title: '<strong>Error</strong>',
+              //title: '<strong>Error</strong>',
               icon: 'fas fa-exclamation-triangle'
             }, {
               type: 'danger'
