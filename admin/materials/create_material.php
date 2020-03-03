@@ -79,9 +79,9 @@ include("../partials/verify-session.php");
                 </div>
               </div>
               <div class="form-group">
-                <label for="description">Descripcion:</label>
+                <label for="description">Descripción:</label>
                 <br>
-                <textarea id="description" class="form-control" rows="5" placeholder="Ej: Lorem ipsum dolor sit amet consectetur, adipiscing elit consequat proin tristique class, lectus posuere nascetur nunc. Malesuada porta turpis litora maecenas ad penatibus mi, eu scelerisque hendrerit rhoncus odio mattis elementum et, suspendisse sodales volutpat magnis integer enim. "></textarea>
+                <textarea id="description" class="form-control" rows="5" placeholder="Ingresa la descripción detallada del material"></textarea>
               </div>
               <br>
               <div class="row" style="margin-bottom: 20px; margin-top: 20px;">
@@ -128,7 +128,7 @@ include("../partials/verify-session.php");
         }, (data, status) => {
           if (status == 'success') {
             $.notify({
-              message: 'Se ha creado el Producto',
+              message: 'Producto creado',
               title: '<strong>Exito</strong>',
               icon: 'fas fa-exclamation-triangle'
             }, {
@@ -137,7 +137,7 @@ include("../partials/verify-session.php");
             clearFields()
           } else {
             $.notify({
-              message: 'No se ha podido crear el Producto',
+              message: 'Producto No creado',
               title: '<strong>Error</strong>',
               icon: 'fas fa-exclamation-triangle'
             }, {

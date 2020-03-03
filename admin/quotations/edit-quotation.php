@@ -54,13 +54,13 @@ $quotation = $quotationDao->findById($_GET["id"]);
             <div class="row">
               <div class="col">
                 <div class="form-group">
-                  <label for="nameClient" class="bmd-label-floating">Nombre</label>
+                  <label for="nameClient" class="bmd-label-floating">Nombres</label>
                   <input type="text" class="form-control" id="nameClient" value="<?= $quotation->getNameClient() ?>">
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">
-                  <label for="lastName" class="bmd-label-floating">Apellido</label>
+                  <label for="lastName" class="bmd-label-floating">Apellidos</label>
                   <input type="text" class="form-control" id="lastName" value="<?= $quotation->getLastNameClient() ?>">
                 </div>
               </div>
@@ -80,7 +80,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
             <div class="row">
               <div class="col">
                 <div class="form-group">
-                  <label for="address" class="bmd-label-floating">Direccion</label>
+                  <label for="address" class="bmd-label-floating">Dirección</label>
                   <input type="text" class="form-control" id="address" value="<?= $quotation->getAddress() ?>">
                 </div>
               </div>
@@ -98,7 +98,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
               </div>
               <div class="col-sm-3">
                 <div class="form-group">
-                  <label for="phone" class="bmd-label-floating">Telefono</label>
+                  <label for="phone" class="bmd-label-floating">Teléfono</label>
                   <input type="text" class="form-control" id="phone" value="<?= $quotation->getPhoneNumber() ?>">
                 </div>
               </div>
@@ -116,7 +116,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
                   <div class="col-md-3 align-self-center">
                     <h5><?= $item->getProduct()->getName() ?></h5>
                     <br>
-                    <p><span class="text-primary">Impresion:</span> <?= $item->isPrinting() ? "SI" : "NO" ?></p>
+                    <p><span class="text-primary">Impresión:</span> <?= $item->isPrinting() ? "SI" : "NO" ?></p>
                     <?php if ($item->getProduct()->getCategory()->getId() == 1  && $item->getProduct()->getId() != $_ENV["id_sacos"]) { ?>
                       <p><span class="text-primary">Ventanilla:</span> <?= $item->isPla() ? "SI" : "NO" ?></p>
                       <p><span class="text-primary">Laminada:</span> <?= $item->isLam() ? "SI" : "NO" ?></p>
@@ -212,7 +212,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Cuerpo del Mensaje</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Mensaje</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -337,7 +337,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
       $('#modalContentEmail').modal('hide')
       $.notify({
         message: 'Enviando Correo',
-        title: 'Procesando',
+        title: 'Greenpack',
         icon: 'email'
       }, {
         type: 'info'
@@ -348,8 +348,8 @@ $quotation = $quotationDao->findById($_GET["id"]);
       }, (data, status, xhr) => {
         if (status == 'success' && xhr.readyState == 4) {
           $.notify({
-            message: 'La cotizacion ha sido enviada correctamente al Cliente',
-            title: 'Exito',
+            message: 'Cotizacion enviada',
+            title: 'Greenpack',
             icon: 'email'
           }, {
             type: 'success'
@@ -386,8 +386,8 @@ $quotation = $quotationDao->findById($_GET["id"]);
       }, (data, status) => {
         if (status == 'success') {
           $.notify({
-            message: 'Se ha actualizado la cotizacion',
-            title: 'Exito',
+            message: 'Cotizacion actualizada',
+            title: 'Greenpack',
             icon: 'notification_important'
           }, {
             type: 'success'
@@ -397,7 +397,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
         if (status == 'notmodified') {
           $.notify({
             message: 'No se ha cambiado ningun valor',
-            title: 'Actualización',
+            title: 'Greenpack',
             icon: 'warning'
           }, {
             type: 'warning'
@@ -445,7 +445,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
         }
       }
     }, () => {
-      editor.html.set(`<html><body><p>Nos permitimos enviarle su cotizacion</p><p>cotizacion generada</p></body></html>`)
+      editor.html.set(`<html><body><p>Nos permitimos enviarle su cotización</p><p>cotización generada</p></body></html>`)
       if (document.domain != 'localhost') {
         $('.fr-wrapper>div:first-child').css('visibility', 'hidden')
       }

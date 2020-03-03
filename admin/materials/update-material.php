@@ -86,7 +86,7 @@ $material = $materialDao->findById($_GET["id"]);
             <div class="form-group">
               <label for="description">Descripcion:</label>
               <br>
-              <textarea id="description" class="form-control" rows="5" placeholder="Ej: Lorem ipsum dolor sit amet consectetur, adipiscing elit consequat proin tristique class, lectus posuere nascetur nunc. Malesuada porta turpis litora maecenas ad penatibus mi, eu scelerisque hendrerit rhoncus odio mattis elementum et, suspendisse sodales volutpat magnis integer enim. "></textarea>
+              <textarea id="description" class="form-control" rows="5" placeholder="Aqui puedes ingresar la descripcíon de la materia prima que estas adicionando"></textarea>
             </div>
             <br>
             <div class="row" style="margin-bottom: 20px; margin-top: 20px;">
@@ -130,7 +130,7 @@ $material = $materialDao->findById($_GET["id"]);
         }, (data, status) => {
           if (status == 'success') {
             $.notify({
-              message: 'Se ha actualizado el Material',
+              message: 'Material actualizado',
               title: '<strong>Exito</strong>',
               icon: 'fas fa-exclamation-triangle'
             }, {

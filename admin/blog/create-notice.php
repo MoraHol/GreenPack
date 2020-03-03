@@ -48,17 +48,17 @@ include("../partials/verify-session.php");
           <br>
 
           <div class="form-group">
-            <label for="title">Escriba el titulo de la noticia:</label>
-            <input type="text" placeholder="Titulo de la noticia" id="title" class="form-control">
+            <label for="title">Ingresa el titulo:</label>
+            <input type="text" placeholder="Un titulo impactante atrae a más personas" id="title" class="form-control">
           </div>
           <br>
           <div class="form-group">
-            <label for="content">Escriba el contenido de la noticia:</label>
+            <label for="content">Aquí puedes ingresar el contenido de tu noticia::</label>
             <br>
             <textarea name="content" id="content"></textarea>
           </div>
           <div class="form-group">
-            <label for="myId">Suba la imagen oficial del blog:</label>
+            <label for="myId">Carga la imagen oficial para la noticia en el blog:</label>
             <div id="myId" class="dropzone"></div>
           </div>
           <br>
@@ -83,7 +83,7 @@ include("../partials/verify-session.php");
             <ul>
               <li>
                 <a href="https://www.creative-tim.com">
-                  Green Pack
+                  Greenpack
                 </a>
               </li>
             </ul>
@@ -92,8 +92,8 @@ include("../partials/verify-session.php");
             &copy;
             <script>
               document.write(new Date().getFullYear())
-            </script>, made with <i class="material-icons">favorite</i> by
-            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+            </script>, hecho con <i class="material-icons">favorite</i> by
+            <a href="https://www.creative-tim.com" target="_blank">Teenus</a> con amor.
           </div>
           <!-- your footer here -->
         </div>
@@ -200,8 +200,8 @@ include("../partials/verify-session.php");
         maxFiles: 1,
         acceptedFiles: "image/*",
         dictDefaultMessage: 'Sube tus archivos, arrastralos o haz click para buscarlos',
-        dictMaxFilesExceeded: 'Solo se permite subir una imagen',
-        dictInvalidFileType: 'Solo se permite imagenes'
+        dictMaxFilesExceeded: 'Carga solo una imagen',
+        dictInvalidFileType: 'Carga solo imagenes'
       })
       $('button#submitEditor').click(() => {
         if (myDropzone.getAcceptedFiles().length > 0 && $('#title').val() != '' && editor.html.get() != '') {
@@ -213,7 +213,7 @@ include("../partials/verify-session.php");
             active: !$('#activeBtn').prop('checked')
           }, (data, status) => {
             $.notify({
-              message: 'Se ha creado la noticia',
+              message: 'Noticia creada',
               title: 'Exito',
               icon: 'notification_important'
             }, {
@@ -223,7 +223,7 @@ include("../partials/verify-session.php");
           })
         } else {
           $.notify({
-            message: 'Los campos deben ser completados',
+            message: 'Completa todos los campos',
             title: 'Error',
             icon: 'notification_important'
           }, {

@@ -157,13 +157,13 @@ $materials = $materialDao->findAll();
             </button>
           </div>
           <div class="modal-body">
-            ¿Estas seguro que quieres borrar este material?
+            ¿Estás seguro de borrar esta materia prima?
             <br>
-            Si lo haces se borrara en todos los productos en los que se utilice
+            Esta acción eliminara la materia prima en todos los productos en los que se utilice
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <a id="linkDelete" role="button" class="btn btn-danger" style="color:white" href="#">Eliminar</a>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            <a id="linkDelete" role="button" class="btn btn-danger" style="color:white" href="#">Si</a>
           </div>
         </div>
       </div>

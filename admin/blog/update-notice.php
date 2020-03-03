@@ -104,14 +104,14 @@ if (isset($_GET["id"])) {
 
           <div class="container">
             <div class="form-group">
-              <label for="title">Escriba el titulo de la noticia:</label>
+              <label for="title">Ingresa el titulo:</label>
               <br>
-              <input type="text" placeholder="Titulo de la noticia" id="title" class="form-control">
+              <input type="text" placeholder="Un titulo impactante atrae más personas" id="title" class="form-control">
             </div>
             <br>
             <br>
             <div class="form-group">
-              <label for="content">Escriba el contenido de la noticia:</label>
+              <label for="content">Aquí puedes ingresar el contenido de tu noticia:</label>
               <br>
               <textarea name="content" id="content"></textarea>
             </div>
@@ -134,7 +134,7 @@ if (isset($_GET["id"])) {
               </div>
             </div>
             <div id="imgUpload">
-              <label for="">Suba la imagen oficial del blog:</label>
+              <label for="">Carga la imagen oficial de la noticia para el blog:</label>
               <div id="myId"></div>
             </div>
             <div class="row" style="margin-bottom: 20px; margin-top: 20px;">
@@ -252,8 +252,8 @@ if (isset($_GET["id"])) {
           maxFiles: 1,
           acceptedFiles: "image/*",
           dictDefaultMessage: 'Sube tus archivos, arrastralos o haz click para buscarlos',
-          dictMaxFilesExceeded: 'Solo se permite subir una imagen',
-          dictInvalidFileType: 'Solo se permite imagenes'
+          dictMaxFilesExceeded: 'Carga solo una imagen',
+          dictInvalidFileType: 'Carga solo imagenes'
         })
       })
       $('button#submitEditor').click(() => {

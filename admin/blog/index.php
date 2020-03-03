@@ -97,16 +97,15 @@ $conversorDate = new ConversorDate();
             </button>
           </div>
           <div class="modal-body">
-            ¿Estas seguro que quieres borrar esta noticia?
+            ¿Estás seguro de borrar esta noticia?
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <a id="linkDelete" role="button" class="btn btn-danger" style="color:white" href="#">Eliminar</a>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            <a id="linkDelete" role="button" class="btn btn-danger" style="color:white" href="#">Si</a>
           </div>
         </div>
       </div>
     </div>
-
 
     <!--   Core JS Files   -->
     <script src="/js/jquery-2.2.4.min.js"></script>
@@ -185,7 +184,7 @@ $conversorDate = new ConversorDate();
 
       if (updated == 'true') {
         $.notify({
-          message: 'Se ha actualizado la noticia',
+          message: 'Noticia actualizada',
           title: 'Exito',
           icon: 'notification_important'
         }, {

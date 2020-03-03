@@ -187,7 +187,7 @@ include("../partials/verify-session.php");
             location.reload()
           }else{
             $.notify({
-              message: 'No se ha actualizado las medidas',
+              message: 'Medidas no actualizadas',
               title: 'Error',
               icon: 'fas fa-check-circle'
             }, {

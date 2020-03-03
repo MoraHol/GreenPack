@@ -59,7 +59,7 @@
       <li class="nav-item" id="users-item">
         <a href="/admin/users" class="nav-link">
           <i class="fas fa-users"></i>
-          <p>Administradores</p>
+          <p>Administrador</p>
         </a>
       </li>
 

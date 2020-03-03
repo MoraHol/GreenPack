@@ -60,7 +60,7 @@ include("../partials/verify-session.php");
           </ol>
           <br>
           <div class="form-group">
-            <label for="title">Escriba el Nombre del producto:</label>
+            <label for="title">Nombre:</label>
             <input type="text" placeholder="Ej. bolsa de manija" id="title" class="form-control">
           </div>
           <br>
@@ -68,13 +68,13 @@ include("../partials/verify-session.php");
           <div class="row">
             <div class="col">
               <div class="form-group">
-                <label for="ref">Escriba la Referencia del producto:</label>
+                <label for="ref">Referencia:</label>
                 <input type="text" placeholder="Ej. LV-12" id="ref" class="form-control">
               </div>
             </div>
             <div class="col">
               <div class="form-group">
-                <label for="price">Escriba el precio del producto:</label>
+                <label for="price">Precio:</label>
                 <input type="number" placeholder="Ej. 2000" id="price" class="form-control">
               </div>
             </div>
@@ -82,12 +82,12 @@ include("../partials/verify-session.php");
 
           <br>
           <div class="form-group">
-            <label for="content">Escriba la descripción del producto:</label>
+            <label for="content">Descripción:</label>
             <br>
             <textarea name="content" id="content"></textarea>
           </div>
           <div class="form-group">
-            <label for="myId">Suba las imagenes del producto:</label>
+            <label for="myId">Sube las imagenes del producto:</label>
             <div id="myId" class="dropzone"></div>
           </div>
           <br>
@@ -125,10 +125,10 @@ include("../partials/verify-session.php");
               $categoryDao = new CategoryDao();
               $categories = $categoryDao->findAll(); ?>
               <div class="form-group">
-                <label for="category">Seleccione la categoría del producto:</label>
+                <label for="category">Selecciona la categoría del producto:</label>
                 <br>
                 <select id="category" class="wide">
-                  <option disabled selected>Seleccione una categoría</option>
+                  <option disabled selected>Selecciona una categoría</option>
                   <?php foreach ($categories as $category) { ?>
                     <option value="<?= $category->getId(); ?>"><?= $category->getName(); ?></option>
                   <?php } ?>
@@ -209,7 +209,7 @@ include("../partials/verify-session.php");
         function addMeasurement() {
           if ($('#category').val() == null) {
             $.notify({
-              message: 'Por favor seleccione una categoria antes de agregar medidas',
+              message: 'Por favor seleccione una categoria antes de agregar las medidas',
               title: 'Advertencia',
               icon: 'notification_important'
             }, {
@@ -261,7 +261,7 @@ include("../partials/verify-session.php");
 
 
         function addMaterial() {
-          $('#materials').append(`<li><select class="wide" style="margin-bottom: 10px;" ><option disabled selected>Seleccione un material</option>
+          $('#materials').append(`<li><select class="wide" style="margin-bottom: 10px;" ><option disabled selected>Selecciona un material</option>
                   <?php foreach ($materials as  $material) { ?>
                     <option value="<?= $material->getId(); ?>"><?= $material->getName(); ?></option>
                   <?php } ?>
@@ -326,8 +326,8 @@ include("../partials/verify-session.php");
             paramName: 'photo',
             acceptedFiles: "image/*",
             dictDefaultMessage: 'Sube tus archivos, arrastralos o haz click para buscarlos',
-            dictMaxFilesExceeded: 'Solo se permite subir una imagen',
-            dictInvalidFileType: 'Solo se permite imagenes'
+            dictMaxFilesExceeded: 'Carga solo una imagen',
+            dictInvalidFileType: 'Carga solo imagenes'
           })
           $('button#submitEditor').click(() => {
             if (myDropzone.getAcceptedFiles().length > 0 && $('#title').val() != '' && editor.html.get() != '') {
@@ -377,7 +377,7 @@ include("../partials/verify-session.php");
                 measurements: JSON.stringify(measurements)
               }, (data, status) => {
                 $.notify({
-                  message: 'Se ha creado el producto',
+                  message: 'Producto creado',
                   title: 'Exito',
                   icon: 'notification_important'
                 }, {
@@ -387,7 +387,7 @@ include("../partials/verify-session.php");
               })
             } else {
               $.notify({
-                message: 'Los campos deben ser completados',
+                message: 'Completa todos los campos',
                 title: 'Error',
                 icon: 'notification_important'
               }, {

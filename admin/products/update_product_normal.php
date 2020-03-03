@@ -194,7 +194,7 @@ switch ($product->getCategory()->getId()) {
 
               <br>
               <div class="form-group">
-                <label for="title">Nombre del producto:</label>
+                <label for="title">Producto:</label>
                 <input type="text" placeholder="Ej. bolsa de manija" id="title" class="form-control" value="<?= $product->getName(); ?>">
               </div>
               <br>
@@ -202,13 +202,13 @@ switch ($product->getCategory()->getId()) {
               <div class="row">
                 <div class="col">
                   <div class="form-group">
-                    <label for="ref">Referencia del producto:</label>
+                    <label for="ref">Referencia:</label>
                     <input type="text" placeholder="Ej. LV-12" id="ref" class="form-control" value="<?= $product->getRef(); ?>">
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-group">
-                    <label for="price">Gramaje del producto:</label>
+                    <label for="price">Gramaje:</label>
                     <input type="number" placeholder="Ej. 40" id="price" class="form-control" value="<?= $product->getPrice(); ?>">
                   </div>
                 </div>
@@ -216,7 +216,7 @@ switch ($product->getCategory()->getId()) {
 
               <br>
               <div class="form-group">
-                <label for="content">descripción del producto:</label>
+                <label for="content">descripción:</label>
                 <br>
                 <textarea name="content" id="content"></textarea>
               </div>
@@ -261,7 +261,7 @@ switch ($product->getCategory()->getId()) {
                 </div>
               </div>
               <div class="form-group">
-                <label for="myId">Suba las imagenes del producto:</label>
+                <label for="myId">Sube las imagenes del producto:</label>
                 <div id="myId" class="dropzone"></div>
               </div>
               <br>
@@ -356,10 +356,10 @@ switch ($product->getCategory()->getId()) {
               $categoryDao = new CategoryDao();
               $categories = $categoryDao->findAll(); ?>
               <div class="form-group">
-                <label for="category">Seleccione la categoría del producto:</label>
+                <label for="category">Selecciona la categoría del producto:</label>
                 <br>
                 <select id="category" class="wide">
-                  <option disabled>Seleccione una categoría</option>
+                  <option disabled>Selecciona una categoría</option>
                   <?php foreach ($categories as $category) { ?>
                     <option value="<?= $category->getId(); ?>" <?= $product->getCategory()->getId() == $category->getId() ? "selected" : ""; ?>><?= $category->getName(); ?></option>
                   <?php } ?>
@@ -428,8 +428,8 @@ switch ($product->getCategory()->getId()) {
           }, (data, status) => {
             if (status == "success") {
               $.notify({
-                message: 'Se ha borrado la imagen',
-                title: '<strong>Borrado</strong>',
+                message: 'Imagen Eliminada',
+                title: '<strong>Greenpack</strong>',
                 icon: 'fas fa-exclamation-triangle'
               }, {
                 type: 'warning'
@@ -448,8 +448,8 @@ switch ($product->getCategory()->getId()) {
               reloadPage()
               $.notify({
                 icon: 'fas fa-exclamation-triangle',
-                title: 'Borrado Exitoso',
-                message: 'Se ha borrado la medida',
+                title: 'Greenpack',
+                message: 'Medida eliminada',
               }, {
                 type: 'warning'
               })
@@ -466,8 +466,8 @@ switch ($product->getCategory()->getId()) {
             if (status == 'success') {
               reloadPage()
               $.notify({
-                message: 'Se ha borrado el material',
-                title: '<strong>Borrado</strong>',
+                message: 'Material eliminado',
+                title: '<strong>Greenpack</strong>',
                 icon: 'fas fa-exclamation-triangle'
               }, {
                 type: 'warning'
@@ -559,8 +559,8 @@ switch ($product->getCategory()->getId()) {
             paramName: 'photo',
             acceptedFiles: "image/*",
             dictDefaultMessage: 'Sube tus archivos, arrastralos o haz click para buscarlos',
-            dictMaxFilesExceeded: 'Solo se permite subir una imagen',
-            dictInvalidFileType: 'Solo se permite imagenes'
+            dictMaxFilesExceeded: 'Carga solo una imagen',
+            dictInvalidFileType: 'Carga solo imagenes'
           })
           $('button#submitEditor').click(() => {
             if ($('#title').val() != '' && editor.html.get() != '') {
@@ -605,19 +605,19 @@ switch ($product->getCategory()->getId()) {
                 update(uses, materials, measurements)
               }
             } else {
-              alert("los campos deben ser completados")
+              alert("Completa todos los campos")
             }
           })
           $('#btnUploadExcel').click(() => {
-            $('#uploadExcel').html('<div>Descargue aqui el formato para cargar medidas <a id="uploadExcelFile" href="<?= $routeDownloadFileExample ?>" download="FormatoMedidas.xlsx" class="btn btn-info"><i class="fas fa-file-download"></i></a></div><div id="uploadFileExcel" class="dropzone"></div>')
+            $('#uploadExcel').html('<div>Descarga aqui el formato para cargar medidas <a id="uploadExcelFile" href="<?= $routeDownloadFileExample ?>" download="FormatoMedidas.xlsx" class="btn btn-info"><i class="fas fa-file-download"></i></a></div><div id="uploadFileExcel" class="dropzone"></div>')
             DropzoneExcel = new Dropzone("div#uploadFileExcel", {
               url: "/admin/upload-file.php",
               method: 'post',
               paramName: 'file',
               maxFiles: 1,
-              dictDefaultMessage: 'Sube El Archivo excel con las medidas del producto',
-              dictMaxFilesExceeded: 'Solo se permite subir un archivo',
-              dictInvalidFileType: 'Solo se permite archivos excel'
+              dictDefaultMessage: 'Carga el archivo Excel con las medidas del producto',
+              dictMaxFilesExceeded: 'Carga solo un archivo',
+              dictInvalidFileType: 'Carga solo archivos de Excel'
             })
             DropzoneExcel.on('success', function(file) {
               let response = JSON.parse(file.xhr.responseText)
@@ -659,8 +659,8 @@ switch ($product->getCategory()->getId()) {
             reloadPage()
             text = editor.html.get()
             $.notify({
-              message: 'Se ha actualizado el producto',
-              title: 'Exito',
+              message: 'Producto actualizado',
+              title: 'Greenpack',
               icon: 'fas fa-check-circle'
             }, {
               type: 'success'
@@ -685,8 +685,8 @@ switch ($product->getCategory()->getId()) {
             text = editor.html.get()
 
             $.notify({
-              message: 'Se ha actualizado el producto',
-              title: 'Exito',
+              message: 'Producto actualizado',
+              title: 'Greenpack',
               icon: 'fas fa-check-circle'
             }, {
               type: 'success'
@@ -771,8 +771,8 @@ switch ($product->getCategory()->getId()) {
 
         if (updated == 'true') {
           $.notify({
-            message: 'Se ha actualizado la Pestaña',
-            title: 'Exito',
+            message: 'Pestaña actualizada',
+            title: 'Greenpack',
             icon: 'notification_important'
           }, {
             type: 'success'

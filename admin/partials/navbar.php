@@ -44,7 +44,7 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="name">Escriba la nueva contaseña:</label>
+          <label for="name">ingresa tu nueva contraseña:</label>
           <input type="password" id="password" class="form-control">
         </div>
       </div>
@@ -63,7 +63,7 @@
     }, (data, status) => {
       if (status == 'success') {
         $.notify({
-          message: 'Se ha cambiado tu contraseña',
+          message: 'Contraseña actualizada',
           title: 'Exito',
           // icon: 'fas fa-check-circle'
         }, {
@@ -85,18 +85,18 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">¿Listo para salir?</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Cerrar sesión</h5>
         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
       </div>
       <div class="modal-body">
-        Seleccione "Cerrar sesión" a continuación si está listo para finalizar su sesión actual.</div>
+          ¿Deseas cerrar esta sesión?.</div>
       <div class="modal-footer">
-        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">No</button>
         <form action="/admin/logout.php" method="POST">
           <input value="true" name="logout" hidden>
-          <button class="btn btn-primary">Cerrar sesión</button>
+          <button class="btn btn-primary">Si</button>
         </form>
       </div>
     </div>

@@ -98,11 +98,11 @@ $products = $productDao->findAll();
             </button>
           </div>
           <div class="modal-body">
-            ¿Estas seguro que quieres borrar este producto?
+            ¿Estas seguro de borrar este producto?
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <a id="linkDelete" role="button" class="btn btn-danger" style="color:white" href="#">Eliminar</a>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            <a id="linkDelete" role="button" class="btn btn-danger" style="color:white" href="#">Si</a>
           </div>
         </div>
       </div>
@@ -143,7 +143,7 @@ $products = $productDao->findAll();
             "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ registros",
             "sZeroRecords": "No se encontraron resultados",
-            "sEmptyTable": "Ningún dato disponible en esta tabla",
+            "sEmptyTable": "Ningún dato disponible",
             "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
             "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
             "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",

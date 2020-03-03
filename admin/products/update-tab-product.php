@@ -73,12 +73,12 @@ $product = $productDao->findById($tab->getIdProduct());
           </ol>
 
           <div class="form-group">
-            <label for="title">Titulo de la Pestaña:</label>
+            <label for="title">Titulo:</label>
             <input type="text" placeholder="Ej. Caracteristicas" id="title" class="form-control" value="<?= $tab->getTitle() ?>">
           </div>
           <br>
           <div class="form-group">
-            <label for="content">Contenido de la Pestaña:</label>
+            <label for="content">Contenido:</label>
             <br>
             <textarea name="content" id="content"></textarea>
           </div>

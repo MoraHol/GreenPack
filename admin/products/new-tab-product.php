@@ -67,12 +67,12 @@ $product = $productDao->findById($_GET["id"]);
           </ol>
 
           <div class="form-group">
-            <label for="title">Escriba el Titulo de la Pestaña:</label>
+            <label for="title">Titulo:</label>
             <input type="text" placeholder="Ej. Caracteristicas" id="title" class="form-control">
           </div>
           <br>
           <div class="form-group">
-            <label for="content">Escriba El contenido de la Pestaña:</label>
+            <label for="content">Contenido:</label>
             <br>
             <textarea name="content" id="content"></textarea>
           </div>

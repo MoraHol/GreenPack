@@ -54,14 +54,14 @@ $roles = $db->consult("SELECT * FROM `roles_admin`", "yes");
                   <div class="form-group">
                     <label for="lastNameUser">Apellidos:</label>
                     <br>
-                    <input type="text" required id="lastNameUser" placeholder="Apellidos Comppletos" class="form-control">
+                    <input type="text" required id="lastNameUser" placeholder="Apellidos Completos" class="form-control">
                   </div>
                 </div>
                 <div class="col-sm-4">
                   <div class="form-group">
-                    <label for="">Numero de Telefono:</label>
+                    <label for="">Número de Teléfono:</label>
                     <br>
-                    <input type="number" required id="phoneUser" placeholder="Numero Celular o Telefono Fijo" class="form-control">
+                    <input type="number" required id="phoneUser" placeholder="Número celular o número fijo" class="form-control">
                   </div>
                 </div>
               </div>
