@@ -37,8 +37,8 @@
       }, (data, status) => {
         if (status == 'success') {
           $.notify({
-            message: 'Se ha enviado un correo de recuperación',
-            title: '<strong>Exito</strong>',
+            message: 'Correo de recuperación enviado',
+            title: '<strong>Greenpack</strong>',
             icon: 'fas fa-exclamation-triangle'
           }, {
             type: 'success'
