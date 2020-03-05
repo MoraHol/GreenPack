@@ -60,7 +60,7 @@ if ($admin->getRole() == 1) {
                 <div class="card-body">
                   <h4 class="card-title">Cotizaciones Diarias</h4>
                   <!-- <div style="float: right"><span>Total: </span> <span id="totalQuotations"></span></div> -->
-                  <p class="card-category"><i class="fas fa-square" style="color: #00bcd4 "></i>Resueltas
+                  <p class="card-category"><i class="fas fa-square" style="color: #00bcd4 "></i> Resueltas
                     <br>
                     <i class="fas fa-square" style="color: #f44336"></i> Sin Resolver</p>
                 </div>
