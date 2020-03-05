@@ -2,7 +2,7 @@
 require_once dirname(dirname(__DIR__)) . "/vendor/PHPMailer/class.phpmailer.php";
 require_once dirname(dirname(__DIR__)) . "/vendor/PHPMailer/class.smtp.php";
 require_once dirname(dirname(__DIR__)) . "/db/env.php";
-$host = "en.teenus.com.co";
+$host = "greenpack.teenustest.com";
 $greeting = date("a") == "am" ? "Dias" : "Tardes";
 if ($_GET["email"]) {
   $email = $_GET["email"];
@@ -20,7 +20,7 @@ if ($_GET["email"]) {
   $mail->Password = $_ENV["smtpPass"];
 
   $mail->From = $_ENV["smtpEmail"]; // Email desde donde env�o el correo.
-  $mail->FromName = 'GreenPack';
+  $mail->FromName = 'Greenpack';
   $mail->AddAddress($email);
   $mail->Subject = "Nueva Cotización"; // Este es el titulo del email.
   $protocol = isset($_SERVER["HTTPS"]) ? 'https' : 'http';

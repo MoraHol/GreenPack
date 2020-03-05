@@ -2,7 +2,7 @@
 require_once dirname(dirname(__DIR__)) . "/vendor/PHPMailer/class.phpmailer.php";
 require_once dirname(dirname(__DIR__)) . "/vendor/PHPMailer/class.smtp.php";
 require_once dirname(dirname(__DIR__)) . "/db/env.php";
-$host = "en.teenus.com.co";
+$host = "greenpack.teenustest.com";
 $greeting = date("a") == "am" ? "Dias" : "Tardes";
 if ($_GET["email"]) {
   $email = $_GET["email"];
