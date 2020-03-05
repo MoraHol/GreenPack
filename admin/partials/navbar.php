@@ -37,14 +37,14 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Editar</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Greenpack</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="name">ingresa tu nueva contraseña:</label>
+          <label for="name">Ingresa tu nueva contraseña:</label>
           <input type="password" id="password" class="form-control">
         </div>
       </div>
@@ -64,7 +64,7 @@
       if (status == 'success') {
         $.notify({
           message: 'Contraseña actualizada',
-          title: 'Exito',
+          title: 'Greenpack',
           // icon: 'fas fa-check-circle'
         }, {
           type: 'success'
@@ -85,7 +85,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Cerrar sesión</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Greenpack</h5>
         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>

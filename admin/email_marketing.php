@@ -202,7 +202,7 @@ if ($admin->getRole() == 1) {
             })
           }else{
             $.notify({
-              message: data.error,
+              message: 'data.error',
               title: 'Greenpack',
               icon: 'notification_important'
             }, {
