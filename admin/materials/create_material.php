@@ -129,7 +129,7 @@ include("../partials/verify-session.php");
           if (status == 'success') {
             $.notify({
               message: 'Producto creado',
-              title: '<strong>Exito</strong>',
+              title: '<strong>Greenpack</strong>',
               icon: 'fas fa-exclamation-triangle'
             }, {
               type: 'success'
@@ -138,7 +138,7 @@ include("../partials/verify-session.php");
           } else {
             $.notify({
               message: 'Producto No creado',
-              title: '<strong>Error</strong>',
+              title: '<strong>Greenpack</strong>',
               icon: 'fas fa-exclamation-triangle'
             }, {
               type: 'danger'
