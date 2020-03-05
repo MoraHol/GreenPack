@@ -27,7 +27,7 @@ include("../partials/verify-session.php");
 <html lang="es">
 
 <head>
-  <title>GreenPack | Productos</title>
+  <title>Greenpack | Productos</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />

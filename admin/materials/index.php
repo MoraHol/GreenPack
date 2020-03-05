@@ -47,14 +47,14 @@ $materials = $materialDao->findAll();
           <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-table"></i>
-              Materiales Ofertados</div>
+              Materiales registrados</div>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table row-border table-bordered hover" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th class="text-center">Material</th>
-                      <th class="text-center">Precio / Kg</th>
+                      <th class="text-center">Precio (Kg)</th>
                       <th class="text-center">Gramaje</th>
                       <th class="text-center">Descripción</th>
                       <th class="text-center">Actualizar</th>
@@ -158,7 +158,7 @@ $materials = $materialDao->findAll();
           </div>
           <div class="modal-body">
             ¿Estás seguro de Eliminar?
-            <br>Esta acción eliminara esta Materia Prima en todos los productos en los que se utilice
+            <br><br>Esta acción eliminara esta Materia Prima en todos los productos en los que se utilice
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>

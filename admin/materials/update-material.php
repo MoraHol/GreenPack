@@ -46,7 +46,7 @@ $material = $materialDao->findById($_GET["id"]);
             <div class="row">
               <div class="col-sm-4">
                 <div class="form-group">
-                  <label for="nameMaterial">Nombre del producto:</label>
+                  <label for="nameMaterial">Nombre:</label>
                   <br>
                   <input type="text" placeholder="Ej: Bond" id="nameMaterial" class="form-control" value="<?= $material->getName(); ?>">
                 </div>
@@ -131,7 +131,7 @@ $material = $materialDao->findById($_GET["id"]);
           if (status == 'success') {
             $.notify({
               message: 'Material actualizado',
-              title: '<strong>Exito</strong>',
+              title: '<strong>Greenpack</strong>',
               icon: 'fas fa-exclamation-triangle'
             }, {
               type: 'success'

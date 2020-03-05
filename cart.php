@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Cotización | GreenPack</title>
+  <title>Cotización | Greenpack</title>
   <?php include("partials/metaproperties.html") ?>
   <link rel="stylesheet" href="/css/styles.css">
   <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
@@ -104,7 +104,7 @@
           <div class="row align-items-center">
             <div class="col-md-3"><img src="https://greenpack.com.co/wp-content/uploads/2017/07/cem-ca.jpg" alt="" width="150" height="150"></div>
             <div class="col-md-5 align-self-center">
-              <h5>Nombre del Producto</h5>
+              <h5>Nombre</h5>
               <br>
               <p><span class="text-primary">Impresion:</span> SI</p>
               <p><span class="text-primary">Material:</span> Bond</p>

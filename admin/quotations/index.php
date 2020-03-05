@@ -17,7 +17,7 @@ if ($admin->getRole() != 2) {
 <html lang="es">
 
 <head>
-  <title>Cotizaciones | GreenPack</title>
+  <title>Cotizaciones | Greenpack</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -75,7 +75,7 @@ if ($admin->getRole() != 2) {
               <div class="card mb-3">
                 <div class="card-header">
                   <i class="fas fa-table"></i>
-                  Todas las cotizaciones</div>
+                  Registros</div>
                 <div class="card-body">
                   <div class="table-responsive">
                     <table class="table row-border table-bordered hover dataTable" width="100%" cellspacing="0">
@@ -84,7 +84,7 @@ if ($admin->getRole() != 2) {
                           <th class="text-center">Nombre</th>
                           <th class="text-center">Apellido</th>
                           <th class="text-center">Empresa</th>
-                          <th class="text-center">Total de la cotización</th>
+                          <th class="text-center">Precio</th>
                           <th class="text-center">Fecha</th>
                           <th class="text-center">Ver Cotizacion</th>
                           <th class="text-center">Editar</th>
@@ -124,7 +124,7 @@ if ($admin->getRole() != 2) {
                           <th class="text-center">Nombre</th>
                           <th class="text-center">Apellido</th>
                           <th class="text-center">Empresa</th>
-                          <th class="text-center">Total de la cotización</th>
+                          <th class="text-center">Precio</th>
                           <th class="text-center">Fecha</th>
                           <th class="text-center">Vendedor</th>
                           <th class="text-center">Ver Cotizacion</th>
@@ -167,7 +167,7 @@ if ($admin->getRole() != 2) {
                           <th class="text-center">Nombre</th>
                           <th class="text-center">Apellido</th>
                           <th class="text-center">Empresa</th>
-                          <th class="text-center">Total de la cotización</th>
+                          <th class="text-center">Precio</th>
                           <th class="text-center">Fecha</th>
                           <th class="text-center">Ver Cotizacion</th>
                           <th class="text-center">Editar</th>
@@ -379,8 +379,8 @@ if ($admin->getRole() != 2) {
 
       function send() {
         $.notify({
-          message: 'Enviando Correo',
-          title: 'Procesando',
+          message: 'Enviando Correo...',
+          title: 'Greenpack',
           icon: 'email'
         }, {
           type: 'info'

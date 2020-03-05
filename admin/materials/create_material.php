@@ -6,7 +6,7 @@ include("../partials/verify-session.php");
 <html lang="es">
 
 <head>
-  <title>Materiales | GreenPack</title>
+  <title>Materiales | Greenpack</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -41,7 +41,7 @@ include("../partials/verify-session.php");
               <div class="row">
                 <div class="col-sm-4">
                   <div class="form-group">
-                    <label for="nameMaterial">Nombre del producto:</label>
+                    <label for="nameMaterial">Nombre:</label>
                     <br>
                     <input type="text" required placeholder="Ej: Bond" id="nameMaterial" class="form-control">
                   </div>

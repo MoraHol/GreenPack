@@ -61,7 +61,7 @@ include("../partials/verify-session.php");
           <br>
           <div class="form-group">
             <label for="title">Nombre:</label>
-            <input type="text" placeholder="Ej. bolsa de manija" id="title" class="form-control">
+            <input type="text" placeholder="bolsa de manija" id="title" class="form-control">
           </div>
           <br>
 
@@ -69,13 +69,13 @@ include("../partials/verify-session.php");
             <div class="col">
               <div class="form-group">
                 <label for="ref">Referencia:</label>
-                <input type="text" placeholder="Ej. LV-12" id="ref" class="form-control">
+                <input type="text" placeholder="LV-12" id="ref" class="form-control">
               </div>
             </div>
             <div class="col">
               <div class="form-group">
                 <label for="price">Precio:</label>
-                <input type="number" placeholder="Ej. 2000" id="price" class="form-control">
+                <input type="number" placeholder="2000" id="price" class="form-control">
               </div>
             </div>
           </div>
@@ -87,7 +87,7 @@ include("../partials/verify-session.php");
             <textarea name="content" id="content"></textarea>
           </div>
           <div class="form-group">
-            <label for="myId">Sube las imagenes del producto:</label>
+            <label for="myId">Imagenes del producto:</label>
             <div id="myId" class="dropzone"></div>
           </div>
           <br>
@@ -128,7 +128,7 @@ include("../partials/verify-session.php");
                 <label for="category">Selecciona la categoría del producto:</label>
                 <br>
                 <select id="category" class="wide">
-                  <option disabled selected>Selecciona una categoría</option>
+                  <option disabled selected>Selecciona</option>
                   <?php foreach ($categories as $category) { ?>
                     <option value="<?= $category->getId(); ?>"><?= $category->getName(); ?></option>
                   <?php } ?>
@@ -193,7 +193,7 @@ include("../partials/verify-session.php");
           $('#materials').append(`<li><select class="wide" style="margin-bottom: 10px;"><option disabled selected>Seleccione un material</option>
                   <?php
                   foreach ($materials as  $material) { ?>
-                                                                                              <option value="<?= $material->getId(); ?>"><?= $material->getName(); ?></option>
+                    <option value="<?= $material->getId(); ?>"><?= $material->getName(); ?></option>
                   <?php }
                   ?>
                 </select></li>`)
@@ -209,8 +209,8 @@ include("../partials/verify-session.php");
         function addMeasurement() {
           if ($('#category').val() == null) {
             $.notify({
-              message: 'Por favor seleccione una categoria antes de agregar las medidas',
-              title: 'Advertencia',
+              message: 'Selecciona una categoria antes de agregar las medidas',
+              title: 'Greenpack',
               icon: 'notification_important'
             }, {
               type: 'warning'
@@ -378,7 +378,7 @@ include("../partials/verify-session.php");
               }, (data, status) => {
                 $.notify({
                   message: 'Producto creado',
-                  title: 'Exito',
+                  title: 'Greenpack',
                   icon: 'notification_important'
                 }, {
                   type: 'success'
@@ -388,7 +388,7 @@ include("../partials/verify-session.php");
             } else {
               $.notify({
                 message: 'Completa todos los campos',
-                title: 'Error',
+                title: 'Greenpack',
                 icon: 'notification_important'
               }, {
                 type: 'danger'

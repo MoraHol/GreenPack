@@ -11,7 +11,7 @@ $products = $productDao->findAll();
 ?>
 
 <head>
-  <title>GreenPack | Productos</title>
+  <title>Greenpack | Productos</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -92,7 +92,7 @@ $products = $productDao->findAll();
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Borrar</h5>
+            <h5 class="modal-title" id="exampleModalLongTitle">Greenpack</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>

@@ -19,7 +19,7 @@ if (isset($_GET["id"]) && isset($_GET["token"])) {
   <meta charset=" UTF-8">
   <meta name=" viewport " content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Recuperar Contraseña | GreenPack</title>
+  <title>Recuperar Contraseña | Greenpack</title>
   <link rel=" stylesheet " href="/admin/assets/css/login-admin.css">
   <link rel=" stylesheet " href="/css/bootstrap.min.css">
   <link rel="stylesheet" href="/css/all.min.css">
@@ -52,7 +52,7 @@ if (isset($_GET["id"]) && isset($_GET["token"])) {
         if (status == 'success') {
           $.notify({
             message: 'Se ha cambiado la contraseña, Click para iniciar Sesion',
-            title: '<strong>Exito</strong>',
+            title: '<strong>Greenpack</strong>',
             icon: 'fas fa-exclamation-triangle',
             url: '/admin'
           }, {
