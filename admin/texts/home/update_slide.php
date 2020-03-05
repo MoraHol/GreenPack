@@ -6,7 +6,7 @@ include("../../partials/verify-session.php");
 <html lang="es">
 
 <head>
-  <title>Textos | GreenPack</title>
+  <title>Textos | Greenpack</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -99,7 +99,7 @@ include("../../partials/verify-session.php");
             <li class="breadcrumb-item">
               <a href="/admin/texts/home/banner.php">Banner</a>
             </li>
-            <li class="breadcrumb-item active">Actualizar Slides</li>
+            <li class="breadcrumb-item active">Actualizar Slide</li>
           </ol>
           <!-- DataTables Example -->
           <div class="card mb-3">
@@ -108,20 +108,20 @@ include("../../partials/verify-session.php");
               Actualizar Slide</div>
             <div class="card-body">
               <div class="form-group">
-                <label for="header">Encabezado del slide</label>
+                <label for="header">Encabezado</label>
                 <input type="text" class="form-control" id="header">
               </div>
               <div class="form-group">
-                <label for="title">Titulo del slide</label>
+                <label for="title">Titulo</label>
                 <input type="text" class="form-control" id="title">
               </div>
               <div class="form-group">
-                <label for="subtitle">Subtitulo del slide</label>
+                <label for="subtitle">Subtitulo</label>
                 <input type="text" class="form-control" id="subtitle">
               </div>
             </div>
 
-            <div id="image-info">Imagen de la Noticia:
+            <div id="image-info"> Carga la imagen del slide:
               <div id="imagen">
                 <img src="" alt="" height="200" width="200" id="imgNotice" hidden>
                 <div id="info">
@@ -137,7 +137,7 @@ include("../../partials/verify-session.php");
           </div>
           <div class="row">
             <div class="col"><a href="/admin/texts/home/banner.php" class="btn btn-danger btn-lg">Regresar</a></div>
-            <div class="col"><button id="submitEditor" class="btn btn-primary btn-lg">Actulizar</button></div>
+            <div class="col"><button id="submitEditor" class="btn btn-primary btn-lg">Actualizar</button></div>
             <div class="col"></div>
           </div>
         </div>
@@ -182,8 +182,8 @@ include("../../partials/verify-session.php");
         paramName: 'photo',
         acceptedFiles: "image/*",
         dictDefaultMessage: 'Sube tus archivos, arrastralos o haz click para buscarlos',
-        dictMaxFilesExceeded: 'Solo se permite subir una imagen',
-        dictInvalidFileType: 'Solo se permite imagenes',
+        dictMaxFilesExceeded: 'Carga solo una imagen',
+        dictInvalidFileType: 'Carga solo imagenes',
         maxFiles: 1
       })
 
@@ -231,8 +231,8 @@ include("../../partials/verify-session.php");
             ajax(link)
           } else {
             $.notify({
-              message: 'Faltan Datos para actulizar el Slide',
-              title: '<strong>Error</strong>',
+              message: 'Faltan datos',
+              title: '<strong>Greenpack</strong>',
               icon: 'notification_important'
             }, {
               type: 'warning'
@@ -251,8 +251,8 @@ include("../../partials/verify-session.php");
         }, (data, status) => {
           if (status == 'success') {
             $.notify({
-              message: 'Se ha actulizado correctamente el Slide',
-              title: '<strong>Exito</strong>',
+              message: 'Slide actualizado',
+              title: '<strong>Greenpack</strong>',
               icon: 'notification_important'
             }, {
               type: 'success'
@@ -262,8 +262,8 @@ include("../../partials/verify-session.php");
             $('#image-info').fadeIn()
           } else {
             $.notify({
-              message: 'No se ha podido actualizar los datos',
-              title: '<strong>Error</strong>',
+              message: 'Error',
+              title: '<strong>Greenpack</strong>',
               icon: 'notification_important'
             }, {
               type: 'danger'

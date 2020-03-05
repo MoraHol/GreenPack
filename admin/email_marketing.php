@@ -15,7 +15,7 @@ if ($admin->getRole() == 1) {
 ?>
 
 <head>
-  <title>Dashboard | GreenPack</title>
+  <title>Dashboard | Greenpack</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -55,18 +55,18 @@ if ($admin->getRole() == 1) {
           </ol>
 
           <div class="form-group">
-            <label for="subject">Asunto del mensaje:</label>
+            <label for="subject">Asunto:</label>
             <br>
             <input class="form-control" type="text" id="subject">
           </div>
 
           <div class="form-group">
-            <label for="content">Contenido del mensaje:</label>
+            <label for="content">Contenido:</label>
             <br>
             <textarea name="content" id="content"></textarea>
           </div>
           <div class="row">
-            <div class="col-12">Por favor escoga a quien desea enviar:</div>
+            <div class="col-12">Seleciona a quien deseas enviar:</div>
             <div class="col-1"></div>
             <div class="col-11">
               <div class="form-check form-check-inline">
@@ -136,7 +136,7 @@ if ($admin->getRole() == 1) {
             if (status != "success") {
               $.notify({
                 message: 'Error',
-                title: 'Error',
+                title: 'Greenpack',
                 icon: 'notification_important'
               }, {
                 type: 'warning'
@@ -152,7 +152,7 @@ if ($admin->getRole() == 1) {
             if (status != "success") {
               $.notify({
                 message: 'Error',
-                title: 'Error',
+                title: 'Greenpack',
                 icon: 'notification_important'
               }, {
                 type: 'warning'
@@ -177,8 +177,8 @@ if ($admin->getRole() == 1) {
       let checkboxSubs = $('#inlineCheckboxSuscriptores').prop('checked')
       if (!checkboxClient && !checkboxSubs) {
         $.notify({
-          message: 'Por favor selecciona a quien desea enviar el correo',
-          title: 'Advertencia',
+          message: 'Selecciona a quien deseas enviar el correo',
+          title: 'Greenpack',
           icon: 'notification_important'
         }, {
           type: 'warning'
@@ -194,8 +194,8 @@ if ($admin->getRole() == 1) {
         if (status == 'success') {
           if (data.status) {
             $.notify({
-              message: 'Los mensajes se han enviado correctamente',
-              title: 'Envio Satisfactorio',
+              message: 'Mensajes enviado',
+              title: 'Greenpack',
               icon: 'notification_important'
             }, {
               type: 'success'
@@ -203,7 +203,7 @@ if ($admin->getRole() == 1) {
           }else{
             $.notify({
               message: data.error,
-              title: 'Error en envio',
+              title: 'Greenpack',
               icon: 'notification_important'
             }, {
               type: 'danger'

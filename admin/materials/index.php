@@ -58,7 +58,7 @@ $materials = $materialDao->findAll();
                       <th class="text-center">Gramaje</th>
                       <th class="text-center">Descripción</th>
                       <th class="text-center">Actualizar</th>
-                      <th class="text-center">Borrar</th>
+                      <th class="text-center">Eliminar</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -158,7 +158,7 @@ $materials = $materialDao->findAll();
           </div>
           <div class="modal-body">
             ¿Estás seguro de Eliminar?
-            <br>Esta acción la eliminara en todos los productos en los que se utilice
+            <br>Esta acción eliminara esta Materia Prima en todos los productos en los que se utilice
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>

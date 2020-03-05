@@ -6,7 +6,7 @@ include("../../partials/verify-session.php");
 <html lang="es">
 
 <head>
-  <title>Textos | GreenPack</title>
+  <title>Textos | Greenpack</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -58,7 +58,7 @@ include("../../partials/verify-session.php");
                 <input type="number" required placeholder="Ej: 200" id="products" class="form-control">
               </div>
               <div class="form-group">
-                <label for="clients">Clientes Atendidos</label>
+                <label for="clients">Clientes</label>
                 <br>
                 <input type="number" required placeholder="Ej: 200" id="clients" class="form-control">
               </div>
@@ -120,16 +120,16 @@ include("../../partials/verify-session.php");
           }, (data, status) => {
             if (status == 'success') {
               $.notify({
-                message: 'Se ha actualizado la sección de números',
-                title: 'Exito',
+                message: 'Seccion actualizada',
+                title: 'Greenpack',
                 icon: 'notification_important'
               }, {
                 type: 'success'
               })
             } else {
               $.notify({
-                message: 'No se ha actualizado la sección de números',
-                title: 'Error',
+                message: 'Error',
+                title: 'Greenpack',
                 icon: 'notification_important'
               }, {
                 type: 'danger'
@@ -139,7 +139,7 @@ include("../../partials/verify-session.php");
         } else {
           $.notify({
             message: 'Completa los números',
-            title: 'Error',
+            title: 'Greenpack',
             icon: 'notification_important'
           }, {
             type: 'warning'

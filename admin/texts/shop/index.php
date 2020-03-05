@@ -6,7 +6,7 @@ include("../../partials/verify-session.php");
 <html lang="es">
 
 <head>
-  <title>Textos | GreenPack</title>
+  <title>Textos | Greenpack</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -54,18 +54,18 @@ include("../../partials/verify-session.php");
           <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-table"></i>
-              Pestañas de la pagina</div>
+              Secciones</div>
             <div class="card-body">
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="input-picker-background-banner">Escoga el color de fondo del banner:</label>
+                    <label for="input-picker-background-banner">Selecione el color:</label>
                     <input type="color" class="form-control" id="input-picker-background-banner">
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="input-picker-color-banner">Escoga el color de letra del banner:</label>
+                    <label for="input-picker-color-banner">Seleccione el color de la fuente:</label>
                     <input type="color" class="form-control mb-2 mr-auto mt-2" id="input-picker-color-banner">
                   </div>
                 </div>
@@ -73,13 +73,13 @@ include("../../partials/verify-session.php");
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="input-title-banner">Titulo del Banner</label>
+                    <label for="input-title-banner">Titulo</label>
                     <input type="text" class="form-control mt-10" id="input-title-banner">
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="input-title-banner">Subtitulo del Banner</label>
+                    <label for="input-title-banner">Subtitulo</label>
                     <input type="text" class="form-control" id="input-subtitle-banner">
                   </div>
                 </div>
@@ -95,7 +95,7 @@ include("../../partials/verify-session.php");
                 <div class="col-sm-4"><button class="btn btn-danger" onclick="changeImage()">Cambiar Imagen</button></div>
               </div>
               <div id="imgUpload">
-                <span>Suba la imagen de la categoría:</span>
+                <span>Sube la imagen de la categoría:</span>
                 <div id="myId"></div>
               </div>
             </div>
@@ -164,8 +164,8 @@ include("../../partials/verify-session.php");
           maxFiles: 1,
           acceptedFiles: "image/*",
           dictDefaultMessage: 'Sube tus archivos, arrastralos o haz click para buscarlos',
-          dictMaxFilesExceeded: 'Solo se permite subir una imagen',
-          dictInvalidFileType: 'Solo se permite imagenes'
+          dictMaxFilesExceeded: 'Carga solo una imagenes',
+          dictInvalidFileType: 'Carga solo imagenes'
         })
       }
 
@@ -179,8 +179,8 @@ include("../../partials/verify-session.php");
         }, (data, status) => {
           if (status == 'success') {
             $.notify({
-              message: 'Se ha actualizado la categoría',
-              title: 'Exito',
+              message: 'Categoría actualizada',
+              title: 'Greenpack',
               icon: 'notification_important'
             }, {
               type: 'success'
@@ -193,8 +193,8 @@ include("../../partials/verify-session.php");
             loadBanner()
           } else {
             $.notify({
-              message: 'No se ha actualizado la categoría',
-              title: 'Error',
+              message: 'Error',
+              title: 'Greenpack',
               icon: 'notification_important'
             }, {
               type: 'warning'
@@ -212,8 +212,8 @@ include("../../partials/verify-session.php");
             ajax(link)
           } else {
             $.notify({
-              message: 'Por favor Suba una Imagen',
-              title: 'Exito',
+              message: 'Cargue una Imagen',
+              title: 'Greenpack',
               icon: 'notification_important'
             }, {
               type: 'warning'

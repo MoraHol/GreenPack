@@ -6,7 +6,7 @@ include("../../partials/verify-session.php");
 <html lang="es">
 
 <head>
-  <title>Textos - Banner | GreenPack</title>
+  <title>Textos - Banner | Greenpack</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -126,8 +126,8 @@ include("../../partials/verify-session.php");
         }, (data, status) => {
           if (status == 'sucsess') {
             $.notify({
-              message: 'Se ha borrado el slide',
-              title: '<strong>Error</strong>',
+              message: 'Slide borrado',
+              title: '<strong>Greenpack</strong>',
               icon: 'notification_important'
             }, {
               type: 'warning'

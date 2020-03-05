@@ -9,7 +9,7 @@ include("../../partials/verify-session.php");
 <html lang="es">
 
 <head>
-  <title>Textos | GreenPack</title>
+  <title>Textos | Greenpack</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -99,7 +99,7 @@ include("../../partials/verify-session.php");
             <li class="breadcrumb-item">
               <a href="/admin/texts/about">Acerca de Nosotros</a>
             </li>
-            <li class="breadcrumb-item active">Actualizar Pestaña</li>
+            <li class="breadcrumb-item active">Actualizar</li>
           </ol>
           <!-- DataTables Example -->
           <div class="card mb-3">
@@ -108,12 +108,12 @@ include("../../partials/verify-session.php");
               Acerca de Nosotros</div>
             <div class="card-body">
               <div class="form-group">
-                <label for="title">Titulo de la Pestaña:</label>
+                <label for="title">Titulo</label>
                 <input type="text" placeholder="Ej. Caracteristicas" id="title" class="form-control">
               </div>
               <br>
               <div class="form-group">
-                <label for="content">Contenido de la Pestaña:</label>
+                <label for="content">Contenido</label>
                 <br>
                 <textarea name="content" id="content"></textarea>
               </div>
@@ -127,7 +127,7 @@ include("../../partials/verify-session.php");
               </div>
 
               <div class="form-group" id="imgUpload">
-                <label for="myId">Suba la imagen del slide:</label>
+                <label for="myId">Sube la imagen del slide:</label>
                 <div id="myId" class="dropzone"></div>
               </div>
             </div>
@@ -226,8 +226,8 @@ include("../../partials/verify-session.php");
         paramName: 'photo',
         acceptedFiles: "image/*",
         dictDefaultMessage: 'Sube tus archivos, arrastralos o haz click para buscarlos',
-        dictMaxFilesExceeded: 'Solo se permite subir una imagen',
-        dictInvalidFileType: 'Solo se permite imagenes',
+        dictMaxFilesExceeded: 'Solo sube una imagen',
+        dictInvalidFileType: 'Solo sube imagenes',
         maxFiles: 1
       })
 
@@ -277,8 +277,8 @@ include("../../partials/verify-session.php");
             ajax(link)
           } else {
             $.notify({
-              message: 'Faltan Datos para actualizar el About',
-              title: '<strong>Error</strong>',
+              message: 'Faltan datos',
+              title: '<strong>Greenpack</strong>',
               icon: 'notification_important'
             }, {
               type: 'warning'
@@ -296,7 +296,7 @@ include("../../partials/verify-session.php");
         }, (data, status) => {
           if (status == 'success') {
             $.notify({
-              message: 'Se ha actualizado correctamente',
+              message: 'Actualizado',
               title: '<strong>Exito</strong>',
               icon: 'notification_important'
             }, {
@@ -307,8 +307,8 @@ include("../../partials/verify-session.php");
             $('#image-info').fadeIn()
           } else {
             $.notify({
-              message: 'No se ha podido actualizar los datos',
-              title: '<strong>Error</strong>',
+              message: 'Error',
+              title: '<strong>Greenpack</strong>',
               icon: 'notification_important'
             }, {
               type: 'danger'

@@ -15,7 +15,7 @@ if ($admin->getRole() == 1) {
 ?>
 
 <head>
-  <title>Dashboard | GreenPack</title>
+  <title>Dashboard | Greenpack</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -60,9 +60,9 @@ if ($admin->getRole() == 1) {
                 <div class="card-body">
                   <h4 class="card-title">Cotizaciones Diarias</h4>
                   <!-- <div style="float: right"><span>Total: </span> <span id="totalQuotations"></span></div> -->
-                  <p class="card-category"><i class="fas fa-square" style="color: #00bcd4 "></i> Cotizaciones contestadas
+                  <p class="card-category"><i class="fas fa-square" style="color: #00bcd4 "></i>Resueltas
                     <br>
-                    <i class="fas fa-square" style="color: #f44336"></i> Cotizaciones no contestadas</p>
+                    <i class="fas fa-square" style="color: #f44336"></i> Sin Resolver</p>
                 </div>
                 <div class="card-footer">
                   <div class="stats">

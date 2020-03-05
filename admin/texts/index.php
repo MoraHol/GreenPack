@@ -48,7 +48,7 @@ include("../partials/verify-session.php");
           <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-table"></i>
-              Pestañas de la pagina</div>
+              Secciones</div>
             <div class="card-body">
               <div class="row">
                 <div class="col-sm-4 align-items-start justify-content-center text-center border-right" id="border-item">

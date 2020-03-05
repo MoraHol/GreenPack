@@ -6,7 +6,7 @@ include("../../partials/verify-session.php");
 <html lang="es">
 
 <head>
-  <title>Textos - Clientes | GreenPack</title>
+  <title>Textos - Clientes | Greenpack</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -91,11 +91,11 @@ include("../../partials/verify-session.php");
           <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-table"></i>
-              Pestañas de la pagina</div>
+              Secciones</div>
             <div class="card-body">
               <!--Carousel Wrapper-->
               <div id="multi-item-example" class="carousel slide carousel-multi-item carousel-multi-item-2" data-ride="carousel">
-                <h5>Imagenes del Producto</h5>
+                <h5>Clientes</h5>
                 <!--Controls-->
                 <div class="controls-top text-center">
                   <a class="black-text" href="#multi-item-example" data-slide="prev"><i class="fas fa-angle-left fa-3x pr-3"></i></a>
@@ -110,7 +110,7 @@ include("../../partials/verify-session.php");
                 </div>
               </div>
               <div class="form-group">
-                <label for="myId">Suba las imagenes del producto:</label>
+                <label for="myId">Sube las logos:</label>
                 <div id="myId" class="dropzone"></div>
               </div>
             </div>
@@ -197,8 +197,8 @@ include("../../partials/verify-session.php");
         }, (data, status) => {
           if (status == "success") {
             $.notify({
-              message: 'Se ha borrado la imagen',
-              title: '<strong>Borrado</strong>',
+              message: 'Cliente eliminado',
+              title: '<strong>Greenpack</strong>',
               icon: 'notification_important'
             }, {
               type: 'warning'
@@ -216,8 +216,8 @@ include("../../partials/verify-session.php");
         paramName: 'photo',
         acceptedFiles: "image/*",
         dictDefaultMessage: 'Sube tus archivos, arrastralos o haz click para buscarlos',
-        dictMaxFilesExceeded: 'Solo se permite subir una imagen',
-        dictInvalidFileType: 'Solo se permite imagenes'
+        dictMaxFilesExceeded: 'Sube solo una imagen',
+        dictInvalidFileType: 'Sube solo imagenes'
       })
 
       function update() {
@@ -230,8 +230,8 @@ include("../../partials/verify-session.php");
           ajax(responses)
         } else {
           $.notify({
-            message: 'No se ha cargado imagenes',
-            title: '<strong>Sin Imagenes</strong>',
+            message: 'Carga imagenes',
+            title: '<strong>Greenpack</strong>',
             icon: 'notification_important'
           }, {
             type: 'warning'
@@ -246,8 +246,8 @@ include("../../partials/verify-session.php");
         }, (data, status) => {
           if (status == 'success') {
             $.notify({
-              message: 'Se ha cargado imagenes',
-              title: '<strong>Exito</strong>',
+              message: 'Carga imagenes',
+              title: '<strong>Greenpack</strong>',
               icon: 'notification_important'
             }, {
               type: 'success'

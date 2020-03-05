@@ -9,7 +9,7 @@ include("../../partials/verify-session.php");
 <html lang="es">
 
 <head>
-  <title>Textos | GreenPack</title>
+  <title>Textos | Greenpack</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -58,23 +58,23 @@ include("../../partials/verify-session.php");
           <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-plus"></i>
-              Nueva Slide</div>
+              Nuevo Slide</div>
             <div class="card-body">
               <div class="form-group">
-                <label for="header">Escriba el encabezado del slide</label>
+                <label for="header">Encabezado</label>
                 <input type="text" class="form-control" id="header">
               </div>
               <div class="form-group">
-                <label for="title">Escriba el titulo del slide</label>
+                <label for="title">Titulo</label>
                 <input type="text" class="form-control" id="title">
               </div>
               <div class="form-group">
-                <label for="subtitle">Escriba el subtitulo del slide</label>
+                <label for="subtitle">Subtitulo</label>
                 <input type="text" class="form-control" id="subtitle">
               </div>
             </div>
             <div class="form-group">
-              <label for="myId">Suba la imagen del slide:</label>
+              <label for="myId">Sube la imagen:</label>
               <div id="myId" class="dropzone"></div>
             </div>
           </div>
@@ -124,8 +124,8 @@ include("../../partials/verify-session.php");
         paramName: 'photo',
         acceptedFiles: "image/*",
         dictDefaultMessage: 'Sube tus archivos, arrastralos o haz click para buscarlos',
-        dictMaxFilesExceeded: 'Solo se permite subir una imagen',
-        dictInvalidFileType: 'Solo se permite imagenes',
+        dictMaxFilesExceeded: 'Sube solo una imagen',
+        dictInvalidFileType: 'Sube solo imagenes',
         maxFiles: 1
       })
       $('#submitEditor').click(() => {
@@ -143,7 +143,7 @@ include("../../partials/verify-session.php");
           })
         } else {
           $.notify({
-            message: 'Faltan Datos para la creacion del slide',
+            message: 'Faltan datos',
             title: '<strong>Error</strong>',
             icon: 'notification_important'
           }, {
