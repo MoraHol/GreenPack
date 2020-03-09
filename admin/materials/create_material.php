@@ -128,7 +128,7 @@ include("../partials/verify-session.php");
         }, (data, status) => {
           if (status == 'success') {
             $.notify({
-              message: 'Producto creado',
+              message: 'Materia Prima creada',
               title: '<strong>Greenpack</strong>',
               icon: 'fas fa-exclamation-triangle'
             }, {
@@ -137,7 +137,7 @@ include("../partials/verify-session.php");
             clearFields()
           } else {
             $.notify({
-              message: 'Producto No creado',
+              message: 'Error al crear la Materia Prima',
               title: '<strong>Greenpack</strong>',
               icon: 'fas fa-exclamation-triangle'
             }, {

@@ -647,7 +647,7 @@ switch ($product->getCategory()->getId()) {
                 update(uses, materials, measurements)
               }
             } else {
-              alert("completa todos los campos")
+              alert("Completa todos los campos")
             }
           })
           $('#btnUploadExcel').click(() => {

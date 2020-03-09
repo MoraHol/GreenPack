@@ -130,7 +130,7 @@ $material = $materialDao->findById($_GET["id"]);
         }, (data, status) => {
           if (status == 'success') {
             $.notify({
-              message: 'Material actualizado',
+              message: 'Materia Prima actualizada',
               title: '<strong>Greenpack</strong>',
               icon: 'fas fa-exclamation-triangle'
             }, {
