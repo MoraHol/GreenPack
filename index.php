@@ -246,7 +246,7 @@ $conversor = new ConversorDate(); ?>
           </div>
         </div>
       </div>
-      <form class="form-area " id="myForm" action="mail.php" method="post" class="contact-form text-right">
+      <form class="form-area " id="myForm" action="email.php" method="post" class="contact-form text-right">
         <div class="row">
           <div class="col-lg-6 form-group">
             <input name="name" placeholder="Nombres" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nombres y Apellidos'" class="common-input mb-20 form-control" required="" type="text">
