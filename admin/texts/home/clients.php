@@ -230,7 +230,7 @@ include("../../partials/verify-session.php");
           ajax(responses)
         } else {
           $.notify({
-            message: 'Carga imagenes',
+            message: 'Carga tu imagen',
             title: '<strong>Greenpack</strong>',
             icon: 'notification_important'
           }, {
@@ -246,7 +246,7 @@ include("../../partials/verify-session.php");
         }, (data, status) => {
           if (status == 'success') {
             $.notify({
-              message: 'Carga imagenes',
+              message: 'Carga tu imagen',
               title: '<strong>Greenpack</strong>',
               icon: 'notification_important'
             }, {
