@@ -12,7 +12,7 @@ $quotations = $quotationDao->findAssignedTo($admin->getId());
 ?>
 
 <head>
-  <title>GreenPack | Cotizaciones</title>
+  <title>Greenpack | Cotizaciones</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />

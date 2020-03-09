@@ -108,7 +108,7 @@ include("../partials/verify-session.php");
               <br>
               <div class="row" style="margin-bottom: 20px; margin-top: 20px;">
                 <div class="col"></div>
-                <div class="col text-center"><input class="btn btn-primary btn-lg" value="Enviar" type="submit"></div>
+                <div class="col text-center"><input class="btn btn-primary btn-lg" value="Actualizar" type="submit"></div>
                 <div class="col"></div>
               </div>
             </form>

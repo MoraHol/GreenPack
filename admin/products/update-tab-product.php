@@ -85,7 +85,7 @@ $product = $productDao->findById($tab->getIdProduct());
         </div>
         <div class="row" style="margin-bottom: 20px; margin-top: 60px;">
           <div class="col"><a href="/admin/products/update_product.php?id=<?= $tab->getIdProduct() ?>" class="btn btn-danger btn-lg">Regresar</a></div>
-          <div class="col text-center"><button id="submitEditor" class="btn btn-primary btn-lg">Enviar</button></div>
+          <div class="col text-center"><button id="submitEditor" class="btn btn-primary btn-lg">Crear</button></div>
           <div class="col"></div>
         </div>
       </div>
