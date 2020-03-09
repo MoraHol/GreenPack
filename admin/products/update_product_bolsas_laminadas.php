@@ -669,7 +669,7 @@ switch ($product->getCategory()->getId()) {
                 file: url
               }, (data, status) => {
                 if (status == "success") {
-                  alert('subido')
+                  alert('Cargado')
                 }
               })
             })

@@ -32,7 +32,7 @@ function deleteItem(idItem) {
     id_item: idItem
   }, (data, status) => {
     if (status == 'success') {
-      alert('borrado')
+      //alert('borrado')
       renderCart()
     }
   })
