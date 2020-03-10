@@ -64,7 +64,7 @@
       if (status == 'success') {
         $.notify({
           message: 'Contraseña actualizada',
-          title: 'Greenpack',
+          //title: 'Greenpack',
           // icon: 'fas fa-check-circle'
         }, {
           type: 'success'

@@ -380,7 +380,7 @@ if ($admin->getRole() != 2) {
       function send() {
         $.notify({
           message: 'Enviando Correo...',
-          title: 'Greenpack',
+          //title: 'Greenpack',
           icon: 'email'
         }, {
           type: 'info'

@@ -145,7 +145,7 @@
     $('#modal-oder').modal('hide')
     $.notify({
       message: 'Enviando Email',
-      title: 'Greenpack',
+      //title: 'Greenpack',
       icon: 'fas fa-envelope'
     }, {
       type: 'info'
@@ -153,8 +153,8 @@
     $.post('/services/create_quotation.php', dataSerialize, (data, status, xhr) => {
       if (status == 'success') {
         $.notify({
-          message: 'La cotizacion fue enviada',
-          title: 'Greenpack',
+          message: 'Cotizacion enviada',
+          //title: 'Greenpack',
           icon: 'fas fa-envelope-open'
         }, {
           type: 'success'

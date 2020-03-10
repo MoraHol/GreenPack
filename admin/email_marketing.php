@@ -136,7 +136,7 @@ if ($admin->getRole() == 1) {
             if (status != "success") {
               $.notify({
                 message: 'Error',
-                title: 'Greenpack',
+                //title: 'Greenpack',
                 icon: 'notification_important'
               }, {
                 type: 'warning'
@@ -152,7 +152,7 @@ if ($admin->getRole() == 1) {
             if (status != "success") {
               $.notify({
                 message: 'Error',
-                title: 'Greenpack',
+                //title: 'Greenpack',
                 icon: 'notification_important'
               }, {
                 type: 'warning'
@@ -178,7 +178,7 @@ if ($admin->getRole() == 1) {
       if (!checkboxClient && !checkboxSubs) {
         $.notify({
           message: 'Selecciona a quien deseas enviar el correo',
-          title: 'Greenpack',
+          //title: 'Greenpack',
           icon: 'notification_important'
         }, {
           type: 'warning'
@@ -195,7 +195,7 @@ if ($admin->getRole() == 1) {
           if (data.status) {
             $.notify({
               message: 'Mensajes enviado',
-              title: 'Greenpack',
+              //title: 'Greenpack',
               icon: 'notification_important'
             }, {
               type: 'success'
@@ -203,7 +203,7 @@ if ($admin->getRole() == 1) {
           }else{
             $.notify({
               message: 'data.error',
-              title: 'Greenpack',
+              //title: 'Greenpack',
               icon: 'notification_important'
             }, {
               type: 'danger'

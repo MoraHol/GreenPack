@@ -452,7 +452,7 @@ switch ($product->getCategory()->getId()) {
               reloadPage()
               $.notify({
                 icon: 'fas fa-exclamation-triangle',
-                title: 'Greenpack',
+                //title: 'Greenpack',
                 message: 'Medida Eliminada',
               }, {
                 type: 'warning'
@@ -671,7 +671,7 @@ switch ($product->getCategory()->getId()) {
             text = editor.html.get()
             $.notify({
               message: 'Producto actualizado',
-              title: 'Greenpack',
+              //title: 'Greenpack',
               icon: 'notification_important'
             }, {
               type: 'success'
@@ -697,7 +697,7 @@ switch ($product->getCategory()->getId()) {
 
             $.notify({
               message: 'Producto actualizado',
-              title: 'Greenpack',
+              //title: 'Greenpack',
               icon: 'notification_important'
             }, {
               type: 'success'
@@ -783,7 +783,7 @@ switch ($product->getCategory()->getId()) {
         if (updated == 'true') {
           $.notify({
             message: 'Pestaña actualizada',
-            title: 'Greenpack',
+            //title: 'Greenpack',
             icon: 'notification_important'
           }, {
             type: 'success'

@@ -180,7 +180,7 @@ include("../../partials/verify-session.php");
           if (status == 'success') {
             $.notify({
               message: 'Categoría actualizada',
-              title: 'Greenpack',
+              //title: 'Greenpack',
               icon: 'notification_important'
             }, {
               type: 'success'
@@ -194,7 +194,7 @@ include("../../partials/verify-session.php");
           } else {
             $.notify({
               message: 'Error',
-              title: 'Greenpack',
+              //title: 'Greenpack',
               icon: 'notification_important'
             }, {
               type: 'warning'
@@ -212,8 +212,8 @@ include("../../partials/verify-session.php");
             ajax(link)
           } else {
             $.notify({
-              message: 'Cargue una Imagen',
-              title: 'Greenpack',
+              message: 'Carga una Imagen',
+              //title: 'Greenpack',
               icon: 'notification_important'
             }, {
               type: 'warning'

@@ -209,8 +209,8 @@ include("../partials/verify-session.php");
         function addMeasurement() {
           if ($('#category').val() == null) {
             $.notify({
-              message: 'Selecciona una categoria antes de agregar las medidas',
-              title: 'Greenpack',
+              message: 'Selecciona una categoria antes de adicionar las medidas',
+              //title: 'Greenpack',
               icon: 'notification_important'
             }, {
               type: 'warning'
@@ -378,7 +378,7 @@ include("../partials/verify-session.php");
               }, (data, status) => {
                 $.notify({
                   message: 'Producto creado',
-                  title: 'Greenpack',
+                  //title: 'Greenpack',
                   icon: 'notification_important'
                 }, {
                   type: 'success'
@@ -388,7 +388,7 @@ include("../partials/verify-session.php");
             } else {
               $.notify({
                 message: 'Completa todos los campos',
-                title: 'Greenpack',
+                //title: 'Greenpack',
                 icon: 'notification_important'
               }, {
                 type: 'danger'

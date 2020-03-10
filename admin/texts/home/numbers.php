@@ -120,8 +120,8 @@ include("../../partials/verify-session.php");
           }, (data, status) => {
             if (status == 'success') {
               $.notify({
-                message: 'Seccion actualizada',
-                title: 'Greenpack',
+                message: 'Sección actualizada',
+                //title: 'Greenpack',
                 icon: 'notification_important'
               }, {
                 type: 'success'
@@ -129,7 +129,7 @@ include("../../partials/verify-session.php");
             } else {
               $.notify({
                 message: 'Error',
-                title: 'Greenpack',
+                //title: 'Greenpack',
                 icon: 'notification_important'
               }, {
                 type: 'danger'
@@ -139,7 +139,7 @@ include("../../partials/verify-session.php");
         } else {
           $.notify({
             message: 'Completa los números',
-            title: 'Greenpack',
+            //title: 'Greenpack',
             icon: 'notification_important'
           }, {
             type: 'warning'

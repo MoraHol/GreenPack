@@ -702,7 +702,7 @@ switch ($product->getCategory()->getId()) {
             text = editor.html.get()
             $.notify({
               message: 'Producto Actualizado',
-              title: 'Greenpack',
+              //title: 'Greenpack',
               icon: 'fas fa-check-circle'
             }, {
               type: 'success'
@@ -728,7 +728,7 @@ switch ($product->getCategory()->getId()) {
 
             $.notify({
               message: 'Producto Actualizado',
-              title: 'Greenpack',
+              //title: 'Greenpack',
               icon: 'fas fa-check-circle'
             }, {
               type: 'success'
@@ -820,7 +820,7 @@ switch ($product->getCategory()->getId()) {
         if (updated == 'true') {
           $.notify({
             message: 'Pestaña actualizada',
-            title: 'Greenpack',
+            //title: 'Greenpack',
             icon: 'notification_important'
           }, {
             type: 'success'

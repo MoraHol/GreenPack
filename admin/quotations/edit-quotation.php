@@ -337,7 +337,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
       $('#modalContentEmail').modal('hide')
       $.notify({
         message: 'Enviando Correo',
-        title: 'Greenpack',
+        //title: 'Greenpack',
         icon: 'email'
       }, {
         type: 'info'
@@ -349,7 +349,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
         if (status == 'success' && xhr.readyState == 4) {
           $.notify({
             message: 'Cotizacion enviada',
-            title: 'Greenpack',
+            //title: 'Greenpack',
             icon: 'email'
           }, {
             type: 'success'
@@ -387,7 +387,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
         if (status == 'success') {
           $.notify({
             message: 'Cotizacion actualizada',
-            title: 'Greenpack',
+            //title: 'Greenpack',
             icon: 'notification_important'
           }, {
             type: 'success'
@@ -397,7 +397,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
         if (status == 'notmodified') {
           $.notify({
             message: 'No se ha cambiado ningun valor',
-            title: 'Greenpack',
+            //title: 'Greenpack',
             icon: 'warning'
           }, {
             type: 'warning'
