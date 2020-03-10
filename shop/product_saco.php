@@ -569,7 +569,7 @@ $tabs = $tabProductDao->findByProduct($product);
         if ($width == null || $height == null || $length == null) {
           $.notify({
             message: 'Selecciona las Medidas',
-            title: 'Greenpack',
+            //title: 'Greenpack',
             icon: 'fas fa-exclamation-triangle'
           }, {
             type: 'danger'
@@ -578,7 +578,7 @@ $tabs = $tabProductDao->findByProduct($product);
         if ($material == undefined) {
           $.notify({
             message: 'Selecciona la Material Prima',
-            title: 'Greenpack',
+            //title: 'Greenpack',
             icon: 'fas fa-exclamation-triangle'
           }, {
             type: 'danger'
