@@ -266,7 +266,7 @@ $tabs = $tabProductDao->findByProduct($product);
               </div>
               <div class="product_count form-group">
                 <br>
-                <a class="btn button primary-btn disabled" id="btnCotizar" href="#">Añadir al cotizador</a>
+                <a class="btn button primary-btn disabled" id="btnCotizar" href="#">Adiconar al cotizador</a>
                 <br>
                 <br>
               </div>

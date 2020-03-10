@@ -282,7 +282,7 @@ $tabs = $tabProductDao->findByProduct($product);
                   <div class="collapse" id="collapseFive" aria-labelledby="headingFive" data-parent="#accordion-cotizador">
                     <div class="card-body">
                       <div class="form-group">
-                        <label for="observations">Agrege las observaciones o especificaciones para el producto:</label>
+                        <label for="observations">Observaciones o especificaciones adicionales para el producto:</label>
                         <textarea id="observations" class="form-control" cols="30" rows="4"></textarea>
                       </div>
                     </div>
@@ -291,7 +291,7 @@ $tabs = $tabProductDao->findByProduct($product);
               </div>
               <div class="product_count form-group">
                 <br>
-                <a class="btn button primary-btn disabled" id="btnCotizar" href="#">Añadir al cotizador</a>
+                <a class="btn button primary-btn disabled" id="btnCotizar" href="#">Adicionar al cotizador</a>
                 <br>
                 <br>
               </div>

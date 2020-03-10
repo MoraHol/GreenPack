@@ -283,7 +283,7 @@ $tabs = $tabProductDao->findByProduct($product);
               </div>
               <div class="product_count form-group">
                 <br>
-                <a class="btn button primary-btn disabled" id="btnCotizar" href="#">Añadir al cotizador</a>
+                <a class="btn button primary-btn disabled" id="btnCotizar" href="#">Adicionar al cotizador</a>
                 <br>
                 <br>
               </div>
@@ -500,7 +500,7 @@ $tabs = $tabProductDao->findByProduct($product);
     function verifyMinQuantityValue() {
       if ($('#sst').val() < verifyMinQuantity()) {
         $('#btnCotizar').addClass("disabled")
-        $('#help-quantity').html(`<br><div class="alert alert-danger alert-min-quantity" role="alert"><span>Cantidad minima ${verifyMinQuantity()} unidades. ¿Te gustaría cotizar cantidades menores? te invitamos a visitar a nuestro aliado Greenpoint (<a style="color:green" href="//www.greenpointonline.com.co" target="_blank">www.greenpointonline.com.co</a>)</div>`)
+        $('#help-quantity').html(`<br><div class="alert alert-danger alert-min-quantity" role="alert"><span>Cantidad minima ${verifyMinQuantity()} unidades. ¿Te gustaría cotizar menores cantidades? Te invitamos a visitar a nuestro aliado Greenpoint (<a style="color:green" href="//www.greenpointonline.com.co" target="_blank">www.greenpointonline.com.co</a>)</div>`)
         $('#help-quantity').fadeIn()
         $('.single').css('margin-bottom', '550px')
       } else {
@@ -546,8 +546,8 @@ $tabs = $tabProductDao->findByProduct($product);
       } else {
         if ($width == null || $height == null || $length == null) {
           $.notify({
-            message: 'Seleccione Medidas para el producto',
-            title: 'Acción Necesaria',
+            message: 'Selecciona las Medidas',
+            title: 'Greenpack',
             icon: 'fas fa-exclamation-triangle'
           }, {
             type: 'danger'
@@ -555,8 +555,8 @@ $tabs = $tabProductDao->findByProduct($product);
         }
         if ($material == undefined) {
           $.notify({
-            message: 'Seleccione un material para cotizar',
-            title: 'Acción Necesaria',
+            message: 'Selecciona la Materia Prima',
+            title: 'Greenpack',
             icon: 'fas fa-exclamation-triangle'
           }, {
             type: 'danger'
