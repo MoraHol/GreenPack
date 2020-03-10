@@ -129,7 +129,7 @@ include("../partials/verify-session.php");
           if (status == 'success') {
             $.notify({
               message: 'Materia Prima creada',
-              title: '<strong>Greenpack</strong>',
+              //title: '<strong>Greenpack</strong>',
               icon: 'fas fa-exclamation-triangle'
             }, {
               type: 'success'
@@ -138,7 +138,7 @@ include("../partials/verify-session.php");
           } else {
             $.notify({
               message: 'Error al crear la Materia Prima',
-              title: '<strong>Greenpack</strong>',
+             //title: '<strong>Greenpack</strong>',
               icon: 'fas fa-exclamation-triangle'
             }, {
               type: 'danger'

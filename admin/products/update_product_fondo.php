@@ -433,7 +433,7 @@ switch ($product->getCategory()->getId()) {
             if (status == "success") {
               $.notify({
                 message: 'Imagen Eliminada',
-                title: '<strong>Borrado</strong>',
+                //title: '<strong>Borrado</strong>',
                 icon: 'fas fa-exclamation-triangle'
               }, {
                 type: 'warning'

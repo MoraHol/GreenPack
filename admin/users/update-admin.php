@@ -160,15 +160,15 @@ include("../partials/verify-session.php");
         if (status == 'success') {
           $.notify({
             message: 'Usuario Actualizado',
-            title: '<strong>Proceso Exitoso</strong>',
+            //title: '<strong>Proceso Exitoso</strong>',
             icon: 'fas fa-exclamation-triangle'
           }, {
             type: 'success'
           })
         } else {
           $.notify({
-            message: 'Usuario no Actualizado',
-            title: '<strong>Error</strong>',
+            message: 'Error, contacte a su administrador',
+            //title: '<strong>Error</strong>',
             icon: 'fas fa-exclamation-triangle'
           }, {
             type: 'danger'

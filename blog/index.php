@@ -21,7 +21,7 @@ if ($_GET["page"] > $pages || $_GET["page"] <= 0) {
 <html lang="es">
 
 <head>
-  <title>Blog | Green Pack</title>
+  <title>Blog | Greenpack</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">

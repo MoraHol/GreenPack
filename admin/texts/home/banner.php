@@ -127,7 +127,7 @@ include("../../partials/verify-session.php");
           if (status == 'sucsess') {
             $.notify({
               message: 'Slide borrado',
-              title: '<strong>Greenpack</strong>',
+              //title: '<strong>Greenpack</strong>',
               icon: 'notification_important'
             }, {
               type: 'warning'

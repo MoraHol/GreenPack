@@ -465,7 +465,7 @@ switch ($product->getCategory()->getId()) {
             if (status == "success") {
               $.notify({
                 message: 'Imagen Eliminada',
-                title: '<strong>Borrado</strong>',
+                //title: '<strong>Borrado</strong>',
                 icon: 'fas fa-exclamation-triangle'
               }, {
                 type: 'warning'
@@ -484,7 +484,7 @@ switch ($product->getCategory()->getId()) {
               reloadPage()
               $.notify({
                 icon: 'fas fa-exclamation-triangle',
-                title: 'Borrado Exitoso',
+                //title: 'Borrado Exitoso',
                 message: 'Medida borrada',
               }, {
                 type: 'warning'
@@ -503,7 +503,7 @@ switch ($product->getCategory()->getId()) {
               reloadPage()
               $.notify({
                 message: 'Material Eliminado',
-                title: '<strong>Borrado</strong>',
+                //title: '<strong>Borrado</strong>',
                 icon: 'fas fa-exclamation-triangle'
               }, {
                 type: 'warning'

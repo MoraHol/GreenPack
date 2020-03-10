@@ -429,7 +429,7 @@ switch ($product->getCategory()->getId()) {
             if (status == "success") {
               $.notify({
                 message: 'Imagen Eliminada',
-                title: '<strong>Greenpack</strong>',
+                //title: '<strong>Greenpack</strong>',
                 icon: 'fas fa-exclamation-triangle'
               }, {
                 type: 'warning'
