@@ -657,7 +657,7 @@ switch ($product->getCategory()->getId()) {
               method: 'post',
               paramName: 'file',
               maxFiles: 1,
-              dictDefaultMessage: 'Sube El Archivo excel con las medidas del producto',
+              dictDefaultMessage: 'Sube el archivo Excel con las medidas del producto',
               dictMaxFilesExceeded: 'Carga solo un archivo',
               dictInvalidFileType: 'Carga unicamente archivos de Excel'
             })
@@ -702,7 +702,7 @@ switch ($product->getCategory()->getId()) {
             text = editor.html.get()
             $.notify({
               message: 'Producto Actualizado',
-              title: 'Exito',
+              title: 'Greenpack',
               icon: 'fas fa-check-circle'
             }, {
               type: 'success'
@@ -728,7 +728,7 @@ switch ($product->getCategory()->getId()) {
 
             $.notify({
               message: 'Producto Actualizado',
-              title: 'Exito',
+              title: 'Greenpack',
               icon: 'fas fa-check-circle'
             }, {
               type: 'success'
@@ -792,7 +792,7 @@ switch ($product->getCategory()->getId()) {
 
         function addMaterial() {
           indexMaterial++;
-          $('#materials').append(`<li><select class="wide" style="margin-bottom: 10px;" id="material${indexMaterial}"><option disabled selected>Seleccione un material</option>
+          $('#materials').append(`<li><select class="wide" style="margin-bottom: 10px;" id="material${indexMaterial}"><option disabled selected>Seleccione la Materia Prima</option>
                       <?php
                       foreach ($materials as  $material) { ?>
                             <option value="<?= $material->getId(); ?>"><?= $material->getName(); ?></option>
@@ -820,7 +820,7 @@ switch ($product->getCategory()->getId()) {
         if (updated == 'true') {
           $.notify({
             message: 'Pestaña actualizada',
-            title: 'Exito',
+            title: 'Greenpack',
             icon: 'notification_important'
           }, {
             type: 'success'

@@ -96,7 +96,7 @@ if (isset($_SESSION["cart"])) {
 
     <div class="content-basket-empty ng-star-inserted">
       <div><i class="iconf-car-2-icon"></i>
-        <p><strong>No tienes productos cotizados</strong></p>
+        <p><strong>No tienes productos seleccionados</strong></p>
         <p><a href="/shop/category.php?id=1&page=1">Te invitamos a cotizar</a></p>
       </div>
     </div>
@@ -109,7 +109,7 @@ if (isset($_SESSION["cart"])) {
     $_SESSION["cart"] = serialize($cart); ?>
   <div class="content-basket-empty ng-star-inserted">
     <div><i class="iconf-car-2-icon"></i>
-      <p><strong>No tienes productos cotizados</strong></p>
+      <p><strong>No tienes productos seleccionados</strong></p>
       <p><a href="/shop/category.php?id=1&page=1">Te invitamos a cotizar</a></p>
     </div>
   </div>

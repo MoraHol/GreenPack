@@ -44,7 +44,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Para Finalizar, dejanos tus datos</h5>
+          <h5 class="modal-title">Para finalizar, ingresa tus datos</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -121,7 +121,7 @@
                 <div class="col">
                   <div class="form-group">
                     <textarea name="extra" id="" rows="5" class="form-control"
-                      placeholder="Escriba aqui especificaciones extra para tu cotización"></textarea>
+                      placeholder="Ingrese las especificaciones extra para tu cotización"></textarea>
                   </div>
                 </div>
               </div>
@@ -144,8 +144,8 @@
     let dataSerialize = $('#form-quotation').serialize()
     $('#modal-oder').modal('hide')
     $.notify({
-      message: 'Enviando Correo',
-      title: 'Procesando',
+      message: 'Enviando Email',
+      title: 'Greenpack',
       icon: 'fas fa-envelope'
     }, {
       type: 'info'
@@ -153,8 +153,8 @@
     $.post('/services/create_quotation.php', dataSerialize, (data, status, xhr) => {
       if (status == 'success') {
         $.notify({
-          message: 'La cotizacion ha sido enviada',
-          title: 'Exito',
+          message: 'La cotizacion fue enviada',
+          title: 'Greenpack',
           icon: 'fas fa-envelope-open'
         }, {
           type: 'success'
