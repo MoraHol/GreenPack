@@ -242,7 +242,7 @@ $quotations = $quotationDao->findAssignedTo($admin->getId());
           }
         }
       }, () => {
-        editor.html.set(`<html><body><p>Nos permitimos enviarle su cotizacion</p><p>cotizacion generada</p></body></html>`)
+        editor.html.set(`<html><body><p>Muy buen dia. Un gusto saludarlo y esperamos que se encuentre de maravilla. Para nosotros es un gusto enviarle su cotizacion. Le estaremos contactando en breve</p><p>Cordialmente</p></body></html>`)
         if (document.domain != 'localhost') {
           $('.fr-wrapper>div:first-child').css('visibility', 'hidden')
         }

@@ -349,7 +349,7 @@ if ($admin->getRole() != 2) {
           }
         }
       }, () => {
-        editor.html.set(`<html><body><p>Nos permitimos enviarle su cotizacion</p><p>cotizacion generada</p></body></html>`)
+        editor.html.set(`<html><body><p>Muy buen dia. Es un gusto saludarlo(a). Esperamos que todo le este saliendo de maravilla. Para nosotros es un gusto enviarle su cotizacion</p><p>Cordialmente</p></body></html>`)
         if (document.domain != 'localhost') {
           $('.fr-wrapper>div:first-child').css('visibility', 'hidden')
         }
