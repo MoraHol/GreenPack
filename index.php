@@ -350,7 +350,7 @@ $conversor = new ConversorDate(); ?>
     $.get('/admin/texts/home/api/get_clients.php', (data, status) => {
       let clients = data
       clients.forEach(client => {
-        $('#clients-slides').append(`<li><img src="${client.image_url}" alt="Imagen de cliente" width="300" class="lazyload"></li>`)
+        $('#clients-slides').append(`<li><img src="${client.image_url}" alt="Imagen de cliente" width="200" class="lazyload"></li>`)
       });
     })
     $.get('/admin/texts/home/api/get_banner.php', (slides, status) => {
