@@ -125,6 +125,7 @@ class MaterialDao
     $status = $this->db->consult($query);
     $this->db->close();
     // self::$logger->info($query);
+    echo $query;
     return $status;
   }
   function delete($id)
@@ -133,7 +134,7 @@ class MaterialDao
     $query = "DELETE FROM `materials` WHERE `materials`.`id_materials` = $id";
     $status = $this->db->consult($query);
     $this->db->close();
-    self::$logger->info($query);
+    //self::$logger->info($query);
     return $status;
   }
   function update($material)

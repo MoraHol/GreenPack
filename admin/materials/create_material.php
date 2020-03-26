@@ -5,10 +5,10 @@ include("../partials/verify-session.php");
 <!doctype html>
 <html lang="es">
 
-<head>
+<head><meta charset="gb18030">
   <title>Materiales | Greenpack</title>
   <!-- Required meta tags -->
-  <meta charset="utf-8">
+  
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <!--     Fonts and icons     -->
@@ -123,7 +123,7 @@ include("../partials/verify-session.php");
           price: $('#pricePerKg').val(),
           grammage: $('#grammage').val(),
           description: $('#description').val(),
-          p5400: $('p5400').val(),
+          p5400: $('#p5400').val(),
           p7000: $('#p7000').val()
         }, (data, status) => {
           if (status == 'success') {
@@ -153,6 +153,8 @@ include("../partials/verify-session.php");
       $('#pricePerKg').val('')
       $('#grammage').val('')
       $('#description').val('')
+      $('#p5400').val('')
+      $('#p7000').val('')
     }
   </script>
   <script>

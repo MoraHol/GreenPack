@@ -7,8 +7,9 @@ if (isset($_POST["name"]) && isset($_POST["price"]) && isset($_POST["grammage"])
   $material->setPricePerKg($_POST["price"]);
   $material->setGrammage($_POST["grammage"]);
   $material->setDescription($_POST["description"]);
-  $material->p5400 = isset($_POST["p5400"]) ? $_POST["p5400"]: 'NULL';
-  $material->p7000 = isset($_POST["p7000"]) ? $_POST["p7000"]: 'NULL';
+  $material->p5400 = $_POST["p5400"] !== '' ? $_POST["p5400"]: 'NULL';
+  $material->p7000 = $_POST["p7000"] !== '' ? $_POST["p7000"]: 'NULL';
+  
   if ($materialDao->save($material) > 0) {
     http_response_code(200);
     echo "true";

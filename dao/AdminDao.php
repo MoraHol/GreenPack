@@ -86,7 +86,13 @@ class AdminDao
     return $status;
   }
   function delete($id)
-  { }
+  { 
+      $this->db->connect();
+    $query = "DELETE FROM `admins` WHERE `admins`.`id_admins` = " . $id;
+    $status = $this->db->consult($query);
+    $this->db->close();
+    return $status;
+  }
   function findSellers()
   {
     $this->db->connect();
