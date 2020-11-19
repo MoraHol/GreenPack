@@ -158,7 +158,7 @@ $conversor = new ConversorDate(); ?>
                 <i class="fas fa-box-open" style="color: rgb(19, 109, 8);height: 70px;font-size: -webkit-xxx-large;"></i>
               </span>
               <span class="counter js-counter notranslate" data-from="0" data-to="700" data-speed="5000" data-refresh-interval="50" id="products">700</span>
-              <span class="counter-label">Productos 12345 <br>Ofertados</span>
+              <span class="counter-label">Productos<br>Ofertados</span>
             </div>
           </div>
           <div class="col-md-3 col-sm-6 animate-box fadeInUp animated-fast">
