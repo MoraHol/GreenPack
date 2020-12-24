@@ -9,3 +9,7 @@ upload/video
 /db/env.php
 db/env.php
 logs/
+.vscode/launch.json
+.htaccess
+.htaccess
+.htaccess

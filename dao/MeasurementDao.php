@@ -111,8 +111,9 @@ class MeasurementDao
   {
     $this->db->connect();
     $query = "UPDATE `measurements` SET `width` = '" . $measurement->getWidth() . "', `height` = '" . $measurement->getHeight() . "', `lenght` = '" . $measurement->getLength() . "' WHERE `measurements`.`id_measurements` = " . $measurement->getId();
-    $this->db->consult($query);
+    $status = $this->db->consult($query);
     $this->db->close();
+    return $status;
     // self::$logger->info($query);
   }
 

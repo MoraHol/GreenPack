@@ -296,7 +296,8 @@ switch ($product->getCategory()->getId()) {
                         <div class="col height"><label for="height<?= $indexMeasurement ?>">Alto:</label><input type="number" id="height<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getHeight(); ?>" readonly></div>
                         <div class="col lenght"><label for="lenght<?= $indexMeasurement ?>">Largo:</label><input type="number" id="lenght<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getLength(); ?>" readonly></div>
                         <div class="col window"><label for="window<?= $indexMeasurement ?>"> <?= $nameAdditional ?></label><input type="number" id="window<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getWindow(); ?>" readonly></div>
-                        <div class="col-sm-2"><button class="btn btn-danger" onclick="deleteMeasurement(<?= $product->getId() ?>,<?= $measurement->getId() ?>)">Eliminar</button></div>
+                        <div class="col-sm-2" style="margin-top: 1rem;"><button class="btn btn-danger" onclick="deleteMeasurement(<?= $product->getId() ?>,<?= $measurement->getId() ?>)">Eliminar</button></div>
+                        <div class="col-sm-2"><button class="btn btn-warning" onclick="updateMeasurement(<?= $product->getId() ?>,<?= $measurement->getId() ?>,<?= $indexMeasurement ?>,this)">Modificar</button></div>
                       </div>
                     </li>
                   <?php $indexMeasurement++;
@@ -456,6 +457,58 @@ switch ($product->getCategory()->getId()) {
               location.href = '#measurement-container'
             }
           })
+        }
+
+        function updateMeasurement(idProduct, idMeasurement, indexMeasurement, evTarget) {
+
+          const widthInput = elById(`width${indexMeasurement}`);
+          const heightInput = elById(`height${indexMeasurement}`);
+          const lengthInput = elById(`lenght${indexMeasurement}`);
+          const windowInput = elById(`window${indexMeasurement}`);
+          console.log(windowInput);
+          if (evTarget.textContent === 'Modificar') {
+
+            evTarget.textContent = 'Guardar';
+          widthInput.readOnly = false;
+          heightInput.readOnly = false;
+          lengthInput.readOnly = false;
+          windowInput.readOnly = false;
+          evTarget.classList.replace('btn-warning', 'btn-info');
+          } else {
+
+            const measurementInfo = {
+              idMeasurement: idMeasurement,
+              width : widthInput.value,
+              height : heightInput.value,
+              length : lengthInput.value,
+              window : windowInput.value
+            };
+            console.log(measurementInfo);
+
+            $.post('api/modify_measurements.php', { measurements : measurementInfo }, 
+            (data, status) => {
+              if (status === 'success') {
+                $.notify({
+                icon: 'fas fa-exclamation-triangle',
+                //title: 'Greenpack',
+                message: 'Medida Actualizada',
+              }, {
+                type: 'warning'
+              })
+              }
+              evTarget.textContent = 'Modificar';
+            widthInput.readOnly = true;
+          heightInput.readOnly = true;
+          lengthInput.readOnly = true;
+          windowInput.readOnly = true;
+          evTarget.classList.replace('btn-info', 'btn-warning');
+          });
+        }
+      }
+    
+
+        function elById(id) {
+          return document.getElementById(id);
         }
 
         function deleteMaterial(idProduct, idMaterial) {
