@@ -17,8 +17,16 @@ class CategoryDao
     $this->db = new DBOperator($_ENV["db_host"], $_ENV["db_user"], $_ENV["db_name"], $_ENV["db_pass"]);
   }
 
-  public function save()
-  { }
+  public function save($category)
+  { 
+    $this->db->connect();
+    $query = "INSERT INTO `categories` (`name`, `description`, `image`) VALUES('" . $category->getName() . "','" . $category->getDescription() . "', '" . $category->getImage() . "')";
+    $status = $this->db->consult($query);
+    $this->db->close();
+    return $status;
+  }
+
+
   public function update($category)
   {
     $this->db->connect();
@@ -76,5 +84,14 @@ class CategoryDao
     $category->setImage($categoryDB["image"]);
     $this->db->close();
     return $category;
+  }
+
+  public function findByName($name)
+  {
+    $this->db->connect();
+    $query = "SELECT * FROM `categories` WHERE `categories`.`name` = '" . $name . "'";
+    $categoryDB = $this->db->consult($query, "yes");
+    $this->db->close();
+    return count($categoryDB);
   }
 }

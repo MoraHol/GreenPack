@@ -58,8 +58,17 @@ include("../../partials/verify-session.php");
           <!-- DataTables Example -->
           <div class="card mb-3">
             <div class="card-header">
+            <div class="row">
+            <div class="card__left col-8">
               <i class="fas fa-table"></i>
-              Pestañas de la pagina</div>
+              Pestañas de la pagina
+              </div>
+              <div class="card__rigth col-4 pr-5">
+                  <a href="javascript:modalCreate()" class="btn btn-success text-white float-right">CREAR</a>
+                </div>
+            
+            </div>  
+              </div>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -79,6 +88,56 @@ include("../../partials/verify-session.php");
         <?php include("../../partials/footer.html"); ?>
       </div>
     </div>
+
+     <!-- CREATE CATEGORY MODAL -->
+     <div class="modal fade" id="modalCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Crear Categoría</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+            <div class="mb-3 col-8">
+  <!-- <label for="categoryInput">Categoría:</label> -->
+  <div class="">Categoría:</div>
+  <input type="text" class="form-control" id="categoryInput" placeholder="nombre de la categoría">
+</div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-sm-4">Descripcion:</div>
+              <div class="col-sm-8 ">
+                <textarea class="form-control text-area-control" id="descriptionCategoryInputC" cols="30" rows="10"></textarea>
+              </div>
+            </div>
+            <br>
+            <div class="row" id="containerImageCategoryC">
+              <div class="col-sm-4">Imagen:</div>
+              <div class="col-sm-8 ">
+                <img src="" id="imageCategoryC" class="img-responsive" width="300">
+              </div>
+            </div>
+            <div class="row" id="containerImageBtnC">
+              <div class="col-sm-7 "></div>
+              <div class="col-sm-4"><button class="btn btn-danger" onclick="putImage()">Cargar Imagen</button></div>
+            </div>
+            <div id="imgUploadC">
+              <span>Suba la imagen de la categoría:</span>
+              <div id="myIdC"></div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary" id="buttonSubmitCreate">Guardar Cambios</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Modal -->
     <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -228,6 +287,7 @@ include("../../partials/verify-session.php");
       let categoryId
 
       function modalEdit(nameCategory, idCategory, description, image) {
+        console.log(image);
         $('#modalEdit').modal()
         $('#nameCategoryLoad').text(nameCategory)
         $('#descriptionCategoryInput').val(description)
@@ -253,6 +313,39 @@ include("../../partials/verify-session.php");
           ajax($('#imageCategory').attr('src'), categoryId)
         }
       })
+
+
+      function modalCreate() {
+        $('#modalCreate').modal();
+        document.getElementById('categoryInput').value = '',
+        $('#descriptionCategoryInputC').val('')
+        $('#imageCategoryC').attr('src', '')
+      }
+
+      document.getElementById('buttonSubmitCreate').addEventListener('click', (ev) => { 
+        if (flagImage) {
+          if (myDropzone.getAcceptedFiles().length > 0) {
+            response = JSON.parse(myDropzone.getAcceptedFiles()[0].xhr.responseText)
+            link = response.link
+            
+            createRequest(link);
+            
+
+          } else {
+            $.notify({
+              message: 'Por favor Suba una Imagen',
+              title: 'Exito',
+              icon: 'notification_important'
+            }, {
+              type: 'warning'
+            })
+          }
+        } else {
+         
+        }
+       });
+
+
     </script>
     <script>
       let flagImage = false
@@ -273,6 +366,25 @@ include("../../partials/verify-session.php");
           dictMaxFilesExceeded: 'Solo se permite subir una imagen',
           dictInvalidFileType: 'Solo se permite imagenes'
         })
+      }
+
+      function putImage() {
+        flagImage = true
+        $('#containerImageCategoryC').fadeOut()
+        $('#myIdC').addClass('dropzone')
+        $('#imgUploadC').fadeIn()
+        myDropzone = new Dropzone("div#myIdC", {
+          url: "/admin/upload.php",
+          method: 'post',
+          paramName: 'photo',
+          maxFiles: 1,
+          acceptedFiles: "image/*",
+          dictDefaultMessage: 'Sube tus archivos, arrastralos o haz click para buscarlos',
+          dictMaxFilesExceeded: 'Solo se permite subir una imagen',
+          dictInvalidFileType: 'Solo se permite imagenes'
+        })
+
+        
       }
 
       function ajax(link, idCategory) {
@@ -303,6 +415,58 @@ include("../../partials/verify-session.php");
             })
           }
         })
+      }
+
+      function createRequest(linkImage) {
+        const categoryInfo = {
+            nameCategory: document.getElementById('categoryInput').value,
+          description: $('#descriptionCategoryInputC').val(),
+          image: linkImage
+          };
+         $.post('api/create_category.php', categoryInfo, (data, status, xhr) => {
+          if (status == 'success') {
+            $('#modalCreate').modal('hide')
+            $.notify({
+              message: 'Se ha creado la categoría',
+              title: 'Exito',
+              icon: 'notification_important'
+            }, {
+              type: 'success'
+            })
+            $table.ajax.reload()
+          } else {
+            $('#modalCreate').modal('hide')
+            $.notify({
+              message: 'No se ha creado la categoría',
+              title: 'Error',
+              icon: 'notification_important'
+            }, {
+              type: 'warning'
+            })
+          }
+        })
+        .fail((err) => {
+          if (err.status === 303) {
+            $('#modalCreate').modal('hide')
+            $.notify({
+              message: 'Ya existe una categoría con este nombre',
+              title: 'error',
+              icon: 'notification_important'
+            }, {
+              type: 'danger'
+            })
+          }
+        })
+        .always(() => {
+          if (myDropzone) {
+           myDropzone.removeAllFiles(true);
+          }
+          document.getElementById('categoryInput').value = '',
+          document.getElementById('descriptionCategoryInputC').value = '',
+        $('#imageCategoryC').attr('src', '')
+     /*    document.getElementById('myIdC').classList.remove('dropzone'); */
+       /*  $('#myIdC').addClass('dropzone') */
+        });
       }
     </script>
 
