@@ -296,8 +296,8 @@ switch ($product->getCategory()->getId()) {
                         <div class="col height"><label for="height<?= $indexMeasurement ?>">Alto:</label><input type="number" id="height<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getHeight(); ?>" readonly></div>
                         <div class="col lenght"><label for="lenght<?= $indexMeasurement ?>">Largo:</label><input type="number" id="lenght<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getLength(); ?>" readonly></div>
                         <div class="col window"><label for="window<?= $indexMeasurement ?>"> <?= $nameAdditional ?></label><input type="number" id="window<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getWindow(); ?>" readonly></div>
-                        <div class="col-sm-2" style="margin-top: 1rem;"><button class="btn btn-danger" onclick="deleteMeasurement(<?= $product->getId() ?>,<?= $measurement->getId() ?>)">Eliminar</button></div>
-                        <div class="col-sm-2"><button class="btn btn-warning" onclick="updateMeasurement(<?= $product->getId() ?>,<?= $measurement->getId() ?>,<?= $indexMeasurement ?>,this)">Modificar</button></div>
+                        <div class="col-sm-2" style="margin-top: 1rem; display: flex; justify-content:flex-end;"><button class="btn btn-danger" onclick="deleteMeasurement(<?= $product->getId() ?>,<?= $measurement->getId() ?>)">Eliminar</button></div>
+                        <div class="col-sm-2" style="margin-top: 1rem;"><button class="btn btn-warning" onclick="updateMeasurement(<?= $product->getId() ?>,<?= $measurement->getId() ?>,<?= $indexMeasurement ?>,this)">Modificar</button></div>
                       </div>
                     </li>
                   <?php $indexMeasurement++;
@@ -402,6 +402,48 @@ switch ($product->getCategory()->getId()) {
       <script src="/js/es.js"></script>
       <script src="/vendor/dropzone/dropzone.js"></script>
       <script>
+
+document.addEventListener('wheel', function(e) {
+    e.preventDefault();
+}, { passive: false });
+/* 
+document.addEventListener("mousewheel", this.mousewheel.bind(this), { passive: false }); */
+
+      jQuery.event.special.touchstart = {
+        setup: function (_, ns, handle) {
+          this.addEventListener('touchstart', handle, { passive: !ns.includes('noPreventDefault') });
+        }
+      };
+      jQuery.event.special.touchmove = {
+        setup: function (_, ns, handle) {
+          this.addEventListener('touchmove', handle, { passive: !ns.includes('noPreventDefault') });
+        }
+      };
+
+      jQuery.event.special.wheel = {
+        setup: function (_, ns, handle) {
+          this.addEventListener('wheel', handle, { passive: !ns.includes('noPreventDefault') });
+        }
+      };
+
+
+/* let scrollTimeout = 1;
+        let throttle = 4500;
+
+        window.addEventListener('wheel', ev => {
+          console.log('si');
+          if (scrollTimeout === 0) {
+            setTimeout(() => {
+              scrollTimeout = 1;
+            }, throttle);
+            ev.preventDefault();
+            return false;
+          }
+          else {
+            scrollTimeout = 0;
+          }
+        }, { passive: false}); */
+
         if (parseInt($('#category').val()) == 6) {
           $('.lenght').css('display', 'none')
           $('.window').css('display', 'none')
@@ -464,8 +506,7 @@ switch ($product->getCategory()->getId()) {
           const widthInput = elById(`width${indexMeasurement}`);
           const heightInput = elById(`height${indexMeasurement}`);
           const lengthInput = elById(`lenght${indexMeasurement}`);
-          const windowInput = elById(`window${indexMeasurement}`);
-          console.log(windowInput);
+          const windowInput = elById(`window${indexMeasurement}`)
           if (evTarget.textContent === 'Modificar') {
 
             evTarget.textContent = 'Guardar';
@@ -483,7 +524,6 @@ switch ($product->getCategory()->getId()) {
               length : lengthInput.value,
               window : windowInput.value
             };
-            console.log(measurementInfo);
 
             $.post('api/modify_measurements.php', { measurements : measurementInfo }, 
             (data, status) => {
@@ -834,6 +874,7 @@ switch ($product->getCategory()->getId()) {
             window.history.pushState({}, "Hide", location.pathname + '?id=' + urlParams.get('id'));
           }
         }
+
       </script>
       <script src="/vendor/bootstrap-notify.min.js"></script>
       <script src="/vendor/sleep.js"></script>

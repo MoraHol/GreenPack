@@ -14,8 +14,19 @@ if (isset($_POST["nameCategory"]) && isset($_POST["description"]) && isset($_POS
     $category = new Category();
     $category->setName($_POST["nameCategory"]);
 	$category->setDescription($_POST["description"]);
-	$category->setImage($_POST["image"]);
-	if ($categoryDao->save($category) > 0) {
+    $category->setImage($_POST["image"]);
+    
+    $savedCategory = $categoryDao->save($category);
+
+	if ($savedCategory > 0) {
+        if (isset($_POST["categories"])) {
+            if ($categoryDao->saveSubcategories($savedCategory, $_POST["categories"]) > 0) {
+                http_response_code(200);
+            } else {
+                http_response_code(202);
+                return;
+            }
+        }
 		http_response_code(200);
 	} else {
 		http_response_code(500);

@@ -22,10 +22,36 @@ class CategoryDao
     $this->db->connect();
     $query = "INSERT INTO `categories` (`name`, `description`, `image`) VALUES('" . $category->getName() . "','" . $category->getDescription() . "', '" . $category->getImage() . "')";
     $status = $this->db->consult($query);
+   $last_id = $this->db->lastInsertId();
     $this->db->close();
-    return $status;
+    return $last_id;
   }
 
+  public function saveSubcategories($categoryId, $subcategoryNames)
+  { 
+    try {
+      
+      $category = $this->findById($categoryId);
+
+      $this->db->connect();
+
+      foreach ($subcategoryNames as $subcategoryName ) {
+
+        $query = "INSERT INTO `categories` (`name`, `parent_category`, `description`, `image`) VALUES('" . $subcategoryName . "','" . $category->getId() . "','" . $category->getDescription() . "', '" . $category->getImage() . "')";
+
+        $status = $this->db->consult($query);
+      }
+
+      $this->db->close();
+
+      return $status;
+
+    } catch (\Throwable $th) {
+      
+      return 0;
+
+    }
+  }
 
   public function update($category)
   {
@@ -35,8 +61,14 @@ class CategoryDao
     $this->db->close();
     return $status;
   }
-  public function delete()
-  { }
+  public function delete($id)
+  {
+    $this->db->connect();
+    $query = "DELETE FROM `categories` WHERE `categories`.`id_categories` = $id";
+    $status = $this->db->consult($query);
+    $this->db->close();
+    return $status;
+  }
 
   public function findChildren($idCategory){
     $this->db->connect();
