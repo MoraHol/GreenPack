@@ -78,6 +78,7 @@ include("../../partials/verify-session.php");
                       <th>Imagen</th>
                       <th>Descripcion</th>
                       <th>Editar</th>
+                      <th>Eliminar</th>
                     </tr>
                   </thead>
                 </table>
@@ -128,6 +129,21 @@ include("../../partials/verify-session.php");
             <div id="imgUploadC">
               <span>Suba la imagen de la categoría:</span>
               <div id="myIdC"></div>
+            </div>
+            <br>
+            <br>
+            <div id="subcategoriesC">
+              <div class="col-sm-8">Crear Subcategoría:
+              <button class="btn btn-primary">
+                <i class="fas fa-plus"></i>
+              </button>
+              </div>
+              <div class="">
+              <ul id="subcat-list" class="list-group list-group-flush">
+             <!--  <br> -->
+</ul>
+              </div>
+      
             </div>
           </div>
           <div class="modal-footer">
@@ -241,10 +257,20 @@ include("../../partials/verify-session.php");
             }
           },
           "ajax": 'api/get_categories.php',
-          "columnDefs": [{
+          "columnDefs": [
+            {
               "targets": -1,
               render: function(data, type, row) {
                 $('tr td:last-child').addClass('text-center')
+                $('td img').parent().addClass('text-center')
+                $('td.sorting_1').addClass('text-capitalize')
+                return `<a class="text-center" href="javascript:deleteCategory(${data})"><i class="fas fa-trash-alt"></i></a>`
+              }
+            },
+            {
+              "targets": 3,
+              render: function(data, type, row) {
+                $('tr td:nth-child(4)').addClass('text-center')
                 $('td img').parent().addClass('text-center')
                 $('td.sorting_1').addClass('text-capitalize')
                 return `<a class="text-center" href="javascript:modalEdit('${row.name}',${row.id},'${row.description}','${row.image}')"><i class='fas fa-pen'></i></a>`
@@ -273,6 +299,9 @@ include("../../partials/verify-session.php");
 
             {
               "data": "description"
+            },
+            {
+              "data": "id"
             },
             {
               "data": "id"
@@ -316,6 +345,16 @@ include("../../partials/verify-session.php");
 
 
       function modalCreate() {
+        if (myDropzone) {
+           myDropzone.removeAllFiles(true);
+          }
+        if (subcatCount) {
+          subcatCount = 0;
+        }
+          document.getElementById('categoryInput').value = '',
+          document.getElementById('descriptionCategoryInputC').value = '',
+        $('#imageCategoryC').attr('src', '')
+        document.getElementById('subcat-list').innerHTML = '';
         $('#modalCreate').modal();
         document.getElementById('categoryInput').value = '',
         $('#descriptionCategoryInputC').val('')
@@ -326,11 +365,8 @@ include("../../partials/verify-session.php");
         if (flagImage) {
           if (myDropzone.getAcceptedFiles().length > 0) {
             response = JSON.parse(myDropzone.getAcceptedFiles()[0].xhr.responseText)
-            link = response.link
-            
+            link = response.link;
             createRequest(link);
-            
-
           } else {
             $.notify({
               message: 'Por favor Suba una Imagen',
@@ -344,6 +380,54 @@ include("../../partials/verify-session.php");
          
         }
        });
+
+      let subcatCount = 0;
+
+       document.querySelector('#subcategoriesC button').addEventListener('click', ev => {
+
+          const subCatList = ev.target.closest('#subcategoriesC').lastElementChild.firstElementChild;
+
+          if (subCatList.style.display !== 'grid') {
+            subCatList.style.display = 'grid';
+          subCatList.style.gridTemplateColumns = '1fr 1fr';
+          }
+
+          subCatList.insertAdjacentHTML('beforeend', 
+            `<li class="list-group-item">
+    <label for="">Subcategoría ${++subcatCount}</label>
+    <input type="text" class="form-control" placeholder="nombre">
+  </li>`
+          );
+       });
+
+
+       /* ELIMINAR CATEGORIA */
+       function deleteCategory(id) {
+         
+        $.post('api/delete_category.php', {idCategory: id}, (data, status, xhr) => {
+          if (status == 'success') {
+            $('#modalCreate').modal('hide')
+            $.notify({
+              message: 'Se ha eliminado la categoría',
+              title: 'Exito',
+              icon: 'notification_important'
+            }, {
+              type: 'success'
+            })
+            $table.ajax.reload()
+          } else {
+            $('#modalCreate').modal('hide')
+            $.notify({
+              message: 'No se ha eliminado la categoría',
+              title: 'Error',
+              icon: 'notification_important'
+            }, {
+              type: 'warning'
+            })
+          }
+        })
+
+       }
 
 
     </script>
@@ -418,11 +502,22 @@ include("../../partials/verify-session.php");
       }
 
       function createRequest(linkImage) {
+
+        const subcatValues = 
+          Array.from(document.getElementById('subcategoriesC').querySelectorAll('input'))
+                .map( input => input.value.trim().toLowerCase())
+                .filter( value => value !== '');
+
         const categoryInfo = {
             nameCategory: document.getElementById('categoryInput').value,
-          description: $('#descriptionCategoryInputC').val(),
-          image: linkImage
-          };
+            description: $('#descriptionCategoryInputC').val(),
+            image: linkImage,
+        };
+
+         if(subcatValues.length !== 0){
+          categoryInfo.categories = subcatValues;
+         }
+
          $.post('api/create_category.php', categoryInfo, (data, status, xhr) => {
           if (status == 'success') {
             $('#modalCreate').modal('hide')
