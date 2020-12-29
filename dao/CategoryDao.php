@@ -27,6 +27,16 @@ class CategoryDao
     return $last_id;
   }
 
+  public function saveSubcategory($subcategory)
+  { 
+    $this->db->connect();
+    $query = "INSERT INTO `categories` (`name`, `parent_category`, `description`, `image`) VALUES('" . $subcategory->getName() . "','" . $subcategory->getParentCategory() . "','" . $subcategory->getDescription() . "', '" . $subcategory->getImage() . "')";
+    $status = $this->db->consult($query);
+    $last_id = $this->db->lastInsertId();
+    $this->db->close();
+    return $last_id;
+  }
+
   public function saveSubcategories($categoryId, $subcategoryNames)
   { 
     try {
