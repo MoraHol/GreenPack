@@ -59,10 +59,15 @@ include("../../partials/verify-session.php");
           <div class="card mb-3">
             <div class="card-header">
             <div class="row">
-            <div class="card__left col-8">
+            <div class="card__left col-4">
               <i class="fas fa-table"></i>
               Pestañas de la pagina
               </div>
+              <div class="col-4">
+              <select id="select-categories" class="custom-select">
+                <option selected>Crear Subcategoría</option>
+              </select>
+            </div>
               <div class="card__rigth col-4 pr-5">
                   <a href="javascript:modalCreate()" class="btn btn-success text-white float-right">CREAR</a>
                 </div>
@@ -124,7 +129,7 @@ include("../../partials/verify-session.php");
             </div>
             <div class="row" id="containerImageBtnC">
               <div class="col-sm-7 "></div>
-              <div class="col-sm-4"><button class="btn btn-danger" onclick="putImage()">Cargar Imagen</button></div>
+              <div class="col-sm-4"><button class="btn btn-danger" onclick="putImage('C')">Cargar Imagen</button></div>
             </div>
             <div id="imgUploadC">
               <span>Suba la imagen de la categoría:</span>
@@ -154,7 +159,7 @@ include("../../partials/verify-session.php");
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal EDIT-->
     <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -199,6 +204,64 @@ include("../../partials/verify-session.php");
         </div>
       </div>
     </div>
+
+
+     <!-- Modal SUBCATEGORIA-->
+     <div class="modal fade" id="modalSubcategoria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Crear Subcategoría</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-sm-3">Categoría:</div>
+              <div class="col-sm-8 text-capitalize" id="nameCategoryS"></div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+            <div class="mb-3 col-8">
+  <!-- <label for="categoryInput">Categoría:</label> -->
+  <div class="">Subcategoría:</div>
+  <input type="text" class="form-control" id="subcategoryInput" placeholder="nombre de la subcategoría">
+</div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-sm-4">Descripcion:</div>
+              <div class="col-sm-8 ">
+                <textarea class="form-control text-area-control" id="descriptionSubcategoryInput" cols="30" rows="10"></textarea>
+              </div>
+            </div>
+            <br>
+            <div class="row" id="containerImagesubCategory">
+              <div class="col-sm-4">Imagen:</div>
+              <div class="col-sm-8 ">
+                <img src="" id="imageSubcategory" class="img-responsive" width="300">
+              </div>
+            </div>
+            <div class="row" id="containerImageBtnS">
+              <div class="col-sm-7 "></div>
+              <div class="col-sm-4"><button class="btn btn-danger" onclick="putImage('S')">Cargar Imagen</button></div>
+            </div>
+            <div id="imgUploadS">
+              <span>Suba la imagen de la Subcategoría:</span>
+              <div id="myIdS"></div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary" id="buttonSubmitCreateS">Guardar Cambios</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <!--   Core JS Files   -->
     <script src="/js/jquery-2.2.4.min.js"></script>
     <script src="../../assets/js/core/popper.min.js"></script>
@@ -228,6 +291,7 @@ include("../../partials/verify-session.php");
     </script>
     <script>
       let $table
+      const selectOptions = new Map();
       // Call the dataTables jQuery plugin
       $(document).ready(function() {
         $('tr td:last-child').addClass('text-center')
@@ -306,7 +370,24 @@ include("../../partials/verify-session.php");
             {
               "data": "id"
             }
-          ]
+          ],
+          "drawCallback": function (settings) { 
+
+            const selectCategories = document.getElementById('select-categories');
+
+            selectCategories.innerHTML = '<option selected>Crear Subcategoría</option>';
+            
+            settings.json?.data
+            .sort((c1,c2) => c1.name.localeCompare(c2.name))
+            .forEach(category => {
+              if (!category.parentCategory) {
+                const newOption = document.createElement('option');
+                newOption.value = category.id;
+                newOption.textContent = category.name;
+                selectCategories.append(newOption);
+              }
+            });
+           }
         })
       })
 
@@ -361,6 +442,8 @@ include("../../partials/verify-session.php");
         $('#imageCategoryC').attr('src', '')
       }
 
+      /* EVENTO QUE MANEJA LA CREACIÓN DE UNA CATEGORÍA */
+
       document.getElementById('buttonSubmitCreate').addEventListener('click', (ev) => { 
         if (flagImage) {
           if (myDropzone.getAcceptedFiles().length > 0) {
@@ -381,8 +464,48 @@ include("../../partials/verify-session.php");
         }
        });
 
-      let subcatCount = 0;
 
+       /* EVENTO QUE MANEJA LA CREACIÓN DE UNA SUBCATEGORÍA */
+
+      document.getElementById('buttonSubmitCreateS').addEventListener('click', (ev) => { 
+        if (flagImage) {
+          if (myDropzone.getAcceptedFiles().length > 0) {
+            response = JSON.parse(myDropzone.getAcceptedFiles()[0].xhr.responseText)
+            link = response.link;
+            createSubcategory(link);
+          } else {
+            $.notify({
+              message: 'Por favor Suba una Imagen',
+              title: 'Exito',
+              icon: 'notification_important'
+            }, {
+              type: 'warning'
+            })
+          }
+        } else {
+         
+        }
+       });
+
+
+
+       /* Función que ejecuta un modal cuando se desea crear una subcategoría */
+       function subcategoriaModal(category) {
+         
+        $('#modalSubcategoria').modal();
+        document.getElementById('nameCategoryS').textContent = category.name;
+        document.getElementById('nameCategoryS').dataset.id = category.id;
+       }
+
+       document.getElementById('select-categories').addEventListener('click', ev => {
+         const targetEl = ev.target;
+          if(targetEl.tagName === 'SELECT' || targetEl === ev.currentTarget[0] ) return;
+          subcategoriaModal({id: targetEl.value, name: targetEl.textContent});
+       });
+
+
+      /* Agrega cuantas categorias el usuario desee */
+      let subcatCount = 0;
        document.querySelector('#subcategoriesC button').addEventListener('click', ev => {
 
           const subCatList = ev.target.closest('#subcategoriesC').lastElementChild.firstElementChild;
@@ -425,7 +548,18 @@ include("../../partials/verify-session.php");
               type: 'warning'
             })
           }
-        })
+        }).fail(err => {
+          if (err.status === 500) {
+            $('#modalCreate').modal('hide')
+            $.notify({
+              message: 'Es posible que esta categoría tenga tenga registros asociados',
+              title: 'error',
+              icon: 'notification_important'
+            }, {
+              type: 'danger'
+            })
+          }
+        });
 
        }
 
@@ -452,12 +586,12 @@ include("../../partials/verify-session.php");
         })
       }
 
-      function putImage() {
-        flagImage = true
-        $('#containerImageCategoryC').fadeOut()
-        $('#myIdC').addClass('dropzone')
-        $('#imgUploadC').fadeIn()
-        myDropzone = new Dropzone("div#myIdC", {
+      function putImage(typeLetter) {
+        flagImage = true;
+        $(`#containerImageCategory${typeLetter}`).fadeOut()
+        $(`#myId${typeLetter}`).addClass('dropzone')
+        $(`#imgUpload${typeLetter}`).fadeIn()
+        myDropzone = new Dropzone(`div#myId${typeLetter}`, {
           url: "/admin/upload.php",
           method: 'post',
           paramName: 'photo',
@@ -466,9 +600,7 @@ include("../../partials/verify-session.php");
           dictDefaultMessage: 'Sube tus archivos, arrastralos o haz click para buscarlos',
           dictMaxFilesExceeded: 'Solo se permite subir una imagen',
           dictInvalidFileType: 'Solo se permite imagenes'
-        })
-
-        
+        }) 
       }
 
       function ajax(link, idCategory) {
@@ -562,6 +694,60 @@ include("../../partials/verify-session.php");
      /*    document.getElementById('myIdC').classList.remove('dropzone'); */
        /*  $('#myIdC').addClass('dropzone') */
         });
+      }
+
+
+      function createSubcategory(linkImage) {
+        const subcategoryInfo = {
+            nameSubcategory: document.getElementById('subcategoryInput').value.trim().toLowerCase(),
+            description: $('#descriptionSubcategoryInput').val(),
+            image: linkImage,
+            idCategory: document.getElementById('nameCategoryS').dataset.id
+        };
+
+         $.post('api/create_subcategory.php', subcategoryInfo, (data, status, xhr) => {
+          if (status == 'success') {
+            $('#modalSubcategoria').modal('hide')
+            $.notify({
+              message: 'Se ha creado la subcategoría',
+              title: 'Exito',
+              icon: 'notification_important'
+            }, {
+              type: 'success'
+            })
+            $table.ajax.reload()
+          } else {
+            $('#modalSubcategoria').modal('hide')
+            $.notify({
+              message: 'No se ha creado la subcategoría',
+              title: 'Error',
+              icon: 'notification_important'
+            }, {
+              type: 'warning'
+            })
+          }
+        })
+        .fail((err) => {
+          if (err.status === 303) {
+            $('#modalCreate').modal('hide')
+            $.notify({
+              message: 'Ya existe una subcategoría con este nombre para esta categoría',
+              title: 'error',
+              icon: 'notification_important'
+            }, {
+              type: 'danger'
+            })
+          }
+        })
+        .always(() => {
+          if (myDropzone) {
+           myDropzone.removeAllFiles(true);
+          }
+          document.getElementById('subcategoryInput').value = '',
+          document.getElementById('descriptionSubcategoryInput').value = '',
+        $('#imageCategoryS').attr('src', '')
+
+        }); 
       }
     </script>
 
