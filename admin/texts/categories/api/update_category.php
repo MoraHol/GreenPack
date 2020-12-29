@@ -7,7 +7,16 @@ if (isset($_POST["id"]) && isset($_POST["description"]) && isset($_POST["image"]
 	$category->setDescription($_POST["description"]);
 	$category->setImage($_POST["image"]);
 	if ($categoryDao->update($category) > 0) {
-		http_response_code(200);
+		if (isset($_POST["subcategories"])) {
+			if ($categoryDao->saveSubcategories($_POST["id"], $_POST["subcategories"]) > 0) {
+				http_response_code(200);
+				return;
+            } else {
+                http_response_code(202);
+                return;
+            }
+		}
+		http_response_code(303);
 	} else {
 		http_response_code(500);
 	}
