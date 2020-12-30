@@ -63,12 +63,12 @@ include("../../partials/verify-session.php");
               <i class="fas fa-table"></i>
               Pestañas de la pagina
               </div>
-              <div class="col-4">
+             <!--  <div class="col-4">
               <select id="select-categories" class="custom-select">
                 <option selected>Crear Subcategoría</option>
               </select>
-            </div>
-              <div class="card__rigth col-4 pr-5">
+            </div> -->
+              <div class="card__rigth col-8 pr-5">
                   <a href="javascript:modalCreate()" class="btn btn-success text-white float-right">CREAR</a>
                 </div>
             
@@ -195,6 +195,27 @@ include("../../partials/verify-session.php");
             <div id="imgUpload">
               <span>Suba la imagen de la categoría:</span>
               <div id="myId"></div>
+            </div>
+
+          
+           <!--  <div class="col-6">
+              <select id="select-subcategories" class="custom-select">
+                <option selected>Subcategorías</option>
+              </select>
+            </div>  -->
+<br>
+            <div id="subcategoriesE">
+              <div class="col-sm-8">Crear Subcategoría:
+              <button class="btn btn-primary">
+                <i class="fas fa-plus"></i>
+              </button>
+              </div>
+              <div class="">
+              <ul id="subcat-listM" class="list-group list-group-flush">
+             <!--  <br> -->
+</ul>
+              </div>
+      
             </div>
           </div>
           <div class="modal-footer">
@@ -371,23 +392,6 @@ include("../../partials/verify-session.php");
               "data": "id"
             }
           ],
-          "drawCallback": function (settings) { 
-
-            const selectCategories = document.getElementById('select-categories');
-
-            selectCategories.innerHTML = '<option selected>Crear Subcategoría</option>';
-            
-            settings.json?.data
-            .sort((c1,c2) => c1.name.localeCompare(c2.name))
-            .forEach(category => {
-              if (!category.parentCategory) {
-                const newOption = document.createElement('option');
-                newOption.value = category.id;
-                newOption.textContent = category.name;
-                selectCategories.append(newOption);
-              }
-            });
-           }
         })
       })
 
@@ -402,8 +406,31 @@ include("../../partials/verify-session.php");
         $('#nameCategoryLoad').text(nameCategory)
         $('#descriptionCategoryInput').val(description)
         $('#imageCategory').attr('src', image)
-        categoryId = idCategory
+        document.getElementById('subcat-listM').innerHTML = '';
+        subcatCountE = 0;
+        categoryId = idCategory;
+       /*  document.getElementById('select-subcategories').innerHTML = ''; */
+        loadSubcategoriesSelect(idCategory);
       }
+
+      /* CARGA SUBCATEGORIAS */
+ /*      function loadSubcategoriesSelect(idCategory) {
+        const table = $('#dataTable').DataTable();
+
+        document.getElementById('select-subcategories').insertAdjacentHTML('beforeend', 
+        '<option selected>Subcategorías</option>');
+
+        const data = Array.from(table.rows().data())
+                          .filter(category => category.parentCategory == idCategory)
+                          .map(subcategory => {
+                            const option = document.createElement('option');
+                            option.value = subcategory.id;
+                            option.textContent = subcategory.name;
+                            return option;
+                          })
+                          .forEach(optionSubcat => document.getElementById('select-subcategories').append(optionSubcat));
+      } */
+
       $('#buttonSubmitUpdate').click(() => {
         if (flagImage) {
           if (myDropzone.getAcceptedFiles().length > 0) {
@@ -497,12 +524,12 @@ include("../../partials/verify-session.php");
         document.getElementById('nameCategoryS').dataset.id = category.id;
        }
 
-       document.getElementById('select-categories').addEventListener('click', ev => {
+    /*    document.getElementById('select-categories').addEventListener('click', ev => {
          const targetEl = ev.target;
           if(targetEl.tagName === 'SELECT' || targetEl === ev.currentTarget[0] ) return;
           subcategoriaModal({id: targetEl.value, name: targetEl.textContent});
        });
-
+ */
 
       /* Agrega cuantas categorias el usuario desee */
       let subcatCount = 0;
@@ -518,6 +545,26 @@ include("../../partials/verify-session.php");
           subCatList.insertAdjacentHTML('beforeend', 
             `<li class="list-group-item">
     <label for="">Subcategoría ${++subcatCount}</label>
+    <input type="text" class="form-control" placeholder="nombre">
+  </li>`
+          );
+       });
+
+
+        /*Editar categoría Agrega cuantas categorias el usuario desee */
+      let subcatCountE = 0;
+       document.querySelector('#subcategoriesE button').addEventListener('click', ev => {
+
+          const subCatList = ev.target.closest('#subcategoriesE').lastElementChild.firstElementChild;
+
+          if (subCatList.style.display !== 'grid') {
+            subCatList.style.display = 'grid';
+          subCatList.style.gridTemplateColumns = '1fr 1fr';
+          }
+
+          subCatList.insertAdjacentHTML('beforeend', 
+            `<li class="list-group-item">
+    <label for="">Subcategoría ${++subcatCountE}</label>
     <input type="text" class="form-control" placeholder="nombre">
   </li>`
           );
@@ -604,10 +651,17 @@ include("../../partials/verify-session.php");
       }
 
       function ajax(link, idCategory) {
+
+        const subcatValues = 
+          Array.from(document.getElementById('subcategoriesE').querySelectorAll('input'))
+                .map( input => input.value.trim().toLowerCase())
+                .filter( value => value !== '');
+
         $.post('api/update_category.php', {
           id: idCategory,
           description: $('#descriptionCategoryInput').val(),
-          image: link
+          image: link,
+          subcategories: subcatValues
         }, (data, status) => {
           if (status == 'success') {
             $('#modalEdit').modal('hide')
@@ -631,6 +685,9 @@ include("../../partials/verify-session.php");
             })
           }
         })
+        .always(() => {
+          document.getElementById('subcat-listM').innerHTML = '';
+        });
       }
 
       function createRequest(linkImage) {

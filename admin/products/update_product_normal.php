@@ -291,13 +291,27 @@ switch ($product->getCategory()->getId()) {
                 <ul class="list-unstyled" id="measurements">
                   <?php foreach ($product->getMeasurements() as $measurement) {
                     ?>
+                     <br>
+                     <br>
                     <li>Medida <?= $indexMeasurement ?>:<div class="row">
-                        <div class="col"><label for="width<?= $indexMeasurement ?>">Ancho:</label><input type="number" id="width<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getWidth(); ?>" readonly></div>
+                    <div class="row">
+                        <div class="col ml-4"><label for="width<?= $indexMeasurement ?>">Ancho:</label><input type="number" id="width<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getWidth(); ?>" readonly></div>
                         <div class="col height"><label for="height<?= $indexMeasurement ?>">Alto:</label><input type="number" id="height<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getHeight(); ?>" readonly></div>
                         <div class="col lenght"><label for="lenght<?= $indexMeasurement ?>">Largo:</label><input type="number" id="lenght<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getLength(); ?>" readonly></div>
                         <div class="col window"><label for="window<?= $indexMeasurement ?>"> <?= $nameAdditional ?></label><input type="number" id="window<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getWindow(); ?>" readonly></div>
-                        <div class="col-sm-2" style="margin-top: 1rem; display: flex; justify-content:flex-end;"><button class="btn btn-danger" onclick="deleteMeasurement(<?= $product->getId() ?>,<?= $measurement->getId() ?>)">Eliminar</button></div>
-                        <div class="col-sm-2" style="margin-top: 1rem;"><button class="btn btn-warning" onclick="updateMeasurement(<?= $product->getId() ?>,<?= $measurement->getId() ?>,<?= $indexMeasurement ?>,this)">Modificar</button></div>
+                        <div class="col largo-util"><label for="">Largo Útil</label><input type="number" id="largo-util<?= $indexMeasurement ?>" value="<?= $measurement->getLargoUtil(); ?>" class="form-control" value="0"></div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-3 ml-4 ancho-total"><label for="">Ancho Total</label><input type="number" id="ancho-total<?= $indexMeasurement ?>" value="<?= $measurement->getAnchoTotal(); ?>" class="form-control" value="0"></div>
+                        <div class="col-3 venta-minima-impresa"><label for="">Venta Mínima Impresa</label><input type="number" id="venta-minima-impresa<?= $indexMeasurement ?>" class="form-control" value="0"></div>
+                        <div class="col-3 mr-3 venta-minima-generica"><label for="">Venta Mínima Genérica</label><input type="number" id="venta-minima-generica<?= $indexMeasurement ?>" class="form-control" value="0"></div>
+
+                        <div class="col-1" style="margin-top: 1rem; display: flex; justify-content:flex-end;"><button class="btn btn-danger" onclick="deleteMeasurement(<?= $product->getId() ?>,<?= $measurement->getId() ?>)"><i class="fas fa-trash-alt"></i></button></div>
+                        <div class="col-1" style="margin-top: 1rem;"><button value="Modificar" class="btn btn-warning" onclick="updateMeasurement(<?= $product->getId() ?>,<?= $measurement->getId() ?>,<?= $indexMeasurement ?>,this)"><i class="fas fa-pencil-alt"></i></button></div>
+              
+                        </div>
                       </div>
                     </li>
                   <?php $indexMeasurement++;
@@ -506,15 +520,23 @@ document.addEventListener("mousewheel", this.mousewheel.bind(this), { passive: f
           const widthInput = elById(`width${indexMeasurement}`);
           const heightInput = elById(`height${indexMeasurement}`);
           const lengthInput = elById(`lenght${indexMeasurement}`);
-          const windowInput = elById(`window${indexMeasurement}`)
-          if (evTarget.textContent === 'Modificar') {
+          const windowInput = elById(`window${indexMeasurement}`);
+          const largoUtilInput = elById(`largo-util${indexMeasurement}`);
+          const anchoTotalInput = elById(`ancho-total${indexMeasurement}`);
 
-            evTarget.textContent = 'Guardar';
+          console.log(largoUtilInput);
+          console.log(anchoTotalInput);
+
+          if (evTarget.closest('button').value === 'Modificar') {
+          /*   evTarget.closest('button').value = 'Guardar'; */
+            evTarget.closest('button').value = 'Guardar';
+            evTarget.closest('button').textContent = 'Guardar';
           widthInput.readOnly = false;
           heightInput.readOnly = false;
           lengthInput.readOnly = false;
           windowInput.readOnly = false;
           evTarget.classList.replace('btn-warning', 'btn-info');
+
           } else {
 
             const measurementInfo = {
@@ -522,8 +544,12 @@ document.addEventListener("mousewheel", this.mousewheel.bind(this), { passive: f
               width : widthInput.value,
               height : heightInput.value,
               length : lengthInput.value,
-              window : windowInput.value
+              window : windowInput.value,
+              largoUtil: largoUtilInput.value,
+              anchoTotal: anchoTotalInput.value
             };
+
+            console.log(measurementInfo);
 
             $.post('api/modify_measurements.php', { measurements : measurementInfo }, 
             (data, status) => {
@@ -536,7 +562,10 @@ document.addEventListener("mousewheel", this.mousewheel.bind(this), { passive: f
                 type: 'warning'
               })
               }
-              evTarget.textContent = 'Modificar';
+          })
+          .always(() => {
+            evTarget.closest('button').value = 'Modificar';
+              evTarget.closest('button').innerHTML = '<i class="fas fa-pencil-alt"></i>';
             widthInput.readOnly = true;
           heightInput.readOnly = true;
           lengthInput.readOnly = true;

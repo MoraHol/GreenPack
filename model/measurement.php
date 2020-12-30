@@ -13,6 +13,8 @@ class Measurement implements JsonSerializable
   private $product;
   private $idMaterial;
   private $pliego;
+  private $anchoTotal;
+  private $largoUtil;
 
   public function getId()
   {
@@ -22,6 +24,26 @@ class Measurement implements JsonSerializable
   public function setId($id)
   {
     $this->id = $id;
+  }
+
+  public function getAnchoTotal()
+  {
+    return $this->anchoTotal;
+  }
+
+  public function setAnchoTotal($anchoTotal)
+  {
+    $this->anchoTotal = $anchoTotal;
+  }
+
+  public function getLargoUtil()
+  {
+    return $this->largoUtil;
+  }
+
+  public function setLargoUtil($largoUtil)
+  {
+    $this->largoUtil = $largoUtil;
   }
 
   public function getWindow()
