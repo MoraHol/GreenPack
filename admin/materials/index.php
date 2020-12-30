@@ -111,6 +111,9 @@ $materials = $materialDao->findAll();
       // Call the dataTables jQuery plugin
       $(document).ready(function() {
         let table = $('#dataTable').DataTable({
+          "scrollY": "500px",
+          "scrollCollapse": true,
+          "paging": false,
           "language": {
             "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ registros",

@@ -81,6 +81,7 @@ if ($admin->getRole() != 2) {
                     <table class="table row-border table-bordered hover dataTable" width="100%" cellspacing="0">
                       <thead>
                         <tr>
+                          <th class="text-center">Id</th>
                           <th class="text-center">Nombre</th>
                           <th class="text-center">Apellido</th>
                           <th class="text-center">Empresa</th>
@@ -94,11 +95,12 @@ if ($admin->getRole() != 2) {
                       <tbody>
                         <?php foreach ($quotations as $quotation) { ?>
                         <tr>
+                          <td><?php echo $quotation->getId(); ?></td>
                           <td><?php echo $quotation->getNameClient(); ?></td>
                           <td><?php echo $quotation->getLastNameClient(); ?></td>
                           <td class="text-center"><?php echo $quotation->getCompany() == "" ? "N/A" : $quotation->getCompany(); ?> </td>
                           <td class="text-center money"><?= $quotation->calculateTotal(); ?></td>
-                          <td class="text-center"><?= date("d-m-Y", $quotation->getCreatedAt()); ?></td>
+                          <td class="text-center sorting_1"><span style="display: none"><?= date($quotation->getCreatedAt()); ?></span><?= date("d-m-Y", $quotation->getCreatedAt()); ?></td>
                           <td class="text-center"><a class="text-center" href="javascript:viewPdf(`<?= $quotation->getId(); ?>`)" title="Ver Aqui"><i class="material-icons">remove_red_eye</i> <a href="#" onclick="openWindow(`<?= $quotation->getId(); ?>`)" title="Ver en nueva Ventana"><i class="material-icons">featured_video</i></a></td>
                           <td class="text-center"><a href="edit-quotation.php?id=<?= $quotation->getId() ?>"><i class="fas fa-pen"></i></a></td>
                           <td class="text-center"><a class="text-center" target="_blank" href="/services/download-quotation.php?id=<?= $quotation->getId(); ?>"><i class="fas fa-fw fa-download"></a></td>
@@ -257,6 +259,10 @@ if ($admin->getRole() != 2) {
       // Call the dataTables jQuery plugin
       $(document).ready(function() {
         let table = $('.dataTable').DataTable({
+          "order": [[ 0, "desc"]],
+          "scrollY": "500px",
+          "scrollCollapse": true,
+          "paging": false,
           "language": {
             "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ registros",

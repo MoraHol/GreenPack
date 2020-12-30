@@ -206,12 +206,12 @@ switch ($product->getCategory()->getId()) {
                     <input type="text" placeholder="Ej. LV-12" id="ref" class="form-control" value="<?= $product->getRef(); ?>">
                   </div>
                 </div>
-                <div class="col">
+              <!--   <div class="col">
                   <div class="form-group">
                     <label for="price">Gramaje:</label>
                     <input type="number" placeholder="Ej. 40" id="price" class="form-control" value="<?= $product->getPrice(); ?>">
                   </div>
-                </div>
+                </div> -->
               </div>
 
               <br>
