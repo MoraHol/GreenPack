@@ -39,6 +39,8 @@ class MeasurementDao
       $measurement->setPliego($measurementDB["pliego"]);
       $measurement->setLargoUtil($measurementDB["largo_util"]);
       $measurement->setAnchoTotal($measurementDB["ancho_total"]);
+      $measurement->setVentaMinimaImpresa($measurementDB["venta_minima_impresa"]);
+      $measurement->setVentaMinimaGenerica($measurementDB["venta_minima_generica"]);
       array_push($measurements, $measurement);
     }
     $this->db->close();
@@ -67,14 +69,14 @@ class MeasurementDao
     // self::$logger->warning('pliego:'. $measurement->getPliego() );
     if ($measurement->getPliego() != null) {
       $query = "INSERT INTO `measurements` (`id_measurements`, `width`, `height`,
-      `lenght`, `products_id_products`, `window` ,`pliego`) VALUES (NULL, '" . $measurement->getWidth() . "', '"
+      `lenght`, `products_id_products`, `window` , `largo_util`, `ancho_total`, `venta_minima_impresa`, `venta_minima_generica`,`pliego`) VALUES (NULL, '" . $measurement->getWidth() . "', '"
         . $measurement->getHeight() . "', '" . $measurement->getLength() . "', 
-      '" . $measurement->getProduct() . "', '" . $measurement->getWindow() . "' ," . $measurement->getPliego() . ")";
+      '" . $measurement->getProduct() . "', '" . $measurement->getWindow() . "', '" . $measurement->getLargoUtil() . "' , '" . $measurement->getAnchoTotal() . "' , '" . $measurement->getVentaMinimaImpresa() . "' , '" . $measurement->getVentaMinimaGenerica() . "','" . $measurement->getPliego() . "')";
     } else {
       $query = "INSERT INTO `measurements` (`id_measurements`, `width`, `height`,
-      `lenght`, `products_id_products`, `window`) VALUES (NULL, '" . $measurement->getWidth() . "', '"
+      `lenght`, `products_id_products`, `largo_util`, `ancho_total`, `venta_minima_impresa` , `venta_minima_generica`, `window`) VALUES (NULL, '" . $measurement->getWidth() . "', '"
         . $measurement->getHeight() . "', '" . $measurement->getLength() . "', 
-      '" . $measurement->getProduct() . "', '" . $measurement->getWindow() . "')";
+      '" . $measurement->getProduct() . "', '" . $measurement->getLargoUtil() . "', '" . $measurement->getAnchoTotal() . "', '" . $measurement->getVentaMinimaImpresa() . "', '" . $measurement->getVentaMinimaGenerica() . "',   '" . $measurement->getWindow() . "')";
     }
     $status = $this->db->consult($query);
     $this->db->close();
@@ -112,7 +114,7 @@ class MeasurementDao
   function update($measurement)
   {
     $this->db->connect();
-    $query = "UPDATE `measurements` SET `width` = '" . $measurement->getWidth() . "', `height` = '" . $measurement->getHeight() . "', `largo_util` = '" . $measurement->getLargoUtil() . "', `ancho_total` = '" . $measurement->getAnchoTotal() . "', `lenght` = '" . $measurement->getLength() . "' WHERE `measurements`.`id_measurements` = " . $measurement->getId();
+    $query = "UPDATE `measurements` SET `width` = '" . $measurement->getWidth() . "', `height` = '" . $measurement->getHeight() . "', `largo_util` = '" . $measurement->getLargoUtil() . "', `ancho_total` = '" . $measurement->getAnchoTotal() . "', `lenght` = '" . $measurement->getLength() . "' , `venta_minima_impresa` = '" . $measurement->getVentaMinimaImpresa() . "' , `venta_minima_generica` = '" . $measurement->getVentaMinimaGenerica() . "' WHERE `measurements`.`id_measurements` = " . $measurement->getId();
     $status = $this->db->consult($query);
     $this->db->close();
     return $status;

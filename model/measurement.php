@@ -15,6 +15,8 @@ class Measurement implements JsonSerializable
   private $pliego;
   private $anchoTotal;
   private $largoUtil;
+  private $ventaMinimaImpresa;
+  private $ventaMinimaGenerica;
 
   public function getId()
   {
@@ -44,6 +46,26 @@ class Measurement implements JsonSerializable
   public function setLargoUtil($largoUtil)
   {
     $this->largoUtil = $largoUtil;
+  }
+
+  public function setVentaMinimaImpresa($ventaMinimaImpresa)
+  {
+    $this->ventaMinimaImpresa = $ventaMinimaImpresa;
+  }
+
+  public function getVentaMinimaImpresa()
+  {
+    return $this->ventaMinimaImpresa;
+  }
+
+  public function setVentaMinimaGenerica($ventaMinimaGenerica)
+  {
+    $this->ventaMinimaGenerica = $ventaMinimaGenerica;
+  }
+
+  public function getVentaMinimaGenerica()
+  {
+    return $this->ventaMinimaGenerica;
   }
 
   public function getWindow()

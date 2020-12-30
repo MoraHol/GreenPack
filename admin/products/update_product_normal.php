@@ -305,8 +305,8 @@ switch ($product->getCategory()->getId()) {
                     <div class="row">
 
                         <div class="col-3 ml-4 ancho-total"><label for="">Ancho Total</label><input type="number" id="ancho-total<?= $indexMeasurement ?>" value="<?= $measurement->getAnchoTotal(); ?>" class="form-control" value="0"></div>
-                        <div class="col-3 venta-minima-impresa"><label for="">Venta Mínima Impresa</label><input type="number" id="venta-minima-impresa<?= $indexMeasurement ?>" class="form-control" value="0"></div>
-                        <div class="col-3 mr-3 venta-minima-generica"><label for="">Venta Mínima Genérica</label><input type="number" id="venta-minima-generica<?= $indexMeasurement ?>" class="form-control" value="0"></div>
+                        <div class="col-3 venta-minima-impresa"><label for="">Venta Mínima Impresa</label><input type="number" id="venta-minima-impresa<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getVentaMinimaImpresa(); ?>"></div>
+                        <div class="col-3 mr-3 venta-minima-generica"><label for="">Venta Mínima Genérica</label><input type="number" id="venta-minima-generica<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getVentaMinimaGenerica(); ?>"></div>
 
                         <div class="col-1" style="margin-top: 1rem; display: flex; justify-content:flex-end;"><button class="btn btn-danger" onclick="deleteMeasurement(<?= $product->getId() ?>,<?= $measurement->getId() ?>)"><i class="fas fa-trash-alt"></i></button></div>
                         <div class="col-1" style="margin-top: 1rem;"><button value="Modificar" class="btn btn-warning" onclick="updateMeasurement(<?= $product->getId() ?>,<?= $measurement->getId() ?>,<?= $indexMeasurement ?>,this)"><i class="fas fa-pencil-alt"></i></button></div>
@@ -417,11 +417,10 @@ switch ($product->getCategory()->getId()) {
       <script src="/vendor/dropzone/dropzone.js"></script>
       <script>
 
-document.addEventListener('wheel', function(e) {
+/* document.addEventListener('wheel', function(e) {
     e.preventDefault();
 }, { passive: false });
-/* 
-document.addEventListener("mousewheel", this.mousewheel.bind(this), { passive: false }); */
+/*  */
 
       jQuery.event.special.touchstart = {
         setup: function (_, ns, handle) {
@@ -523,6 +522,8 @@ document.addEventListener("mousewheel", this.mousewheel.bind(this), { passive: f
           const windowInput = elById(`window${indexMeasurement}`);
           const largoUtilInput = elById(`largo-util${indexMeasurement}`);
           const anchoTotalInput = elById(`ancho-total${indexMeasurement}`);
+          const ventaMinimaImpresaInput = elById(`venta-minima-impresa${indexMeasurement}`);
+          const ventaMinimaGenericaInput = elById(`venta-minima-generica${indexMeasurement}`);
 
           console.log(largoUtilInput);
           console.log(anchoTotalInput);
@@ -546,7 +547,9 @@ document.addEventListener("mousewheel", this.mousewheel.bind(this), { passive: f
               length : lengthInput.value,
               window : windowInput.value,
               largoUtil: largoUtilInput.value,
-              anchoTotal: anchoTotalInput.value
+              anchoTotal: anchoTotalInput.value,
+              ventaMinimaImpresa: ventaMinimaImpresaInput.value,
+              ventaMinimaGenerica: ventaMinimaGenericaInput.value
             };
 
             console.log(measurementInfo);
@@ -709,6 +712,13 @@ document.addEventListener("mousewheel", this.mousewheel.bind(this), { passive: f
                 measurement.height = $('#height' + (index + 1)).val()
                 measurement.lenght = $('#lenght' + (index + 1)).val()
                 measurement.window = $('#window' + (index + 1)).val()
+                measurement.largoUtil = $('#largo-util' + (index + 1)).val()
+                measurement.anchoTotal = $('#ancho-total' + (index + 1)).val()
+                measurement.ventaMinimaGenerica = $('#venta-minima-generica' + (index + 1)).val()
+                measurement.ventaMinimaImpresa = $('#venta-minima-impresa' + (index + 1)).val()
+
+                console.log(measurement);
+
                 if (typeof($('#width' + (index + 1)).val()) != 'undefinded' && $('#width' + (index + 1)).val() != '' &&
                   typeof($('#height' + (index + 1)).val()) != 'undefined' && $('#height' + (index + 1)).val() != '' &&
                   typeof($('#lenght' + (index + 1)).val()) != 'undefined' && $('#lenght' + (index + 1)).val() != '' &&
@@ -831,7 +841,10 @@ document.addEventListener("mousewheel", this.mousewheel.bind(this), { passive: f
         function addMeasurement() {
           indexMeasurement++;
           $('#measurements').append(`
+          <br>
+          <br>
         <li>Medida ${indexMeasurement}:
+        
           <div class="row">
             <div class="col">
               <label for="width${indexMeasurement}">Ancho:</label>
@@ -849,9 +862,14 @@ document.addEventListener("mousewheel", this.mousewheel.bind(this), { passive: f
               <label for="window${indexMeasurement}"><?= $nameAdditional ?>:</label>
               <input type="number" id="window${indexMeasurement}" class="form-control">
             </div>
-            <div class="col-sm-2">
-            </div>
+            <div class="col largo-util"><label for="">Largo Útil</label><input type="number" id="largo-util${ indexMeasurement}" value="" class="form-control" value="0"></div>
           </div>
+            <div class="row">
+            <div class="col-2 ancho-total"><label for="">Ancho Total</label><input type="number" id="ancho-total${indexMeasurement}" value="" class="form-control" value="0"></div>
+            <div class="col-2 venta-minima-impresa"><label for="">Venta Mínima Impresa</label><input type="number" id="venta-minima-impresa${indexMeasurement}" class="form-control" value="0"></div>
+                        <div class="col-2 venta-minima-generica"><label for="">Venta Mínima Genérica</label><input type="number" id="venta-minima-generica${indexMeasurement}" class="form-control" value="0"></div>
+            </div>
+         
         </li>`)
           if (parseInt($('#category').val()) == 6) {
             $('.height').children('label').text('Largo:')
