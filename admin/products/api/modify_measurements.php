@@ -14,6 +14,8 @@ if (isset($_POST['measurements'])) {
     $measurement->setHeight($measurementReq['height']);
     $measurement->setLength($measurementReq['length']);
     $measurement->setWindow($measurementReq['window']);
+    $measurement->setLargoUtil($measurementReq['largoUtil']);
+    $measurement->setAnchoTotal($measurementReq['anchoTotal']);
     $measurement->setId($measurementReq['idMeasurement']);
 
     if($measurementDao->update($measurement)){

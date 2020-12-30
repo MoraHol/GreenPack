@@ -259,6 +259,22 @@ $tabs = $tabProductDao->findByProduct($product);
                             </select>
                           </div>
                         </div>
+
+                        <div class="row">
+                        <div class="col-5">
+                            <label for="largo-util">Largo Útil:</label>
+                            <select id="largo-total" disabled class="form-control">
+                              <option selected disabled>Seleccione</option>
+                            </select>
+                          </div>
+                          <div class="col-5">
+                            <label for="ancho-total">Ancho Total:</label>
+                            <select id="ancho-total" disabled class="form-control">
+                              <option selected disabled>Seleccione</option>
+                            </select>
+                          </div>
+                        </div>
+
                       </div>
                     </div>
                   </div>
@@ -413,6 +429,7 @@ $tabs = $tabProductDao->findByProduct($product);
     $('#height').attr("disabled", "false")
     let measurements = `<?= json_encode($product->getMeasurements()); ?>`
     measurements = JSON.parse(measurements)
+    console.log(measurements);
     let widths = []
     measurements.forEach(measurement => {
       if (!widths.includes(measurement.width)) {
@@ -429,6 +446,16 @@ $tabs = $tabProductDao->findByProduct($product);
       $('#length').prop("disabled", true)
       renderLengths($(this).val(), $('#width').val())
     })
+    $('#length').change(function() {
+      $('#largo-util').prop("disabled", true)
+      renderLengths($(this).val(), $('#width').val())
+    })
+   /*  $('#largo-util').change(function() {
+      $('#length').prop("disabled", true)
+      $('#ancho-total').prop("disabled", true)
+      renderLengths($(this).val(), $('#width').val())
+    })
+     */
 
 
     function renderHeigths(width) {
@@ -466,6 +493,22 @@ $tabs = $tabProductDao->findByProduct($product);
       })
       $('#length').prop("disabled", false)
     }
+
+  /*   function renderLargoUtil(width) {
+      $('#length').html('')
+      $('#height').html('')
+      $('#height').append('<option selected disabled>Seleccione</option>')
+      $('#length').append('<option selected disabled>Seleccione</option>')
+      let measurementsAux = measurements.filter((measurement) => measurement.width == width)
+      let heights = []
+      measurementsAux.forEach(measurement => {
+        if (!heights.includes(measurement.height)) {
+          heights.push(measurement.height)
+          $('#height').append(`<option>${measurement.height}</option>`)
+        }
+      })
+      $('#height').prop("disabled", false)
+    } */
 
 
     $('.checkboxPrinting').change(function() {

@@ -37,6 +37,8 @@ class MeasurementDao
       $measurement->setWindow($measurementDB["window"]);
       $measurement->setProduct($product->getId());
       $measurement->setPliego($measurementDB["pliego"]);
+      $measurement->setLargoUtil($measurementDB["largo_util"]);
+      $measurement->setAnchoTotal($measurementDB["ancho_total"]);
       array_push($measurements, $measurement);
     }
     $this->db->close();
@@ -110,7 +112,7 @@ class MeasurementDao
   function update($measurement)
   {
     $this->db->connect();
-    $query = "UPDATE `measurements` SET `width` = '" . $measurement->getWidth() . "', `height` = '" . $measurement->getHeight() . "', `lenght` = '" . $measurement->getLength() . "' WHERE `measurements`.`id_measurements` = " . $measurement->getId();
+    $query = "UPDATE `measurements` SET `width` = '" . $measurement->getWidth() . "', `height` = '" . $measurement->getHeight() . "', `largo_util` = '" . $measurement->getLargoUtil() . "', `ancho_total` = '" . $measurement->getAnchoTotal() . "', `lenght` = '" . $measurement->getLength() . "' WHERE `measurements`.`id_measurements` = " . $measurement->getId();
     $status = $this->db->consult($query);
     $this->db->close();
     return $status;
