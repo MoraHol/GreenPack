@@ -75,6 +75,10 @@ foreach (json_decode($_POST["measurements"]) as  $measurementReq) {
   $measurement->setHeight($measurementReq->height);
   $measurement->setLength($measurementReq->lenght);
   $measurement->setWindow($measurementReq->window);
+  $measurement->setLargoUtil($measurementReq->largoUtil);
+  $measurement->setAnchoTotal($measurementReq->anchoTotal);
+  $measurement->setVentaMinimaGenerica($measurementReq->ventaMinimaGenerica);
+  $measurement->setVentaMinimaImpresa($measurementReq->ventaMinimaImpresa);
   $measurement->setProduct($product->getId());
   if ($product->getCategory()->getId() == 8) {
     $measurement->setPliego($measurementReq->pliego);

@@ -258,6 +258,21 @@ $tabs = $tabProductDao->findByProduct($product);
                               <option selected disabled>Seleccione</option>
                             </select>
                           </div>
+                         
+                          <div class="row mt-3">
+                          <div class="col ml-3">
+                            <label for="length">Largo Útil:</label>
+                            <select id="length" disabled class="form-control">
+                              <option selected disabled>Seleccione</option>
+                            </select>
+                          </div>
+                          <div class="col">
+                            <label for="length">Ancho Total:</label>
+                            <select id="length" disabled class="form-control">
+                              <option selected disabled>Seleccione</option>
+                            </select>
+                          </div>
+                          </div>
                         </div>
                       </div>
                     </div>
