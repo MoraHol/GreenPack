@@ -115,6 +115,9 @@ $roles = $db->consult("SELECT * FROM `roles_admin`", "yes");
       // Call the dataTables jQuery plugin
       $(document).ready(function() {
         $('#dataTable').DataTable({
+          "paging": false,
+          "scrollY": "500px",
+          "scrollCollapse": true,
           "language": {
             "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ registros",

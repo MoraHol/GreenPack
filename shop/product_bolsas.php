@@ -259,22 +259,6 @@ $tabs = $tabProductDao->findByProduct($product);
                             </select>
                           </div>
                         </div>
-
-                        <div class="row">
-                        <div class="col-5">
-                            <label for="largo-util">Largo Útil:</label>
-                            <select id="largo-total" disabled class="form-control">
-                              <option selected disabled>Seleccione</option>
-                            </select>
-                          </div>
-                          <div class="col-5">
-                            <label for="ancho-total">Ancho Total:</label>
-                            <select id="ancho-total" disabled class="form-control">
-                              <option selected disabled>Seleccione</option>
-                            </select>
-                          </div>
-                        </div>
-
                       </div>
                     </div>
                   </div>
@@ -447,16 +431,8 @@ $tabs = $tabProductDao->findByProduct($product);
       renderLengths($(this).val(), $('#width').val())
     })
     $('#length').change(function() {
-      $('#largo-util').prop("disabled", true)
       renderLengths($(this).val(), $('#width').val())
     })
-   /*  $('#largo-util').change(function() {
-      $('#length').prop("disabled", true)
-      $('#ancho-total').prop("disabled", true)
-      renderLengths($(this).val(), $('#width').val())
-    })
-     */
-
 
     function renderHeigths(width) {
       $('#length').html('')
