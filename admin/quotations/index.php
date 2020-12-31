@@ -31,6 +31,8 @@ if ($admin->getRole() != 2) {
   <!-- Page level plugin CSS-->
   <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/froala-editor@3.0.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type='text/css' />
+  
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedcolumns/3.3.0/css/fixedColumns.dataTables.css">
   <style>
     td.highlight {
       background-color: whitesmoke !important;
@@ -123,6 +125,7 @@ if ($admin->getRole() != 2) {
                     <table class="table row-border table-bordered hover dataTable" width="100%" cellspacing="0">
                       <thead>
                         <tr>
+                          <th id="thId-second" class="text-center">Id</th>
                           <th class="text-center">Nombre</th>
                           <th class="text-center">Apellido</th>
                           <th class="text-center">Empresa</th>
@@ -138,6 +141,7 @@ if ($admin->getRole() != 2) {
                         <?php foreach ($quotationsSolved as $quotation) {
                           $admin = $adminDao->findById($quotation->getIdAdminSolved()); ?>
                         <tr>
+                          <td><?= $quotation->getId(); ?></td>
                           <td><?= $quotation->getNameClient(); ?></td>
                           <td><?= $quotation->getLastNameClient(); ?></td>
                           <td class="text-center"><?= $quotation->getCompany() == "" ? "N/A" : $quotation->getCompany(); ?> </td>
@@ -166,6 +170,7 @@ if ($admin->getRole() != 2) {
                     <table class="table row-border table-bordered hover dataTable" width="100%" cellspacing="0" id="table-no-solved">
                       <thead>
                         <tr>
+                          <th id="thId-third" class="text-center">Id</th>
                           <th class="text-center">Nombre</th>
                           <th class="text-center">Apellido</th>
                           <th class="text-center">Empresa</th>
@@ -180,6 +185,7 @@ if ($admin->getRole() != 2) {
                       <tbody>
                         <?php foreach ($quotationsNoSolved as $quotation) { ?>
                         <tr>
+                          <td><?php echo $quotation->getId(); ?></td>
                           <td><?php echo $quotation->getNameClient(); ?></td>
                           <td><?php echo $quotation->getLastNameClient(); ?></td>
                           <td class="text-center"><?php echo $quotation->getCompany() == "" ? "N/A" : $quotation->getCompany(); ?> </td>
@@ -255,6 +261,8 @@ if ($admin->getRole() != 2) {
 
     <script src="/vendor/froala_editor.pkgd.min.js"></script>
     <script src="/js/es.js"></script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.3.0/js/dataTables.fixedColumns.js"></script>
     <script>
       // Call the dataTables jQuery plugin
       $(document).ready(function() {
@@ -286,9 +294,23 @@ if ($admin->getRole() != 2) {
               "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
               "sSortDescending": ": Activar para ordenar la columna de manera descendente"
             }
-
+          },
+          "columnDefs": [{
+            "targets": [0,1,2],
+            "orderable": true,
+        }],
+        "headerCallback": function( thead, data, start, end, display ) {
+              thead.style.width = "1000px";
+  },
+          "initComplete": function (settings, json) {  
+            /* console.log(settings, json); */
+           /*  $(".dataTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");  */
+           /* table.columns.adjust(); */
           }
-        })
+        });
+
+        table.columns.adjust();
+
         table.on('draw', function() {
           $('.money').formatCurrency({
             region: 'es-CO'
@@ -301,9 +323,33 @@ if ($admin->getRole() != 2) {
             $(table.cells().nodes()).removeClass('highlight');
             $(table.column(colIdx).nodes()).addClass('highlight');
           });
+
+          
       })
     </script>
     <script>
+
+function activateTheads() {
+        setTimeout(() => {
+        document.getElementById('thId-third').click();
+        document.getElementById('thId-second').nextElementSibling.click();
+        document.querySelector('a[href$="solved"]').closest('li').removeEventListener('click',activateTheads);
+        document.querySelector('a[href$="no-solved"]').closest('li').removeEventListener('click',activateTheads);
+      }, 180);
+      }
+   
+    document.querySelector('a[href$="no-solved"]').closest('li').addEventListener('click',activateTheads);
+
+      document.querySelector('a[href$="solved"]').closest('li').addEventListener('click', () => {
+        setTimeout(() => {
+          document.getElementById('thId-second').click();
+        }, 180);
+        
+      });
+
+    
+
+   /*  document.getElementById('thId-third').click(); */
       $(() => {
         $('.money').formatCurrency({
           region: 'es-CO'
@@ -410,3 +456,5 @@ if ($admin->getRole() != 2) {
 </body>
 
 </html>
+
+
