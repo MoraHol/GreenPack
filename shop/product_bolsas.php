@@ -430,9 +430,9 @@ $tabs = $tabProductDao->findByProduct($product);
       $('#length').prop("disabled", true)
       renderLengths($(this).val(), $('#width').val())
     })
-    $('#length').change(function() {
+   /*  $('#length').change(function() {
       renderLengths($(this).val(), $('#width').val())
-    })
+    }) */
 
     function renderHeigths(width) {
       $('#length').html('')
@@ -453,13 +453,11 @@ $tabs = $tabProductDao->findByProduct($product);
     function renderLengths(height, width) {
       $('#length').html('')
       $('#length').append('<option selected disabled>Seleccione</option>')
-      console.log(height, width)
       let measurementsAux = measurements.filter((measurement) => {
         if (measurement.height == height && measurement.width == width) {
           return measurement
         }
       })
-      console.log(measurementsAux)
       let lengths = []
       measurementsAux.forEach(measurement => {
         if (!lengths.includes(measurement.length)) {
@@ -469,23 +467,6 @@ $tabs = $tabProductDao->findByProduct($product);
       })
       $('#length').prop("disabled", false)
     }
-
-  /*   function renderLargoUtil(width) {
-      $('#length').html('')
-      $('#height').html('')
-      $('#height').append('<option selected disabled>Seleccione</option>')
-      $('#length').append('<option selected disabled>Seleccione</option>')
-      let measurementsAux = measurements.filter((measurement) => measurement.width == width)
-      let heights = []
-      measurementsAux.forEach(measurement => {
-        if (!heights.includes(measurement.height)) {
-          heights.push(measurement.height)
-          $('#height').append(`<option>${measurement.height}</option>`)
-        }
-      })
-      $('#height').prop("disabled", false)
-    } */
-
 
     $('.checkboxPrinting').change(function() {
       if ($(this).prop('checked')) {
