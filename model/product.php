@@ -7,6 +7,7 @@ class Product implements JsonSerializable
   private $description;
   private $images;
   private $materials;
+  private $cotizador;
   private $measurements;
   private $category;
   private $uses;
@@ -85,6 +86,18 @@ class Product implements JsonSerializable
   {
     $this->materials = $materials;
   }
+
+  public function getCotizador()
+  {
+    return $this->cotizador;
+  }
+
+  public function setCotizador($cotizador)
+  {
+    $this->cotizador = $cotizador;
+  }
+
+
 
   public function getMeasurements()
   {

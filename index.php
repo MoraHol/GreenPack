@@ -140,7 +140,7 @@ $conversor = new ConversorDate(); ?>
   <section class="section-gap info-area" style="padding: 0px 0 550px 0;">
     <div id="fh5co-counter" class="fh5co-bg fh5co-counter animated" style="background-image:url(/images/productos.png);   background-position-y: 50%;">
       <div class="container" id="counters">
-        <div class="row align-items-center justify-content-center" style="Svertical-align: middle; height: 600px;">
+        <div class="row align-items-center justify-content-center" style="vertical-align: middle; height: 600px;">
           <div class="col-md-3 col-sm-6 animate-box fadeInUp animated-fast">
             <div class="feature-center">
               <span class="icon">

@@ -4,7 +4,7 @@ include("../../partials/verify-session.php");
 // $materialDao = new MaterialDao();
 // $materials = $materialDao->findAll();
 ?>
-<!-- author: Alexis Holguin, github: MoraHol -->
+<!-- author: Teenus SAS, github: Teenus SAS -->
 <!doctype html>
 <html lang="es">
 

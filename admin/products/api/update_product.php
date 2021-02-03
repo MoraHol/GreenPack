@@ -1,6 +1,6 @@
 <?php
 /*
-*Desarrollada por Alexis Holguin(github: MoraHol)
+*Desarrollada por Teenus SAS
 */
 require_once dirname(dirname(dirname(__DIR__))) . "/dao/ProductDao.php";
 require_once dirname(dirname(dirname(__DIR__))) . "/dao/CategoryDao.php";
@@ -8,6 +8,7 @@ require_once dirname(dirname(dirname(__DIR__))) . "/model/Image.php";
 require_once dirname(dirname(dirname(__DIR__))) . "/dao/ImageDao.php";
 require_once dirname(dirname(dirname(__DIR__))) . "/dao/MaterialDao.php";
 require_once dirname(dirname(dirname(__DIR__))) . "/dao/MeasurementDao.php";
+
 $productDao = new ProductDao();
 $categoryDao = new CategoryDao();
 $imageDao = new ImageDao();
@@ -26,6 +27,8 @@ $product->setCategory($categoryDao->findById($_POST["category"]));
 $product->setPrice($_POST["price"]);
 $product->setRef($_POST["ref"]);
 $product->setUses(json_decode($_POST["uses"]));
+$product->setCotizador($_POST["cotizador"]);
+
 if (isset($_POST["photos"])) {
   $photos = json_decode($_POST["photos"]);
   $images = [];

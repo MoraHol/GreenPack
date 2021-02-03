@@ -1,5 +1,5 @@
 <?php
-//  author: Alexis Holguin Github: MoraHol
+//  author: Teenus SAS Github: Teenus SAS
 require_once dirname(dirname(dirname(dirname(__DIR__)))) . "/db/DBOperator.php";
 require_once dirname(dirname(dirname(dirname(__DIR__)))) . "/db/env.php";
 

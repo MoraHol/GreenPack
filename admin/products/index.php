@@ -1,7 +1,7 @@
 <?php
 include("../partials/verify-session.php");
 ?>
-<!-- author: Alexis Holguin, github: MoraHol -->
+<!-- author: Teenus SAS, github: Teenus SAS -->
 <!doctype html>
 <html lang="es">
 <?php
@@ -47,9 +47,13 @@ $products = $productDao->findAll();
           <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-table"></i>
-              Productos Ofertados</div>
+              Productos Ofertados
+            </div>
             <div class="card-body">
               <div class="table-responsive">
+                <div>
+                  <a class="btn btn-primary" href="create_product.php"> <i class="fas fa-plus"></i> Crear</a>
+                </div>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
@@ -77,9 +81,9 @@ $products = $productDao->findAll();
                   </tbody>
                 </table>
               </div>
-              <div>
+              <!-- <div>
                 <a class="btn btn-primary" href="create_product.php"> <i class="fas fa-plus"></i> Crear</a>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

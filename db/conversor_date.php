@@ -2,7 +2,7 @@
 
 /****************************************************************************************************************
 /*Esta clase permite hacer conversion de fechas dadas por php
-/*Desarrollada por Alexis Holguin(github: MoraHol)
+/*Desarrollada por Teenus SAS
 /*Para Teenus.com.co
 /*Ultima actualizacion 06/06/2019
 /****************************************************************************************************************/

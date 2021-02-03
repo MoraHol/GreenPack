@@ -1,7 +1,7 @@
   
 <?php
 /*
-* Desarrollada por Alexis Holguin(github: MoraHol)
+* Desarrollada por Teenus SAS
 */
 $host = $_SERVER["HTTP_HOST"];
 $protocol = isset($_SERVER["HTTPS"]) ? "https":"http";

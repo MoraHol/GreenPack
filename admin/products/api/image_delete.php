@@ -1,6 +1,6 @@
 <?php
 /*
-*Desarrollada por Alexis Holguin(github: MoraHol)
+*Desarrollada por Teenus SAS
 */
 require_once dirname(dirname(dirname(__DIR__))) . "/dao/ImageDao.php";
 if (isset($_POST["id"])) {

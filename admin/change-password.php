@@ -1,6 +1,6 @@
 <?php
 /*
-* Desarrollada por Alexis Holguin(github: MoraHol)
+* Desarrollada por Teenus SAS
 */
 require_once dirname(__DIR__) . "/db/DBOperator.php";
 require_once dirname(__DIR__) . "/db/env.php";

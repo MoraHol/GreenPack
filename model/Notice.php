@@ -1,7 +1,7 @@
 <?php
 /****************************************************************************************************************
 /*Esta clase es el modelo de Noticia
-/*Desarrollada por Alexis Holguin(github: MoraHol)
+/*Desarrollada por Teenus SAS
 /*Para greenpack.com.co
 /*Ultima actualizacion 28/06/2019
 /****************************************************************************************************************/

@@ -2,12 +2,12 @@
 require_once dirname(__DIR__) . "/model/Quotation.php";
 require_once dirname(__DIR__) . "/model/Item.php";
 require_once dirname(__DIR__) . "/model/ItemBag.php";
-require_once dirname(__DIR__) . "/model/ItemBox.php";
-require_once dirname(__DIR__) . "/model/ItemIndividual.php";
-require_once dirname(__DIR__) . "/model/ItemSheet.php";
-require_once dirname(__DIR__) . "/model/ItemSaco.php";
-require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemBolsasLaminadas.php");
-require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemFondoAutomatico.php");
+//require_once dirname(__DIR__) . "/model/ItemBox.php";
+//require_once dirname(__DIR__) . "/model/ItemIndividual.php";
+//require_once dirname(__DIR__) . "/model/ItemSheet.php";
+//require_once dirname(__DIR__) . "/model/ItemSaco.php";
+//require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemBolsasLaminadas.php");
+//require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemFondoAutomatico.php");
 require_once dirname(__DIR__) . "/db/DBOperator.php";
 require_once dirname(__DIR__) . "/db/env.php";
 require_once dirname(__DIR__) . "/dao/MeasurementDao.php";
@@ -16,7 +16,7 @@ require_once dirname(__DIR__) . "/dao/ProductDao.php";
 require_once dirname(__DIR__) . "/dao/AdminDao.php";
 /*****************************************************************************
 /*Esta clase permite Crear, Actualizar, Buscar y Eliminar Cotizaciones
-/*Desarrollada por Alexis Holguin(github: MoraHol)
+/*Desarrollada por Teenus SAS
 /*Para Teenus.com.co
 /*Ultima actualizacion 31/07/2019
 /*****************************************************************************/
