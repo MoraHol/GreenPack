@@ -1,6 +1,8 @@
 <?php
 require_once(dirname(__DIR__) . "/dao/ProductDao.php");
 require_once(dirname(__DIR__) . "/dao/TabProductDao.php");
+require_once(dirname(__DIR__) . "/dao/MeasurementDao.php");
+
 if (!$_GET) {
   header("Location: /shop");
 }
@@ -57,20 +59,22 @@ $tabs = $tabProductDao->findByProduct($product);
   <script src="/js/jquery.easing.1.3.js"></script>
 
   <style>
-    @media screen and (max-width: 500px){
+    @media screen and (max-width: 500px) {
       .flex-direction-nav {
         display: none;
       }
+
       .flex-direction-nav .flex-prev {
         display: none;
-      
+
+      }
+
+      .flex-direction-nav .flex-next {
+        display: none;
+      }
+
     }
 
-    .flex-direction-nav .flex-next {
-      display: none;
-    }
-    
-    }
     .flex-direction-nav {
       display: flex;
       justify-content: center;
@@ -173,7 +177,7 @@ $tabs = $tabProductDao->findByProduct($product);
                   <div class="card-header" id="headingOne">
                     <h2 class="mb-0 panel-title">
                       <a class="btn btn-link text-left" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        <i class="more-less fas fa-minus"></i>Caracteristicas
+                        <i class="more-less fas fa-minus"></i>Características
                       </a>
                     </h2>
                   </div>
@@ -187,8 +191,9 @@ $tabs = $tabProductDao->findByProduct($product);
                             <input type="checkbox" class="checkboxPrinting" id="impresion">
                             <span class="slider round"></span>
                             <span class="questionPrinting">NO</span>
-                          </label></div>
-                        <div class="col">
+                          </label>
+                        </div>
+                        <!-- <div class="col">
                           <span>Ventanilla:</span>
                           <br>
                           <label class="switch">
@@ -205,7 +210,7 @@ $tabs = $tabProductDao->findByProduct($product);
                             <span class="slider round"></span>
                             <span class="questionPrinting">NO</span>
                           </label>
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                   </div>
@@ -267,7 +272,7 @@ $tabs = $tabProductDao->findByProduct($product);
                   <div class="card-header" id="headingFour">
                     <h2 class="mb-0 panel-title">
                       <a class="btn btn-link collapsed text-left" role="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                        Cantidad<i class="more-less fas fa-plus"></i>
+                        Cantidad Mínima<i class="more-less fas fa-plus"></i>
                       </a>
                     </h2>
                   </div>
@@ -413,7 +418,7 @@ $tabs = $tabProductDao->findByProduct($product);
     $('#height').attr("disabled", "false")
     let measurements = `<?= json_encode($product->getMeasurements()); ?>`
     measurements = JSON.parse(measurements)
-    console.log(measurements);
+    //console.log(measurements);
     let widths = []
     measurements.forEach(measurement => {
       if (!widths.includes(measurement.width)) {
@@ -430,9 +435,9 @@ $tabs = $tabProductDao->findByProduct($product);
       $('#length').prop("disabled", true)
       renderLengths($(this).val(), $('#width').val())
     })
-   /*  $('#length').change(function() {
-      renderLengths($(this).val(), $('#width').val())
-    }) */
+    /*  $('#length').change(function() {
+       renderLengths($(this).val(), $('#width').val())
+     }) */
 
     function renderHeigths(width) {
       $('#length').html('')
@@ -484,12 +489,18 @@ $tabs = $tabProductDao->findByProduct($product);
     $('#btnCotizar').removeClass("disabled")
     $('#help-quantity').fadeOut()
 
+
     function verifyMinQuantity() {
+      /* se debe cargar la informacion desde la base de datos y validar si se selecciono impresion o generica y de acuerdo a la medida obtener la minima cantidad  */
       if (category == "bolsas") {
-        if ($('#width').val() < 13) {
-          minQuantity = 20000
+        let $printing = $('#impresion').prop('checked')
+        let measurements = `<?= json_encode($product->getMeasurements()); ?>`
+        measurements = JSON.parse(measurements);
+        console.log(measurements);
+        if ($printing) {
+          minQuantity = measurements[0].ventaMinimaImpresa;
         } else {
-          minQuantity = 10000
+          minQuantity = measurements[0].ventaMinimaGenerica;
         }
       } else {
         minQuantity = 1000
@@ -497,7 +508,18 @@ $tabs = $tabProductDao->findByProduct($product);
       return minQuantity
     }
 
+    $('#impresion').change(function(e) {
+      e.preventDefault();
+      let $printing = $('#impresion').prop('checked')
+      $printing == false ? minQuantity = measurements[0].ventaMinimaGenerica : minQuantity = measurements[0].ventaMinimaImpresa;
+      $('#sst').val(minQuantity)
+      verifyMinQuantityValue()
+    });
+
+
     function verifyMinQuantityValue() {
+      minQuantity
+      imput = $('#sst').val()
       if ($('#sst').val() < verifyMinQuantity()) {
         $('#btnCotizar').addClass("disabled")
         $('#help-quantity').html(`<br><div class="alert alert-danger alert-min-quantity" role="alert"><span>Cantidad minima ${verifyMinQuantity()} unidades. ¿Te gustaría cotizar menores cantidades? Te invitamos a visitar a nuestro aliado Greenpoint (<a style="color:green" href="//www.greenpointonline.com.co" target="_blank">www.greenpointonline.com.co</a>)</div>`)
@@ -546,18 +568,18 @@ $tabs = $tabProductDao->findByProduct($product);
       } else {
         if ($width == null || $height == null || $length == null) {
           $.notify({
+            icon: 'fas fa fa-bell',
             message: 'Selecciona las Medidas',
-            //title: 'Greenpack',
-            icon: 'fas fa-exclamation-triangle'
+
           }, {
-            type: 'danger'
+            type: 'danger',
+            timer: 3000
           })
         }
         if ($material == undefined) {
           $.notify({
             message: 'Selecciona la Materia Prima',
-            //title: 'Greenpack',
-            icon: 'fas fa-exclamation-triangle'
+            icon: 'fas fa fa-bell'
           }, {
             type: 'danger'
           })

@@ -1,10 +1,10 @@
 <?php
 require_once __DIR__ . "/ItemBag.php";
-require_once __DIR__ . "/ItemBox.php";
-require_once __DIR__ . "/ItemIndividual.php";
-require_once __DIR__ . "/ItemSheet.php";
-require_once __DIR__ . "/ItemSaco.php";
-require_once __DIR__ . "/ItemFondoAutomatico.php";
+//require_once __DIR__ . "/ItemBox.php";
+//require_once __DIR__ . "/ItemIndividual.php";
+//require_once __DIR__ . "/ItemSheet.php";
+//require_once __DIR__ . "/ItemSaco.php";
+//require_once __DIR__ . "/ItemFondoAutomatico.php";
 class Quotation implements JsonSerializable
 {
   private $nameClient;

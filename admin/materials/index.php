@@ -4,7 +4,7 @@ include("../partials/verify-session.php");
 $materialDao = new MaterialDao();
 $materials = $materialDao->findAll();
 ?>
-<!-- author: Alexis Holguin, github: MoraHol -->
+<!-- author: Teenus SAS, github: Teenus SAS -->
 <!doctype html>
 <html lang="es">
 
@@ -49,8 +49,13 @@ $materials = $materialDao->findAll();
               <i class="fas fa-table"></i>
               Materiales registrados</div>
             <div class="card-body">
+              
               <div class="table-responsive">
+                
                 <table class="table row-border table-bordered hover" id="dataTable" width="100%" cellspacing="0">
+                <div>
+                <a class="btn btn-primary" href="create_material.php"> <i class="fas fa-plus"></i> Crear</a>
+              </div>
                   <thead>
                     <tr>
                       <th class="text-center">Material</th>
@@ -75,9 +80,9 @@ $materials = $materialDao->findAll();
                   </tbody>
                 </table>
               </div>
-              <div>
+              <!-- <div>
                 <a class="btn btn-primary" href="create_material.php"> <i class="fas fa-plus"></i> Crear</a>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

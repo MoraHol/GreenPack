@@ -1,6 +1,6 @@
 <?php
 /*
-*Desarrollada por Alexis Holguin(github: MoraHol)
+*Desarrollada por Teenus SAS
 */
 require_once dirname(dirname(dirname(__DIR__))) . "/dao/ProductDao.php";
 require_once dirname(dirname(dirname(__DIR__))) . "/model/product.php";
@@ -39,6 +39,11 @@ if (isset($_POST)) {
     $measurement->setHeight($measurementReq->height);
     $measurement->setLength($measurementReq->lenght);
     $measurement->setWindow($measurementReq->window);
+    $measurement->setLargoUtil($measurementReq->largo_util);
+    $measurement->setAnchoTotal($measurementReq->ancho_total);
+    $measurement->setVentaMinimaImpresa($measurementReq->venta_minima_impresa);
+    $measurement->setVentaMinimaGenerica($measurementReq->venta_minima_generica);
+
     array_push($measurements, $measurement);
   }
   $product->setImages($images);

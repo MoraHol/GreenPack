@@ -9,7 +9,7 @@ require_once(dirname(__DIR__) . "/db/env.php");
 
 /*****************************************************************************
 /*Esta clase permite Crear, Actualizar, Buscar y Eliminar Materiales
-/*Desarrollada por Alexis Holguin(github: MoraHol)
+/*Desarrollada por Teenus SAS
 /*Para Teenus.com.co
 /*Ultima actualizacion 31/07/2019
 /*****************************************************************************/
@@ -27,7 +27,7 @@ class MaterialDao
   function findAll()
   {
     $materials = [];
-    $materialsDB = $this->db->consult("SELECT * FROM `materials`", "yes");
+    $materialsDB = $this->db->consult("SELECT * FROM `materials` ORDER BY `name`", "yes");
     foreach ($materialsDB as  $materialDB) {
       $material = new Material();
       $material->setId($materialDB["id_materials"]);

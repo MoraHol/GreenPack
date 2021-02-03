@@ -176,7 +176,7 @@
                   <ul>
                     <?php foreach ($categories as $catego) {
                       $categoriesChildren = $categoryDao->findChildren($catego->getId()); ?>
-                      <?php if (count($categoriesChildren) > 0 && $catego->getId() != 1) { ?>
+                      <?php if (count($categoriesChildren) > 0 /* && $catego->getId() != 1 */) { ?>
                         <li class="filter-list text-capitalize"><a href="#<?= $catego->getName() ?>" class="accordion" data-toggle="collapse"><?= $catego->getName() ?> <span> (<?= count($productDao->findByCategory(2)); ?>)</span></a>
                           <ul id="<?= $catego->getName() ?>" class="category collapse">
                             <?php foreach ($categoriesChildren as  $cat) { ?>
@@ -218,7 +218,7 @@
               <div class="input-group filter-bar-search mr-auto">
                 <input class="form-control" type="text" placeholder="Buscar" id="in-search">
                 <div class="input-group-append">
-                  <button class="btn" style="" type="button" id="btn-search"><i class="fas fa-search"></i></button>
+                  <button class="btn" type="button" id="btn-search"><i class="fas fa-search"></i></button>
                 </div>
               </div>
             </div>

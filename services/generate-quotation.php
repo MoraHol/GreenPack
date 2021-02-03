@@ -1026,8 +1026,8 @@ if (isset($_GET["id"])) {
               <br>
             </td>
             <td colspan="2" class="xl8610772" style="border-right:.5pt solid black"><span style="mso-spacerun:yes">&nbsp;</span><?= number_format($item->getQuantity(), 0, ",", ".") ?></td>
-            <td class="xl7210772" style="border-left:none"><span style="mso-spacerun:yes">&nbsp;</span>$<span style="mso-spacerun:yes">&nbsp;</span><?= money_format("%!i", $item->getPrice()) ?></td>
-            <td colspan="2" class="xl7310772" style="border-left:none"><span style="mso-spacerun:yes">&nbsp;</span>$<span style="mso-spacerun:yes">&nbsp;</span><?= money_format("%!i", $item->calculateTotal()) ?> </td>
+            <td class="xl7210772" style="border-left:none"><span style="mso-spacerun:yes">&nbsp;</span>$<span style="mso-spacerun:yes">&nbsp;</span><?= number_format($item->getPrice(), 0, ",", ".") ?></td>
+            <td colspan="2" class="xl7310772" style="border-left:none"><span style="mso-spacerun:yes">&nbsp;</span>$<span style="mso-spacerun:yes">&nbsp;</span><?= number_format($item->calculateTotal(), 0, ",", ".") ?> </td>
 
           </tr>
           <!-- individual product -->
@@ -1077,18 +1077,18 @@ if (isset($_GET["id"])) {
           </td>
           <td class="xl6510772"></td>
           <td class="xl1510772">Subtotal</td>
-          <td colspan="2" class="xl7310772"><span style="mso-spacerun:yes">&nbsp;</span>$<span style="mso-spacerun:yes">&nbsp;</span><?= money_format("%!i", $quotation->calculateTotal()) ?></td>
+          <td colspan="2" class="xl7310772"><span style="mso-spacerun:yes">&nbsp;</span>$<span style="mso-spacerun:yes">&nbsp;</span><?= number_format($quotation->calculateTotal(), 0, ",", ".") ?></td>
         </tr>
         <tr height="21" style="mso-height-source:userset;height:15.75pt">
           <td height="21" class="xl6510772" style="height:15.75pt"></td>
           <td class="xl1510772">IVA 19%</td>
-          <td colspan="2" class="xl7310772" style="border-top:none">&nbsp; $ <?= money_format("%!i", $quotation->calculateTotal() * 0.19) ?></td>
+          <td colspan="2" class="xl7310772" style="border-top:none">&nbsp; $ <?= number_format($quotation->calculateTotal() * 0.19, 0, ",", ".") ?></td>
 
         </tr>
         <tr height="21" style="mso-height-source:userset;height:15.75pt">
           <td height="21" class="xl6510772" style="height:15.75pt"></td>
           <td class="xl1510772">Total</td>
-          <td colspan="2" class="xl7310772" style="border-top:none">&nbsp; $ <?= money_format("%!i", $quotation->calculateTotal() + $quotation->calculateTotal() * 0.19) ?></td>
+          <td colspan="2" class="xl7310772" style="border-top:none">&nbsp; $ <?= number_format($quotation->calculateTotal() + $quotation->calculateTotal() * 0.19, 0, ",", ".") ?></td>
 
         </tr>
         <tr height="21" style="mso-height-source:userset;height:15.75pt">

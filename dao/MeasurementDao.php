@@ -9,7 +9,7 @@ require_once dirname(__DIR__) . "/db/DBOperator.php";
 
 /*****************************************************************************
 /*Esta clase permite Crear, Actualizar, Buscar y Eliminar Medidas
-/*Desarrollada por Alexis Holguin(github: MoraHol)
+/*Desarrollada por Teenus SAS
 /*Para Teenus.com.co
 /*Ultima actualizacion 31/07/2019
 /*****************************************************************************/
@@ -58,8 +58,12 @@ class MeasurementDao
     $measurement->setWidth($measurementDB["width"]);
     $measurement->setHeight($measurementDB["height"]);
     $measurement->setWindow($measurementDB["window"]);
+    $measurement->setLargoUtil($measurementDB["largo_util"]);
+    $measurement->setAnchoTotal($measurementDB["ancho_total"]);
     $measurement->setProduct($measurementDB["products_id_products"]);
     $measurement->setPliego($measurementDB["pliego"]);
+    $measurement->setVentaMinimaImpresa($measurementDB["venta_minima_impresa"]);
+    $measurement->setVentaMinimaGenerica($measurementDB["venta_minima_generica"]);
     // $this->db->close();
     return $measurement;
   }
@@ -95,8 +99,12 @@ class MeasurementDao
     $measurement->setWidth($measurementDB["width"]);
     $measurement->setHeight($measurementDB["height"]);
     $measurement->setWindow($measurementDB["window"]);
+    $measurement->setLargoUtil($measurementDB["largo_util"]);
+    $measurement->setAnchoTotal($measurementDB["ancho_total"]);
     $measurement->setProduct($product->getId());
     $measurement->setPliego($measurementDB["pliego"]);
+    $measurement->setVentaMinimaImpresa($measurementDB["venta_minima_impresa"]);
+    $measurement->setVentaMinimaGenerica($measurementDB["venta_minima_generica"]);
     // self::$logger->info($query);
     $this->db->close();
     return $measurement;
@@ -134,9 +142,13 @@ class MeasurementDao
       $measurement->setWidth($measurementDB["width"]);
       $measurement->setHeight($measurementDB["height"]);
       $measurement->setWindow($measurementDB["window"]);
+      $measurement->setLargoUtil($measurementDB["largo_util"]);
+      $measurement->setAnchoTotal($measurementDB["ancho_total"]);
       $measurement->setIdMaterial($idMaterial);
       $measurement->setProduct($product->getId());
-      
+      $measurement->setVentaMinimaImpresa($measurementDB["venta_minima_impresa"]);
+      $measurement->setVentaMinimaGenerica($measurementDB["venta_minima_generica"]);
+
       // self::$logger->info($query);
       array_push($measurements, $measurement);
     }

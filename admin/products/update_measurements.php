@@ -22,7 +22,7 @@ $measurements = $measurementDao->findByMaterial($_GET["id_material"], $product);
 <?php
 include("../partials/verify-session.php");
 ?>
-<!-- author: Alexis Holguin, github: MoraHol -->
+<!-- author: Teenus SAS, github: Teenus SAS -->
 <!doctype html>
 <html lang="es">
 

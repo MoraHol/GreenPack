@@ -4,7 +4,7 @@ require_once dirname(__DIR__) . "/model/Notice.php";
 require_once dirname(__DIR__) . "/db/env.php";
 /****************************************************************************************************************
 /*Esta clase permite Crear, Actualizar, Buscar y Eliminar Noticias
-/*Desarrollada por Alexis Holguin(github: MoraHol)
+/*Desarrollada por Teenus SAS
 /*Para greenpack.com.co
 /*Ultima actualizacion 28/06/2019
 /****************************************************************************************************************/

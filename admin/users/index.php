@@ -7,7 +7,7 @@ $admins = $adminDao->findAll();
 $db = new DBOperator($_ENV["db_host"], $_ENV["db_user"], $_ENV["db_name"], $_ENV["db_pass"]);
 $roles = $db->consult("SELECT * FROM `roles_admin`", "yes");
 ?>
-<!-- author: Alexis Holguin, github: MoraHol -->
+<!-- author: Teenus SAS, github: Teenus SAS -->
 <!doctype html>
 <html lang="es">
 

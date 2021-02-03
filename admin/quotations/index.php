@@ -1,4 +1,4 @@
-<!-- author: Alexis Holguin, github: MoraHol -->
+<!-- author: Teenus SAS, github: Teenus SAS -->
 <?php
 include("../partials/verify-session.php");
 require_once dirname(dirname(__DIR__)) . "/dao/QuotationDao.php";
@@ -80,7 +80,7 @@ if ($admin->getRole() != 2) {
                   Registros</div>
                 <div class="card-body">
                   <div class="table-responsive">
-                    <table class="table row-border table-bordered hover dataTable" width="100%" cellspacing="0">
+                    <table class="table row-border table-bordered dataTable" width="100%" cellspacing="0">
                       <thead>
                         <tr>
                           <th class="text-center">Id</th>
@@ -109,7 +109,7 @@ if ($admin->getRole() != 2) {
                         </tr>
                         <?php } ?>
                       </tbody>
-                    </table>
+                    </table>  
                   </div>
                 </div>
               </div>

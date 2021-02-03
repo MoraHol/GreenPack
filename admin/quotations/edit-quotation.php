@@ -7,7 +7,7 @@ if (!isset($_GET["id"])) {
 }
 $quotation = $quotationDao->findById($_GET["id"]);
 ?>
-<!-- author: Alexis Holguin, github: MoraHol -->
+<!-- author: Teenus SAS, github: Teenus SAS -->
 <!doctype html>
 <html lang="es">
 

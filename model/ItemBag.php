@@ -30,14 +30,21 @@ class ItemBag extends Item implements JsonSerializable
     $content = curl_exec($curl);
     curl_close($curl);
     $pricePLA = (int) $content;
-    $LongUseful = $this->getMeasurement()->getLength() - 3;
-    $AT = (($this->getMeasurement()->getWidth() + $this->getMeasurement()->getHeight()) * 2) + 2;
+    
+    //$LongUseful = $this->getMeasurement()->getLength() - 3;
+    $LongUseful = $this->getMeasurement()->getLargoUtil();
+    
+    //$AT = (($this->getMeasurement()->getWidth() + $this->getMeasurement()->getHeight()) * 2) + 2;
+    $AT = $this->getMeasurement()->getAnchoTotal();
+    
     $V = $this->getMeasurement()->getWindow();
+    
     $PAPER = ($AT * $this->getMeasurement()->getLength() * $this->getMaterial()->getGrammage()) / 10000000;
     $PLA = ((($V + 3) * $this->getMeasurement()->getLength()) * 30) / 10000000;
     $LAM = ($AT * $this->getMeasurement()->getLength() * 30) / 10000000;
     $CPLA = $PLA * $pricePLA;
     $CLAM = $LAM * $pricePLA;
+    
     $CPAPER = $PAPER * $this->getMaterial()->getPricePerKg();
     $directCost = $CPAPER;
     if ($this->isLam() && $this->isPla()) {

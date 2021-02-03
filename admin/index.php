@@ -1,6 +1,6 @@
 <?php
 /*
-* Desarrollada por Alexis Holguin(github: MoraHol)
+* Desarrollada por Teenus SAS
 */
 session_start();
 if (isset($_SESSION["admin"])) {

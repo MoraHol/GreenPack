@@ -213,9 +213,9 @@ $tabs = $tabProductDao->findByProduct($product);
                   </div>
                   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion-cotizador">
                     <div class="card-body">
-                      <label class="radio-inline" style="margin-left: 10px;">&nbsp;&nbsp;<input type="radio" name="material" value="Productos Secos">&nbsp;&nbsp;&nbsp;Productos Secos</label>
-                      <label class="radio-inline" style="margin-left: 10px;">&nbsp;&nbsp;<input type="radio" name="material" value="Productos Humedos">&nbsp;&nbsp;&nbsp;Productos Humedos</label>
-                      <label class="radio-inline" style="margin-left: 10px;">&nbsp;&nbsp;<input type="radio" name="material" value="Productos Grasos">&nbsp;&nbsp;&nbsp;Productos Grasos</label>
+                      <label class="radio-inline" style="margin-left: 10px;">&nbsp;&nbsp;<input type="radio" name="material" value="Productos Secos">&nbsp;&nbsp;&nbsp;Secos</label>
+                      <label class="radio-inline" style="margin-left: 10px;">&nbsp;&nbsp;<input type="radio" name="material" value="Productos Humedos">&nbsp;&nbsp;&nbsp;Humedos</label>
+                      <label class="radio-inline" style="margin-left: 10px;">&nbsp;&nbsp;<input type="radio" name="material" value="Productos Grasos">&nbsp;&nbsp;&nbsp;Grasos</label>
                     </div>
                   </div>
                 </div>

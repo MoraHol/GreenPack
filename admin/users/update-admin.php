@@ -1,4 +1,4 @@
-<!-- author: Alexis Holguin, github: MoraHol -->
+<!-- author: Teenus SAS, github: Teenus SAS -->
 
 <?php
 require_once dirname(dirname(__DIR__)) . "/db/DBOperator.php";

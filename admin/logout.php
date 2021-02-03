@@ -1,6 +1,6 @@
 <?php
 /*
-* Desarrollada por Alexis Holguin(github: MoraHol)
+* Desarrollada por Teenus SAS
 */
 if (isset($_POST["logout"])) {
   if ($_POST["logout"] == "true") {

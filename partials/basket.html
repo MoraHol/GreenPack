@@ -21,7 +21,6 @@
 
     <div class="border-space"></div>
 
-
     <div class="basket-footer">
       <div class="border-space"></div>
       <div class="cont-footer-header">
@@ -121,7 +120,7 @@
                 <div class="col">
                   <div class="form-group">
                     <textarea name="extra" id="" rows="5" class="form-control"
-                      placeholder="Ingrese las especificaciones extra para tu cotización"></textarea>
+                      placeholder="Si deseas en este espacio puedes ingresar especificaciones extra para tu cotización"></textarea>
                   </div>
                 </div>
               </div>
@@ -131,7 +130,7 @@
         </div>
         <div class="modal-footer">
           <input class="btn btn-primary" type="submit" value="Enviar Cotización">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Seguir Cotizando</button>
+          <button type="button" class="btn btn-info" data-dismiss="modal">Seguir Cotizando</button>
         </div>
       </div>
     </div>
@@ -145,7 +144,6 @@
     $('#modal-oder').modal('hide')
     $.notify({
       message: 'Enviando Email',
-      //title: 'Greenpack',
       icon: 'fas fa-envelope'
     }, {
       type: 'info'
@@ -154,7 +152,6 @@
       if (status == 'success') {
         $.notify({
           message: 'Cotizacion enviada',
-          //title: 'Greenpack',
           icon: 'fas fa-envelope-open'
         }, {
           type: 'success'

@@ -7,7 +7,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/dao/MeasurementDao.php";
  * Este script se realiza para traer las medidas del 
  * producto con respecto a un material  
  * 
- * @author Alexis Holguin <wholguinmor@uniminuto.edu.co>
+ * @author Teenus SAS <wholguinmor@uniminuto.edu.co>
  * @version 1.0.0
  * 
  */

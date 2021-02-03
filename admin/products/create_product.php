@@ -1,7 +1,7 @@
 <?php
 include("../partials/verify-session.php");
 ?>
-<!-- author: Alexis Holguin, github: MoraHol -->
+<!-- author: Teenus SAS, github: Teenus SAS -->
 <!doctype html>
 <html lang="es">
 
@@ -60,8 +60,8 @@ include("../partials/verify-session.php");
           </ol>
           <br>
           <div class="form-group">
-            <label for="title">Nombre:</label>
-            <input type="text" placeholder="bolsa de manija" id="title" class="form-control">
+            <label for="title">Nombre del producto:</label>
+            <input type="text" id="title" class="form-control">
           </div>
           <br>
 
@@ -69,7 +69,7 @@ include("../partials/verify-session.php");
             <div class="col">
               <div class="form-group">
                 <label for="ref">Referencia:</label>
-                <input type="text" placeholder="LV-12" id="ref" class="form-control">
+                <input type="text" id="ref" class="form-control">
               </div>
             </div>
             <div class="col">
@@ -82,7 +82,7 @@ include("../partials/verify-session.php");
 
           <br>
           <div class="form-group">
-            <label for="content">Descripción:</label>
+            <label for="content">Descripción del producto:</label>
             <br>
             <textarea name="content" id="content"></textarea>
           </div>
@@ -113,8 +113,6 @@ include("../partials/verify-session.php");
               <div class="form-gruop" style="display: none">
                 <label for="campo1">Materiales:</label>
                 <ul class="list-unstyled" id="materials">
-
-
                 </ul>
               </div>
 
@@ -247,10 +245,11 @@ include("../partials/verify-session.php");
                 $(`#window${indexMeasurement}`).val(0)
                 break;
             }
-            
+
           }
         }
-        function addMeasurementHtml(indexMeasurement, nameAdditional = ''){
+
+        function addMeasurementHtml(indexMeasurement, nameAdditional = '') {
           $('#measurements').append(`<li>Medida ${indexMeasurement}:<div class="row">
                   <div class="col"><label for="width${indexMeasurement}">Ancho:</label><input type="number" id="width${indexMeasurement}" class="form-control"></div>
                   <div class="col"><label for="height${indexMeasurement}">Alto:</label><input type="number" id="height${indexMeasurement}" class="form-control"></div>
@@ -358,11 +357,17 @@ include("../partials/verify-session.php");
                 measurement.height = $('#height' + (index + 1)).val()
                 measurement.lenght = $('#lenght' + (index + 1)).val()
                 measurement.window = $('#window' + (index + 1)).val()
+                measurement.largo_util = $('#largo-util' + (index + 1)).val()
+                measurement.ancho_total = $('#ancho-total' + (index + 1)).val()
+                measurement.venta_minima_impresa = $('#venta-minima-impresa' + (index + 1)).val()
+                measurement.venta_minima_generica = $('#venta-minima-generica' + (index + 1)).val()
+
                 if (typeof($('#width' + (index + 1)).val()) != 'undefinded' && $('#width' + (index + 1)).val() != '' &&
                   typeof($('#height' + (index + 1)).val()) != 'undefined' && $('#height' + (index + 1)).val() != '' &&
                   typeof($('#lenght' + (index + 1)).val()) != 'undefined' && $('#lenght' + (index + 1)).val() != '' &&
                   $('#window' + (index + 1)).val() != undefined) {
                   measurements.push(measurement)
+                  debugger;
                 }
               }
               $.post("api/create_product.php", {

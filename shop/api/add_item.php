@@ -3,11 +3,11 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/model/Quotation.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . "/dao/QuotationDao.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . "/model/Item.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemBag.php");
-require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemBox.php");
-require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemIndividual.php");
-require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemSheet.php");
-require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemFondoAutomatico.php");
-require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemBolsasLaminadas.php");
+//require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemBox.php");
+//require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemIndividual.php");
+//require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemSheet.php");
+//require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemFondoAutomatico.php");
+//require_once($_SERVER["DOCUMENT_ROOT"] . "/model/ItemBolsasLaminadas.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . "/dao/ProductDao.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . "/dao/MeasurementDao.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . "/dao/MaterialDao.php");
@@ -64,9 +64,8 @@ if (
     $item->setTypeProduct($itemDB["type_product"]);
     $item->setLam(false);
     $item->setPla(false);
-    $item->setMaterial($materialDao->findByIdByProduct($product->getMaterials()[0]->getId(),$product));
-
-  }else {
+    $item->setMaterial($materialDao->findByIdByProduct($product->getMaterials()[0]->getId(), $product));
+  } else {
     $item = new ItemBox();
     $item->setLam(false);
     $item->setPla(false);

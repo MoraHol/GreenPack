@@ -42,7 +42,7 @@
       box-shadow: 5px 10px;
     }
 
-    #banner-box::after {}
+    /* #banner-box::after {} */
 
     #banner-box:before {
       content: '';

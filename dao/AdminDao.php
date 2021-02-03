@@ -4,7 +4,7 @@ require_once dirname(__DIR__) . "/db/env.php";
 require_once dirname(__DIR__) . "/model/Admin.php";
 /*****************************************************************************
 /*Esta clase permite Crear, Actualizar, Buscar y Eliminar Usuarios Administradores
-/*Desarrollada por Alexis Holguin(github: MoraHol)
+/*Desarrollada por Teenus SAS
 /*Para Teenus.com.co
 /*Ultima actualizacion 31/07/2019
 /*****************************************************************************/

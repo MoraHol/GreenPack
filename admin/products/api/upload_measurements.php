@@ -1,6 +1,6 @@
 <?php
 /*
-* Desarrollada por Alexis Holguin(github: MoraHol)
+* Desarrollada por Teenus SAS
 */
 require_once dirname(dirname(dirname(__DIR__))) . '/vendor/PHPExcel/PHPExcel.php';
 require_once dirname(dirname(dirname(__DIR__))) . '/dao/MeasurementDao.php';
@@ -22,6 +22,12 @@ for ($row = 2; $row <= $highestRow; $row++) {
     $measurement->setHeight((int) $sheet->getCell("B" . $row)->getValue());
     $measurement->setLength((int) $sheet->getCell("C" . $row)->getValue());
     $measurement->setWindow((int) $sheet->getCell("D" . $row)->getValue());
+    
+    $measurement->setLargoUtil((int) $sheet->getCell("E" . $row)->getValue());
+    $measurement->setAnchoTotal((int) $sheet->getCell("F" . $row)->getValue());
+    $measurement->setVentaMinimaImpresa((int) $sheet->getCell("G" . $row)->getValue());
+    $measurement->setVentaMinimaGenerica((int) $sheet->getCell("H" . $row)->getValue());
+    
     $measurement->setProduct($_POST["id"]);
     $measurementDao->saveByProduct($measurement);
 }

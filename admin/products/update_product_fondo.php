@@ -47,7 +47,7 @@ switch ($product->getCategory()->getId()) {
 }
 
 ?>
-  <!-- author: Alexis Holguin, github: MoraHol -->
+  <!-- author: Teenus SAS, github: Teenus SAS -->
   <!doctype html>
   <html lang="es">
 
