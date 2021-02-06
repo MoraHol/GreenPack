@@ -17,6 +17,7 @@ class Measurement implements JsonSerializable
   private $largoUtil;
   private $ventaMinimaImpresa;
   private $ventaMinimaGenerica;
+  // private $codigo;
 
   public function getId()
   {
@@ -27,6 +28,16 @@ class Measurement implements JsonSerializable
   {
     $this->id = $id;
   }
+
+// public function getcodigo($codigo)
+// {
+//    return $this->codigo;
+// }
+
+// public function setcodigo($codigo)
+// {
+//    $this->codigo = $codigo;
+// }
 
   public function getAnchoTotal()
   {
@@ -88,6 +99,16 @@ class Measurement implements JsonSerializable
   {
     $this->width = $width;
   }
+
+  public function getcodigo()
+{
+   return $this->codigo;
+}
+
+public function setcodigo($codigo)
+{
+   $this->codigo = $codigo;
+}
 
   public function getHeight()
   {

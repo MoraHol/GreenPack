@@ -295,6 +295,10 @@ switch ($product->getCategory()->getId()) {
                   <br>
                   <li>Medida <?= $indexMeasurement ?>:<div class="row">
                       <div class="row">
+                        <div class="col ml-4"> <label for="codigo<?= $indexMeasurement ?>">Codigo:</label>
+                        <!-- Evento para traer el codigo -->
+                        <input type="text" id="codigo<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getcodigo(); ?>" readonly>
+                      </div>
                         <div class="col ml-4"><label for="width<?= $indexMeasurement ?>">Ancho:</label><input type="number" id="width<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getWidth(); ?>" readonly></div>
                         <div class="col height"><label for="height<?= $indexMeasurement ?>">Alto:</label><input type="number" id="height<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getHeight(); ?>" readonly></div>
                         <div class="col lenght"><label for="lenght<?= $indexMeasurement ?>">Largo:</label><input type="number" id="lenght<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getLength(); ?>" readonly></div>
@@ -537,6 +541,7 @@ switch ($product->getCategory()->getId()) {
 
       function updateMeasurement(idProduct, idMeasurement, indexMeasurement, evTarget) {
 
+        const codigoInput = elById(`codigo${indexMeasurement}`);
         const widthInput = elById(`width${indexMeasurement}`);
         const heightInput = elById(`height${indexMeasurement}`);
         const lengthInput = elById(`lenght${indexMeasurement}`);
@@ -553,6 +558,7 @@ switch ($product->getCategory()->getId()) {
           /*   evTarget.closest('button').value = 'Guardar'; */
           evTarget.closest('button').value = 'Guardar';
           evTarget.closest('button').textContent = 'Guardar';
+          codigoInput.readOnly = false;
           widthInput.readOnly = false;
           heightInput.readOnly = false;
           lengthInput.readOnly = false;
@@ -563,6 +569,7 @@ switch ($product->getCategory()->getId()) {
 
           const measurementInfo = {
             idMeasurement: idMeasurement,
+            codigo: codigoInput.value,
             width: widthInput.value,
             height: heightInput.value,
             length: lengthInput.value,
@@ -591,6 +598,7 @@ switch ($product->getCategory()->getId()) {
             .always(() => {
               evTarget.closest('button').value = 'Modificar';
               evTarget.closest('button').innerHTML = '<i class="fas fa-pencil-alt"></i>';
+              codigoInput.readOnly = true;
               widthInput.readOnly = true;
               heightInput.readOnly = true;
               lengthInput.readOnly = true;

@@ -69,7 +69,11 @@ include("../partials/verify-session.php");
               <?php foreach ($measurements as $measurement) {
                 ?>
                 <li>Medida <?= $indexMeasurement ?>:<div class="row">
-                    <div class="col">
+                    <!-- <div class="col codigo">
+                      <label for="codigo?= $indexMeasurement ?>">Codigo:</label>
+                      <input type="number" id="codigo?= $indexMeasurement ?>" class="form-control" value="?= $measurement->getcodigo(); ?>" readonly></div>
+                    <div class="col height">
+                    <div class="col"> -->
                       <label for="width<?= $indexMeasurement ?>">Ancho:</label>
                       <input type="number" id="width<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getWidth(); ?>" readonly></div>
                     <div class="col height">

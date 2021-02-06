@@ -16,9 +16,10 @@ if (isset($_POST['measurements'])) {
     $measurement->setWindow($measurementReq['window']);
     $measurement->setLargoUtil($measurementReq['largoUtil']);
     $measurement->setAnchoTotal($measurementReq['anchoTotal']);
+    $measurement->setcodigo($measurementReq['codigo']);
     $measurement->setVentaMinimaImpresa($measurementReq['ventaMinimaImpresa']);
     $measurement->setVentaMinimaGenerica($measurementReq['ventaMinimaGenerica']);
-    $measurement->setId($measurementReq['idMeasurement']);
+    $measurement->setId($measurementReq['idMeasurement' ]);
 
     if($measurementDao->update($measurement)){
     http_response_code(200);
