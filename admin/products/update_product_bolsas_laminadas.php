@@ -312,8 +312,8 @@ switch ($product->getCotizador()) {
                       <div class="col-2 ventaminimaimpresa"><label for="">Venta Mínima Impresa</label><input type="number" id="VentaMinimaImpresa<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getVentaMinimaImpresa(); ?>" readonly></div>
                       <div class="col-2 ventaminimagenerica"><label for="">Venta Mínima Genérica</label><input type="number" id="VentaMinimaGenerica<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getVentaMinimaGenerica(); ?>" readonly></div>
 
-                      <!-- <div class="col-sm-2"><button class="btn btn-danger" onclick="deleteMeasurement(<?= $product->getId() ?>,<?= $measurement->getId() ?>)">Eliminar</button></div>
-                      <div class="col-sm-2"><button class="btn btn-warning" onclick="updateMeasurement(<?= $product->getId() ?>,<?= $measurement->getId() ?>,<?= $indexMeasurement ?>,this)">Update</button></div> -->
+                      <!-- <div class="col-sm-2"><button class="btn btn-danger" onclick="deleteMeasurement(?= $product->getId() ?>,?= $measurement->getId() ?>)">Eliminar</button></div>
+                      <div class="col-sm-2"><button class="btn btn-warning" onclick="updateMeasurement(?= $product->getId() ?>,?= $measurement->getId() ?>,?= $indexMeasurement ?>,this)">Update</button></div> -->
                       <div class="col-1 ml-3" style="margin-top: 1rem;"><button class="btn btn-danger" onclick="deleteMeasurement(<?= $product->getId() ?>,<?= $measurement->getId() ?>)"><i class="fas fa-trash-alt"></i></button></div>
                       <div class="col-1" style="margin-top: 1rem;"><button value="Modificar" class="btn btn-warning" onclick="updateMeasurement(<?= $product->getId() ?>,<?= $measurement->getId() ?>,<?= $indexMeasurement ?>,this)"><i class="fas fa-pencil-alt"></i></button></div>
                     </div>
@@ -678,6 +678,7 @@ switch ($product->getCotizador()) {
                 typeof($('#VentaMinimaGenerica' + (index + 1)).val()) != 'undefined' && $('#VentaMinimaGenerica' + (index + 1)).val() != '' &&
                 typeof($('#VentaMinimaImpresa' + (index + 1)).val()) != 'undefined' && $('#VentaMinimaImpresa' + (index + 1)).val() != '') /* && */
                 /* $('#window' + (index + 1)).val() != undefined) { */
+                  debugger;
                 measurements.push(measurement)
               /* } */
             }

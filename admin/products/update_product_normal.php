@@ -162,7 +162,7 @@ switch ($product->getCotizador()) {
   </style>
   <?php if ($product->getCategory()->getId() == 6) {
     echo "<style>
-      .lenght,.window{
+      .length,.window{
         display: none;
       }
       </style>";
@@ -297,16 +297,16 @@ switch ($product->getCotizador()) {
                         <div class="col ml-4"> <label for="codigo<?= $indexMeasurement ?>">Codigo:</label><input type="text" id="codigo<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getcodigo(); ?>" readonly></div>
                         <div class="col ml-4"><label for="width<?= $indexMeasurement ?>">Ancho:</label><input type="number" id="width<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getWidth(); ?>" readonly></div>
                         <div class="col height"><label for="height<?= $indexMeasurement ?>">Alto:</label><input type="number" id="height<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getHeight(); ?>" readonly></div>
-                        <div class="col lenght"><label for="lenght<?= $indexMeasurement ?>">Largo:</label><input type="number" id="lenght<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getLength(); ?>" readonly></div>
-                        <!-- <div class="col window"><label for="window<?= $indexMeasurement ?>"> <?= $nameAdditional ?></label><input type="number" id="window<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getWindow(); ?>" readonly></div> -->
-                        <div class="col largo-util"><label for="">Largo Útil</label><input type="number" id="largoUtil<?= $indexMeasurement ?>" value="<?= $measurement->getLargoUtil(); ?>" class="form-control" value="0"></div>
+                        <div class="col length"><label for="length<?= $indexMeasurement ?>">Largo:</label><input type="number" id="length<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getLength(); ?>" readonly></div>
+                        <!-- <div class="col window"><label for="window?= $indexMeasurement ?>">?= $nameAdditional ?></label><input type="number" id="window?= $indexMeasurement ?>" class="form-control" value="?= $measurement->getWindow(); ?>" readonly></div> -->
+                        <div class="col largo-util"><label for="">Largo Útil</label><input type="number" id="largoUtil<?= $indexMeasurement ?>" value="<?= $measurement->getLargoUtil(); ?>" class="form-control" value="0" readonly></div>
                       </div>
 
                       <div class="row">
 
-                        <div class="col-2 ml-4 ancho-total"><label for="">Ancho Total</label><input type="number" id="anchoTotal<?= $indexMeasurement ?>" value="<?= $measurement->getAnchoTotal(); ?>" class="form-control" value="0"></div>
-                        <div class="col-3 venta-minima-impresa"><label for="">Venta Mínima Impresa</label><input type="number" id="VentaMinimaImpresa<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getVentaMinimaImpresa(); ?>"></div>
-                        <div class="col-3 mr-3 venta-minima-generica"><label for="">Venta Mínima Genérica</label><input type="number" id="VentaMinimaGenerica<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getVentaMinimaGenerica(); ?>"></div>
+                        <div class="col-2 ml-4 ancho-total"><label for="">Ancho Total</label><input type="number" id="anchoTotal<?= $indexMeasurement ?>" value="<?= $measurement->getAnchoTotal(); ?>" class="form-control" value="0" readonly></div>
+                        <div class="col-3 venta-minima-impresa"><label for="">Venta Mínima Impresa</label><input type="number" id="VentaMinimaImpresa<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getVentaMinimaImpresa(); ?>" readonly></div>
+                        <div class="col-3 mr-3 venta-minima-generica"><label for="">Venta Mínima Genérica</label><input type="number" id="VentaMinimaGenerica<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getVentaMinimaGenerica(); ?>" readonly></div>
 
                         <div class="col-1 mr-3" style="margin-top: 1rem;"><button class="btn btn-danger" onclick="deleteMeasurement(<?= $product->getId() ?>,<?= $measurement->getId() ?>)"><i class="fas fa-trash-alt"></i></button></div>
                         <div class="col-1" style="margin-top: 1rem;"><button value="Modificar" class="btn btn-warning" onclick="updateMeasurement(<?= $product->getId() ?>,<?= $measurement->getId() ?>,<?= $indexMeasurement ?>,this)"><i class="fas fa-pencil-alt"></i></button></div>
@@ -479,7 +479,7 @@ switch ($product->getCotizador()) {
               }, { passive: false}); */
 
       if (parseInt($('#category').val()) == 6) {
-        $('.lenght').css('display', 'none')
+        $('.length').css('display', 'none')
         $('.window').css('display', 'none')
       }
 
@@ -535,16 +535,15 @@ switch ($product->getCotizador()) {
 
       function updateMeasurement(idProduct, idMeasurement, indexMeasurement, evTarget) {
 
-        const codigoInput = elById(`codigo${indexMeasurement}`);
-        const widthInput = elById(`width${indexMeasurement}`);
-        const heightInput = elById(`height${indexMeasurement}`);
-        const lengthInput = elById(`lenght${indexMeasurement}`);
-        const windowInput = elById(`window${indexMeasurement}`);
-        const largoUtilInput = elById(`largoUtil${indexMeasurement}`);
-        const anchoTotalInput = elById(`anchoTotal${indexMeasurement}`);
-        const ventaMinimaImpresaInput = elById(`VentaMinimaImpresa${indexMeasurement}`);
-        const ventaMinimaGenericaInput = elById(`VentaMinimaGenerica${indexMeasurement}`);
-
+        const codigoInput = $(`#codigo${indexMeasurement}`).val();
+        const widthInput = $(`#width${indexMeasurement}`).val();
+        const heightInput = $(`#height${indexMeasurement}`).val();
+        const lengthInput = $(`#length${indexMeasurement}`).val();
+        // const windowInput = $(`#window${indexMeasurement}`).val();
+        const largoUtilInput = $(`#largoUtil${indexMeasurement}`).val();
+        const anchoTotalInput = $(`#anchoTotal${indexMeasurement}`).val();
+        const VentaMinimaImpresaInput = $(`#VentaMinimaImpresa${indexMeasurement}`).val();
+        const VentaMinimaGenericaInput = $(`#VentaMinimaGenerica${indexMeasurement}`).val();
         /* console.log(largoUtilInput);
         console.log(anchoTotalInput); */
 
@@ -552,15 +551,25 @@ switch ($product->getCotizador()) {
           /*   evTarget.closest('button').value = 'Guardar'; */
           evTarget.closest('button').value = 'Guardar';
           evTarget.closest('button').textContent = 'Guardar';
-          codigoInput.readOnly = false;
-          widthInput.readOnly = false;
-          heightInput.readOnly = false;
-          lengthInput.readOnly = false;
-          windowInput.readOnly = false;
-          largoUtilInput.readOnly = false;
-          anchoTotalInput.readOnly = false;
-          ventaMinimaImpresaInput.readOnly = false;
-          ventaMinimaGenericaInput.readOnly = false;
+
+          $(`#codigo${indexMeasurement}`).prop("readonly", false);
+          // codigoInput.readOnly = false;
+          $(`#width${indexMeasurement}`).prop("readonly", false);
+          // widthInput.readOnly = false;
+          $(`#height${indexMeasurement}`).prop("readonly", false);
+          // heightInput.readOnly = false;
+          $(`#length${indexMeasurement}`).prop("readonly", false);
+          // lengthInput.readOnly = false;
+          // $(`#window${indexMeasurement}`).prop("readonly", false);
+          // windowoInput.readOnly = false;
+          $(`#largoUtil${indexMeasurement}`).prop("readonly", false);
+          // largoUtilInput.readOnly = false;
+          $(`#anchoTotal${indexMeasurement}`).prop("readonly", false);
+          // anchoTotalInput.readOnly = false;
+          $(`#VentaMinimaImpresa${indexMeasurement}`).prop("readonly", false);
+          // VentaMinimaImpresaInput.readOnly = false;
+          $(`#VentaMinimaGenerica${indexMeasurement}`).prop("readonly", false);
+          // VentaMinimaGenericaInput.readOnly = false;
 
           evTarget.classList.replace('btn-warning', 'btn-info');
 
@@ -568,15 +577,15 @@ switch ($product->getCotizador()) {
 
           const measurementInfo = {
             idMeasurement: idMeasurement,
-            codigo: codigoInput.value,
-            width: widthInput.value,
-            height: heightInput.value,
-            length: lengthInput.value,
-            window: windowInput.value,
-            largoUtil: largoUtilInput.value,
-            anchoTotal: anchoTotalInput.value,
-            ventaMinimaImpresa: ventaMinimaImpresaInput.value,
-            ventaMinimaGenerica: ventaMinimaGenericaInput.value
+            codigo: codigoInput,
+            width: widthInput,
+            height: heightInput,
+            length: lengthInput,
+            // window: windowInput.value,
+            largoUtil: largoUtilInput,
+            anchoTotal: anchoTotalInput,
+            ventaMinimaImpresa: VentaMinimaImpresaInput,
+            ventaMinimaGenerica: VentaMinimaGenericaInput
           };
 
           console.log(measurementInfo);
@@ -597,15 +606,25 @@ switch ($product->getCotizador()) {
             .always(() => {
               evTarget.closest('button').value = 'Modificar';
               evTarget.closest('button').innerHTML = '<i class="fas fa-pencil-alt"></i>';
-              codigoInput.readOnly = true;
-              widthInput.readOnly = true;
-              heightInput.readOnly = true;
-              lengthInput.readOnly = true;
-              windowInput.readOnly = true;
-              largoUtilInput.readOnly = true;
-              anchoTotalInput.readOnly = true;
-              ventaMinimaImpresaInput.readOnly = true;
-              ventaMinimaGenericaInput.readOnly = true;
+              // codigoInput.readOnly = true;
+              // widthInput.readOnly = true;
+              // heightInput.readOnly = true;
+              // lengthInput.readOnly = true;
+              // windowInput.readOnly = true;
+              // largoUtilInput.readOnly = true;
+              // anchoTotalInput.readOnly = true;
+              // ventaMinimaImpresaInput.readOnly = true;
+              // ventaMinimaGenericaInput.readOnly = true;
+              $(`#codigo${indexMeasurement}`).prop("readonly", true);
+              $(`#width${indexMeasurement}`).prop("readonly", true);
+              $(`#height${indexMeasurement}`).prop("readonly", true);
+              $(`#length${indexMeasurement}`).prop("readonly", true);
+              // $(`#window${indexMeasurement}`).prop("readonly", true);
+              $(`#largoUtil${indexMeasurement}`).prop("readonly", true);
+              $(`#anchoTotal${indexMeasurement}`).prop("readonly", true);
+              $(`#VentaMinimaImpresa${indexMeasurement}`).prop("readonly", true);
+              $(`#VentaMinimaGenerica${indexMeasurement}`).prop("readonly", true);
+
 
               evTarget.classList.replace('btn-info', 'btn-warning');
             });
@@ -746,8 +765,8 @@ switch ($product->getCotizador()) {
               measurement.codigo = $('#codigo' + (index + 1)).val()
               measurement.width = $('#width' + (index + 1)).val()
               measurement.height = $('#height' + (index + 1)).val()
-              measurement.lenght = $('#lenght' + (index + 1)).val()
-              measurement.window = $('#window' + (index + 1)).val()
+              measurement.length = $('#length' + (index + 1)).val()
+              // measurement.window = $('#window' + (index + 1)).val()
               measurement.largoUtil = $('#largoUtil' + (index + 1)).val()
               measurement.anchoTotal = $('#anchoTotal' + (index + 1)).val()
               measurement.ventaMinimaGenerica = $('#VentaMinimaGenerica' + (index + 1)).val()
@@ -756,7 +775,7 @@ switch ($product->getCotizador()) {
               if (typeof($('#codigo' + (index + 1)).val()) != 'undefined' && $('#codigo' + (index + 1)).val() != '' &&
                 typeof($('#width' + (index + 1)).val()) != 'undefinded' && $('#width' + (index + 1)).val() != '' &&
                 typeof($('#height' + (index + 1)).val()) != 'undefined' && $('#height' + (index + 1)).val() != '' &&
-                typeof($('#lenght' + (index + 1)).val()) != 'undefined' && $('#lenght' + (index + 1)).val() != '' &&
+                typeof($('#length' + (index + 1)).val()) != 'undefined' && $('#length' + (index + 1)).val() != '' &&
                 typeof($('#largoUtil' + (index + 1)).val()) != 'undefined' && $('#largoUtil' + (index + 1)).val() != '' &&
                 typeof($('#anchoTotal' + (index + 1)).val()) != 'undefined' && $('#anchoTotal' + (index + 1)).val() != '' &&
                 typeof($('#VentaMinimaGenerica' + (index + 1)).val()) != 'undefined' && $('#VentaMinimaGenerica' + (index + 1)).val() != '' &&
@@ -902,9 +921,9 @@ switch ($product->getCotizador()) {
               <label for="height${indexMeasurement}">Alto:</label>
               <input type="number" id="height${indexMeasurement}" class="form-control">
             </div>
-            <div class="col lenght">
-              <label for="lenght${indexMeasurement}">Largo:</label>
-              <input type="number" id="lenght${indexMeasurement}" class="form-control">
+            <div class="col length">
+              <label for="length${indexMeasurement}">Largo:</label>
+              <input type="number" id="length${indexMeasurement}" class="form-control">
             </div>
             <div class="col window">
               <label for="window${indexMeasurement}"><?= $nameAdditional ?>:</label>
@@ -920,16 +939,16 @@ switch ($product->getCotizador()) {
               <button type="button" class="btn btn-danger" onclick="deleteMeasurement()"><i class="fas fa-trash-alt"></i></button>
             </div>
             <div class="col Update">
-              <button type="button" class="btn btn-warning" onclick="updateMeasurement(<?= $product->getId() ?>,<?= $measurement->getId() ?>,<?= $indexMeasurement ?>,this)"><i class="fas fa-pencil-alt"></i></button>
+              <button type="button" class="btn btn-warning" onclick="updateMeasurement()"><i class="fas fa-pencil-alt"></i></button>
             </div>
                         </div>
          
         </li>`)
         if (parseInt($('#category').val()) == 6) {
           $('.height').children('label').text('Largo:')
-          $('.lenght').css('display', 'none')
+          $('.length').css('display', 'none')
           $('.window').css('display', 'none')
-          $(`#lenght${indexMeasurement}`).val(0)
+          $(`#length${indexMeasurement}`).val(0)
           $(`#window${indexMeasurement}`).val(0)
         }
       }
