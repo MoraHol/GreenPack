@@ -6,6 +6,7 @@ class Measurement implements JsonSerializable
    * @var id 
    */
   private $id;
+  private $codigo;
   private $width;
   private $height;
   private $length;
@@ -15,9 +16,8 @@ class Measurement implements JsonSerializable
   private $pliego;
   private $anchoTotal;
   private $largoUtil;
-  private $ventaMinimaImpresa;
-  private $ventaMinimaGenerica;
-  // private $codigo;
+  private $VentaMinimaImpresa;
+  private $VentaMinimaGenerica;
 
   public function getId()
   {
@@ -29,15 +29,15 @@ class Measurement implements JsonSerializable
     $this->id = $id;
   }
 
-// public function getcodigo($codigo)
-// {
-//    return $this->codigo;
-// }
+  public function getcodigo()
+  {
+    return $this->codigo;
+  }
 
-// public function setcodigo($codigo)
-// {
-//    $this->codigo = $codigo;
-// }
+  public function setcodigo($codigo)
+  {
+    $this->codigo = $codigo;
+  }
 
   public function getAnchoTotal()
   {
@@ -59,24 +59,24 @@ class Measurement implements JsonSerializable
     $this->largoUtil = $largoUtil;
   }
 
-  public function setVentaMinimaImpresa($ventaMinimaImpresa)
+  public function setVentaMinimaImpresa($VentaMinimaImpresa)
   {
-    $this->ventaMinimaImpresa = $ventaMinimaImpresa;
+    $this->VentaMinimaImpresa = $VentaMinimaImpresa;
   }
 
   public function getVentaMinimaImpresa()
   {
-    return $this->ventaMinimaImpresa;
+    return $this->VentaMinimaImpresa;
   }
 
-  public function setVentaMinimaGenerica($ventaMinimaGenerica)
+  public function setVentaMinimaGenerica($VentaMinimaGenerica)
   {
-    $this->ventaMinimaGenerica = $ventaMinimaGenerica;
+    $this->VentaMinimaGenerica = $VentaMinimaGenerica;
   }
 
   public function getVentaMinimaGenerica()
   {
-    return $this->ventaMinimaGenerica;
+    return $this->VentaMinimaGenerica;
   }
 
   public function getWindow()
@@ -100,15 +100,6 @@ class Measurement implements JsonSerializable
     $this->width = $width;
   }
 
-  public function getcodigo()
-{
-   return $this->codigo;
-}
-
-public function setcodigo($codigo)
-{
-   $this->codigo = $codigo;
-}
 
   public function getHeight()
   {
@@ -160,11 +151,13 @@ public function setcodigo($codigo)
   {
     $this->idMaterial = $idMaterial;
   }
-  public function getPliego(){
-		return $this->pliego;
-	}
+  public function getPliego()
+  {
+    return $this->pliego;
+  }
 
-	public function setPliego($pliego){
-		$this->pliego = $pliego;
-	}
+  public function setPliego($pliego)
+  {
+    $this->pliego = $pliego;
+  }
 }

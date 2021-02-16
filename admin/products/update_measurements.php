@@ -63,7 +63,7 @@ include("../partials/verify-session.php");
           </ol>
 
 
-          <div class="form-gruop">
+          <div class="form-group">
             <label for="campo1">Medidas:</label>
             <ul class="list-unstyled" id="measurements">
               <?php foreach ($measurements as $measurement) {

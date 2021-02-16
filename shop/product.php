@@ -9,7 +9,12 @@ if (!$_GET) {
 $productDao = new ProductDao();
 $product = $productDao->findById($_GET["id"]);
 
-if ($product->getCategory()->getId() == 1) { // bolsas
+if ($product->getCotizador() == 1) {
+  include_once('product_bolsas.php');
+} else
+  include_once('product_copy.php');
+
+  /* if ($product->getCategory()->getId() == 1) { // bolsas
   if ($product->getId() == $_ENV["id_sacos"]) {
     include_once('product_saco.php');
   } 
@@ -25,4 +30,4 @@ if ($product->getCategory()->getId() == 1) { // bolsas
 } 
 else {
   include_once('product_copy.php');
-}
+} */

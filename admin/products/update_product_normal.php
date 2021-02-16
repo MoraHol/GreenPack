@@ -18,7 +18,7 @@ $tabs = $tabProductDao->findByProduct($product);
 
 $nameAdditional = "";
 $routeDownloadFileExample = "";
-switch ($product->getCategory()->getId()) {
+switch ($product->getCotizador()) {
   case 1:
     $nameAdditional = "Ventana";
     $routeDownloadFileExample = "/Catalogos/FormatMeasurements.xlsx";
@@ -27,7 +27,7 @@ switch ($product->getCategory()->getId()) {
     $nameAdditional = "Piezas por Pliego";
     $routeDownloadFileExample = "/Catalogos/FormatMeasurementsBoxes.xlsx";
     break;
-  case 3:
+    /* case 3:
     $nameAdditional = "Piezas por Pliego";
     $routeDownloadFileExample = "/Catalogos/FormatMeasurementsBoxes.xlsx";
     break;
@@ -38,7 +38,7 @@ switch ($product->getCategory()->getId()) {
   case 5:
     $nameAdditional = "Piezas por Pliego";
     $routeDownloadFileExample = "/Catalogos/FormatMeasurementsBoxes.xlsx";
-    break;
+    break; */
 }
 ?>
 <!-- author: Teenus SAS, github: Teenus SAS -->
@@ -266,7 +266,7 @@ switch ($product->getCategory()->getId()) {
             </div>
             <br>
             <br>
-            <div class="form-gruop">
+            <div class="form-group">
               <label for="campo1">Usos:</label>
               <div class="container">
                 <div class="row" id="fields">
@@ -285,34 +285,30 @@ switch ($product->getCategory()->getId()) {
               <hr>
 
             </div>
-            <div class="form-gruop" id="measurement-container">
+            <div class="form-group" id="measurement-container">
               <label for="campo1">Medidas:</label>
               <button class="btn btn-primary" id="hideMeasurements">Ver Medidas</button>
               <ul class="list-unstyled" id="measurements">
                 <?php foreach ($product->getMeasurements() as $measurement) {
                 ?>
-                  <br>
-                  <br>
-                  <li>Medida <?= $indexMeasurement ?>:<div class="row">
+                  <li>Medida <?= $indexMeasurement ?>:
+                    <div class="row">
                       <div class="row">
-                        <div class="col ml-4"> <label for="codigo<?= $indexMeasurement ?>">Codigo:</label>
-                        <!-- Evento para traer el codigo -->
-                        <input type="text" id="codigo<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getcodigo(); ?>" readonly>
-                      </div>
+                        <div class="col ml-4"> <label for="codigo<?= $indexMeasurement ?>">Codigo:</label><input type="text" id="codigo<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getcodigo(); ?>" readonly></div>
                         <div class="col ml-4"><label for="width<?= $indexMeasurement ?>">Ancho:</label><input type="number" id="width<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getWidth(); ?>" readonly></div>
                         <div class="col height"><label for="height<?= $indexMeasurement ?>">Alto:</label><input type="number" id="height<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getHeight(); ?>" readonly></div>
                         <div class="col lenght"><label for="lenght<?= $indexMeasurement ?>">Largo:</label><input type="number" id="lenght<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getLength(); ?>" readonly></div>
-                        <div class="col window"><label for="window<?= $indexMeasurement ?>"> <?= $nameAdditional ?></label><input type="number" id="window<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getWindow(); ?>" readonly></div>
-                        <div class="col largo-util"><label for="">Largo Útil</label><input type="number" id="largo-util<?= $indexMeasurement ?>" value="<?= $measurement->getLargoUtil(); ?>" class="form-control" value="0"></div>
+                        <!-- <div class="col window"><label for="window<?= $indexMeasurement ?>"> <?= $nameAdditional ?></label><input type="number" id="window<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getWindow(); ?>" readonly></div> -->
+                        <div class="col largo-util"><label for="">Largo Útil</label><input type="number" id="largoUtil<?= $indexMeasurement ?>" value="<?= $measurement->getLargoUtil(); ?>" class="form-control" value="0"></div>
                       </div>
 
                       <div class="row">
 
-                        <div class="col-3 ml-4 ancho-total"><label for="">Ancho Total</label><input type="number" id="ancho-total<?= $indexMeasurement ?>" value="<?= $measurement->getAnchoTotal(); ?>" class="form-control" value="0"></div>
-                        <div class="col-3 venta-minima-impresa"><label for="">Venta Mínima Impresa</label><input type="number" id="venta-minima-impresa<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getVentaMinimaImpresa(); ?>"></div>
-                        <div class="col-3 mr-3 venta-minima-generica"><label for="">Venta Mínima Genérica</label><input type="number" id="venta-minima-generica<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getVentaMinimaGenerica(); ?>"></div>
+                        <div class="col-2 ml-4 ancho-total"><label for="">Ancho Total</label><input type="number" id="anchoTotal<?= $indexMeasurement ?>" value="<?= $measurement->getAnchoTotal(); ?>" class="form-control" value="0"></div>
+                        <div class="col-3 venta-minima-impresa"><label for="">Venta Mínima Impresa</label><input type="number" id="VentaMinimaImpresa<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getVentaMinimaImpresa(); ?>"></div>
+                        <div class="col-3 mr-3 venta-minima-generica"><label for="">Venta Mínima Genérica</label><input type="number" id="VentaMinimaGenerica<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getVentaMinimaGenerica(); ?>"></div>
 
-                        <div class="col-1" style="margin-top: 1rem; display: flex; justify-content:flex-end;"><button class="btn btn-danger" onclick="deleteMeasurement(<?= $product->getId() ?>,<?= $measurement->getId() ?>)"><i class="fas fa-trash-alt"></i></button></div>
+                        <div class="col-1 mr-3" style="margin-top: 1rem;"><button class="btn btn-danger" onclick="deleteMeasurement(<?= $product->getId() ?>,<?= $measurement->getId() ?>)"><i class="fas fa-trash-alt"></i></button></div>
                         <div class="col-1" style="margin-top: 1rem;"><button value="Modificar" class="btn btn-warning" onclick="updateMeasurement(<?= $product->getId() ?>,<?= $measurement->getId() ?>,<?= $indexMeasurement ?>,this)"><i class="fas fa-pencil-alt"></i></button></div>
 
                       </div>
@@ -378,7 +374,6 @@ switch ($product->getCategory()->getId()) {
             <div class="container-fluid" style="margin-bottom: 50px;">
               <div class="form-group">
                 <label for="category">Selecciona la categoría del producto:</label>
-                <br>
                 <select id="category" class="wide">
                   <option disabled>Selecciona una categoría</option>
                   <?php foreach ($categories as $category) { ?>
@@ -395,11 +390,10 @@ switch ($product->getCategory()->getId()) {
             <div class="container-fluid">
               <div class="form-group mt-3">
                 <label for="category">Selecciona el cotizador:</label>
-                <br>
                 <select id="cotizador" class="wide">
                   <option disabled>Selecciona una cotizador</option>
                   <?php foreach ($cotizadores as $cotizador) { ?>
-                    <option value="<?= $cotizador->getId(); ?>" <?= $product->getCategory()->getId() == $cotizador->getId() ? "selected" : ""; ?>><?= $cotizador->getName(); ?></option>
+                    <option value="<?= $cotizador->getId(); ?>" <?= $product->getCotizador() == $cotizador->getId() ? "selected" : ""; ?>><?= $cotizador->getName(); ?></option>
                   <?php } ?>
                 </select>
               </div>
@@ -422,7 +416,7 @@ switch ($product->getCategory()->getId()) {
     <script src="/js/jquery.nice-select.min.js"></script>
     <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
     <script src="https://unpkg.com/default-passive-events"></script>
-    <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <!-- <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script> -->
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Chartist JS -->
@@ -546,10 +540,10 @@ switch ($product->getCategory()->getId()) {
         const heightInput = elById(`height${indexMeasurement}`);
         const lengthInput = elById(`lenght${indexMeasurement}`);
         const windowInput = elById(`window${indexMeasurement}`);
-        const largoUtilInput = elById(`largo-util${indexMeasurement}`);
-        const anchoTotalInput = elById(`ancho-total${indexMeasurement}`);
-        const ventaMinimaImpresaInput = elById(`venta-minima-impresa${indexMeasurement}`);
-        const ventaMinimaGenericaInput = elById(`venta-minima-generica${indexMeasurement}`);
+        const largoUtilInput = elById(`largoUtil${indexMeasurement}`);
+        const anchoTotalInput = elById(`anchoTotal${indexMeasurement}`);
+        const ventaMinimaImpresaInput = elById(`VentaMinimaImpresa${indexMeasurement}`);
+        const ventaMinimaGenericaInput = elById(`VentaMinimaGenerica${indexMeasurement}`);
 
         /* console.log(largoUtilInput);
         console.log(anchoTotalInput); */
@@ -563,6 +557,11 @@ switch ($product->getCategory()->getId()) {
           heightInput.readOnly = false;
           lengthInput.readOnly = false;
           windowInput.readOnly = false;
+          largoUtilInput.readOnly = false;
+          anchoTotalInput.readOnly = false;
+          ventaMinimaImpresaInput.readOnly = false;
+          ventaMinimaGenericaInput.readOnly = false;
+
           evTarget.classList.replace('btn-warning', 'btn-info');
 
         } else {
@@ -603,6 +602,11 @@ switch ($product->getCategory()->getId()) {
               heightInput.readOnly = true;
               lengthInput.readOnly = true;
               windowInput.readOnly = true;
+              largoUtilInput.readOnly = true;
+              anchoTotalInput.readOnly = true;
+              ventaMinimaImpresaInput.readOnly = true;
+              ventaMinimaGenericaInput.readOnly = true;
+
               evTarget.classList.replace('btn-info', 'btn-warning');
             });
         }
@@ -736,23 +740,31 @@ switch ($product->getCategory()->getId()) {
                 materials.push(value)
               }
             }
+            let i = $('#measurements').children().length;
             for (let index = 0; index < $('#measurements').children().length; index++) {
               let measurement = {}
+              measurement.codigo = $('#codigo' + (index + 1)).val()
               measurement.width = $('#width' + (index + 1)).val()
               measurement.height = $('#height' + (index + 1)).val()
               measurement.lenght = $('#lenght' + (index + 1)).val()
               measurement.window = $('#window' + (index + 1)).val()
-              measurement.largoUtil = $('#largo-util' + (index + 1)).val()
-              measurement.anchoTotal = $('#ancho-total' + (index + 1)).val()
-              measurement.ventaMinimaGenerica = $('#venta-minima-generica' + (index + 1)).val()
-              measurement.ventaMinimaImpresa = $('#venta-minima-impresa' + (index + 1)).val()
+              measurement.largoUtil = $('#largoUtil' + (index + 1)).val()
+              measurement.anchoTotal = $('#anchoTotal' + (index + 1)).val()
+              measurement.ventaMinimaGenerica = $('#VentaMinimaGenerica' + (index + 1)).val()
+              measurement.ventaMinimaImpresa = $('#VentaMinimaImpresa' + (index + 1)).val()
 
-              if (typeof($('#width' + (index + 1)).val()) != 'undefinded' && $('#width' + (index + 1)).val() != '' &&
+              if (typeof($('#codigo' + (index + 1)).val()) != 'undefined' && $('#codigo' + (index + 1)).val() != '' &&
+                typeof($('#width' + (index + 1)).val()) != 'undefinded' && $('#width' + (index + 1)).val() != '' &&
                 typeof($('#height' + (index + 1)).val()) != 'undefined' && $('#height' + (index + 1)).val() != '' &&
                 typeof($('#lenght' + (index + 1)).val()) != 'undefined' && $('#lenght' + (index + 1)).val() != '' &&
-                $('#window' + (index + 1)).val() != undefined) {
-                measurements.push(measurement)
-              }
+                typeof($('#largoUtil' + (index + 1)).val()) != 'undefined' && $('#largoUtil' + (index + 1)).val() != '' &&
+                typeof($('#anchoTotal' + (index + 1)).val()) != 'undefined' && $('#anchoTotal' + (index + 1)).val() != '' &&
+                typeof($('#VentaMinimaGenerica' + (index + 1)).val()) != 'undefined' && $('#VentaMinimaGenerica' + (index + 1)).val() != '' &&
+                typeof($('#VentaMinimaImpresa' + (index + 1)).val()) != 'undefined' && $('#VentaMinimaImpresa' + (index + 1)).val() != '') /* && */
+                /* $('#window' + (index + 1)).val() != undefined) { */
+                debugger;
+              measurements.push(measurement)
+              /* } */
               /* debugger;
               console.log(measurement); */
             }
@@ -807,6 +819,7 @@ switch ($product->getCategory()->getId()) {
       })
 
       function update(uses, materials, measurements) {
+        debugger;
         $.post("api/update_product.php", {
           id: <?= $product->getId(); ?>,
           title: $('#title').val(),
@@ -831,7 +844,7 @@ switch ($product->getCategory()->getId()) {
       }
 
       function ajax(responses, uses, materials, measurements) {
-
+        debugger;
         $.post("api/update_product.php", {
           id: <?= $product->getId(); ?>,
           title: $('#title').val(),
@@ -873,11 +886,14 @@ switch ($product->getCategory()->getId()) {
       function addMeasurement() {
         indexMeasurement++;
         $('#measurements').append(`
-          <br>
-          <br>
+          
         <li>Medida ${indexMeasurement}:
         
           <div class="row">
+          <div class="col codigo">
+              <label for="codigo${indexMeasurement}">Codigo:</label>
+              <input type="text" id="codigo${indexMeasurement}" class="form-control">
+            </div>
             <div class="col">
               <label for="width${indexMeasurement}">Ancho:</label>
               <input type="number" id="width${indexMeasurement}" class="form-control">
@@ -894,13 +910,19 @@ switch ($product->getCategory()->getId()) {
               <label for="window${indexMeasurement}"><?= $nameAdditional ?>:</label>
               <input type="number" id="window${indexMeasurement}" class="form-control">
             </div>
-            <div class="col largo-util"><label for="">Largo Útil</label><input type="number" id="largo-util${ indexMeasurement}" value="" class="form-control" value="0"></div>
+            <div class="col largoUtil"><label for="">Largo Útil</label><input type="number" id="largoUtil${ indexMeasurement}" value="" class="form-control" value="0"></div>
           </div>
             <div class="row">
-            <div class="col-2 ancho-total"><label for="">Ancho Total</label><input type="number" id="ancho-total${indexMeasurement}" value="" class="form-control" value="0"></div>
-            <div class="col-2 venta-minima-impresa"><label for="">Venta Mínima Impresa</label><input type="number" id="venta-minima-impresa${indexMeasurement}" class="form-control" value="0"></div>
-                        <div class="col-2 venta-minima-generica"><label for="">Venta Mínima Genérica</label><input type="number" id="venta-minima-generica${indexMeasurement}" class="form-control" value="0"></div>
+            <div class="col-2 anchoTotal"><label for="">Ancho Total</label><input type="number" id="anchoTotal${indexMeasurement}" value="" class="form-control" value="0"></div>
+              <div class="col-2 venta-minima-impresa"><label for="">Venta Mínima Impresa</label><input type="number" id="VentaMinimaImpresa${indexMeasurement}" class="form-control" value="0"></div>
+              <div class="col-2 venta-minima-generica"><label for="">Venta Mínima Genérica</label><input type="number" id="VentaMinimaGenerica${indexMeasurement}" class="form-control" value="0"></div>
+            <div class="Delete">
+              <button type="button" class="btn btn-danger" onclick="deleteMeasurement()"><i class="fas fa-trash-alt"></i></button>
             </div>
+            <div class="col Update">
+              <button type="button" class="btn btn-warning" onclick="updateMeasurement(<?= $product->getId() ?>,<?= $measurement->getId() ?>,<?= $indexMeasurement ?>,this)"><i class="fas fa-pencil-alt"></i></button>
+            </div>
+                        </div>
          
         </li>`)
         if (parseInt($('#category').val()) == 6) {

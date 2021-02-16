@@ -266,7 +266,7 @@ switch ($product->getCategory()->getId()) {
               </div>
               <br>
               <br>
-              <div class="form-gruop">
+              <div class="form-group">
                 <label for="campo1">Usos:</label>
                 <div class="container">
                   <div class="row" id="fields">

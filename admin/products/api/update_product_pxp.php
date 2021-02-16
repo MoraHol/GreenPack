@@ -41,7 +41,6 @@ if (isset($_POST["photos"])) {
   }
   $product->setImages($images);
 }
-
 $materials = [];
 $materialsByProduct = $materialDao->findByProduct($product);
 if ($product->getId() == $_ENV["id_fondo_auto"] || $product->getCategory()->getid() == 8) {
@@ -79,15 +78,15 @@ foreach (json_decode($_POST["measurements"]) as  $measurementReq) {
   $measurement->setWidth($measurementReq->width);
   $measurement->setHeight($measurementReq->height);
   $measurement->setLength($measurementReq->lenght);
-  $measurement->setWindow($measurementReq->window);
+  $measurement->setPliego($measurementReq->pliego);
   $measurement->setLargoUtil($measurementReq->largoUtil);
   $measurement->setAnchoTotal($measurementReq->anchoTotal);
-  $measurement->setVentaMinimaGenerica($measurementReq->ventaMinimaGenerica);
-  $measurement->setVentaMinimaImpresa($measurementReq->ventaMinimaImpresa);
+  $measurement->setVentaMinimaGenerica($measurementReq->VentaMinimaGenerica);
+  $measurement->setVentaMinimaImpresa($measurementReq->VentaMinimaImpresa);
   $measurement->setProduct($product->getId());
-  if ($product->getCotizador() == 2) {
-    $measurement->setPliego($measurementReq->pliego);
-  }
+  // if ($product->getCategory()->getId() == 8) {
+  //   $measurement->setPliego($measurementReq->pliego);
+  // }
   if (count($measurementsByProduct) <= 0) {
     array_push($measurements, $measurement);
     $measurementDao->saveByProduct($measurement);

@@ -353,22 +353,28 @@ include("../partials/verify-session.php");
               for (let index = 0; index < $('#measurements').children().length; index++) {
                 let measurement = {}
 
-                measurement.width = $('#width' + (index + 1)).val()
-                measurement.height = $('#height' + (index + 1)).val()
-                measurement.lenght = $('#lenght' + (index + 1)).val()
-                measurement.window = $('#window' + (index + 1)).val()
-                measurement.largo_util = $('#largo-util' + (index + 1)).val()
-                measurement.ancho_total = $('#ancho-total' + (index + 1)).val()
-                measurement.venta_minima_impresa = $('#venta-minima-impresa' + (index + 1)).val()
-                measurement.venta_minima_generica = $('#venta-minima-generica' + (index + 1)).val()
+              measurement.codigo = $('#codigo' + (index + 1)).val()
+              measurement.width = $('#width' + (index + 1)).val()
+              measurement.height = $('#height' + (index + 1)).val()
+              measurement.lenght = $('#lenght' + (index + 1)).val()
+              measurement.window = $('#window' + (index + 1)).val()
+              measurement.largoUtil = $('#largoUtil' + (index + 1)).val()
+              measurement.anchoTotal = $('#anchoTotal' + (index + 1)).val()
+              measurement.ventaMinimaGenerica = $('#VentaMinimaGenerica' + (index + 1)).val()
+              measurement.ventaMinimaImpresa = $('#VentaMinimaImpresa' + (index + 1)).val()
 
-                if (typeof($('#width' + (index + 1)).val()) != 'undefinded' && $('#width' + (index + 1)).val() != '' &&
-                  typeof($('#height' + (index + 1)).val()) != 'undefined' && $('#height' + (index + 1)).val() != '' &&
-                  typeof($('#lenght' + (index + 1)).val()) != 'undefined' && $('#lenght' + (index + 1)).val() != '' &&
-                  $('#window' + (index + 1)).val() != undefined) {
-                  measurements.push(measurement)
-                  debugger;
-                }
+              if (typeof($('#codigo' + (index + 1)).val()) != 'undefined' && $('#codigo' + (index + 1)).val() != '' &&
+                typeof($('#width' + (index + 1)).val()) != 'undefinded' && $('#width' + (index + 1)).val() != '' &&
+                typeof($('#height' + (index + 1)).val()) != 'undefined' && $('#height' + (index + 1)).val() != '' &&
+                typeof($('#lenght' + (index + 1)).val()) != 'undefined' && $('#lenght' + (index + 1)).val() != '' &&
+                typeof($('#largoUtil' + (index + 1)).val()) != 'undefined' && $('#largoUtil' + (index + 1)).val() != '' &&
+                typeof($('#anchoTotal' + (index + 1)).val()) != 'undefined' && $('#anchoTotal' + (index + 1)).val() != '' &&
+                typeof($('#VentaMinimaGenerica' + (index + 1)).val()) != 'undefined' && $('#VentaMinimaGenerica' + (index + 1)).val() != '' &&
+                typeof($('#VentaMinimaImpresa' + (index + 1)).val()) != 'undefined' && $('#VentaMinimaImpresa' + (index + 1)).val() != '' &&
+                $('#window' + (index + 1)).val() != undefined) {
+                measurements.push(measurement)
+                debugger;
+              }
               }
               $.post("api/create_product.php", {
                 title: $('#title').val(),
