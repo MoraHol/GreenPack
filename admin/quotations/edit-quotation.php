@@ -113,13 +113,13 @@ $quotation = $quotationDao->findById($_GET["id"]);
               <?php foreach ($quotation->getItems() as $item) { ?>
                 <div class="row align-items-center">
                   <div class="col-md-2 text-center"><img src="<?= $item->getProduct()->getImages()[0]->getUrl() ?>" alt="" width="150" height="150"></div>
-                  <div class="col-md-3 align-self-center">
-                    <h5><?= $item->getProduct()->getName() ?></h5>
+                  <div class="col-md-3 align-self-center mt-3">
+                    <h5><b><?= $item->getProduct()->getName() ?></b></h5>
                     <br>
                     <p><span class="text-primary">Impresión:</span> <?= $item->isPrinting() ? "SI" : "NO" ?></p>
                     <?php if ($item->getProduct()->getCategory()->getId() == 1  && $item->getProduct()->getId() != $_ENV["id_sacos"]) { ?>
-                      <p><span class="text-primary">Ventanilla:</span> <?= $item->isPla() ? "SI" : "NO" ?></p>
-                      <p><span class="text-primary">Laminada:</span> <?= $item->isLam() ? "SI" : "NO" ?></p>
+                      <!-- <p><span class="text-primary">Ventanilla:</span> <?= $item->isPla() ? "SI" : "NO" ?></p>
+                      <p><span class="text-primary">Laminada:</span> <?= $item->isLam() ? "SI" : "NO" ?></p> -->
                       <p><span class="text-primary">Material:</span> <?= $item->getMaterial()->getName() ?></p>
                       <?php } else {
                           if ($item->getProduct()->getCategory()->getId() == 2 || $item->getProduct()->getCategory()->getParentcategory() == 2) {
@@ -137,7 +137,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
                     <p>
                       <ul class="measurements list-inline">
                         <li class="list-inline-item"><span class="text-primary">Ancho:</span> <?= $item->getMeasurement()->getWidth() ?></li>
-                        <li class="list-inline-item"><span class="text-primary"><?= $item->getProduct()->getCategory()->getId() == 1 ? "Fuelle" : $item->getProduct()->getCategory()->getId() == 6 ? 'Largo' : 'Alto' ?>:</span> <?= $item->getMeasurement()->getHeight() ?></li>
+                        <li class="list-inline-item"><span class="text-primary"><?= ($item->getProduct()->getCategory()->getId() == 1 ? "Fuelle" : $item->getProduct()->getCategory()->getId() == 6) ? 'Largo' : 'Alto' ?>:</span> <?= $item->getMeasurement()->getHeight() ?></li>
                         <?php if( $item->getProduct()->getCategory()->getId() != 6){?>
                           <li class="list-inline-item"><span class="text-primary">Largo:</span> <?= $item->getMeasurement()->getLength() ?></li>
                         <?php } ?>
@@ -233,7 +233,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
   <script src="https://unpkg.com/default-passive-events"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!-- <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script> -->
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
 
@@ -293,8 +293,8 @@ $quotation = $quotationDao->findById($_GET["id"]);
         if (parseInt($(`#price${id}`).val()) < cost) {
           console.log($(`#priceHelp${id}`))
           $(`#priceHelp${id}`).html(`<div class="alert alert-danger fade show mb-0">Estas por debajo del costo del producto, el cual equivale a $${cost} <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button></div>`)
+                                     <span aria-hidden="true">&times;</span>
+                                     </button></div>`)
           $(`#priceHelp${id}`).fadeIn()
         } else {
           $(`#priceHelp${id}`).fadeOut()
@@ -318,7 +318,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
 
     function viewPdf(id) {
       $('#load_pdf').html('')
-      $('#load_pdf').append(`<embed  src="/services/view-quotation.php?id=${id}#toolbar=0&navpanes=0&scrollbar=0&statusbar=0%zoom=20" type="application/pdf" width="100%" height="600px" />`)
+      $('#load_pdf').append(`<embed src="/services/view-quotation.php?id=${id}#toolbar=0&navpanes=0&scrollbar=0&statusbar=0%zoom=20" type="application/pdf" width="100%" height="600px" />`)
     }
 
     function recalculate() {
@@ -349,7 +349,6 @@ $quotation = $quotationDao->findById($_GET["id"]);
         if (status == 'success' && xhr.readyState == 4) {
           $.notify({
             message: 'Cotizacion enviada',
-            //title: 'Greenpack',
             icon: 'email'
           }, {
             type: 'success'
@@ -387,7 +386,6 @@ $quotation = $quotationDao->findById($_GET["id"]);
         if (status == 'success') {
           $.notify({
             message: 'Cotizacion actualizada',
-            //title: 'Greenpack',
             icon: 'notification_important'
           }, {
             type: 'success'
@@ -397,7 +395,6 @@ $quotation = $quotationDao->findById($_GET["id"]);
         if (status == 'notmodified') {
           $.notify({
             message: 'No se ha cambiado ningun valor',
-            //title: 'Greenpack',
             icon: 'warning'
           }, {
             type: 'warning'

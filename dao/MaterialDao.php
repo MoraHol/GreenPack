@@ -101,11 +101,11 @@ class MaterialDao
     $this->db->close();
     return $materials;
   }
+
   function saveByProduct($material, $product, $minimunScale = "NULL", $mediumScale = "NULL", $maximunScale = "NULL")
   {
     $this->db->connect();
-    $query = "INSERT INTO `products_has_materials` (`products_id_products`,
-    `materials_id_materials`,`minimun_scale`,`medium_scale`,`maximun_scale`) 
+    $query = "INSERT INTO `products_has_materials` (`products_id_products`, `materials_id_materials`,`minimun_scale`,`medium_scale`,`maximun_scale`) 
     VALUES ('" . $product->getId() . "', '" . $material->getId() . "',$minimunScale, $mediumScale, $maximunScale)
     ON DUPLICATE KEY UPDATE `minimun_scale` = $minimunScale,`medium_scale` = $mediumScale,`maximun_scale` = $maximunScale";
     $status = $this->db->consult($query);
@@ -113,6 +113,7 @@ class MaterialDao
     $this->db->close();
     return $status;
   }
+
   function save($material)
   {
     $this->db->connect();
@@ -128,6 +129,7 @@ class MaterialDao
     echo $query;
     return $status;
   }
+
   function delete($id)
   {
     $this->db->connect();
@@ -137,6 +139,7 @@ class MaterialDao
     //self::$logger->info($query);
     return $status;
   }
+
   function update($material)
   {
     $this->db->connect();
@@ -152,6 +155,7 @@ class MaterialDao
     // self::$logger->info($query);
     return $status;
   }
+  
   function deleteByProduct($id, $product)
   {
     $this->db->connect();

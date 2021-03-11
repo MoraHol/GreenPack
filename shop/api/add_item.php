@@ -45,8 +45,8 @@ if (
       $item = new ItemBag();
       $item->setMaterial($materialDao->findById($_POST["material"]));
     }
-    $item->setLam(filter_var($_POST["lam"], FILTER_VALIDATE_BOOLEAN));
-    $item->setPla(filter_var($_POST["window"], FILTER_VALIDATE_BOOLEAN));
+    /* $item->setLam(filter_var($_POST["lam"], FILTER_VALIDATE_BOOLEAN));
+    $item->setPla(filter_var($_POST["window"], FILTER_VALIDATE_BOOLEAN)); */
   } else if ($product->getCategory()->getId() == 6) {
     if ($product->getId() == $_ENV["id_individuales"]) {
       $item = new ItemIndividual();
@@ -77,7 +77,7 @@ if (
     $item->setTypeProduct($_POST["material"]);
   }
   $item->setProduct($product);
-  $item->setMeasurement($measurementDao->searchMeasurementByProduct($item->getProduct(), $_POST["height"], $_POST["width"], $_POST["length"]));
+  $item->setMeasurement($measurementDao->searchMeasurementByProduct($item->getProduct(), $_POST["height"], $_POST["width"], $_POST["length"]/* , $_POST["codigo"] */ ));
   $item->setPrinting(filter_var($_POST["printing"], FILTER_VALIDATE_BOOLEAN));
   $item->setQuantity($_POST["quantity"]);
   $items = $cart->addItem($item);

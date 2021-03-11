@@ -18,6 +18,7 @@ class Measurement implements JsonSerializable
   private $largoUtil;
   private $VentaMinimaImpresa;
   private $VentaMinimaGenerica;
+  private $factor;
 
   public function getId()
   {
@@ -77,6 +78,16 @@ class Measurement implements JsonSerializable
   public function getVentaMinimaGenerica()
   {
     return $this->VentaMinimaGenerica;
+  }
+
+  public function getFactor()
+  {
+    return $this->factor;
+  }
+
+  public function setFactor($factor)
+  {
+   $this->factor = $factor;
   }
 
   public function getWindow()

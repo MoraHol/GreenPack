@@ -27,22 +27,6 @@ switch ($product->getCotizador()) {
     $nameAdditional = "Piezas por Pliego";
     $routeDownloadFileExample = "/Catalogos/FormatMeasurementsBoxes.xlsx";
     break;
-    /* case 3:
-    $nameAdditional = "Piezas por Pliego";
-    $routeDownloadFileExample = "/Catalogos/FormatMeasurementsBoxes.xlsx";
-    break;
-  case 4:
-    $nameAdditional = "Piezas por Pliego";
-    $routeDownloadFileExample = "/Catalogos/FormatMeasurementsBoxes.xlsx";
-    break;
-  case 5:
-    $nameAdditional = "Piezas por Pliego";
-    $routeDownloadFileExample = "/Catalogos/FormatMeasurementsBoxes.xlsx";
-    break;
-  case 8:
-    $nameAdditional = "Piezas por Pliego";
-    $routeDownloadFileExample = "/Catalogos/FormatMeasurementsBoxes.xlsx";
-    break; */
 }
 ?>
 <!-- author: Teenus SAS, github: Teenus SAS -->
@@ -198,7 +182,7 @@ switch ($product->getCotizador()) {
 
             <br>
             <div class="form-group">
-              <label for="title">Nombre:</label>
+              <label for="title">Nombre del producto:</label>
               <input type="text" placeholder="Ej. bolsa de manija" id="title" class="form-control" value="<?= $product->getName(); ?>">
             </div>
             <br>

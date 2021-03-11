@@ -12,6 +12,7 @@ class Product implements JsonSerializable
   private $category;
   private $uses;
   private $ref;
+  private $factor;
 
   function __construct()
   { }
@@ -97,7 +98,15 @@ class Product implements JsonSerializable
     $this->cotizador = $cotizador;
   }
 
+  public function getFactor()
+  {
+    return $this->factor;
+  }
 
+  public function setFactor($factor)
+  {
+   $this->factor = $factor;
+  }
 
   public function getMeasurements()
   {

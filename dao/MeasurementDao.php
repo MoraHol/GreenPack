@@ -61,12 +61,12 @@ class MeasurementDao
     $measurement->setWidth($measurementDB["width"]);
     $measurement->setHeight($measurementDB["height"]);
     $measurement->setWindow($measurementDB["window"]);
-    $measurement->setLargoUtil($measurementDB["largoUtil"]);
-    $measurement->setAnchoTotal($measurementDB["anchoTotal"]);
+    $measurement->setLargoUtil($measurementDB["largo_util"]);
+    $measurement->setAnchoTotal($measurementDB["ancho_total"]);
     $measurement->setProduct($measurementDB["products_id_products"]);
     $measurement->setPliego($measurementDB["pliego"]);
-    $measurement->setVentaMinimaImpresa($measurementDB["VentaMinimaImpresa"]);
-    $measurement->setVentaMinimaGenerica($measurementDB["VentaMinimaGenerica"]);
+    $measurement->setVentaMinimaImpresa($measurementDB["venta_minima_impresa"]);
+    $measurement->setVentaMinimaGenerica($measurementDB["venta_minima_generica"]);
     
     // $this->db->close();
     return $measurement;
@@ -89,10 +89,10 @@ class MeasurementDao
     // self::$logger->info($query);
     return $status;
   }
-  function searchMeasurementByProduct($product, $height, $width, $length, $codigo)
+  function searchMeasurementByProduct($product, $height, $width, $length/* , $codigo */)
   {
     $this->db->connect();
-    $query = "SELECT * FROM `measurements` WHERE `codigo` = $codigo and `width` = $width and `height` = $height and `lenght` = $length AND `products_id_products` = " . $product->getId();
+    $query = "SELECT * FROM `measurements` WHERE `width` = $width and `height` = $height and `lenght` = $length AND `products_id_products` = " . $product->getId();    /* `codigo` = $codigo and  */ 
     $measurementDB = $this->db->consult($query, "yes");
     $measurementDB = $measurementDB[0];
     $measurement = new Measurement();
@@ -102,12 +102,12 @@ class MeasurementDao
     $measurement->setWidth($measurementDB["width"]);
     $measurement->setHeight($measurementDB["height"]);
     $measurement->setWindow($measurementDB["window"]);
-    $measurement->setLargoUtil($measurementDB["largoUtil"]);
-    $measurement->setAnchoTotal($measurementDB["anchoTotal"]);
+    $measurement->setLargoUtil($measurementDB["largo_util"]);
+    $measurement->setAnchoTotal($measurementDB["ancho_total"]);
     $measurement->setProduct($product->getId());
     $measurement->setPliego($measurementDB["pliego"]);
-    $measurement->setVentaMinimaImpresa($measurementDB["VentaMinimaImpresa"]);
-    $measurement->setVentaMinimaGenerica($measurementDB["VentaMinimaGenerica"]);
+    $measurement->setVentaMinimaImpresa($measurementDB["venta_minima_impresa"]);
+    $measurement->setVentaMinimaGenerica($measurementDB["venta_minima_generica"]);
     // self::$logger->info($query);
     $this->db->close();
     return $measurement;

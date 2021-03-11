@@ -171,7 +171,7 @@ $tabs = $tabProductDao->findByProduct($product);
           <div class="col-md-5" id="container-cotizador">
             <div class="s_product_text" style="margin-left: 0; margin-top: 0;">
 
-              <!-- nueva pesentacion -->
+              <!-- nueva presentacion -->
               <div class="accordion" id="accordion-cotizador">
                 <div class="card">
                   <div class="card-header" id="headingOne">
@@ -491,33 +491,53 @@ $tabs = $tabProductDao->findByProduct($product);
 
 
     function verifyMinQuantity() {
-      /* se debe cargar la informacion desde la base de datos y validar si se selecciono impresion o generica y de acuerdo a la medida obtener la minima cantidad  */
-      if (category == "bolsas") {
-        let $printing = $('#impresion').prop('checked')
-        let measurements = `<?= json_encode($product->getMeasurements()); ?>`
-        measurements = JSON.parse(measurements);
-        console.log(measurements);
-        if ($printing) {
-          minQuantity = measurements[0].ventaMinimaImpresa;
-        } else {
-          minQuantity = measurements[0].ventaMinimaGenerica;
+      let $printing = $('#impresion').prop('checked')
+      let measurements = `<?= json_encode($product->getMeasurements()); ?>`
+      measurements = JSON.parse(measurements);
+
+      let width = $('#width').val();
+      let height = $('#height').val();
+      let length = $('#length').val();
+
+      if (width == null || height == null || length == undefined)
+        return false;
+
+      for (let i = 0; i < measurements.length; i++) {
+        if (measurements[i].width == width && measurements[i].height == height && measurements[i].length == length) {
+          if ($printing)
+            minQuantity = measurements[i].VentaMinimaImpresa;
+          else
+            minQuantity = measurements[i].VentaMinimaGenerica;
+          break;
         }
-      } else {
-        minQuantity = 1000
       }
       return minQuantity
     }
 
-    $('#impresion').change(function(e) {
+    $('#length').change(function(e) {
       e.preventDefault();
-      let $printing = $('#impresion').prop('checked')
-      $printing == false ? minQuantity = measurements[0].ventaMinimaGenerica : minQuantity = measurements[0].ventaMinimaImpresa;
-      $('#sst').val(minQuantity)
-      verifyMinQuantityValue()
+      verifyMinQuantity()
+      $('#sst').val(minQuantity);
     });
 
 
+    $('#impresion').change(function(e) {
+      e.preventDefault();
+      verifyMinQuantity()
+      $('#sst').val(minQuantity);
+    });
+
+    /* $('#impresion').change(function(e) {
+      e.preventDefault();
+      let $printing = $('#impresion').prop('checked')
+      $printing == false ? minQuantity = measurements[0].VentaMinimaGenerica : minQuantity = measurements[0].VentaMinimaImpresa;
+      $('#sst').val(minQuantity)
+      verifyMinQuantityValue()
+    }); */
+
+
     function verifyMinQuantityValue() {
+      
       minQuantity
       imput = $('#sst').val()
       if ($('#sst').val() < verifyMinQuantity()) {
@@ -541,13 +561,14 @@ $tabs = $tabProductDao->findByProduct($product);
     // agregar un producto al carrito
     $('#btnCotizar').click(() => {
       let $printing = $('#impresion').prop('checked')
-      let $laminada = $('#laminada').prop('checked')
-      let $ventanilla = $('#ventanilla').prop('checked')
+      /* let $laminada = $('#laminada').prop('checked')*/
+       /* let $ventanilla = $('#ventanilla').prop('checked') */
       let $width = $('#width').val()
       let $height = $('#height').val()
       let $length = $('#length').val()
       let $material = $("input[name='material']:checked").val();
       let $quantity = $('#sst').val()
+      debugger;
       if ($width != null && $height != null && $length != null && $material != undefined && $quantity > 999) {
         $.post('api/add_item.php', {
           idProduct: `<?= $product->getId(); ?>`,
@@ -557,8 +578,8 @@ $tabs = $tabProductDao->findByProduct($product);
           material: $material,
           quantity: $quantity,
           printing: $printing,
-          lam: $laminada,
-          window: $ventanilla
+          /* lam: $laminada, */
+          /* window: $ventanilla */
         }, (data, status) => {
           if (status == 'success') {
             renderCart()

@@ -522,22 +522,46 @@ $tabs = $tabProductDao->findByProduct($product);
   <script>
     let category = `<?= $product->getCategory()->getName(); ?>`;
     let minQuantity = 0;
-    $('#sst').val(verifyMinQuantity())
+    // $('#sst').val(verifyMinQuantity())
     $('#btnCotizar').removeClass("disabled")
     $('#help-quantity').fadeOut()
 
     function verifyMinQuantity() {
-      if (category == "bolsas") {
-        if ($('#width').val() < 13) {
-          minQuantity = 20000
-        } else {
-          minQuantity = 10000
+      let $printing = $('#impresion').prop('checked')
+      let measurements = `<?= json_encode($product->getMeasurements()); ?>`
+      measurements = JSON.parse(measurements);
+
+      let width = $('#width').val();
+      let height = $('#height').val();
+      let length = $('#length').val();
+
+      if (width == null || height == null || length == undefined)
+        return false;
+
+      for (let i = 0; i < measurements.length; i++) {
+        if (measurements[i].width == width && measurements[i].height == height && measurements[i].length == length) {
+          if ($printing)
+            minQuantity = measurements[i].VentaMinimaImpresa;
+          else
+            minQuantity = measurements[i].VentaMinimaGenerica;
+          break;
         }
-      } else {
-        minQuantity = 1000
       }
       return minQuantity
     }
+
+    $('#length').change(function(e) {
+      e.preventDefault();
+      verifyMinQuantity()
+      $('#sst').val(minQuantity);
+    });
+
+
+    $('#impresion').change(function(e) {
+      e.preventDefault();
+      verifyMinQuantity()
+      $('#sst').val(minQuantity);
+    });
 
     function verifyMinQuantityValue() {
       if ($('#sst').val() < verifyMinQuantity()) {

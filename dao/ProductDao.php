@@ -164,6 +164,7 @@ class ProductDao
     }
     return $products;
   }
+  
   function save($product)
   {
     $this->db->connect();
@@ -186,6 +187,7 @@ class ProductDao
     $this->db->close();
     return $status;
   }
+
   function update($product)
   {
     $this->db->connect();
