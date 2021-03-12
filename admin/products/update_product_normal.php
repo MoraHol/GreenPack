@@ -2,11 +2,13 @@
 require_once dirname(dirname(__DIR__)) . "/dao/ProductDao.php";
 require_once dirname(dirname(__DIR__)) . "/dao/MaterialDao.php";
 require_once dirname(dirname(__DIR__)) . "/dao/TabProductDao.php";
-require_once dirname(dirname(__DIR__)) . "/dao/FactorDao.php";
+
 $productDao = new ProductDao();
+
 if (!isset($_GET["id"])) {
   header("Location: /admin/products");
 }
+
 $product = $productDao->findById($_GET["id"]);
 $tabProductDao = new TabProductDao();
 $indexField = 1;
@@ -279,8 +281,7 @@ switch ($product->getCotizador()) {
               <label for="campo1">Medidas:</label>
               <button class="btn btn-primary" id="hideMeasurements">Ver Medidas</button>
               <ul class="list-unstyled" id="measurements">
-                <?php foreach ($product->getMeasurements() as $measurement) {
-                ?>
+                <?php foreach ($product->getMeasurements() as $measurement) { ?>
                   <li>Medida <?= $indexMeasurement ?>:
                     <div class="row">
                       <div class="row">
@@ -331,13 +332,12 @@ switch ($product->getCotizador()) {
                     foreach ($materials as  $material) {
                       $materialSelected = $materialProduct->getId() == $material->getId() ? $material : $materialSelected ?>
                       <option value="<?= $material->getId(); ?>" <?= $materialProduct->getId() == $material->getId() ? "selected" : "" ?>><?= $material->getName(); ?></option>
-                    <?php }
-                    ?>
+                    <?php } ?>
                   </select>
 
-                  <input class="col md-4 form-control ml-3 mr-5" id="e1<?= $indexFactor ?>" type="number" style="width: 100px; text-align:center">
-                  <input class="col md-4 form-control mr-3" id="e2<?= $indexFactor ?>" type="number" style="width: 100px; text-align:center">
-                  <input class="col md-4 form-control mr-3" id="e3<?= $indexFactor ?>" type="number" style="width: 100px; text-align:center">
+                  <input class="col md-4 form-control ml-3 mr-5" id="e1<?= $indexMaterial ?>" value="<?= $materialProduct->getE1(); ?>" type="number" style="width: 100px; text-align:center" readonly>
+                  <input class="col md-4 form-control mr-3" id="e2<?= $indexMaterial ?>" value="<?= $materialProduct->getE2() ?>" type="number" style="width: 100px; text-align:center" readonly>
+                  <input class="col md-4 form-control mr-3" id="e3<?= $indexMaterial ?>" value="<?= $materialProduct->getE3() ?>" type="number" style="width: 100px; text-align:center" readonly>
 
                   <div>
                     <button class="btn btn-danger" onclick="deleteMaterial(<?= $product->getId() ?>,<?= $materialSelected->getId() ?>)"><i class="fas fa-trash-alt"></i></button>
@@ -359,7 +359,6 @@ switch ($product->getCotizador()) {
               <div style="text-align: center;">Pestañas del producto:</div>
               <hr style="width: 30%;">
               <?php
-              // echo count($tabs); 
               if (count($tabs) > 0) {
                 foreach ($tabs as $tab) {
               ?>
@@ -405,47 +404,6 @@ switch ($product->getCotizador()) {
                   <?php } ?>
                 </select>
               </div>
-
-              <!-- <div class="form-group mt-3">
-                <label for="category">Factores</label>
-                <div class="row">
-                  <label>Materia Prima</label>
-                </div>
-                <div class="tituloFactores">
-                  <label for="FactorE1<?= $indexFactor ?>" class="col-md-3">E1</label>
-                  <label for="FactorE2<?= $indexFactor ?>" class="col-md-3">E2</label>
-                  <label for="FactorE3<?= $indexFactor ?>" class="col-md-3">E3</label>
-                </div>
-              </div>
-              <div class="factores">
-
-              </div>
-
-            </div> -->
-
-              <!-- <label for="category">Rangos:</label>
-            <div class="row">
-              <div class="col md-4"><label>E1:</label></div>
-              <div class="col md-4"><label>E2:</label></div>
-              <div class="col md-4"><label>E3:</label></div>
-            </div>
-            <div class="row">
-              <div class="col md-2"><label>Min:</label></div>
-              <div class="col md-2"><label>Max:</label></div>
-              <div class="col md-2"><label>Min:</label></div>
-              <div class="col md-2"><label>Max:</label></div>
-              <div class="col md-2"><label>Min:</label></div>
-              <div class="col md-2"><label>Max:</label></div>
-            </div>
-            <div class="row">
-              <input class="col md-2 form-control" type="number">
-              <input class="col md-2 form-control" type="number">
-              <input class="col md-2 form-control" type="number">
-              <input class="col md-2 form-control" type="number">
-              <input class="col md-2 form-control" type="number">
-              <input class="col md-2 form-control" type="number">
-            </div>
- -->
             </div>
 
             <div class="row" style="margin-bottom: 20px; margin-top: 60px;">
@@ -559,6 +517,62 @@ switch ($product->getCotizador()) {
           location.href = '#measurement-container'
         }
       })
+    }
+
+    function updateMaterial(idProduct, IdMaterial, evTarget) {
+      const idMaterialInput = $(`#idmaterial${indexMaterial}`).val();
+      const E1Input = $(`#e1${indexMaterial}`).val();
+      const E2Input = $(`#e2${indexMaterial}`).val();
+      const E3Input = $(`#e3${indexMaterial}`).val();
+
+      if (evTarget.closest('button').value === 'Modificar') {
+
+        evTarget.closest('button').value = 'Guardar';
+        evTarget.closest('button').textContent = 'Guardar';
+
+        $(`#idmaterial${indexMaterial}`).prop("readonly", false);
+        $(`#e1${indexMaterial}`).prop("readonly", false);
+        $(`#e2${indexMaterial}`).prop("readonly", false);
+        $(`#e3${indexMaterial}`).prop("readonly", false);
+
+        evTarget.classList.replace('btn-warning', 'btn-info');
+
+      } else {
+
+        const materialInfo = {
+          idMaterial: idMaterialInput,
+          E1: E1Input,
+          E2: E2Input,
+          E3: E3Input
+        };
+
+        $.post('api/modify_factor.php', {
+              materials: materialtInfo
+            },
+            (data, status) => {
+              if (status === 'success') {
+                $.notify({
+                  icon: 'fas fa-exclamation-triangle',
+                  message: 'Medida Actualizada',
+                }, {
+                  type: 'warning'
+                })
+              }
+            })
+          .always(() => {
+            evTarget.closest('button').value = 'Modificar';
+            evTarget.closest('button').innerHTML = '<i class="fas fa-pencil-alt"></i>';
+
+            $(`#idmaterial${indexMaterial}`).prop("readonly", true);
+            $(`#e1${indexMaterial}`).prop("readonly", true);
+            $(`#e2${indexMaterial}`).prop("readonly", true);
+            $(`#e3${indexMaterial}`).prop("readonly", true);
+
+            evTarget.classList.replace('btn-info', 'btn-warning');
+          });
+
+      }
+
     }
 
     function updateMeasurement(idProduct, idMeasurement, indexMeasurement, evTarget) {
@@ -758,21 +772,25 @@ switch ($product->getCotizador()) {
             }
           }
           $('select').niceSelect('update')
-
+          debugger;
           for (let index = 0; index < $('#materials').children().length; index++) {
             let value = $('#material' + (index + 1)).val()
             let e1 = $('#e1' + (index + 1)).val()
             let e2 = $('#e2' + (index + 1)).val()
             let e3 = $('#e3' + (index + 1)).val()
 
-            if (value != '' && typeof(value) != 'undefined' && value != null) {
-              materials.push(value)
+            if (value != '' && typeof(value) != 'undefined' && value != null &&
+              e1 != '' && typeof(e1) != 'undefined' && e1 != null &&
+              e2 != '' && typeof(e2) != 'undefined' && e2 != null &&
+              e3 != '' && typeof(e3) != 'undefined' && e3 != null) {
+
               const factor = {};
-              factor.materials = value;
+              factor.material = value;
               factor.e1 = e1;
               factor.e2 = e2;
               factor.e3 = e3;
-              materialFactor.push(factor);
+              //materialFactor.push(factor);
+              materials.push(factor);
             }
           }
           let i = $('#measurements').children().length;
@@ -1042,7 +1060,6 @@ switch ($product->getCotizador()) {
     function FactorMaterial() {
       // addFactor();
       // addMaterial();
-      indexFactor++;
       indexMaterial++;
       $('#materials').append(`
       
@@ -1055,37 +1072,14 @@ switch ($product->getCotizador()) {
             <?php } ?>
             </select>  
              
-              <input class="col md-4 form-control ml-5 mr-5" id="e1<?= $indexFactor ?>" type="number" style="width:100px; text-align:center">
-              <input class="col md-4 form-control mr-5" id="e2<?= $indexFactor ?>" type="number" style="width:100px; text-align:center">
-              <input class="col md-4 form-control mr-5" id="e3<?= $indexFactor ?>" type="number" style="width:100px; text-align:center">
+              <input class="col md-4 form-control ml-5 mr-5" id="e1${indexMaterial}" type="number" style="width:100px; text-align:center">
+              <input class="col md-4 form-control mr-5" id="e2${indexMaterial}" type="number" style="width:100px; text-align:center">
+              <input class="col md-4 form-control mr-5" id="e3${indexMaterial}" type="number" style="width:100px; text-align:center">
             </div>`);
 
-      //     $('#materials').append(`
-      // <select class="form-control" style="margin-bottom: 10px;" id="material${indexMaterial}">
-      //   <option disabled selected>Seleccione un material</option>
-      //     <?php
-              //     foreach ($materials as  $material) { 
-              ?>
-      //         <option value="?= $material->getId(); ?>">?= $material->getName(); ?></option>
-      //     ?php } ?>
-      //     </select>
-      // `)
-
-    }
-
-    function addFactor() {
-      indexFactor++;
-      $('.tituloFactores').append(`
-            <div class="row">
-              <label value="<?= $material->getId(); ?>" <?= $materialProduct->getId() == $material->getId() ? "selected" : "" ?>><?= $material->getName(); ?></label>
-              <input class="col md-4 form-control" id="Factor<?= $indexFactor ?>" type="number">
-              <input class="col md-4 form-control" id="Factor<?= $indexFactor ?>" type="number">
-              <input class="col md-4 form-control" id="Factor<?= $indexFactor ?>" type="number">
-            </div>`);
     }
 
     $(document).ready(function() {
-
       let selectElement = document.querySelector('.material');
       if (selectElement == null) {
         selectElement = 1;

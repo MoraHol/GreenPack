@@ -35,7 +35,7 @@ class FactorDao
   function findByProduct($product)
   {
     $this->db->connect();
-    $query = "SELECT * FROM `factors` WHERE id_product = $product->getId()";
+    $query = "SELECT * FROM `factors` WHERE id_product = " . $product->getId();
     $factorDB = $this->db->consult($query, "yes");
     $factorDB = $factorDB[0];
     $factor = new Factor();
@@ -44,7 +44,7 @@ class FactorDao
     $factor->setE1($factorDB["e1"]);
     $factor->setE2($factorDB["e2"]);
     $factor->setE1($factorDB["e3"]);
-    
+
     $this->db->close();
     return $factor;
   }

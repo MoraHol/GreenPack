@@ -8,14 +8,14 @@ require_once dirname(dirname(dirname(__DIR__))) . "/model/Image.php";
 require_once dirname(dirname(dirname(__DIR__))) . "/dao/ImageDao.php";
 require_once dirname(dirname(dirname(__DIR__))) . "/dao/MaterialDao.php";
 require_once dirname(dirname(dirname(__DIR__))) . "/dao/MeasurementDao.php";
-require_once dirname(dirname(dirname(__DIR__))) . "/dao/FactorDao.php";
+//require_once dirname(dirname(dirname(__DIR__))) . "/dao/FactorDao.php";
 
 $productDao = new ProductDao();
 $categoryDao = new CategoryDao();
 $imageDao = new ImageDao();
 $materialDao = new MaterialDao();
 $measurementDao = new MeasurementDao();
-$factorDao = new FactorDao();
+//$factorDao = new FactorDao();
 
 /* instanciar clase para almacenar array factores */
 
@@ -49,32 +49,40 @@ if (isset($_POST["photos"])) {
 
 $materials = [];
 $materialsByProduct = $materialDao->findByProduct($product);
-if ($product->getId() == $_ENV["id_fondo_auto"] || $product->getCategory()->getid() == 8) {
-  //si el la bolsa de fondo automatico
-  foreach (json_decode($_POST["materials"]) as  $materialReq) {
-    $material = $materialDao->findById((int) $materialReq->id);
-    $materialReq->minimunScale = $materialReq->minimunScale == null ? "NULL" : $materialReq->minimunScale;
+/* if ($product->getId() == $_ENV["id_fondo_auto"] || $product->getCategory()->getid() == 8) { */
+//si el la bolsa de fondo automatico
+foreach (json_decode($_POST["materials"]) as  $materialReq) {
+  $material = $materialDao->findById((int) $materialReq->material);
+  $material->setE1($materialReq->e1);
+  $material->setE2($materialReq->e2);
+  $material->setE3($materialReq->e3);
+  /* $materialReq->minimunScale = $materialReq->minimunScale == null ? "NULL" : $materialReq->minimunScale;
     $materialReq->mediumScale = $materialReq->mediumScale == null ? "NULL" : $materialReq->mediumScale;
     $materialReq->maximunScale = $materialReq->maximunScale == null ? "NULL" : $materialReq->maximunScale;
-
-    $materialDao->saveByProduct($material, $product, $materialReq->minimunScale, $materialReq->mediumScale, $materialReq->maximunScale);
-  }
-} else {
-  foreach (json_decode($_POST["materials"]) as  $materialId) {
-    $material = $materialDao->findById((int) $materialId);
-    if (count($materialsByProduct) <= 0) {
-      array_push($materials, $material);
-      $materialDao->saveByProduct($material, $product);
-    } else {
-      foreach ($materialsByProduct as $materialProduct) {
-        if ($materialProduct->getId() != $material->getId()) {
-          array_push($materials, $material);
-          $materialDao->saveByProduct($material, $product);
-        }
+     */
+  if (count($materialsByProduct) <= 0) {
+    array_push($materials, $material, $factor);
+    $materialDao->saveByProduct($material, $product);
+  } else {
+    $find = 0;
+    for ($i = 0; $i < sizeof($materialsByProduct); $i++) {
+      //foreach ($materialsByProduct as $materialProduct) {
+      if ($materialsByProduct[$i]->getId() == $materialReq->material) {
+        $find = 1;
       }
     }
+    if ($find != 1) {
+      array_push($materials, $material);
+      $materialDao->saveByProduct($material, $product);
+    }
+    //$materialDao->saveByProduct($material, $product, $materialReq->minimunScale, $materialReq->mediumScale, $materialReq->maximunScale);
   }
 }
+/* } else { */
+/* foreach (json_decode($_POST["materials"]) as  $materialId) {
+  $material = $materialDao->findById((int) $materialId);
+} */
+/* } */
 
 $measurements = [];
 foreach (json_decode($_POST["measurements"]) as  $measurementReq) {
@@ -113,7 +121,7 @@ foreach (json_decode($_POST["measurements"]) as  $measurementReq) {
 
 /* Crear funcion para almacenar factores setter y getter */
 
-$factors = [];
+/* $factors = [];
 foreach (json_decode($_POST["materialFactors"]) as $factorReq) {
   $factorsByProduct = $factorDao->findByProduct($product);
   $factor = new Factor();
@@ -134,7 +142,7 @@ foreach (json_decode($_POST["materialFactors"]) as $factorReq) {
       }
     }
   }
-}
+} */
 
 // var_dump($measurements);
 $productDao->update($product);

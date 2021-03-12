@@ -27,7 +27,7 @@ class MaterialDao
   function findAll()
   {
     $materials = [];
-    $materialsDB = $this->db->consult("SELECT * FROM `materials` ORDER BY `name`", "yes");
+    $materialsDB = $this->db->consult("SELECT * FROM materials m INNER JOIN products_has_materials phm ON m.id_materials = phm.materials_id_materials ORDER BY `name`", "yes");
     foreach ($materialsDB as  $materialDB) {
       $material = new Material();
       $material->setId($materialDB["id_materials"]);
@@ -35,8 +35,11 @@ class MaterialDao
       $material->setDescription($materialDB["description"]);
       $material->setGrammage($materialDB["grammage"]);
       $material->setPricePerKg($materialDB["price_per_kg"]);
-      $material->p5400 = $materialDB["price_5400"];
-      $material->p7000 = $materialDB["price_7000"];
+      $material->setE1($materialDB["e1"]);
+      $material->setE2($materialDB["e2"]);
+      $material->setE3($materialDB["e3"]);
+      //$material->p5400 = $materialDB["price_5400"];
+      //$material->p7000 = $materialDB["price_7000"];
       array_push($materials, $material);
     }
     return $materials;
@@ -91,11 +94,17 @@ class MaterialDao
       $material->setDescription($materialDB["description"]);
       $material->setGrammage($materialDB["grammage"]);
       $material->setPricePerKg($materialDB["price_per_kg"]);
+      
+      $material->setE1($materialDB["e1"]);
+      $material->setE2($materialDB["e2"]);
+      $material->setE3($materialDB["e3"]);
+
       $material->setMinimunScale($materialDB["minimun_scale"]);
       $material->setMediumScale($materialDB["medium_scale"]);
       $material->setMaximunScale($materialDB["maximun_scale"]);
-      $material->p5400 = $materialDB["price_5400"];
-      $material->p7000 = $materialDB["price_7000"];
+      
+      //$material->p5400 = $materialDB["price_5400"];
+      //$material->p7000 = $materialDB["price_7000"];
       array_push($materials, $material);
     }
     $this->db->close();
@@ -105,8 +114,8 @@ class MaterialDao
   function saveByProduct($material, $product, $minimunScale = "NULL", $mediumScale = "NULL", $maximunScale = "NULL")
   {
     $this->db->connect();
-    $query = "INSERT INTO `products_has_materials` (`products_id_products`, `materials_id_materials`,`minimun_scale`,`medium_scale`,`maximun_scale`) 
-    VALUES ('" . $product->getId() . "', '" . $material->getId() . "',$minimunScale, $mediumScale, $maximunScale)
+    $query = "INSERT INTO `products_has_materials` (`products_id_products`, `materials_id_materials`, `e1`, `e2`, `e3`, `minimun_scale`, `medium_scale`, `maximun_scale`) 
+    VALUES ('" . $product->getId() . "', '" . $material->getId() . "' , '" . $material->getE1() . "', '" . $material->getE2() . "', '" . $material->getE3() . "',$minimunScale, $mediumScale, $maximunScale)
     ON DUPLICATE KEY UPDATE `minimun_scale` = $minimunScale,`medium_scale` = $mediumScale,`maximun_scale` = $maximunScale";
     $status = $this->db->consult($query);
     // self::$logger->info($query);
@@ -155,7 +164,7 @@ class MaterialDao
     // self::$logger->info($query);
     return $status;
   }
-  
+
   function deleteByProduct($id, $product)
   {
     $this->db->connect();
