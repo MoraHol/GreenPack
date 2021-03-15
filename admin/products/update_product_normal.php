@@ -341,7 +341,7 @@ switch ($product->getCotizador()) {
 
                   <div>
                     <button class="btn btn-danger" onclick="deleteMaterial(<?= $product->getId() ?>,<?= $materialSelected->getId() ?>)"><i class="fas fa-trash-alt"></i></button>
-                    <button class="btn btn-warning" onclick="updateMaterial(<?= $product->getId() ?>,<?= $materialSelected->getId() ?>)"><i class="fas fa-pencil-alt"></i></button>
+                    <button class="btn btn-warning" id="btnUpdateMaterial<?= $indexMaterial ?>" value='Modifica2' onclick="updateMaterial(<?= $product->getId() ?>,<?= $materialSelected->getId() ?>,<?= $indexMaterial ?>)"><i class="fas fa-pencil-alt"></i></button>
                   </div>
 
                 </div>
@@ -519,59 +519,77 @@ switch ($product->getCotizador()) {
       })
     }
 
-    function updateMaterial(idProduct, IdMaterial, evTarget) {
-      const idMaterialInput = $(`#idmaterial${indexMaterial}`).val();
-      const E1Input = $(`#e1${indexMaterial}`).val();
-      const E2Input = $(`#e2${indexMaterial}`).val();
-      const E3Input = $(`#e3${indexMaterial}`).val();
+    function updateMaterial(idProduct, IdMaterial, IdBtn /*,  evTarget */ ) {
+      debugger;
+      //const idMaterialInput = $(`#idmaterial${indexFactor}`).val();
+      const E1Input = $(`#e1${IdBtn}`).val();
+      const E2Input = $(`#e2${IdBtn}`).val();
+      const E3Input = $(`#e3${IdBtn}`).val();
 
-      if (evTarget.closest('button').value === 'Modificar') {
+      $(`#btnUpdateMaterial${IdBtn}`).html('Actualizar');
 
-        evTarget.closest('button').value = 'Guardar';
-        evTarget.closest('button').textContent = 'Guardar';
+      //if (evTarget.closest('button').value === 'Modifica2') {
+      /* if ($('#btnUpdateMaterial').html() === 'Modifica2') {
+        $('#btnUpdateMaterial').html('Guardar'); */
 
-        $(`#idmaterial${indexMaterial}`).prop("readonly", false);
-        $(`#e1${indexMaterial}`).prop("readonly", false);
-        $(`#e2${indexMaterial}`).prop("readonly", false);
-        $(`#e3${indexMaterial}`).prop("readonly", false);
+      //evTarget.closest('button').value = 'Guardar';
+      //evTarget.closest('button').textContent = 'Guardar';
 
-        evTarget.classList.replace('btn-warning', 'btn-info');
+      // $(`#idmaterial${IdBtn}`).prop("readonly", false);
+      $(`#e1${IdBtn}`).prop("readonly", false);
+      $(`#e2${IdBtn}`).prop("readonly", false);
+      $(`#e3${IdBtn}`).prop("readonly", false);
 
-      } else {
+      //evTarget.classList.replace('btn-warning', 'btn-info');
 
-        const materialInfo = {
-          idMaterial: idMaterialInput,
-          E1: E1Input,
-          E2: E2Input,
-          E3: E3Input
-        };
+      /* } else { */
+        if ($('#btnUpdateMaterial').html() === 'Actualizar'){
+      UpdateMaterialGuardar();
+    } else {
+      UpdateMaterialGuardar();
+    }
+    }
+    
+    
+    function UpdateMaterialGuardar(idProduct, IdMaterial, IdBtn){
 
-        $.post('api/modify_factor.php', {
-              materials: materialtInfo
-            },
-            (data, status) => {
-              if (status === 'success') {
-                $.notify({
-                  icon: 'fas fa-exclamation-triangle',
-                  message: 'Medida Actualizada',
-                }, {
-                  type: 'warning'
-                })
-              }
+      const E1Input = $(`#e1${IdBtn}`).val();
+      const E2Input = $(`#e2${IdBtn}`).val();
+      const E3Input = $(`#e3${IdBtn}`).val();
+
+    const materialInfo = {
+      // idMaterial: idMaterialInput,
+      E1: E1Input,
+      E2: E2Input,
+      E3: E3Input
+    };
+
+    $.post('api/modify_factor.php', {
+          materials: materialInfo
+        },
+        (data, status) => {
+          if (status === 'success') {
+            $.notify({
+              icon: 'fas fa-exclamation-triangle',
+              message: 'Medida Actualizada',
+            }, {
+              type: 'warning'
             })
-          .always(() => {
-            evTarget.closest('button').value = 'Modificar';
-            evTarget.closest('button').innerHTML = '<i class="fas fa-pencil-alt"></i>';
+          }
+        })
+      .always(() => {
+        //evTarget.closest('button').value = 'Modifica2';
+        //evTarget.closest('button').innerHTML = '<i class="fas fa-pencil-alt"></i>';
 
-            $(`#idmaterial${indexMaterial}`).prop("readonly", true);
-            $(`#e1${indexMaterial}`).prop("readonly", true);
-            $(`#e2${indexMaterial}`).prop("readonly", true);
-            $(`#e3${indexMaterial}`).prop("readonly", true);
+        // $(`#idmaterial${indexFactor}`).prop("readonly", true);
+        $(`#e1${indexFactor}`).prop("readonly", true);
+        $(`#e2${indexFactor}`).prop("readonly", true);
+        $(`#e3${indexFactor}`).prop("readonly", true);
 
-            evTarget.classList.replace('btn-info', 'btn-warning');
-          });
+        //evTarget.classList.replace('btn-info', 'btn-warning');
+      });
 
-      }
+    /* } */
 
     }
 
