@@ -88,6 +88,16 @@ class Product implements JsonSerializable
     $this->materials = $materials;
   }
 
+  public function getCantidad()
+  {
+    return $this->Cantidad;
+  }
+
+  public function setCantidad($cantidad)
+  {
+    $this->cantidad = $cantidad;
+  }
+
   public function getCotizador()
   {
     return $this->cotizador;

@@ -8,6 +8,7 @@ require_once dirname(dirname(dirname(__DIR__))) . "/model/Image.php";
 require_once dirname(dirname(dirname(__DIR__))) . "/dao/ImageDao.php";
 require_once dirname(dirname(dirname(__DIR__))) . "/dao/MaterialDao.php";
 require_once dirname(dirname(dirname(__DIR__))) . "/dao/MeasurementDao.php";
+require_once dirname(dirname(dirname(__DIR__))) . "/dao/CantidadDao.php";
 //require_once dirname(dirname(dirname(__DIR__))) . "/dao/FactorDao.php";
 
 $productDao = new ProductDao();
@@ -15,6 +16,7 @@ $categoryDao = new CategoryDao();
 $imageDao = new ImageDao();
 $materialDao = new MaterialDao();
 $measurementDao = new MeasurementDao();
+$cantidadDao = new CantidadDao();
 //$factorDao = new FactorDao();
 
 /* instanciar clase para almacenar array factores */
@@ -117,6 +119,24 @@ foreach (json_decode($_POST["measurements"]) as  $measurementReq) {
       $measurementDao->saveByProduct($measurement);
     }
   }
+}
+
+/* Cantidades */
+
+//$cantidades = [];
+
+foreach (json_decode($_POST["cantidades"]) as  $cantidadReq) {
+  $cantidad = new Cantidad();
+  $cantidad->setIdProduct($product->getId());
+  $cantidad->setE1min($cantidadReq->e1min);
+  $cantidad->setE1max($cantidadReq->e1max);
+  $cantidad->setE2min($cantidadReq->e2min);
+  $cantidad->setE2max($cantidadReq->e2max);
+  $cantidad->setE3min($cantidadReq->e3min);
+  $cantidad->setE3max($cantidadReq->e3max);
+
+  //array_push($cantidades, $cantidad);
+  $cantidadDao->save($cantidad);
 }
 
 /* Crear funcion para almacenar factores setter y getter */

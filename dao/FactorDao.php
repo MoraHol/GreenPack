@@ -35,12 +35,12 @@ class FactorDao
   function findByProduct($product)
   {
     $this->db->connect();
-    $query = "SELECT * FROM `factors` WHERE id_product = " . $product->getId();
+    $query = "SELECT * FROM `product_has_materials` WHERE `products_Id_products`.`materials_id_materials` = " . $product->getIdmaterial();
     $factorDB = $this->db->consult($query, "yes");
     $factorDB = $factorDB[0];
     $factor = new Factor();
-    $factor->setIdfactor($factorDB["id"]);
-    $factor->setidmaterial($factorDB["id_materials"]);
+    $factor->setIdmaterial($factorDB["id_materials"]); 
+  
     $factor->setE1($factorDB["e1"]);
     $factor->setE2($factorDB["e2"]);
     $factor->setE1($factorDB["e3"]);
@@ -50,18 +50,18 @@ class FactorDao
   }
 
 
-  function save($factor)
+ /*  function save($factor)
   {
     $this->db->connect();
     $query = "INSERT INTO `factors` (`id_materials`, `e1`, `e2`, `e3`) 
     VALUES ('" . $factor->getIdmaterials() . "', '" . $factor->getE1() . "', '" . $factor->getE2() . "', '" . $factor->getE3() . "')";
-  }
+  } */
 
   function update($factor)
   {
     $this->db->connect();
-    $query = "UPDATE `factors` SET `e1` = '" . $factor->getE1() . "', `e2` = '" . $factor->getE2 . "', `e3` = '" . $factor->getE3 . "' 
-    WHERE `factores`.`id` = " . $factor->getIdfactor();
+    $query = "UPDATE `products_has_materials` SET `e1` = '" . $factor->getE1() . "', `e2` = '" . $factor->getE2() . "', `e3` = '" . $factor->getE3() . "' 
+    WHERE `products_Id_products` ='"  . $factor->getIdProduct(). "' AND  `materials_id_materials` ='"  . $factor->getidmaterial(). "'  " ;
 
     $status = $this->db->consult($query);
     $this->db->close();
@@ -71,7 +71,7 @@ class FactorDao
   function delete($id)
   {
     $this->db->connect();
-    $query = "DELETE FROM `factors` WHERE `factores`.`id` = $id";
+    $query = "DELETE FROM `products_has_materials` WHERE `products_Id_products`.`materials_id_materials` = $id";
     $status = $this->db->consult($query);
     $this->db->close();
     return $status;

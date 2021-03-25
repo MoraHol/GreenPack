@@ -1,7 +1,6 @@
 <?php
 class Factor implements JsonSerializable
 {
-  private $idfactor;
   private $idmaterial;
   private $idproduct;
   private $e1;
@@ -11,16 +10,6 @@ class Factor implements JsonSerializable
   function __construct()
   {
     $this->db = new DBOperator($_ENV["db_host"], $_ENV["db_user"], $_ENV["db_name"], $_ENV["db_pass"]);
-  }
-
-  public function getIdfactor()
-  {
-    return $this->idfactor;
-  }
-
-  public function setIdfactor($idfactor)
-  {
-    $this->idfactor = $idfactor;
   }
 
   public function getIdmaterial()
