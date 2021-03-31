@@ -90,7 +90,7 @@ class Product implements JsonSerializable
 
   public function getCantidad()
   {
-    return $this->Cantidad;
+    return $this->cantidad;
   }
 
   public function setCantidad($cantidad)
