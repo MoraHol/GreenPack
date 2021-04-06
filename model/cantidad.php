@@ -35,19 +35,14 @@ class Cantidad implements JsonSerializable
     $this->idproduct = $idproduct;
   }
 
-  public function getE1min()
-  {
-    return $this->e1min;
-  }
-
   public function setE1min($e1min)
   {
     $this->e1min = $e1min;
   }
 
-  public function getE1max()
+  public function getE1min()
   {
-    return $this->e1max;
+    return $this->e1min;
   }
 
   public function setE1max($e1max)
@@ -55,19 +50,19 @@ class Cantidad implements JsonSerializable
     $this->e1max = $e1max;
   }
 
-  public function getE2min()
+  public function getE1max()
   {
-    return $this->e2min;
+    return $this->e1max;
   }
+
 
   public function setE2min($e2min)
   {
     $this->e2min = $e2min;
   }
-
-  public function getE2max()
+  public function getE2min()
   {
-    return $this->e2max;
+    return $this->e2min;
   }
 
   public function setE2max($e2max)
@@ -75,9 +70,9 @@ class Cantidad implements JsonSerializable
     $this->e2max = $e2max;
   }
 
-  public function getE3min()
+  public function getE2max()
   {
-    return $this->e3min;
+    return $this->e2max;
   }
 
   public function setE3min($e3min)
@@ -85,15 +80,21 @@ class Cantidad implements JsonSerializable
     $this->e3min = $e3min;
   }
 
-  public function getE3max()
+  public function getE3min()
   {
-    return $this->e3max;
+    return $this->e3min;
   }
 
   public function setE3max($e3max)
   {
     $this->e3max = $e3max;
   }
+
+  public function getE3max()
+  {
+    return $this->e3max;
+  }
+
 
   public function jsonSerialize()
   {

@@ -19,7 +19,6 @@ $indexMaterial = 1;
 $indexCantidad = 1;
 $indexFactor = 1;
 
-
 $materialDao = new MaterialDao();
 $materials = $materialDao->findAll();
 $tabs = $tabProductDao->findByProduct($product);
@@ -422,31 +421,35 @@ switch ($product->getCotizador()) {
 
             <div class="row" id="cantidad">
 
+              <?php //foreach ($product->getCantidad() as $cantidadProducto) { ?>
+
               <div class="col-md-2">
                 <label for=" e1_min" style="margin-right: 50px; text-align: center;" class="col-md-1">Mínimo</label>
-                <input id="e1_min" name=" e1_min" class="form-control md-1" type="number" style="width: 100px; text-align:center"></input>
+                <input id="e1_min" name=" e1_min" class="form-control md-1" value="<?= $product->getCantidad()->getE1min() ?>" type="number" style="width: 100px; text-align:center"></input>
               </div>
               <div class="col-md-2">
                 <label for="e1_max" style="margin-right: 50px; text-align: center;" class="col-md-1">Máximo</label>
-                <input id="e1_max" name="e1_max" class="form-control md-1" type="number" style="width: 100px; text-align:center"></input>
+                <input id="e1_max" name="e1_max" class="form-control md-1" value="<?= $product->getCantidad()->getE1max() ?>" type="number" style="width: 100px; text-align:center"></input>
               </div>
               <div class="col-md-2">
                 <label for="e2_min " style="margin-right: 50px; text-align: center;" class="col-md-1">Mínimo</label>
-                <input id="e2_min" name="e2_min" class="form-control md-1" type="number" style="width: 100px; text-align:center"></input>
+                <input id="e2_min" name="e2_min" class="form-control md-1" value="<?= $product->getCantidad()->getE2min() ?>" type="number" style="width: 100px; text-align:center"></input>
               </div>
               <div class="col-md-2">
                 <label for="e2_max" style="margin-right: 50px; text-align: center;" class="col-md-1">Máximo</label>
-                <input id="e2_max" name="e2_max" class="form-control md-1" type="number" style="width: 100px; text-align:center"></input>
+                <input id="e2_max" name="e2_max" class="form-control md-1" value="<?= $product->getCantidad()->getE2max() ?>" type="number" style="width: 100px; text-align:center"></input>
               </div>
               <div class="col-md-2">
                 <label for="e3_min" style="margin-right: 50px; text-align: center;" class="col-md-1">Mínimo</label>
-                <input id="e3_min" name="e3_min" class="form-control md-1" type="number" style="width: 100px; text-align:center"></input>
+                <input id="e3_min" name="e3_min" class="form-control md-1" value="<?= $product->getCantidad()->getE3min() ?>" type="number" style="width: 100px; text-align:center"></input>
               </div>
               <div class="col-md-2">
                 <label for="e3_max " style="margin-right: 50px; text-align: center;" class="col-md-1">Máximo</label>
-                <input id="e3_max" name="e3_max" class="form-control md-1" type="number" style="width: 100px; text-align:center"></input>
+                <input id="e3_max" name="e3_max" class="form-control md-1" value="<?= $product->getCantidad()->getE3max() ?>" type="number" style="width: 100px; text-align:center"></input>
               </div>
 
+              <?php 
+              //} ?>
 
             </div>
 
@@ -958,7 +961,7 @@ switch ($product->getCotizador()) {
           let cantidad = {}
 
           cantidad.e1min = $('#e1_min').val();
-          cantidad.e1max = $('#e1_min').val();
+          cantidad.e1max = $('#e1_max').val();
           cantidad.e2min = $('#e2_min').val();
           cantidad.e2max = $('#e2_max').val();
           cantidad.e3min = $('#e3_min').val();

@@ -7,6 +7,7 @@ require_once  dirname(__DIR__) . "/model/product.php";
 require_once dirname(__DIR__) . "/db/DBOperator.php";
 require_once __DIR__ . "/MaterialDao.php";
 require_once  __DIR__ . "/CategoryDao.php";
+require_once  __DIR__ . "/CantidadDao.php";
 /*****************************************************************************
 /*Esta clase permite Crear, Actualizar, Buscar y Eliminar Productos
 /*Desarrollada por Teenus SAS
@@ -19,6 +20,7 @@ class ProductDao
   private $imageDao;
   private $measurementDao;
   private $materialDao;
+  private $cantidadDao;
   private $categoryDao;
 
   function __construct()
@@ -28,6 +30,7 @@ class ProductDao
     $this->measurementDao = new MeasurementDao();
     $this->materialDao = new MaterialDao();
     $this->categoryDao = new CategoryDao();
+    $this->cantidadDao = new CantidadDao();
   }
 
   function findAll()
@@ -47,6 +50,7 @@ class ProductDao
       $product->setMaterials($this->materialDao->findByProduct($product));
       $product->setCategory($this->categoryDao->findById($productDB["categories_id_categories"]));
       $product->setCotizador($productDB["cotizador"]);
+      $product->setCantidad($this->cantidadDao->findByProduct($product));
       if (isset($productDB["uses"])) {
         $product->setUses(json_decode($productDB["uses"]));
       }
@@ -69,6 +73,7 @@ class ProductDao
     $product->setImages($this->imageDao->findByProduct($product));
     $product->setMeasurements($this->measurementDao->findByProduct($product));
     $product->setMaterials($this->materialDao->findByProduct($product));
+    $product->setCantidad($this->cantidadDao->findByProduct($product));
     if (isset($productDB["uses"])) {
       $product->setUses(json_decode($productDB["uses"]));
     }
