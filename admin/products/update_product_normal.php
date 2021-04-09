@@ -554,10 +554,9 @@ switch ($product->getCotizador()) {
       })
     }
 
-    function deleteCantidad(idProduct, cantidad) {
-      $.post('api/modify_cantidad.php', {
-        idProduct: idProduct,
-        cantidad: cantidad
+    function deleteCantidad(id) {
+      $.post('api/delete_cantidad.php', {
+        id: id
       }, (data, status) => {
         if (status == 'success') {
           reloadPage()
@@ -573,7 +572,7 @@ switch ($product->getCotizador()) {
       })
     }
 
-    function updateCantidad(idProduct) {
+    function updateCantidad(id) {
 
       let btn = $(`#btnUpdateCantidad`).val();
 
@@ -586,6 +585,7 @@ switch ($product->getCotizador()) {
         $(`#e3_max`).prop("readonly", false);
         $(`#btnUpdateCantidad`).html('Actualizar');
         $(`#btnUpdateCantidad`).val('modificado');
+
       } else {
 
         const e1min = $(`#e1_min`).val();
@@ -597,7 +597,7 @@ switch ($product->getCotizador()) {
 
         const cantidadInfo = {
 
-          idProduct,
+          id,
           e1min,
           e1max,
           e2min,
@@ -621,12 +621,12 @@ switch ($product->getCotizador()) {
             })
           .always(() => {
 
-            $(`#e1_min`).prop("readonly", true);
-            $(`#e1_max`).prop("readonly", true);
-            $(`#e2_min`).prop("readonly", true);
-            $(`#e2_max`).prop("readonly", true);
-            $(`#e3_min`).prop("readonly", true);
-            $(`#e3_max`).prop("readonly", true);
+            $(`#e1_min`).prop("readonly", false);
+            $(`#e1_max`).prop("readonly", false);
+            $(`#e2_min`).prop("readonly", false);
+            $(`#e2_max`).prop("readonly", false);
+            $(`#e3_min`).prop("readonly", false);
+            $(`#e3_max`).prop("readonly", false);
 
             $(`#btnUpdateCantidad`).html('Actualizado');
             $(`#btnUpdateCantidad`).val('modifica3');

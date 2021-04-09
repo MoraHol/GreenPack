@@ -22,7 +22,9 @@ class CantidadDao
     $cantidadDB = $this->db->consult($query, "yes");
     $cantidadDB = $cantidadDB[0];
     $cantidad = new Cantidad();
-    //$cantidad->setIdproduct($cantidadDB["id_products"]); 
+    
+    $cantidad->setId($cantidadDB["id"]); 
+    $cantidad->setIdproduct($cantidadDB["id_product"]); 
     $cantidad->setE1min($cantidadDB["e1_min"]);
     $cantidad->setE1max($cantidadDB["e1_max"]);
     $cantidad->setE2min($cantidadDB["e2_min"]);
@@ -50,17 +52,17 @@ class CantidadDao
   {
     $this->db->connect();
     $query = "UPDATE `cantidades_producto` SET `e1_min` = '" . $cantidad->getE1min() . "', `e1_max` = '" . $cantidad->getE1max() . "' , `e2_min` = '" . $cantidad->getE2min() . "', `e2_max` = '" . $cantidad->getE2max() . "' , `e3_min` = '" . $cantidad->getE3min() . "' , `e3_max` = '" . $cantidad->getE3max() . "' 
-    WHERE `id_product` ='"  . $cantidad->getIdproduct(). "' " ;
+    WHERE `id` ='"  . $cantidad->getid(). "' " ;
 
     $status = $this->db->consult($query);
     $this->db->close();
     return $status;
   }
 
-  function delete($id)
+  function deleteById($id)
   {
     $this->db->connect();
-    $query = "DELETE FROM `cantidades_producto` WHERE `id_product`.`id` = $id";
+    $query = "DELETE FROM `cantidades_producto` WHERE `id` = $id";
     $status = $this->db->consult($query);
     $this->db->close();
     return $status;

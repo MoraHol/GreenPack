@@ -11,12 +11,12 @@ if (isset($_POST['cantidades'])) {
 
   $cantidad->setId($cantidadReq["id"]);
   $cantidad->setIdproduct($cantidadReq["id_product"]);
-  $cantidad->setE1min($cantidadReq["e1_min"]);
-  $cantidad->setE1max($cantidadReq["e1_max"]);
-  $cantidad->setE2min($cantidadReq["e2_min"]);
-  $cantidad->setE2max($cantidadReq["e2_max"]);
-  $cantidad->setE3min($cantidadReq["e3_min"]);
-  $cantidad->setE3max($cantidadReq["e3_max"]);
+  $cantidad->setE1min($cantidadReq["e1min"]);
+  $cantidad->setE1max($cantidadReq["e1max"]);
+  $cantidad->setE2min($cantidadReq["e2min"]);
+  $cantidad->setE2max($cantidadReq["e2max"]);
+  $cantidad->setE3min($cantidadReq["e3min"]);
+  $cantidad->setE3max($cantidadReq["e3max"]);
 
 
   if ($cantidadDao->update($cantidad)) {
