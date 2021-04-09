@@ -1,0 +1,17 @@
+/* Grid Cantidades por Producto */
+
+.cantidades {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.recta {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+}
+
+.nombreProducto {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-gap: 1em;
+  }

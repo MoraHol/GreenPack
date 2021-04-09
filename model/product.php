@@ -13,9 +13,11 @@ class Product implements JsonSerializable
   private $uses;
   private $ref;
   private $factor;
+  private $cantidad;
 
   function __construct()
-  { }
+  {
+  }
 
   public function getCategory()
   {
@@ -97,7 +99,6 @@ class Product implements JsonSerializable
     return $this->cantidad;
   }
 
-  
 
   public function getCotizador()
   {
@@ -116,7 +117,7 @@ class Product implements JsonSerializable
 
   public function setFactor($factor)
   {
-   $this->factor = $factor;
+    $this->factor = $factor;
   }
 
   public function getMeasurements()
@@ -129,11 +130,7 @@ class Product implements JsonSerializable
     $this->measurements = $measurements;
   }
 
-  public function jsonSerialize()
-  {
-    return get_object_vars($this);
-  }
-  
+
   public function getUses()
   {
     return $this->uses;
@@ -153,5 +150,8 @@ class Product implements JsonSerializable
     $this->ref = $ref;
   }
 
-  
+  public function jsonSerialize()
+  {
+    return get_object_vars($this);
+  }
 }

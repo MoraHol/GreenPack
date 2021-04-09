@@ -123,12 +123,12 @@ foreach (json_decode($_POST["measurements"]) as  $measurementReq) {
 
 /* Cantidades */
 
-//$cantidad = [];
+$cantidad = [];
 
 foreach (json_decode($_POST["cantidades"]) as  $cantidadReq) {
   $cantidad = new Cantidad();
 
-  $cantidad->setId($cantidadReq->getId());
+  //$cantidad->setId($cantidadReq->getId());
   $cantidad->setIdProduct($product->getId());
   $cantidad->setE1min($cantidadReq->e1min);
   $cantidad->setE1max($cantidadReq->e1max);
@@ -139,7 +139,7 @@ foreach (json_decode($_POST["cantidades"]) as  $cantidadReq) {
 
   //array_push($cantidades, $cantidad);
   $cantidadDao->save($cantidad);
- }
+}
 
 /* Crear funcion para almacenar factores setter y getter */
 
