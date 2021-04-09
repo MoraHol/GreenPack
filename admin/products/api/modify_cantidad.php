@@ -10,7 +10,7 @@ if (isset($_POST['cantidades'])) {
   $cantidad = new Cantidad();
 
   $cantidad->setId($cantidadReq["id"]);
-  $cantidad->setIdproduct($cantidadReq["id_product"]);
+  //$cantidad->setIdproduct($cantidadReq["id_product"]);
   $cantidad->setE1min($cantidadReq["e1min"]);
   $cantidad->setE1max($cantidadReq["e1max"]);
   $cantidad->setE2min($cantidadReq["e2min"]);

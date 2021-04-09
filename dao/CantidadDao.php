@@ -4,7 +4,12 @@ require_once __DIR__ . "/MaterialDao.php";
 require_once(dirname(__DIR__) . "/db/env.php");
 require_once  __DIR__ . "/CategoryDao.php";
 require_once  dirname(__DIR__) . "/model/cantidad.php";
-
+/*****************************************************************************
+/*Esta clase permite Crear, Actualizar, Buscar y Eliminar Cantidades minimas a fabricar para los productos
+/*Desarrollada por Teenus SAS
+/*Para Teenus.com.co
+/*Ultima actualizacion 08/04/2021
+/*****************************************************************************/
 
 class CantidadDao
 {
@@ -18,13 +23,13 @@ class CantidadDao
   function findByProduct($product)
   {
     $this->db->connect();
-    $query = "SELECT * FROM `cantidades_producto` WHERE `id_product` = " . $product->getId();
+    $query = "SELECT * FROM `cantidades_producto` WHERE `id_product` = " . $product->getid();
     $cantidadDB = $this->db->consult($query, "yes");
     $cantidadDB = $cantidadDB[0];
     $cantidad = new Cantidad();
-    
-    $cantidad->setId($cantidadDB["id"]); 
-    $cantidad->setIdproduct($cantidadDB["id_product"]); 
+
+    $cantidad->setId($cantidadDB["id"]);
+    $cantidad->setIdproduct($cantidadDB["id_product"]);
     $cantidad->setE1min($cantidadDB["e1_min"]);
     $cantidad->setE1max($cantidadDB["e1_max"]);
     $cantidad->setE2min($cantidadDB["e2_min"]);
@@ -52,7 +57,7 @@ class CantidadDao
   {
     $this->db->connect();
     $query = "UPDATE `cantidades_producto` SET `e1_min` = '" . $cantidad->getE1min() . "', `e1_max` = '" . $cantidad->getE1max() . "' , `e2_min` = '" . $cantidad->getE2min() . "', `e2_max` = '" . $cantidad->getE2max() . "' , `e3_min` = '" . $cantidad->getE3min() . "' , `e3_max` = '" . $cantidad->getE3max() . "' 
-    WHERE `id` ='"  . $cantidad->getid(). "' " ;
+    WHERE `id` ='"  . $cantidad->getid() . "' ";
 
     $status = $this->db->consult($query);
     $this->db->close();
@@ -67,5 +72,4 @@ class CantidadDao
     $this->db->close();
     return $status;
   }
-
 }

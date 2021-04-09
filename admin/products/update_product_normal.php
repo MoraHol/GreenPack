@@ -47,18 +47,14 @@ switch ($product->getCotizador()) {
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <!--     Fonts and icons     -->
+
+  <link rel="stylesheet" href="../assets/css/style.css" />
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-  <!-- Material Kit CSS -->
   <link href="../assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
   <link rel="stylesheet" href="/css/all.min.css">
-
-  <!-- Include Editor style. -->
   <link href="https://cdn.jsdelivr.net/npm/froala-editor@3.0.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type='text/css' />
   <link rel="stylesheet" href="/css/nice-select.css">
-
-
   <link rel="stylesheet" href="/vendor/dropzone/dropzone.css">
 
   <!-- Include JS file. -->
@@ -175,9 +171,7 @@ switch ($product->getCotizador()) {
 
         <!-- End Navbar -->
         <div class="content">
-
           <div class="container-fluid">
-
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
@@ -187,35 +181,30 @@ switch ($product->getCotizador()) {
               <li class="breadcrumb-item active">Actualizar Producto | <?= $product->getName() ?></li>
             </ol>
 
-            <br>
-            <div class="form-group">
+            <div class="nombreProducto">
+              <label for="ref">Referencia:</label>
               <label for="title">Nombre del producto:</label>
+              <input type="text" placeholder="Ej. LV-12" id="ref" class="form-control" value="<?= $product->getRef(); ?>">
               <input type="text" placeholder="Ej. bolsa de manija" id="title" class="form-control" value="<?= $product->getName(); ?>">
-            </div>
-            <br>
 
-            <div class="row">
-              <div class="col">
-                <div class="form-group">
-                  <label for="ref">Referencia:</label>
-                  <input type="text" placeholder="Ej. LV-12" id="ref" class="form-control" value="<?= $product->getRef(); ?>">
-                </div>
-              </div>
-              <div class="col">
+              <!-- <div class="col">
                 <div class="form-group">
                   <label for="price">Gramaje:</label>
                   <input type="number" placeholder="Ej. 40" id="price" class="form-control" value="<?= $product->getPrice(); ?>">
                 </div>
-              </div>
+              </div> -->
             </div>
-
-            <br>
+            <!-- <div class="form-group">
+              <label for="title">Nombre del producto:</label>
+              <input type="text" placeholder="Ej. bolsa de manija" id="title" class="form-control" value="<?= $product->getName(); ?>">
+            </div>
+ --> <br>
             <div class="form-group">
               <label for="content">descripción:</label>
               <br>
               <textarea name="content" id="content"></textarea>
             </div>
-
+            <div class="mt-5 mb-5" style="text-align: center;"><b>Imagenes del producto</b></div>
             <!--Carousel Wrapper-->
             <div id="multi-item-example" class="carousel slide carousel-multi-item carousel-multi-item-2" data-ride="carousel">
               <h5>Imagenes del Producto</h5>
@@ -261,8 +250,9 @@ switch ($product->getCotizador()) {
             </div>
             <br>
             <br>
+            <div class="mt-4 mb-4" style="text-align: center;"><b>Usos</b></div>
             <div class="form-group">
-              <label for="campo1">Usos:</label>
+              <!-- <label for="campo1">Usos:</label> -->
               <div class="container">
                 <div class="row" id="fields">
                   <?php
@@ -280,8 +270,9 @@ switch ($product->getCotizador()) {
               <hr>
 
             </div>
+            <div class="mt-4 mb-3" style="text-align: center;"><b>Medidas</b></div>
             <div class="form-group" id="measurement-container">
-              <label for="campo1">Medidas:</label>
+              <!-- <label for="campo1">Medidas:</label> -->
               <button class="btn btn-primary" id="hideMeasurements">Ver Medidas</button>
               <ul class="list-unstyled" id="measurements">
                 <?php foreach ($product->getMeasurements() as $measurement) { ?>
@@ -314,8 +305,9 @@ switch ($product->getCotizador()) {
             <button id="btnUploadExcel" class="btn btn-primary" title="Cargar Medidas"><i class="fas fa-cloud-upload-alt"></i></button>
             <div id="uploadExcel"></div>
             <hr>
+            <div class="mt-4 mb-5" style="text-align: center;"><b>Materia prima y Factores de precio</b></div>
             <div class="form-gruop">
-              <label class="col-2" for="campo1" style="margin-right: 240px;">Materiales:</label>
+              <label class="col-2" for="campo1" style="margin-right: 240px;">Materia Prima:</label>
               <!-- <label class="col-2 ml6" for="category">Factores</label> -->
 
               <label for="FactorE1<?= $indexMaterial ?>" class="col-md-2">E1</label>
@@ -359,8 +351,8 @@ switch ($product->getCotizador()) {
             <button class="btn btn-primary ml-3" onclick="FactorMaterial()" title="Agregar un material"><i class="fas fa-plus"></i></button>
             <hr style="width: 96%;">
             <div>
-              <div style="text-align: center;">Pestañas del producto:</div>
-              <hr style="width: 30%;">
+              <div class="mb-5" style="text-align: center;"><b>Pestañas del producto</b></div>
+
               <?php
               if (count($tabs) > 0) {
                 foreach ($tabs as $tab) {
@@ -377,85 +369,63 @@ switch ($product->getCotizador()) {
             </div>
             <hr style="width: 96%;">
 
+            <div class="mt-4 mb-5" style="text-align: center;"><b>Categoria y Cotizador</b></div>
+
             <?php
             require_once $_SERVER["DOCUMENT_ROOT"] . "/dao/CategoryDao.php";
             $categoryDao = new CategoryDao();
             $categories = $categoryDao->findAll(); ?>
-            <div style="margin-bottom: 50px;">
-              <div class="form-group">
-                <label for="category">Selecciona la categoría del producto:</label>
-                <select id="category" class="form-control" style="width: 40%;">
-                  <option disabled>Selecciona una categoría</option>
-                  <?php foreach ($categories as $category) { ?>
-                    <option value="<?= $category->getId(); ?>" <?= $product->getCategory()->getId() == $category->getId() ? "selected" : ""; ?>><?= $category->getName(); ?></option>
-                  <?php } ?>
-                </select>
-              </div>
-            </div>
 
+            <div class="recta mb-3">
+              <label for="category">Selecciona la categoría:</label>
+              <select id="category" class="form-control" style="width: 40%;">
+                <option disabled>Selecciona una categoría</option>
+                <?php foreach ($categories as $category) { ?>
+                  <option value="<?= $category->getId(); ?>" <?= $product->getCategory()->getId() == $category->getId() ? "selected" : ""; ?>><?= $category->getName(); ?></option>
+                <?php } ?>
+              </select>
+            </div>
 
             <?php
             require_once $_SERVER["DOCUMENT_ROOT"] . "/dao/CotizadorDao.php";
             $cotizadorDao = new CotizadorDao();
             $cotizadores = $cotizadorDao->findAll(); ?>
-            <div>
-              <div class="form-group mt-3 mb-5">
-                <label for="cotizador">Selecciona el cotizador:</label>
-                <select id="cotizador" class="form-control" style="width: 40%;">
-                  <option disabled>Selecciona una cotizador</option>
-                  <?php foreach ($cotizadores as $cotizador) { ?>
-                    <option value="<?= $cotizador->getId(); ?>" <?= $product->getCotizador() == $cotizador->getId() ? "selected" : ""; ?>><?= $cotizador->getName(); ?></option>
-                  <?php } ?>
-                </select>
-              </div>
+
+            <div class="recta mb-5">
+              <label for="cotizador">Selecciona el cotizador:</label>
+              <select id="cotizador" class="form-control" style="width: 40%;">
+                <option disabled>Selecciona una cotizador</option>
+                <?php foreach ($cotizadores as $cotizador) { ?>
+                  <option value="<?= $cotizador->getId(); ?>" <?= $product->getCotizador() == $cotizador->getId() ? "selected" : ""; ?>><?= $cotizador->getName(); ?></option>
+                <?php } ?>
+              </select>
             </div>
+
             <hr style="width: 96%;">
 
+            <div class="mt-5 mb-5" style="text-align: center;"><b>Rango Cantidades Mínimas</b></div>
             <div class="row align-center">
-
               <label style="text-align: center;" class="col-md-3">E1</label>
               <label style="text-align: center;" class="col-md-3">E2</label>
               <label style="text-align: center;" class="col-md-3">E3</label>
-
             </div>
 
-            <div class="row" id="cantidad">
-
-              <?php //foreach ($product->getCantidad() as $cantidadProducto) { ?>
-
-              <div class="col-md-2">
-                <label for=" e1_min" style="margin-right: 50px; text-align: center;" class="col-md-1">Mínimo</label>
-                <input id="e1_min" name=" e1_min" class="form-control md-1" value="<?= $product->getCantidad()->getE1min() ?>" type="number" style="width: 100px; text-align:center"></input>
-              </div>
-              <div class="col-md-2">
-                <label for="e1_max" style="margin-right: 50px; text-align: center;" class="col-md-1">Máximo</label>
-                <input id="e1_max" name="e1_max" class="form-control md-1" value="<?= $product->getCantidad()->getE1max() ?>" type="number" style="width: 100px; text-align:center"></input>
-              </div>
-              <div class="col-md-2">
-                <label for="e2_min " style="margin-right: 50px; text-align: center;" class="col-md-1">Mínimo</label>
-                <input id="e2_min" name="e2_min" class="form-control md-1" value="<?= $product->getCantidad()->getE2min() ?>" type="number" style="width: 100px; text-align:center"></input>
-              </div>
-              <div class="col-md-2">
-                <label for="e2_max" style="margin-right: 50px; text-align: center;" class="col-md-1">Máximo</label>
-                <input id="e2_max" name="e2_max" class="form-control md-1" value="<?= $product->getCantidad()->getE2max() ?>" type="number" style="width: 100px; text-align:center"></input>
-              </div>
-              <div class="col-md-2">
-                <label for="e3_min" style="margin-right: 50px; text-align: center;" class="col-md-1">Mínimo</label>
-                <input id="e3_min" name="e3_min" class="form-control md-1" value="<?= $product->getCantidad()->getE3min() ?>" type="number" style="width: 100px; text-align:center"></input>
-              </div>
-              <div class="col-md-2">
-                <label for="e3_max " style="margin-right: 50px; text-align: center;" class="col-md-1">Máximo</label>
-                <input id="e3_max" name="e3_max" class="form-control md-1" value="<?= $product->getCantidad()->getE3max() ?>" type="number" style="width: 100px; text-align:center"></input>
-              </div>
-
-              <?php 
-              //} ?>
-
+            <div class="cantidades" id="cantidad">
+              <label for=" e1_min" style="margin-right: 50px; text-align: center;" class="col-md-1">Mínimo</label>
+              <input id="e1_min" name=" e1_min" class="form-control md-1" value="<?= $product->getCantidad()->getE1min() ?>" type="number" style="width: 100px; text-align:center"></input>
+              <label for="e2_min " style="margin-right: 50px; text-align: center;" class="col-md-1">Mínimo</label>
+              <input id="e2_min" name="e2_min" class="form-control md-1" value="<?= $product->getCantidad()->getE2min() ?>" type="number" style="width: 100px; text-align:center"></input>
+              <label for="e3_min" style="margin-right: 50px; text-align: center;" class="col-md-1">Mínimo</label>
+              <input id="e3_min" name="e3_min" class="form-control md-1" value="<?= $product->getCantidad()->getE3min() ?>" type="number" style="width: 100px; text-align:center"></input>
+              <button class=" btn btn-danger" onclick="deleteCantidad(<?= $product->getId() ?>)"><i class="fas fa-trash-alt"></i></button>
+              <label for="e1_max" style="margin-right: 50px; text-align: center;" class="col-md-1">Máximo</label>
+              <input id="e1_max" name="e1_max" class="form-control md-1" value="<?= $product->getCantidad()->getE1max() ?>" type="number" style="width: 100px; text-align:center"></input>
+              <label for="e2_max" style="margin-right: 50px; text-align: center;" class="col-md-1">Máximo</label>
+              <input id="e2_max" name="e2_max" class="form-control md-1" value="<?= $product->getCantidad()->getE2max() ?>" type="number" style="width: 100px; text-align:center"></input>
+              <label for="e3_max " style="margin-right: 50px; text-align: center;" class="col-md-1">Máximo</label>
+              <input id="e3_max" name="e3_max" class="form-control md-1" value="<?= $product->getCantidad()->getE3max() ?>" type="number" style="width: 100px; text-align:center"></input>
+              <button class="btn btn-warning" id="btnUpdateCantidad" value='Modifica3' onclick="updateCantidad(<?= $product->getId() ?>)"><i class="fas fa-pencil-alt"></i></button>
             </div>
-
-
-            <button class="btn btn-danger" onclick="deleteCantidad(<?= $product->getId() ?>)"><i class="fas fa-trash-alt"></i></button>
-            <button class="btn btn-warning" id="btnUpdateCantidad" value='Modifica3' onclick="updateCantidad(<?= $product->getId() ?>)"><i class="fas fa-pencil-alt"></i></button>
 
             <hr style="width: 96%;">
 
@@ -488,6 +458,7 @@ switch ($product->getCotizador()) {
   <script src="../assets/js/script.js"></script>
   <script src="/js/es.js"></script>
   <script src="/vendor/dropzone/dropzone.js"></script>
+  <script src="../js/rangoCantidades.js"></script>
   <script>
     /* document.addEventListener('wheel', function(e) {
     e.preventDefault();
@@ -531,279 +502,6 @@ switch ($product->getCotizador()) {
       $('.imagen div.info').width($('.imagen').parent().width())
     })
 
-    function deleteImage(id, url) {
-      $.post('/admin/image_delete.php', {
-        src: url
-      }, (data, status) => {
-        if (status != "success") {
-          alert("error")
-        }
-      })
-      $.post('api/image_delete.php', {
-        id: id
-      }, (data, status) => {
-        if (status == "success") {
-          $.notify({
-            message: 'Imagen Eliminada',
-            icon: 'fas fa-exclamation-triangle'
-          }, {
-            type: 'warning'
-          })
-          reloadPage()
-        }
-      })
-    }
-
-    function deleteCantidad(id) {
-      $.post('api/delete_cantidad.php', {
-        id: id
-      }, (data, status) => {
-        if (status == 'success') {
-          reloadPage()
-          $.notify({
-            message: 'Cantidad eliminado',
-            title: '<strong>Greenpack</strong>',
-            icon: 'fas fa-exclamation-triangle'
-          }, {
-            type: 'warning'
-          })
-        }
-
-      })
-    }
-
-    function updateCantidad(id) {
-
-      let btn = $(`#btnUpdateCantidad`).val();
-
-      if (btn == 'Modifica3') {
-        $(`#e1_min`).prop("readonly", false);
-        $(`#e1_max`).prop("readonly", false);
-        $(`#e2_min`).prop("readonly", false);
-        $(`#e2_max`).prop("readonly", false);
-        $(`#e3_min`).prop("readonly", false);
-        $(`#e3_max`).prop("readonly", false);
-        $(`#btnUpdateCantidad`).html('Actualizar');
-        $(`#btnUpdateCantidad`).val('modificado');
-
-      } else {
-
-        const e1min = $(`#e1_min`).val();
-        const e1max = $(`#e1_max`).val();
-        const e2min = $(`#e2_min`).val();
-        const e2max = $(`#e2_max`).val();
-        const e3min = $(`#e3_min`).val();
-        const e3max = $(`#e3_max`).val();
-
-        const cantidadInfo = {
-
-          id,
-          e1min,
-          e1max,
-          e2min,
-          e2max,
-          e3min,
-          e3max
-        };
-
-        $.post('api/modify_cantidad.php', {
-              cantidades: cantidadInfo
-            },
-            (data, status) => {
-              if (status === 'success') {
-                $.notify({
-                  icon: 'fas fa-exclamation-triangle',
-                  message: 'Medida Actualizada',
-                }, {
-                  type: 'warning'
-                })
-              }
-            })
-          .always(() => {
-
-            $(`#e1_min`).prop("readonly", false);
-            $(`#e1_max`).prop("readonly", false);
-            $(`#e2_min`).prop("readonly", false);
-            $(`#e2_max`).prop("readonly", false);
-            $(`#e3_min`).prop("readonly", false);
-            $(`#e3_max`).prop("readonly", false);
-
-            $(`#btnUpdateCantidad`).html('Actualizado');
-            $(`#btnUpdateCantidad`).val('modifica3');
-
-          });
-      }
-
-    };
-
-    function deleteMeasurement(idProduct, idMeasurement) {
-      $.post('api/delete_measurement.php', {
-        idProduct: idProduct,
-        idMeasurement: idMeasurement
-      }, (data, status) => {
-        if (status == 'success') {
-          reloadPage()
-          $.notify({
-            icon: 'fas fa-exclamation-triangle',
-            message: 'Medida eliminada',
-          }, {
-            type: 'warning'
-          })
-          location.href = '#measurement-container'
-        }
-      })
-    }
-
-    function updateMaterial(idProduct, idMaterial, IdBtn) {
-      
-
-      let btn = $(`#btnUpdateMaterial${IdBtn}`).val();
-
-      if (btn == 'Modifica2') {
-        $(`#e1${IdBtn}`).prop("readonly", false);
-        $(`#e2${IdBtn}`).prop("readonly", false);
-        $(`#e3${IdBtn}`).prop("readonly", false);
-        $(`#btnUpdateMaterial${IdBtn}`).html('Actualizar');
-        $(`#btnUpdateMaterial${IdBtn}`).val('modificado');
-      } else {
-        const e1 = $(`#e1${IdBtn}`).val();
-        const e2 = $(`#e2${IdBtn}`).val();
-        const e3 = $(`#e3${IdBtn}`).val();
-
-        const materialInfo = {
-          idMaterial,
-          idProduct,
-          e1,
-          e2,
-          e3
-        };
-
-        $.post('api/modify_factor.php', {
-              factors: materialInfo
-            },
-            (data, status) => {
-              if (status === 'success') {
-                $.notify({
-                  icon: 'fas fa-exclamation-triangle',
-                  message: 'Medida Actualizada',
-                }, {
-                  type: 'warning'
-                })
-              }
-            })
-          .always(() => {
-
-            $(`#e1${IdBtn}`).prop("readonly", true);
-            $(`#e2${IdBtn}`).prop("readonly", true);
-            $(`#e3${IdBtn}`).prop("readonly", true);
-
-            $(`#btnUpdateMaterial${IdBtn}`).html('Actualizado');
-            $(`#btnUpdateMaterial${IdBtn}`).val('modifica2');
-
-          });
-      }
-
-
-    };
-
-
-
-    function updateMeasurement(idProduct, idMeasurement, indexMeasurement, evTarget) {
-      
-      const codigoInput = $(`#codigo${indexMeasurement}`).val();
-      const widthInput = $(`#width${indexMeasurement}`).val();
-      const heightInput = $(`#height${indexMeasurement}`).val();
-      const lengthInput = $(`#length${indexMeasurement}`).val();
-      // const windowInput = $(`#window${indexMeasurement}`).val();
-      const largoUtilInput = $(`#largoUtil${indexMeasurement}`).val();
-      const anchoTotalInput = $(`#anchoTotal${indexMeasurement}`).val();
-      const VentaMinimaImpresaInput = $(`#VentaMinimaImpresa${indexMeasurement}`).val();
-      const VentaMinimaGenericaInput = $(`#VentaMinimaGenerica${indexMeasurement}`).val();
-
-      if (evTarget.closest('button').value === 'Modificar') {
-        /*   evTarget.closest('button').value = 'Guardar'; */
-        evTarget.closest('button').value = 'Guardar';
-        evTarget.closest('button').textContent = 'Guardar';
-
-        $(`#codigo${indexMeasurement}`).prop("readonly", false);
-        $(`#width${indexMeasurement}`).prop("readonly", false);
-        $(`#height${indexMeasurement}`).prop("readonly", false);
-        $(`#length${indexMeasurement}`).prop("readonly", false);
-        $(`#largoUtil${indexMeasurement}`).prop("readonly", false);
-        $(`#anchoTotal${indexMeasurement}`).prop("readonly", false);
-        $(`#VentaMinimaImpresa${indexMeasurement}`).prop("readonly", false);
-        $(`#VentaMinimaGenerica${indexMeasurement}`).prop("readonly", false);
-
-        evTarget.classList.replace('btn-warning', 'btn-info');
-
-      } else {
-
-        const measurementInfo = {
-          idMeasurement: idMeasurement,
-          codigo: codigoInput,
-          width: widthInput,
-          height: heightInput,
-          length: lengthInput,
-          largoUtil: largoUtilInput,
-          anchoTotal: anchoTotalInput,
-          ventaMinimaImpresa: VentaMinimaImpresaInput,
-          ventaMinimaGenerica: VentaMinimaGenericaInput
-        };
-
-        $.post('api/modify_measurements.php', {
-              measurements: measurementInfo
-            },
-            (data, status) => {
-              if (status === 'success') {
-                $.notify({
-                  icon: 'fas fa-exclamation-triangle',
-                  message: 'Medida Actualizada',
-                }, {
-                  type: 'warning'
-                })
-              }
-            })
-          .always(() => {
-            evTarget.closest('button').value = 'Modificar';
-            evTarget.closest('button').innerHTML = '<i class="fas fa-pencil-alt"></i>';
-
-            $(`#codigo${indexMeasurement}`).prop("readonly", true);
-            $(`#width${indexMeasurement}`).prop("readonly", true);
-            $(`#height${indexMeasurement}`).prop("readonly", true);
-            $(`#lenght${indexMeasurement}`).prop("readonly", true);
-            $(`#largoUtil${indexMeasurement}`).prop("readonly", true);
-            $(`#anchoTotal${indexMeasurement}`).prop("readonly", true);
-            $(`#VentaMinimaImpresa${indexMeasurement}`).prop("readonly", true);
-            $(`#VentaMinimaGenerica${indexMeasurement}`).prop("readonly", true);
-
-            evTarget.classList.replace('btn-info', 'btn-warning');
-          });
-      }
-    }
-
-
-    function elById(id) {
-      return document.getElementById(id);
-    }
-
-    function deleteMaterial(idProduct, idMaterial) {
-      $.post('api/delete_material.php', {
-        idProduct: idProduct,
-        idMaterial: idMaterial
-      }, (data, status) => {
-        if (status == 'success') {
-          reloadPage()
-          $.notify({
-            message: 'Material eliminado',
-            title: '<strong>Greenpack</strong>',
-            icon: 'fas fa-exclamation-triangle'
-          }, {
-            type: 'warning'
-          })
-        }
-
-      })
-    }
 
     function reloadPage() {
       $('#main-panel').html('')
@@ -957,7 +655,7 @@ switch ($product->getCotizador()) {
 
           }
           /* cantidades del producto */
-          debugger;
+          
           let cantidad = {}
 
           cantidad.e1min = $('#e1_min').val();
@@ -1020,7 +718,7 @@ switch ($product->getCotizador()) {
     })
 
     function update(uses, materials, measurements, materialFactor, cantidades) {
-      
+
       $.post("api/update_product.php", {
         id: <?= $product->getId(); ?>,
         title: $('#title').val(),
