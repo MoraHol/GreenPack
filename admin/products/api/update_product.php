@@ -125,7 +125,7 @@ foreach (json_decode($_POST["measurements"]) as  $measurementReq) {
 
 //$cantidad = [];
 
-// foreach (json_decode($_POST["cantidades"]) as  $cantidadReq) {
+foreach (json_decode($_POST["cantidades"]) as  $cantidadReq) {
   $cantidad = new Cantidad();
 
   $cantidad->setId($cantidadReq->getId());
@@ -139,7 +139,7 @@ foreach (json_decode($_POST["measurements"]) as  $measurementReq) {
 
   //array_push($cantidades, $cantidad);
   $cantidadDao->save($cantidad);
-// }
+ }
 
 /* Crear funcion para almacenar factores setter y getter */
 
