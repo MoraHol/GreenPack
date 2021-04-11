@@ -20,7 +20,7 @@ $indexCantidad = 1;
 $indexFactor = 1;
 
 $materialDao = new MaterialDao();
-$materials = $materialDao->findAll();
+$materials = $materialDao->findMaterials();
 $tabs = $tabProductDao->findByProduct($product);
 
 $nameAdditional = "";
@@ -303,7 +303,15 @@ switch ($product->getCotizador()) {
             </div>
             <button class="btn btn-primary" onclick="addEvaluateMeasurement()" title="Agregar una medida"><i class="fas fa-plus"></i></button>
             <button id="btnUploadExcel" class="btn btn-primary" title="Cargar Medidas"><i class="fas fa-cloud-upload-alt"></i></button>
-            <div id="uploadExcel"></div>
+            <div id="uploadExcel">
+              <div style="display: flex;margin-top: 30px;justify-content: center;">
+                <label class="mb-5">Importar Medidas</label>
+              </div>
+              <div id="uploadExcel" style="display: flex;justify-content: center;">
+                <input class="form-control" type="file" id="cargarMedidas" accept=".xls,.xlsx" style="width: 500px;">
+                <button class="btn btn-primary" id="btnImportarMedidas" onclick="importarMedidas(<?= $_GET["id"] ?>);">Importar</button>
+              </div>
+            </div>
             <hr>
             <div class="mt-4 mb-5" style="text-align: center;"><b>Materia prima y Factores de precio</b></div>
             <div class="form-gruop">
@@ -454,11 +462,17 @@ switch ($product->getCotizador()) {
   <script src="../assets/js/plugins/chartist.min.js"></script>
   <script src="../assets/js/plugins/bootstrap-notify.js"></script>
   <script src="../assets/js/material-dashboard.js?v=2.1.0"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.2/xlsx.full.min.js"></script>
   <!-- <script src="../assets/demo/demo.js"></script> -->
   <script src="../assets/js/script.js"></script>
   <script src="/js/es.js"></script>
   <script src="/vendor/dropzone/dropzone.js"></script>
   <script src="../js/rangoCantidades.js"></script>
+  <script src="../js/factores.js"></script>
+  <script src="../js/imagenes.js"></script>
+  <script src="../js/materiaPrima.js"></script>
+  <script src="../js/medidas.js"></script>
+  <script src="../js/excel.js"></script>
   <script>
     /* document.addEventListener('wheel', function(e) {
     e.preventDefault();
@@ -501,7 +515,6 @@ switch ($product->getCotizador()) {
       $('.imagen .info').height($('.imagen').parent().height())
       $('.imagen div.info').width($('.imagen').parent().width())
     })
-
 
     function reloadPage() {
       $('#main-panel').html('')
@@ -599,13 +612,14 @@ switch ($product->getCotizador()) {
           let materialFactor = []
           let cantidades = []
 
+          limit = $('#fields').children().length;
           for (let index = 0; index < $('#fields').children().length; index++) {
             if (typeof($('#field' + (index + 1)).val()) != 'undefined' && $('#field' + (index + 1)).val() !== "") {
               uses.push($('#field' + (index + 1)).val())
             }
           }
           $('select').niceSelect('update')
-
+          limit = $('#materials').children().length;
           for (let index = 0; index < $('#materials').children().length; index++) {
             let value = $('#material' + (index + 1)).val()
             let e1 = $('#e1' + (index + 1)).val()
@@ -655,7 +669,6 @@ switch ($product->getCotizador()) {
 
           }
           /* cantidades del producto */
-          
           let cantidad = {}
 
           cantidad.e1min = $('#e1_min').val();
@@ -682,29 +695,9 @@ switch ($product->getCotizador()) {
       })
 
       $('#btnUploadExcel').click(() => {
-        $('#uploadExcel').html('<div>Descarga aqui el formato para cargar medidas <a id="uploadExcelFile" href="<?= $routeDownloadFileExample ?>" download="FormatoMedidas.xlsx" class="btn btn-info"><i class="fas fa-file-download"></i></a></div><div id="uploadFileExcel" class="dropzone"></div>')
-        DropzoneExcel = new Dropzone("div#uploadFileExcel", {
-          url: "/admin/upload-file.php",
-          method: 'post',
-          paramName: 'file',
-          maxFiles: 1,
-          dictDefaultMessage: 'Carga el archivo Excel con las medidas del producto',
-          dictMaxFilesExceeded: 'Carga solo un archivo',
-          dictInvalidFileType: 'Carga solo archivos de Excel'
-        })
-        DropzoneExcel.on('success', function(file) {
-          let response = JSON.parse(file.xhr.responseText)
-          let url = response.link
-          $.post('api/upload_measurements.php', {
-            id: `<?= $_GET["id"] ?>`,
-            file: url
-          }, (data, status) => {
-            if (status == "success") {
-              alert('Cargado')
-            }
-          })
-        })
+        $('#uploadExcel').toggle(600);
       })
+      
       $('#hideMeasurements').click(function() {
         $('#measurements').fadeToggle()
         $(this).text(function(i, text) {
@@ -713,9 +706,20 @@ switch ($product->getCotizador()) {
         $(this).toggleClass('btn-primary')
       })
     }
+
     $(() => {
       initialize()
     })
+
+    $(document).ready(function() {
+      let selectElement = document.querySelector(".material");
+      if (selectElement == null) {
+        selectElement = 1;
+        return false;
+      }
+
+    });
+
 
     function update(uses, materials, measurements, materialFactor, cantidades) {
 
@@ -745,7 +749,7 @@ switch ($product->getCotizador()) {
     }
 
     function ajax(responses, uses, materials, measurements, materialFactor, cantidades) {
-      debugger;
+
       $.post("api/update_product.php", {
         id: <?= $product->getId(); ?>,
         title: $('#title').val(),
@@ -806,133 +810,6 @@ switch ($product->getCotizador()) {
         addMeasurement2();
     }
 
-
-    function addMeasurement() {
-      indexMeasurement++;
-      $('#measurements').append(`
-          
-        <li>Medida ${indexMeasurement}:
-          <div class="row">
-            <div class="col codigo"><label for="codigo${indexMeasurement}">Codigo:</label><input type="text" id="codigo${indexMeasurement}" class="form-control"></div>
-            <div class="col"><label for="width${indexMeasurement}">Ancho:</label><input type="number" id="width${indexMeasurement}" class="form-control"></div>
-            <div class="col height"><label for="height${indexMeasurement}">Alto:</label><input type="number" id="height${indexMeasurement}" class="form-control"></div>
-            <div class="col length"><label for="length${indexMeasurement}">Largo:</label><input type="number" id="length${indexMeasurement}" class="form-control"></div>
-            <div class="col largoUtil"><label for="">Largo Útil</label><input type="number" id="largoUtil${ indexMeasurement}" value="" class="form-control" value="0"></div>
-          </div>
-            
-          <div class="row">
-            <div class="col-2 anchoTotal"><label for="">Ancho Total</label><input type="number" id="anchoTotal${indexMeasurement}" value="" class="form-control" value="0"></div>
-            <div class="col-2 venta-minima-impresa"><label for="">Vta Min Impresa</label><input type="number" id="VentaMinimaImpresa${indexMeasurement}" class="form-control" value="0"></div>
-            <div class="col-2 venta-minima-generica"><label for="">Vta Min Genérica</label><input type="number" id="VentaMinimaGenerica${indexMeasurement}" class="form-control" value="0"></div>
-          </div>
-         
-        </li>`)
-      if (parseInt($('#category').val()) == 6) {
-        $('.height').children('label').text('Largo:')
-        $('.length').css('display', 'none')
-        $('.window').css('display', 'none')
-        $(`#lenght${indexMeasurement}`).val(0)
-        $(`#window${indexMeasurement}`).val(0)
-      }
-    }
-
-
-    function addMeasurement2() {
-      indexMeasurement++;
-      $('#measurements').append(`
-        <li>Medida ${indexMeasurement}:
-          <div class="row">
-            <div class="col-2 ml-4 codigo">
-              <label for="codigo${indexMeasurement}">Codigo:</label>
-              <input type="text" id="codigo${indexMeasurement}" class="form-control">
-            </div>
-            <div class="col-2 ml-4">
-              <label for="width${indexMeasurement}">Ancho:</label>
-              <input type="number" id="width${indexMeasurement}" class="form-control">
-            </div>
-            <div class="col-2 height">
-              <label for="height${indexMeasurement}">Alto/Fuelle:</label>
-              <input type="number" id="height${indexMeasurement}" class="form-control">
-            </div>
-            <div class="col-2 length">
-              <label for="length${indexMeasurement}">Largo:</label>
-              <input type="number" id="length${indexMeasurement}" class="form-control">
-            </div>
-            
-            <div class="col-2 LargoUtil">
-              <label for="largoUtil${indexMeasurement}">Largo Útil:</label>
-              <input type="number" id="largoUtil${indexMeasurement}" class="form-control">
-            </div>
-            
-            <div class="col-2 ml-4 anchototal">
-              <label for="anchoTotal${indexMeasurement}">Ancho Total:</label>
-              <input type="number" id="anchoTotal${indexMeasurement}" class="form-control">
-            </div>
-            
-            <!--</div>
-            <div class="row">-->
-            <div class="col-2 Pliego">
-              <label for="Pliego${indexMeasurement}"><?= $nameAdditional ?>:</label>
-              <input type="number" id="pliego${indexMeasurement}" class="form-control">
-            </div>
-            <div class="col-2 VentaMinimaImpresa">
-              <label for="VentaMinimaImpresa${indexMeasurement}">Venta Mínima Impresa:</label>
-              <input type="number" id="VentaMinimaImpresa${indexMeasurement}" class="form-control">
-            </div>
-            <div class="col-2 VentaMinimaGenerica">
-              <label for="VentaMinimaGenerica${indexMeasurement}">Venta Mínima Genérica:</label>
-              <input type="number" id="VentaMinimaGenerica${indexMeasurement}" class="form-control">
-            </div>
-            
-            
-          </div>
-        </li>`)
-      /* $('select').niceSelect() */
-      /* if (parseInt($('#category').val()) == 6) {
-        $('.height').children('label').text('Largo:')
-        $('.length').css('display', 'none')
-        $('.window').css('display', 'none')
-        $(`#length${indexMeasurement}`).val(0)
-        $(`#window${indexMeasurement}`).val(0)
-      } */
-    }
-
-
-    function FactorMaterial() {
-      // addFactor();
-      // addMaterial(); 
-      $('#materials').append(`
-      
-      <div class="row"> 
-            <select class="form-control" style="margin-bottom: 10px; width: 30%" id="material${indexMaterial}">
-              <option disabled selected>Seleccione un material</option>
-            <?php
-            foreach ($materials as  $material) { ?>
-                <option value="<?= $material->getId(); ?>"><?= $material->getName(); ?></option>
-            <?php } ?>
-            </select>  
-             
-              <input class="col md-4 form-control ml-5 mr-5" id="e1${indexMaterial}" type="number" style="width:100px; text-align:center">
-              <input class="col md-4 form-control mr-5" id="e2${indexMaterial}" type="number" style="width:100px; text-align:center">
-              <input class="col md-4 form-control mr-5" id="e3${indexMaterial}" type="number" style="width:100px; text-align:center">
-            </div>`);
-
-    }
-
-    $(document).ready(function() {
-      let selectElement = document.querySelector('.material');
-      if (selectElement == null) {
-        selectElement = 1;
-        return false;
-
-      }
-      $("#material").change(function() {
-        alert('Hola');
-      });
-
-    });
-
-
     /* function addMaterial() {
       indexMaterial++;
       $('#materials').append(`
@@ -948,30 +825,56 @@ switch ($product->getCotizador()) {
     $('select').niceSelect('update') */
 
     /* } */
-  </script>
-  <script>
-    function deleteTab(id) {
-      $.post('api/delete_tab_product.php', {
-        id: id
-      }, (data, status) => {
-        if (status == 'success') {
-          location.reload()
-        }
-      })
-    }
-    const urlParams = new URLSearchParams(window.location.search);
-    const updated = urlParams.get('updated');
 
-    if (updated == 'true') {
-      $.notify({
-        message: 'Pestaña actualizada',
-        icon: 'notification_important'
-      }, {
-        type: 'success'
-      })
-      if (typeof window.history.pushState == 'function') {
-        window.history.pushState({}, "Hide", location.pathname + '?id=' + urlParams.get('id'));
+    function addMeasurement() {
+      $('#measurement-container').slideDown();
+      indexMeasurement++;
+      $("#measurements").append(`
+        
+      <li>Medida ${indexMeasurement}:
+        <div class="row">
+          <div class="col codigo"><label for="codigo${indexMeasurement}">Codigo:</label><input type="text" id="codigo${indexMeasurement}" class="form-control"></div>
+          <div class="col"><label for="width${indexMeasurement}">Ancho:</label><input type="number" id="width${indexMeasurement}" class="form-control"></div>
+          <div class="col height"><label for="height${indexMeasurement}">Alto:</label><input type="number" id="height${indexMeasurement}" class="form-control"></div>
+          <div class="col length"><label for="length${indexMeasurement}">Largo:</label><input type="number" id="length${indexMeasurement}" class="form-control"></div>
+          <div class="col largoUtil"><label for="">Largo Útil</label><input type="number" id="largoUtil${indexMeasurement}" value="" class="form-control" value="0"></div>
+        </div>
+          
+        <div class="row">
+          <div class="col-2 anchoTotal"><label for="">Ancho Total</label><input type="number" id="anchoTotal${indexMeasurement}" value="" class="form-control" value="0"></div>
+          <div class="col-2 venta-minima-impresa"><label for="">Vta Min Impresa</label><input type="number" id="VentaMinimaImpresa${indexMeasurement}" class="form-control" value="0"></div>
+          <div class="col-2 venta-minima-generica"><label for="">Vta Min Genérica</label><input type="number" id="VentaMinimaGenerica${indexMeasurement}" class="form-control" value="0"></div>
+        </div>
+       
+      </li>`);
+      if (parseInt($("#category").val()) == 6) {
+        $(".height").children("label").text("Largo:");
+        $(".length").css("display", "none");
+        $(".window").css("display", "none");
+        $(`#lenght${indexMeasurement}`).val(0);
+        $(`#window${indexMeasurement}`).val(0);
       }
+    }
+
+
+    function FactorMaterial() {
+      indexMaterial++;
+      $('#materials').append(`
+    
+    <div class="row"> 
+          <select class="form-control" style="margin-bottom: 10px; width: 30%" id="material${indexMaterial}">
+            <option disabled selected>Seleccione un material</option>
+          <?php
+          foreach ($materials as  $material) { ?>
+              <option value="<?= $material->getId(); ?>"><?= $material->getName(); ?></option>
+          <?php } ?>
+          </select>  
+           
+            <input class="col md-4 form-control ml-5 mr-5" id="e1${indexMaterial}" type="number" style="width:100px; text-align:center">
+            <input class="col md-4 form-control mr-5" id="e2${indexMaterial}" type="number" style="width:100px; text-align:center">
+            <input class="col md-4 form-control mr-5" id="e3${indexMaterial}" type="number" style="width:100px; text-align:center">
+          </div>`);
+
     }
   </script>
   <script src="/vendor/bootstrap-notify.min.js"></script>

@@ -107,3 +107,65 @@ function updateMeasurement(
     });
   }
 }
+
+
+
+function addMeasurement2() {
+    indexMeasurement++;
+    $('#measurements').append(`
+      <li>Medida ${indexMeasurement}:
+        <div class="row">
+          <div class="col-2 ml-4 codigo">
+            <label for="codigo${indexMeasurement}">Codigo:</label>
+            <input type="text" id="codigo${indexMeasurement}" class="form-control">
+          </div>
+          <div class="col-2 ml-4">
+            <label for="width${indexMeasurement}">Ancho:</label>
+            <input type="number" id="width${indexMeasurement}" class="form-control">
+          </div>
+          <div class="col-2 height">
+            <label for="height${indexMeasurement}">Alto/Fuelle:</label>
+            <input type="number" id="height${indexMeasurement}" class="form-control">
+          </div>
+          <div class="col-2 length">
+            <label for="length${indexMeasurement}">Largo:</label>
+            <input type="number" id="length${indexMeasurement}" class="form-control">
+          </div>
+          
+          <div class="col-2 LargoUtil">
+            <label for="largoUtil${indexMeasurement}">Largo Útil:</label>
+            <input type="number" id="largoUtil${indexMeasurement}" class="form-control">
+          </div>
+          
+          <div class="col-2 ml-4 anchototal">
+            <label for="anchoTotal${indexMeasurement}">Ancho Total:</label>
+            <input type="number" id="anchoTotal${indexMeasurement}" class="form-control">
+          </div>
+          
+          <!--</div>
+          <div class="row">-->
+          <div class="col-2 Pliego">
+            <label for="Pliego${indexMeasurement}"><?= $nameAdditional ?>:</label>
+            <input type="number" id="pliego${indexMeasurement}" class="form-control">
+          </div>
+          <div class="col-2 VentaMinimaImpresa">
+            <label for="VentaMinimaImpresa${indexMeasurement}">Venta Mínima Impresa:</label>
+            <input type="number" id="VentaMinimaImpresa${indexMeasurement}" class="form-control">
+          </div>
+          <div class="col-2 VentaMinimaGenerica">
+            <label for="VentaMinimaGenerica${indexMeasurement}">Venta Mínima Genérica:</label>
+            <input type="number" id="VentaMinimaGenerica${indexMeasurement}" class="form-control">
+          </div>
+          
+          
+        </div>
+      </li>`)
+    /* $('select').niceSelect() */
+    /* if (parseInt($('#category').val()) == 6) {
+      $('.height').children('label').text('Largo:')
+      $('.length').css('display', 'none')
+      $('.window').css('display', 'none')
+      $(`#length${indexMeasurement}`).val(0)
+      $(`#window${indexMeasurement}`).val(0)
+    } */
+  }

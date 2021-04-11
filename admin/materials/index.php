@@ -2,7 +2,7 @@
 require dirname(dirname(__DIR__)) . "/dao/MaterialDao.php";
 include("../partials/verify-session.php");
 $materialDao = new MaterialDao();
-$materials = $materialDao->findAll();
+$materials = $materialDao->findMaterials();
 ?>
 <!-- author: Teenus SAS, github: Teenus SAS -->
 <!doctype html>
@@ -47,15 +47,16 @@ $materials = $materialDao->findAll();
           <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-table"></i>
-              Materiales registrados</div>
+              Materiales registrados
+            </div>
             <div class="card-body">
-              
+
               <div class="table-responsive">
-                
+
                 <table class="table row-border table-bordered hover" id="dataTable" width="100%" cellspacing="0">
-                <div>
-                <a class="btn btn-primary" href="create_material.php"> <i class="fas fa-plus"></i> Crear</a>
-              </div>
+                  <div>
+                    <a class="btn btn-primary" href="create_material.php"> <i class="fas fa-plus"></i> Crear</a>
+                  </div>
                   <thead>
                     <tr>
                       <th class="text-center">Material</th>
@@ -68,21 +69,18 @@ $materials = $materialDao->findAll();
                   </thead>
                   <tbody>
                     <?php foreach ($materials as $material) { ?>
-                    <tr>
-                      <td><?php echo $material->getName(); ?></td>
-                      <td class="text-center money"><?php echo $material->getPricePerKg(); ?></td>
-                      <td class="text-center"><?php echo $material->getGrammage(); ?> grs</td>
-                      <td><?= substr($material->getDescription(), 0, 100) . "..."; ?></td>
-                      <td class="text-center"><a class="text-center" href="/admin/materials/update-material.php?id=<?php echo $material->getId(); ?>"><i class="fas fa-fw fa-sync"></a></td>
-                      <td class="text-center"><a onclick="modal(<?php echo $material->getId(); ?>)" href="#"><i class="far fa-trash-alt"></i></a></td>
-                    </tr>
+                      <tr>
+                        <td><?php echo $material->getName(); ?></td>
+                        <td class="text-center money"><?php echo $material->getPricePerKg(); ?></td>
+                        <td class="text-center"><?php echo $material->getGrammage(); ?> grm</td>
+                        <td><?= substr($material->getDescription(), 0, 100) . "..."; ?></td>
+                        <td class="text-center"><a class="text-center" href="/admin/materials/update-material.php?id=<?php echo $material->getId(); ?>"><i class="fas fa-fw fa-sync"></a></td>
+                        <td class="text-center"><a onclick="modal(<?php echo $material->getId(); ?>)" href="#"><i class="far fa-trash-alt"></i></a></td>
+                      </tr>
                     <?php } ?>
                   </tbody>
                 </table>
               </div>
-              <!-- <div>
-                <a class="btn btn-primary" href="create_material.php"> <i class="fas fa-plus"></i> Crear</a>
-              </div> -->
             </div>
           </div>
         </div>
@@ -94,7 +92,7 @@ $materials = $materialDao->findAll();
     <script src="../assets/js/core/popper.min.js"></script>
     <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
     <script src="https://unpkg.com/default-passive-events"></script>
-    <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <!-- <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script> -->
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Chartist JS -->
@@ -104,7 +102,7 @@ $materials = $materialDao->findAll();
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="../assets/js/material-dashboard.js?v=2.1.0"></script>
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-    <script src="../assets/demo/demo.js"></script>
+    <!-- <script src="../assets/demo/demo.js"></script> -->
     <script src="../assets/js/script.js"></script>
 
     <!-- Page level plugin JavaScript-->

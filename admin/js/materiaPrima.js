@@ -77,3 +77,12 @@ function updateMaterial(idProduct, idMaterial, IdBtn) {
     });
   }
 }
+
+$(document).ready(function () {
+  let selectElement = document.querySelector(".material");
+  if (selectElement == null) {
+    selectElement = 1;
+    return false;
+  }
+
+});

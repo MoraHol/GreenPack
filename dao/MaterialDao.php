@@ -24,6 +24,26 @@ class MaterialDao
     // self::$logger = new Logger('channel-name');
     // self::$logger->pushHandler(new StreamHandler($_SERVER["DOCUMENT_ROOT"] . '/logs/app.log', Logger::DEBUG));
   }
+
+  function findMaterials()
+  {
+    $materials = [];
+
+    $materialsDB = $this->db->consult("SELECT * FROM materials ORDER BY `name`", "yes");
+    foreach ($materialsDB as  $materialDB) {
+      $material = new Material();
+      $material->setId($materialDB["id_materials"]);
+      $material->setName($materialDB["name"]);
+      $material->setDescription($materialDB["description"]);
+      $material->setGrammage($materialDB["grammage"]);
+      $material->setPricePerKg($materialDB["price_per_kg"]);
+      array_push($materials, $material);
+    }
+    return $materials;
+  }
+
+
+
   function findAll()
   {
     $materials = [];

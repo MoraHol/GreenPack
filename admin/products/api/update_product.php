@@ -94,7 +94,6 @@ foreach (json_decode($_POST["measurements"]) as  $measurementReq) {
   $measurement->setWidth($measurementReq->width);
   $measurement->setHeight($measurementReq->height);
   $measurement->setLength($measurementReq->length);
-  //$measurement->setWindow($measurementReq->window);
   $measurement->setLargoUtil($measurementReq->largoUtil);
   $measurement->setAnchoTotal($measurementReq->anchoTotal);
   $measurement->setVentaMinimaGenerica($measurementReq->ventaMinimaGenerica);
