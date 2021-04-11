@@ -51,7 +51,7 @@ class ProductDao
       $product->setMaterials($this->materialDao->findByProduct($product));
       $product->setCategory($this->categoryDao->findById($productDB["categories_id_categories"]));
       $product->setCotizador($productDB["cotizador"]);
-      $product->setCantidad($this->cantidadDao->findByProduct($product));
+      // $product->setCantidad($this->cantidadDao->findByProduct($product));
       if (isset($productDB["uses"])) {
         $product->setUses(json_decode($productDB["uses"]));
       }
