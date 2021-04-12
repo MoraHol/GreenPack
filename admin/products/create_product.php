@@ -6,7 +6,7 @@ include("../partials/verify-session.php");
 <html lang="es">
 
 <head>
-  <title>GreenPack | Crear Producto</title>
+  <title>Crear Producto | Greenpack</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -21,8 +21,6 @@ include("../partials/verify-session.php");
   <!-- Include Editor style. -->
   <link href="https://cdn.jsdelivr.net/npm/froala-editor@3.0.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type='text/css' />
   <link rel="stylesheet" href="/css/nice-select.css">
-
-
   <link rel="stylesheet" href="/vendor/dropzone/dropzone.css">
 
   <!-- Include JS file. -->
@@ -30,8 +28,18 @@ include("../partials/verify-session.php");
 
   <?php
   require_once dirname(dirname(__DIR__)) . "/dao/MaterialDao.php";
+  require dirname(dirname(__DIR__)) . "/dao/CategoryDao.php";
+  require_once $_SERVER["DOCUMENT_ROOT"] . "/dao/CotizadorDao.php";
+
   $materialDao = new MaterialDao();
-  $materials = $materialDao->findAll(); ?>
+  $categoryDao = new CategoryDao();
+  $cotizadorDao = new CotizadorDao();
+  $materials = $materialDao->findAll();
+  $categories = $categoryDao->findAll();
+  $cotizadores = $cotizadorDao->findAll();
+  ?>
+
+
   <style>
     select .wide {
       width: 90%;
@@ -60,52 +68,31 @@ include("../partials/verify-session.php");
           </ol>
           <br>
           <div class="form-group">
-            <label for="title">Nombre del producto:</label>
+            <label for="ref">Referencia:</label>
+            <input type="text" id="ref" class="form-control">
+            <label class="mt-3" for="title">Nombre del producto:</label>
             <input type="text" id="title" class="form-control">
           </div>
-          <br>
 
-          <div class="row">
-            <div class="col">
-              <div class="form-group">
-                <label for="ref">Referencia:</label>
-                <input type="text" id="ref" class="form-control">
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-group">
-                <label for="price">Precio:</label>
-                <input type="number" placeholder="2000" id="price" class="form-control">
-              </div>
-            </div>
-          </div>
-
-          <br>
           <div class="form-group">
             <label for="content">Descripción del producto:</label>
-            <br>
-            <textarea name="content" id="content"></textarea>
+            <textarea class="mt-5" name="content" id="content"></textarea>
           </div>
           <div class="form-group">
             <label for="myId">Imagenes del producto:</label>
             <div id="myId" class="dropzone"></div>
           </div>
-          <br>
-          <br>
-          <div class="form-gruop">
-            <label for="campo1">Usos:</label>
-            <div class="container">
-              <div class="row" id="fields">
 
-              </div>
-              <div>
-              </div>
-              <button class="btn btn-primary" onclick="addField()" title="Agregar un uso"><i class="fas fa-plus"></i></button>
+          <div class="form-gruop">
+            <label for="campo1" style="display: none;">Usos:</label>
+            <div class="container">
+              <div class="row" id="fields" style="display: none;"></div>
+              <div></div>
+              <button class="btn btn-primary" onclick="addField()" title="Agregar un uso" style="display: none;"><i class="fas fa-plus"></i></button>
               <!-- <hr> -->
               <div class="form-gruop" style="display: none">
                 <label for="campo1">Medidas:</label>
                 <ul class="list-unstyled" id="measurements">
-
                 </ul>
               </div>
               <button style="display: none" class="btn btn-primary" onclick="addMeasurement()" title="Agregar una medida"><i class="fas fa-plus"></i></button>
@@ -118,29 +105,31 @@ include("../partials/verify-session.php");
 
               <button style="display: none" class="btn btn-primary" onclick="addMaterial()" title="Agregar un material"><i class="fas fa-plus"></i></button>
               <!-- <hr> -->
-              <?php
-              require dirname(dirname(__DIR__)) . "/dao/CategoryDao.php";
-              $categoryDao = new CategoryDao();
-              $categories = $categoryDao->findAll(); ?>
-              <div class="form-group">
-                <label for="category">Selecciona la categoría del producto:</label>
-                <br>
-                <select id="category" class="wide">
-                  <option disabled selected>Selecciona</option>
-                  <?php foreach ($categories as $category) { ?>
-                    <option value="<?= $category->getId(); ?>"><?= $category->getName(); ?></option>
-                  <?php } ?>
-                </select>
+              <div class="mb-5">
+                <div class="form-group">
+                  <label for="category">Selecciona la categoría del producto:</label>
+                  <select id="category" class="wide">
+                    <option disabled selected>Selecciona</option>
+                    <?php foreach ($categories as $category) { ?>
+                      <option value="<?= $category->getId(); ?>"><?= $category->getName(); ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
               </div>
-
-
-              <div class="row" style="margin-bottom: 20px; margin-top: 60px;">
-                <div class="col"></div>
-                <div class="col text-center"><button id="submitEditor" class="btn btn-primary btn-lg">Crear</button></div>
-                <div class="col"></div>
+              <div class="mt-5">
+                <div class="form-group">
+                  <label for="cotizador">Selecciona el cotizador:</label>
+                  <select id="cotizador" class="wide">
+                    <option disabled selected>Selecciona</option>
+                    <?php foreach ($cotizadores as $cotizador) { ?>
+                      <option value="<?= $cotizador->getId(); ?>"><?= $cotizador->getName(); ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
               </div>
-
-
+              <div class="mt-5" style="display:flex;justify-content:center">
+                <button id="submitEditor" class="btn btn-primary btn-lg">Crear</button>
+              </div>
             </div>
           </div>
           <?php include("../partials/footer.html"); ?>
@@ -154,7 +143,7 @@ include("../partials/verify-session.php");
       <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
       <script src="/js/jquery.nice-select.min.js"></script>
       <script src="https://unpkg.com/default-passive-events"></script>
-      <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+      <!-- <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script> -->
       <!-- Place this tag in your head or just before your close body tag. -->
       <script async defer src="https://buttons.github.io/buttons.js"></script>
       <!-- Chartist JS -->
@@ -164,7 +153,7 @@ include("../partials/verify-session.php");
       <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
       <script src="../assets/js/material-dashboard.js?v=2.1.0"></script>
       <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-      <script src="../assets/demo/demo.js"></script>
+      <!-- <script src="../assets/demo/demo.js"></script> -->
       <script>
         $(() => {
           $('.sidebar div.sidebar-wrapper ul.nav li:first').removeClass('active')
@@ -177,31 +166,21 @@ include("../partials/verify-session.php");
       <script>
         let indexField = 1
         let indexMeasurement = 0
+
         $(document).ready(function() {
           $('[data-toggle="popover"]').popover();
-          $('#fields').append(`<div class="col-sm-4">
-                  Uso ${indexField}:<input type="text" id="field${indexField}" class="form-control">
-                </div>`)
-          // $('#measurements').append(`<li>Medida ${indexField}:<div class="row">
-          //         <div class="col"><label for="width${indexMeasurement}">Ancho:</label><input type="number" id="width${indexMeasurement}" class="form-control"></div>
-          //         <div class="col"><label for="height${indexMeasurement}">Alto:</label><input type="number" id="height${indexMeasurement}" class="form-control"></div>
-          //         <div class="col"><label for="lenght${indexMeasurement}">Largo:</label><input type="number" id="lenght${indexMeasurement}" class="form-control"></div>
-          //         <div class="col"><label for="window${indexMeasurement}">Ventana:</label><input type="number" id="window${indexMeasurement}" class="form-control"</div>
-          //       </div></li>`)
+          $('#fields').append(`<div class="col-sm-4">Uso ${indexField}:<input type="text" id="field${indexField}" class="form-control"></div>`)
           $('#materials').append(`<li><select class="wide" style="margin-bottom: 10px;"><option disabled selected>Seleccione un material</option>
-                  <?php
-                  foreach ($materials as  $material) { ?>
-                    <option value="<?= $material->getId(); ?>"><?= $material->getName(); ?></option>
-                  <?php }
-                  ?>
+            <?php
+            foreach ($materials as  $material) { ?>
+                <option value="<?= $material->getId(); ?>"><?= $material->getName(); ?></option>
+            <?php } ?>
                 </select></li>`)
         });
 
         function addField() {
           indexField++;
-          $('#fields').append(`<div class="col-sm-4">
-                  Uso ${indexField}:<input type="text" id="field${indexField}" class="form-control">
-                </div>`)
+          $('#fields').append(`<div class="col-sm-4">Uso ${indexField}:<input type="text" id="field${indexField}" class="form-control"></div>`)
         }
 
         function addMeasurement() {
@@ -328,6 +307,7 @@ include("../partials/verify-session.php");
             dictMaxFilesExceeded: 'Carga solo una imagen',
             dictInvalidFileType: 'Carga solo imagenes'
           })
+
           $('button#submitEditor').click(() => {
             if (myDropzone.getAcceptedFiles().length > 0 && $('#title').val() != '' && editor.html.get() != '') {
               let responses = []
@@ -338,6 +318,9 @@ include("../partials/verify-session.php");
                 let response = JSON.parse(image.xhr.responseText)
                 responses.push(response.link)
               })
+
+              usos = $('#fields').children().length;
+
               for (let index = 0; index < $('#fields').children().length; index++) {
                 if (typeof($('#field' + index).val()) != 'undefined' && $('#field' + index).val() !== "") {
                   uses.push($('#field' + index).val())
@@ -353,39 +336,49 @@ include("../partials/verify-session.php");
               for (let index = 0; index < $('#measurements').children().length; index++) {
                 let measurement = {}
 
-              measurement.codigo = $('#codigo' + (index + 1)).val()
-              measurement.width = $('#width' + (index + 1)).val()
-              measurement.height = $('#height' + (index + 1)).val()
-              measurement.lenght = $('#lenght' + (index + 1)).val()
-              measurement.window = $('#window' + (index + 1)).val()
-              measurement.largoUtil = $('#largoUtil' + (index + 1)).val()
-              measurement.anchoTotal = $('#anchoTotal' + (index + 1)).val()
-              measurement.ventaMinimaGenerica = $('#VentaMinimaGenerica' + (index + 1)).val()
-              measurement.ventaMinimaImpresa = $('#VentaMinimaImpresa' + (index + 1)).val()
+                measurement.codigo = $('#codigo' + (index + 1)).val()
+                measurement.width = $('#width' + (index + 1)).val()
+                measurement.height = $('#height' + (index + 1)).val()
+                measurement.lenght = $('#lenght' + (index + 1)).val()
+                measurement.window = $('#window' + (index + 1)).val()
+                measurement.largoUtil = $('#largoUtil' + (index + 1)).val()
+                measurement.anchoTotal = $('#anchoTotal' + (index + 1)).val()
+                measurement.ventaMinimaGenerica = $('#VentaMinimaGenerica' + (index + 1)).val()
+                measurement.ventaMinimaImpresa = $('#VentaMinimaImpresa' + (index + 1)).val()
 
-              if (typeof($('#codigo' + (index + 1)).val()) != 'undefined' && $('#codigo' + (index + 1)).val() != '' &&
-                typeof($('#width' + (index + 1)).val()) != 'undefinded' && $('#width' + (index + 1)).val() != '' &&
-                typeof($('#height' + (index + 1)).val()) != 'undefined' && $('#height' + (index + 1)).val() != '' &&
-                typeof($('#lenght' + (index + 1)).val()) != 'undefined' && $('#lenght' + (index + 1)).val() != '' &&
-                typeof($('#largoUtil' + (index + 1)).val()) != 'undefined' && $('#largoUtil' + (index + 1)).val() != '' &&
-                typeof($('#anchoTotal' + (index + 1)).val()) != 'undefined' && $('#anchoTotal' + (index + 1)).val() != '' &&
-                typeof($('#VentaMinimaGenerica' + (index + 1)).val()) != 'undefined' && $('#VentaMinimaGenerica' + (index + 1)).val() != '' &&
-                typeof($('#VentaMinimaImpresa' + (index + 1)).val()) != 'undefined' && $('#VentaMinimaImpresa' + (index + 1)).val() != '' &&
-                $('#window' + (index + 1)).val() != undefined) {
-                measurements.push(measurement)
-                debugger;
+                if (typeof($('#codigo' + (index + 1)).val()) != 'undefined' && $('#codigo' + (index + 1)).val() != '' &&
+                  typeof($('#width' + (index + 1)).val()) != 'undefinded' && $('#width' + (index + 1)).val() != '' &&
+                  typeof($('#height' + (index + 1)).val()) != 'undefined' && $('#height' + (index + 1)).val() != '' &&
+                  typeof($('#lenght' + (index + 1)).val()) != 'undefined' && $('#lenght' + (index + 1)).val() != '' &&
+                  typeof($('#largoUtil' + (index + 1)).val()) != 'undefined' && $('#largoUtil' + (index + 1)).val() != '' &&
+                  typeof($('#anchoTotal' + (index + 1)).val()) != 'undefined' && $('#anchoTotal' + (index + 1)).val() != '' &&
+                  typeof($('#VentaMinimaGenerica' + (index + 1)).val()) != 'undefined' && $('#VentaMinimaGenerica' + (index + 1)).val() != '' &&
+                  typeof($('#VentaMinimaImpresa' + (index + 1)).val()) != 'undefined' && $('#VentaMinimaImpresa' + (index + 1)).val() != '' &&
+                  $('#window' + (index + 1)).val() != undefined) {
+                  measurements.push(measurement)
+                }
               }
-              }
+
+              ref = $('#ref').val()
+              title = $('#title').val()
+              content = editor.html.get()
+              response = responses
+              use = uses
+              categoria = $('#category').val()
+              cotizador = $('#cotizador').val()
+
+
               $.post("api/create_product.php", {
+                ref: $('#ref').val(),
                 title: $('#title').val(),
                 content: editor.html.get(),
                 photos: JSON.stringify(responses),
-                uses: JSON.stringify(uses),
-                ref: $('#ref').val(),
+                //uses: JSON.stringify(uses),
                 category: $('#category').val(),
-                price: $('#price').val(),
-                materials: JSON.stringify(materials),
-                measurements: JSON.stringify(measurements)
+                cotizador: $('#cotizador').val(),
+                //price: $('#price').val(),
+                //materials: JSON.stringify(materials),
+                //measurements: JSON.stringify(measurements)
               }, (data, status) => {
                 $.notify({
                   message: 'Producto creado',
@@ -394,7 +387,7 @@ include("../partials/verify-session.php");
                 }, {
                   type: 'success'
                 })
-                fieldsClear()
+                $(location).prop('href', 'index.php');
               })
             } else {
               $.notify({

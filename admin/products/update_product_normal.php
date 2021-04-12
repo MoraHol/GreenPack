@@ -12,6 +12,7 @@ if (!isset($_GET["id"])) {
 }
 
 $product = $productDao->findById($_GET["id"]);
+$cantidad = $product->getCantidad();
 $tabProductDao = new TabProductDao();
 $indexField = 1;
 $indexMeasurement = 1;
@@ -197,8 +198,8 @@ switch ($product->getCotizador()) {
             <!-- <div class="form-group">
               <label for="title">Nombre del producto:</label>
               <input type="text" placeholder="Ej. bolsa de manija" id="title" class="form-control" value="<?= $product->getName(); ?>">
-            </div>
- --> <br>
+            </div>-->
+            <br>
             <div class="form-group">
               <label for="content">descripción:</label>
               <br>
@@ -248,8 +249,40 @@ switch ($product->getCotizador()) {
               <label for="myId">Sube las imagenes del producto:</label>
               <div id="myId" class="dropzone"></div>
             </div>
-            <br>
-            <br>
+            <hr style="width: 96%;">
+
+            <div class="mt-4 mb-5" style="text-align: center;"><b>Categoria y Cotizador</b></div>
+
+            <?php
+            require_once $_SERVER["DOCUMENT_ROOT"] . "/dao/CategoryDao.php";
+            $categoryDao = new CategoryDao();
+            $categories = $categoryDao->findAll(); ?>
+
+            <div class="recta mb-3">
+              <label for="category">Selecciona la categoría:</label>
+              <select id="category" class="form-control" style="width: 40%;">
+                <option disabled>Selecciona una categoría</option>
+                <?php foreach ($categories as $category) { ?>
+                  <option value="<?= $category->getId(); ?>" <?= $product->getCategory()->getId() == $category->getId() ? "selected" : ""; ?>><?= $category->getName(); ?></option>
+                <?php } ?>
+              </select>
+            </div>
+
+            <?php
+            require_once $_SERVER["DOCUMENT_ROOT"] . "/dao/CotizadorDao.php";
+            $cotizadorDao = new CotizadorDao();
+            $cotizadores = $cotizadorDao->findAll(); ?>
+
+            <div class="recta mb-5">
+              <label for="cotizador">Selecciona el cotizador:</label>
+              <select id="cotizador" class="form-control" style="width: 40%;">
+                <option disabled>Selecciona una cotizador</option>
+                <?php foreach ($cotizadores as $cotizador) { ?>
+                  <option value="<?= $cotizador->getId(); ?>" <?= $product->getCotizador() == $cotizador->getId() ? "selected" : ""; ?>><?= $cotizador->getName(); ?></option>
+                <?php } ?>
+              </select>
+            </div>
+            <hr style="width: 96%;">
             <div class="mt-4 mb-4" style="text-align: center;"><b>Usos</b></div>
             <div class="form-group">
               <!-- <label for="campo1">Usos:</label> -->
@@ -288,7 +321,9 @@ switch ($product->getCotizador()) {
 
                       <div class="row">
                         <div class="col-2 ml-4 ancho-total"><label for="">Ancho Total</label><input type="number" id="anchoTotal<?= $indexMeasurement ?>" value="<?= $measurement->getAnchoTotal(); ?>" class="form-control" value="0" readonly></div>
-                        <!-- <div class="col-2 ml-4 pliego"><label for="pliego<?= $indexMeasurement ?>"> Piezas por Pliego</label><input type="number" id="pliego<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getPliego(); ?>" readonly></div> -->
+                        <?php if ($product->getCotizador() == 2) { ?>
+                          <div class="col-2 ml-4 pliego"><label for="pliego<?= $indexMeasurement ?>"> Piezas por Pliego</label><input type="number" id="pliego<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getPliego(); ?>" readonly></div>
+                        <?php } ?>
                         <div class="col-2 venta-minima-impresa"><label for="">Vta Min Impresa</label><input type="number" id="VentaMinimaImpresa<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getVentaMinimaImpresa(); ?>" readonly></div>
                         <div class="col-2 venta-minima-generica"><label for="">Vta Min Genérica</label><input type="number" id="VentaMinimaGenerica<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getVentaMinimaGenerica(); ?>" readonly></div>
                         <div class="col-1 mr-3" style="margin-top: 1rem;"><button class="btn btn-danger" onclick="deleteMeasurement(<?= $product->getId() ?>,<?= $measurement->getId() ?>)"><i class="fas fa-trash-alt"></i></button></div>
@@ -375,39 +410,6 @@ switch ($product->getCotizador()) {
               } ?>
               <a href="new-tab-product.php?id=<?= $product->getId() ?>" class="btn btn-primary"><i class="fas fa-plus"> Crear</i></a>
             </div>
-            <hr style="width: 96%;">
-
-            <div class="mt-4 mb-5" style="text-align: center;"><b>Categoria y Cotizador</b></div>
-
-            <?php
-            require_once $_SERVER["DOCUMENT_ROOT"] . "/dao/CategoryDao.php";
-            $categoryDao = new CategoryDao();
-            $categories = $categoryDao->findAll(); ?>
-
-            <div class="recta mb-3">
-              <label for="category">Selecciona la categoría:</label>
-              <select id="category" class="form-control" style="width: 40%;">
-                <option disabled>Selecciona una categoría</option>
-                <?php foreach ($categories as $category) { ?>
-                  <option value="<?= $category->getId(); ?>" <?= $product->getCategory()->getId() == $category->getId() ? "selected" : ""; ?>><?= $category->getName(); ?></option>
-                <?php } ?>
-              </select>
-            </div>
-
-            <?php
-            require_once $_SERVER["DOCUMENT_ROOT"] . "/dao/CotizadorDao.php";
-            $cotizadorDao = new CotizadorDao();
-            $cotizadores = $cotizadorDao->findAll(); ?>
-
-            <div class="recta mb-5">
-              <label for="cotizador">Selecciona el cotizador:</label>
-              <select id="cotizador" class="form-control" style="width: 40%;">
-                <option disabled>Selecciona una cotizador</option>
-                <?php foreach ($cotizadores as $cotizador) { ?>
-                  <option value="<?= $cotizador->getId(); ?>" <?= $product->getCotizador() == $cotizador->getId() ? "selected" : ""; ?>><?= $cotizador->getName(); ?></option>
-                <?php } ?>
-              </select>
-            </div>
 
             <hr style="width: 96%;">
 
@@ -417,24 +419,27 @@ switch ($product->getCotizador()) {
               <label style="text-align: center;" class="col-md-3">E2</label>
               <label style="text-align: center;" class="col-md-3">E3</label>
             </div>
-
-            <div class="cantidades" id="cantidad">
-              <label for=" e1_min" style="margin-right: 50px; text-align: center;" class="col-md-1">Mínimo</label>
-              <input id="e1_min" name=" e1_min" class="form-control md-1" value="<?= $product->getCantidad()->getE1min() ?>" type="number" style="width: 100px; text-align:center"></input>
-              <label for="e2_min " style="margin-right: 50px; text-align: center;" class="col-md-1">Mínimo</label>
-              <input id="e2_min" name="e2_min" class="form-control md-1" value="<?= $product->getCantidad()->getE2min() ?>" type="number" style="width: 100px; text-align:center"></input>
-              <label for="e3_min" style="margin-right: 50px; text-align: center;" class="col-md-1">Mínimo</label>
-              <input id="e3_min" name="e3_min" class="form-control md-1" value="<?= $product->getCantidad()->getE3min() ?>" type="number" style="width: 100px; text-align:center"></input>
-              <button class=" btn btn-danger" onclick="deleteCantidad(<?= $product->getId() ?>)"><i class="fas fa-trash-alt"></i></button>
-              <label for="e1_max" style="margin-right: 50px; text-align: center;" class="col-md-1">Máximo</label>
-              <input id="e1_max" name="e1_max" class="form-control md-1" value="<?= $product->getCantidad()->getE1max() ?>" type="number" style="width: 100px; text-align:center"></input>
-              <label for="e2_max" style="margin-right: 50px; text-align: center;" class="col-md-1">Máximo</label>
-              <input id="e2_max" name="e2_max" class="form-control md-1" value="<?= $product->getCantidad()->getE2max() ?>" type="number" style="width: 100px; text-align:center"></input>
-              <label for="e3_max " style="margin-right: 50px; text-align: center;" class="col-md-1">Máximo</label>
-              <input id="e3_max" name="e3_max" class="form-control md-1" value="<?= $product->getCantidad()->getE3max() ?>" type="number" style="width: 100px; text-align:center"></input>
-              <button class="btn btn-warning" id="btnUpdateCantidad" value='Modifica3' onclick="updateCantidad(<?= $product->getId() ?>)"><i class="fas fa-pencil-alt"></i></button>
-            </div>
-
+            <?php
+            if (isset($cantidad)) {
+            ?>
+              <div class="cantidades" id="cantidad">
+                <label for=" e1_min" style="margin-right: 50px; text-align: center;" class="col-md-1">Mínimo</label>
+                <input id="e1_min" name=" e1_min" class="form-control md-1" value="<?= $product->getCantidad()->getE1min() ?>" type="number" style="width: 100px; text-align:center"></input>
+                <label for="e2_min " style="margin-right: 50px; text-align: center;" class="col-md-1">Mínimo</label>
+                <input id="e2_min" name="e2_min" class="form-control md-1" value="<?= $product->getCantidad()->getE2min() ?>" type="number" style="width: 100px; text-align:center"></input>
+                <label for="e3_min" style="margin-right: 50px; text-align: center;" class="col-md-1">Mínimo</label>
+                <input id="e3_min" name="e3_min" class="form-control md-1" value="<?= $product->getCantidad()->getE3min() ?>" type="number" style="width: 100px; text-align:center"></input>
+                <button class=" btn btn-danger" onclick="deleteCantidad(<?= $product->getId() ?>)"><i class="fas fa-trash-alt"></i></button>
+                <label for="e1_max" style="margin-right: 50px; text-align: center;" class="col-md-1">Máximo</label>
+                <input id="e1_max" name="e1_max" class="form-control md-1" value="<?= $product->getCantidad()->getE1max() ?>" type="number" style="width: 100px; text-align:center"></input>
+                <label for="e2_max" style="margin-right: 50px; text-align: center;" class="col-md-1">Máximo</label>
+                <input id="e2_max" name="e2_max" class="form-control md-1" value="<?= $product->getCantidad()->getE2max() ?>" type="number" style="width: 100px; text-align:center"></input>
+                <label for="e3_max " style="margin-right: 50px; text-align: center;" class="col-md-1">Máximo</label>
+                <input id="e3_max" name="e3_max" class="form-control md-1" value="<?= $product->getCantidad()->getE3max() ?>" type="number" style="width: 100px; text-align:center"></input>
+                <button class="btn btn-warning" id="btnUpdateCantidad" value='Modifica3' onclick="updateCantidad(<?= $product->getId() ?>)"><i class="fas fa-pencil-alt"></i></button>
+              </div>
+            <?php }
+            ?>
             <hr style="width: 96%;">
 
             <div class="row" style="margin-bottom: 20px; margin-top: 60px;">
@@ -649,8 +654,10 @@ switch ($product->getCotizador()) {
             measurement.width = $('#width' + (index + 1)).val()
             measurement.height = $('#height' + (index + 1)).val()
             measurement.length = $('#length' + (index + 1)).val()
-            /* Validar cuando se requeriere pliego y activarlo */
-            //measurement.pliego = $('#pliego' + (index + 1)).val()
+
+            if (`<?= $product->getCotizador(); ?>` == 2)
+              measurement.pliego = $('#pliego' + (index + 1)).val()
+
             measurement.largoUtil = $('#largoUtil' + (index + 1)).val()
             measurement.anchoTotal = $('#anchoTotal' + (index + 1)).val()
             measurement.ventaMinimaGenerica = $('#VentaMinimaGenerica' + (index + 1)).val()
@@ -697,7 +704,7 @@ switch ($product->getCotizador()) {
       $('#btnUploadExcel').click(() => {
         $('#uploadExcel').toggle(600);
       })
-      
+
       $('#hideMeasurements').click(function() {
         $('#measurements').fadeToggle()
         $(this).text(function(i, text) {
@@ -827,7 +834,7 @@ switch ($product->getCotizador()) {
     /* } */
 
     function addMeasurement() {
-      $('#measurement-container').slideDown();
+      $('#measurements').slideDown();
       indexMeasurement++;
       $("#measurements").append(`
         

@@ -108,11 +108,10 @@ function updateMeasurement(
   }
 }
 
-
-
 function addMeasurement2() {
-    indexMeasurement++;
-    $('#measurements').append(`
+  indexMeasurement++;
+  $("#measurements").slideDown();
+  $("#measurements").append(`
       <li>Medida ${indexMeasurement}:
         <div class="row">
           <div class="col-2 ml-4 codigo">
@@ -145,7 +144,7 @@ function addMeasurement2() {
           <!--</div>
           <div class="row">-->
           <div class="col-2 Pliego">
-            <label for="Pliego${indexMeasurement}"><?= $nameAdditional ?>:</label>
+            <label for="Pliego${indexMeasurement}"><?= $nameAdditional ?>Piezas x Pliego:</label>
             <input type="number" id="pliego${indexMeasurement}" class="form-control">
           </div>
           <div class="col-2 VentaMinimaImpresa">
@@ -159,13 +158,13 @@ function addMeasurement2() {
           
           
         </div>
-      </li>`)
-    /* $('select').niceSelect() */
-    /* if (parseInt($('#category').val()) == 6) {
+      </li>`);
+  /* $('select').niceSelect() */
+  /* if (parseInt($('#category').val()) == 6) {
       $('.height').children('label').text('Largo:')
       $('.length').css('display', 'none')
       $('.window').css('display', 'none')
       $(`#length${indexMeasurement}`).val(0)
       $(`#window${indexMeasurement}`).val(0)
     } */
-  }
+}

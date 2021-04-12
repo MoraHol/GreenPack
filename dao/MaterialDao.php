@@ -96,8 +96,8 @@ class MaterialDao
     $material->setMinimunScale($materialDB["minimun_scale"]);
     $material->setMediumScale($materialDB["medium_scale"]);
     $material->setMaximunScale($materialDB["maximun_scale"]);
-    $material->p5400 = $materialDB["price_5400"];
-    $material->p7000 = $materialDB["price_7000"];
+   /*  $material->p5400 = $materialDB["price_5400"];
+    $material->p7000 = $materialDB["price_7000"]; */
     $this->db->close();
     return $material;
   }

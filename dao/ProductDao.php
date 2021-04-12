@@ -170,11 +170,12 @@ class ProductDao
     }
     return $products;
   }
-  
+
   function save($product)
   {
     $this->db->connect();
-    $query = "INSERT INTO `products` (`id_products`, `ref`, `name`, `price`, `description`, `categories_id_categories`, `uses`) VALUES (NULL, '" . $product->getRef() . "', '" . $product->getName() . "', '" . $product->getPrice() . "', '" . $product->getDescription() . "', '" . $product->getCategory()->getId() . "', '" . json_encode($product->getUses(), JSON_UNESCAPED_UNICODE) . "')";
+    $query = "INSERT INTO `products` (`id_products`, `ref`, `name`, `description`, `categories_id_categories`, `cotizador`) 
+              VALUES (NULL, '" . $product->getRef() . "', '" . $product->getName() . "', '" . $product->getDescription() . "', '" . $product->getCategory()->getId() . "', '" . $product->getCotizador() . "')"; // '" . json_encode($product->getUses(), JSON_UNESCAPED_UNICODE) . "',
     $status = $this->db->consult($query);
     $id = $this->db->consult("SELECT MAX(`id_products`) AS id FROM products", "yes");
     $id = $id[0]["id"];
@@ -183,13 +184,13 @@ class ProductDao
       $image->setProduct($product->getId());
       $this->imageDao->save($image);
     }
-    foreach ($product->getMaterials() as $material) {
+    /* foreach ($product->getMaterials() as $material) {
       $this->materialDao->saveByProduct($material, $product);
-    }
-    foreach ($product->getMeasurements() as $measurement) {
+    } */
+    /* foreach ($product->getMeasurements() as $measurement) {
       $measurement->setProduct($product->getId());
       $this->measurementDao->saveByProduct($measurement);
-    }
+    } */
     $this->db->close();
     return $status;
   }

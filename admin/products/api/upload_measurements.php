@@ -16,6 +16,7 @@ if (!empty($_POST)) {
         $measurement->setLength($medida['Largo']);
         $measurement->setLargoUtil($medida['LargoUtil']);
         $measurement->setAnchoTotal($medida['AnchoTotal']);
+        $measurement->setPliego($medida['PiezasporPliego']);
         $measurement->setVentaMinimaImpresa($medida['VentaMinimaImpresa']);
         $measurement->setVentaMinimaGenerica($medida['VentaMinimaGenerica']);
         $measurement->setProduct($idProducto);

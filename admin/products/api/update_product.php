@@ -9,7 +9,6 @@ require_once dirname(dirname(dirname(__DIR__))) . "/dao/ImageDao.php";
 require_once dirname(dirname(dirname(__DIR__))) . "/dao/MaterialDao.php";
 require_once dirname(dirname(dirname(__DIR__))) . "/dao/MeasurementDao.php";
 require_once dirname(dirname(dirname(__DIR__))) . "/dao/CantidadDao.php";
-//require_once dirname(dirname(dirname(__DIR__))) . "/dao/FactorDao.php";
 
 $productDao = new ProductDao();
 $categoryDao = new CategoryDao();
@@ -17,7 +16,6 @@ $imageDao = new ImageDao();
 $materialDao = new MaterialDao();
 $measurementDao = new MeasurementDao();
 $cantidadDao = new CantidadDao();
-//$factorDao = new FactorDao();
 
 /* instanciar clase para almacenar array factores */
 
@@ -31,7 +29,6 @@ $description = $_POST["content"];
 $product->setName($name);
 $product->setDescription($description);
 $product->setCategory($categoryDao->findById($_POST["category"]));
-//$product->setPrice($_POST["price"]);
 $product->setRef($_POST["ref"]);
 $product->setUses(json_decode($_POST["uses"]));
 $product->setCotizador($_POST["cotizador"]);
@@ -51,24 +48,19 @@ if (isset($_POST["photos"])) {
 
 $materials = [];
 $materialsByProduct = $materialDao->findByProduct($product);
-/* if ($product->getId() == $_ENV["id_fondo_auto"] || $product->getCategory()->getid() == 8) { */
-//si el la bolsa de fondo automatico
+
 foreach (json_decode($_POST["materials"]) as  $materialReq) {
   $material = $materialDao->findById((int) $materialReq->material);
   $material->setE1($materialReq->e1);
   $material->setE2($materialReq->e2);
   $material->setE3($materialReq->e3);
-  /* $materialReq->minimunScale = $materialReq->minimunScale == null ? "NULL" : $materialReq->minimunScale;
-    $materialReq->mediumScale = $materialReq->mediumScale == null ? "NULL" : $materialReq->mediumScale;
-    $materialReq->maximunScale = $materialReq->maximunScale == null ? "NULL" : $materialReq->maximunScale;
-     */
   if (count($materialsByProduct) <= 0) {
     array_push($materials, $material, $factor);
     $materialDao->saveByProduct($material, $product);
   } else {
     $find = 0;
     for ($i = 0; $i < sizeof($materialsByProduct); $i++) {
-      //foreach ($materialsByProduct as $materialProduct) {
+
       if ($materialsByProduct[$i]->getId() == $materialReq->material) {
         $find = 1;
       }
@@ -77,14 +69,8 @@ foreach (json_decode($_POST["materials"]) as  $materialReq) {
       array_push($materials, $material);
       $materialDao->saveByProduct($material, $product);
     }
-    //$materialDao->saveByProduct($material, $product, $materialReq->minimunScale, $materialReq->mediumScale, $materialReq->maximunScale);
   }
 }
-/* } else { */
-/* foreach (json_decode($_POST["materials"]) as  $materialId) {
-  $material = $materialDao->findById((int) $materialId);
-} */
-/* } */
 
 $measurements = [];
 foreach (json_decode($_POST["measurements"]) as  $measurementReq) {
@@ -120,14 +106,10 @@ foreach (json_decode($_POST["measurements"]) as  $measurementReq) {
   }
 }
 
-/* Cantidades */
-
 $cantidad = [];
 
 foreach (json_decode($_POST["cantidades"]) as  $cantidadReq) {
   $cantidad = new Cantidad();
-
-  //$cantidad->setId($cantidadReq->getId());
   $cantidad->setIdProduct($product->getId());
   $cantidad->setE1min($cantidadReq->e1min);
   $cantidad->setE1max($cantidadReq->e1max);
@@ -135,35 +117,7 @@ foreach (json_decode($_POST["cantidades"]) as  $cantidadReq) {
   $cantidad->setE2max($cantidadReq->e2max);
   $cantidad->setE3min($cantidadReq->e3min);
   $cantidad->setE3max($cantidadReq->e3max);
-
-  //array_push($cantidades, $cantidad);
   $cantidadDao->save($cantidad);
 }
 
-/* Crear funcion para almacenar factores setter y getter */
-
-/* $factors = [];
-foreach (json_decode($_POST["materialFactors"]) as $factorReq) {
-  $factorsByProduct = $factorDao->findByProduct($product);
-  $factor = new Factor();
-  $factor->setIdmaterial($factorReq->materials);
-  $factor->setIdProduct($factorReq->product);
-  $factor->setE1($factorReq->e1);
-  $factor->setE2($factorReq->e2);
-  $factor->setE3($factorReq->e3);
-
-  if (count($factorsByProduct) <= 0) {
-    array_push($factors, $factor);
-    $factorDao->save($factor);
-  } else {
-    foreach ($factorsByProduct as $factorProduct) {
-      if ($factorProduct->getId() != $factor->getIdproduct()) {
-        array_push($factors, $factor);
-        $factorDao->save($factor);
-      }
-    }
-  }
-} */
-
-// var_dump($measurements);
 $productDao->update($product);

@@ -7,7 +7,7 @@ document.getElementById("cargarMedidas").addEventListener("change", (event) => {
   var ext = selectedFile.name.split(".");
   ext = ext[ext.length - 1];
 
-  if (ext !== "xls" || ext !== "xlsx") {
+  if (ext !== "xls" && ext !== "xlsx") {
     $.notify(
       {
         message:
@@ -43,8 +43,6 @@ importarMedidas = (id) => {
         let rowObject = XLSX.utils.sheet_to_row_object_array(
           workbook.Sheets[sheet]
         );
-        console.log(rowObject);
-        //              document.getElementById("jsondata").innerHTML = JSON.stringify(rowObject,undefined,4)
 
         $.post(
           "api/upload_measurements.php",
@@ -54,6 +52,18 @@ importarMedidas = (id) => {
               $.notify(
                 {
                   message: "Medidas Cargadas exitosamente",
+                  icon: "fas fa-check-circle",
+                },
+                {
+                  type: "success",
+                }
+              );
+              location.reload();
+            } else {
+              $.notify(
+                {
+                  message:
+                    "Ocurrio un error al cargar las medidas, intente nuevamente",
                   icon: "fas fa-check-circle",
                 },
                 {
