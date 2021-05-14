@@ -7,7 +7,8 @@ function deleteMeasurement(idProduct, idMeasurement) {
     },
     (data, status) => {
       if (status == "success") {
-        reloadPage();
+        location.reload();
+        //reloadPage();
         $.notify(
           {
             icon: "fas fa-exclamation-triangle",

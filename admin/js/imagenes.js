@@ -26,7 +26,8 @@ function deleteImage(id, url) {
             type: "warning",
           }
         );
-        reloadPage();
+        location.reload();
+        //reloadPage();
       }
     }
   );

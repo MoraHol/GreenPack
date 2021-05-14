@@ -3,7 +3,8 @@ function deleteCantidad(id) {
       id: id
     }, (data, status) => {
       if (status == 'success') {
-        reloadPage()
+        location.reload();
+        //reloadPage()
         $.notify({
           message: 'Cantidad eliminado',
           title: '<strong>Greenpack</strong>',

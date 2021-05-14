@@ -11,7 +11,8 @@ function deleteMaterial(idProduct, idMaterial) {
     },
     (data, status) => {
       if (status == "success") {
-        reloadPage();
+        location.reload();
+        //reloadPage();
         $.notify(
           {
             message: "Material eliminado",

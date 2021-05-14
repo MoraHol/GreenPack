@@ -723,7 +723,8 @@ switch ($product->getCotizador()) {
         materialFactors: materialFactor,
         cantidades: JSON.stringify(cantidades)
       }, (data, status) => {
-        reloadPage()
+        location.reload();
+        //reloadPage()
         text = editor.html.get()
         $.notify({
           message: 'Producto actualizado',
