@@ -42,8 +42,6 @@ class MaterialDao
     return $materials;
   }
 
-
-
   function findAll()
   {
     $materials = [];
@@ -96,7 +94,7 @@ class MaterialDao
     $material->setMinimunScale($materialDB["minimun_scale"]);
     $material->setMediumScale($materialDB["medium_scale"]);
     $material->setMaximunScale($materialDB["maximun_scale"]);
-   /*  $material->p5400 = $materialDB["price_5400"];
+    /*  $material->p5400 = $materialDB["price_5400"];
     $material->p7000 = $materialDB["price_7000"]; */
     $this->db->close();
     return $material;
@@ -195,11 +193,11 @@ class MaterialDao
     return $status;
   }
 
-  function updateFactors($factor)
+  function updateFactors($product, $factor, $material)
   {
     $this->db->connect();
     $query = "UPDATE `products_has_materials` SET `e1` = '" . $factor->getE1() . "', `e2` = '" . $factor->getE2() . "', `e3` = '" . $factor->getE3() . "' 
-    WHERE `factores`.`id` = " . $factor->getIdfactor();
+    WHERE `products_has_materials`.`products_id_products` = $product  AND `products_has_materials`.`materials_id_materials` = $material";
 
     $status = $this->db->consult($query);
     $this->db->close();

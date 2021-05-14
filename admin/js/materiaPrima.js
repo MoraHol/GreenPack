@@ -41,13 +41,7 @@ function updateMaterial(idProduct, idMaterial, IdBtn) {
     const e2 = $(`#e2${IdBtn}`).val();
     const e3 = $(`#e3${IdBtn}`).val();
 
-    const materialInfo = {
-      idMaterial,
-      idProduct,
-      e1,
-      e2,
-      e3,
-    };
+    const materialInfo = { idMaterial, idProduct, e1, e2, e3 };
 
     $.post(
       "api/modify_factor.php",
@@ -84,5 +78,4 @@ $(document).ready(function () {
     selectElement = 1;
     return false;
   }
-
 });

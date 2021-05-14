@@ -9,6 +9,7 @@ require_once dirname(dirname(dirname(__DIR__))) . "/dao/ImageDao.php";
 require_once dirname(dirname(dirname(__DIR__))) . "/dao/MaterialDao.php";
 require_once dirname(dirname(dirname(__DIR__))) . "/dao/MeasurementDao.php";
 require_once dirname(dirname(dirname(__DIR__))) . "/dao/CantidadDao.php";
+require_once dirname(dirname(dirname(__DIR__))) . "/dao/FactorDao.php";
 
 $productDao = new ProductDao();
 $categoryDao = new CategoryDao();
@@ -16,6 +17,7 @@ $imageDao = new ImageDao();
 $materialDao = new MaterialDao();
 $measurementDao = new MeasurementDao();
 $cantidadDao = new CantidadDao();
+$factorDao = new FactorDao();
 
 /* instanciar clase para almacenar array factores */
 
@@ -51,6 +53,7 @@ $materialsByProduct = $materialDao->findByProduct($product);
 
 foreach (json_decode($_POST["materials"]) as  $materialReq) {
   $material = $materialDao->findById((int) $materialReq->material);
+  $material->setId($materialReq->material);
   $material->setE1($materialReq->e1);
   $material->setE2($materialReq->e2);
   $material->setE3($materialReq->e3);
@@ -63,6 +66,7 @@ foreach (json_decode($_POST["materials"]) as  $materialReq) {
 
       if ($materialsByProduct[$i]->getId() == $materialReq->material) {
         $find = 1;
+        $materialDao->updateFactors($_POST["id"], $material, $materialReq->material);
       }
     }
     if ($find != 1) {

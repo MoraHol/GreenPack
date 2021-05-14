@@ -75,7 +75,7 @@ class CantidadDao
   {
     $this->db->connect();
     $query = "UPDATE `cantidades_producto` SET `e1_min` = '" . $cantidad->getE1min() . "', `e1_max` = '" . $cantidad->getE1max() . "' , `e2_min` = '" . $cantidad->getE2min() . "', `e2_max` = '" . $cantidad->getE2max() . "' , `e3_min` = '" . $cantidad->getE3min() . "' , `e3_max` = '" . $cantidad->getE3max() . "' 
-    WHERE `id` ='"  . $cantidad->getidproduct() . "' ";
+    WHERE `id_product` ='"  . $cantidad->getidproduct() . "' ";
 
     $status = $this->db->consult($query);
     $this->db->close();

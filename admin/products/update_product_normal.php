@@ -187,18 +187,8 @@ switch ($product->getCotizador()) {
               <label for="title">Nombre del producto:</label>
               <input type="text" placeholder="Ej. LV-12" id="ref" class="form-control" value="<?= $product->getRef(); ?>">
               <input type="text" placeholder="Ej. bolsa de manija" id="title" class="form-control" value="<?= $product->getName(); ?>">
-
-              <!-- <div class="col">
-                <div class="form-group">
-                  <label for="price">Gramaje:</label>
-                  <input type="number" placeholder="Ej. 40" id="price" class="form-control" value="<?= $product->getPrice(); ?>">
-                </div>
-              </div> -->
             </div>
-            <!-- <div class="form-group">
-              <label for="title">Nombre del producto:</label>
-              <input type="text" placeholder="Ej. bolsa de manija" id="title" class="form-control" value="<?= $product->getName(); ?>">
-            </div>-->
+
             <br>
             <div class="form-group">
               <label for="content">descripción:</label>
@@ -285,7 +275,6 @@ switch ($product->getCotizador()) {
             <hr style="width: 96%;">
             <div class="mt-4 mb-4" style="text-align: center;"><b>Usos</b></div>
             <div class="form-group">
-              <!-- <label for="campo1">Usos:</label> -->
               <div class="container">
                 <div class="row" id="fields">
                   <?php
@@ -305,7 +294,6 @@ switch ($product->getCotizador()) {
             </div>
             <div class="mt-4 mb-3" style="text-align: center;"><b>Medidas</b></div>
             <div class="form-group" id="measurement-container">
-              <!-- <label for="campo1">Medidas:</label> -->
               <button class="btn btn-primary" id="hideMeasurements">Ver Medidas</button>
               <ul class="list-unstyled" id="measurements">
                 <?php foreach ($product->getMeasurements() as $measurement) { ?>
@@ -351,19 +339,13 @@ switch ($product->getCotizador()) {
             <div class="mt-4 mb-5" style="text-align: center;"><b>Materia prima y Factores de precio</b></div>
             <div class="form-gruop">
               <label class="col-2" for="campo1" style="margin-right: 240px;">Materia Prima:</label>
-              <!-- <label class="col-2 ml6" for="category">Factores</label> -->
-
               <label for="FactorE1<?= $indexMaterial ?>" class="col-md-2">E1</label>
               <label for="FactorE2<?= $indexMaterial ?>" class="col-md-2">E2</label>
               <label for="FactorE3<?= $indexMaterial ?>" class="col-md-2">E3</label>
             </div>
-            <!-- <input type="text" id="nuevo_material"> -->
-            <!-- <ul class="list-unstyled" id="materials"> -->
             <div class="ml-3" id="materials">
               <?php foreach ($product->getMaterials() as $materialProduct) { ?>
-                <!-- <li> -->
                 <div class="row">
-
                   <select class="form-control" style="margin-bottom: 10px; width:30%" id="material<?= $indexMaterial; ?>">
                     <option>Seleccione un material</option>
                     <?php
@@ -373,22 +355,21 @@ switch ($product->getCotizador()) {
                     <?php } ?>
                   </select>
 
-                  <input class="col md-4 form-control ml-3 mr-5" id="e1<?= $indexMaterial ?>" value="<?= $materialProduct->getE1(); ?>" type="number" style="width: 100px; text-align:center" readonly>
-                  <input class="col md-4 form-control mr-3" id="e2<?= $indexMaterial ?>" value="<?= $materialProduct->getE2() ?>" type="number" style="width: 100px; text-align:center" readonly>
-                  <input class="col md-4 form-control mr-3" id="e3<?= $indexMaterial ?>" value="<?= $materialProduct->getE3() ?>" type="number" style="width: 100px; text-align:center" readonly>
+                  <input class="col md-4 form-control ml-3 mr-5" id="e1<?= $indexMaterial ?>" value="<?= $materialProduct->getE1(); ?>" type="number" style="width: 100px; text-align:center">
+                  <input class="col md-4 form-control mr-3" id="e2<?= $indexMaterial ?>" value="<?= $materialProduct->getE2() ?>" type="number" style="width: 100px; text-align:center">
+                  <input class="col md-4 form-control mr-3" id="e3<?= $indexMaterial ?>" value="<?= $materialProduct->getE3() ?>" type="number" style="width: 100px; text-align:center">
 
                   <div>
                     <button class="btn btn-danger" onclick="deleteMaterial(<?= $product->getId() ?>,<?= $materialSelected->getId() ?>)"><i class="fas fa-trash-alt"></i></button>
-                    <button class="btn btn-warning" id="btnUpdateMaterial<?= $indexMaterial ?>" value='Modifica2' onclick="updateMaterial(<?= $product->getId() ?>,<?= $materialSelected->getId() ?>,<?= $indexMaterial ?>)"><i class="fas fa-pencil-alt"></i></button>
+                    <!-- <button class="btn btn-warning" id="btnUpdateMaterial<?= $indexMaterial ?>" value='Modifica2' onclick="updateMaterial(<?= $product->getId() ?>,<?= $materialSelected->getId() ?>,<?= $indexMaterial ?>)"><i class="fas fa-pencil-alt"></i></button> -->
                   </div>
 
                 </div>
-                <!-- </li> -->
               <?php $indexMaterial++;
                 $indexFactor++;
               } ?>
             </div>
-            <!-- </ul> -->
+
 
 
             <button class="btn btn-primary ml-3" onclick="FactorMaterial()" title="Agregar un material"><i class="fas fa-plus"></i></button>
@@ -413,8 +394,8 @@ switch ($product->getCotizador()) {
 
             <hr style="width: 96%;">
 
-            <div class="mt-5 mb-5" style="text-align: center;"><b>Rango Cantidades Mínimas</b></div>
-            <div class="row align-center">
+            <div class="mt-5 mb-5" style="text-align: center;"><b>Cantidades Mínimas para Venta</b></div>
+            <div class="tituloCantidades">
               <label style="text-align: center;" class="col-md-3">E1</label>
               <label style="text-align: center;" class="col-md-3">E2</label>
               <label style="text-align: center;" class="col-md-3">E3</label>
@@ -429,14 +410,12 @@ switch ($product->getCotizador()) {
                 <input id="e2_min" name="e2_min" class="form-control md-1" value="<?= $product->getCantidad()->getE2min() ?>" type="number" style="width: 100px; text-align:center"></input>
                 <label for="e3_min" style="margin-right: 50px; text-align: center;" class="col-md-1">Mínimo</label>
                 <input id="e3_min" name="e3_min" class="form-control md-1" value="<?= $product->getCantidad()->getE3min() ?>" type="number" style="width: 100px; text-align:center"></input>
-                <button class=" btn btn-danger" onclick="deleteCantidad(<?= $product->getId() ?>)"><i class="fas fa-trash-alt"></i></button>
                 <label for="e1_max" style="margin-right: 50px; text-align: center;" class="col-md-1">Máximo</label>
                 <input id="e1_max" name="e1_max" class="form-control md-1" value="<?= $product->getCantidad()->getE1max() ?>" type="number" style="width: 100px; text-align:center"></input>
                 <label for="e2_max" style="margin-right: 50px; text-align: center;" class="col-md-1">Máximo</label>
                 <input id="e2_max" name="e2_max" class="form-control md-1" value="<?= $product->getCantidad()->getE2max() ?>" type="number" style="width: 100px; text-align:center"></input>
                 <label for="e3_max " style="margin-right: 50px; text-align: center;" class="col-md-1">Máximo</label>
                 <input id="e3_max" name="e3_max" class="form-control md-1" value="<?= $product->getCantidad()->getE3max() ?>" type="number" style="width: 100px; text-align:center"></input>
-                <button class="btn btn-warning" id="btnUpdateCantidad" value='Modifica3' onclick="updateCantidad(<?= $product->getId() ?>)"><i class="fas fa-pencil-alt"></i></button>
               </div>
             <?php }
             ?>
@@ -641,7 +620,7 @@ switch ($product->getCotizador()) {
               factor.e1 = e1;
               factor.e2 = e2;
               factor.e3 = e3;
-              //materialFactor.push(factor);
+              materialFactor.push(factor);
               materials.push(factor);
             }
           }
@@ -741,7 +720,7 @@ switch ($product->getCotizador()) {
         cotizador: $('#cotizador').val(),
         materials: JSON.stringify(materials),
         measurements: JSON.stringify(measurements),
-        materialFactors: JSON.stringify(materialFactor),
+        materialFactors: materialFactor,
         cantidades: JSON.stringify(cantidades)
       }, (data, status) => {
         reloadPage()
