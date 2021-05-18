@@ -1,4 +1,4 @@
-<div class="sidebar" data-color="green" data-background-color="black" data-image="/admin/assets/img/sidebar-2.jpg">
+<div class="sidebar" data-color="green" data-background-color="black" data-image="/admin/assets/img/sidebar-2.jpg"> <!-- /admin/assets/img/sidebar-2.jpg -->
   <div class="logo">
     <a href="javascript:;" class="simple-text logo-normal">
       <img src="/images/greenpack_logo.png" alt="Greenpack">
