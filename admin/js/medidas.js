@@ -37,6 +37,7 @@ function updateMeasurement(
   // const windowInput = $(`#window${indexMeasurement}`).val();
   const largoUtilInput = $(`#largoUtil${indexMeasurement}`).val();
   const anchoTotalInput = $(`#anchoTotal${indexMeasurement}`).val();
+  const pliegoInput = $(`#pliego${indexMeasurement}`).val();
   const VentaMinimaImpresaInput = $(
     `#VentaMinimaImpresa${indexMeasurement}`
   ).val();
@@ -55,6 +56,7 @@ function updateMeasurement(
     $(`#length${indexMeasurement}`).prop("readonly", false);
     $(`#largoUtil${indexMeasurement}`).prop("readonly", false);
     $(`#anchoTotal${indexMeasurement}`).prop("readonly", false);
+    $(`#pliego${indexMeasurement}`).prop("readonly", false);
     $(`#VentaMinimaImpresa${indexMeasurement}`).prop("readonly", false);
     $(`#VentaMinimaGenerica${indexMeasurement}`).prop("readonly", false);
 
@@ -68,6 +70,7 @@ function updateMeasurement(
       length: lengthInput,
       largoUtil: largoUtilInput,
       anchoTotal: anchoTotalInput,
+      pliego: pliegoInput,
       ventaMinimaImpresa: VentaMinimaImpresaInput,
       ventaMinimaGenerica: VentaMinimaGenericaInput,
     };
@@ -98,8 +101,9 @@ function updateMeasurement(
       $(`#codigo${indexMeasurement}`).prop("readonly", true);
       $(`#width${indexMeasurement}`).prop("readonly", true);
       $(`#height${indexMeasurement}`).prop("readonly", true);
-      $(`#lenght${indexMeasurement}`).prop("readonly", true);
+      $(`#length${indexMeasurement}`).prop("readonly", true);
       $(`#largoUtil${indexMeasurement}`).prop("readonly", true);
+      $(`#pliego${indexMeasurement}`).prop("readonly", true);
       $(`#anchoTotal${indexMeasurement}`).prop("readonly", true);
       $(`#VentaMinimaImpresa${indexMeasurement}`).prop("readonly", true);
       $(`#VentaMinimaGenerica${indexMeasurement}`).prop("readonly", true);

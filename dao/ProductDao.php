@@ -45,7 +45,7 @@ class ProductDao
       $product->setName($productDB["name"]);
       $product->setRef($productDB["ref"]);
       $product->setDescription($productDB["description"]);
-      $product->setPrice($productDB["price"]);
+      //$product->setPrice($productDB["price"]);
       $product->setImages($this->imageDao->findByProduct($product));
       $product->setMeasurements($this->measurementDao->findByProduct($product));
       $product->setMaterials($this->materialDao->findByProduct($product));
@@ -62,14 +62,14 @@ class ProductDao
   function findById($id)
   {
     $this->db->connect();
-    $productDB = $this->db->consult("SELECT id_products,ref,products.name,products.description,price, categories.name as category_name, categories.id_categories,uses,cotizador FROM `products` INNER JOIN categories ON categories.id_categories = products.categories_id_categories WHERE `id_products` = $id", "yes");
+    $productDB = $this->db->consult("SELECT id_products,ref,products.name,products.description, categories.name as category_name, categories.id_categories,uses,cotizador FROM `products` INNER JOIN categories ON categories.id_categories = products.categories_id_categories WHERE `id_products` = $id", "yes");
     $productDB = $productDB[0];
     $product = new Product();
     $product->setId($productDB["id_products"]);
     $product->setName($productDB["name"]);
     $product->setRef($productDB["ref"]);
     $product->setDescription($productDB["description"]);
-    $product->setPrice($productDB["price"]);
+    //$product->setPrice($productDB["price"]);
     $product->setCotizador($productDB["cotizador"]);
     $product->setImages($this->imageDao->findByProduct($product));
     $product->setMeasurements($this->measurementDao->findByProduct($product));
