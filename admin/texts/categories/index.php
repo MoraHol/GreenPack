@@ -97,7 +97,7 @@ include("../../partials/verify-session.php");
 
     <!-- CREATE CATEGORY MODAL -->
     <div class="modal fade" id="modalCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Crear Categoría</h5>
@@ -115,9 +115,9 @@ include("../../partials/verify-session.php");
             </div>
             <br>
             <div class="row">
-              <div class="col-sm-4">Descripcion:</div>
+              <div class="col-sm-4">Descripción:</div>
               <div class="col-sm-8 ">
-                <textarea class="form-control text-area-control" id="descriptionCategoryInputC" cols="30" rows="10"></textarea>
+                <textarea class="form-control text-area-control" id="descriptionCategoryInputC" cols="30" rows="3"></textarea>
               </div>
             </div>
             <br>
@@ -161,7 +161,7 @@ include("../../partials/verify-session.php");
 
     <!-- Modal EDIT-->
     <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Editar Categoría</h5>
@@ -176,9 +176,9 @@ include("../../partials/verify-session.php");
             </div>
             <br>
             <div class="row">
-              <div class="col-sm-4">Descripcion:</div>
+              <div class="col-sm-4">Descripción:</div>
               <div class="col-sm-8 ">
-                <textarea class="form-control text-area-control" id="descriptionCategoryInput" cols="30" rows="10"></textarea>
+                <textarea class="form-control text-area-control" id="descriptionCategoryInput" cols="30" rows="3"></textarea>
               </div>
             </div>
             <br>
@@ -253,9 +253,9 @@ include("../../partials/verify-session.php");
             </div>
             <br>
             <div class="row">
-              <div class="col-sm-4">Descripcion:</div>
+              <div class="col-sm-4">Descripción:</div>
               <div class="col-sm-8 ">
-                <textarea class="form-control text-area-control" id="descriptionSubcategoryInput" cols="30" rows="10"></textarea>
+                <textarea class="form-control text-area-control" id="descriptionSubcategoryInput" cols="30" rows="3"></textarea>
               </div>
             </div>
             <br>
