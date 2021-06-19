@@ -18,17 +18,17 @@ class CategoryDao
   }
 
   public function save($category)
-  { 
+  {
     $this->db->connect();
     $query = "INSERT INTO `categories` (`name`, `description`, `image`) VALUES('" . $category->getName() . "','" . $category->getDescription() . "', '" . $category->getImage() . "')";
     $status = $this->db->consult($query);
-   $last_id = $this->db->lastInsertId();
+    $last_id = $this->db->lastInsertId();
     $this->db->close();
     return $last_id;
   }
 
   public function saveSubcategory($subcategory)
-  { 
+  {
     $this->db->connect();
     $query = "INSERT INTO `categories` (`name`, `parent_category`, `description`, `image`) VALUES('" . $subcategory->getName() . "','" . $subcategory->getParentCategory() . "','" . $subcategory->getDescription() . "', '" . $subcategory->getImage() . "')";
     $status = $this->db->consult($query);
@@ -38,28 +38,20 @@ class CategoryDao
   }
 
   public function saveSubcategories($categoryId, $subcategoryNames)
-  { 
+  {
     try {
-      
+
       $category = $this->findById($categoryId);
-
       $this->db->connect();
-
-      foreach ($subcategoryNames as $subcategoryName ) {
-
+      foreach ($subcategoryNames as $subcategoryName) {
         $query = "INSERT INTO `categories` (`name`, `parent_category`, `description`, `image`) VALUES('" . $subcategoryName . "','" . $category->getId() . "','" . $category->getDescription() . "', '" . $category->getImage() . "')";
-
         $status = $this->db->consult($query);
       }
 
       $this->db->close();
-
       return $status;
-
     } catch (\Throwable $th) {
-      
       return 0;
-
     }
   }
 
@@ -80,7 +72,8 @@ class CategoryDao
     return $status;
   }
 
-  public function findChildren($idCategory){
+  public function findChildren($idCategory)
+  {
     $this->db->connect();
     $categories = [];
     $categoriesDB = $this->db->consult("SELECT * FROM `categories` WHERE parent_category = $idCategory", "yes");
@@ -96,7 +89,27 @@ class CategoryDao
     $this->db->close();
     return $categories;
   }
+  
   public function findAll()
+  {
+    $this->db->connect();
+    $categories = [];
+    $categoriesDB = $this->db->consult("SELECT * FROM categories WHERE parent_category IS NULL", "yes");
+    foreach ($categoriesDB as $categoryDB) {
+      $category = new Category();
+      $category->setId($categoryDB["id_categories"]);
+      $category->setName($categoryDB["name"]);
+      $category->setParentcategory($categoryDB["parent_category"]);
+      $category->setDescription($categoryDB["description"]);
+      $category->setImage($categoryDB["image"]);
+      array_push($categories, $category);
+    }
+    $this->db->close();
+    return $categories;
+  }
+
+
+  public function findAllsubCategories()
   {
     $this->db->connect();
     $categories = [];
@@ -113,6 +126,8 @@ class CategoryDao
     $this->db->close();
     return $categories;
   }
+
+
   public function findById($id)
   {
     $this->db->connect();
