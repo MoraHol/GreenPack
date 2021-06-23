@@ -10,6 +10,7 @@ require_once dirname(dirname(dirname(__DIR__))) . "/dao/MaterialDao.php";
 require_once dirname(dirname(dirname(__DIR__))) . "/dao/MeasurementDao.php";
 require_once dirname(dirname(dirname(__DIR__))) . "/dao/CantidadDao.php";
 require_once dirname(dirname(dirname(__DIR__))) . "/dao/FactorDao.php";
+require_once dirname(dirname(dirname(__DIR__))) . "/dao/ProductAssocDao.php";
 
 $productDao = new ProductDao();
 $categoryDao = new CategoryDao();
@@ -18,6 +19,7 @@ $materialDao = new MaterialDao();
 $measurementDao = new MeasurementDao();
 $cantidadDao = new CantidadDao();
 $factorDao = new FactorDao();
+$productAssoc = new ProductAssocDao();
 
 /* instanciar clase para almacenar array factores */
 
@@ -25,6 +27,7 @@ if (!$_POST) {
   http_response_code(404);
   exit;
 }
+
 $product = $productDao->findById($_POST["id"]);
 $name = $_POST["title"];
 $description = $_POST["content"];
@@ -57,6 +60,7 @@ foreach (json_decode($_POST["materials"]) as  $materialReq) {
   $material->setE1($materialReq->e1);
   $material->setE2($materialReq->e2);
   $material->setE3($materialReq->e3);
+
   if (count($materialsByProduct) <= 0) {
     array_push($materials, $material, $factor);
     $materialDao->saveByProduct($material, $product);
@@ -77,6 +81,7 @@ foreach (json_decode($_POST["materials"]) as  $materialReq) {
 }
 
 $measurements = [];
+
 foreach (json_decode($_POST["measurements"]) as  $measurementReq) {
   $measurementsByProduct = $measurementDao->findByProduct($product);
   $measurement = new Measurement();
@@ -89,9 +94,11 @@ foreach (json_decode($_POST["measurements"]) as  $measurementReq) {
   $measurement->setVentaMinimaGenerica($measurementReq->ventaMinimaGenerica);
   $measurement->setVentaMinimaImpresa($measurementReq->ventaMinimaImpresa);
   $measurement->setProduct($product->getId());
+
   if ($product->getCotizador() == 2) {
     $measurement->setPliego($measurementReq->pliego);
   }
+
   if (count($measurementsByProduct) <= 0) {
     array_push($measurements, $measurement);
     $measurementDao->saveByProduct($measurement);
@@ -104,6 +111,7 @@ foreach (json_decode($_POST["measurements"]) as  $measurementReq) {
         $flag = false;
       }
     }
+
     if (!$flag) {
       $measurementDao->saveByProduct($measurement);
     }
@@ -122,6 +130,15 @@ foreach (json_decode($_POST["cantidades"]) as  $cantidadReq) {
   $cantidad->setE3min($cantidadReq->e3min);
   $cantidad->setE3max($cantidadReq->e3max);
   $cantidadDao->save($cantidad);
+}
+
+$productsAssoc = $_POST["productsAssoc"];
+
+foreach ($productsAssoc as $productAssoc) {
+  $prod_assoc = new ProductsAssoc();
+  $productAssoc->setIdProduct($product->getId());
+  $productAssoc->setProductAssoc($productAssoc);
+  $productAssocDao->save($productAssoc);
 }
 
 $productDao->update($product);

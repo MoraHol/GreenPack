@@ -32,6 +32,7 @@ class ClientDao
     }
     return $suscribers;
   }
+
   public function findAll()
   { 
     $clients = [];
@@ -49,4 +50,5 @@ class ClientDao
     }
     return $clients;
   }
+  
 }

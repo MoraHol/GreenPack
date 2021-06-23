@@ -91,10 +91,10 @@
         </button>
       </div>
       <div class="modal-body">
-          ¿Deseas cerrar esta sesión?.</div>
+        ¿Deseas cerrar esta sesión?.</div>
       <div class="modal-footer">
-        <button class="btn btn-secondary" type="button" data-dismiss="modal">No</button>
-        <form action="/admin/logout.php" method="POST">
+        <button class="btn btn-danger" type="button" data-dismiss="modal">No</button>
+        <form action="/admin/logout.php" method="POST" class="mb-0">
           <input value="true" name="logout" hidden>
           <button class="btn btn-primary">Si</button>
         </form>

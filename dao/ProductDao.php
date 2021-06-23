@@ -45,13 +45,12 @@ class ProductDao
       $product->setName($productDB["name"]);
       $product->setRef($productDB["ref"]);
       $product->setDescription($productDB["description"]);
-      //$product->setPrice($productDB["price"]);
       $product->setImages($this->imageDao->findByProduct($product));
       $product->setMeasurements($this->measurementDao->findByProduct($product));
       $product->setMaterials($this->materialDao->findByProduct($product));
       $product->setCategory($this->categoryDao->findById($productDB["categories_id_categories"]));
       $product->setCotizador($productDB["cotizador"]);
-      // $product->setCantidad($this->cantidadDao->findByProduct($product));
+
       if (isset($productDB["uses"])) {
         $product->setUses(json_decode($productDB["uses"]));
       }
@@ -59,6 +58,22 @@ class ProductDao
     }
     return $products;
   }
+
+  function findAllSimpleProduct()
+  {
+    $products = [];
+    $productsDB = $this->db->consult("SELECT p.id_products, p.name FROM products p", "yes");
+
+    foreach ($productsDB as $productDB) {
+      $product = new Product();
+      $product->setId(intval($productDB["id_products"]));
+      $product->setName($productDB["name"]);
+      array_push($products, $product);
+    }
+    return $products;
+  }
+
+
   function findById($id)
   {
     $this->db->connect();
@@ -69,7 +84,6 @@ class ProductDao
     $product->setName($productDB["name"]);
     $product->setRef($productDB["ref"]);
     $product->setDescription($productDB["description"]);
-    //$product->setPrice($productDB["price"]);
     $product->setCotizador($productDB["cotizador"]);
     $product->setImages($this->imageDao->findByProduct($product));
     $product->setMeasurements($this->measurementDao->findByProduct($product));
@@ -80,7 +94,7 @@ class ProductDao
     }
     $category = $this->categoryDao->findById($productDB["id_categories"]);
     $product->setCategory($category);
-    $this->db->close();
+    //$this->db->close();
     return $product;
   }
   function findByCategory($idCategory)
@@ -95,7 +109,6 @@ class ProductDao
       $product->setRef($productDB["ref"]);
       $product->setDescription($productDB["description"]);
       $product->setPrice($productDB["price"]);
-      /* $product->setCotizador($productDB["cotizador"]); */
       $product->setImages($this->imageDao->findByProduct($product));
       $product->setMeasurements($this->measurementDao->findByProduct($product));
       $product->setMaterials($this->materialDao->findByProduct($product));
@@ -121,7 +134,6 @@ class ProductDao
       $product->setRef($productDB["ref"]);
       $product->setDescription($productDB["description"]);
       $product->setPrice($productDB["price"]);
-      /* $product->setCotizador($productDB["cotizador"]); */
       $product->setImages($this->imageDao->findByProduct($product));
       $product->setMeasurements($this->measurementDao->findByProduct($product));
       $product->setMaterials($this->materialDao->findByProduct($product));
@@ -184,13 +196,7 @@ class ProductDao
       $image->setProduct($product->getId());
       $this->imageDao->save($image);
     }
-    /* foreach ($product->getMaterials() as $material) {
-      $this->materialDao->saveByProduct($material, $product);
-    } */
-    /* foreach ($product->getMeasurements() as $measurement) {
-      $measurement->setProduct($product->getId());
-      $this->measurementDao->saveByProduct($measurement);
-    } */
+
     $this->db->close();
     return $status;
   }
@@ -206,6 +212,16 @@ class ProductDao
     $this->db->close();
     return $status;
   }
+
+  function updateProductAssoc($product, $idParent)
+  {
+    $this->db->connect();
+    $query = "UPDATE `products` SET `parent_product` = '" . $idParent . "' WHERE `products`.`id_products` = " . $product->getId();
+    $status = $this->db->consult($query);
+    $this->db->close();
+    return $status;
+  }
+
   function delete($id)
   {
     $this->db->connect();

@@ -12,6 +12,7 @@ if (!isset($_GET["id"])) {
 }
 
 $product = $productDao->findById($_GET["id"]);
+$products = $productDao->findAll();
 $cantidad = $product->getCantidad();
 $tabProductDao = new TabProductDao();
 $indexField = 1;
@@ -246,135 +247,161 @@ switch ($product->getCotizador()) {
             <?php
             require_once $_SERVER["DOCUMENT_ROOT"] . "/dao/CategoryDao.php";
             $categoryDao = new CategoryDao();
-            $categories = $categoryDao->findAll(); ?>
+            $categories = $categoryDao->findAll();
+            $subcategories = $categoryDao->findAllsubCategories();
+            ?>
 
-            <div class="recta mb-3">
-              <label for="category">Selecciona la categoría:</label>
-              <select id="category" class="form-control" style="width: 40%;">
-                <option disabled>Selecciona una categoría</option>
-                <?php foreach ($categories as $category) { ?>
-                  <option value="<?= $category->getId(); ?>" <?= $product->getCategory()->getId() == $category->getId() ? "selected" : ""; ?>><?= $category->getName(); ?></option>
-                <?php } ?>
-              </select>
+            <!-- Categoria -->
+            <div class="ml-5" id="categories">
+              <div class="recta mb-3">
+                <label for="category">Categoría:</label>
+                <select id="category" class="form-control" style="width: 40%;">
+                  <option disabled>Selecciona una categoría</option>
+                  <?php foreach ($categories as $category) { ?>
+                    <option value="<?= $category->getId(); ?>" <?= $product->getCategory()->getParentCategory() == $category->getId() ? "selected" : ""; ?>><?= $category->getName(); ?></option>
+                  <?php } ?>
+                </select>
+              </div>
+
+              <!-- subcategoria -->
+
+              <div class="recta mb-3">
+                <label for="category">Subcategoría:</label>
+                <select id="category" class="form-control" style="width: 40%;">
+                  <option disabled>Selecciona una Subcategoría</option>
+                  <?php foreach ($subcategories as $subcategory) { ?>
+                    <option value="<?= $subcategory->getId(); ?>" <?= $product->getCategory()->getId() == $subcategory->getId() ? "selected" : ""; ?>><?= $subcategory->getName(); ?></option>
+                  <?php } ?>
+                </select>
+              </div>
+
+              <?php
+              require_once $_SERVER["DOCUMENT_ROOT"] . "/dao/CotizadorDao.php";
+              $cotizadorDao = new CotizadorDao();
+              $cotizadores = $cotizadorDao->findAll(); ?>
+
+              <div class="recta mb-5">
+                <label for="cotizador">Cotizador:</label>
+                <select id="cotizador" class="form-control" style="width: 40%;">
+                  <option disabled>Selecciona una cotizador</option>
+                  <?php foreach ($cotizadores as $cotizador) { ?>
+                    <option value="<?= $cotizador->getId(); ?>" <?= $product->getCotizador() == $cotizador->getId() ? "selected" : ""; ?>><?= $cotizador->getName(); ?></option>
+                  <?php } ?>
+                </select>
+              </div>
             </div>
 
-            <?php
-            require_once $_SERVER["DOCUMENT_ROOT"] . "/dao/CotizadorDao.php";
-            $cotizadorDao = new CotizadorDao();
-            $cotizadores = $cotizadorDao->findAll(); ?>
-
-            <div class="recta mb-5">
-              <label for="cotizador">Selecciona el cotizador:</label>
-              <select id="cotizador" class="form-control" style="width: 40%;">
-                <option disabled>Selecciona una cotizador</option>
-                <?php foreach ($cotizadores as $cotizador) { ?>
-                  <option value="<?= $cotizador->getId(); ?>" <?= $product->getCotizador() == $cotizador->getId() ? "selected" : ""; ?>><?= $cotizador->getName(); ?></option>
-                <?php } ?>
-              </select>
-            </div>
             <hr style="width: 96%;">
-            <div class="mt-4 mb-4" style="text-align: center;"><b>Usos</b></div>
-            <div class="form-group">
-              <div class="container">
-                <div class="row" id="fields">
-                  <?php
-                  if (is_array($product->getUses()) || is_object($product->getUses())) {
-                    foreach ($product->getUses() as $use) { ?>
-                      <div class="col-sm-4">
-                        Uso <?= $indexField; ?>:<input type="text" id="field<?= $indexField; ?>" class="form-control" value="<?= $use; ?>">
-                      </div>
-                  <?php $indexField++;
-                    }
-                  } ?>
-                </div>
-              </div>
-              <button class="btn btn-primary" onclick="addField()" title="Agregar un uso"><i class="fas fa-plus"></i></button>
-              <hr>
 
-            </div>
-            <div class="mt-4 mb-3" style="text-align: center;"><b>Medidas</b></div>
-            <div class="form-group" id="measurement-container">
-              <button class="btn btn-primary" id="hideMeasurements">Ver Medidas</button>
-              <ul class="list-unstyled" id="measurements">
-                <?php foreach ($product->getMeasurements() as $measurement) { ?>
-                  <li>Medida <?= $indexMeasurement ?>:
-                    <div class="row">
-                      <div class="row">
-                        <div class="col codigo"> <label for="codigo<?= $indexMeasurement ?>" style="margin-left:15px">Codigo:</label><input type="text" id="codigo<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getcodigo(); ?>" style="margin-left:15px" readonly></div>
-                        <div class="col"><label for="width<?= $indexMeasurement ?>">Ancho:</label><input type="number" id="width<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getWidth(); ?>" readonly></div>
-                        <div class="col height"><label for="height<?= $indexMeasurement ?>">Alto:</label><input type="number" id="height<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getHeight(); ?>" readonly></div>
-                        <div class="col length"><label for="length<?= $indexMeasurement ?>">Largo:</label><input type="number" id="length<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getLength(); ?>" readonly></div>
-                        <div class="col largo-util"><label for="">Largo Útil</label><input type="number" id="largoUtil<?= $indexMeasurement ?>" value="<?= $measurement->getLargoUtil(); ?>" class="form-control" value="0" readonly></div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-2 ml-4 ancho-total"><label for="">Ancho Total</label><input type="number" id="anchoTotal<?= $indexMeasurement ?>" value="<?= $measurement->getAnchoTotal(); ?>" class="form-control" value="0" readonly></div>
-                        <?php if ($product->getCotizador() == 2) { ?>
-                          <div class="col-2 ml-4 pliego"><label for="pliego<?= $indexMeasurement ?>"> Piezas por Pliego</label><input type="number" id="pliego<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getPliego(); ?>" readonly></div>
-                        <?php } ?>
-                        <div class="col-2 venta-minima-impresa"><label for="">Vta Min Impresa</label><input type="number" id="VentaMinimaImpresa<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getVentaMinimaImpresa(); ?>" readonly></div>
-                        <div class="col-2 venta-minima-generica"><label for="">Vta Min Genérica</label><input type="number" id="VentaMinimaGenerica<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getVentaMinimaGenerica(); ?>" readonly></div>
-                        <div class="col-1 mr-3" style="margin-top: 1rem;"><button class="btn btn-danger" onclick="deleteMeasurement(<?= $product->getId() ?>,<?= $measurement->getId() ?>)"><i class="fas fa-trash-alt"></i></button></div>
-                        <div class="col-1" style="margin-top: 1rem;"><button value="Modificar" class="btn btn-warning" onclick="updateMeasurement(<?= $product->getId() ?>,<?= $measurement->getId() ?>,<?= $indexMeasurement ?>,this)"><i class="fas fa-pencil-alt"></i></button></div>
-
-                      </div>
-                    </div>
-                  </li>
-                <?php $indexMeasurement++;
-                } ?>
-              </ul>
-            </div>
-            <button class="btn btn-primary" onclick="addEvaluateMeasurement()" title="Agregar una medida"><i class="fas fa-plus"></i></button>
-            <button id="btnUploadExcel" class="btn btn-primary" title="Cargar Medidas"><i class="fas fa-cloud-upload-alt"></i></button>
-            <div id="uploadExcel">
-              <div style="display: flex;margin-top: 30px;justify-content: center;">
-                <label class="mb-5">Importar Medidas</label>
-              </div>
-              <div id="uploadExcel" style="display: flex;justify-content: center;">
-                <input class="form-control" type="file" id="cargarMedidas" accept=".xls,.xlsx" style="width: 500px;">
-                <button class="btn btn-primary" id="btnImportarMedidas" onclick="importarMedidas(<?= $_GET["id"] ?>);">Importar</button>
-              </div>
-            </div>
-            <hr>
-            <div class="mt-4 mb-5" style="text-align: center;"><b>Materia prima y Factores de precio</b></div>
-            <div class="form-gruop">
-              <label class="col-2" for="campo1" style="margin-right: 240px;">Materia Prima:</label>
-              <label for="FactorE1<?= $indexMaterial ?>" class="col-md-2">E1</label>
-              <label for="FactorE2<?= $indexMaterial ?>" class="col-md-2">E2</label>
-              <label for="FactorE3<?= $indexMaterial ?>" class="col-md-2">E3</label>
-            </div>
-            <div class="ml-3" id="materials">
-              <?php foreach ($product->getMaterials() as $materialProduct) { ?>
-                <div class="row">
-                  <select class="form-control" style="margin-bottom: 10px; width:30%" id="material<?= $indexMaterial; ?>">
-                    <option>Seleccione un material</option>
+            <div class="ml-5" id="usos">
+              <div class="mt-4 mb-4" style="text-align: center;"><b>Usos</b></div>
+              <div class="form-group">
+                <div class="container">
+                  <div class="row" id="fields">
                     <?php
-                    foreach ($materials as  $material) {
-                      $materialSelected = $materialProduct->getId() == $material->getId() ? $material : $materialSelected ?>
-                      <option value="<?= $material->getId(); ?>" <?= $materialProduct->getId() == $material->getId() ? "selected" : "" ?>><?= $material->getName(); ?></option>
-                    <?php } ?>
-                  </select>
-
-                  <input class="col md-4 form-control ml-3 mr-5" id="e1<?= $indexMaterial ?>" value="<?= $materialProduct->getE1(); ?>" type="number" style="width: 100px; text-align:center">
-                  <input class="col md-4 form-control mr-3" id="e2<?= $indexMaterial ?>" value="<?= $materialProduct->getE2() ?>" type="number" style="width: 100px; text-align:center">
-                  <input class="col md-4 form-control mr-3" id="e3<?= $indexMaterial ?>" value="<?= $materialProduct->getE3() ?>" type="number" style="width: 100px; text-align:center">
-
-                  <div>
-                    <button class="btn btn-danger" onclick="deleteMaterial(<?= $product->getId() ?>,<?= $materialSelected->getId() ?>)"><i class="fas fa-trash-alt"></i></button>
-                    <!-- <button class="btn btn-warning" id="btnUpdateMaterial<?= $indexMaterial ?>" value='Modifica2' onclick="updateMaterial(<?= $product->getId() ?>,<?= $materialSelected->getId() ?>,<?= $indexMaterial ?>)"><i class="fas fa-pencil-alt"></i></button> -->
+                    if (is_array($product->getUses()) || is_object($product->getUses())) {
+                      foreach ($product->getUses() as $use) { ?>
+                        <div class="col-sm-4">
+                          Uso <?= $indexField; ?>:<input type="text" id="field<?= $indexField; ?>" class="form-control" value="<?= $use; ?>">
+                        </div>
+                    <?php $indexField++;
+                      }
+                    } ?>
                   </div>
-
                 </div>
-              <?php $indexMaterial++;
-                $indexFactor++;
-              } ?>
+                <button class="btn btn-primary" onclick="addField()" title="Agregar un uso"><i class="fas fa-plus"></i></button>
+              </div>
             </div>
 
+            <hr>
 
+            <div class="ml-5" id="medidas">
+              <div class="mt-4 mb-3" style="text-align: center;"><b>Medidas</b></div>
+              <div class="form-group" id="measurement-container">
+                <button class="btn btn-primary" id="hideMeasurements">Ver Medidas</button>
+                <ul class="list-unstyled" id="measurements">
+                  <?php foreach ($product->getMeasurements() as $measurement) { ?>
+                    <li>Medida <?= $indexMeasurement ?>:
+                      <div class="row">
+                        <div class="row">
+                          <div class="col codigo"> <label for="codigo<?= $indexMeasurement ?>" style="margin-left:15px">Codigo:</label><input type="text" id="codigo<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getcodigo(); ?>" style="margin-left:15px" readonly></div>
+                          <div class="col"><label for="width<?= $indexMeasurement ?>">Ancho:</label><input type="number" id="width<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getWidth(); ?>" readonly></div>
+                          <div class="col height"><label for="height<?= $indexMeasurement ?>">Alto:</label><input type="number" id="height<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getHeight(); ?>" readonly></div>
+                          <div class="col length"><label for="length<?= $indexMeasurement ?>">Largo:</label><input type="number" id="length<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getLength(); ?>" readonly></div>
+                          <div class="col largo-util"><label for="">Largo Útil</label><input type="number" id="largoUtil<?= $indexMeasurement ?>" value="<?= $measurement->getLargoUtil(); ?>" class="form-control" value="0" readonly></div>
+                        </div>
 
-            <button class="btn btn-primary ml-3" onclick="FactorMaterial()" title="Agregar un material"><i class="fas fa-plus"></i></button>
+                        <div class="row">
+                          <div class="col-2 ml-4 ancho-total"><label for="">Ancho Total</label><input type="number" id="anchoTotal<?= $indexMeasurement ?>" value="<?= $measurement->getAnchoTotal(); ?>" class="form-control" value="0" readonly></div>
+                          <?php if ($product->getCotizador() == 2) { ?>
+                            <div class="col-2 ml-4 pliego"><label for="pliego<?= $indexMeasurement ?>"> Piezas por Pliego</label><input type="number" id="pliego<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getPliego(); ?>" readonly></div>
+                          <?php } ?>
+                          <div class="col-2 venta-minima-impresa"><label for="">Vta Min Impresa</label><input type="number" id="VentaMinimaImpresa<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getVentaMinimaImpresa(); ?>" readonly></div>
+                          <div class="col-2 venta-minima-generica"><label for="">Vta Min Genérica</label><input type="number" id="VentaMinimaGenerica<?= $indexMeasurement ?>" class="form-control" value="<?= $measurement->getVentaMinimaGenerica(); ?>" readonly></div>
+                          <div class="col-1 mr-3" style="margin-top: 1rem;"><button class="btn btn-danger" onclick="deleteMeasurement(<?= $product->getId() ?>,<?= $measurement->getId() ?>)"><i class="fas fa-trash-alt"></i></button></div>
+                          <div class="col-1" style="margin-top: 1rem;"><button value="Modificar" class="btn btn-warning" onclick="updateMeasurement(<?= $product->getId() ?>,<?= $measurement->getId() ?>,<?= $indexMeasurement ?>,this)"><i class="fas fa-pencil-alt"></i></button></div>
+
+                        </div>
+                      </div>
+                    </li>
+                  <?php $indexMeasurement++;
+                  } ?>
+                </ul>
+              </div>
+              <button class="btn btn-primary" onclick="addEvaluateMeasurement()" title="Agregar una medida"><i class="fas fa-plus"></i></button>
+              <button id="btnUploadExcel" class="btn btn-primary" title="Cargar Medidas"><i class="fas fa-cloud-upload-alt"></i></button>
+              <div id="uploadExcel">
+                <div style="display: flex;margin-top: 30px;justify-content: center;">
+                  <label class="mb-5">Importar Medidas</label>
+                </div>
+                <div id="uploadExcel" style="display: flex;justify-content: center;">
+                  <input class="form-control" type="file" id="cargarMedidas" accept=".xls,.xlsx" style="width: 500px;">
+                  <button class="btn btn-primary" id="btnImportarMedidas" onclick="importarMedidas(<?= $_GET["id"] ?>);">Importar</button>
+                </div>
+              </div>
+            </div>
+
+            <hr>
+            <div class="ml-5 mr-5" id="materiaPrima">
+              <div class="mt-4 mb-5" style="text-align: center;"><b>Materia prima y Factores de precio</b></div>
+              <div class="form-gruop">
+                <label class="col-2" for="campo1" style="margin-right: 240px;">Materia Prima:</label>
+                <label for="FactorE1<?= $indexMaterial ?>" class="col-md-2">E1</label>
+                <label for="FactorE2<?= $indexMaterial ?>" class="col-md-2">E2</label>
+                <label for="FactorE3<?= $indexMaterial ?>" class="col-md-2">E3</label>
+              </div>
+              <div class="ml-3" id="materials">
+                <?php foreach ($product->getMaterials() as $materialProduct) { ?>
+                  <div class="row">
+                    <select class="form-control" style="margin-bottom: 10px; width:30%" id="material<?= $indexMaterial; ?>">
+                      <option>Seleccione un material</option>
+                      <?php
+                      foreach ($materials as  $material) {
+                        $materialSelected = $materialProduct->getId() == $material->getId() ? $material : $materialSelected ?>
+                        <option value="<?= $material->getId(); ?>" <?= $materialProduct->getId() == $material->getId() ? "selected" : "" ?>><?= $material->getName(); ?></option>
+                      <?php } ?>
+                    </select>
+
+                    <input class="col md-4 form-control ml-3 mr-5" id="e1<?= $indexMaterial ?>" value="<?= $materialProduct->getE1(); ?>" type="number" style="width: 100px; text-align:center">
+                    <input class="col md-4 form-control mr-3" id="e2<?= $indexMaterial ?>" value="<?= $materialProduct->getE2() ?>" type="number" style="width: 100px; text-align:center">
+                    <input class="col md-4 form-control mr-3" id="e3<?= $indexMaterial ?>" value="<?= $materialProduct->getE3() ?>" type="number" style="width: 100px; text-align:center">
+
+                    <div>
+                      <button class="btn btn-danger" onclick="deleteMaterial(<?= $product->getId() ?>,<?= $materialSelected->getId() ?>)"><i class="fas fa-trash-alt"></i></button>
+                      <!-- <button class="btn btn-warning" id="btnUpdateMaterial<?= $indexMaterial ?>" value='Modifica2' onclick="updateMaterial(<?= $product->getId() ?>,<?= $materialSelected->getId() ?>,<?= $indexMaterial ?>)"><i class="fas fa-pencil-alt"></i></button> -->
+                    </div>
+
+                  </div>
+                <?php $indexMaterial++;
+                  $indexFactor++;
+                } ?>
+              </div>
+              <button class="btn btn-primary ml-3" onclick="FactorMaterial()" title="Agregar un material"><i class="fas fa-plus"></i></button>
+            </div>
+
             <hr style="width: 96%;">
-            <div>
+
+            <div class="ml-5 mr-5">
               <div class="mb-5" style="text-align: center;"><b>Pestañas del producto</b></div>
 
               <?php
@@ -393,33 +420,51 @@ switch ($product->getCotizador()) {
             </div>
 
             <hr style="width: 96%;">
-
-            <div class="mt-5 mb-5" style="text-align: center;"><b>Cantidades Mínimas para Venta</b></div>
-            <div class="tituloCantidades">
-              <label style="text-align: center;" class="col-md-3">E1</label>
-              <label style="text-align: center;" class="col-md-3">E2</label>
-              <label style="text-align: center;" class="col-md-3">E3</label>
-            </div>
-            <?php
-            if (isset($cantidad)) {
-            ?>
-              <div class="cantidades" id="cantidad">
-                <label for=" e1_min" style="margin-right: 50px; text-align: center;" class="col-md-1">Mínimo</label>
-                <input id="e1_min" name=" e1_min" class="form-control md-1" value="<?= $product->getCantidad()->getE1min() ?>" type="number" style="width: 100px; text-align:center"></input>
-                <label for="e2_min " style="margin-right: 50px; text-align: center;" class="col-md-1">Mínimo</label>
-                <input id="e2_min" name="e2_min" class="form-control md-1" value="<?= $product->getCantidad()->getE2min() ?>" type="number" style="width: 100px; text-align:center"></input>
-                <label for="e3_min" style="margin-right: 50px; text-align: center;" class="col-md-1">Mínimo</label>
-                <input id="e3_min" name="e3_min" class="form-control md-1" value="<?= $product->getCantidad()->getE3min() ?>" type="number" style="width: 100px; text-align:center"></input>
-                <label for="e1_max" style="margin-right: 50px; text-align: center;" class="col-md-1">Máximo</label>
-                <input id="e1_max" name="e1_max" class="form-control md-1" value="<?= $product->getCantidad()->getE1max() ?>" type="number" style="width: 100px; text-align:center"></input>
-                <label for="e2_max" style="margin-right: 50px; text-align: center;" class="col-md-1">Máximo</label>
-                <input id="e2_max" name="e2_max" class="form-control md-1" value="<?= $product->getCantidad()->getE2max() ?>" type="number" style="width: 100px; text-align:center"></input>
-                <label for="e3_max " style="margin-right: 50px; text-align: center;" class="col-md-1">Máximo</label>
-                <input id="e3_max" name="e3_max" class="form-control md-1" value="<?= $product->getCantidad()->getE3max() ?>" type="number" style="width: 100px; text-align:center"></input>
+            
+            <div class="ml-5 mr-5">
+              <div class="mt-5 mb-5" style="text-align: center;"><b>Cantidades Mínimas para Venta</b></div>
+              <div class="tituloCantidades">
+                <label style="text-align: center;" class="col-md-3">E1</label>
+                <label style="text-align: center;" class="col-md-3">E2</label>
+                <label style="text-align: center;" class="col-md-3">E3</label>
               </div>
-            <?php }
-            ?>
+              <?php
+              if (isset($cantidad)) {
+              ?>
+                <div class="cantidades" id="cantidad">
+                  <label for=" e1_min" style="margin-right: 50px; text-align: center;" class="col-md-1">Mínimo</label>
+                  <input id="e1_min" name=" e1_min" class="form-control md-1" value="<?= $product->getCantidad()->getE1min() ?>" type="number" style="width: 100px; text-align:center"></input>
+                  <label for="e2_min " style="margin-right: 50px; text-align: center;" class="col-md-1">Mínimo</label>
+                  <input id="e2_min" name="e2_min" class="form-control md-1" value="<?= $product->getCantidad()->getE2min() ?>" type="number" style="width: 100px; text-align:center"></input>
+                  <label for="e3_min" style="margin-right: 50px; text-align: center;" class="col-md-1">Mínimo</label>
+                  <input id="e3_min" name="e3_min" class="form-control md-1" value="<?= $product->getCantidad()->getE3min() ?>" type="number" style="width: 100px; text-align:center"></input>
+                  <label for="e1_max" style="margin-right: 50px; text-align: center;" class="col-md-1">Máximo</label>
+                  <input id="e1_max" name="e1_max" class="form-control md-1" value="<?= $product->getCantidad()->getE1max() ?>" type="number" style="width: 100px; text-align:center"></input>
+                  <label for="e2_max" style="margin-right: 50px; text-align: center;" class="col-md-1">Máximo</label>
+                  <input id="e2_max" name="e2_max" class="form-control md-1" value="<?= $product->getCantidad()->getE2max() ?>" type="number" style="width: 100px; text-align:center"></input>
+                  <label for="e3_max " style="margin-right: 50px; text-align: center;" class="col-md-1">Máximo</label>
+                  <input id="e3_max" name="e3_max" class="form-control md-1" value="<?= $product->getCantidad()->getE3max() ?>" type="number" style="width: 100px; text-align:center"></input>
+                </div>
+              <?php }
+              ?>
+              <!--<hr style="width: 96%;">
+
+             <div class="mt-4 mb-5" style="text-align: center;"><b>Productos relacionados</b></div>
+            <div class="form-gruop">
+              <label class="col-2" for="campo1" style="margin-right: 240px;">Productos</label>
+            </div>
+            <div class="ml-5" id="productsAssoc">
+
+              <div>
+                <select class="form-control" style="margin-bottom: 10px; width:50%" id="productoAssoc1"></select>
+              </div>
+
+            </div>
+            <button class="btn btn-primary ml-3" id="addProductAssoc" title="Adicione un subproducto"><i class="fas fa-plus"></i></button> -->
+              <!-- onclick="FactorMaterial()" -->
+            </div>
             <hr style="width: 96%;">
+
 
             <div class="row" style="margin-bottom: 20px; margin-top: 60px;">
               <div class="ml-5"><a href="/admin/products" class="btn btn-danger btn-lg"><i class="fas fa-arrow-left"></i></a></div>
@@ -457,6 +502,7 @@ switch ($product->getCotizador()) {
   <script src="../js/materiaPrima.js"></script>
   <script src="../js/medidas.js"></script>
   <script src="../js/excel.js"></script>
+  <script src="../js/productos_asociados.js"></script>
   <script>
     /* document.addEventListener('wheel', function(e) {
     e.preventDefault();
@@ -603,7 +649,9 @@ switch ($product->getCotizador()) {
             }
           }
           $('select').niceSelect('update')
+
           limit = $('#materials').children().length;
+
           for (let index = 0; index < $('#materials').children().length; index++) {
             let value = $('#material' + (index + 1)).val()
             let e1 = $('#e1' + (index + 1)).val()
@@ -624,6 +672,7 @@ switch ($product->getCotizador()) {
               materials.push(factor);
             }
           }
+
           let i = $('#measurements').children().length;
 
           for (let index = 0; index < $('#measurements').children().length; index++) {
@@ -646,7 +695,6 @@ switch ($product->getCotizador()) {
               typeof($('#width' + (index + 1)).val()) != 'undefinded' && $('#width' + (index + 1)).val() != '' &&
               typeof($('#height' + (index + 1)).val()) != 'undefined' && $('#height' + (index + 1)).val() != '' &&
               typeof($('#length' + (index + 1)).val()) != 'undefined' && $('#length' + (index + 1)).val() != '' &&
-              //typeof($('#pliego' + (index + 1)).val()) != 'undefined' && $('#pliego' + (index + 1)).val() != '' &&
               typeof($('#largoUtil' + (index + 1)).val()) != 'undefined' && $('#largoUtil' + (index + 1)).val() != '' &&
               typeof($('#anchoTotal' + (index + 1)).val()) != 'undefined' && $('#anchoTotal' + (index + 1)).val() != '' &&
               typeof($('#VentaMinimaGenerica' + (index + 1)).val()) != 'undefined' && $('#VentaMinimaGenerica' + (index + 1)).val() != '' &&
@@ -655,6 +703,7 @@ switch ($product->getCotizador()) {
 
           }
           /* cantidades del producto */
+
           let cantidad = {}
 
           cantidad.e1min = $('#e1_min').val();
@@ -665,15 +714,24 @@ switch ($product->getCotizador()) {
           cantidad.e3max = $('#e3_max').val();
           cantidades.push(cantidad);
 
+
+          /* productos asociados */
+          let productsAssoc = []
+          for (let i = 1; i <= $('#productsAssoc').children().length; i++) {
+            let prodAssoc = $(`#productoAssoc${i}`).val();
+            if (prodAssoc != null) productsAssoc.push($(`#productoAssoc${i}`).val())
+          }
+
+
           if (myDropzone.getAcceptedFiles().length > 0) {
             let responses = []
             myDropzone.getAcceptedFiles().forEach(image => {
               let response = JSON.parse(image.xhr.responseText)
               responses.push(response.link)
             })
-            ajax(responses, uses, materials, measurements, materialFactor, cantidades)
+            ajax(responses, uses, materials, measurements, materialFactor, cantidades, productsAssoc)
           } else {
-            update(uses, materials, measurements, materialFactor, cantidades)
+            update(uses, materials, measurements, materialFactor, cantidades, productsAssoc)
           }
         } else {
           alert("Completa todos los campos")
@@ -707,7 +765,7 @@ switch ($product->getCotizador()) {
     });
 
 
-    function update(uses, materials, measurements, materialFactor, cantidades) {
+    function update(uses, materials, measurements, materialFactor, cantidades, productsAssoc) {
 
       $.post("api/update_product.php", {
         id: <?= $product->getId(); ?>,
@@ -721,10 +779,10 @@ switch ($product->getCotizador()) {
         materials: JSON.stringify(materials),
         measurements: JSON.stringify(measurements),
         materialFactors: materialFactor,
-        cantidades: JSON.stringify(cantidades)
+        cantidades: JSON.stringify(cantidades),
+        productAssoc: productsAssoc,
       }, (data, status) => {
         location.reload();
-        //reloadPage()
         text = editor.html.get()
         $.notify({
           message: 'Producto actualizado',
@@ -735,7 +793,7 @@ switch ($product->getCotizador()) {
       })
     }
 
-    function ajax(responses, uses, materials, measurements, materialFactor, cantidades) {
+    function ajax(responses, uses, materials, measurements, materialFactor, cantidades, productsAssoc) {
 
       $.post("api/update_product.php", {
         id: <?= $product->getId(); ?>,
@@ -750,7 +808,8 @@ switch ($product->getCotizador()) {
         materials: JSON.stringify(materials),
         measurements: JSON.stringify(measurements),
         materialFactors: JSON.stringify(materialFactor),
-        cantidades: JSON.stringify(cantidades)
+        cantidades: JSON.stringify(cantidades),
+        productAssoc: productsAssoc,
       }, (data, status) => {
         reloadPage()
         text = editor.html.get()
@@ -796,22 +855,6 @@ switch ($product->getCotizador()) {
       else
         addMeasurement2();
     }
-
-    /* function addMaterial() {
-      indexMaterial++;
-      $('#materials').append(`
-        <select class="factors${indexMaterial} form-control" style="margin-bottom: 10px;" id="material${indexMaterial}">
-          <option disabled selected>Seleccione un material</option>
-            <?php
-            foreach ($materials as  $material) { ?>
-                <option value="<?= $material->getId(); ?>"><?= $material->getName(); ?></option>
-            <?php } ?>
-            </select>
-        `) */
-    /* $('select').niceSelect()
-    $('select').niceSelect('update') */
-
-    /* } */
 
     function addMeasurement() {
       $('#measurements').slideDown();

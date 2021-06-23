@@ -113,7 +113,7 @@ class CategoryDao
   {
     $this->db->connect();
     $categories = [];
-    $categoriesDB = $this->db->consult("SELECT * FROM `categories`", "yes");
+    $categoriesDB = $this->db->consult("SELECT * FROM `categories` WHERE parent_category IS NOT NULL", "yes");
     foreach ($categoriesDB as $categoryDB) {
       $category = new Category();
       $category->setId($categoryDB["id_categories"]);
