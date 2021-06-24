@@ -267,7 +267,7 @@ switch ($product->getCotizador()) {
 
               <div class="recta mb-3">
                 <label for="category">Subcategoría:</label>
-                <select id="category" class="form-control" style="width: 40%;">
+                <select id="subcategory" class="form-control" style="width: 40%;">
                   <option disabled>Selecciona una Subcategoría</option>
                   <?php foreach ($subcategories as $subcategory) { ?>
                     <option value="<?= $subcategory->getId(); ?>" <?= $product->getCategory()->getId() == $subcategory->getId() ? "selected" : ""; ?>><?= $subcategory->getName(); ?></option>
@@ -503,6 +503,8 @@ switch ($product->getCotizador()) {
   <script src="../js/medidas.js"></script>
   <script src="../js/excel.js"></script>
   <script src="../js/productos_asociados.js"></script>
+  <script src="../js/categorias_productos.js"></script>
+
   <script>
     /* document.addEventListener('wheel', function(e) {
     e.preventDefault();
