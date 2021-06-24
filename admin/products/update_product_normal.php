@@ -183,7 +183,7 @@ switch ($product->getCotizador()) {
               <li class="breadcrumb-item active">Actualizar Producto | <?= $product->getName() ?></li>
             </ol>
 
-            <div class="nombreProducto">
+            <div class="nombreProducto ml-3">
               <label for="ref">Referencia:</label>
               <label for="title">Nombre del producto:</label>
               <input type="text" placeholder="Ej. LV-12" id="ref" class="form-control" value="<?= $product->getRef(); ?>">
@@ -191,14 +191,14 @@ switch ($product->getCotizador()) {
             </div>
 
             <br>
-            <div class="form-group">
+            <div class="form-group ml-3">
               <label for="content">descripción:</label>
               <br>
               <textarea name="content" id="content"></textarea>
             </div>
             <div class="mt-5 mb-5" style="text-align: center;"><b>Imagenes del producto</b></div>
             <!--Carousel Wrapper-->
-            <div id="multi-item-example" class="carousel slide carousel-multi-item carousel-multi-item-2" data-ride="carousel">
+            <div id="multi-item-example" class="carousel slide carousel-multi-item carousel-multi-item-2 ml-3 mr-3" data-ride="carousel">
               <h5>Imagenes del Producto</h5>
               <!--Controls-->
               <div class="controls-top text-center">
@@ -236,13 +236,13 @@ switch ($product->getCotizador()) {
                 </div>
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group ml-3 mr-3">
               <label for="myId">Sube las imagenes del producto:</label>
               <div id="myId" class="dropzone"></div>
             </div>
             <hr style="width: 96%;">
 
-            <div class="mt-4 mb-5" style="text-align: center;"><b>Categoria y Cotizador</b></div>
+            <div class="mt-4 mb-5" style="text-align: center;"><b>Categoria</b></div>
 
             <?php
             require_once $_SERVER["DOCUMENT_ROOT"] . "/dao/CategoryDao.php";
@@ -274,6 +274,10 @@ switch ($product->getCotizador()) {
                   <?php } ?>
                 </select>
               </div>
+
+              <hr style="width: 96%;">
+
+              <div class="mt-4 mb-5" style="text-align: center;"><b>Cotizador</b></div>
 
               <?php
               require_once $_SERVER["DOCUMENT_ROOT"] . "/dao/CotizadorDao.php";
@@ -420,7 +424,7 @@ switch ($product->getCotizador()) {
             </div>
 
             <hr style="width: 96%;">
-            
+
             <div class="ml-5 mr-5">
               <div class="mt-5 mb-5" style="text-align: center;"><b>Cantidades Mínimas para Venta</b></div>
               <div class="tituloCantidades">
@@ -449,18 +453,18 @@ switch ($product->getCotizador()) {
               ?>
               <hr style="width: 96%;">
 
-             <div class="mt-4 mb-5" style="text-align: center;"><b>Productos relacionados</b></div>
-            <div class="form-gruop">
-              <label class="col-2" for="campo1" style="margin-right: 240px;">Productos</label>
-            </div>
-            <div class="ml-5" id="productsAssoc">
-
-              <div>
-                <select class="form-control" style="margin-bottom: 10px; width:50%" id="productoAssoc1"></select>
+              <div class="mt-4 mb-5" style="text-align: center;"><b>Productos relacionados</b></div>
+              <div class="form-gruop">
+                <label class="col-2" for="campo1" style="margin-right: 240px;">Productos</label>
               </div>
+              <div class="ml-5" id="productsAssoc">
 
-            </div>
-            <button class="btn btn-primary ml-3" id="addProductAssoc" title="Adicione un subproducto"><i class="fas fa-plus"></i></button>
+                <div>
+                  <select class="form-control" style="margin-bottom: 10px; width:50%" id="productoAssoc1"></select>
+                </div>
+
+              </div>
+              <button class="btn btn-primary ml-3" id="addProductAssoc" title="Adicione un subproducto"><i class="fas fa-plus"></i></button>
               <!-- onclick="FactorMaterial()" -->
             </div>
             <hr style="width: 96%;">
@@ -504,6 +508,7 @@ switch ($product->getCotizador()) {
   <script src="../js/excel.js"></script>
   <script src="../js/productos_asociados.js"></script>
   <script src="../js/categorias_productos.js"></script>
+  <script src="../js/tab.js"></script>
 
   <script>
     /* document.addEventListener('wheel', function(e) {
