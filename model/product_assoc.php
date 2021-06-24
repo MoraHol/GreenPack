@@ -9,7 +9,7 @@ class ProductsAssoc implements JsonSerializable
     $this->db = new DBOperator($_ENV["db_host"], $_ENV["db_user"], $_ENV["db_name"], $_ENV["db_pass"]);
   }
 
-  public function getIdproduct()
+  public function getIdProduct()
   {
     return $this->idproduct;
   }
@@ -28,6 +28,8 @@ class ProductsAssoc implements JsonSerializable
   {
     $this->productAssoc = $productAssoc;
   }
+
+
 
   public function jsonSerialize()
   {

@@ -4,6 +4,7 @@ require_once __DIR__ . "/MaterialDao.php";
 require_once(dirname(__DIR__) . "/db/env.php");
 require_once  __DIR__ . "/CategoryDao.php";
 require_once  dirname(__DIR__) . "/model/cantidad.php";
+
 /*****************************************************************************
 /*Esta clase permite Crear, Actualizar, Buscar y Eliminar Cantidades minimas a fabricar para los productos
 /*Desarrollada por Teenus SAS

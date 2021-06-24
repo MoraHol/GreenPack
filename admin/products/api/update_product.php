@@ -19,7 +19,7 @@ $materialDao = new MaterialDao();
 $measurementDao = new MeasurementDao();
 $cantidadDao = new CantidadDao();
 $factorDao = new FactorDao();
-$productAssoc = new ProductAssocDao();
+$productAssocDao = new ProductAssocDao();
 
 /* instanciar clase para almacenar array factores */
 
@@ -136,9 +136,9 @@ $productsAssoc = $_POST["productsAssoc"];
 
 foreach ($productsAssoc as $productAssoc) {
   $prod_assoc = new ProductsAssoc();
-  $productAssoc->setIdProduct($product->getId());
-  $productAssoc->setProductAssoc($productAssoc);
-  $productAssocDao->save($productAssoc);
+  $prod_assoc->setIdProduct($product->getId());
+  $prod_assoc->setProductAssoc($productAssoc);
+  $productAssocDao->save($prod_assoc);
 }
 
 $productDao->update($product);

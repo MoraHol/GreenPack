@@ -447,7 +447,7 @@ switch ($product->getCotizador()) {
                 </div>
               <?php }
               ?>
-              <!--<hr style="width: 96%;">
+              <hr style="width: 96%;">
 
              <div class="mt-4 mb-5" style="text-align: center;"><b>Productos relacionados</b></div>
             <div class="form-gruop">
@@ -460,7 +460,7 @@ switch ($product->getCotizador()) {
               </div>
 
             </div>
-            <button class="btn btn-primary ml-3" id="addProductAssoc" title="Adicione un subproducto"><i class="fas fa-plus"></i></button> -->
+            <button class="btn btn-primary ml-3" id="addProductAssoc" title="Adicione un subproducto"><i class="fas fa-plus"></i></button>
               <!-- onclick="FactorMaterial()" -->
             </div>
             <hr style="width: 96%;">
@@ -780,7 +780,7 @@ switch ($product->getCotizador()) {
         measurements: JSON.stringify(measurements),
         materialFactors: materialFactor,
         cantidades: JSON.stringify(cantidades),
-        productAssoc: productsAssoc,
+        productsAssoc: productsAssoc,
       }, (data, status) => {
         location.reload();
         text = editor.html.get()
@@ -809,7 +809,7 @@ switch ($product->getCotizador()) {
         measurements: JSON.stringify(measurements),
         materialFactors: JSON.stringify(materialFactor),
         cantidades: JSON.stringify(cantidades),
-        productAssoc: productsAssoc,
+        productsAssoc: productsAssoc,
       }, (data, status) => {
         reloadPage()
         text = editor.html.get()

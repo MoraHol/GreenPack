@@ -17,18 +17,17 @@ require_once dirname(__DIR__) . "/model/product_assoc.php";
 class ProductAssocDao
 {
   private $db;
-  static $logger;
-
+  
   function __construct()
   {
     $this->db = new DBOperator($_ENV["db_host"], $_ENV["db_user"], $_ENV["db_name"], $_ENV["db_pass"]);
   }
 
-  function findByProduct($product)
+  function findByProduct($idProduct)
   {
     $this->db->connect();
     $productsAssoc = [];
-    $productsAssocDB = $this->db->consult("SELECT * FROM `products_assoc` WHERE `id` = " . $product->getId(), "yes");
+    $productsAssocDB = $this->db->consult("SELECT * FROM `products_assoc` WHERE `product` = " . $idProduct, "yes");
 
     foreach ($productsAssocDB as  $productAssocDB) {
       $prod_assoc = new ProductsAssoc();
@@ -61,7 +60,7 @@ class ProductAssocDao
   {
     $this->db->connect();
 
-    $query = "INSERT INTO products_assoc (product, products_assoc) VALUES ('" . $productsAssoc->getIdProduct() . "', '" . $productsAssoc->getProductAssoc() . "')";
+    $query = "INSERT INTO products_assoc (product, product_assoc) VALUES ('" . $productsAssoc->getIdProduct() . "', '" . $productsAssoc->getProductAssoc() . "')";
     $status = $this->db->consult($query);
     $this->db->close();
     return $status;
