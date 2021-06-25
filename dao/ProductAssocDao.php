@@ -17,7 +17,7 @@ require_once dirname(__DIR__) . "/model/product_assoc.php";
 class ProductAssocDao
 {
   private $db;
-  
+
   function __construct()
   {
     $this->db = new DBOperator($_ENV["db_host"], $_ENV["db_user"], $_ENV["db_name"], $_ENV["db_pass"]);
@@ -60,10 +60,23 @@ class ProductAssocDao
   {
     $this->db->connect();
 
-    $query = "INSERT INTO products_assoc (product, product_assoc) VALUES ('" . $productsAssoc->getIdProduct() . "', '" . $productsAssoc->getProductAssoc() . "')";
-    $status = $this->db->consult($query);
-    $this->db->close();
-    return $status;
+    $query = "SELECT * FROM `products_assoc` WHERE `product` = '" . $productsAssoc->getIdproduct() . "' ";
+    $idProductAssoc = $this->db->consult($query, "yes");
+
+    if ($idProductAssoc) {
+
+      foreach ($idProductAssoc as $key => $val) {
+        if ($val['product_assoc'] === $productsAssoc->getProductAssoc()) {
+          return $key;
+        }
+      }
+
+      $query = "INSERT INTO products_assoc (product, product_assoc) 
+        VALUES ('" . $productsAssoc->getIdProduct() . "', '" . $productsAssoc->getProductAssoc() . "')";
+      $status = $this->db->consult($query);
+      $this->db->close();
+      return $status;
+    }
   }
 
   function deleteByProduct($idProduct)
@@ -81,7 +94,7 @@ class ProductAssocDao
 
     $query = "SELECT * FROM `products_assoc` WHERE `product` = '" . $productsAssoc->getIdproduct() . "' AND '" . $productsAssoc->getProductAssoc() . "' ";
     $idProductAssoc = $this->db->consult($query, "yes");
-    
+
     $query = "UPDATE `products_assoc` SET `product_assoc` = '" . $productsAssoc->getProductAssoc() . "' WHERE `products_assoc`.`product` = " . $productsAssoc->getProductAssoc();
 
     $status = $this->db->consult($query);

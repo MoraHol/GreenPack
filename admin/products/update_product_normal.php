@@ -244,22 +244,11 @@ switch ($product->getCotizador()) {
 
             <div class="mt-4 mb-5" style="text-align: center;"><b>Categoria</b></div>
 
-            <?php
-            require_once $_SERVER["DOCUMENT_ROOT"] . "/dao/CategoryDao.php";
-            $categoryDao = new CategoryDao();
-            $categories = $categoryDao->findAll();
-            $subcategories = $categoryDao->findAllsubCategories();
-            ?>
-
             <!-- Categoria -->
             <div class="ml-5" id="categories">
               <div class="recta mb-3">
                 <label for="category">Categoría:</label>
                 <select id="category" class="form-control" style="width: 40%;">
-                  <option disabled>Selecciona una categoría</option>
-                  <?php foreach ($categories as $category) { ?>
-                    <option value="<?= $category->getId(); ?>" <?= $product->getCategory()->getParentCategory() == $category->getId() ? "selected" : ""; ?>><?= $category->getName(); ?></option>
-                  <?php } ?>
                 </select>
               </div>
 
@@ -268,10 +257,6 @@ switch ($product->getCotizador()) {
               <div class="recta mb-3">
                 <label for="category">Subcategoría:</label>
                 <select id="subcategory" class="form-control" style="width: 40%;">
-                  <option disabled>Selecciona una Subcategoría</option>
-                  <?php foreach ($subcategories as $subcategory) { ?>
-                    <option value="<?= $subcategory->getId(); ?>" <?= $product->getCategory()->getId() == $subcategory->getId() ? "selected" : ""; ?>><?= $subcategory->getName(); ?></option>
-                  <?php } ?>
                 </select>
               </div>
 
@@ -736,12 +721,21 @@ switch ($product->getCotizador()) {
               let response = JSON.parse(image.xhr.responseText)
               responses.push(response.link)
             })
+            value = checkCategory();
+            if (value == 'false') return false
             ajax(responses, uses, materials, measurements, materialFactor, cantidades, productsAssoc)
           } else {
+            value = checkCategory();
+            if (value == 'false') return false
             update(uses, materials, measurements, materialFactor, cantidades, productsAssoc)
           }
         } else {
-          alert("Completa todos los campos")
+          $.notify({
+            message: 'Ingrese todos los campos',
+            icon: 'fas fa-check-circle'
+          }, {
+            type: 'danger'
+          })
         }
       })
 
@@ -771,6 +765,19 @@ switch ($product->getCotizador()) {
 
     });
 
+    checkCategory = () => {
+      category = $('#category').val()
+      subcategory = $('#subcategory').val()
+      if (category == null || subcategory == null) {
+        $.notify({
+          message: 'Ingrese la Categoria y Subcategoria',
+          icon: 'fas fa-check-circle'
+        }, {
+          type: 'danger'
+        })
+        return 'false';
+      }
+    }
 
     function update(uses, materials, measurements, materialFactor, cantidades, productsAssoc) {
 
@@ -781,6 +788,7 @@ switch ($product->getCotizador()) {
         uses: JSON.stringify(uses),
         ref: $('#ref').val(),
         category: $('#category').val(),
+        subcategory: $('#subcategory').val(),
         price: $('#price').val(),
         cotizador: $('#cotizador').val(),
         materials: JSON.stringify(materials),
@@ -810,6 +818,7 @@ switch ($product->getCotizador()) {
         uses: JSON.stringify(uses),
         ref: $('#ref').val(),
         category: $('#category').val(),
+        subcategory: $('#subcategory').val(),
         price: $('#price').val(),
         cotizador: $('#cotizador').val(),
         materials: JSON.stringify(materials),

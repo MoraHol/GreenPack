@@ -3,7 +3,12 @@
 require_once dirname(dirname(dirname(__DIR__))) . "/dao/ProductDao.php";
 
 $productDao = new ProductDao();
-$products = $productDao->findAllSimpleProduct();
+
+if (empty($_POST))
+    $products = $productDao->findAllSimpleProduct();
+else
+    $products = $productDao->findById($_POST['idProduct']);
+
 $data = new stdClass();
 $data->data = $products;
 

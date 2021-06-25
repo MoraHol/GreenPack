@@ -33,7 +33,9 @@ $name = $_POST["title"];
 $description = $_POST["content"];
 $product->setName($name);
 $product->setDescription($description);
-$product->setCategory($categoryDao->findById($_POST["category"]));
+//$product->setCategory($categoryDao->findById($_POST["category"]));
+$product->setCategory($_POST["category"]);
+$product->setSubCategory($_POST["subcategory"]);
 $product->setRef($_POST["ref"]);
 $product->setUses(json_decode($_POST["uses"]));
 $product->setCotizador($_POST["cotizador"]);
@@ -132,13 +134,15 @@ foreach (json_decode($_POST["cantidades"]) as  $cantidadReq) {
   $cantidadDao->save($cantidad);
 }
 
-$productsAssoc = $_POST["productsAssoc"];
+if (!empty($_POST["productsAssoc"])) {
+  $productsAssoc = $_POST["productsAssoc"];
 
-foreach ($productsAssoc as $productAssoc) {
-  $prod_assoc = new ProductsAssoc();
-  $prod_assoc->setIdProduct($product->getId());
-  $prod_assoc->setProductAssoc($productAssoc);
-  $productAssocDao->save($prod_assoc);
+  foreach ($productsAssoc as $productAssoc) {
+    $prod_assoc = new ProductsAssoc();
+    $prod_assoc->setIdProduct($product->getId());
+    $prod_assoc->setProductAssoc($productAssoc);
+    $productAssocDao->save($prod_assoc);
+  }
 }
 
 $productDao->update($product);

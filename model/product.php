@@ -10,6 +10,7 @@ class Product implements JsonSerializable
   private $cotizador;
   private $measurements;
   private $category;
+  private $subcategory;
   private $uses;
   private $ref;
   private $factor;
@@ -27,6 +28,16 @@ class Product implements JsonSerializable
   public function setCategory($category)
   {
     $this->category = $category;
+  }
+
+  public function getSubCategory()
+  {
+    return $this->subcategory;
+  }
+
+  public function setSubCategory($subcategory)
+  {
+    $this->subcategory = $subcategory;
   }
 
 
