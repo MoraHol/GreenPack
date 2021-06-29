@@ -1,0 +1,123 @@
+/* Index */
+
+.nav-bar-nav a {
+  color: #fff !important;
+}
+
+html a:link,
+html a:visited {
+  color: #fff;
+}
+
+#banner-box {
+  /* background-color: rgba(0, 0, 0, 0.8); */
+  background-size: cover;
+  /* filter: brightness(0.4); */
+  position: relative;
+  box-shadow: 5px 10px;
+}
+
+/* #banner-box::after {} */
+
+#banner-box:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(97, 85, 85, 0.6);
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+#banner-box p {
+  color: #fff;
+  position: relative;
+}
+
+.view-more {
+  z-index: 100;
+  filter: none;
+}
+
+#undefined-sticky-wrapper {
+  height: 0 !important;
+}
+
+/* Category */
+
+@media (max-width: 600) {
+  #container-image {
+    background-attachment: scroll !important;
+    background-size: contain !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  #container-image {
+    background-attachment: fixed !important;
+  }
+
+  .sticky-wrapper {
+    height: 0 !important;
+  }
+}
+
+#container-image {
+  background-size: cover !important;
+  background-position: center;
+  -webkit-background-size: cover !important;
+  -moz-background-size: cover !important;
+  -o-background-size: cover !important;
+  background-size: cover !important;
+  background-attachment: fixed;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+
+.blog-banner-area::after {
+  background: #fff !important;
+}
+
+.card-product__title {
+  font-size: 16px;
+}
+
+.blog-banner div.text-center:first {
+  margin: auto;
+  width: 50%;
+  background: #333333c2;
+  color: #fff !important;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.blog-banner div.text-center {
+  margin: auto;
+  width: 50%;
+  background: #333333c2;
+  color: #fff !important;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.blog-banner div.text-center h1 {
+  color: #fff !important;
+}
+
+@media (max-width: 400px) {
+  .blog-banner div.text-center:first h1 {
+    font-size: 14px;
+  }
+
+  #title-category {
+    font-size: 20px !important;
+  }
+}
