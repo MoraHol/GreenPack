@@ -1,7 +1,7 @@
 .accordion::after {
     float: right;
     font-family: 'FontAwesome';
-    content: "\f077";
+    /* content: "\f077"; */
 }
 
 .accordion.collapsed::after{

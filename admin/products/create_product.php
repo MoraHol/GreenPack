@@ -169,21 +169,21 @@ include("../partials/verify-session.php");
 
         $(document).ready(function() {
           $('[data-toggle="popover"]').popover();
-          $('#fields').append(`<div class="col-sm-4">Uso ${indexField}:<input type="text" id="field${indexField}" class="form-control"></div>`)
+          /* $('#fields').append(`<div class="col-sm-4">Uso ${indexField}:<input type="text" id="field${indexField}" class="form-control"></div>`)
           $('#materials').append(`<li><select class="wide" style="margin-bottom: 10px;"><option disabled selected>Seleccione un material</option>
             <?php
-            foreach ($materials as  $material) { ?>
+            //foreach ($materials as  $material) { ?>
                 <option value="<?= $material->getId(); ?>"><?= $material->getName(); ?></option>
-            <?php } ?>
-                </select></li>`)
+            <?php //} ?>
+                </select></li>`) */
         });
 
-        function addField() {
+        /* function addField() {
           indexField++;
           $('#fields').append(`<div class="col-sm-4">Uso ${indexField}:<input type="text" id="field${indexField}" class="form-control"></div>`)
         }
-
-        function addMeasurement() {
+ */
+        /* function addMeasurement() {
           if ($('#category').val() == null) {
             $.notify({
               message: 'Selecciona una categoria antes de adicionar las medidas',
@@ -226,19 +226,19 @@ include("../partials/verify-session.php");
             }
 
           }
-        }
+        } */
 
-        function addMeasurementHtml(indexMeasurement, nameAdditional = '') {
+        /* function addMeasurementHtml(indexMeasurement, nameAdditional = '') {
           $('#measurements').append(`<li>Medida ${indexMeasurement}:<div class="row">
                   <div class="col"><label for="width${indexMeasurement}">Ancho:</label><input type="number" id="width${indexMeasurement}" class="form-control"></div>
                   <div class="col"><label for="height${indexMeasurement}">Alto:</label><input type="number" id="height${indexMeasurement}" class="form-control"></div>
                   <div class="col lenght"><label for="lenght${indexMeasurement}">Largo:</label><input type="number" id="lenght${indexMeasurement}" class="form-control"></div>
                   <div class="col window"><label for="window${indexMeasurement}">${nameAdditional}:</label><input type="number" id="window${indexMeasurement}" class="form-control"></div>
                 </div></li>`)
-        }
+        } */
 
 
-        function addMaterial() {
+     /*    function addMaterial() {
           $('#materials').append(`<li><select class="wide" style="margin-bottom: 10px;" ><option disabled selected>Selecciona un material</option>
                   <?php foreach ($materials as  $material) { ?>
                     <option value="<?= $material->getId(); ?>"><?= $material->getName(); ?></option>
@@ -246,7 +246,7 @@ include("../partials/verify-session.php");
                 </select></li>`)
           $('select').niceSelect()
 
-        }
+        } */
       </script>
       <script>
         let editor
@@ -311,29 +311,29 @@ include("../partials/verify-session.php");
           $('button#submitEditor').click(() => {
             if (myDropzone.getAcceptedFiles().length > 0 && $('#title').val() != '' && editor.html.get() != '') {
               let responses = []
-              let uses = []
-              let materials = []
-              let measurements = []
+              //let uses = []
+              //let materials = []
+              //let measurements = []
               myDropzone.getAcceptedFiles().forEach(image => {
                 let response = JSON.parse(image.xhr.responseText)
                 responses.push(response.link)
               })
 
-              usos = $('#fields').children().length;
+              //usos = $('#fields').children().length;
 
-              for (let index = 0; index < $('#fields').children().length; index++) {
+              /* for (let index = 0; index < $('#fields').children().length; index++) {
                 if (typeof($('#field' + index).val()) != 'undefined' && $('#field' + index).val() !== "") {
                   uses.push($('#field' + index).val())
                 }
               }
-
-              for (let index = 0; index < $('#materials').children().length; index++) {
+ */
+             /*  for (let index = 0; index < $('#materials').children().length; index++) {
                 let value = $('#materials').children()[index].firstElementChild.value
                 if (value != '' && typeof(value) != 'undefined') {
                   materials.push(value)
                 }
-              }
-              for (let index = 0; index < $('#measurements').children().length; index++) {
+              } */
+              /* for (let index = 0; index < $('#measurements').children().length; index++) {
                 let measurement = {}
 
                 measurement.codigo = $('#codigo' + (index + 1)).val()
@@ -357,13 +357,13 @@ include("../partials/verify-session.php");
                   $('#window' + (index + 1)).val() != undefined) {
                   measurements.push(measurement)
                 }
-              }
+              } */
 
               ref = $('#ref').val()
               title = $('#title').val()
               content = editor.html.get()
               response = responses
-              use = uses
+              //use = uses
               categoria = $('#category').val()
               cotizador = $('#cotizador').val()
 
