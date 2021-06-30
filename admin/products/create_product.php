@@ -169,20 +169,20 @@ include("../partials/verify-session.php");
 
         $(document).ready(function() {
           $('[data-toggle="popover"]').popover();
-          /* $('#fields').append(`<div class="col-sm-4">Uso ${indexField}:<input type="text" id="field${indexField}" class="form-control"></div>`)
+          $('#fields').append(`<div class="col-sm-4">Uso ${indexField}:<input type="text" id="field${indexField}" class="form-control"></div>`)
           $('#materials').append(`<li><select class="wide" style="margin-bottom: 10px;"><option disabled selected>Seleccione un material</option>
             <?php
-            //foreach ($materials as  $material) { ?>
+            foreach ($materials as  $material) { ?>
                 <option value="<?= $material->getId(); ?>"><?= $material->getName(); ?></option>
-            <?php //} ?>
-                </select></li>`) */
+            <?php } ?>
+                </select></li>`)
         });
 
-        /* function addField() {
+        function addField() {
           indexField++;
           $('#fields').append(`<div class="col-sm-4">Uso ${indexField}:<input type="text" id="field${indexField}" class="form-control"></div>`)
         }
- */
+
         /* function addMeasurement() {
           if ($('#category').val() == null) {
             $.notify({
