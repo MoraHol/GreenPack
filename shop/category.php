@@ -179,9 +179,8 @@
                     <?php foreach ($categories as $catego) {
                       $categoriesChildren = $categoryDao->findChildren($catego->getId()); ?>
                       <?php if (count($categoriesChildren) > 0 /* && $catego->getId() != 1 */) { ?>
-                        <li class="filter-list text-capitalize">
-                          <a href="#<?= $catego->getName() ?>" class="accordion" data-toggle="collapse" data-parent="#accordion<?= $catego->getId()?>"><?= $catego->getName() ?></a> <!-- <span> (<?= count($productDao->findByCategory($catego->getId())); ?>)</span> -->
-                          <ul id="<?= $catego->getName() ?>" class="category collapse<?= $catego->getId()?>">
+                        <li class="filter-list text-capitalize"><a href="#<?= $catego->getId() ?>" class="accordion" data-toggle="collapse" data-parent="#accordion"><?= $catego->getName() ?></a> <!--  -->
+                          <ul id="<?= $catego->getId() ?>" class="category collapse">
                             <?php foreach ($categoriesChildren as  $cat) { ?>
                               <li class="child-category text-capitalize"><a href="category.php?id=<?= $cat->getId() ?>&page=1"><?= $cat->getName() ?> <span> (<?= count($productDao->findByCategory($cat->getId())); ?>)</span></a></li>
                             <?php }
