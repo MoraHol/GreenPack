@@ -1,7 +1,7 @@
 .accordion::after {
     float: right;
     font-family: 'FontAwesome';
-    /* content: "\f077"; */
+    content: "\f077";
 }
 
 .accordion.collapsed::after{
@@ -20,3 +20,7 @@ a.accordion {
 .category .child-category {
     padding-left: 20px;
 }
+
+.active:after {
+    content: "\2796"; /* Unicode character for "minus" sign (-) */
+  }

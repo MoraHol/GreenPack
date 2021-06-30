@@ -16,7 +16,9 @@
   <!--CSS ============================================= -->
   <link rel="stylesheet" href="/css/linearicons.css">
   <link rel="stylesheet" href="/css/font-awesome.min.css">
-  <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+  <!-- <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"> -->
+  <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="/css/magnific-popup.css">
   <link rel="stylesheet" href="/css/animate.min.css">
   <link rel="stylesheet" href="/css/owl.carousel.css">
@@ -167,7 +169,7 @@
   <section class="section-margin--small mb-5" id="categories-section">
     <div class="container">
       <div class="row">
-        <div class="col-xl-4 col-lg-4 col-md-5">
+        <div class="col-xl-3 col-lg-4 col-md-5">
           <div class="sidebar-categories">
             <div class="head">Categorías</div>
             <ul class="main-categories">
@@ -177,8 +179,9 @@
                     <?php foreach ($categories as $catego) {
                       $categoriesChildren = $categoryDao->findChildren($catego->getId()); ?>
                       <?php if (count($categoriesChildren) > 0 /* && $catego->getId() != 1 */) { ?>
-                        <li class="filter-list text-capitalize"><a href="#<?= $catego->getName() ?>" class="accordion" data-toggle="collapse<?= $catego->getId() ?>" data-parent="#accordion"><?= $catego->getName() ?> <span></span></a> <!-- (<?= count($productDao->findByCategory($catego->getId())); ?>) -->
-                          <ul id="<?= $catego->getName() ?>" class="category collapse<?= $catego->getId() ?>">
+                        <li class="filter-list text-capitalize">
+                          <a href="#<?= $catego->getName() ?>" class="accordion" data-toggle="collapse" data-parent="#accordion<?= $catego->getId()?>"><?= $catego->getName() ?></a> <!-- <span> (<?= count($productDao->findByCategory($catego->getId())); ?>)</span> -->
+                          <ul id="<?= $catego->getName() ?>" class="category collapse<?= $catego->getId()?>">
                             <?php foreach ($categoriesChildren as  $cat) { ?>
                               <li class="child-category text-capitalize"><a href="category.php?id=<?= $cat->getId() ?>&page=1"><?= $cat->getName() ?> <span> (<?= count($productDao->findByCategory($cat->getId())); ?>)</span></a></li>
                             <?php }
@@ -209,7 +212,7 @@
             </ul>
           </div>
         </div>
-        <div class="col-xl-8 col-lg-8 col-md-7">
+        <div class="col-xl-9 col-lg-8 col-md-7">
           <!-- Start Filter Bar -->
           <div class="filter-bar d-flex flex-wrap align-items-center">
             <div class="sorting mr-auto">
@@ -367,7 +370,9 @@
   <script src="/js/jquery.counterup.min.js"></script>
   <script src="/js/main.js"></script>
   <script src="/js/back-top.js"></script>
-  <script src="/js/bootstrap.min.js"></script>
+  <!-- <script src="/js/bootstrap.min.js"></script> -->
+  <!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <script>
     $(document).ready(function() {
       $('select').niceSelect()
