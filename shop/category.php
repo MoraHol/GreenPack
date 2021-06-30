@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="/css/font-awesome.min.css">
   <!-- <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"> -->
   <!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="/css/magnific-popup.css">
   <link rel="stylesheet" href="/css/animate.min.css">
   <link rel="stylesheet" href="/css/owl.carousel.css">
@@ -178,8 +178,8 @@
                   <ul>
                     <?php foreach ($categories as $catego) {
                       $categoriesChildren = $categoryDao->findChildren($catego->getId()); ?>
-                      <?php if (count($categoriesChildren) > 0 /* && $catego->getId() != 1 */) { ?>
-                        <li class="filter-list text-capitalize"><a href="#<?= $catego->getId() ?>" class="accordion" data-toggle="collapse" data-parent="#accordion"><?= $catego->getName() ?></a> <!--  -->
+                      <?php if (count($categoriesChildren) > 0) { ?>
+                        <li class="filter-list text-capitalize"><a href="#<?= $catego->getId() ?>" class="accordion" data-toggle="collapse" data-parent="#accordion"><?= $catego->getName() ?></a>
                           <ul id="<?= $catego->getId() ?>" class="category collapse">
                             <?php foreach ($categoriesChildren as  $cat) { ?>
                               <li class="child-category text-capitalize"><a href="category.php?id=<?= $cat->getId() ?>&page=1"><?= $cat->getName() ?> <span> (<?= count($productDao->findByCategory($cat->getId())); ?>)</span></a></li>
@@ -195,16 +195,6 @@
 
                       <?php } ?>
                     <?php } ?>
-                    <!-- 
-                    <li class="filter-list text-capitalize"><a href="#cajas" class="accordion" data-toggle="collapse">cajas <span> (<?= count($productDao->findByCategory(2)); ?>)</span></a>
-                      <ul id="cajas" class="category collapse">
-                        <li class="child-category text-capitalize"><a href="category.php?id=3&page=1">Cajas de exhibir <span> (<?= count($productDao->findByCategory(3)); ?>)</span></a></li>
-                        <li class="child-category text-capitalize"><a href="category.php?id=4&page=1">Cajas de llevar <span> (<?= count($productDao->findByCategory(4)); ?>)</span></a></li>
-                        <li class="child-category text-capitalize"><a href="category.php?id=5&page=1">Cajas de servir<span> (<?= count($productDao->findByCategory(5)); ?>)</span></a></li>
-                      </ul>
-                    </li>
-                    <li class="filter-list text-capitalize"><a href="category.php?id=6&page=1">Laminas<span> (<?= count($productDao->findByCategory(6)); ?>)</span></a></li>
-                    <li class="filter-list text-capitalize"><a href="category.php?id=7&page=1">Productos especiales<span> (<?= count($productDao->findByCategory(7)); ?>)</span></a></li> -->
                   </ul>
                 </form>
               </li>
@@ -371,7 +361,8 @@
   <script src="/js/back-top.js"></script>
   <!-- <script src="/js/bootstrap.min.js"></script> -->
   <!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="js/categories.js"></script>
   <script>
     $(document).ready(function() {
       $('select').niceSelect()
