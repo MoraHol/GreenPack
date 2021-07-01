@@ -187,8 +187,8 @@ class ProductDao
   function save($product)
   {
     $this->db->connect();
-    $query = "INSERT INTO `products` (`id_products`, `ref`, `name`, `description`, `categories_id_categories`, `cotizador`) 
-              VALUES (NULL, '" . $product->getRef() . "', '" . $product->getName() . "', '" . $product->getDescription() . "', '" . $product->getCategory()->getId() . "', '" . $product->getCotizador() . "')"; // '" . json_encode($product->getUses(), JSON_UNESCAPED_UNICODE) . "',
+    $query = "INSERT INTO `products` (`ref`, `name`, `description`, `categories_id_categories`, `cotizador`) 
+              VALUES ('" . $product->getRef() . "', '" . $product->getName() . "', '" . $product->getDescription() . "', '" . $product->getCategory()->getId() . "', '" . $product->getCotizador() . "')"; // '" . json_encode($product->getUses(), JSON_UNESCAPED_UNICODE) . "',
     $status = $this->db->consult($query);
     $id = $this->db->consult("SELECT MAX(`id_products`) AS id FROM products", "yes");
     $id = $id[0]["id"];
