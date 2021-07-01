@@ -6,8 +6,8 @@ $(document).ready(function () {
     "api/get_category.php",
     { idParameter: idParameter },
     function (data, textStatus, jqXHR) {
-        $(`#${data}`).addClass("show");
-
+      $(`#${data}`).addClass("show");
+      $(`#${idParameter}`).css("color", "#45a016");
     }
   );
 });

@@ -182,7 +182,7 @@
                         <li class="filter-list text-capitalize"><a href="#<?= $catego->getId() ?>" class="accordion" data-toggle="collapse" data-parent="#accordion"><?= $catego->getName() ?></a>
                           <ul id="<?= $catego->getId() ?>" class="category collapse">
                             <?php foreach ($categoriesChildren as  $cat) { ?>
-                              <li class="child-category text-capitalize"><a href="category.php?id=<?= $cat->getId() ?>&page=1"><?= $cat->getName() ?> <span> (<?= count($productDao->findByCategory($cat->getId())); ?>)</span></a></li>
+                              <li class="child-category text-capitalize"><a id="<?= $cat->getId() ?>" href="category.php?id=<?= $cat->getId() ?>&page=1"><?= $cat->getName() ?> <span> (<?= count($productDao->findByCategory($cat->getId())); ?>)</span></a></li>
                             <?php }
                             ?>
                           </ul>
