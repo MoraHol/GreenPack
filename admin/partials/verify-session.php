@@ -1,6 +1,7 @@
 <?php
-
-// Desarrollada por Teenus SAS
-session_start();
-if (!isset($_SESSION["admin"]))
-    header("Location: /admin");
+if (!isset($_SESSION)) {
+    session_start();
+    if (!isset($_SESSION["admin"])) {
+        header("Location: /admin");
+    }
+}
