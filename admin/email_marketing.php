@@ -1,7 +1,7 @@
 <!-- author: Teenus SAS, github: Teenus SAS -->
 <!doctype html>
 <html lang="es">
-<?php if (!isset($_SESSION)) {
+<?php if (empty($_SESSION)) {
   session_start();
 }
 require_once dirname(__DIR__) . "/model/Admin.php";
@@ -200,7 +200,7 @@ if ($admin->getRole() == 1) {
             }, {
               type: 'success'
             })
-          }else{
+          } else {
             $.notify({
               message: 'data.error',
               //title: 'Greenpack',
