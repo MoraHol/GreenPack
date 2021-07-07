@@ -2,7 +2,7 @@
 <!doctype html>
 <html lang="es">
 <?php
-include("../partials/verify-session.php");
+//include("../partials/verify-session.php");
 require dirname(dirname(__DIR__)) . "/dao/AdminDao.php";
 require dirname(dirname(__DIR__)) . "/dao/QuotationDao.php";
 $quotationDao = new QuotationDao();
