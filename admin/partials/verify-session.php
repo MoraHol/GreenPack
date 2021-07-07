@@ -3,9 +3,11 @@
 // Desarrollada por Teenus SAS
 
 if (!isset($_SESSION)) {
-    session_start();
+    if (headers_sent())
+        echo "Oh no!";
+    else
+        session_start();
     if (!isset($_SESSION["admin"])) {
         header("Location: /admin");
     }
 }
-?>
