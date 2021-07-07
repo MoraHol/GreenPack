@@ -62,7 +62,8 @@ if ($admin->getRole() == 1) {
                   <!-- <div style="float: right"><span>Total: </span> <span id="totalQuotations"></span></div> -->
                   <p class="card-category"><i class="fas fa-square" style="color: #00bcd4 "></i> Resueltas
                     <br>
-                    <i class="fas fa-square" style="color: #f44336"></i> Sin Resolver</p>
+                    <i class="fas fa-square" style="color: #f44336"></i> Sin Resolver
+                  </p>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
@@ -113,24 +114,17 @@ if ($admin->getRole() == 1) {
   <script src="./assets/js/core/popper.min.js"></script>
   <script src="./assets/js/core/bootstrap-material-design.min.js"></script>
   <script src="https://unpkg.com/default-passive-events"></script>
-  <!-- <script src="./assets/js/plugins/perfect-scrollbar.jquery.min.js"></script> -->
-  <!-- Place this tag in your head or just before your close body tag. -->
+  <script src="./assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
   <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <!-- Chartist JS -->
   <script src="./assets/js/plugins/chartist.min.js"></script>
   <script src="./assets/js/plugins/chartist-plugin-pointlabels.min.js"></script>
-  <!--  Notifications Plugin    -->
   <script src="./assets/js/plugins/bootstrap-notify.js"></script>
-  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="./assets/js/material-dashboard.js?v=2.1.0"></script>
-  <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-  <script src="./assets/demo/demo.js"></script>
+  <!-- <script src="./assets/demo/demo.js"></script> -->
   <script src="./assets/js/script.js"></script>
   <script>
     $(document).ready(function() {
-      // Javascript method's body can be found in assets/js/demos.js
       md.initDashboardPageCharts();
-
     });
   </script>
 </body>
