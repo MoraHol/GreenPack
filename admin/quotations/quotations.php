@@ -12,7 +12,7 @@ $quotations = $quotationDao->findAssignedTo($admin->getId());
 ?>
 
 <head>
-  <title>Greenpack | Cotizaciones</title>
+  <title>Cotizaciones | Greenpack </title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -49,7 +49,8 @@ $quotations = $quotationDao->findAssignedTo($admin->getId());
           <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-table"></i>
-              Cotizaciones Asignadas</div>
+              Cotizaciones Asignadas
+            </div>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -68,16 +69,16 @@ $quotations = $quotationDao->findAssignedTo($admin->getId());
                   </thead>
                   <tbody>
                     <?php foreach ($quotations as $quotation) { ?> <tr>
-                      <td><?php echo $quotation->getNameClient(); ?></td>
-                      <td><?php echo $quotation->getLastNameClient(); ?></td>
-                      <td class="text-center"><?php echo $quotation->getCompany() == "" ? "N/A" : $quotation->getCompany(); ?> </td>
-                      <td class="text-center money"><?php echo $quotation->calculateTotal(); ?></td>
-                      <td class="text-center"><?= date("d-m-Y", $quotation->getCreatedAt()); ?></td>
-                      <td class="text-center"><a class="text-center" href="javascript:viewPdf(`<?= $quotation->getId(); ?>`)" title="Ver Aqui"><i class="material-icons">remove_red_eye</i> <a href="#" onclick="openWindow(`<?= $quotation->getId(); ?>`)" title="Ver en nueva Ventana"><i class="material-icons">featured_video</i></a></td>
-                      <td class="text-center"><a href="edit-quotation.php?id=<?= $quotation->getId() ?>"><i class="material-icons">create</i></a></td>
-                      <td class="text-center"><a class="text-center" target="_blank" title="descargar" href="/services/download-quotation.php?id=<?php echo $quotation->getId(); ?>"><i class="material-icons">cloud_download</a></td>
-                      <td class="text-center"><a class="text-center" href="javascript:sentEmail(`<?php echo $quotation->getId(); ?>`)"><i class="material-icons">email</a></td>
-                    </tr>
+                        <td><?php echo $quotation->getNameClient(); ?></td>
+                        <td><?php echo $quotation->getLastNameClient(); ?></td>
+                        <td class="text-center"><?php echo $quotation->getCompany() == "" ? "N/A" : $quotation->getCompany(); ?> </td>
+                        <td class="text-center money"><?php echo $quotation->calculateTotal(); ?></td>
+                        <td class="text-center"><?= date("d-m-Y", $quotation->getCreatedAt()); ?></td>
+                        <td class="text-center"><a class="text-center" href="javascript:viewPdf(`<?= $quotation->getId(); ?>`)" title="Ver Aqui"><i class="material-icons">remove_red_eye</i> <a href="#" onclick="openWindow(`<?= $quotation->getId(); ?>`)" title="Ver en nueva Ventana"><i class="material-icons">featured_video</i></a></td>
+                        <td class="text-center"><a href="edit-quotation.php?id=<?= $quotation->getId() ?>"><i class="material-icons">create</i></a></td>
+                        <td class="text-center"><a class="text-center" target="_blank" title="descargar" href="/services/download-quotation.php?id=<?php echo $quotation->getId(); ?>"><i class="material-icons">cloud_download</a></td>
+                        <td class="text-center"><a class="text-center" href="javascript:sentEmail(`<?php echo $quotation->getId(); ?>`)"><i class="material-icons">email</a></td>
+                      </tr>
                     <?php } ?>
                   </tbody>
                 </table>
@@ -120,16 +121,11 @@ $quotations = $quotationDao->findAssignedTo($admin->getId());
     <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
     <script src="https://unpkg.com/default-passive-events"></script>
     <!-- <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script> -->
-    <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <!-- Chartist JS -->
     <script src="../assets/js/plugins/chartist.min.js"></script>
-    <!--  Notifications Plugin    -->
     <script src="../assets/js/plugins/bootstrap-notify.js"></script>
-    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="../assets/js/material-dashboard.js?v=2.1.0"></script>
-    <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-    <script src="../assets/demo/demo.js"></script>
+    <!-- <script src="../assets/demo/demo.js"></script> -->
     <script>
       $(() => {
         $('.sidebar div.sidebar-wrapper ul.nav li:first').removeClass('active')
@@ -137,7 +133,6 @@ $quotations = $quotationDao->findAssignedTo($admin->getId());
       })
     </script>
     <script src="../assets/js/script.js"></script>
-    <!-- Page level plugin JavaScript-->
     <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="/vendor/jquery.formatCurrency-1.4.0.min.js"></script>
