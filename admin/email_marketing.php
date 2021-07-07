@@ -1,7 +1,7 @@
 <!-- author: Teenus SAS, github: Teenus SAS -->
 <!doctype html>
 <html lang="es">
-<?php if (empty($_SESSION)) {
+<?php if (!empty($_SESSION)) {
   session_start();
 }
 require_once dirname(__DIR__) . "/model/Admin.php";
