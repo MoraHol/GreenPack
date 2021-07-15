@@ -122,26 +122,27 @@ $quotation = $quotationDao->findById($_GET["id"]);
                       <p><span class="text-primary">Laminada:</span> <?= $item->isLam() ? "SI" : "NO" ?></p> -->
                       <p><span class="text-primary">Material:</span> <?= $item->getMaterial()->getName() ?></p>
                       <?php } else {
-                          if ($item->getProduct()->getCategory()->getId() == 2 || $item->getProduct()->getCategory()->getParentcategory() == 2) {
-                            if ($item->isPrinting()) { ?>
+                      if ($item->getProduct()->getCategory()->getId() == 2 || $item->getProduct()->getCategory()->getParentcategory() == 2) {
+                        if ($item->isPrinting()) { ?>
                           <p><span class="text-primary">Número de tintas:</span> <?= $item->getNumberInks() ?></p>
                       <?php }
-                          } ?>
+                      } ?>
                       <p><span class="text-primary">Tipo de Producto:</span> <?= $item->getTypeProduct() ?></p>
                       <p><span class="text-primary">Material: <select class="form-control select-option-material" id="<?= $item->getId() ?>"><?php foreach ($item->getProduct()->getMaterials() as  $material) { ?>
                               <option <?= $item->getMaterial() == $material ? "selected" : "" ?> value="<?= $material->getId() ?>"><?= $material->getName() ?></option>
-                            <?php } ?></select></p>
+                            <?php } ?>
+                          </select></p>
                     <?php } ?>
 
                     <p><span class="text-primary">Medidas:</span></p>
                     <p>
-                      <ul class="measurements list-inline">
-                        <li class="list-inline-item"><span class="text-primary">Ancho:</span> <?= $item->getMeasurement()->getWidth() ?></li>
-                        <li class="list-inline-item"><span class="text-primary"><?= ($item->getProduct()->getCategory()->getId() == 1 ? "Fuelle" : $item->getProduct()->getCategory()->getId() == 6) ? 'Largo' : 'Alto' ?>:</span> <?= $item->getMeasurement()->getHeight() ?></li>
-                        <?php if( $item->getProduct()->getCategory()->getId() != 6){?>
-                          <li class="list-inline-item"><span class="text-primary">Largo:</span> <?= $item->getMeasurement()->getLength() ?></li>
-                        <?php } ?>
-                      </ul>
+                    <ul class="measurements list-inline">
+                      <li class="list-inline-item"><span class="text-primary">Ancho:</span> <?= $item->getMeasurement()->getWidth() ?></li>
+                      <li class="list-inline-item"><span class="text-primary"><?= ($item->getProduct()->getCategory()->getId() == 1 ? "Fuelle" : $item->getProduct()->getCategory()->getId() == 6) ? 'Largo' : 'Alto' ?>:</span> <?= $item->getMeasurement()->getHeight() ?></li>
+                      <?php if ($item->getProduct()->getCategory()->getId() != 6) { ?>
+                        <li class="list-inline-item"><span class="text-primary">Largo:</span> <?= $item->getMeasurement()->getLength() ?></li>
+                      <?php } ?>
+                    </ul>
                     </p>
                     <?php if ($item->getProduct()->getCategory()->getId() != 1) { ?>
                       <p><span class="text-primary">Observaciones:</span> <?= $item->getObservations() ?></p>
@@ -234,22 +235,17 @@ $quotation = $quotationDao->findById($_GET["id"]);
   <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
   <script src="https://unpkg.com/default-passive-events"></script>
   <!-- <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script> -->
-  <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
-
-  <!-- Chartist JS -->
   <script src="../assets/js/plugins/chartist.min.js"></script>
-  <!--  Notifications Plugin    -->
   <script src="../assets/js/plugins/bootstrap-notify.js"></script>
-  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../assets/js/material-dashboard.js?v=2.1.0"></script>
-  <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-  <script src="../assets/demo/demo.js"></script>
+  <!-- <script src="../assets/demo/demo.js"></script> -->
   <script src="../assets/js/script.js"></script>
   <script src="/vendor/jquery.formatCurrency-1.4.0.min.js"></script>
   <script src="/vendor/jquery.formatCurrency.all.js"></script>
   <script src="/vendor/froala_editor.pkgd.min.js"></script>
   <script src="/js/es.js"></script>
+  <script src="js/quotationsinfo.js"></script>
   <script>
     $(() => {
       $('.sidebar div.sidebar-wrapper ul.nav li:first').removeClass('active')
@@ -280,57 +276,6 @@ $quotation = $quotationDao->findById($_GET["id"]);
 
     })
 
-    function eventChangeValuesItem(id) {
-      calculateTotal(id)
-      verifyDirectCost(id)
-    }
-
-    function verifyDirectCost(id) {
-      $.get('api/calculate_cost_item.php', {
-        id
-      }, (data, status) => {
-        let cost = parseInt(data)
-        if (parseInt($(`#price${id}`).val()) < cost) {
-          console.log($(`#priceHelp${id}`))
-          $(`#priceHelp${id}`).html(`<div class="alert alert-danger fade show mb-0">Estas por debajo del costo del producto, el cual equivale a $${cost} <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                     <span aria-hidden="true">&times;</span>
-                                     </button></div>`)
-          $(`#priceHelp${id}`).fadeIn()
-        } else {
-          $(`#priceHelp${id}`).fadeOut()
-        }
-      })
-    }
-
-    function calculateTotal(id) {
-      let quantity = parseInt($(`#quantity${id}`).val())
-      let price = parseInt($(`#price${id}`).val())
-      let total = quantity * price
-      $(`#total${id}`).html(total)
-      formatMoney()
-    }
-
-    function formatMoney() {
-      $('.money').formatCurrency({
-        region: 'es-CO'
-      })
-    }
-
-    function viewPdf(id) {
-      $('#load_pdf').html('')
-      $('#load_pdf').append(`<embed src="/services/view-quotation.php?id=${id}#toolbar=0&navpanes=0&scrollbar=0&statusbar=0%zoom=20" type="application/pdf" width="100%" height="600px" />`)
-    }
-
-    function recalculate() {
-      $.post('api/recalculate_prices.php', {
-          id: `<?= $_GET["id"]; ?>`
-        },
-        (data, status) => {
-          if (status == 'success') {
-            location.reload()
-          }
-        })
-    }
 
     function send() {
       update()
@@ -348,7 +293,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
       }, (data, status, xhr) => {
         if (status == 'success' && xhr.readyState == 4) {
           $.notify({
-            message: 'Cotizacion enviada',
+            message: 'Cotización enviada',
             icon: 'email'
           }, {
             type: 'success'
@@ -385,7 +330,7 @@ $quotation = $quotationDao->findById($_GET["id"]);
       }, (data, status) => {
         if (status == 'success') {
           $.notify({
-            message: 'Cotizacion actualizada',
+            message: 'Cotización actualizada',
             icon: 'notification_important'
           }, {
             type: 'success'
@@ -402,61 +347,6 @@ $quotation = $quotationDao->findById($_GET["id"]);
         }
       })
     }
-    var editor = new FroalaEditor('#content', {
-      language: 'es',
-      height: 300,
-      imageUploadParam: 'photo',
-      imageUploadURL: '/admin/upload.php',
-      imageUploadMethod: 'POST',
-      videoUploadParam: 'video',
-      videoUploadURL: 'upload-video.php',
-      imageUploadMethod: 'POST',
-      fileUploadParam: 'file',
-      fileUploadURL: '/admin/upload-file.php',
-      fileUploadMethod: 'POST',
-      events: {
-        'image.removed': function($img) {
-          img = $img[0]
-          $.post('/admin/image_delete.php', {
-            src: $img.attr('src')
-          }, (data, status) => {
-            if (status != "success") {
-              alert("error")
-            }
-          })
-        },
-        'file.removed': function($file) {
-          file = $file[0]
-          $.post('/admin/file_delete.php', {
-            src: $file.attr('src')
-          }, (data, status) => {
-            if (status != "success") {
-              alert("error")
-            }
-          })
-        },
-        'keyup': function(keyupEvent) {
-          if (document.domain != 'localhost') {
-            $('.fr-wrapper>div:first-child').css('visibility', 'hidden')
-          }
-        }
-      }
-    }, () => {
-      editor.html.set(`<html><body><p>Nos permitimos enviarle su cotización</p><p>cotización generada</p></body></html>`)
-      if (document.domain != 'localhost') {
-        $('.fr-wrapper>div:first-child').css('visibility', 'hidden')
-      }
-    })
-
-    $('.select-option-material').change(function() {
-      $.post('api/calculate_price_item.php', {
-        id: $(this).attr("id"),
-        material: $(this).val()
-      }, (data, status) => {
-        $(`#price${$(this).attr('id')}`).val(data)
-        calculateTotal($(this).attr("id"))
-      })
-    })
   </script>
 </body>
 

@@ -18,13 +18,16 @@ class ImageDao
   }
 
   function findById($id)
-  { }
+  {
+  }
   function findByProduct($product)
   {
     $this->db->connect();
     $images = [];
     $query = "SELECT * FROM `product_image` WHERE `products_id_products` = " . $product->getId();
     $imagesDB = $this->db->consult($query, "yes");
+    if (sizeof($imagesDB) == 0)
+      $images[0] = '';
     foreach ($imagesDB as  $imageDB) {
       $image = new Image();
       $image->setId($imageDB["id_product_image"]);
@@ -35,6 +38,7 @@ class ImageDao
     $this->db->close();
     return $images;
   }
+
   function save($image)
   {
     $this->db->connect();
@@ -43,14 +47,29 @@ class ImageDao
     $this->db->close();
     return $status;
   }
+
   function delete($id)
-  { 
+  {
     $this->db->connect();
-    $query = "DELETE FROM `product_image` WHERE `product_image`.`id_product_image` = $id";
-    $status = $this->db->consult($query);
+
+    $query = "SELECT * FROM `product_image` WHERE `product_image`.`id_product_image` = $id";
+    $imagesDB = $this->db->consult($query, "yes");
+
+    $id_product = json_encode($imagesDB[0]['products_id_products']);
+
+    $query = "SELECT * FROM product_image WHERE products_id_products = $id_product";
+    $imagesDB = $this->db->consult($query, "yes");
+    $tm = sizeof($imagesDB);
+    if (sizeof($imagesDB) > 1) {
+      $query = "DELETE FROM product_image WHERE id_product_image = $id";
+      $status = $this->db->consult($query);
+      $this->db->close();
+      return $status;
+    }
     $this->db->close();
-    return $status;
   }
+
   function update($id, $url)
-  { }
+  {
+  }
 }
